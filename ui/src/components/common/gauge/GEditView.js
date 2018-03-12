@@ -432,6 +432,11 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+
+  renderSearchMode () {
+
+  }
+
   renderNormal () {
     const {
       resource, savedSearchId,
