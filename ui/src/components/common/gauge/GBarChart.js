@@ -15,7 +15,7 @@ import {getRanges} from 'components/common/DateRangePicker'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {buildServiceParams} from 'util/Query'
-const sampleData = []
+import {appletColors} from 'shared/Global'
 
 const chartOptions = {
   maintainAspectRatio: false,
@@ -144,8 +144,8 @@ export default class GBarChart extends React.Component {
 
   fetchRecordCount (props) {
     const {gauge, searchList, workflows, devices, allDevices} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit,
-      splitBy, splitUnit,workflowId, workflowIds, userConnectorId} = gauge
+    const {monitorId, resource, duration, durationUnit,
+      splitBy, splitUnit, workflowId, workflowIds, userConnectorId, savedSearchIds} = gauge
 
     this.setState({
       loading: true
@@ -166,34 +166,13 @@ export default class GBarChart extends React.Component {
           sort: 'timestamp'
         }
       }).then(res => {
+        const {events} = res.data._embedded
         this.setState({
-          searchRecordCounts: res.data._embedded.events.map(p => ({
-            date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
-            count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
-          })),
-          loading: false,
-          needRefresh: false
-        })
-      }).catch(() => {
-        setTimeout(() => {
-          this.setState({needRefresh: true})
-        }, 2000)
-      })
-    } else if (resource === 'userconnector'){
-      axios.get(`${ROOT_URL}/event/search/findByUserConnector`, {
-        params: {
-          dateFrom: dateFrom.valueOf(),
-          dateTo: dateTo.valueOf(),
-          userConnectorId,
-          sort: 'timestamp',
-          size: 1000
-        }
-      }).then(res => {
-        this.setState({
-          searchRecordCounts: res.data._embedded.events.map(p => ({
-            date: moment(p.timestamp).format('MM-DD HH:mm'),
-            count: parseFloat(p.lastResultData || 0)
-          })),
+          labels: events.map(p => moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss')),
+          datasets: [{
+            label: 'Status',
+            data: events.map(p => p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0)
+          }],
           loading: false,
           needRefresh: false
         })
@@ -202,7 +181,6 @@ export default class GBarChart extends React.Component {
           this.setState({needRefresh: true})
         }, 5000)
       })
-      if (!this.eventSocket) this.startSocket()
     } else if (resource === 'incident'){
       const params = {
         q: [
@@ -217,7 +195,11 @@ export default class GBarChart extends React.Component {
       }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
-          searchRecordCounts: res.data,
+          labels: res.data.map(p => p.date),
+          datasets: [{
+            label: 'Incident',
+            data: res.data.map(p => p.count)
+          }],
           loading: false,
           needRefresh: false
         })
@@ -226,29 +208,67 @@ export default class GBarChart extends React.Component {
           this.setState({needRefresh: true})
         }, 5000)
       })
+    } else if (resource === 'userconnector'){
+      axios.get(`${ROOT_URL}/event/search/findByUserConnector`, {
+        params: {
+          dateFrom: dateFrom.valueOf(),
+          dateTo: dateTo.valueOf(),
+          userConnectorId,
+          sort: 'timestamp',
+          size: 1000
+        }
+      }).then(res => {
+        const {events} = res.data._embedded
+        this.setState({
+          labels: events.map(p => moment(p.timestamp).format('MM-DD HH:mm')),
+          datasets: [{
+            label: 'Value',
+            data: events.map(p => parseFloat(p.lastResultData || 0))
+          }],
+
+          loading: false,
+          needRefresh: false
+        })
+      }).catch(() => {
+        setTimeout(() => {
+          this.setState({needRefresh: true})
+        }, 5000)
+      })
+      if (!this.eventSocket) this.startSocket()
     } else {
-      const index = findIndex(searchList, {id: savedSearchId})
-      if (index < 0) {
-        console.log('Saved search not found.')
-        return
-      }
-      const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
-        dateRanges: getRanges(),
-        collections, severities, workflows,
-        allDevices: devices || allDevices,
-        queryDateFormat
+      const qs = []
+      const searchNames = []
+      savedSearchIds.forEach(savedSearchId => {
+        const index = findIndex(searchList, {id: savedSearchId})
+        if (index < 0) {
+          console.log('Saved search not found.')
+          return
+        }
+        const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
+          dateRanges: getRanges(),
+          collections, severities, workflows,
+          allDevices: devices || allDevices,
+          queryDateFormat
+        })
+
+        qs.push(searchParams.q)
+        searchNames.push(searchList[index].name)
       })
 
       const params = {
-        q: searchParams.q,
+        qs,
         splitBy,
         splitUnit,
         from: dateFrom.valueOf(),
         to: dateTo.valueOf()
       }
-      axios.get(`${ROOT_URL}/search/getRecordCount?${encodeUrlParams(params)}`).then(res => {
+      axios.get(`${ROOT_URL}/search/getRecordCounts?${encodeUrlParams(params)}`).then(res => {
         this.setState({
-          searchRecordCounts: res.data,
+          labels: res.data.map(p => p.date),
+          datasets: qs.map((q, i) => ({
+            label: searchNames[i],
+            data: res.data.map(p => /* parseInt(Math.random() * 20)*/p.count[i])
+          })),
           loading: false,
           needRefresh: false
         })
@@ -263,15 +283,15 @@ export default class GBarChart extends React.Component {
   ////////////////////////////////////////////
 
   startSocket () {
-    this.eventSocket = new MonitorSocket({
-      listener: this.onEventUpdate.bind(this)
-    })
-    this.eventSocket.connect(() => {}, 'eventupdate')
+    // this.eventSocket = new MonitorSocket({
+    //   listener: this.onEventUpdate.bind(this)
+    // })
+    // this.eventSocket.connect(() => {}, 'eventupdate')
   }
 
   stopSocket() {
-    if (!this.eventSocket) return
-    this.eventSocket.close()
+    // if (!this.eventSocket) return
+    // this.eventSocket.close()
   }
 
   onEventUpdate (data) {
@@ -339,16 +359,18 @@ export default class GBarChart extends React.Component {
 
   renderFrontView () {
     const {gauge} = this.props
-    const {searchRecordCounts} = this.state
-
+    const {labels, datasets} = this.state
     const chartData = {
-      labels: (searchRecordCounts || sampleData).map(p => p.date),
-      datasets: [{
-        data: (searchRecordCounts || sampleData).map(p => p.count),
-        borderWidth: 1,
-        borderColor: '#0288d1',
-        backgroundColor: '#4dd8e9'
-      }]
+      labels,
+      datasets: datasets.map((d, i) => ({
+        label: d.label,
+        data: d.data,
+        borderWidth: 2,
+        borderColor: appletColors[i],
+        fill: false,
+        pointRadius: 0,
+        pointHitRadius: 20
+      }))
     }
 
     const options = gauge.resource === 'userconnector' ?
