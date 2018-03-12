@@ -12,7 +12,7 @@ import './style'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
-console.log('Version: 0.37.11')
+console.log('Version: 0.37.12')
 
 ReactDOM.render(
     <Provider store={store}>
