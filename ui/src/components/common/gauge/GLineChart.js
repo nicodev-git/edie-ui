@@ -287,6 +287,7 @@ export default class GLineChart extends React.Component {
       if (!this.eventSocket) this.startSocket()
     } else {
       const qs = []
+      const searchNames = []
       savedSearchIds.forEach(savedSearchId => {
         const index = findIndex(searchList, {id: savedSearchId})
         if (index < 0) {
@@ -301,6 +302,7 @@ export default class GLineChart extends React.Component {
         })
 
         qs.push(searchParams.q)
+        searchNames: searchList[index].name
       })
 
       const params = {
