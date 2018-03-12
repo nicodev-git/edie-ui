@@ -302,7 +302,7 @@ export default class GLineChart extends React.Component {
         })
 
         qs.push(searchParams.q)
-        searchNames: searchList[index].name
+        searchNames.push(searchList[index].name)
       })
 
       const params = {
@@ -316,7 +316,7 @@ export default class GLineChart extends React.Component {
         this.setState({
           labels: res.data.map(p => p.date),
           datasets: qs.map((q, i) => ({
-            label: `Count${i}`,
+            label: searchNames[i],
             data: res.data.map(p => /* parseInt(Math.random() * 20)*/p.count[i])
           })),
           loading: false,
