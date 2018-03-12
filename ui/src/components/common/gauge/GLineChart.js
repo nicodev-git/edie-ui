@@ -314,7 +314,7 @@ export default class GLineChart extends React.Component {
         this.setState({
           labels: res.data.map(p => p.date),
           datasets: qs.map((q, i) => ({
-            label: 'Count',
+            label: `Count${i}`,
             data: res.data.map(p => /* parseInt(Math.random() * 20)*/p.count[i])
           })),
           loading: false,
