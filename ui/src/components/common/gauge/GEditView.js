@@ -434,15 +434,29 @@ export default class GEditView extends React.Component {
   }
 
   renderSearchMode () {
-
+    const {resource} = this.state
+    const {searchList} = this.props
+    if (resource !== 'search') return null
+    return (
+      <div className="row">
+        <div className="col-md-6">
+          <FormControl className="valign-top mr-dialog">
+            <InputLabel>Saved Search</InputLabel>
+            <Select style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
+              {searchList.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            </Select>
+          </FormControl>
+        </div>
+      </div>
+    )
   }
 
   renderNormal () {
     const {
-      resource, savedSearchId,
+      resource,
       duration, durationUnit, splitBy, splitUnit, name
     } = this.state
-    const {searchList, hideDuration, hideSplit, gauge} = this.props
+    const {hideDuration, hideSplit, gauge} = this.props
     return (
       <div>
         <div className="row">
@@ -459,17 +473,8 @@ export default class GEditView extends React.Component {
           </div>
         </div>
 
+
         <div className="row">
-          {resource === 'search' ? (
-            <div className="col-md-6">
-              <FormControl className="valign-top mr-dialog">
-                <InputLabel>Saved Search</InputLabel>
-                <Select value={savedSearchId} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
-                  {searchList.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
-                </Select>
-              </FormControl>
-            </div>
-          ): null}
           {this.renderWorkflowPick()}
           {this.renderMonitorPick()}
           {this.renderTableViewMode()}
