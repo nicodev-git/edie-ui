@@ -35,7 +35,10 @@ class GaugeWizard extends React.Component {
 
       selectedSearchIds: [],
 
-      savedSearchIds: ['']
+      savedSearchItems: [{
+        name: '',
+        searchId: ''
+      }]
     }
   }
 
@@ -282,22 +285,38 @@ class GaugeWizard extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
-  onChangeSavedSearch (id, index) {
-    const {savedSearchIds} = this.state
+  onChangeSavedSearchId (searchId, index) {
+    const {savedSearchItems} = this.state
     this.setState({
-      savedSearchIds: savedSearchIds.map((p, i) => i === index ? id : p)
+      savedSearchItems: savedSearchItems.map((p, i) => i === index ? {
+        ...p,
+        searchId
+      } : p)
+    })
+  }
+
+  onChangeSavedSearchName (name, index) {
+    const {savedSearchItems} = this.state
+    this.setState({
+      savedSearchItems: savedSearchItems.map((p, i) => i === index ? {
+        ...p,
+        name
+      } : p)
     })
   }
 
   onClickAddSavedSearch () {
     this.setState({
-      savedSearchIds: [...this.state.savedSearchIds, '']
+      savedSearchItems: [...this.state.savedSearchItems, {
+        name: '',
+        searchId: ''
+      }]
     })
   }
 
   onClickRemoveSavedSearch (i) {
     this.setState({
-      savedSearchIds: this.state.savedSearchIds.filter((p, index) => index !== i)
+      savedSearchItems: this.state.savedSearchItems.filter((p, index) => index !== i)
     })
   }
 
@@ -319,7 +338,7 @@ class GaugeWizard extends React.Component {
     const {
       selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo,
       selectedServers, selectedWorkflows, selectedMonitorGroups, selectedSearchIds,
-      savedSearchIds
+      savedSearchItems
     } = this.state
     const { extraParams, onFinish, options } = this.props
 
@@ -333,7 +352,7 @@ class GaugeWizard extends React.Component {
         workflowIds: selectedWorkflows,
         logicalGroups: selectedMonitorGroups,
         searchIds: selectedSearchIds,
-        savedSearchIds
+        savedSearchItems
       },
       formProps,
       extraParams
@@ -363,7 +382,7 @@ class GaugeWizard extends React.Component {
     const {selectedDevice, selectedServers, selectedRight, selectedMonitor,
       selectedWorkflow, selectedWorkflows,
       selectedMonitorGroup, selectedMonitorGroups,
-      savedSearchIds
+      savedSearchItems
     } = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName,
       devices, device, monitorGroups, gaugeBoards, allDevices } = this.props
@@ -399,7 +418,7 @@ class GaugeWizard extends React.Component {
         services={serviceOptions}
         workflows={workflows}
         workflowOptions={workflowOptions}
-        savedSearchIds={savedSearchIds}
+        savedSearchItems={savedSearchItems}
 
         formValues={formValues}
         durationVisible={durationVisible}
@@ -459,7 +478,8 @@ class GaugeWizard extends React.Component {
         selectedSearchIds={this.state.selectedSearchIds}
         onClickToggleSearch={this.onClickToggleSearch.bind(this)}
 
-        onChangeSavedSearch={this.onChangeSavedSearch.bind(this)}
+        onChangeSavedSearchName={this.onChangeSavedSearchName.bind(this)}
+        onChangeSavedSearchId={this.onChangeSavedSearchId.bind(this)}
         onClickAddSavedSearch={this.onClickAddSavedSearch.bind(this)}
         onClickRemoveSavedSearch={this.onClickRemoveSavedSearch.bind(this)}
       />

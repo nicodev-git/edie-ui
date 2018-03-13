@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {Select, MenuItem, Button, Checkbox} from 'material-ui'
+import {Select, MenuItem, Button, Checkbox, TextField} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components/modal/parts'
 import {findIndex} from 'lodash'
@@ -118,7 +118,9 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderSearchMode () {
-    const {formValues, searchList, savedSearchIds, onChangeSavedSearch, onClickAddSavedSearch, onClickRemoveSavedSearch} = this.props
+    const {formValues, searchList, savedSearchItems,
+      onChangeSavedSearchName, onChangeSavedSearchId,
+      onClickAddSavedSearch, onClickRemoveSavedSearch} = this.props
     if (formValues.resource !== 'search') return null
     return (
       <div className="margin-md-top">
@@ -132,10 +134,12 @@ export default class GaugeWizardView extends React.Component {
             </tr>
           </thead>
           <tbody>
-          {savedSearchIds.map((id, i) =>
+          {savedSearchItems.map((item, i) =>
             <tr key={i}>
               <td>
-                <Select value={id} onChange={(e) => onChangeSavedSearch(e.target.value, i)} style={{minWidth: 200}}>
+                <TextField value={item.name} onChange={e => onChangeSavedSearchName(e.target.value, i)} className="margin-md-right"/>
+
+                <Select value={item.searchId} onChange={(e) => onChangeSavedSearchId(e.target.value, i)} style={{minWidth: 200}}>
                   {searchList.map(p =>
                     <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
                   )}
