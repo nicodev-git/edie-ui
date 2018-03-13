@@ -125,7 +125,7 @@ const monitorChartOptions = {
   }
 }
 
-export default class GLineChart extends React.Component {
+export default class GLineChart extends React.Component {s
   constructor (props) {
     super (props)
     this.state = {
