@@ -193,7 +193,8 @@ export default class Log extends React.Component {
       q: queries.join(' AND '),
       from,
       to,
-      types: 'event'
+      types: 'event',
+      sortBy: 'sequencer'
     }
   }
 
