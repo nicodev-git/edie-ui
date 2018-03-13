@@ -20,7 +20,8 @@ import {appletColors} from 'shared/Global'
 const chartOptions = {
   maintainAspectRatio: false,
   legend: {
-    display: false
+    display: true,
+    position: 'bottom'
   },
   elements: {
     line: {
@@ -29,7 +30,11 @@ const chartOptions = {
   },
   scales: {
     xAxes: [{
-      display: false
+      display: true,
+      gridLines: {
+        display: true,
+        drawBorder: false
+      }
     }],
     yAxes: [{
       display: true,
