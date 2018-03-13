@@ -33,7 +33,13 @@ const chartOptions = {
       display: true,
       gridLines: {
         display: true,
+        drawTicks: false,
         drawBorder: false
+      },
+      ticks: {
+        callback: function(value, index, values) {
+          return ''
+        }
       }
     }],
     yAxes: [{
