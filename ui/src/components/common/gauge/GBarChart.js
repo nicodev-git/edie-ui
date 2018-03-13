@@ -156,7 +156,7 @@ export default class GBarChart extends React.Component {
   fetchRecordCount (props) {
     const {gauge, searchList, workflows, devices, allDevices} = props
     const {monitorId, resource, duration, durationUnit,
-      splitBy, splitUnit, workflowId, workflowIds, userConnectorId, savedSearchIds} = gauge
+      splitBy, splitUnit, workflowId, workflowIds, userConnectorId, savedSearchItems} = gauge
 
     this.setState({
       loading: true
@@ -249,8 +249,8 @@ export default class GBarChart extends React.Component {
     } else {
       const qs = []
       const searchNames = []
-      savedSearchIds.forEach(savedSearchId => {
-        const index = findIndex(searchList, {id: savedSearchId})
+      savedSearchItems.forEach(item => {
+        const index = findIndex(searchList, {id: item.searchId})
         if (index < 0) {
           console.log('Saved search not found.')
           return
@@ -263,7 +263,7 @@ export default class GBarChart extends React.Component {
         })
 
         qs.push(searchParams.q)
-        searchNames.push(searchList[index].name)
+        searchNames.push(item.name)
       })
 
       const params = {
