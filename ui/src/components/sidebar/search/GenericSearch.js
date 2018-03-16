@@ -13,7 +13,7 @@ import QueryParser from 'lucene'
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
-import { guid, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
+import { guid, collections, severities, viewFilters, queryDateFormat, anyFieldKey } from 'shared/Global'
 import {renderEntity2, expandEntity, getHighlighted} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
@@ -490,7 +490,7 @@ class GenericSearch extends React.Component {
   onKeyDownFreeText (e) {
     if (e.keyCode === 13) {
       const {formValues} = this.props
-      const newQuery = modifyFieldValue(formValues.query, '_all', e.target.value || null, true)
+      const newQuery = modifyFieldValue(formValues.query, anyFieldKey, e.target.value || null, true)
       this.updateQuery(newQuery)
     }
   }
@@ -858,7 +858,7 @@ class GenericSearch extends React.Component {
       monitorNames: getArrayValues(parsed, 'monitor'),
       deviceNames: getArrayValues(parsed, 'device'),
       types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
-      freeText: getFieldValue(parsed, '_all'),
+      freeText: getFieldValue(parsed, anyFieldKey),
       eventLog: getFieldValue(parsed, 'eventlog'),
       ...dateRange
     }
@@ -925,7 +925,7 @@ class GenericSearch extends React.Component {
 
     //EventLog
     if (eventLog) {
-      qs.push(`(_all:${eventLog})`)
+      qs.push(`(${anyFieldKey}:${eventLog})`)
       qs.push(`(monitortype:log)`)
     }
 

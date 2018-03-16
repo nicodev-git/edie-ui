@@ -21,6 +21,7 @@ import {hasPermission} from 'shared/Permission'
 import {getAgentStatus} from 'util/Device'
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import DetailLogModal from 'components/dashboard/log/DetailLogModal'
+import {anyFieldKey} from 'shared/Global'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -186,7 +187,7 @@ export default class Log extends React.Component {
     const queries = []
     queries.push(`(monitorid:${monitorUid})`)
     if (search) {
-      queries.push(`(_all:"${search}")`)
+      queries.push(`(${anyFieldKey}:"${search}")`)
     }
 
     return {

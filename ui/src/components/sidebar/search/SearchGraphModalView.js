@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {CloseIconButton} from 'components/modal/parts'
-// import {dateFormat} from 'shared/Global'
+import {anyFieldKey} from 'shared/Global'
 
 const chipStyle = {
   color: 'white',
@@ -75,7 +75,7 @@ export default class SearchGraphModalView extends React.Component {
           <div><small>Search Keywords:</small></div>
           {queryChips.map((p, i) =>
             <div key={i} style={chipStyle}>
-              {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
+              {p.name !== anyFieldKey ? <b>{p.name}: </b> : null}{p.value}
             </div>
           )}
         </div>
