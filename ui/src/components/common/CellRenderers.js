@@ -147,7 +147,7 @@ export function getHighlighted (entity, highlights) {
           el.forEach((item, index) => {
             if (highlighted.match(item)) el[index] = highlighted
           })
-        } else {
+        } else if (isObject(el)){
           el[pathEl] = highlighted
         }
       } else {
