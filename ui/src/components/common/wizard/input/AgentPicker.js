@@ -172,10 +172,9 @@ export default class AgentPicker extends React.Component {
               isWin ? (
                 <div className="inline-block margin-md-left">
                   <label className="margin-md-right">via</label>
-                  <Field name="agentCollectorId" label="Collector"
-                         component={FormSelect} className="valign-top" options={collectorOptions}
-                         // defaultValue={collectorOptions.length ? collectorOptions[0].value : null}
-                         style={{marginTop: -12, width: 180}}/>
+                  <div className="inline-block" style={{marginTop: -12, width: 180}}>
+                    <Field name="agentCollectorId" component={FormSelect} className="valign-top" options={collectorOptions}/>
+                  </div>
                 </div>
               ) : null
             }
