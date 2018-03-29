@@ -343,6 +343,10 @@ export default class General extends React.Component {
     )
   }
 
+  renderSyncButton () {
+
+  }
+
   renderRoles () {
     const {roles} = this.props
     return (
@@ -419,6 +423,7 @@ export default class General extends React.Component {
             <div className="col-md-6">
               {this.renderContent(canEdit)}
               {this.renderCustomer()}
+              {this.renderSyncButton()}
             </div>
             <div className="col-md-6">
               {this.renderMenuConfig(canEdit)}
