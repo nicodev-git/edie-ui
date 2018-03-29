@@ -52,6 +52,10 @@ export default class General extends React.Component {
     this.props.syncData(false)
   }
 
+  onClickEddieSync () {
+
+  }
+
   getOption (key) {
     const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
     if (list.length) return list[0]
@@ -325,7 +329,17 @@ export default class General extends React.Component {
 
           {!canEdit && <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 5}}/>}
         </div>
+
+        {this.renderSyncEddie()}
       </CardPanel>
+    )
+  }
+
+  renderSyncEddie () {
+    return (
+      <div>
+        <Button variant="raised" onClick={this.onClickEddieSync.bind(this)}>Eddie Sync</Button>
+      </div>
     )
   }
 
@@ -341,10 +355,6 @@ export default class General extends React.Component {
         <Button variant="raised" onClick={this.onClickSync.bind(this)}>Sync</Button>
       </div>
     )
-  }
-
-  renderSyncButton () {
-
   }
 
   renderRoles () {
@@ -423,7 +433,6 @@ export default class General extends React.Component {
             <div className="col-md-6">
               {this.renderContent(canEdit)}
               {this.renderCustomer()}
-              {this.renderSyncButton()}
             </div>
             <div className="col-md-6">
               {this.renderMenuConfig(canEdit)}

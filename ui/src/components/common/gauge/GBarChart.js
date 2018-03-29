@@ -12,7 +12,7 @@ import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
 import {getRanges} from 'components/common/DateRangePicker'
-import MonitorSocket from 'util/socket/MonitorSocket'
+// import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {buildServiceParams} from 'util/Query'
 import {appletColors} from 'shared/Global'

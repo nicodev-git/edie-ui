@@ -932,3 +932,9 @@ export function removeWfParam (param) {
     dispatch({type: REMOVE_WF_PARAM, param})
   }
 }
+
+export function eddieSync () {
+  return dispatch => {
+    
+  }
+}
