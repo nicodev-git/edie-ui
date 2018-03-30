@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Paper, IconButton} from 'material-ui'
-import { assign, isEqual, keys, chunk, reverse, merge, isArray, findIndex } from 'lodash'
+import {assign, isEqual, keys, chunk, reverse, merge, isArray, findIndex, isObject} from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
@@ -47,7 +47,7 @@ export default class LogPapers extends React.Component {
             el.forEach((item, index) => {
               if (highlighted.match(item)) el[index] = highlighted
             })
-          } else {
+          } else if (isObject(el)){
             el[pathEl] = highlighted
           }
         } else {
