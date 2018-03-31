@@ -6,7 +6,14 @@ const loadingStyle = {
   position: 'absolute',
   left: '50%',
   top: '50%',
-  transform: 'translate(-50%, -50%)'
+  transform: 'translate(-50%, -50%)',
+  background: 'white',
+  borderRadius: '50%',
+  width: 55,
+  height: 55,
+  paddingTop: 2,
+  textAlign: 'center',
+  boxShadow: '1px 1px 2px 0px #292828'
 }
 
 const overlayStyle = {
