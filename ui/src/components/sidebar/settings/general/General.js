@@ -53,7 +53,7 @@ export default class General extends React.Component {
   }
 
   onClickEddieSync () {
-
+    this.props.eddieSync()
   }
 
   getOption (key) {
@@ -393,7 +393,7 @@ export default class General extends React.Component {
   renderMenuConfig (canEdit) {
     return (
       <CardPanel title="Menu">
-        <div style={{minHeight: 400, overflow: 'auto'}}>
+        <div style={{minHeight: 485, overflow: 'auto'}}>
           <div>
             <FormControl>
               <InputLabel>Default Page</InputLabel>

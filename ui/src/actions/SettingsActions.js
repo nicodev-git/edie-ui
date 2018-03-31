@@ -935,6 +935,11 @@ export function removeWfParam (param) {
 
 export function eddieSync () {
   return dispatch => {
-    
+    dispatch({type: SYNC_DATA, data: null})
+    axios.get(`${ROOT_URL}/eddieSync`).then(res => {
+      dispatch({type: SYNC_DATA, data: 'OK'})
+    }).catch(() => {
+      dispatch({type: SYNC_DATA, data: 'Failed'})
+    })
   }
 }

@@ -12,7 +12,8 @@ import {
   syncData,
 
   fetchRoles,
-  updateRole
+  updateRole,
+  eddieSync
 } from 'actions'
 
 class GeneralContainer extends React.Component {
@@ -39,7 +40,8 @@ export default connect(
       syncData,
 
       fetchRoles,
-      updateRole
+      updateRole,
+      eddieSync
     }, dispatch)
   })
 )(GeneralContainer)
