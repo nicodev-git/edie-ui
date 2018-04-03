@@ -44,7 +44,9 @@ export default class Log extends React.Component {
       draggingUid: '',
       draggingFolderId: '',
       filterMenuOpen: false,
-      anchorEl: null
+      anchorEl: null,
+
+      selectedMonitorParam: false
     }
 
     this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
@@ -59,12 +61,21 @@ export default class Log extends React.Component {
 
   componentDidUpdate (prevProps) {
     // const {allDevices} = this.props
+    const {selectedMonitorParam} = this.state
+    const {monitorId} = this.props.match.params
     if (!this.state.draggingUid && JSON.stringify(this.getLogMonitors(prevProps)) !== JSON.stringify(this.getLogMonitors())) {
     // if (prevProps.allDevices !== allDevices) {
       this.setState({
         monitorTreeData: this.getTreeData(true)
       })
       console.log('-----Tree updated-----')
+    }
+
+    if (monitorId && !selectedMonitorParam) {
+      this.setState({
+        monitorUid: monitorId,
+        selectedMonitorParam: true
+      })
     }
   }
 

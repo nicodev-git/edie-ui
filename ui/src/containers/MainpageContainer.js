@@ -229,7 +229,8 @@ class MainpageContainer extends Component {
         <Route path="/:device/editwf/diagram/:id" component={EditWfDiagramContainer}/>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
-        <Route path="/logs" component={LogContainer}/>
+        <Route path="/logs" component={LogContainer} exact/>
+        <Route path="/logs/:monitorId" component={LogContainer}/>
         <Route path="/threatmap" component={ThreatMapContainer}/>
         <Route path="/signout" component={SignoutContainer}/>
         <Route path="/settings" component={Settings}/>
