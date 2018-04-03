@@ -46,7 +46,8 @@ export default class Log extends React.Component {
       filterMenuOpen: false,
       anchorEl: null,
 
-      selectedMonitorParam: false
+      selectedMonitorParam: false,
+      openMonitorParam: false
     }
 
     this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
@@ -61,7 +62,7 @@ export default class Log extends React.Component {
 
   componentDidUpdate (prevProps) {
     // const {allDevices} = this.props
-    const {selectedMonitorParam} = this.state
+    const {selectedMonitorParam, monitorTreeData, openMonitorParam} = this.state
     const {monitorId} = this.props.match.params
     if (!this.state.draggingUid && JSON.stringify(this.getLogMonitors(prevProps)) !== JSON.stringify(this.getLogMonitors())) {
     // if (prevProps.allDevices !== allDevices) {
@@ -71,11 +72,26 @@ export default class Log extends React.Component {
       console.log('-----Tree updated-----')
     }
 
-    if (monitorId && !selectedMonitorParam) {
-      this.setState({
-        monitorUid: monitorId,
-        selectedMonitorParam: true
-      })
+    if (monitorId) {
+      if (!selectedMonitorParam) {
+        this.setState({
+          monitorUid: monitorId,
+          selectedMonitorParam: true
+        })
+      }
+
+      if (monitorTreeData && !openMonitorParam) {
+        const filtered = monitorTreeData.filter(p => p.children.filter(u => u.uid === monitorId).length > 0)
+        if (filtered.length > 0) {
+          this.setState({
+            monitorTreeData: monitorTreeData.map(p => p.id === filtered[0].id ? {
+              ...p,
+              expanded: true
+            } : p),
+            openMonitorParam: true
+          })
+        }
+      }
     }
   }
 
@@ -101,6 +117,7 @@ export default class Log extends React.Component {
 
   getTreeData (force) {
     let data = this.state.monitorTreeData
+
     if (!data || force) {
       const {draggingUid} = this.state
       const folders = this.getFolders()
