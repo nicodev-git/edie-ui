@@ -116,6 +116,8 @@ export default class AgentPicker extends React.Component {
       return
     }
 
+    this.props.change('agentType', 'agent')
+
     const {editDevice} = this.props
     const {collectorId} = this.props.formValues
     if (isWindowsDevice(editDevice) && !collectorId) {
