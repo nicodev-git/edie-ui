@@ -162,22 +162,23 @@ export default class AgentPicker extends React.Component {
 
         agentCombo = (
           <div style={{position: 'absolute', top: 80, left: 120, zIndex: 3}}>
+            {
+              isWin ? (
+                <div className="inline-block margin-md-left">
+                  <Field name="collectorId" label="Collector" component={FormSelect} className="valign-top" options={collectorOptions}/>
+
+                  <div className="inline-block hidden" style={{marginTop: -12, width: 180}}>
+                    <Field name="agentCollectorId" component={FormSelect} className="valign-top" options={collectorOptions}/>
+                  </div>
+                </div>
+              ) : null
+            }
             <div
               className="inline-block"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
               onClick={installing ? null : this.onClickInstallAgent.bind(this)}>
               {installing ? 'Installing...' : 'Install Agent'}
             </div>
-            {
-              isWin ? (
-                <div className="inline-block margin-md-left">
-                  <label className="margin-md-right">via</label>
-                  <div className="inline-block" style={{marginTop: -12, width: 180}}>
-                    <Field name="agentCollectorId" component={FormSelect} className="valign-top" options={collectorOptions}/>
-                  </div>
-                </div>
-              ) : null
-            }
             {installing ? <CircularProgress className="valign-top margin-md-left" size={24}/> : null}
           </div>
         )
@@ -195,7 +196,7 @@ export default class AgentPicker extends React.Component {
       <div style={{minHeight: 110, position: 'relative'}}>
         <Field name="agentType" className="padding-md-top" component={RadioGroup} onChange={onChange}>
           <FormControlLabel control={<Radio />} value="" label="None" className="pull-left"/>
-          <FormControlLabel control={<Radio />} value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
+          <FormControlLabel control={<Radio />} value="agent" label={agentLabel} className="pull-left"/>
           <FormControlLabel control={<Radio />} value="collector" label={collectorLabel} className="pull-left"/>
         </Field>
 
