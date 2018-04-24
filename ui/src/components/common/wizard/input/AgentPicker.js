@@ -157,7 +157,7 @@ export default class AgentPicker extends React.Component {
       if (installAgent && installAgent.status === 'installed') {
         agent = {}
       } else {
-        const isWin = isWindowsDevice(editDevice)
+        // const isWin = isWindowsDevice(editDevice)
 
         agentCombo = (
           <div style={{position: 'absolute', top: 80, left: 135, zIndex: 3}}>
