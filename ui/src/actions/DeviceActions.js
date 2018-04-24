@@ -1170,8 +1170,19 @@ export function selectDeviceCreds (creds) {
     dispatch({type: SELECT_DEVICE_CREDS, creds})
   }
 }
-
 export function installAgent (device, collectorId, cb) {
+  return dispatch => {
+    dispatch({type: ADD_AGENT_INSTALL, data: device})
+    dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: ''})
+    axios.get(`${ROOT_URL}/installAgent`, {
+      params: {
+        id: device.id,
+        collectorId
+      }
+    })
+  }
+}
+export function installAgent1 (device, collectorId, cb) {
   return dispatch => {
     dispatch({type: ADD_AGENT_INSTALL, data: device})
     dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: ''})
