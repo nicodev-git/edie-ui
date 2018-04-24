@@ -164,8 +164,10 @@ export default class AgentPicker extends React.Component {
           <div style={{position: 'absolute', top: 80, left: 120, zIndex: 3}}>
             {
               isWin ? (
-                <div className="inline-block margin-md-left">
-                  <Field name="collectorId" label="Collector" component={FormSelect} className="valign-top" options={collectorOptions}/>
+                <div className="inline-block">
+                  <div className="inline-block" style={{marginTop: -24}}>
+                    <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
+                  </div>
 
                   <div className="inline-block hidden" style={{marginTop: -12, width: 180}}>
                     <Field name="agentCollectorId" component={FormSelect} className="valign-top" options={collectorOptions}/>
@@ -174,7 +176,7 @@ export default class AgentPicker extends React.Component {
               ) : null
             }
             <div
-              className="inline-block"
+              className="inline-block margin-md-left"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
               onClick={installing ? null : this.onClickInstallAgent.bind(this)}>
               {installing ? 'Installing...' : 'Install Agent'}
@@ -202,12 +204,12 @@ export default class AgentPicker extends React.Component {
 
         {agentCombo}
 
-        <div style={{position: 'absolute', left: 120, bottom: 10}}>
+        <div style={{position: 'absolute', left: 135, bottom: 10}}>
           <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
           <IconButton className="pull-left hidden" onClick={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
           {isWindowsDevice(editDevice) && !collectorOptions.length &&
             <img src="/resources/images/dashboard/question.png" width="24"
-                 className="pull-left margin-md-top link" alt=""
+                 className="pull-left margin-md-top link hidden" alt=""
                  onClick={() => this.props.showCollectorInstallModal(true)}/>}
         </div>
         {this.renderCredPicker()}
