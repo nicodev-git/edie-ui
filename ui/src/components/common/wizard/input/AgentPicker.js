@@ -177,7 +177,7 @@ export default class AgentPicker extends React.Component {
     }
 
     const agentLabel = (
-      <div style={{width: 100}} className="inline-block">Agent</div>
+      <div style={{width: 100}} className="inline-block">Agent &nbsp;&nbsp;&nbsp;&nbsp; via</div>
     )
     const collectorLabel = (
       <div style={{width: 100}} className="inline-block">Collector</div>
