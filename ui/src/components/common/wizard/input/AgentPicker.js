@@ -21,7 +21,6 @@ export default class AgentPicker extends React.Component {
       }, collectors)
       if (found.length) {
         if (!nextProps.formValues.collectorId) this.props.change('collectorId', found[0].id)
-        if (!nextProps.formValues.agentCollectorId) this.props.change('agentCollectorId', found[0].id)
       }
     }
   }
@@ -118,13 +117,13 @@ export default class AgentPicker extends React.Component {
     }
 
     const {editDevice} = this.props
-    const {agentCollectorId} = this.props.formValues
-    if (isWindowsDevice(editDevice) && !agentCollectorId) {
+    const {collectorId} = this.props.formValues
+    if (isWindowsDevice(editDevice) && !collectorId) {
       this.onClickAddCollector()
       return
     }
 
-    this.props.installAgent(editDevice, agentCollectorId, () => {
+    this.props.installAgent(editDevice, collectorId, () => {
       this.startAgentCheck()
     })
   }
@@ -161,20 +160,10 @@ export default class AgentPicker extends React.Component {
         const isWin = isWindowsDevice(editDevice)
 
         agentCombo = (
-          <div style={{position: 'absolute', top: 80, left: 120, zIndex: 3}}>
-            {
-              isWin ? (
-                <div className="inline-block">
-                  <div className="inline-block" style={{marginTop: -24}}>
-                    <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
-                  </div>
-
-                  <div className="inline-block hidden" style={{marginTop: -12, width: 180}}>
-                    <Field name="agentCollectorId" component={FormSelect} className="valign-top" options={collectorOptions}/>
-                  </div>
-                </div>
-              ) : null
-            }
+          <div style={{position: 'absolute', top: 80, left: 135, zIndex: 3}}>
+            <div className="inline-block" style={{marginTop: -24}}>
+              <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
+            </div>
             <div
               className="inline-block margin-md-left"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}

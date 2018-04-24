@@ -40,7 +40,7 @@ export default connect(
       agentType: 'collector',
       ...state.devices.editDevice
     },
-    formValues: formValueSelector('editDeviceFixForm')(state, 'agentType', 'collectorId', 'agentCollectorId', 'useIntegratedSecurity'),
+    formValues: formValueSelector('editDeviceFixForm')(state, 'agentType', 'collectorId', 'useIntegratedSecurity'),
     deviceFixModalOpen: state.devices.deviceFixModalOpen,
     fixCode: state.devices.fixCode,
 

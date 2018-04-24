@@ -43,7 +43,7 @@ const selector = formValueSelector('editDeviceForm')
 export default connect(
   state => ({
     initialValues: state.devices.editDevice,
-    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution'),
 
     images: state.dashboard.images,
     tplImageModalVisible: state.settings.tplImageModalVisible,

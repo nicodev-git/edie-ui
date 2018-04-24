@@ -91,7 +91,7 @@ export default connect(
       ...state.dashboard.selectedDevice,
       ...getRemoveAfter(state.dashboard.selectedDevice),
     },
-    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId', 'useIntegratedSecurity'),
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'useIntegratedSecurity'),
 
     selectedDevice: state.dashboard.selectedDevice,
 
