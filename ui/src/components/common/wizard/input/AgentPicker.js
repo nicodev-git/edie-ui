@@ -67,7 +67,7 @@ export default class AgentPicker extends React.Component {
       }
       if (!editDevice) return
       this.props.fetchDevice(editDevice.id)
-    }, 3000)
+    }, 1000)
   }
 
   stopAgentCheck () {

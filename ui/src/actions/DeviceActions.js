@@ -1179,6 +1179,10 @@ export function installAgent (device, collectorId, cb) {
         id: device.id,
         collectorId
       }
+    }).then(() => {
+      cb && cb()
+    }).catch(() => {
+      dispatch(updateInstallAgentStatus(device, false, 'Connection failed.'))
     })
   }
 }
