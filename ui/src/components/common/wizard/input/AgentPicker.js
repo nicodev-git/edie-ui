@@ -59,8 +59,8 @@ export default class AgentPicker extends React.Component {
       const {editDevice} = this.props
       const now = new Date().getTime()
 
-      if ((now - this.agentCheckStarted) > 30 * 1000) {
-        //If 30secs timeout
+      if ((now - this.agentCheckStarted) > 5 * 60 * 1000) {
+        //If timeout
         this.props.updateInstallAgentStatus(editDevice, false, 'Timed out')
         this.stopAgentCheck()
         return
