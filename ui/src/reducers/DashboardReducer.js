@@ -97,6 +97,8 @@ import {
 
   UPDATE_SETTING_USER,
 
+  FETCH_DEVICES,
+
   API_ERROR
 } from 'actions/types'
 
@@ -185,6 +187,15 @@ export default function (state = initialState, action) {
     case ADD_MAP_DEVICE: {
       const mapDevices = concat(state.mapDevices, action.data)
       return { ...state, mapDevices }
+    }
+
+    case FETCH_DEVICES: {
+      let {selectedDevice} = state
+      if (selectedDevice) {
+        const index = findIndex(action.payload, {id: selectedDevice.id})
+        selectedDevice = {...selectedDevice, ...action.payload[index]}
+      }
+      return {...state, selectedDevice}
     }
 
     case UPDATE_MAP_DEVICE: {

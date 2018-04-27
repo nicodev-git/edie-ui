@@ -29,10 +29,10 @@ export default class AgentPicker extends React.Component {
     const {installAgentMessage, meta, editDevice} = nextProps
     if (!this.props.installAgentMessage && installAgentMessage) {
       showAlert(installAgentMessage)
-      if (isWindowsDevice(editDevice)) this.stopAgentCheck()
+      this.stopAgentCheck()
     }
 
-    if (isWindowsDevice(editDevice) && !this.props.editDevice.agent && editDevice.agent) {
+    if (!this.props.editDevice.agent && editDevice.agent) {
       this.props.updateInstallAgentStatus(editDevice, true)
     }
 
@@ -120,7 +120,7 @@ export default class AgentPicker extends React.Component {
 
     const {editDevice} = this.props
     const {collectorId} = this.props.formValues
-    if (isWindowsDevice(editDevice) && !collectorId) {
+    if (!collectorId) {
       this.onClickAddCollector()
       return
     }
@@ -159,8 +159,6 @@ export default class AgentPicker extends React.Component {
       if (installAgent && installAgent.status === 'installed') {
         agentCombo = ''
       } else {
-        // const isWin = isWindowsDevice(editDevice)
-
         agentCombo = (
           <div style={{position: 'absolute', top: 77, left: 105, zIndex: 3}}>
             via
@@ -199,7 +197,7 @@ export default class AgentPicker extends React.Component {
         <div style={{position: 'absolute', left: 138, bottom: 10}}>
           <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
           <IconButton className="pull-left hidden" onClick={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
-          {isWindowsDevice(editDevice) && !collectorOptions.length &&
+          {!collectorOptions.length &&
             <img src="/resources/images/dashboard/question.png" width="24"
                  className="pull-left margin-md-top link hidden" alt=""
                  onClick={() => this.props.showCollectorInstallModal(true)}/>}

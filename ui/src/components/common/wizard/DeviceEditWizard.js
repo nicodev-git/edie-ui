@@ -233,12 +233,10 @@ class DeviceEditWizard extends React.Component {
     const device = this.props.initialValues
     const {collectors} = this.props
 
-    if (isWindowsDevice(device)) {
-      const exists = collectors.filter(p => p.ostype === 'WINDOWS').length > 0
-      if (!exists) {
-        showAlert('Please add windows collector.');
-        return;
-      }
+    const exists = collectors.filter(p => p.ostype === 'WINDOWS').length > 0
+    if (!exists) {
+      showAlert('Please add collector.');
+      return;
     }
 
     const creds = this.getDeviceCreds()
