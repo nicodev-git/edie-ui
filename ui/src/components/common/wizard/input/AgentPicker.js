@@ -67,7 +67,7 @@ export default class AgentPicker extends React.Component {
       }
       if (!editDevice) return
       this.props.fetchDevice(editDevice.id)
-    }, 1000)
+    }, 3000)
   }
 
   stopAgentCheck () {
@@ -148,22 +148,23 @@ export default class AgentPicker extends React.Component {
     const collectorOptions = this.getCollectors().map(p => ({
       label: p.name, value: p.id
     }))
-
     let agentCombo = ''
-    if (agent && (new Date().getTime() - agent.lastSeen) > 3 * 60 * 1000) agent = null
+    if (agent && (new Date().getTime() - agent.lastSeen) > 3 * 60 * 1000)
+      agent = null
 
     if (!agent) {
       let installAgent = installAgents.filter(a => a.id === editDevice.id)
       installAgent = installAgent.length ? installAgent[0] : null
       const installing = installAgent && installAgent.status === 'installing'
       if (installAgent && installAgent.status === 'installed') {
-        agent = {}
+        agentCombo = ''
       } else {
         // const isWin = isWindowsDevice(editDevice)
 
         agentCombo = (
-          <div style={{position: 'absolute', top: 80, left: 135, zIndex: 3}}>
-            <div className="inline-block" style={{marginTop: -24}}>
+          <div style={{position: 'absolute', top: 77, left: 105, zIndex: 3}}>
+            via
+            <div className="inline-block margin-md-left" style={{marginTop: -24}}>
               <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
             </div>
             <div
@@ -179,10 +180,10 @@ export default class AgentPicker extends React.Component {
     }
 
     const agentLabel = (
-      <div style={{width: 100}} className="inline-block">Agent &nbsp;&nbsp;&nbsp;&nbsp; via</div>
+      <div style={{width: 70}} className="inline-block">Agent</div>
     )
     const collectorLabel = (
-      <div style={{width: 100}} className="inline-block">Collector</div>
+      <div style={{width: 70}} className="inline-block">Collector</div>
     )
 
     return (
@@ -195,7 +196,7 @@ export default class AgentPicker extends React.Component {
 
         {agentCombo}
 
-        <div style={{position: 'absolute', left: 135, bottom: 10}}>
+        <div style={{position: 'absolute', left: 138, bottom: 10}}>
           <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
           <IconButton className="pull-left hidden" onClick={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
           {isWindowsDevice(editDevice) && !collectorOptions.length &&
