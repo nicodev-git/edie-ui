@@ -45,6 +45,7 @@ export default class MonitorWizardView extends React.Component {
         <Field
           key={k} name={k} floatingLabel={paramLabels[k] || k}
           component={FormInput} className="margin-sm-left margin-sm-right"
+          multiline={k === 'shell'}
           label={hintText}
         />
       )
