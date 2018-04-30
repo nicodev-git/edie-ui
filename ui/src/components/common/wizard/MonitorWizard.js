@@ -82,7 +82,7 @@ class MonitorWizard extends React.Component {
     }
 
     if (values.checkinterval !== null) {
-      values.checkinterval = values.checkinterval * 1000
+      params.checkinterval = values.checkinterval = values.checkinterval * 1000
     }
 
     if (values.remove_after !== null) {
