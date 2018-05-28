@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Form} from 'redux-form'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import { WizardButtons, Modal } from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'

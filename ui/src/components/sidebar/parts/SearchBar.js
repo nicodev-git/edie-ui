@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchIcon from 'material-ui-icons/Search'
+import SearchIcon from '@material-ui/icons/Search'
 
 const defaultStyle = {
   backgroundColor: '#d1d1d1'

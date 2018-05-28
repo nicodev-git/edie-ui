@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 const TwoButtonsBlockCustom = ({name1, name2, action1, action2}) => (
   <div className="form-buttons">

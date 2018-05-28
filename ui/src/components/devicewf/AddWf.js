@@ -1,7 +1,7 @@
 import React from 'react'
-import {Checkbox, Select, MenuItem, Button} from 'material-ui'
+import {Checkbox, Select, MenuItem, Button} from '@material-ui/core'
 import {findIndex} from 'lodash'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'

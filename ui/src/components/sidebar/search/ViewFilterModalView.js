@@ -1,11 +1,11 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
+import {Checkbox} from '@material-ui/core'
 import {keys} from 'lodash'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
-import Tabs, {Tab} from 'material-ui/Tabs'
+import {Tabs, Tab} from '@material-ui/core'
 import {viewFilters} from 'shared/Global'
 
 export default class ViewFilterModalView extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 import InfiniteTable from 'components/common/InfiniteTable'
-import {Switch, Button} from 'material-ui'
+import {Switch, Button} from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'

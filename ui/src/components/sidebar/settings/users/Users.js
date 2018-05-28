@@ -1,7 +1,7 @@
 import React from 'react'
 
-import {Button, Select} from 'material-ui'
-import Menu, {MenuItem} from 'material-ui/Menu'
+import {Button, Select} from '@material-ui/core'
+import {Menu, MenuItem} from '@material-ui/core'
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
 

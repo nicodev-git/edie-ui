@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {IconButton} from 'material-ui'
-import ArrowDownIcon from 'material-ui-icons/ArrowDownward'
-import ArrowUpIcon from 'material-ui-icons/ArrowUpward'
+import {IconButton} from '@material-ui/core'
+import ArrowDownIcon from '@material-ui/icons/ArrowDownward'
+import ArrowUpIcon from '@material-ui/icons/ArrowUpward'
 
 import { DeleteObject, ColorPicker,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType,

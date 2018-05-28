@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import InlineEdit from 'components/common/ReactEditInline'
-import DeleteIcon from 'material-ui-icons/Delete'
-import {Chip, IconButton} from 'material-ui'
+import DeleteIcon from '@material-ui/icons/Delete'
+import {Chip, IconButton} from '@material-ui/core'
 
 import { CardPanel } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'

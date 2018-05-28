@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Select from 'material-ui/Select'
-import {MenuItem} from 'material-ui/Menu'
+import Select from '@material-ui/core/Select'
+import {MenuItem} from '@material-ui/core'
 
 export const style = {
   width: 128,

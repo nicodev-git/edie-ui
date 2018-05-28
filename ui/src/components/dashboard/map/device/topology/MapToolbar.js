@@ -1,9 +1,9 @@
 import React from 'react'
 // import { ChromePicker } from 'react-color'
-import {IconButton} from 'material-ui'
-import CreateIcon from 'material-ui-icons/Create'
-import AddCircleIcon from 'material-ui-icons/AddCircle'
-import DeleteIcon from 'material-ui-icons/Delete'
+import {IconButton} from '@material-ui/core'
+import CreateIcon from '@material-ui/icons/Create'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from 'shared/Global'

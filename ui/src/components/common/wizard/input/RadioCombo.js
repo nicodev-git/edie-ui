@@ -1,6 +1,6 @@
 import React from 'react'
 import {util} from '../WizardUtil'
-import {Select} from 'material-ui'
+import {Select} from '@material-ui/core'
 
 export default class RadioCombo extends React.Component {
   constructor (props) {

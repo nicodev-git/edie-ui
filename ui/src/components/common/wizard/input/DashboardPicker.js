@@ -1,5 +1,5 @@
 import React from 'react'
-import {Select, MenuItem, Button} from 'material-ui'
+import {Select, MenuItem, Button} from '@material-ui/core'
 
 import { Modal, CardPanel } from 'components/modal/parts'
 

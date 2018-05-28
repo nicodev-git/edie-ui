@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {Select, MenuItem} from 'material-ui'
+import {Select, MenuItem} from '@material-ui/core'
 
 export default class ServerCombo extends React.Component {
   getServers () {

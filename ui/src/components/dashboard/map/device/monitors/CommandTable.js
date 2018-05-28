@@ -1,7 +1,7 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form'
 import {connect} from 'react-redux'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'

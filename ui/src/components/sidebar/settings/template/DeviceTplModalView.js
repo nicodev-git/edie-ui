@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
-import {Chip} from 'material-ui'
+import {Chip} from '@material-ui/core'
 
 import { SubmitBlock, FormInput, ImageUploader, FormCheckbox,
   Monitors, MonitorTemplates, Workflows, Modal, CardPanel } from 'components/modal/parts'

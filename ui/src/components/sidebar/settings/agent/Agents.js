@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, Select, Button, CircularProgress} from 'material-ui'
+import {MenuItem, Select, Button, CircularProgress} from '@material-ui/core'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 

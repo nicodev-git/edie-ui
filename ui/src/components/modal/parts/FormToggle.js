@@ -1,5 +1,5 @@
 import React from 'react'
-import Switch from 'material-ui/Switch'
+import Switch from '@material-ui/core/Switch'
 
 const FormToggle = ({input, label, meta: {touched, error}, ...custom}) => (
   <Switch

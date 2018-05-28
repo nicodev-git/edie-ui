@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Paper, IconButton} from 'material-ui'
+import {Paper, IconButton} from '@material-ui/core'
 import {assign, isEqual, keys, chunk, reverse, merge, isArray, findIndex, isObject} from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
-import RenewIcon from 'material-ui-icons/Visibility'
+import RenewIcon from '@material-ui/icons/Visibility'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'

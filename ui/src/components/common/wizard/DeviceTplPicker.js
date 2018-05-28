@@ -1,5 +1,5 @@
 import React from 'react'
-import {Select, MenuItem} from 'material-ui'
+import {Select, MenuItem} from '@material-ui/core'
 import { Modal } from 'components/modal/parts'
 
 import AppletCard from 'components/common/AppletCard'

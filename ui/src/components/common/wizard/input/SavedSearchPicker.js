@@ -1,6 +1,6 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
-import { FormControlLabel } from 'material-ui/Form'
+import {Checkbox} from '@material-ui/core'
+import { FormControlLabel } from '@material-ui/core'
 
 export default class SavedSearchPicker extends React.Component {
   render () {

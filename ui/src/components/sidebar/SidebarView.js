@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import {Drawer, IconButton} from 'material-ui'
-import { withStyles } from 'material-ui/styles'
-import Badge from 'material-ui/Badge'
-import Divider from 'material-ui/Divider'
-import MenuIcon from 'material-ui-icons/Menu'
+import {Drawer, IconButton} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import Badge from '@material-ui/core/Badge'
+import Divider from '@material-ui/core/Divider'
+import MenuIcon from '@material-ui/icons/Menu'
 
 import {badgeStyle, badgeRootStyle, iconButtonStyle, sidebarStyle} from 'style/common/materialStyles'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import moment from 'moment'
 import {findIndex} from 'lodash'
-import {IconButton} from 'material-ui'
-import RefreshIcon from 'material-ui-icons/Refresh'
+import {IconButton} from '@material-ui/core'
+import RefreshIcon from '@material-ui/icons/Refresh'
 
 import FlipView from './FlipView'
 import NormalTable from './display/NormalTable'

@@ -1,6 +1,6 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
-import Dialog, {DialogTitle} from 'material-ui/Dialog'
+import { withStyles } from '@material-ui/core/styles'
+import {Dialog, DialogTitle} from '@material-ui/core'
 
 import CloseIconButton from './CloseIconButton'
 import {dialogBodyStyle, dialogTitleStyle, dialogTitleFontStyle} from 'style/common/materialStyles'

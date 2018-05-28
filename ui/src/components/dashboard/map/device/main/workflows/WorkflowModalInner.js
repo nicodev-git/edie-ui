@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'

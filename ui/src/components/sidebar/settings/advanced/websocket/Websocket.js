@@ -1,8 +1,8 @@
 import React from 'react'
 import { ChromePicker } from 'react-color'
-import {TextField, Select, MenuItem, Button} from 'material-ui'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import {TextField, Select, MenuItem, Button} from '@material-ui/core'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 export default class Websocket extends React.Component {
   constructor (props) {

@@ -1,11 +1,11 @@
 import React from 'react'
-import InfoIcon from 'material-ui-icons/Info'
-import DeleteIcon from 'material-ui-icons/Close'
-import MinimizeIcon from 'material-ui-icons/IndeterminateCheckBox'
-import MaximizeIcon from 'material-ui-icons/AspectRatio'
-import RefreshIcon from 'material-ui-icons/Refresh'
+import InfoIcon from '@material-ui/icons/Info'
+import DeleteIcon from '@material-ui/icons/Close'
+import MinimizeIcon from '@material-ui/icons/IndeterminateCheckBox'
+import MaximizeIcon from '@material-ui/icons/AspectRatio'
+import RefreshIcon from '@material-ui/icons/Refresh'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import {Paper} from 'material-ui'
+import {Paper} from '@material-ui/core'
 
 // import {paperZDepth} from 'style/common/materialStyles'
 

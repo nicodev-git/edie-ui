@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import IconButton from 'material-ui/IconButton'
-import AddCircleIcon from 'material-ui-icons/AddCircle'
+import IconButton from '@material-ui/core/IconButton'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 import { buttonStyle } from 'style/common/materialStyles'
 
 export default class MonitorTemplates extends Component {

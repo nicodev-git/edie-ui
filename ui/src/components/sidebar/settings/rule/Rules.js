@@ -1,6 +1,6 @@
 import React from 'react'
-import {Button, IconButton} from 'material-ui'
-import Share from 'material-ui-icons/Share'
+import {Button, IconButton} from '@material-ui/core'
+import Share from '@material-ui/icons/Share'
 import { assign } from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'

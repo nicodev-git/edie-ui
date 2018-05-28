@@ -2,7 +2,7 @@ import React from 'react'
 
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
-import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
+import {Step, Stepper, StepLabel} from '@material-ui/core'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'

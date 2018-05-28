@@ -1,10 +1,8 @@
 import React from 'react'
-import {TextField, Select, MenuItem, Button, Checkbox} from 'material-ui'
+import {TextField, Select, MenuItem, Button, Checkbox, FormControl, FormControlLabel, InputLabel} from '@material-ui/core'
 import {findIndex} from 'lodash'
-import { FormControl, FormControlLabel } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
-import AddIcon from 'material-ui-icons/AddCircle'
-import DeleteIcon from 'material-ui-icons/Delete'
+import AddIcon from '@material-ui/icons/AddCircle'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import {gaugeDurationTypes, gaugeResources, gaugeTableViewModes} from 'shared/Global'
 

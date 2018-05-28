@@ -1,5 +1,5 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
+import TextField from '@material-ui/core/TextField'
 import { inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 const defaultStyle = {

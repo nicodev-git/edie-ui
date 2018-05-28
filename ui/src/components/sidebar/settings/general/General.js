@@ -1,11 +1,11 @@
 import React from 'react'
 import moment from 'moment'
 import InlineEdit from 'components/common/ReactEditInline'
-import {Checkbox, Button, Select, MenuItem} from 'material-ui'
+import {Checkbox, Button, Select, MenuItem} from '@material-ui/core'
 import { assign } from 'lodash'
-import { FormControlLabel } from 'material-ui/Form'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import { FormControlLabel } from '@material-ui/core'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import SettingTabs from '../SettingTabs' // Never used
 import TabPage from 'components/common/TabPage' // Never used

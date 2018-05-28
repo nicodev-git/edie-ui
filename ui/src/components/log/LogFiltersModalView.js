@@ -1,8 +1,8 @@
 import React from 'react'
-import {IconButton, Button} from 'material-ui'
-import DeleteIcon from 'material-ui-icons/Delete'
-import AddCircleIcon from 'material-ui-icons/AddCircle'
-import EditIcon from 'material-ui-icons/Create'
+import {IconButton, Button} from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Create'
 
 import Modal from 'components/modal/parts/Modal'
 import CardPanel from 'components/modal/parts/CardPanel'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 export default class DoneButton extends React.Component {
   render () {

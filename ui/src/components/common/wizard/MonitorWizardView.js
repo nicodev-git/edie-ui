@@ -1,8 +1,7 @@
 import React from 'react'
-import {Button, Radio} from 'material-ui'
+import {Button, Radio, RadioGroup} from '@material-ui/core'
 import {Field} from 'redux-form'
-import {RadioGroup} from 'redux-form-material-ui'
-import {FormControlLabel} from 'material-ui/Form'
+import {FormControlLabel} from '@material-ui/core'
 
 import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal} from 'components/modal/parts'
 

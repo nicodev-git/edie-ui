@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import InfiniteTable from 'components/common/InfiniteTable'
-import IconButton from 'material-ui/IconButton'
-import DeleteIcon from 'material-ui-icons/Delete'
-import AddCircleIcon from 'material-ui-icons/AddCircle'
-import CreateIcon from 'material-ui-icons/Create'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import CreateIcon from '@material-ui/icons/Create'
 import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
 import { buttonStyle } from 'style/common/materialStyles'
 

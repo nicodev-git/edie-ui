@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, TextField} from 'material-ui'
+import {Button, TextField} from '@material-ui/core'
 import { assign } from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'

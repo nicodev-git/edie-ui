@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { reduxForm, Field, Form } from 'redux-form'
 import {parse} from 'query-string'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import { FormInput } from 'components/modal/parts'

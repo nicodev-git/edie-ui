@@ -1,9 +1,9 @@
 import React from 'react'
-import Checkbox from 'material-ui/Checkbox'
-import Select from 'material-ui/Select'
-import {MenuItem} from 'material-ui/Menu'
+import Checkbox from '@material-ui/core/Checkbox'
+import Select from '@material-ui/core/Select'
+import {MenuItem} from '@material-ui/core'
 import { findIndex } from 'lodash'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,

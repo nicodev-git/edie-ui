@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import { FormInput } from 'components/modal/parts'
-import ActionList from 'material-ui-icons/List'
-import ActionTrendingUp from 'material-ui-icons/TrendingUp'
-import {Button} from 'material-ui'
+import ActionList from '@material-ui/icons/List'
+import ActionTrendingUp from '@material-ui/icons/TrendingUp'
+import {Button} from '@material-ui/core'
 import { selectedItemStyle } from 'style/common/materialStyles'
 
 export default class WorkflowStep0 extends Component {

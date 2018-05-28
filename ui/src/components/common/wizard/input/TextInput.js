@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import TextField from 'material-ui/TextField'
+import TextField from '@material-ui/core/TextField'
 
 import {required} from 'components/modal/validation/CommonValidation'
 

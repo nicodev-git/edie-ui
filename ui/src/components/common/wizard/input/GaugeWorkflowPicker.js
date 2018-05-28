@@ -1,7 +1,7 @@
 import React from 'react'
-import {IconButton} from 'material-ui'
-import ForwardIcon from 'material-ui-icons/ArrowForward'
-import BackwardIcon from 'material-ui-icons/ArrowBack'
+import {IconButton} from '@material-ui/core'
+import ForwardIcon from '@material-ui/icons/ArrowForward'
+import BackwardIcon from '@material-ui/icons/ArrowBack'
 import {findIndex} from 'lodash'
 
 export default class GaugeWorkflowPicker extends React.Component {

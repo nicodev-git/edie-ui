@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {CircularProgress} from 'material-ui/Progress'
+import {CircularProgress} from '@material-ui/core'
 
 const loadingStyle = {
   position: 'absolute',

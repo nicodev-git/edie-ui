@@ -1,5 +1,5 @@
 import React from 'react'
-import {MenuItem, Select, TextField} from 'material-ui'
+import {MenuItem, Select, TextField} from '@material-ui/core'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 

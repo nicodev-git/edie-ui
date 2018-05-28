@@ -1,7 +1,7 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
+import {Checkbox} from '@material-ui/core'
 import { Field } from 'redux-form'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts'
 

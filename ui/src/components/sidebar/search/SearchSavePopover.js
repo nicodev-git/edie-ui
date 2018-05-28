@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { Popover, RadioGroup, Radio } from 'material-ui'
+import { Popover, RadioGroup, Radio } from '@material-ui/core'
 
 import { FormInput, FormSelect, SubmitBlock } from 'components/modal/parts'
 

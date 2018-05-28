@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import {Button, MenuItem, Select, IconButton, Chip} from 'material-ui'
-import DeleteIcon from 'material-ui-icons/Delete'
-import EditIcon from 'material-ui-icons/ModeEdit'
-import Share from 'material-ui-icons/Share'
-import CopyIcon from 'material-ui-icons/ContentCopy'
+import {Button, MenuItem, Select, IconButton, Chip} from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import EditIcon from '@material-ui/icons/ModeEdit'
+import Share from '@material-ui/icons/Share'
+import CopyIcon from '@material-ui/icons/ContentCopy'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'

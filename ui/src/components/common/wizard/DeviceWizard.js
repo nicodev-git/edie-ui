@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
-import Stepper, {Step, StepLabel} from 'material-ui/Stepper'
-import {CircularProgress} from 'material-ui'
+import {Stepper, Step, StepLabel} from '@material-ui/core'
+import {CircularProgress} from '@material-ui/core'
 import {debounce} from 'lodash'
 
 import TextInput from './input/TextInput'

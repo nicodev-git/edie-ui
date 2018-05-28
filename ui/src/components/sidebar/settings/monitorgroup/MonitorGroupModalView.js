@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, Field } from 'redux-form'
-import {Checkbox} from 'material-ui'
+import {Checkbox} from '@material-ui/core'
 import SortableTree from 'react-sortable-tree'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import { Modal, CardPanel, FormInput, SubmitBlock } from 'components/modal/parts'
 

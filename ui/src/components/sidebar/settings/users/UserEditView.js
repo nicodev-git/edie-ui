@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 export default class UserEditView extends React.Component {
   render () {

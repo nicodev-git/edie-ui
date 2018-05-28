@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'

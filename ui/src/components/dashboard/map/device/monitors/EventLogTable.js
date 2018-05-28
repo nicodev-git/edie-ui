@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {TextField, Button, Select, MenuItem} from 'material-ui'
-import ActionSearch from 'material-ui-icons/Search'
+import {TextField, Button, Select, MenuItem} from '@material-ui/core'
+import ActionSearch from '@material-ui/icons/Search'
 import moment from 'moment'
 import {assign} from 'lodash'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 

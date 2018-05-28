@@ -1,7 +1,5 @@
 import React from 'react'
-import {Button} from 'material-ui'
-// import ArrowUp from 'material-ui/svg-icons/navigation/arrow-drop-up'
-// import ArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
+import {Button} from '@material-ui/core'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import MainTabs from '../MainTabs'

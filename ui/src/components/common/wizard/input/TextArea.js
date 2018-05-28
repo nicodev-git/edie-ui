@@ -1,6 +1,6 @@
 import React from 'react'
 import {util} from '../WizardUtil'
-import {TextField} from 'material-ui'
+import {TextField} from '@material-ui/core'
 
 export default class TextArea extends React.Component {
   constructor (props) {

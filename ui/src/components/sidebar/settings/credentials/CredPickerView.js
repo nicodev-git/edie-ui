@@ -1,5 +1,5 @@
 import React from 'react'
-import {Select, MenuItem, Chip} from 'material-ui'
+import {Select, MenuItem, Chip} from '@material-ui/core'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'

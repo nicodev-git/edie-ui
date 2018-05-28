@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import {Button, Chip} from 'material-ui'
+import {Button, Chip} from '@material-ui/core'
 import {chipStyles} from 'style/common/materialStyles'
 import { concat, assign } from 'lodash'
 

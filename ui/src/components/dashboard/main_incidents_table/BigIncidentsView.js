@@ -1,10 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import {Button, MenuItem, Select, TextField} from 'material-ui'
-import ActionSearch from 'material-ui-icons/Search'
+import {Button, MenuItem, Select, TextField} from '@material-ui/core'
+import ActionSearch from '@material-ui/icons/Search'
 import ReactTooltip from 'react-tooltip'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 

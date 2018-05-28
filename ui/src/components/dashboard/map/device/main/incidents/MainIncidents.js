@@ -8,12 +8,12 @@ import {
   Popover,
   Select,
   TextField
-} from 'material-ui'
+} from '@material-ui/core'
 import ReactTooltip from 'react-tooltip'
-import ArrowBack from 'material-ui-icons/ArrowBack'
-import ActionSearch from 'material-ui-icons/Search'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import ArrowBack from '@material-ui/icons/ArrowBack'
+import ActionSearch from '@material-ui/icons/Search'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import InfiniteTable from 'components/common/InfiniteTable'

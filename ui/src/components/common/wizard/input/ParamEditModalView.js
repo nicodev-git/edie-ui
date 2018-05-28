@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
-import Chip from 'material-ui/Chip'
+import Chip from '@material-ui/core/Chip'
 import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts'
 
 export default class ParamEditModalView extends Component {
