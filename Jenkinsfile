@@ -13,7 +13,9 @@ node {
 
         def npm = tool 'nodejs'
         env.PATH = "${npm}/bin:${env.PATH}"
-        sh 'cd ui && npm i && npm run build'
+        sh 'cd ui && npm install -g yarn'
+        sh 'cd ui && yarn install'
+        sh 'cd ui && yarn build'
 
         archiveArtifacts artifacts: 'ui/build/**', fingerprint: true
     }
