@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Menu, MenuItem} from 'material-ui'
+import {Button, Menu, MenuItem} from '@material-ui/core'
 
 const tabs = [{
   title: 'Collectors',

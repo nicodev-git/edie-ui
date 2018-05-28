@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {TextField, Button, MenuItem} from 'material-ui'
-import Menu from 'material-ui/Menu'
-import ActionSearch from 'material-ui-icons/Search'
+import {TextField, Button, MenuItem} from '@material-ui/core'
+import Menu from '@material-ui/core/Menu'
+import ActionSearch from '@material-ui/icons/Search'
 import moment from 'moment'
 import {assign} from 'lodash'
 

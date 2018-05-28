@@ -1,7 +1,7 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
+import {Checkbox} from '@material-ui/core'
 import JSONTree from 'react-json-tree'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import { Modal, CardPanel } from 'components/modal/parts'
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import CheckIcon from 'material-ui-icons/CheckBox'
-import CloseIcon from 'material-ui-icons/Close'
-import HelpIcon from 'material-ui-icons/Help'
+import CheckIcon from '@material-ui/icons/CheckBox'
+import CloseIcon from '@material-ui/icons/Close'
+import HelpIcon from '@material-ui/icons/Help'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import ShowMoreLine from 'components/common/ShowMoreLine'

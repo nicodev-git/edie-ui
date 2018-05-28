@@ -1,8 +1,8 @@
 import React from 'react'
-import IconButton from 'material-ui/IconButton'
-import Menu, {MenuItem} from 'material-ui/Menu'
-import Divider from 'material-ui/Divider'
-import AccoutCircleIcon from 'material-ui-icons/AccountCircle'
+import IconButton from '@material-ui/core/IconButton'
+import {Menu, MenuItem} from '@material-ui/core'
+import Divider from '@material-ui/core/Divider'
+import AccoutCircleIcon from '@material-ui/icons/AccountCircle'
 
 import {iconButtonStyle} from 'style/common/materialStyles'
 

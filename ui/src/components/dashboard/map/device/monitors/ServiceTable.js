@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import TabPage from 'components/common/TabPage'

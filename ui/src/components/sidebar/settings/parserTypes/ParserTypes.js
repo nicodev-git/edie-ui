@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 import { assign, concat } from 'lodash'
 
 import SettingTabs from '../SettingTabs'

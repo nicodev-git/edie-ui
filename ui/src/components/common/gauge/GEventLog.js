@@ -1,8 +1,8 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {Select, MenuItem} from 'material-ui'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import {Select, MenuItem} from '@material-ui/core'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'

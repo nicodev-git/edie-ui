@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import {CardPanel, FormInput, ModalFull} from 'components/modal/parts'
 

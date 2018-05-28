@@ -1,8 +1,5 @@
 import React from 'react'
-import Select from 'material-ui/Select'
-import {MenuItem} from 'material-ui/Menu'
-import {InputLabel} from 'material-ui/Input'
-import {FormControl} from 'material-ui/Form'
+import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 
 const FormSelect = ({input, label, floatingLabel, style, fullWidth, className, meta: {touched, error}, options, ...custom}) => (
   <FormControl fullWidth={fullWidth} className={className} style={{minWidth: 160}}>

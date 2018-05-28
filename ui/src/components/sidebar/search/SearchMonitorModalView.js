@@ -1,8 +1,8 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
-import SetDefIcon from 'material-ui-icons/Sort'
-import {IconButton} from 'material-ui'
-import { FormControlLabel } from 'material-ui/Form'
+import {Checkbox} from '@material-ui/core'
+import SetDefIcon from '@material-ui/icons/Sort'
+import {IconButton} from '@material-ui/core'
+import { FormControlLabel } from '@material-ui/core'
 
 import SortableTree from 'react-sortable-tree'
 

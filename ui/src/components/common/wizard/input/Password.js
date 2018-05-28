@@ -1,5 +1,5 @@
 import React from 'react'
-import {TextField} from 'material-ui'
+import {TextField} from '@material-ui/core'
 
 export default class Password extends React.Component {
   render () {

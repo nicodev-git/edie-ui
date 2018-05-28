@@ -1,7 +1,7 @@
 import React from 'react'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
-import {Select, MenuItem} from 'material-ui'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
+import {Select, MenuItem} from '@material-ui/core'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
 

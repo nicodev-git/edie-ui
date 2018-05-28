@@ -1,6 +1,6 @@
 import React from 'react'
-import {Dialog, IconButton} from 'material-ui'
-import ZoomOutIcon from 'material-ui-icons/ZoomOutMap'
+import {Dialog, IconButton} from '@material-ui/core'
+import ZoomOutIcon from '@material-ui/icons/ZoomOutMap'
 import {Line} from 'react-chartjs-2'
 import moment from 'moment'
 

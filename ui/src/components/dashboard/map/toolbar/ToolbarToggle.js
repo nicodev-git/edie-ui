@@ -1,6 +1,6 @@
 import React from 'react'
-import IconButton from 'material-ui/IconButton'
-import CropFreeIcon from 'material-ui-icons/CropFree'
+import IconButton from '@material-ui/core/IconButton'
+import CropFreeIcon from '@material-ui/icons/CropFree'
 
 const buttonStyle = {
   padding: '4px',

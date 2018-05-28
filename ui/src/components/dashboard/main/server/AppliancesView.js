@@ -1,6 +1,6 @@
 import React from 'react'
-import ComputerIcon from 'material-ui-icons/Computer'
-import {purple, deepPurple} from 'material-ui/colors'
+import ComputerIcon from '@material-ui/icons/Computer'
+import {purple, deepPurple} from '@material-ui/core/colors'
 
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 import ServerItem from './ServerItem'

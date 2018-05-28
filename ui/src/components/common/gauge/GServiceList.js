@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex, keys} from 'lodash'
-import {Button, CircularProgress} from 'material-ui'
+import {Button, CircularProgress} from '@material-ui/core'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'

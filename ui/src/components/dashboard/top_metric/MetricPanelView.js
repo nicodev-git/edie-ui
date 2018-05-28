@@ -1,12 +1,12 @@
 import React from 'react'
-import {IconButton} from 'material-ui'
+import {IconButton} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
-import HistoryIcon from 'material-ui-icons/History'
-import AlarmIcon from 'material-ui-icons/Alarm'
-import BugReportIcon from 'material-ui-icons/BugReport'
-import FlagIcon from 'material-ui-icons/Flag'
-import ExitIcon from 'material-ui-icons/ExitToApp'
+import HistoryIcon from '@material-ui/icons/History'
+import AlarmIcon from '@material-ui/icons/Alarm'
+import BugReportIcon from '@material-ui/icons/BugReport'
+import FlagIcon from '@material-ui/icons/Flag'
+import ExitIcon from '@material-ui/icons/ExitToApp'
 
 import Metric from 'components/common/Metric'
 

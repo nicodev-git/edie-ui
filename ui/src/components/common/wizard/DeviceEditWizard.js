@@ -1,8 +1,8 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
-import {Button, IconButton, CircularProgress, Tooltip} from 'material-ui'
-import AddCircleIcon from 'material-ui-icons/AddCircle'
+import {Button, IconButton, CircularProgress, Tooltip} from '@material-ui/core'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Chip} from 'material-ui'
+import {Button, Chip} from '@material-ui/core'
 import {findIndex} from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'

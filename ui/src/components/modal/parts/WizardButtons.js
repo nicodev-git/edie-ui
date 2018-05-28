@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 import { buttonStyle } from 'style/common/materialStyles'
 
 const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps, isDiagramButton}) => (

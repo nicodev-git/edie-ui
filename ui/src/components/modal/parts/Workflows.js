@@ -1,5 +1,5 @@
 import React from 'react'
-import {Chip} from 'material-ui'
+import {Chip} from '@material-ui/core'
 
 import {chipStyles} from 'style/common/materialStyles'
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import {Select, MenuItem} from 'material-ui'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import {Select, MenuItem} from '@material-ui/core'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Button} from 'material-ui'
+import {Button} from '@material-ui/core'
 
 import { Modal } from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'

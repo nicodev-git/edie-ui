@@ -1,5 +1,5 @@
 import React from 'react'
-import Card, {CardContent} from 'material-ui/Card'
+import {Card, CardContent} from '@material-ui/core'
 import CardLegend from './CardLegend'
 
 export default class CardPanel extends React.Component {

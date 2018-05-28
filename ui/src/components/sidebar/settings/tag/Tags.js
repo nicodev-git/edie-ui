@@ -1,7 +1,7 @@
 import React from 'react'
-import {Button, Chip, Avatar} from 'material-ui'
-import {blue, indigo} from 'material-ui/colors'
-import { withStyles } from 'material-ui/styles'
+import {Button, Chip, Avatar} from '@material-ui/core'
+import {blue, indigo} from '@material-ui/core/colors'
+import { withStyles } from '@material-ui/core/styles'
 import {showConfirm} from 'components/common/Alert'
 
 import SettingTabs from '../SettingTabs'

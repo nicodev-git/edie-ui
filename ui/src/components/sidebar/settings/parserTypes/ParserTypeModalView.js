@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import IconButton from 'material-ui/IconButton'
-import DeleteIcon from 'material-ui-icons/Delete'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 import InlineEdit from 'components/common/ReactEditInline'
 import { Field } from 'redux-form'
-import {Chip} from 'material-ui'
+import {Chip} from '@material-ui/core'
 
 import { SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'

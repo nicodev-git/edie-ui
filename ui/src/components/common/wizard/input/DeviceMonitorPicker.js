@@ -1,7 +1,7 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
+import {Checkbox} from '@material-ui/core'
 import {findIndex} from 'lodash'
-import { FormControlLabel } from 'material-ui/Form'
+import { FormControlLabel } from '@material-ui/core'
 
 import SortableTree from 'react-sortable-tree'
 

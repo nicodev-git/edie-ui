@@ -1,8 +1,8 @@
 import React from 'react'
-import CreateIcon from 'material-ui-icons/Create'
-import DeleteIcon from 'material-ui-icons/Delete'
+import CreateIcon from '@material-ui/icons/Create'
+import DeleteIcon from '@material-ui/icons/Delete'
 
-import {TextField, Button} from 'material-ui'
+import {TextField, Button} from '@material-ui/core'
 import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class WfRectGroupsModalView extends React.Component {

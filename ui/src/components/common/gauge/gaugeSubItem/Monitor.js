@@ -1,9 +1,9 @@
 import React from 'react'
-import {Select, MenuItem, IconButton} from 'material-ui'
+import {Select, MenuItem, IconButton} from '@material-ui/core'
 import {findIndex, assign, concat} from 'lodash'
-import AddCircleIcon from 'material-ui-icons/AddCircle'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import MonitorPicker from 'components/dashboard/map/device/monitors/MonitorPicker'

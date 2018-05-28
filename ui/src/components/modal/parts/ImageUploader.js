@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'material-ui/Button'
+import Button from '@material-ui/core/Button'
 
 const ImageUploader = ({imgUrl, onChange, className}) => (
   <div className={`image-upload-container ${className || ''}`}>
