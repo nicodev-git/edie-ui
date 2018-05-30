@@ -52,7 +52,7 @@ pipeline{
           }
 
            stage("Install on dev"){
-                when {branch '${branch}}
+                when {branch ${branch}}
                 steps{
                    sh 'ssh root@dev docker pull ${registry}:${registryport}/${name} '
                    sh 'ssh root@dev docker rm -f ${name} || true'
