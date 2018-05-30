@@ -1,10 +1,11 @@
 import React from 'react'
 import {Chip, Popover} from '@material-ui/core'
+import {Select, MenuItem} from '@material-ui/core'
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
+
 import {findIndex} from 'lodash'
 import {blue300} from '@material-ui/core/colors'
-// import Tags from 'react-material-tags'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
@@ -48,30 +49,22 @@ export default class TagPickerModalView extends React.Component {
     this.props.onDeselectTag(removedTag.label)
   }
 
-  // renderContent1 () {
-  //   const {tags} = this.props
-  //   if (!tags || !tags.length) return null
-  //   return (
-  //     <Tags
-  //       sourceTags={tags.map(p => ({label: p.name}))}
-  //       onlyFromSource
-  //       onAdd={this.onAdd.bind(this)}
-  //       onRemove={this.onRemove.bind(this)}
-  //     />
-  //   )
-  // }
-
   renderContent () {
     const {tags, value, onChangeValue} = this.props
     if (!tags || !tags.length) return null
     return (
-      <div style={{zIndex: 1000}}>
-        <Select
-          options={(tags || []).map(t => ({label: t.name, value: t.id}))}
-          value={value}
-          style={{overflow: 'visible'}}
-          onChange={onChangeValue}
-        />
+      <div>
+        <FormControl fullWidth>
+          <InputLabel>Severity</InputLabel>
+          <Select
+            value={value}
+            onChange={onChangeValue}
+          >
+            {(tags || []).map(option =>
+              <MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>
+            )}
+          </Select>
+        </FormControl>
       </div>
     )
   }

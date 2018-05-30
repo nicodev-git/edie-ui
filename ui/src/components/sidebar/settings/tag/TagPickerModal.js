@@ -44,9 +44,9 @@ export default class TagPickerModal extends React.Component {
       })
     })
   }
-  onChangeValue (p) {
+  onChangeValue (e) {
     const {tags} = this.props
-    const index = findIndex(tags, {id: p.value})
+    const index = findIndex(tags, {id: e.target.value})
     if (index < 0) return
     this.onSelectTag(tags[index].name)
   }
@@ -54,7 +54,7 @@ export default class TagPickerModal extends React.Component {
     return (
       <TagPickerModalView
         {...this.props}
-        value={null}
+        value=""
         onChangeValue={this.onChangeValue.bind(this)}
         onClickAdd={this.onClickAdd.bind(this)}
         onSelectTag={this.onSelectTag.bind(this)}
