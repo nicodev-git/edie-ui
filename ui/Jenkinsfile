@@ -6,6 +6,7 @@ pipeline{
           registryport='18079'
           registryurl=''
           branch='2018.1'
+          exposedport="6000"
            }
      agent any
 
@@ -56,7 +57,7 @@ pipeline{
                 steps{
                    sh 'ssh root@dev docker pull ${registry}:${registryport}/${name} '
                    sh 'ssh root@dev docker rm -f ${name} || true'
-                   sh 'ssh root@dev docker run --name ${name} -d -p 5001:80 ${registry}:${registryport}/${name} '
+                   sh 'ssh root@dev docker run --name ${name} -d -p ${exposedport}:80 ${registry}:${registryport}/${name} '
                 }
              }
 
