@@ -152,15 +152,15 @@ export default class SearchFormView extends React.Component {
                 <Button variant="flat" onClick={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}>Tags</Button>
               </div>
 
-              <div style={{marginTop: -35}}>
+              <div>
                 <FormControl className="text-left margin-md-left">
                   <InputLabel>Severity</InputLabel>
                   <Select
                     multiple
                     value={selectedSeverities}
                     onChange={onChangeSeverity}
-                    style={{width: 300}}
                     renderValue={this.severityRenderer.bind(this, severities)}
+                    fullWidth
                   >
                     {severities.map(option =>
                       <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
@@ -169,14 +169,14 @@ export default class SearchFormView extends React.Component {
                 </FormControl>
               </div>
 
-              <div style={{marginTop: -20}}>
+              <div className="margin-md-bottom">
                 <FormControl className="margin-md-left">
                   <InputLabel>MonitorType</InputLabel>
                   <Select
                     multiple
                     value={selectedMonitorTypes}
                     onChange={onChangeMonitorType}
-                    style={{width: 300}}
+                    fullWidth
                   >
                     {monitorTemplates.map(option =>
                       <MenuItem key={option.id} value={option.monitortype}>{option.name}</MenuItem>
