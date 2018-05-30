@@ -12,7 +12,7 @@ pipeline{
      stages {
 
           stage('Clone') {
-           when { branch ${branch}}
+           when { branch "${branch}"}
                steps{
                     echo 'getting code...'+env.BRANCH_NAME
                     checkout scm
@@ -21,7 +21,7 @@ pipeline{
 
 
           stage('Install') {
-           when { branch ${branch}}
+           when { branch "${branch}"}
                steps{
                     sh 'sh install.sh'
                   
@@ -29,14 +29,14 @@ pipeline{
           }
 
            stage('Build') {
-           when { branch ${branch}}
+           when { branch "${branch}"}
                steps{
                     sh 'sh build.sh'
                }
           }
 
           stage("Packaging"){
-            when { branch ${branch}}
+            when { branch "${branch}"}
             steps{
                 echo 'preparing docker'
                 sh 'docker build -t ${name} .'
@@ -45,14 +45,14 @@ pipeline{
           }
 
           stage("Push dev registry"){
-            when {branch ${branch}}
+            when {branch "${branch}"}
             steps{
                   sh 'docker push ${registry}:${registryport}/${name} '
             }
           }
 
            stage("Install on dev"){
-                when {branch ${branch}}
+                when {branch "${branch}"}
                 steps{
                    sh 'ssh root@dev docker pull ${registry}:${registryport}/${name} '
                    sh 'ssh root@dev docker rm -f ${name} || true'
