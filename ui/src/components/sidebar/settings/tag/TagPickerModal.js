@@ -46,19 +46,30 @@ export default class TagPickerModal extends React.Component {
   }
   onChangeValue (e) {
     const {tags} = this.props
-    const index = findIndex(tags, {id: e.target.value})
-    if (index < 0) return
-    this.onSelectTag(tags[index].name)
+    const tag = e.target.value
+    if (tags.includes(tag)) return
+    this.onSelectTag(tag)
+  }
+  getTags () {
+    const {tags, workflows} = this.props
+    const allTags = tags.map(p => p.name)
+    workflows.forEach(wf => {
+      (wf.tags || []).forEach(t => {
+        if (!allTags.includes(t)) {
+          allTags.push(t)
+        }
+      })
+    })
+    return allTags
   }
   render () {
     return (
       <TagPickerModalView
         {...this.props}
+        tags={this.getTags()}
         value=""
         onChangeValue={this.onChangeValue.bind(this)}
         onClickAdd={this.onClickAdd.bind(this)}
-        onSelectTag={this.onSelectTag.bind(this)}
-        onDeselectTag={this.onDeselectTag.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
       />
     )

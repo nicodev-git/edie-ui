@@ -4,31 +4,11 @@ import {Select, MenuItem} from '@material-ui/core'
 import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 
-import {findIndex} from 'lodash'
-import {blue300} from '@material-ui/core/colors'
-
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 import {chipStyles} from 'style/common/materialStyles'
 
 export default class TagPickerModalView extends React.Component {
-  renderChip (w) {
-    const {selectedTags, onSelectTag, onDeselectTag} = this.props
-    const selected = findIndex(selectedTags, {id: w.id}) >= 0
-    return (
-      <Chip
-        key={w.id} style={chipStyles.chip}
-        backgroundColor={selected ? blue300 : null}
-        onClick={() => selected ? onDeselectTag(w) : onSelectTag(w)}
-        label={w.name}
-      />
-    )
-  }
-
-  onAdd (addedTag, allTags) {
-    this.props.onSelectTag(addedTag.label)
-  }
-
   renderContent () {
     const {tags, value, onChangeValue} = this.props
     if (!tags || !tags.length) return null
@@ -40,8 +20,8 @@ export default class TagPickerModalView extends React.Component {
             value={value}
             onChange={onChangeValue}
           >
-            {(tags || []).map(option =>
-              <MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>
+            {(tags || []).map((t, i) =>
+              <MenuItem key={i} value={t}>{t}</MenuItem>
             )}
           </Select>
         </FormControl>
@@ -54,8 +34,8 @@ export default class TagPickerModalView extends React.Component {
     return (
       <div style={chipStyles.wrapper}>
         {
-          selectedTags.map(p =>
-            <Chip key={p} style={chipStyles.chip} label={p}/>
+          selectedTags.map((p, i) =>
+            <Chip key={i} style={chipStyles.chip} label={p}/>
           )
         }
       </div>
