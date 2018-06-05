@@ -1,6 +1,2 @@
-const getServerURL = () => {
-    return window.location.port === '3000' ? 'http://im.securegion.com' : window.location.origin;
-}
-
-export const ROOT_URL = getServerURL()
-export const SRA_URL = 'http://aaa.securegion.com'
+export const ROOT_URL = 'http://imserver.avatar.securegion.com'
+export const SRA_URL = 'http://aaa.avatar.securegion.com'
