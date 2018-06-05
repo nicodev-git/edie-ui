@@ -1,6 +1,4 @@
 import React from 'react'
-import {findIndex} from 'lodash'
-
 import TagPickerModalView from './TagPickerModalView'
 
 import {showPrompt, showAlert} from 'components/common/Alert'
