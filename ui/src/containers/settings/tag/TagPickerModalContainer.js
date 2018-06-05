@@ -19,7 +19,8 @@ class TagPickerModalContainer extends React.Component {
 export default connect(
   state => ({
     tags: state.tag.tags,
-    selectedTags: state.tag.selectedTags
+    selectedTags: state.tag.selectedTags,
+    workflows: state.settings.workflows
   }), {
     fetchTags,
     addTag,

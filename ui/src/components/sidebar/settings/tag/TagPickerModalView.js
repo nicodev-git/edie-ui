@@ -25,28 +25,8 @@ export default class TagPickerModalView extends React.Component {
     )
   }
 
-  renderContent2 () {
-    const {tags, onClickAdd, hideAdd} = this.props
-    return (
-      <div style={chipStyles.wrapper}>
-        {
-          tags.map(this.renderChip.bind(this))
-        }
-        {!hideAdd && <Chip
-          style={chipStyles.chip}
-          onClick={onClickAdd}
-          label={<b>+</b>}
-        />}
-      </div>
-    )
-  }
-
   onAdd (addedTag, allTags) {
     this.props.onSelectTag(addedTag.label)
-  }
-
-  onRemove (removedTag, allTags) {
-    this.props.onDeselectTag(removedTag.label)
   }
 
   renderContent () {
