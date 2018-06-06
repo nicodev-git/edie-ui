@@ -1,15 +1,12 @@
 import React from 'react'
 import {RadioGroup} from '@material-ui/core'
 
-const FormInput = ({input, label, floatingLabel, meta: {touched, error}, ...custom}) => (
-  <TextField
-    {...input}
+const FormRadioGroup = ({input, children, ...custom}) => (
+  <RadioGroup
     {...custom}
-    inputProps={{style: {paddingTop: 3}}}
-    label={floatingLabel}
-    placeholder={label}
-    autoComplete={custom.type === 'password' ? 'new-password' : 'off'}
-  />
+    {...input}>
+    {children}
+  </RadioGroup>
 )
 
-export default FormInput
+export default FormRadioGroup
