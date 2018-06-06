@@ -28,6 +28,7 @@ import CardLegend from './CardLegend'
 import CardPanel from './CardPanel'
 import Modal from './Modal'
 import ModalFull from './ModalFull'
+import FormRadioGroup from './FormRadioGroup'
 
 export {
     Header,
@@ -59,5 +60,6 @@ export {
     CardLegend,
     Modal,
     CardPanel,
-    ModalFull
+    ModalFull,
+    FormRadioGroup
 }

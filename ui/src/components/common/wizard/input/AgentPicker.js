@@ -1,5 +1,5 @@
 import React from 'react'
-import {RadioGroup, Radio, CircularProgress, IconButton} from '@material-ui/core'
+import {Radio, CircularProgress, IconButton} from '@material-ui/core'
 import {FormControlLabel} from '@material-ui/core'
 
 import {Field} from 'redux-form'
@@ -7,7 +7,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle'
 
 import CredentialModal from 'components/credentials/CredentialModal'
 
-import {FormSelect} from 'components/modal/parts'
+import {FormSelect, FormRadioGroup} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'
 import {isWindowsDevice, getDeviceCollectors} from 'shared/Global'
 
@@ -185,7 +185,7 @@ export default class AgentPicker extends React.Component {
 
     return (
       <div style={{minHeight: 110, position: 'relative'}}>
-        <Field name="agentType" className="padding-md-top" component={RadioGroup} onChange={onChange}>
+        <Field name="agentType" className="padding-md-top" component={FormRadioGroup} onChange={onChange}>
           <FormControlLabel control={<Radio />} value="" label="None" className="pull-left"/>
           <FormControlLabel control={<Radio />} value="agent" label={agentLabel} className="pull-left"/>
           <FormControlLabel control={<Radio />} value="collector" label={collectorLabel} className="pull-left"/>

@@ -1,9 +1,9 @@
 import React from 'react'
-import {Button, Radio, RadioGroup} from '@material-ui/core'
+import {Button, Radio} from '@material-ui/core'
 import {Field} from 'redux-form'
 import {FormControlLabel} from '@material-ui/core'
 
-import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal} from 'components/modal/parts'
+import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal, FormRadioGroup} from 'components/modal/parts'
 
 import {removeAfterDurations, removeAfterDurationUnits} from 'shared/Global'
 
@@ -92,7 +92,7 @@ export default class MonitorWizardView extends React.Component {
             </div>
 
             <div className={showAgentType ? '' : 'hidden'} style={{position: 'relative'}}>
-              <Field name="agentType" component={RadioGroup} className="margin-md-top">
+              <Field name="agentType" component={FormRadioGroup} className="margin-md-top">
                 <FormControlLabel control={<Radio />} value="agent" label={agentLabel} disabled={!agent}/>
                 <FormControlLabel control={<Radio />} value="collector" label={collectorLabel}/>
               </Field>
