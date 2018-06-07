@@ -32,8 +32,6 @@ class Workflows extends React.Component {
         this.props.fetchWorkflows()
         this.props.fetchGroups()
         this.props.fetchShapes()
-        this.props.fetchMonitorTpls()
-        this.props.fetchServerTpls()
         this.props.fetchBrainCells()
     }
 

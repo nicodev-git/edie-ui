@@ -72,7 +72,7 @@ export default connect(
         wfSettingModalOpen: state.workflow.wfSettingModalOpen,
         editWfSetting: state.workflow.editWfSetting,
 
-        brainCells: state.setting.brainCells
+        brainCells: state.settings.brainCells
     }), {
         openDeviceWfDiagramModal,
         closeDeviceWfDiagramModal,

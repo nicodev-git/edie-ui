@@ -33,7 +33,19 @@ import {
     SHOW_WF_SETTING_MODAL
 } from 'actions/types'
 
-export default function (state = {}, action) {
+const initialState = {
+  workflows: [],
+  wfDiagramModalOpen: false,
+  workflowOutput: [],
+  progressWfs: [],
+  groups: [],
+  wfGroups: [],
+  selectedWorkflow: '',
+  finishedWfs: [],
+  globalVars: [],
+  shapes: []
+}
+export default function (state = initialState, action) {
     switch (action.type) {
         case FETCH_WORKFLOWS:
             return { ...state, workflows: action.data, diagrams: action.diagrams/*, selectedWorkflow: action.data.length ? action.data[0] : ''*/ }
