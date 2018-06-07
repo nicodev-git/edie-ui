@@ -1,4 +1,5 @@
 import {
+  OPEN_DIAGRAM_MODAL,
 
   ADD_DIAGRAM_OBJECT,
   UPDATE_DIAGRAM_OBJECT,
@@ -22,6 +23,7 @@ import {
   SET_DIAGRAM_LINE_DRAWING,
   SET_DIAGRAM_LINE_START_POINT,
   SET_DIAGRAM_LINE_END_POINT,
+  SET_DIAGRAM_LINE_STEP_POINT,
 
   ADD_DIAGRAM_LINE,
   UPDATE_DIAGRAM_LINE,
@@ -30,210 +32,292 @@ import {
   CLOSE_DIAGRAM_OBJECT_MODAL,
 
   SET_DIAGRAM_EDITING_TEXT,
-  REMOVE_DIAGRAM_SELECTED_OBJECTS
+  REMOVE_DIAGRAM_SELECTED_OBJECTS,
 
+  SHOW_FILL_COLOR_PICKER,
+  CHANGE_PICKER_COLOR,
+
+  UPDATE_DIAGRAM_WORKFLOW
 } from './types'
 
-export function addDiagramObject (object) {
+export function openDiagramModal (stateId, data, flow) {
+  return dispatch => {
+    dispatch({
+      type: OPEN_DIAGRAM_MODAL,
+      data,
+      flow,
+      stateId
+    })
+  }
+}
+
+export function addDiagramObject (stateId, object) {
   return dispatch => {
     dispatch({
       type: ADD_DIAGRAM_OBJECT,
-      data: object
+      data: object,
+      stateId
     })
   }
 }
 
-export function updateDiagramObject (object) {
+export function updateDiagramObject (stateId, object) {
   return dispatch => {
     dispatch({
       type: UPDATE_DIAGRAM_OBJECT,
-      data: object
+      data: object,
+      stateId
     })
   }
 }
 
-export function selectDiagramObject (object) {
+export function selectDiagramObject (stateId, object) {
   return dispatch => {
     dispatch({
       type: SELECT_DIAGRAM_OBJECT,
-      data: object ? [object] : []
+      data: object ? [object] : [],
+      stateId
     })
   }
 }
 
-export function setHoverDiagramObject (object) {
+export function setHoverDiagramObject (stateId, object) {
   return dispatch => {
     dispatch({
       type: SET_HOVER_DIAGRAM_OBJECT,
-      data: object
+      data: object,
+      stateId
     })
   }
 }
 
-export function clearHoverDiagramObject (object) {
+export function clearHoverDiagramObject (stateId, object) {
   return dispatch => {
     dispatch({
       type: CLEAR_HOVER_DIAGRAM_OBJECT,
-      data: object
+      data: object,
+      stateId
     })
   }
 }
 
-export function setHoverPoint (point) {
+export function setHoverPoint (stateId, point) {
   return dispatch => {
     dispatch({
       type: SET_HOVER_POINT,
-      data: point
+      data: point,
+      stateId
     })
   }
 }
 
-export function setDiagramMouseDown (isDown, pos, downOn) {
+export function setDiagramMouseDown (stateId, isDown, pos, downOn) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_MOUSE_DOWN,
       data: isDown,
       pos,
-      downOn
+      downOn,
+      stateId
     })
   }
 }
 
-export function setDiagramDragging (dragging) {
+export function setDiagramDragging (stateId, dragging) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_DRAGGING,
-      data: dragging
+      data: dragging,
+      stateId
     })
   }
 }
 
-export function setDiagramCursorPos (pos) {
+export function setDiagramCursorPos (stateId, pos) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_CURSOR_POS,
-      data: pos
+      data: pos,
+      stateId
     })
   }
 }
 
-export function moveDiagramSelectedObjects (offset) {
+export function moveDiagramSelectedObjects (stateId, offset, workflowItems, selected) {
   return dispatch => {
     dispatch({
       type: MOVE_DIAGRAM_SELECTED_OBJECTS,
-      data: offset
+      data: offset,
+      workflowItems,
+      stateId,
+      selected
     })
   }
 }
 
-export function setDiagramResizing (resizing) {
+export function setDiagramResizing (stateId, resizing) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_RESIZING,
-      data: resizing
+      data: resizing,
+      stateId
     })
   }
 }
 
-export function setDiagramResizingPoint (point) {
+export function setDiagramResizingPoint (stateId, point) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_RESIZING_POINT,
-      data: point
+      data: point,
+      stateId
     })
   }
 }
 
-export function resizeDiagramSelectedObjects (offset) {
+export function resizeDiagramSelectedObjects (stateId, offset) {
   return dispatch => {
     dispatch({
       type: RESIZE_DIAGRAM_SELECTED_OBJECTS,
-      data: offset
+      data: offset,
+      stateId
     })
   }
 }
 
-export function setDiagramLineDrawing (isDrawing, isDrawingStart, drawingLine) {
+export function setDiagramLineDrawing (stateId, isDrawing, isDrawingStart, drawingLine) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_LINE_DRAWING,
       data: isDrawing,
       isDrawingStart,
-      drawingLine
+      drawingLine,
+      stateId
     })
   }
 }
 
-export function setDiagramLineStartPoint (pos, object, connectionPoint) {
+export function setDiagramLineStartPoint (stateId, pos, object, connectionPoint) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_LINE_START_POINT,
       pos,
       object,
-      connectionPoint
+      connectionPoint,
+      stateId
     })
   }
 }
 
-export function setDiagramLineEndPoint (pos, object, connectionPoint) {
+export function setDiagramLineEndPoint (stateId, pos, object, connectionPoint) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_LINE_END_POINT,
       pos,
       object,
-      connectionPoint
+      connectionPoint,
+      stateId
     })
   }
 }
 
-export function addDiagramLine (line) {
+export function setDiagramLineStepPoint (stateId, point) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_LINE_STEP_POINT,
+      point,
+      stateId
+    })
+  }
+}
+
+export function addDiagramLine (stateId, line) {
   return dispatch => {
     dispatch({
       type: ADD_DIAGRAM_LINE,
-      data: line
+      data: line,
+      stateId
     })
   }
 }
 
-export function updateDiagramLine (line) {
+export function updateDiagramLine (stateId, line) {
   return dispatch => {
     dispatch({
       type: UPDATE_DIAGRAM_LINE,
-      line
+      line,
+      stateId
     })
   }
 }
 
-export function openDiagramObjectModal (config) {
+export function openDiagramObjectModal (stateId, config, tpl) {
   return dispatch => {
     dispatch({
       type: OPEN_DIAGRAM_OBJECT_MODAL,
-      config
+      config,
+      tpl,
+      stateId
     })
   }
 }
 
-export function closeDiagramObjectModal () {
+export function closeDiagramObjectModal (stateId) {
   return dispatch => {
     dispatch({
-      type: CLOSE_DIAGRAM_OBJECT_MODAL
+      type: CLOSE_DIAGRAM_OBJECT_MODAL,
+      stateId
     })
   }
 }
 
-export function setDiagramEditingText (object) {
+export function setDiagramEditingText (stateId, object) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_EDITING_TEXT,
-      object
+      object,
+      stateId
     })
   }
 }
 
-export function removeDiagramSelectedObjects () {
+export function removeDiagramSelectedObjects (stateId, objects) {
   return dispatch => {
     dispatch({
-      type: REMOVE_DIAGRAM_SELECTED_OBJECTS
+      type: REMOVE_DIAGRAM_SELECTED_OBJECTS,
+      objects,
+      stateId
+    })
+  }
+}
+
+export function showFillColorPicker (stateId, visible, color) {
+  return dispatch => {
+    dispatch({
+      type: SHOW_FILL_COLOR_PICKER,
+      visible,
+      color,
+      stateId
+    })
+  }
+}
+
+export function changePickerColor (stateId, color) {
+  return dispatch => {
+    dispatch({
+      type: CHANGE_PICKER_COLOR,
+      color,
+      stateId
+    })
+  }
+}
+
+export function updateDiagramWorkflow (stateId, flow) {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_DIAGRAM_WORKFLOW,
+      flow,
+      stateId
     })
   }
 }
