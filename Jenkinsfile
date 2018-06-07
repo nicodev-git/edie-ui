@@ -2,5 +2,5 @@
 webBuild {
     name='imui'
     exposedport='6000'
-    devbranch='2018.1.1'
+    devbranch='2018.1'
 }
