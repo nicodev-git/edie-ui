@@ -10,6 +10,7 @@ import DiagramReducer from './DiagramReducer'
 import AttackersReducer from './AttackersReducer'
 import TagReducer from './TagReducer'
 import GaugeReducer from './GaugeReducer'
+import WorkflowReducer from './WorkflowReducer'
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   chat: ChatReducer,
   attackers: AttackersReducer,
   tag: TagReducer,
-  gauge: GaugeReducer
+  gauge: GaugeReducer,
+  workflow: WorkflowReducer
 })
 
 export default rootReducer

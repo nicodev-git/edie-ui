@@ -220,6 +220,8 @@ const initialState = {
   roles: [],
   permissions: [],
 
+  brainCells: [],
+
   workflowDraw: 1
 }
 
