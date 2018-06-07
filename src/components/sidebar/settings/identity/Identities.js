@@ -14,7 +14,7 @@ import { showAlert, showConfirm } from 'components/common/Alert'
 
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'
-import {hasPermission} from "../../../../shared/Permission";
+import {hasPermission} from 'shared/Permission'
 
 export default class Identities extends React.Component {
   constructor (props) {

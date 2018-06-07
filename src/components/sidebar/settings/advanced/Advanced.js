@@ -10,7 +10,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import {showAlert} from 'components/common/Alert'
-import {hasPermission} from "../../../../shared/Permission";
+import {hasPermission} from 'shared/Permission'
 
 export default class Advanced extends React.Component {
   constructor (props) {

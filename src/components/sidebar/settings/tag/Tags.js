@@ -10,10 +10,10 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import TagModal from './TagModal'
-import WfTabs from '../rule/WorkflowTabs'
+import WfTabs from '../oldwf/WorkflowTabs'
 
 import {chipStyles} from 'style/common/materialStyles'
-import {hasPermission} from '../../../../shared/Permission'
+import {hasPermission} from 'shared/Permission'
 
 const styles = {
   avatar: {
