@@ -63,7 +63,10 @@ import uuid from 'uuid'
 
 const WF_URL = ''
 const getAuthConfig = {}
-const requestFlowApi = () => {}
+const requestFlowApi = () => ({
+  then: () => requestFlowApi(),
+  catch: () => requestFlowApi()
+})
 
 export const openDeviceWfDiagramModal = (stateId, diagram, flow) => {
   return (dispatch) => {
