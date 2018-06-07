@@ -76,7 +76,7 @@ class Tags extends React.Component {
     this.props.history.push(`/device/${device.id}`)
   }
   onClickTagWf (wf) {
-    this.props.history.push(`/settings/tags/rules`)
+    this.props.history.push(`/settings/tags/workflows`)
   }
   onClickTagParserType (pt) {
     this.props.history.push(`/settings/tags/parsertypes`)

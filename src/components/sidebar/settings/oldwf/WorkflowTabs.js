@@ -9,7 +9,7 @@ const tabs = [{
   path: '/settings/tags/templates'
 }, {
   title: 'Workflows',
-  path: '/settings/tags/rules'
+  path: '/settings/tags/workflows'
 }, {
   title: 'ParserTypes',
   path: '/settings/tags/parsertypes'
