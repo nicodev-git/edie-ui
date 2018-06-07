@@ -21,7 +21,7 @@ import { showConfirm, showAlert } from 'components/common/Alert'
 import { chipStyles } from 'style/common/materialStyles'
 
 import { extImageBaseUrl } from 'shared/Global'
-import WfTabs from '../oldwf/WorkflowTabs'
+import WfTabs from '../wf/WorkflowTabs'
 import {hasPermission} from 'shared/Permission'
 
 export default class Templates extends Component {

@@ -11,12 +11,13 @@ import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import FormControl from '@material-ui/core/FormControl'
 
-import TabPage from 'components/shared/tab_page'
-import TabPageBody from 'components/shared/tab_page_body'
-import TabPageHeader from 'components/shared/tab_page_header'
-
-import WorkflowEditModal from './workflow_edit_modal'
-import WorkflowSettingModal from './WorkflowSettingModal'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
+import WfTabs from './WorkflowTabs'
+import SettingTabs from "../SettingTabs";
+// import WorkflowEditModal from './workflow_edit_modal'
+// import WorkflowSettingModal from './WorkflowSettingModal'
 
 class Workflows extends React.Component {
     constructor (props) {
@@ -171,15 +172,15 @@ class Workflows extends React.Component {
     renderWorkflowEditModal () {
         if (!this.props.wfNameModalOpen) return
 
-        const {editWf} = this.state
-        return (
-            <WorkflowEditModal
-                {...this.props}
-                allTags={this.getTags()}
-                editWf={editWf}
-                onSave={this.onSaveName.bind(this)}
-            />
-        )
+        // const {editWf} = this.state
+        // return (
+        //     <WorkflowEditModal
+        //         {...this.props}
+        //         allTags={this.getTags()}
+        //         editWf={editWf}
+        //         onSave={this.onSaveName.bind(this)}
+        //     />
+        // )
     }
     renderGroups () {
         const {groups} = this.props
@@ -199,12 +200,12 @@ class Workflows extends React.Component {
     }
     renderSettingModal () {
         if (!this.props.wfSettingModalOpen) return
-        return (
-            <WorkflowSettingModal
-                onSave={this.onSaveSetting.bind(this)}
-                onClose={this.onCloseSetting.bind(this)}
-            />
-        )
+        // return (
+        //     <WorkflowSettingModal
+        //         onSave={this.onSaveSetting.bind(this)}
+        //         onClose={this.onCloseSetting.bind(this)}
+        //     />
+        // )
     }
     renderFilterTags() {
         const {filterTags} = this.state
@@ -251,11 +252,12 @@ class Workflows extends React.Component {
                         <div className="pull-right">
                             <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
                             <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Settings</Button>&nbsp;
+                          <WfTabs history={this.props.history}/>
                         </div>
                     </div>
                 </TabPageHeader>
 
-                <TabPageBody>
+              <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location} transparent>
                     {this.renderWorkflows()}
                     {this.renderWorkflowEditModal()}
                     {this.renderSettingModal()}

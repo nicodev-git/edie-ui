@@ -11,7 +11,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import ParserTypeModal from './ParserTypeModal'
 import SimulationModal from './SimulationModal'
 
-import WfTabs from '../oldwf/WorkflowTabs'
+import WfTabs from '../wf/WorkflowTabs'
 import { showAlert } from 'components/common/Alert'
 import {hasPermission} from 'shared/Permission'
 
