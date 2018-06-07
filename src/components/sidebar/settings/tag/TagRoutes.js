@@ -3,7 +3,7 @@ import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 
 import SettingTagsContainer from 'containers/settings/tag/TagsContainer'
-// import SettingWfContainer from 'containers/settings/wf/WorkflowContainer'
+// import SettingWfContainer from 'containers/settings/wf/WorkflowsContainer'
 import SettingTemplatesContainer from 'containers/settings/template/TemplatesContainer'
 import SettingParserTypesContainer from 'containers/settings/parserTypes/ParserTypesContainer'
 

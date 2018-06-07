@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Workflows from 'components/page/workflow/workflows'
+import Workflows from 'components/sidebar/settings/wf/Workflows'
 
 import {
     openDeviceWfDiagramModal,
@@ -27,7 +27,6 @@ import {
     showWfRuleModal,
     showWfTaskModal,
 
-    fetchUsers,
     showUserPickModal,
 
     fetchShapes,
@@ -41,7 +40,7 @@ import {
     resetForm
 } from 'actions'
 
-class WorkflowContainer extends React.Component {
+class WorkflowsContainer extends React.Component {
     render () {
         return (
             <Workflows {...this.props}/>
@@ -98,7 +97,6 @@ export default connect(
         showWfRuleModal,
         showWfTaskModal,
 
-        fetchUsers,
         showUserPickModal,
 
         fetchShapes,
@@ -111,4 +109,4 @@ export default connect(
         fetchBrainCells,
         resetForm
     }
-)(WorkflowContainer)
+)(WorkflowsContainer)

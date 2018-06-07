@@ -106,6 +106,15 @@ import {
   UPDATE_WF_PARAM,
   REMOVE_WF_PARAM,
 
+  FETCH_BRAIN_CELLS,
+  ADD_BRAIN_CELL,
+  UPDATE_BRAIN_CELL,
+  REMOVE_BRAIN_CELL,
+  SHOW_BRAIN_CELL_MODAL,
+  // SHOW_SCRIPT_MODAL,
+  // SHOW_GROK_MODAL,
+  // SHOW_CELL_PARAM_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -941,5 +950,29 @@ export function eddieSync () {
     }).catch(() => {
       dispatch({type: SYNC_DATA, data: 'Failed'})
     })
+  }
+}
+
+//////////////////////////////////////////////////////////////////
+
+export function fetchBrainCells() {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/braincells?size=1000`).then(res => {
+      dispatch({type: FETCH_BRAIN_CELLS, data: res.data._embedded.brainCells})
+    })
+  }
+}
+
+export function addBrainCell(entity) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/braincells`, entity).then(res => {
+      dispatch({type: ADD_BRAIN_CELL, data: res.data})
+    })
+  }
+}
+
+export function resetForm(name) {
+  return dispatch => {
+    dispatch(reset(name))
   }
 }
