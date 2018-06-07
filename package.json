@@ -54,6 +54,7 @@
     "stompjs": "^2.3.3"
   },
   "devDependencies": {
+    "eslint-config-google": "^0.9.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
