@@ -550,3 +550,13 @@ export function trimOSName(name) {
 }
 
 export const anyFieldKey = '*'
+
+export const sortArray = (list, prop) => {
+  list.sort((a, b) => {
+    if (a[prop] < b[prop]) return -1
+    if (a[prop] > b[prop]) return 1
+    return 0
+  })
+
+  return list
+}

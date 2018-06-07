@@ -3,7 +3,7 @@ import React from 'react'
 import BoardListModalView from './BoardListModalView'
 
 import {showPrompt, showConfirm} from 'components/common/Alert'
-import {showAlert} from "../../common/Alert";
+import {showAlert} from 'components/common/Alert'
 
 export default class BoardListModal extends React.Component {
   constructor (props) {
