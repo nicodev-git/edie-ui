@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import {reduce, isNull, isUndefined, isArray, assign} from 'lodash'
+import {reduce, isNull, isUndefined, isArray, assign, keys} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
@@ -562,3 +562,126 @@ export const sortArray = (list, prop) => {
 }
 
 export const gridBg = window.btoa('<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 0 10 L 40 10 M 10 0 L 10 40 M 0 20 L 40 20 M 20 0 L 20 40 M 0 30 L 40 30 M 30 0 L 30 40" fill="none" stroke="#e0e0e0" opacity="0.2" stroke-width="1"/><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e0e0e0" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>')
+
+export function updateFlowItemForm (values) {
+
+  const mapping = {}
+  keys(values.mapping || {}).forEach(key => {
+    if (values.mapping[key] && key.startsWith('from')) {
+      const id = key.replace('from', '')
+      const value = values.mapping[`to${id}`]
+      mapping[values.mapping[key]] = value
+    }
+  })
+
+  //////////////////////////////////////////////////////
+
+  const matches = []
+  const matchKeys = keys(values.match || {})
+  matchKeys.forEach(key => {
+    if (values.match[key] && key.startsWith('name')) {
+      const pid = key.replace('name', '')
+
+      const field = values.match[key]
+      const condition = values.match[`condition${pid}`]
+      const fieldValues = []
+
+      const prefix = `value_${pid}_`
+      matchKeys.forEach(vkey => {
+        if (!vkey.startsWith(prefix)) return
+        const value = values.match[vkey]
+        if(value) fieldValues.push(value)
+      })
+
+      matches.push({
+        field,
+        condition,
+        values: fieldValues
+      })
+    }
+  })
+
+  //////////////////////////////////////////////////////
+
+  const tr = values.timerange
+  const timerange = {
+  }
+
+  if (tr && tr.type) {
+    timerange.type = tr.type
+    timerange.weekdays = (tr.weekdays || '').split(',').filter(p => !!p)
+    timerange.days = (tr.days || '').split(',').filter(p => !!p).map(p => parseInt(p, 10))
+    timerange.date = tr.date || 0
+    timerange.timeFrom = tr.timeFrom.split(':').map(p => parseInt(p, 10))
+    timerange.timeTo = tr.timeTo.split(':').map(p => parseInt(p, 10))
+  }
+
+  //////////////////////////////////////////////////////
+
+  const wfConditions = []
+  const {wfCondition} = values
+  if (wfCondition) {
+    keys(wfCondition).forEach(key => {
+      if(key.startsWith('checkFlowId')) {
+        const checkFlowId = wfCondition[key]
+        if (!checkFlowId) return
+
+        const pid = key.replace('checkFlowId', '')
+
+        wfConditions.push({
+          duration: wfCondition[`duration${pid}`],
+          durationUnit: wfCondition[`durationUnit${pid}`],
+          checkFlowId
+        })
+      }
+    })
+  }
+
+  //////////////////////////////////////////////////////
+
+  const params = []
+  const paramKeys = keys(values.param || {})
+  paramKeys.forEach(key => {
+    if (values.param[key] && key.startsWith('name')) {
+      const pid = key.replace('name', '')
+
+      const name = values.param[key]
+      const value = values.param[`value${pid}`]
+
+      params.push({
+        name,
+        value
+      })
+    }
+  })
+
+  const resVars = []
+  const resVarKeys = keys(values.resvar || {})
+  resVarKeys.forEach(key => {
+    if (values.resvar[key] && key.startsWith('name')) {
+      const pid = key.replace('name', '')
+
+      const name = values.resvar[key]
+      const value = values.resvar[`value${pid}`]
+
+      resVars.push({
+        name,
+        value
+      })
+    }
+  })
+
+  //////////////////////////////////////////////////////
+
+  return {
+    ...values,
+    match: null,
+    wfCondition: null,
+    timerange,
+    matches,
+    mapping,
+    wfConditions,
+    params,
+    resVars
+  }
+}

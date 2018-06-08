@@ -1,5 +1,4 @@
 import React from 'react'
-// import HomeIcon from '@material-ui/core/svg-icons/action/home'
 import SearchIcon from '@material-ui/icons/Search'
 import ChatIcon from '@material-ui/icons/Chat'
 import BugReportIcon from '@material-ui/icons/BugReport'
@@ -7,7 +6,6 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
 import SettingsIcon from '@material-ui/icons/Settings'
 import BackIcon from '@material-ui/icons/ArrowBack'
 import DashboardIcon from '@material-ui/icons/Dashboard'
-// import ExitIcon from '@material-ui/icons/ExitToApp'
 import PlaylistIcon from '@material-ui/icons/PlaylistAddCheck'
 import { sidebarIconsColor } from 'style/common/materialStyles'
 import MapIcon from '@material-ui/icons/Map'
@@ -37,7 +35,7 @@ export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true, roleMenuId: 'Dashboard'},
   {id: 'home', title: 'Map', icon: map, path: '/', roleMenuId: 'Map'},
   {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers', roleMenuId: 'Servers'},
-  {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows', roleMenuId: 'Workflows'},
+  {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/workflow', roleMenuId: 'Workflows'},
   {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true, roleMenuId: 'Apps'},
   {id: 'search', title: 'Search', icon: search, path: '/search', roleMenuId: 'Search'},
   {id: 'devicewf', title: 'Device Workflow', icon: deviceWfIcon, path: '/devicewf', roleMenuId: 'DeviceWorkflows'},
