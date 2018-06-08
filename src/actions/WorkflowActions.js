@@ -62,12 +62,6 @@ import {
 
 import uuid from 'uuid'
 
-const WF_URL = ''
-const getAuthConfig = {}
-const requestFlowApi = () => ({
-  then: () => requestFlowApi(),
-  catch: () => requestFlowApi()
-})
 
 export const openDeviceWfDiagramModal = (stateId, diagram, flow) => {
   return (dispatch) => {
@@ -94,18 +88,11 @@ export const fetchWorkflows = () => {
 
 export const fetchWorkflow = (id, cb) => {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'get',
-      data: {
-        flowId: id
-      }
+    axios.get(`${ROOT_URL}/getFlow`, {
+      params: {id}
     }).then(res => {
-      dispatch({type: UPDATE_WORKFLOW, data: res.data.object})
-      cb && cb(res.data.object)
+      if (res.data) dispatch({type: UPDATE_WORKFLOW, data: res.data})
+      cb && cb(res.data)
     }).catch(() => {
       cb && cb()
     })
@@ -114,16 +101,11 @@ export const fetchWorkflow = (id, cb) => {
 
 export const fetchWorkflowByName = (name, cb) => {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'getByName',
-      data: {name}
+    axios.get(`${ROOT_URL}/getFlowByName`, {
+      params: {name}
     }).then(res => {
-      dispatch({type: UPDATE_WORKFLOW, data: res.data.object})
-      cb && cb(res.data.object)
+      if (res.data) dispatch({type: UPDATE_WORKFLOW, data: res.data})
+      cb && cb(res.data)
     }).catch(() => {
       cb && cb()
     })
@@ -132,17 +114,10 @@ export const fetchWorkflowByName = (name, cb) => {
 
 export const addWorkflow = (data, cb) => {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'addflow',
-      data
-    }).then(res => {
-      if (res.data.success) {
-        dispatch({type: ADD_WORKFLOW, data})
-        cb && cb(data)
+    axios.post(`${ROOT_URL}/addFlow`, data).then(res => {
+      if (res.data) {
+        dispatch({type: ADD_WORKFLOW, data: res.data})
+        cb && cb(res.data)
       } else {
         cb && cb()
       }
@@ -206,18 +181,11 @@ export const updateWorkflow = (data, cb) => {
   return dispatch => {
     dispatch({type: UPDATE_WORKFLOW_SAVE_STATE, data: true})
 
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'updateflow',
-      data
-    }).then(res => {
+    axios.post(`${ROOT_URL}/updateFlow`, data).then(res => {
       dispatch({type: UPDATE_WORKFLOW_SAVE_STATE, data: false})
-      if (res.data.success) {
-        dispatch({type: UPDATE_WORKFLOW, data})
-        cb && cb(data)
+      if (res.data) {
+        dispatch({type: UPDATE_WORKFLOW, data: res.data})
+        cb && cb(res.data)
       } else {
         cb && cb()
       }
@@ -230,14 +198,7 @@ export const updateWorkflow = (data, cb) => {
 
 export const removeWorkflow = (data) => {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'deleteflow',
-      data
-    }).then(res => {
+    axios.post(`${ROOT_URL}/deleteFlow`, data).then(res => {
       if (res.data.success) {
         dispatch({type: REMOVE_WORKFLOW, data})
       }
@@ -753,13 +714,7 @@ export function showWfNameModal (visible) {
 
 export function fetchProgressWorkflows () {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'getAllCloned'
-    }).then(res => {
+    axios.get(`${ROOT_URL}/getAllClonedFlows`).then(res => {
       dispatch({type: FETCH_PROGRESS_WFS, data: res.data || []})
     })
   }
@@ -773,13 +728,7 @@ export function showWfMappingModal (visible) {
 
 export function fetchGroups () {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Group',
-      method: 'getAll'
-    }).then(res => {
+    axios.get(`${ROOT_URL}/getAllFlowGroups`).then(res => {
       dispatch({type: FETCH_GROUPS, data: res.data || []})
     })
   }
@@ -793,16 +742,9 @@ export function showGroupModal (visible, group) {
 
 export function addGroup (group) {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Group',
-      method: 'add',
-      data: group
-    }).then(res => {
-      if (res.data.success) {
-        dispatch({type: ADD_GROUP, data: res.data.object})
+    axios.post(`${ROOT_URL}/addFlowGroup`, group).then(res => {
+      if (res.data) {
+        dispatch({type: ADD_GROUP, data: res.data})
       }
     })
   }
@@ -810,16 +752,9 @@ export function addGroup (group) {
 
 export function updateGroup (group) {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Group',
-      method: 'update',
-      data: group
-    }).then(res => {
-      if (res.data.success) {
-        dispatch({type: UPDATE_GROUP, data: res.data.object})
+    axios.post(`${ROOT_URL}/updateFlowGroup`, group).then(res => {
+      if (res.data) {
+        dispatch({type: UPDATE_GROUP, data: res.data})
       }
     })
   }
@@ -827,14 +762,7 @@ export function updateGroup (group) {
 
 export function removeGroup (group) {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Group',
-      method: 'delete',
-      data: group
-    }).then(res => {
+    axios.post(`${ROOT_URL}/deleteFlowGroup`, group).then(res => {
       if (res.data.success) {
         dispatch({type: REMOVE_GROUP, data: group})
       }
