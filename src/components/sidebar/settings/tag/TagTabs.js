@@ -8,14 +8,11 @@ const tabs = [{
   title: 'Templates',
   path: '/settings/tags/templates'
 }, {
-  title: 'Workflows',
-  path: '/settings/tags/workflows'
-}, {
   title: 'ParserTypes',
   path: '/settings/tags/parsertypes'
 }]
 
-export default class WorkflowTabs extends React.Component {
+export default class TagTabs extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

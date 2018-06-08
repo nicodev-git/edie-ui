@@ -10,7 +10,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import TagModal from './TagModal'
-import WfTabs from '../wf/WorkflowTabs'
+import WfTabs from '../tag/TagTabs'
 
 import {chipStyles} from 'style/common/materialStyles'
 import {hasPermission} from 'shared/Permission'

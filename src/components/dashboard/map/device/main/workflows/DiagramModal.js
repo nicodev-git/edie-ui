@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { findIndex, assign, keys } from 'lodash'
-import Popover from 'components/shared/Popover'
+import Popover from 'components/common/popover'
 
 import DiagramPanel from './diagram/DiagramPanel'
 import DiagramDragLayer from './diagram/DiagramDragLayer'
