@@ -49,6 +49,7 @@ import {
   SHOW_WF_SETTING_MODAL
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
+import { ROOT_URL } from 'actions/config'
 
 import {
   addDiagramObject, updateDiagramObject, removeDiagramSelectedObjects,
@@ -83,13 +84,7 @@ export const closeDeviceWfDiagramModal = (stateId) => {
 
 export const fetchWorkflows = () => {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'getAll'
-    }).then(res => {
+    axios.get(`${ROOT_URL}/getAllFlows`).then(res => {
       dispatch({type: FETCH_WORKFLOWS, data: reverse(sortArray(res.data || [], 'updated')), diagrams: []})
     }).catch(() => {
       dispatch({type: FETCH_WORKFLOWS, data: ['New Workflow'], diagrams: []})

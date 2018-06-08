@@ -165,8 +165,9 @@ import {
   SHOW_WF_PARAM_MODAL,
   ADD_WF_PARAM,
   UPDATE_WF_PARAM,
-  REMOVE_WF_PARAM
+  REMOVE_WF_PARAM,
 
+  FETCH_BRAIN_CELLS
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys} from 'lodash'
@@ -709,6 +710,9 @@ export default function (state = initialState, action) {
       return { ...state, editWfParams: state.editWfParams.map(p => p.key === action.oldParam.key ? action.newParam : p) }
     case REMOVE_WF_PARAM:
       return { ...state, editWfParams: state.editWfParams.filter(p => p.key !== action.param.key) }
+
+    case FETCH_BRAIN_CELLS:
+      return { ...state, brainCells: action.data }
 
     default:
       return state

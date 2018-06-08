@@ -957,8 +957,8 @@ export function eddieSync () {
 
 export function fetchBrainCells() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/braincells?size=1000`).then(res => {
-      dispatch({type: FETCH_BRAIN_CELLS, data: res.data._embedded.brainCells})
+    axios.get(`${ROOT_URL}/getAllBraincells`).then(res => {
+      dispatch({type: FETCH_BRAIN_CELLS, data: res.data})
     })
   }
 }

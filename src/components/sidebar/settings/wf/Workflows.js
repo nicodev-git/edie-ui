@@ -255,7 +255,7 @@ class Workflows extends React.Component {
                     </div>
                 </TabPageHeader>
 
-              <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location} transparent>
+              <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
                     {this.renderWorkflows()}
                     {this.renderWorkflowEditModal()}
                     {this.renderSettingModal()}
