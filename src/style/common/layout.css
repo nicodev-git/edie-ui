@@ -442,3 +442,44 @@ input:-webkit-autofill {
 .__react_component_tooltip.type-dark {
     font-size: 11px;
 }
+
+.wf-item-main {
+    background: #4472c4;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+}
+.wf-item-label {
+    color: black;
+    font-weight: bold;
+    background: #fec001;
+    padding: 7px 14px;
+    border-radius: 4px;
+    min-width: 100px;
+    text-align: center;
+    width: 130px;
+    vertical-align: middle;
+}
+
+.wf-item-value {
+    color: white;
+    font-size: 17px;
+    padding: 4px 10px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 260px;
+    text-align: center;
+}
+
+.wf-item-delete {
+    position: absolute;
+    right: -24px;
+    top: 0;
+    opacity: 0;
+}
+
+.wf-item-main:hover .wf-item-delete,
+.wf-item-delete:hover {
+    display: inline-block;
+    opacity: 1;
+}

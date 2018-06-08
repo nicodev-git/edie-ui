@@ -96,32 +96,14 @@ class WorkflowEditModalView extends React.Component {
 
     renderFilterTab () {
         const {
-            monitorTpls, serverTpls, allValues, onClickAddTag, onClickDeleteTag, tags, allTags,
+            allValues, onClickDeleteTag, tags, allTags,
             onClickExistingTag
-            // tagInputValue, onChangeTagInput, getTagSuggestionValue
         } = this.props
         const {triggerMonitorType} = allValues || {}
         return (
             <div>
                 <div style={{height: panelHeight, overflow: 'auto'}}>
                     <CardPanel title="Existing Tags">
-                        <div className="hidden">
-                            <Field name="triggerMonitorType" component={FormSelect} floatingLabel="MonitorType"
-                                   className="valign-top" options={monitorTpls.map(p => ({label: p.name, value: p.monitortype}))}/>
-                            <Field name="triggerOSType" component={FormSelect} floatingLabel="Device"
-                                   className="valign-top margin-md-left" options={serverTpls.map(p => ({label: p.name, value: p.name}))}/>
-                        </div>
-                        <div className="margin-md-top hidden">
-                            {triggerMonitorType === 'logfile' ? (
-                                <Field name="triggerFilePath" component={FormInput} floatingLabel="File Path"
-                                       className="valign-top" fullWidth/>
-                            ) : null}
-                        </div>
-
-                        <div className="hidden">
-                            <Field name="tag" component={FormInput} label="Type Tag" className="valign-top"/>
-                            <AddIcon className="valign-top margin-sm-top" onClick={onClickAddTag}/>
-                        </div>
 
                         <div className="margin-md-top">
                             {allTags.filter(p => !tags.includes(p.name)).map((t, i) =>
