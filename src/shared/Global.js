@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import {reduce, isNull, isUndefined, isArray, assign, keys} from 'lodash'
+import {reduce, isNull, isUndefined, isArray, assign, keys, findIndex} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
@@ -93,24 +93,24 @@ export function dateFormatter (datetime) {
   if (yesterday === date) return `Yesterday ${time}`
 
   let diff = new Date() - new Date(date)
-  if (diff <= 0) return 'Today'
+if (diff <= 0) return 'Today'
 
-  let seconds = diff / 1000
-  let minutes = seconds / 60
-  let hours = minutes / 60
-  let days = Math.floor(hours / 24)
-  let years = Math.floor(days / 365)
+let seconds = diff / 1000
+let minutes = seconds / 60
+let hours = minutes / 60
+let days = Math.floor(hours / 24)
+let years = Math.floor(days / 365)
 
-  let str = ''
-  if (years > 0) {
-    days -= years * 365
-    str += `${years} year${years > 1 ? 's' : ''}`
-  }
+let str = ''
+if (years > 0) {
+  days -= years * 365
+  str += `${years} year${years > 1 ? 's' : ''}`
+}
 
-  let months = Math.floor(days / 30)
-  if (months > 0) {
-    days -= months * 30
-    if (str) str += ' '
+let months = Math.floor(days / 30)
+if (months > 0) {
+  days -= months * 30
+  if (str) str += ' '
     str += `${months} month${months > 1 ? 's' : ''}`
   }
 
@@ -684,4 +684,10 @@ export function updateFlowItemForm (values) {
     params,
     resVars
   }
+}
+
+export const findObject = (objects, criteria) => {
+  const index = findIndex(objects, criteria)
+  if (index < 0) return null
+  return objects[index]
 }

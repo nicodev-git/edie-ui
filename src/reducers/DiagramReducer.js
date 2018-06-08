@@ -1,10 +1,11 @@
-import { concat, findIndex } from 'lodash'
-import { DiagramTypes } from 'shared/Global'
+import {assign, concat, findIndex} from 'lodash'
+import {DiagramTypes, findObject} from 'shared/Global'
 import {
+  OPEN_DIAGRAM_MODAL,
+
   ADD_DIAGRAM_OBJECT,
   UPDATE_DIAGRAM_OBJECT,
 
-  OPEN_DEVICE_WF_DIAGRAM_MODAL,
   SELECT_DIAGRAM_OBJECT,
   SET_HOVER_DIAGRAM_OBJECT,
   CLEAR_HOVER_DIAGRAM_OBJECT,
@@ -20,6 +21,7 @@ import {
   SET_DIAGRAM_LINE_DRAWING,
   SET_DIAGRAM_LINE_START_POINT,
   SET_DIAGRAM_LINE_END_POINT,
+  SET_DIAGRAM_LINE_STEP_POINT,
 
   ADD_DIAGRAM_LINE,
   UPDATE_DIAGRAM_LINE,
@@ -28,23 +30,20 @@ import {
   CLOSE_DIAGRAM_OBJECT_MODAL,
 
   SET_DIAGRAM_EDITING_TEXT,
-  REMOVE_DIAGRAM_SELECTED_OBJECTS
+  REMOVE_DIAGRAM_SELECTED_OBJECTS,
+
+  SHOW_FILL_COLOR_PICKER,
+  CHANGE_PICKER_COLOR,
+
+  UPDATE_DIAGRAM_WORKFLOW
 } from 'actions/types'
 
-const initialState = {
-  objects: [],
-  lines: [],
-  lastId: 0,
+import {findStepPoints, getHandlePoints} from 'shared/LineUtil'
 
-  backImg: window.btoa('<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 0 10 L 40 10 M 10 0 L 10 40 M 0 20 L 40 20 M 20 0 L 20 40 M 0 30 L 40 30 M 30 0 L 30 40" fill="none" stroke="#e0e0e0" opacity="0.2" stroke-width="1"/><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e0e0e0" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>'),
-
-  selected: []
-}
-
-export default function (state = initialState, action) {
+const reducer = function (state = {}, action) {
   switch (action.type) {
-    case OPEN_DEVICE_WF_DIAGRAM_MODAL: {
-      const {data} = action
+    case OPEN_DIAGRAM_MODAL: {
+      const {data, flow} = action
       let objects = []
       let lastId = 100
       let lines = []
@@ -58,28 +57,46 @@ export default function (state = initialState, action) {
           console.log(e)
         }
       }
-      return { ...state, objects, lastId, lines, selected: [], hovered: null, isDragging: false, isResizing: false, isLineDrawing: false }
+      return {
+        ...state,
+        objects,
+        lastId,
+        lines,
+        selected: [],
+        hovered: null,
+        isDragging: false,
+        isResizing: false,
+        isLineDrawing: false,
+
+        flow,
+        flowId: flow.uuid,
+        lineStepPoint: -1
+      }
     }
 
     case ADD_DIAGRAM_OBJECT:
-      return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
+      return {...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1}
 
     case UPDATE_DIAGRAM_OBJECT:
-      return { ...state, objects: state.objects.map(m => m.id === action.data.id ? action.data : m) }
+      return {
+        ...state,
+        objects: state.objects.map(m => m.id === action.data.id ? action.data : m),
+        selected: state.selected.map(m => m.id === action.data.id ? action.data : m)
+      }
 
     case SELECT_DIAGRAM_OBJECT:
-      return { ...state, selected: action.data, hovered: null }
+      return {...state, selected: action.data, hovered: null}
 
     case SET_HOVER_DIAGRAM_OBJECT:
-      return { ...state, hovered: action.data, hoverPoint: -1 }
+      return {...state, hovered: action.data, hoverPoint: -1}
 
     case CLEAR_HOVER_DIAGRAM_OBJECT: {
       const {hovered} = state
-      return { ...state, hovered: hovered && hovered.id === action.data.id ? null : hovered }
+      return {...state, hovered: hovered && hovered.id === action.data.id ? null : hovered}
     }
 
     case SET_HOVER_POINT:
-      return { ...state, hoverPoint: action.data }
+      return {...state, hoverPoint: action.data}
 
     case SET_DIAGRAM_MOUSE_DOWN:
       return {
@@ -95,28 +112,73 @@ export default function (state = initialState, action) {
       }
 
     case SET_DIAGRAM_DRAGGING:
-      return { ...state, isDragging: action.data }
+      return {...state, isDragging: action.data}
 
     case SET_DIAGRAM_CURSOR_POS:
-      return { ...state, cursorPos: action.data }
+      return {...state, cursorPos: action.data}
 
-    case MOVE_DIAGRAM_SELECTED_OBJECTS:
+    case MOVE_DIAGRAM_SELECTED_OBJECTS: {
+      const {workflowItems} = action
+      const selected = action.selected.map(obj => {
+        if (obj.type !== DiagramTypes.OBJECT) return obj
+
+        obj.x += action.data.x
+        obj.y += action.data.y
+
+        return obj
+      })
+
+      const lines = state.lines.map(line => {
+        const found = selected.filter(obj => obj.type === DiagramTypes.OBJECT && (line.startObject.id === obj.id || line.endObject.id === obj.id))
+        if (!found.length) return line
+
+        let {startObject, endObject, startPoint, endPoint} = line
+        startObject = findObject(found, {id: startObject.id}) || startObject
+        endObject = findObject(found, {id: endObject.id}) || endObject
+
+        const leftTpl = workflowItems[line.startObject.imgIndex]
+        const rightTpl = workflowItems[line.endObject.imgIndex]
+
+        const startPos = leftTpl.getConnectionPoint(startObject, startPoint)
+        const endPos = rightTpl.getConnectionPoint(endObject, endPoint)
+        // let startPos, endPos
+        // const isStart = findObject(found, {id: startObject.id}) != null
+        // if (isStart) {
+        //     endPos = rightTpl.getConnectionPoint(endObject, endPoint)
+        //     const nearest = getNearestPoint(endObject, rightTpl, endPoint, endPos, startObject, leftTpl)
+        //     startPoint = nearest.point
+        //     startPos = nearest.pos
+        // } else {
+        //     startPos = leftTpl.getConnectionPoint(startObject, startPoint)
+        //     const nearest = getNearestPoint(startObject, leftTpl, startPoint, endObject, rightTpl)
+        //     endPoint = nearest.point
+        //     endPos = nearest.pos
+        // }
+
+        const stepPoints = findStepPoints(leftTpl, startPos, startPoint, rightTpl, endPos, endPoint)
+        const handlePoints = getHandlePoints(startPos, stepPoints, endPos)
+
+        return assign({}, line, {
+          startObject,
+          endObject,
+          startPoint,
+          endPoint,
+          points: concat([], startPos, stepPoints, endPos),
+          handlePoints
+        })
+      })
       return {
         ...state,
-        selected: state.selected.map(obj => {
-          if (obj.type !== DiagramTypes.OBJECT) return obj
-
-          obj.x += action.data.x
-          obj.y += action.data.y
-          return obj
-        })
+        selected,
+        lines
       }
+    }
 
     case SET_DIAGRAM_RESIZING_POINT:
-      return { ...state, resizePoint: action.data }
+      return {...state, resizePoint: action.data}
 
     case SET_DIAGRAM_RESIZING:
-      return { ...state, isResizing: action.data }
+      return {...state, isResizing: action.data}
 
     case RESIZE_DIAGRAM_SELECTED_OBJECTS:
       return {
@@ -166,47 +228,67 @@ export default function (state = initialState, action) {
               obj.w += action.data.x
               obj.h += action.data.y
               break
-
-            default:
-              break
+            default: return obj
           }
           return obj
         })
       }
 
     case SET_DIAGRAM_LINE_DRAWING:
-      return { ...state, isLineDrawing: action.data, isLineDrawingStart: action.isDrawingStart, drawingLine: action.drawingLine, selected: [] }
-
-    case SET_DIAGRAM_LINE_START_POINT:
-      return { ...state, lineStart: action.pos, lineStartObject: action.object, lineStartObjectPoint: action.connectionPoint }
-
-    case SET_DIAGRAM_LINE_END_POINT:
-      return { ...state, lineEnd: action.pos, lineEndObject: action.object, lineEndObjectPoint: action.connectionPoint }
-
-    case ADD_DIAGRAM_LINE:
-      return { ...state, lines: concat(state.lines, action.data), lastId: state.lastId + 1 }
-
-    case UPDATE_DIAGRAM_LINE:
-      return { ...state, lines: state.lines.map(m => m.id === action.line.id ? action.line : m) }
-
-    case OPEN_DIAGRAM_OBJECT_MODAL:
-      return { ...state, objectModalOpen: true, objectConfig: action.config }
-
-    case CLOSE_DIAGRAM_OBJECT_MODAL:
-      return { ...state, objectModalOpen: false }
-
-    case SET_DIAGRAM_EDITING_TEXT:
-      return { ...state, object: action.object }
-
-    case REMOVE_DIAGRAM_SELECTED_OBJECTS: {
-      const { objects, lines, selected } = state
       return {
         ...state,
-        objects: objects.filter(obj => findIndex(selected, { id: obj.id, type: DiagramTypes.OBJECT }) < 0),
+        isLineDrawing: action.data,
+        isLineDrawingStart: action.isDrawingStart,
+        drawingLine: action.drawingLine,
+        selected: []
+      }
+
+    case SET_DIAGRAM_LINE_START_POINT:
+      return {
+        ...state,
+        lineStart: action.pos,
+        lineStartObject: action.object,
+        lineStartObjectPoint: action.connectionPoint
+      }
+
+    case SET_DIAGRAM_LINE_END_POINT:
+      return {
+        ...state,
+        lineEnd: action.pos,
+        lineEndObject: action.object,
+        lineEndObjectPoint: action.connectionPoint
+      }
+
+    case SET_DIAGRAM_LINE_STEP_POINT:
+      return {
+        ...state,
+        lineStepPoint: action.point
+      }
+    case ADD_DIAGRAM_LINE:
+      return {...state, lines: concat(state.lines, action.data), lastId: state.lastId + 1}
+
+    case UPDATE_DIAGRAM_LINE:
+      return {...state, lines: state.lines.map(m => m.id === action.line.id ? action.line : m)}
+
+    case OPEN_DIAGRAM_OBJECT_MODAL:
+      return {...state, objectModalOpen: true, objectConfig: action.config, objectTpl: action.tpl}
+
+    case CLOSE_DIAGRAM_OBJECT_MODAL:
+      return {...state, objectModalOpen: false}
+
+    case SET_DIAGRAM_EDITING_TEXT:
+      return {...state, object: action.object}
+
+    case REMOVE_DIAGRAM_SELECTED_OBJECTS: {
+      const {objects, lines} = state
+      const selected = action.objects
+      return {
+        ...state,
+        objects: objects.filter(obj => findIndex(selected, {id: obj.id, type: DiagramTypes.OBJECT}) < 0),
         lines: lines.filter(line => {
-          if (findIndex(selected, { id: line.id, type: DiagramTypes.LINE }) >= 0) return false
-          if (findIndex(selected, { id: line.startObject.id, type: DiagramTypes.OBJECT }) >= 0) return false
-          if (findIndex(selected, { id: line.endObject.id, type: DiagramTypes.OBJECT }) >= 0) return false
+          if (findIndex(selected, {id: line.id, type: DiagramTypes.LINE}) >= 0) return false
+          if (findIndex(selected, {id: line.startObject.id, type: DiagramTypes.OBJECT}) >= 0) return false
+          if (findIndex(selected, {id: line.endObject.id, type: DiagramTypes.OBJECT}) >= 0) return false
           return true
         }),
         selected: [],
@@ -217,7 +299,34 @@ export default function (state = initialState, action) {
         isLineDrawing: false
       }
     }
-    default:
-      return state
+
+    case SHOW_FILL_COLOR_PICKER:
+      return {...state, fillColorPickerOpen: !!action.visible, pickerColor: action.color}
+
+    case CHANGE_PICKER_COLOR:
+      return { ...state, pickerColor: action.color }
+
+    case UPDATE_DIAGRAM_WORKFLOW: {
+      let {objects} = state
+      const {flowItems, flowItemDetails} = action.flow
+
+      //Update Steps
+      const items = flowItems || flowItemDetails
+      objects = objects.map(object => {
+        const index = findIndex(items, {uuid: object.data.uuid})
+        if (index < 0) return object
+        object.data.step = items[index].step
+        return object
+      })
+      return { ...state, flow: action.flow, objects }
+    }
+    default: return state
   }
+}
+
+export default function (state = {}, action) {
+  if (!action.stateId) return state
+  let subState = state[action.stateId] || {}
+  subState = reducer(subState, action)
+  return { ...state, [action.stateId]: subState }
 }

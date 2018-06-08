@@ -773,30 +773,17 @@ export function removeGroup (group) {
 export function fetchFinishedWfs(lastOnly, messageUniqueId) {
   return dispatch => {
     dispatch({type: FETCH_FINISHED_WFS, data: []})
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Flow',
-      method: 'getFinishedFlows',
-      data: {
-        lastOnly, messageUniqueId
-      }
+    axios.get(`${ROOT_URL}/getFinishedFlowAudit`, {
+      params: {lastOnly, messageUniqueId}
     }).then(res => {
-      dispatch({type: FETCH_FINISHED_WFS, data: res.data})
+      dispatch({type: FETCH_FINISHED_WFS, data: res.data || []})
     })
   }
 }
 
 export function fetchGlobalVars () {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'GlobalVar',
-      method: 'getAll'
-    }).then(res => {
+    axios.get(`${ROOT_URL}/getAllGlobalVars`).then(res => {
       dispatch({type: FETCH_GLOBAL_VARS, data: res.data || []})
     })
   }
