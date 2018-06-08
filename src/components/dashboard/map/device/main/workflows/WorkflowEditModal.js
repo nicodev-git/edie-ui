@@ -9,7 +9,7 @@ import WorkflowEditModalView from './WorkflowEditModalView'
 import DiagramObjectModal from 'components/dashboard/map/device/main/workflows/diagram/DiagramObjectModal'
 import {drawFlows} from "components/dashboard/map/device/main/workflows/DiagramLoader"
 import {extendShape} from 'components/dashboard/map/device/main/workflows/diagram/DiagramItems'
-import { DiagramTypes } from 'shared/global'
+import { DiagramTypes } from 'shared/Global'
 
 const typeOptions = [{
     label: 'Normal', value: 'normal'

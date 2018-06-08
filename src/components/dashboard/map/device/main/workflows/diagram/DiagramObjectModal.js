@@ -1,6 +1,6 @@
 import React from 'react'
-import SimpleModalContainer from 'containers/modal/simple_modal_container'
-import {updateFlowItemForm} from 'shared/global'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
+import {updateFlowItemForm} from 'shared/Global'
 
 class DiagramObjectModal extends React.Component {
     onClickClose () {

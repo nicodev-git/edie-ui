@@ -9,7 +9,7 @@ import AppBar from '@material-ui/core/AppBar'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import { FormInput, FormSelect, FormMultiSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
-import {severities} from 'shared/global'
+import {severities} from 'shared/Global'
 
 const cardStyle = {
     height: 250,

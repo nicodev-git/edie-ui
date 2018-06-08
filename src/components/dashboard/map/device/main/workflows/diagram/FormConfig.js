@@ -58,9 +58,6 @@ const forms = {
     "buildForm": [{
        "form": "Build"
     }],
-    "timeRangeForm": [{
-       "form": "TimeRange"
-    }],
     "ocurrenceForm": [{
         "key": "name",
         "name": "Name"

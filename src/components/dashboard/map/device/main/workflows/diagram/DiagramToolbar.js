@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {DiagramTypes} from 'shared/global'
+import {DiagramTypes} from 'shared/Global'
 
 class DiagramToolbar extends React.Component {
 

@@ -19,7 +19,6 @@ const {
     decisionForm,
     multiDecisionForm,
     buildForm,
-    timeRangeForm,
     ocurrenceForm,
     flowFinishForm,
     shareVarForm,
@@ -213,15 +212,6 @@ export const workflowItems = [assign({}, imgRectConfig, {
     },
     img: <g><image href="/images/multidecision.png" width={iw} height={iw}/></g>,
     form: multiDecisionForm
-}), assign({}, imgRectConfig, {
-    // 3
-    title: 'Time Range',
-    config: {
-        img: '/images/timer.png',
-        type: 'TIMERANGE'
-    },
-    img: <g><image href="/images/timer.png" width={iw} height={iw}/></g>,
-    form: timeRangeForm
 }), assign({}, imgRectConfig, {
     // 7
     title: 'Function',

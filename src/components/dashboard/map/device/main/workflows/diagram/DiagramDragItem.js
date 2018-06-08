@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { DragSource } from 'react-dnd'
-import { DragTypes } from 'shared/global'
+import { DragTypes } from 'shared/Global'
 
 const dragSource = {
     beginDrag (props) {

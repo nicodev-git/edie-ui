@@ -2,7 +2,7 @@ import React from 'react'
 import {DropTarget} from 'react-dnd'
 import {assign} from 'lodash'
 
-import {DragTypes, DiagramTypes, gridBg} from 'shared/global'
+import {DragTypes, DiagramTypes, gridBg} from 'shared/Global'
 import DRect from './DRect'
 import {handlePoints} from './DiagramItems'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragLayer } from 'react-dnd'
 
-import { DragTypes } from 'shared/global'
+import { DragTypes } from 'shared/Global'
 
 function collect (monitor) {
     return {
