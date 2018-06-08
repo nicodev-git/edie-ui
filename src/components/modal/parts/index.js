@@ -29,6 +29,7 @@ import CardPanel from './CardPanel'
 import Modal from './Modal'
 import ModalFull from './ModalFull'
 import FormRadioGroup from './FormRadioGroup'
+import ButtonsBlock from './ButtonsBlock'
 
 export {
     Header,
@@ -61,5 +62,6 @@ export {
     Modal,
     CardPanel,
     ModalFull,
-    FormRadioGroup
+    FormRadioGroup,
+    ButtonsBlock
 }
