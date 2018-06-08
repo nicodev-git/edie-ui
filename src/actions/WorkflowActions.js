@@ -882,13 +882,7 @@ export function showUserPickModal(visible) {
 
 export function fetchShapes() {
   return dispatch => {
-    requestFlowApi({
-      type: 'function',
-      channel: 'eddieui',
-      functionCategory: 'EddieInternal',
-      subcategory: 'Shape',
-      method: 'getAll'
-    }).then(res => {
+    axios.get(`${ROOT_URL}/getAllShapes`).then(res => {
       dispatch({type: FETCH_SHAPES, data: res.data || []})
     })
   }
