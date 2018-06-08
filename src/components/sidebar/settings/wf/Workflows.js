@@ -16,7 +16,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import WfTabs from './WorkflowTabs'
 import SettingTabs from "../SettingTabs";
-// import WorkflowEditModal from './workflow_edit_modal'
+import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
 
 class Workflows extends React.Component {
@@ -170,15 +170,15 @@ class Workflows extends React.Component {
     renderWorkflowEditModal () {
         if (!this.props.wfNameModalOpen) return
 
-        // const {editWf} = this.state
-        // return (
-        //     <WorkflowEditModal
-        //         {...this.props}
-        //         allTags={this.getTags()}
-        //         editWf={editWf}
-        //         onSave={this.onSaveName.bind(this)}
-        //     />
-        // )
+        const {editWf} = this.state
+        return (
+            <WorkflowEditModal
+                {...this.props}
+                allTags={this.getTags()}
+                editWf={editWf}
+                onSave={this.onSaveName.bind(this)}
+            />
+        )
     }
     renderGroups () {
         const {groups} = this.props

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 import DiagramModal from 'components/dashboard/map/device/main/workflows/DiagramModal'
 
@@ -22,52 +22,71 @@ import {
   setDiagramLineDrawing,
   setDiagramLineStartPoint,
   setDiagramLineEndPoint,
+  setDiagramLineStepPoint,
   addDiagramLine,
   updateDiagramLine,
 
   openDiagramObjectModal,
   closeDiagramObjectModal,
-  removeDiagramSelectedObjects
+  removeDiagramSelectedObjects,
+
+  showFillColorPicker,
+  changePickerColor
 } from 'actions'
 
 class DiagramModalContainer extends React.Component {
   render () {
+    let {diagram, stateId} = this.props
+    diagram = diagram[stateId]
+    if (!diagram) return null
+    const state = {
+      flow: diagram.flow,
+      flowId: diagram.flowId,
+
+      objects: diagram.objects,
+      lastId: diagram.lastId,
+
+      flowItemModalOpen: diagram.flowItemModalOpen,
+
+      selected: diagram.selected,
+      hovered: diagram.hovered,
+      hoverPoint: diagram.hoverPoint,
+      isMouseDown: diagram.isMouseDown,
+      mouseDownPos: diagram.mouseDownPos,
+      mouseDownObject: diagram.mouseDownObject,
+      resizePoint: diagram.resizePoint,
+      isDragging: diagram.isDragging,
+      cursorPos: diagram.cursorPos,
+      isResizing: diagram.isResizing,
+
+      lines: diagram.lines,
+      isLineDrawing: diagram.isLineDrawing,
+      isLineDrawingStart: diagram.isLineDrawingStart,
+      drawingLine: diagram.drawingLine,
+      lineStart: diagram.lineStart,
+      lineEnd: diagram.lineEnd,
+      lineStartObject: diagram.lineStartObject,
+      lineStartObjectPoint: diagram.lineStartObjectPoint,
+      lineEndObject: diagram.lineEndObject,
+      lineEndObjectPoint: diagram.lineEndObjectPoint,
+      lineStepPoint: diagram.lineStepPoint,
+
+      objectModalOpen: diagram.objectModalOpen,
+      objectConfig: diagram.objectConfig,
+      objectTpl: diagram.objectTpl,
+
+      fillColorPickerOpen: diagram.fillColorPickerOpen,
+      pickerColor: diagram.pickerColor
+    }
+
     return (
-      <DiagramModal {...this.props} />
+      <DiagramModal {...this.props} {...state}/>
     )
   }
 }
 export default connect(
   state => ({
-    objects: state.diagram.objects,
-    lastId: state.diagram.lastId,
-
-    backImg: state.diagram.backImg,
-
-    selected: state.diagram.selected,
-    hovered: state.diagram.hovered,
-    hoverPoint: state.diagram.hoverPoint,
-    isMouseDown: state.diagram.isMouseDown,
-    mouseDownPos: state.diagram.mouseDownPos,
-    mouseDownObject: state.diagram.mouseDownObject,
-    resizePoint: state.diagram.resizePoint,
-    isDragging: state.diagram.isDragging,
-    cursorPos: state.diagram.cursorPos,
-    isResizing: state.diagram.isResizing,
-
-    lines: state.diagram.lines,
-    isLineDrawing: state.diagram.isLineDrawing,
-    isLineDrawingStart: state.diagram.isLineDrawingStart,
-    drawingLine: state.diagram.drawingLine,
-    lineStart: state.diagram.lineStart,
-    lineEnd: state.diagram.lineEnd,
-    lineStartObject: state.diagram.lineStartObject,
-    lineStartObjectPoint: state.diagram.lineStartObjectPoint,
-    lineEndObject: state.diagram.lineEndObject,
-    lineEndObjectPoint: state.diagram.lineEndObjectPoint,
-
-    objectModalOpen: state.diagram.objectModalOpen,
-    objectConfig: state.diagram.objectConfig
+    diagram: state.diagram
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
@@ -87,11 +106,15 @@ export default connect(
     setDiagramLineDrawing,
     setDiagramLineStartPoint,
     setDiagramLineEndPoint,
+    setDiagramLineStepPoint,
     addDiagramLine,
     updateDiagramLine,
     removeDiagramSelectedObjects,
 
     openDiagramObjectModal,
-    closeDiagramObjectModal
+    closeDiagramObjectModal,
+
+    showFillColorPicker,
+    changePickerColor
   }
 )(DiagramModalContainer)
