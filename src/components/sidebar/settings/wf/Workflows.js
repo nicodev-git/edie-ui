@@ -17,7 +17,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import WfTabs from './WorkflowTabs'
 import SettingTabs from "../SettingTabs";
 // import WorkflowEditModal from './workflow_edit_modal'
-// import WorkflowSettingModal from './WorkflowSettingModal'
+import WorkflowSettingModal from './WorkflowSettingModal'
 
 class Workflows extends React.Component {
     constructor (props) {
@@ -198,12 +198,12 @@ class Workflows extends React.Component {
     }
     renderSettingModal () {
         if (!this.props.wfSettingModalOpen) return
-        // return (
-        //     <WorkflowSettingModal
-        //         onSave={this.onSaveSetting.bind(this)}
-        //         onClose={this.onCloseSetting.bind(this)}
-        //     />
-        // )
+        return (
+            <WorkflowSettingModal
+                onSave={this.onSaveSetting.bind(this)}
+                onClose={this.onCloseSetting.bind(this)}
+            />
+        )
     }
     renderFilterTags() {
         const {filterTags} = this.state

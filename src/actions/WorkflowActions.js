@@ -902,9 +902,9 @@ export function showWfSettingModal(visible, data)  {
 
 export function fetchWfSetting(customerId, openModal) {
   return dispatch => {
-    axios.get(`${WF_URL}/getFlowSetting`, getAuthConfig({
+    axios.get(`${ROOT_URL}/getFlowSetting`, {
       params: {customerId}
-    })).then(res => {
+    }).then(res => {
       if (openModal) {
         dispatch(showWfSettingModal(true, res.data || {}))
       }
@@ -914,7 +914,7 @@ export function fetchWfSetting(customerId, openModal) {
 
 export function saveWfSetting(data) {
   return dispatch => {
-    axios.post(`${WF_URL}/saveFlowSetting`, data, getAuthConfig())
+    axios.post(`${ROOT_URL}/saveFlowSetting`, data)
   }
 }
 

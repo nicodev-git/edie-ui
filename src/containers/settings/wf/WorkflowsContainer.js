@@ -65,7 +65,7 @@ export default connect(
         users: state.dashboard.users,
         userPickModalOpen: state.workflow.userPickModalOpen,
 
-        userInfo: state.auth.userInfo,
+        userInfo: state.dashboard.userInfo,
 
         shapes: state.workflow.shapes,
 
