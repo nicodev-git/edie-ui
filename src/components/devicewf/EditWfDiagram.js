@@ -1,7 +1,7 @@
 import React from 'react'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
-import DiagramModalContainer from 'containers/device/main/workflows/DiagramModalContainer'
+import DiagramModalContainer from 'containers/wf/DiagramModalContainer'
 
 export default class EditWfDiagram extends React.Component {
   componentWillMount () {

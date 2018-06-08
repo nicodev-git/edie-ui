@@ -6,9 +6,9 @@ import {assign, merge, findIndex, keys} from 'lodash'
 
 import WorkflowEditModalView from './WorkflowEditModalView'
 // import UserPickModal from './UserPickModal'
-import DiagramObjectModal from 'components/dashboard/map/device/main/workflows/diagram/DiagramObjectModal'
-import {drawFlows} from "components/dashboard/map/device/main/workflows/DiagramLoader"
-import {extendShape} from 'components/dashboard/map/device/main/workflows/diagram/DiagramItems'
+import DiagramObjectModal from 'components/dashboard/wf/diagram/DiagramObjectModal'
+import {drawFlows} from "components/dashboard/wf/DiagramLoader"
+import {extendShape} from 'components/dashboard/wf/diagram/DiagramItems'
 import { DiagramTypes } from 'shared/Global'
 
 const typeOptions = [{

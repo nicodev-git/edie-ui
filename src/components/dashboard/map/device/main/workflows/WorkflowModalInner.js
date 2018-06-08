@@ -4,7 +4,7 @@ import {Button} from '@material-ui/core'
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
-import DiagramModalContainer from 'containers/device/main/workflows/DiagramModalContainer'
+import DiagramModalContainer from 'containers/wf/DiagramModalContainer'
 import { WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
   MainWorkflowModalView, WfParamEditModal } from 'components/modal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'

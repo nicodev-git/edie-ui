@@ -14,8 +14,6 @@ import FormControl from '@material-ui/core/FormControl'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import WfTabs from './WorkflowTabs'
-import SettingTabs from "../SettingTabs";
 import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
 
@@ -250,12 +248,11 @@ class Workflows extends React.Component {
                         <div className="pull-right">
                             <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
                             <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Settings</Button>&nbsp;
-                          <WfTabs history={this.props.history}/>
                         </div>
                     </div>
                 </TabPageHeader>
 
-              <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
+              <TabPageBody history={this.props.history} location={this.props.location}>
                     {this.renderWorkflows()}
                     {this.renderWorkflowEditModal()}
                     {this.renderSettingModal()}
