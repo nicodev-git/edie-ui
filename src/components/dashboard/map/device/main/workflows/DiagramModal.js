@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { findIndex, assign, keys } from 'lodash'
-import Popover from 'components/shared/popover'
+import Popover from 'components/shared/Popover'
 
 import DiagramPanel from './diagram/DiagramPanel'
 import DiagramDragLayer from './diagram/DiagramDragLayer'
 import DiagramDragItem from './diagram/DiagramDragItem'
 import DiagramToolbar from './diagram/DiagramToolbar'
-import { DiagramTypes } from 'shared/global'
-import DiagramModalView from 'components/modal/diagram_modal_view'
+import { DiagramTypes } from 'shared/Global'
+import DiagramModalView from './DiagramModalView'
 
 import DiagramObjectModal from './diagram/DiagramObjectModal'
 import ColorPicker from './diagram/ColorPicker'
