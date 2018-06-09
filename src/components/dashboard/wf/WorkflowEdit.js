@@ -2,15 +2,13 @@ import React from 'react'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
-// import WorkflowEditPage from './WorkflowEditPage'
+import WorkflowEditModal from './WorkflowEditModal'
 import {drawFlows} from './DiagramLoader'
 import {extendShape} from './diagram/DiagramItems'
 
 class WorkflowEditDiagram extends React.Component {
   componentWillMount () {
-    this.props.fetchWorkflows()
-    this.props.fetchCollectors()
-    this.props.closeDeviceWfDiagramModal('workflow')
+    this.props.fetchGroups()
     this.props.fetchShapes()
     this.props.fetchBrainCells()
 
@@ -37,21 +35,16 @@ class WorkflowEditDiagram extends React.Component {
     }
   }
 
-  onClickItemInfo (flow, object) {
-    this.props.history.push(`/workflow/${flow.name}/editdetail/${object.uuid}`)
-  }
-
   render () {
     const {wfDiagramModalOpen, shapes} = this.props
     if (!wfDiagramModalOpen) return <div>Loading...</div>
 
     return (
       <div className="flex-vertical flex-1">
-        {/*<WorkflowEditPage*/}
-        {/*{...this.props}*/}
-        {/*workflowItems={shapes.map(p => extendShape(p))}*/}
-        {/*noModal*/}
-        {/*onClickItemInfo={this.onClickItemInfo.bind(this)}/>*/}
+        <WorkflowEditModal
+        {...this.props}
+        workflowItems={shapes.map(p => extendShape(p))}
+        noModal/>
       </div>
     )
   }
