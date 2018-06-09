@@ -287,7 +287,7 @@ class ConnectorModal extends Component {
 
 export default connect(
     state => ({
-        initialValues: state.dashboard.editCollector || {
+        initialValues: state.settings.editCollector || {
             mode: 'COLLECTOR',
             addrType: 'ip',
             ostype: 'LINUX'

@@ -166,10 +166,10 @@ export default connect(
             json: '{\n' +
             '\t"temperature": 33.3\n' +
             '}',
-            id: state.dashboard.editUserConnector ?
-                state.dashboard.editUserConnector.id : props.uuid,
+            id: state.settings.editUserConnector ?
+                state.settings.editUserConnector.id : props.uuid,
 
-            ...state.dashboard.editUserConnector
+            ...state.settings.editUserConnector
         },
         allValues: getFormValues('userConnectorForm')(state)
     })
