@@ -36,7 +36,7 @@ export default connect(
 
     workflows: state.workflow.workflows,
     collectors: state.dashboard.collectors,
-    brainCells: state.setting.brainCells
+    brainCells: state.settings.brainCells
   }), {})(reduxForm({
   form: 'simpleModalForm'
 })(SimpleModalContainer))
