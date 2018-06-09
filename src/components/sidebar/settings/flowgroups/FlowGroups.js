@@ -96,7 +96,7 @@ export default class FlowGroups extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={0} history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody tabs={SettingTabs} tab={8} history={this.props.history} location={this.props.location}>
           {this.renderGroups()}
           {this.renderGroupModal()}
         </TabPageBody>

@@ -22,6 +22,9 @@ const tabs = [{
 }, {
   title: 'Advanced',
   path: '/settings/advanced'
+}, {
+  title: 'Flow Groups',
+  path: '/settings/flowgroups'
 }]
 
 export default tabs
