@@ -61,6 +61,8 @@ class WorkflowEditDiagram extends React.Component {
       this.props.addWorkflow(flow)
     }
 
+    this.props.history.push('/workflow')
+
   }
 
   getTags () {

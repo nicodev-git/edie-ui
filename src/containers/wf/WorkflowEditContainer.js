@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import WorkflowEdit from 'components/dashboard/wf/WorkflowEdit'
 
@@ -111,4 +112,4 @@ export default connect(
         fetchBrainCells,
         resetForm
     }
-)(WorkflowsContainer)
+)(withRouter(WorkflowsContainer))
