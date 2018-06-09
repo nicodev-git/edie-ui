@@ -11,6 +11,7 @@ import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
 import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
+import SettingGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
 
 
 class Settings extends React.Component {
@@ -26,6 +27,7 @@ class Settings extends React.Component {
         <Route path="/settings/audit" component={SettingAudit} />
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
         <Route path="/settings/flowgroups" component={SettingFlowGroupsContainer} />
+        <Route path="/settings/globalvars" component={SettingGlobalvarsContainer} />
       </Switch>
     )
   }

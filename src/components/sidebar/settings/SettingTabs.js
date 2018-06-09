@@ -25,6 +25,9 @@ const tabs = [{
 }, {
   title: 'Flow Groups',
   path: '/settings/flowgroups'
+}, {
+  title: 'Global Vars',
+  path: '/settings/globalvars'
 }]
 
 export default tabs
