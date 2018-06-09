@@ -230,9 +230,9 @@ class MainpageContainer extends Component {
         <Route path="/:device/addwf" component={AddWfContainer}/>
         <Route path="/:device/editwf/:id" component={EditWfContainer} exact/>
         <Route path="/:device/editwf/diagram/:id" component={EditWfDiagramContainer}/>
-        <Route path="/workflow" component={WorkflowsContainer} exact/>
         <Route path="/workflow/:name/diagram" component={WorkflowEditDiagramContainer} exact/>
         <Route path="/workflow/:name/edit" component={WorkflowEditContainer} exact/>
+        <Route path="/workflow" component={WorkflowsContainer} exact/>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
         <Route path="/logs" component={LogContainer} exact/>

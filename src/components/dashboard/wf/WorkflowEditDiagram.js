@@ -1,4 +1,6 @@
 import React from 'react'
+import { DragDropContext } from 'react-dnd'
+import TouchBackend from 'react-dnd-touch-backend'
 
 import WorkflowEditDiagramView from './WorkflowEditDiagramView'
 import {drawFlows} from './DiagramLoader'
@@ -55,4 +57,4 @@ class WorkflowEditDiagram extends React.Component {
     }
 }
 
-export default WorkflowEditDiagram
+export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(WorkflowEditDiagram)

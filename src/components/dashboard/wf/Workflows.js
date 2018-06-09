@@ -1,6 +1,6 @@
 import React from 'react'
-import { DragDropContext } from 'react-dnd'
-import TouchBackend from 'react-dnd-touch-backend'
+// import { DragDropContext } from 'react-dnd'
+// import TouchBackend from 'react-dnd-touch-backend'
 import {Button, Select, MenuItem} from '@material-ui/core'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -263,4 +263,4 @@ class Workflows extends React.Component {
     }
 }
 
-export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(Workflows)
+export default Workflows
