@@ -168,6 +168,14 @@ import {
   REMOVE_WF_PARAM,
 
   FETCH_BRAIN_CELLS,
+  ADD_BRAIN_CELL,
+  UPDATE_BRAIN_CELL,
+  REMOVE_BRAIN_CELL,
+  SHOW_BRAIN_CELL_MODAL,
+  SHOW_SCRIPT_MODAL,
+  SHOW_GROK_MODAL,
+  SHOW_CELL_PARAM_MODAL,
+
   SHOW_USER_CONNECTOR_MODAL
 } from 'actions/types'
 
@@ -716,6 +724,20 @@ export default function (state = initialState, action) {
 
     case FETCH_BRAIN_CELLS:
       return { ...state, brainCells: action.data }
+    case ADD_BRAIN_CELL:
+      return { ...state, brainCells: [...state.brainCells, action.data] }
+    case UPDATE_BRAIN_CELL:
+      return { ...state, brainCells: state.brainCells.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_BRAIN_CELL:
+      return { ...state, brainCells: state.brainCells.filter(p => p.id !== action.data.id) }
+    case SHOW_BRAIN_CELL_MODAL:
+      return { ...state, brainCellModalOpen: action.visible, editBrainCell: action.data }
+    case SHOW_SCRIPT_MODAL:
+      return { ...state, scriptModalOpen: action.visible }
+    case SHOW_GROK_MODAL:
+      return { ...state, grokModalOpen: action.visible }
+    case SHOW_CELL_PARAM_MODAL:
+      return { ...state, cellParamModalOpen: action.visible, editCellParam: action.data }
     case SHOW_USER_CONNECTOR_MODAL:
       return { ...state, userConnectorModalOpen: action.visible, editUserConnector: action.userConnector }
     default:
