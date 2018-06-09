@@ -77,7 +77,7 @@ class WorkflowEditDiagram extends React.Component {
         <TabPageHeader title="Workflow Edit">
         </TabPageHeader>
 
-        <TabPageBody>
+        <TabPageBody transparent>
           <WorkflowEditModal
             {...this.props}
             noModal

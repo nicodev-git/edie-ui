@@ -277,9 +277,9 @@ class WorkflowEditModalView extends React.Component {
     }
 
     renderButtons () {
-        const {onClickClose} = this.props
+        const {onClickClose, noModal} = this.props
         return (
-            <SubmitBlock name="Save" onCancel={onClickClose}/>
+            <SubmitBlock name="Save" onCancel={noModal ? null : onClickClose}/>
         )
     }
 
@@ -297,16 +297,14 @@ class WorkflowEditModalView extends React.Component {
         const content = (
           <div style={mainStyle}>
             <form onSubmit={onSubmit}>
-              <AppBar position="static">
-                <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
-                  <Tab label="Filter" value="filter"/>
-                  <Tab label="General" value="general"/>
-                  <Tab label="Workflow" value="wf"/>
-                  <Tab label="Actions" value="actions"/>
-                  <Tab label="Security" value="security"/>
-                  <Tab label="Schedule" value="schedule"/>
-                </Tabs>
-              </AppBar>
+              <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
+                <Tab label="Filter" value="filter"/>
+                <Tab label="General" value="general"/>
+                <Tab label="Workflow" value="wf"/>
+                <Tab label="Actions" value="actions"/>
+                <Tab label="Security" value="security"/>
+                <Tab label="Schedule" value="schedule"/>
+              </Tabs>
 
               {this.renderTabContent()}
             </form>

@@ -45,14 +45,15 @@ class Workflows extends React.Component {
         })
     }
     onClickEdit (wf) {
-        this.props.history.push(`/workflow/${wf.name}/edit`)
+
     }
 
     onClickRename (wf) {
-        this.setState({
-            editWf: wf
-        })
-        this.props.showWfNameModal(true)
+      this.props.history.push(`/workflow/${wf.name}/edit`)
+        // this.setState({
+        //     editWf: wf
+        // })
+        // this.props.showWfNameModal(true)
     }
 
     onSaveName (values) {
