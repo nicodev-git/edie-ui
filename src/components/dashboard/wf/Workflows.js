@@ -1,6 +1,4 @@
 import React from 'react'
-// import { DragDropContext } from 'react-dnd'
-// import TouchBackend from 'react-dnd-touch-backend'
 import {Button, Select, MenuItem} from '@material-ui/core'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -253,7 +251,7 @@ class Workflows extends React.Component {
                     </div>
                 </TabPageHeader>
 
-              <TabPageBody history={this.props.history} location={this.props.location}>
+                  <TabPageBody history={this.props.history} location={this.props.location}>
                     {this.renderWorkflows()}
                     {this.renderWorkflowEditModal()}
                     {this.renderSettingModal()}

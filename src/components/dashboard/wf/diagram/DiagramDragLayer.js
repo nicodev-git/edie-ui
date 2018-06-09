@@ -51,7 +51,7 @@ class DiagramDragLayer extends React.Component {
             case DragTypes.WORKFLOW:
                 return (
                   <svg style={style}>
-                    {shapes[item.imgIndex].img}
+                      <image href={`/images/${shapes[item.imgIndex].img}`} width="36" hanging="36"/>
                   </svg>
                 )
             default: return null
