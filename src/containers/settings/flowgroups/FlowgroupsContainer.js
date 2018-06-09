@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import Groups from 'components/page/group/groups'
+import FlowGroups from 'components/sidebar/settings/flowgroups/FlowGroups'
 
 import {
   fetchGroups,
@@ -12,10 +12,10 @@ import {
   removeGroup
 } from 'actions'
 
-class GroupsContainer extends React.Component {
+class FlowGroupsContainer extends React.Component {
   render () {
     return (
-      <Groups {...this.props}/>
+      <FlowGroups {...this.props}/>
     )
   }
 }
@@ -31,4 +31,4 @@ export default connect(
     updateGroup,
     removeGroup
   }
-)(withRouter(GroupsContainer))
+)(withRouter(FlowGroupsContainer))
