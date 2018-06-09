@@ -6,7 +6,6 @@ class DiagramObjectModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
-    console.log('DiagramObjectModal')
   }
 
   onClickClose() {
