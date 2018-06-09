@@ -3,15 +3,15 @@ import {Button} from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Create'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-import SettingTabs from 'components/page/setting/SettingTabs'
+import SettingTabs from '../SettingTabs'
 
-import TabPage from 'components/shared/tab_page'
-import TabPageBody from 'components/shared/tab_page_body'
-import TabPageHeader from 'components/shared/tab_page_header'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import ConnectorModal from './ConnectorModal'
 import UserConnectorModal from './UserConnectorModal'
-import RefreshOverlay from 'components/shared/refresh_overlay'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class Connectors extends React.Component {
     componentDidMount () {

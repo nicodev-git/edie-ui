@@ -28,6 +28,9 @@ const tabs = [{
 }, {
   title: 'Global Vars',
   path: '/settings/globalvars'
+}, {
+  title: 'Connectors',
+  path: '/settings/connectors'
 }]
 
 export default tabs

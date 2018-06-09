@@ -29,6 +29,7 @@ class Settings extends React.Component {
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
         <Route path="/settings/flowgroups" component={SettingFlowGroupsContainer} />
         <Route path="/settings/globalvars" component={SettingGlobalvarsContainer} />
+        <Route path="/settings/connectors" component={SettingConnectorsContainer} />
       </Switch>
     )
   }
