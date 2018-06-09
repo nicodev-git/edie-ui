@@ -702,12 +702,12 @@ export const showCollectorModal = (visible, collector) => {
   }
 }
 
-export const addCollector = (props) => {
+export const addCollector = (entity) => {
   return dispatch => {
-    axios.post(`${ROOT_URL}/collector`, props).then(({data}) => {
-      dispatch({type: ADD_COLLECTOR, data})
-      dispatch(showCollectorModal(false))
+    axios.post(`${ROOT_URL}/connector/save`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_COLLECTOR, data: res.data})
     }).catch(error => apiError(dispatch, error))
+    dispatch(showCollectorModal(false))
   }
 }
 
