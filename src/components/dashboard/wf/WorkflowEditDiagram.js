@@ -2,7 +2,7 @@ import React from 'react'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
-// import WorkflowEditPage from './WorkflowEditPage'
+import WorkflowEditDiagramView from './WorkflowEditDiagramView'
 import {drawFlows} from './DiagramLoader'
 import {extendShape} from './diagram/DiagramItems'
 
@@ -47,11 +47,11 @@ class WorkflowEditDiagram extends React.Component {
 
         return (
             <div className="flex-vertical flex-1">
-                {/*<WorkflowEditPage*/}
-                    {/*{...this.props}*/}
-                    {/*workflowItems={shapes.map(p => extendShape(p))}*/}
-                    {/*noModal*/}
-                    {/*onClickItemInfo={this.onClickItemInfo.bind(this)}/>*/}
+                <WorkflowEditDiagramView
+                    {...this.props}
+                    workflowItems={shapes.map(p => extendShape(p))}
+                    noModal
+                    onClickItemInfo={this.onClickItemInfo.bind(this)}/>
             </div>
         )
     }

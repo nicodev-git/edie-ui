@@ -55,7 +55,7 @@ export default connect(
         wfNameModalOpen: state.workflow.wfNameModalOpen,
         wfMappingModalOpen: state.workflow.wfMappingModalOpen,
 
-        brainCells: state.setting.brainCells
+        brainCells: state.settings.brainCells
     }), {
         fetchWorkflow,
         fetchWorkflowByName,

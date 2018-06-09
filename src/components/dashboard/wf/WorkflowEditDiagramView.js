@@ -1,12 +1,12 @@
 import React from 'react'
 import {merge, assign} from 'lodash'
 import uuid from 'uuid'
-import {Button} from '@material-ui/core'
+import {Button, Dialog} from '@material-ui/core'
 
 // import { DiagramTypes } from 'shared/global'
 import {extendShape, wfTaskItems} from './diagram/DiagramItems'
 
-import DiagramModal from 'containers/diagram_modal_container'
+import DiagramModal from 'containers/wf/DiagramModalContainer'
 // import FormConfig from './diagram/FormConfig'
 import MappingModal from './MappingModal'
 
