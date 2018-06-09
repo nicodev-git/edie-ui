@@ -32,7 +32,7 @@ import {
     fetchBrainCells
 } from 'actions'
 
-class WorkflowEditContainer extends React.Component {
+class WorkflowEditDiagramContainer extends React.Component {
     render () {
         return (
             <WorkflowEdit {...this.props}/>
@@ -83,4 +83,4 @@ export default connect(
         fetchCollectors,
         fetchBrainCells
     }
-)(withRouter(WorkflowEditContainer))
+)(withRouter(WorkflowEditDiagramContainer))

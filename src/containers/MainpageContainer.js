@@ -26,6 +26,7 @@ import DeviceWfContainer from 'containers/devicewf/DeviceWfContainer'
 import EditWfContainer from 'containers/devicewf/EditWfContainer'
 import EditWfDiagramContainer from 'containers/devicewf/EditWfDiagramContainer'
 import WorkflowsContainer from 'containers/wf/WorkflowsContainer'
+import WorkflowEditDiagramContainer from 'containers/wf/WorkflowEditDiagramContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
 
@@ -229,6 +230,8 @@ class MainpageContainer extends Component {
         <Route path="/:device/editwf/:id" component={EditWfContainer} exact/>
         <Route path="/:device/editwf/diagram/:id" component={EditWfDiagramContainer}/>
         <Route path="/workflow" component={WorkflowsContainer} exact/>
+        <Route path="/workflow/:name/diagram" component={WorkflowEditDiagramContainer} exact/>
+        <Route path="/workflow/:name/edit" component={WorkflowEditDiagramContainer} exact/>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
         <Route path="/logs" component={LogContainer} exact/>
