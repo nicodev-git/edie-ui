@@ -28,6 +28,9 @@ const tabs = [{
 }, {
   title: 'Global Vars',
   path: '/settings/globalvars'
+}, {
+  title: 'Braincells',
+  path: '/settings/braincells'
 }]
 
 export default tabs
