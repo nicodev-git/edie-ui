@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import WorkflowEdit from 'components/dashboard/wf/WorkflowEdit'
+import WorkflowEditDiagram from 'components/dashboard/wf/WorkflowEditDiagram'
 
 import {
     fetchWorkflow,
@@ -35,7 +35,7 @@ import {
 class WorkflowEditDiagramContainer extends React.Component {
     render () {
         return (
-            <WorkflowEdit {...this.props}/>
+            <WorkflowEditDiagram {...this.props}/>
         )
     }
 }

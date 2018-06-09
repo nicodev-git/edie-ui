@@ -96,10 +96,9 @@ class WorkflowEditModalView extends React.Component {
 
     renderFilterTab () {
         const {
-            allValues, onClickDeleteTag, tags, allTags,
+            onClickDeleteTag, tags, allTags,
             onClickExistingTag
         } = this.props
-        const {triggerMonitorType} = allValues || {}
         return (
             <div>
                 <div style={{height: panelHeight, overflow: 'auto'}}>

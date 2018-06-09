@@ -10,7 +10,7 @@ import DiagramModal from 'containers/diagram_modal_container'
 // import FormConfig from './diagram/FormConfig'
 import MappingModal from './mapping_modal'
 
-class WorkflowEditPage extends React.Component {
+class WorkflowEditDiagramView extends React.Component {
     onClickClose () {
         this.props.closeDeviceWfDiagramModal('workflow')
     }
@@ -203,4 +203,4 @@ class WorkflowEditPage extends React.Component {
     }
 }
 
-export default WorkflowEditPage
+export default WorkflowEditDiagramView
