@@ -78,7 +78,7 @@ export default class FlowGroups extends React.Component {
     if (!this.props.groupModalOpen) return
 
     return (
-      <GroupModal
+      <FlowGroupModal
         onSave={this.onSaveGroup.bind(this)}
         onClose={this.onCloseGroupModal.bind(this)}
       />

@@ -10,7 +10,7 @@ import SettingAudit from 'containers/settings/audit/AuditContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
-import SettingFlowGroupsContainer from 'components/sidebar/settings/flowgroups/FlowgroupsContainer'
+import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
 
 
 class Settings extends React.Component {
