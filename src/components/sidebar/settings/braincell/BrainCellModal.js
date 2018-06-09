@@ -5,7 +5,7 @@ import {getFormValues, reduxForm} from 'redux-form'
 import BrainCellModalView from './BrainCellModalView'
 import ScriptModal from './ScriptModal'
 import GrokModal from './GrokModal'
-import {getKeyValues} from 'shared/global'
+import {getKeyValues} from 'shared/Global'
 import CellParamModal from './CellParamModal'
 
 class BrainCellModal extends React.Component {

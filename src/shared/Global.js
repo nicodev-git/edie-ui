@@ -696,3 +696,33 @@ export const mappingFieldOptions = 'message ip port user description hostname [O
   label: p,
   value: p
 }))
+
+export const brainCellTypes = [{
+  label: 'CommandPattern', value: 'CommandPattern',
+  valueTypes: ['WORKFLOW', 'COMMAND', 'FUNCTION', 'TEXTRESPONSE']
+}, {
+  label: 'Regex', value: 'Regex', valueTypes: ['TEXT']
+}, {
+  label: 'Grok', value: 'Grok', valueTypes: ['TEXT']
+}, {
+  label: 'Classification', value: 'Classification', valueTypes: ['TEXT']
+}, {
+  label: 'Tag', value: 'Tag', valueTypes: ['TEXT']
+}]
+
+export const brainCellValueTypes = [{
+  label: 'Workflow', value: 'WORKFLOW'
+}, {
+  label: 'Text Response', value: 'TEXTRESPONSE'
+}, {
+  label: 'Function', value: 'FUNCTION'
+}, {
+  label: 'Text', value: 'TEXT'
+}]
+
+export function getKeyValues(obj, keyField = 'key', valueField = 'value') {
+  return keys(obj || {}).map(p => ({
+    [keyField]: p,
+    [valueField]: obj[p]
+  }))
+}

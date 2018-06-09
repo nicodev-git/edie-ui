@@ -5,14 +5,14 @@ import EditIcon from '@material-ui/icons/Create'
 import ReactTooltip from 'react-tooltip'
 import {debounce} from 'lodash'
 
-import SettingTabs from 'components/page/setting/SettingTabs'
+import SettingTabs from '../SettingTabs'
 
-import TabPage from 'components/shared/tab_page'
-import TabPageBody from 'components/shared/tab_page_body'
-import TabPageHeader from 'components/shared/tab_page_header'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import BrainCellModal from './BrainCellModal'
-import {brainCellTypes} from 'shared/global'
+import {brainCellTypes} from 'shared/Global'
 
 export default class Braincells extends React.Component {
     constructor (props) {
@@ -204,7 +204,7 @@ export default class Braincells extends React.Component {
                     </div>
                 </TabPageHeader>
 
-                <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
+                <TabPageBody tabs={SettingTabs} tab={10} history={this.props.history} location={this.props.location}>
                     {this.renderContent()}
                     {this.renderBrainCellModal()}
                 </TabPageBody>

@@ -12,16 +12,16 @@ import {Table,
     TableRow,
 } from '@material-ui/core'
 import ParamsTableHead from './ParamsTableHead'
-import InlineEdit from 'components/shared/ReactEditInline'
+import InlineEdit from 'components/common/ReactEditInline'
 import {
     FormInput,
     FormSelect,
     Modal,
     CardPanel,
-    FormCheckBox
+    FormCheckbox
 } from 'components/modal/parts'
 
-import {brainCellTypes, brainCellValueTypes, severities} from 'shared/global'
+import {brainCellTypes, brainCellValueTypes, severities} from 'shared/Global'
 
 const dirOptions = [{
     label: 'External', value: 'external'
@@ -47,7 +47,7 @@ export default class BrainCellModalView extends Component {
                     <Field name="value" component={FormInput} floatingLabel="Format" className="margin-md-right valign-top" fullWidth/>
                     <Field name="severity" component={FormSelect} className="margin-md-right valign-top" floatingLabel="Severity"
                            options={severities.map(p => ({label: p, value: p}))}/>
-                    <Field name="blockIP" component={FormCheckBox} label="BlockIP" className="margin-sm-top"/>
+                    <Field name="blockIP" component={FormCheckbox} label="BlockIP" className="margin-sm-top"/>
                 </div>
             )
         } else if (valueType === 'WORKFLOW') {
@@ -178,7 +178,7 @@ export default class BrainCellModalView extends Component {
         if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
         return (
             <CardPanel title="Script">
-                <Field name="params2.script" component={FormCheckBox} label="Script"/>
+                <Field name="params2.script" component={FormCheckbox} label="Script"/>
 
                 <label className="link margin-md-left text-underline"
                        onClick={() => onClickScript('linuxShell')}>Linux</label>

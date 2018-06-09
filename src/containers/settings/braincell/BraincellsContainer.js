@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import Braincells from 'components/page/setting/braincell/Braincells'
+import Braincells from 'components/sidebar/settings/braincell/Braincells'
 import {
     fetchBrainCells,
     addBrainCell,
