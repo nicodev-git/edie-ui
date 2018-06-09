@@ -110,10 +110,10 @@ import {
   ADD_BRAIN_CELL,
   UPDATE_BRAIN_CELL,
   REMOVE_BRAIN_CELL,
-  // SHOW_BRAIN_CELL_MODAL,
-  // SHOW_SCRIPT_MODAL,
-  // SHOW_GROK_MODAL,
-  // SHOW_CELL_PARAM_MODAL,
+  SHOW_BRAIN_CELL_MODAL,
+  SHOW_SCRIPT_MODAL,
+  SHOW_GROK_MODAL,
+  SHOW_CELL_PARAM_MODAL,
 
   SHOW_USER_CONNECTOR_MODAL,
 
@@ -995,8 +995,8 @@ export function updateBrainCell (entity) {
 
 export function removeBrainCell (entity) {
   return dispatch => {
-    axios.delete(entity._links.self.href).then(() => {
-      dispatch({type: REMOVE_BRAIN_CELL, data: entity})
+    axios.post(`${ROOT_URL}/deleteBraincell`, entity).then(res => {
+      if (res.data.success) dispatch({type: REMOVE_BRAIN_CELL, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
 }
