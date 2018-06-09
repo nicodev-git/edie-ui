@@ -2,16 +2,10 @@ import axios from 'axios'
 import { merge, assign, findIndex, reverse } from 'lodash'
 import {
   FETCH_WORKFLOW,
-  OPEN_WORKFLOW_MODAL,
-  CLOSE_WORKFLOW_MODAL,
-
-  UPDATE_WORKFLOW_EDIT_TYPE,
 
   SHOW_WF_TAG_MODAL,
   ADD_WORKFLOW_TAG,
   REMOVE_WORKFLOW_TAG,
-
-  NO_AUTH_ERROR,
 
   OPEN_DEVICE_WF_DIAGRAM_MODAL,
   CLOSE_DEVICE_WF_DIAGRAM_MODAL,
