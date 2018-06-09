@@ -712,11 +712,11 @@ export const addCollector = (props) => {
 }
 
 export const updateCollector = (entity) => {
-  return (dispatch) => {
-    axios.put(entity._links.self.href, entity).then(({data}) => {
-      dispatch({type: UPDATE_COLLECTOR, data})
-      dispatch(showCollectorModal(false))
+  return dispatch => {
+    axios.post(`${ROOT_URL}/connector/save`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_COLLECTOR, data: res.data})
     }).catch(error => apiError(dispatch, error))
+    dispatch(showCollectorModal(false))
   }
 }
 
