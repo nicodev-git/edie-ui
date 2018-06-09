@@ -305,7 +305,7 @@ class DiagramModal extends Component {
 
       }
     })
-
+    console.log('Render diagram object modal')
     return (
       <DiagramObjectModal
         stateId={stateId}
