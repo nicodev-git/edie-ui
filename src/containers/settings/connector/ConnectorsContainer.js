@@ -9,12 +9,10 @@ import {
     addCollector,
     updateCollector,
     removeCollector,
-    showUserConnectorModal,
-
-    showAgentModal
+    showUserConnectorModal
 } from 'actions'
 
-class CollectorsContainer extends React.Component {
+class ConnectorsContainer extends React.Component {
     render () {
         return (
             <Connectors {...this.props} />
@@ -23,25 +21,18 @@ class CollectorsContainer extends React.Component {
 }
 export default connect(
     state => ({
-        collectors: state.dashboard.collectors,
-        collectorModalOpen: state.dashboard.collectorModalOpen,
-        editCollector: state.dashboard.editCollector,
-        preloaderOpen: state.dashboard.preloaderOpen,
-        resolvedAddr: state.dashboard.resolvedAddr,
+        collectors: state.settings.collectors,
+        collectorModalOpen: state.settings.collectorModalOpen,
+        editCollector: state.settings.editCollector,
 
-        userConnectorModalOpen: state.dashboard.userConnectorModalOpen,
-        editUserConnector: state.dashboard.editUserConnector,
-
-        agentModalOpen: state.dashboard.agentModalOpen,
-        editAgent: state.dashboard.editAgent
+        userConnectorModalOpen: state.settings.userConnectorModalOpen,
+        editUserConnector: state.settings.editUserConnector
     }), {
         fetchCollectors,
         showCollectorModal,
         addCollector,
         updateCollector,
         removeCollector,
-        showUserConnectorModal,
-
-        showAgentModal
+        showUserConnectorModal
     }
-)(withRouter(CollectorsContainer))
+)(withRouter(ConnectorsContainer))

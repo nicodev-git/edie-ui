@@ -92,7 +92,7 @@ export default class Connectors extends React.Component {
                     </div>
                 </TabPageHeader>
 
-                <TabPageBody tabs={SettingTabs} tab={3} history={this.props.history} location={this.props.location}>
+                <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}>
                     {this.renderContent()}
                     {this.renderModal()}
                 </TabPageBody>

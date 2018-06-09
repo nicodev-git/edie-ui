@@ -9,7 +9,7 @@ import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedConta
 import SettingAudit from 'containers/settings/audit/AuditContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
-import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
+// import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
 import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
 import SettingGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
 import SettingConnectorsContainer from 'containers/settings/connector/ConnectorsContainer'
@@ -20,7 +20,7 @@ class Settings extends React.Component {
     return (
       <Switch>
         <Route path="/settings" exact component={SettingGeneralContainer} />
-        <Route path="/settings/collectors" component={SettingCollectors} />
+        {/*<Route path="/settings/collectors" component={SettingCollectors} />*/}
         <Route path="/settings/tags" component={SettingTags}/>
         <Route path="/settings/maps" component={SettingMapsContainer} />
         <Route path="/settings/users" component={SettingUsers}/>

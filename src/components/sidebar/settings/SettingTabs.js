@@ -2,8 +2,8 @@ const tabs = [{
   title: 'General',
   path: '/settings'
 }, {
-  title: 'Collectors',
-  path: '/settings/collectors'
+  title: 'Connectors',
+  path: '/settings/connectors'
 }, {
   title: 'Maps',
   path: '/settings/maps'
@@ -28,9 +28,6 @@ const tabs = [{
 }, {
   title: 'Global Vars',
   path: '/settings/globalvars'
-}, {
-  title: 'Connectors',
-  path: '/settings/connectors'
 }]
 
 export default tabs
