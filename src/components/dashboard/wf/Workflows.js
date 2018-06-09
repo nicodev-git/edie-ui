@@ -45,7 +45,7 @@ class Workflows extends React.Component {
         })
     }
     onClickEdit (wf) {
-
+      this.props.history.push(`/workflow/${wf.name}/diagram`)
     }
 
     onClickRename (wf) {

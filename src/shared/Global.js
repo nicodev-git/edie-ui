@@ -691,3 +691,8 @@ export const findObject = (objects, criteria) => {
   if (index < 0) return null
   return objects[index]
 }
+
+export const mappingFieldOptions = 'message ip port user description hostname [Other]'.split(' ').map(p => ({
+  label: p,
+  value: p
+}))

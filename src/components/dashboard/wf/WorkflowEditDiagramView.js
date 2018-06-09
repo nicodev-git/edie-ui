@@ -1,206 +1,215 @@
 import React from 'react'
-import { merge, assign } from 'lodash'
+import {merge, assign} from 'lodash'
 import uuid from 'uuid'
+import {Button} from '@material-ui/core'
 
-import WorkflowModalView from 'components/modal/workflow_modal_view'
 // import { DiagramTypes } from 'shared/global'
 import {extendShape, wfTaskItems} from './diagram/DiagramItems'
 
 import DiagramModal from 'containers/diagram_modal_container'
 // import FormConfig from './diagram/FormConfig'
-import MappingModal from './mapping_modal'
+import MappingModal from './MappingModal'
 
 class WorkflowEditDiagramView extends React.Component {
-    onClickClose () {
-        this.props.closeDeviceWfDiagramModal('workflow')
+  onClickClose() {
+    this.props.closeDeviceWfDiagramModal('workflow')
+  }
+
+  onCloseWorkflow() {
+  }
+
+  onSaveFlowObject(stateId, values, objectConfig, flow, objects) {
+    // const name = values.name
+    // if (!name) return false
+
+    const object = assign({}, objectConfig)
+    object.data = merge({}, values, {
+      uiprops: {
+        type: (objectConfig.config || {}).type,
+        x: objectConfig.x,
+        y: objectConfig.y,
+        w: objectConfig.w,
+        h: objectConfig.h,
+        fill: objectConfig.fill,
+        lines: []
+      }
+    })
+    object.name = values.name || object.name
+
+    console.log(object)
+
+    if (object.data.uuid) {
+      this.props.updateFlowItem(stateId, flow, object)
+    } else {
+      object.data = assign(object.data, {
+        uuid: uuid.v4(),
+        step: Math.max.apply(null, [0, ...objects.map(u => u.data ? u.data.step : 0)]) + 1
+      })
+      this.props.addFlowItem(stateId, flow, object)
     }
 
-    onCloseWorkflow () {
-    }
+    return true
+  }
 
-    onSaveFlowObject (stateId, values, objectConfig, flow, objects) {
-        // const name = values.name
-        // if (!name) return false
+  onDeleteFlowObject(stateId, flow, selected, lines) {
+    this.props.removeFlowItem(stateId, flow, selected, lines)
+  }
 
-        const object = assign({}, objectConfig)
-        object.data = merge({}, values, {
-            uiprops: {
-                type: (objectConfig.config || {}).type,
-                x: objectConfig.x,
-                y: objectConfig.y,
-                w: objectConfig.w,
-                h: objectConfig.h,
-                fill: objectConfig.fill,
-                lines: []
-            }
-        })
-        object.name = values.name || object.name
+  onToggleFlowDisable(stateId, object) {
+    // const disabled = parseInt(object.data.disabled || 0, 10) ? 0 : 1
+    // const props = assign({}, object.data, {
+    //     disabled
+    // })
+    //
+    // const obj = assign({}, object, {
+    //     greyImg: disabled
+    // })
+    //
+    // this.props.updateFlowItem(stateId, props, obj)
+  }
 
-        console.log(object)
+  onDblClickFlowItem(stateId, flow, obj) {
+    if (!obj.data || obj.data.uiprops.type !== 'GROUP') return
+    // const {type} = obj.data
+    // if (type === 'TASK') {
+    //     this.props.showWfTaskModal(true, 'wf-task', obj.data)
+    // } else if (type === 'RULE') {
+    //     this.props.showWfRuleModal(true, 'wf-rule', obj.data)
+    // }
 
-        if (object.data.uuid) {
-            this.props.updateFlowItem(stateId, flow, object)
-        } else {
-            object.data = assign(object.data, {
-                uuid: uuid.v4(),
-                step: Math.max.apply(null, [0, ...objects.map(u => u.data ? u.data.step : 0)]) + 1
-            })
-            this.props.addFlowItem(stateId, flow, object)
-        }
+    // this.props.showWfTaskModal(true, stateId, flow, 'wf-task', obj, this.props.history)
 
-        return true
-    }
+    this.props.history.push(`/workflow/${flow.name}/edititem/${obj.data.uuid}`)
+  }
 
-    onDeleteFlowObject (stateId, flow, selected, lines) {
-        this.props.removeFlowItem(stateId, flow, selected, lines)
-    }
+  onClickItemInfo(stateId, flow, obj) {
+    if (!obj.data) return
+    const {onClickItemInfo} = this.props
+    onClickItemInfo && onClickItemInfo(flow, obj.data)
+  }
 
-    onToggleFlowDisable (stateId, object) {
-        // const disabled = parseInt(object.data.disabled || 0, 10) ? 0 : 1
-        // const props = assign({}, object.data, {
-        //     disabled
-        // })
-        //
-        // const obj = assign({}, object, {
-        //     greyImg: disabled
-        // })
-        //
-        // this.props.updateFlowItem(stateId, props, obj)
-    }
+  onDeleteRuleObject(stateId, flow, selected, lines) {
+    this.props.removeWfRule(stateId, selected)
+  }
 
-    onDblClickFlowItem (stateId, flow, obj) {
-        if (!obj.data || obj.data.uiprops.type !== 'GROUP') return
-        // const {type} = obj.data
-        // if (type === 'TASK') {
-        //     this.props.showWfTaskModal(true, 'wf-task', obj.data)
-        // } else if (type === 'RULE') {
-        //     this.props.showWfRuleModal(true, 'wf-rule', obj.data)
-        // }
+  onChangeMapping() {
+    this.props.showWfMappingModal(true)
+  }
 
-        // this.props.showWfTaskModal(true, stateId, flow, 'wf-task', obj, this.props.history)
+  onCloseMappingModal() {
+    this.props.showWfMappingModal(false)
+  }
 
-        this.props.history.push(`/workflow/${flow.name}/edititem/${obj.data.uuid}`)
-    }
+  onSaveMapping(mapping) {
+    const {selectedWorkflow} = this.props
+    this.props.updateWorkflow({
+      ...selectedWorkflow,
+      mapping
+    })
+    this.onCloseMappingModal()
+  }
 
-    onClickItemInfo (stateId, flow, obj) {
-        if (!obj.data) return
-        const {onClickItemInfo} = this.props
-        onClickItemInfo && onClickItemInfo(flow, obj.data)
-    }
+  renderDiagramView() {
+    if (!this.props.selectedWorkflow) return <div/>
+    const {addFlowLine, updateFlowLine, moveFlowItems, changeFlowItemFill, noModal, shapes} = this.props
 
-    onDeleteRuleObject (stateId, flow, selected, lines) {
-        this.props.removeWfRule(stateId, selected)
-    }
+    return (
+      <DiagramModal
+        innerModal
+        stateId="workflow"
+        workflowSelect={null}
+        commands={[]}
+        onClose={this.onCloseWorkflow.bind(this)}
+        noModal={noModal}
+        shapes={shapes}
 
-    onChangeMapping () {
-        this.props.showWfMappingModal(true)
-    }
+        workflowItems={shapes.map(p => extendShape(p))}
 
-    onCloseMappingModal () {
-        this.props.showWfMappingModal(false)
-    }
+        // formContents={FormConfig.taskForm}
+        onSaveDiagramObject={this.onSaveFlowObject.bind(this)}
+        onToggleDisable={this.onToggleFlowDisable.bind(this)}
+        onChangeMapping={this.onChangeMapping.bind(this)}
 
-    onSaveMapping (mapping) {
-        const {selectedWorkflow} = this.props
-        this.props.updateWorkflow({
-            ...selectedWorkflow,
-            mapping
-        })
-        this.onCloseMappingModal()
-    }
+        addFlowLine={addFlowLine}
+        updateFlowLine={updateFlowLine}
+        moveFlowItems={moveFlowItems}
+        changeFlowItemFill={changeFlowItemFill}
+        onDeleteDiagramObject={this.onDeleteFlowObject.bind(this)}
 
-    renderDiagramView () {
-        if (!this.props.selectedWorkflow) return <div/>
-        const {addFlowLine, updateFlowLine, moveFlowItems, changeFlowItemFill, noModal, shapes} = this.props
+        onDblClickFlowItem={this.onDblClickFlowItem.bind(this)}
+        onClickItemInfo={this.onClickItemInfo.bind(this)}
+      />
+    )
+  }
 
-        return (
-            <DiagramModal
-                innerModal
-                stateId="workflow"
-                workflowSelect={null}
-                commands={[]}
-                onClose={this.onCloseWorkflow.bind(this)}
-                noModal={noModal}
-                shapes={shapes}
+  renderWfTaskModal() {
+    if (!this.props.wfTaskModalOpen) return
+    const {addFlowLine, updateFlowLine, moveFlowItems, changeFlowItemFill} = this.props
 
-                workflowItems={shapes.map(p => extendShape(p))}
+    const formContents = [
+      {name: 'Name', key: 'name'}
+    ]
 
-                // formContents={FormConfig.taskForm}
-                onSaveDiagramObject={this.onSaveFlowObject.bind(this)}
-                onToggleDisable={this.onToggleFlowDisable.bind(this)}
-                onChangeMapping={this.onChangeMapping.bind(this)}
+    return (
+      <DiagramModal
+        stateId="wf-task"
+        commands={[]}
+        onClose={() => this.props.showWfTaskModal(false)}
 
-                addFlowLine={addFlowLine}
-                updateFlowLine={updateFlowLine}
-                moveFlowItems={moveFlowItems}
-                changeFlowItemFill={changeFlowItemFill}
-                onDeleteDiagramObject={this.onDeleteFlowObject.bind(this)}
+        workflowItems={wfTaskItems}
 
-                onDblClickFlowItem={this.onDblClickFlowItem.bind(this)}
-                onClickItemInfo={this.onClickItemInfo.bind(this)}
-            />
-        )
-    }
+        formContents={formContents}
+        onSaveDiagramObject={this.onSaveFlowObject.bind(this)}
 
-    renderWfTaskModal () {
-        if (!this.props.wfTaskModalOpen) return
-        const { addFlowLine, updateFlowLine, moveFlowItems, changeFlowItemFill } = this.props
+        addFlowLine={addFlowLine}
+        updateFlowLine={updateFlowLine}
+        moveFlowItems={moveFlowItems}
+        changeFlowItemFill={changeFlowItemFill}
+        onDeleteDiagramObject={this.onDeleteFlowObject.bind(this)}
+        hideInfo
+      />
+    )
+  }
 
-        const formContents = [
-            {name: 'Name', key: 'name'}
-        ]
+  renderMappingModal() {
+    if (!this.props.wfMappingModalOpen) return null
 
-        return (
-            <DiagramModal
-                stateId="wf-task"
-                commands={[]}
-                onClose={() => this.props.showWfTaskModal(false)}
+    const {selectedWorkflow} = this.props
+    return (
+      <MappingModal
+        workflow={selectedWorkflow}
+        onSave={this.onSaveMapping.bind(this)}
+        onClickClose={this.onCloseMappingModal.bind(this)}/>
+    )
+  }
 
-                workflowItems={wfTaskItems}
+  renderModals() {
+    return (
+      <div>
+        {this.renderMappingModal()}
+      </div>
+    )
+  }
+  render() {
+    const {noModal} = this.props
 
-                formContents={formContents}
-                onSaveDiagramObject={this.onSaveFlowObject.bind(this)}
+    const content = (
+      <div className={noModal ? "flex-1 flex-vertical" : null}>
+        {this.renderDiagramView()}
+        {this.renderWfTaskModal()}
+        {this.renderModals()}
+        {!noModal && <Button variant="raised" label="Close" onClick={this.onClickClose.bind(this)} />}
+      </div>
+    )
 
-                addFlowLine={addFlowLine}
-                updateFlowLine={updateFlowLine}
-                moveFlowItems={moveFlowItems}
-                changeFlowItemFill={changeFlowItemFill}
-                onDeleteDiagramObject={this.onDeleteFlowObject.bind(this)}
-                hideInfo
-            />
-        )
-    }
+    if (noModal) return content
 
-    renderMappingModal () {
-        if (!this.props.wfMappingModalOpen) return null
-
-        const {selectedWorkflow} = this.props
-        return (
-            <MappingModal
-                workflow={selectedWorkflow}
-                onSave={this.onSaveMapping.bind(this)}
-                onClickClose={this.onCloseMappingModal.bind(this)}/>
-        )
-    }
-    renderModals () {
-        return (
-            <div>
-                {this.renderMappingModal()}
-            </div>
-        )
-    }
-    render () {
-        return (
-            <WorkflowModalView
-                {...this.props}
-                title={this.props.selectedWorkflow}
-                onHide={this.onClickClose.bind(this)}
-                modals={this.renderModals()}
-                diagramView={this.renderDiagramView()}
-                diagramTaskModal={this.renderWfTaskModal()}
-            />
-        )
-    }
+    return (
+      <Dialog open title={this.props.selectedWorkflow || 'Workflow'}>
+        {content}
+      </Dialog>
+    )
+  }
 }
 
 export default WorkflowEditDiagramView
