@@ -315,13 +315,17 @@ class WorkflowEditModalView extends React.Component {
           </div>
         )
 
-        if (noModal) return content
-
-        return (
+        if (noModal) {
+          return content
+        } else {
+          return (
             <Modal title="Workflow" width={1100}>
               {content}
             </Modal>
-        )
+          )
+        }
+
+
     }
 }
 

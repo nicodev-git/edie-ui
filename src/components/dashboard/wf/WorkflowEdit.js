@@ -3,6 +3,10 @@ import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 import uuid from 'uuid'
 
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
+
 import WorkflowEditModal from './WorkflowEditModal'
 
 class WorkflowEditDiagram extends React.Component {
@@ -69,15 +73,20 @@ class WorkflowEditDiagram extends React.Component {
     if (!editWf) return <div>Loading...</div>
 
     return (
-      <div className="flex-vertical flex-1">
-        <WorkflowEditModal
-          {...this.props}
-          noModal
-          allTags={this.getTags()}
-          editWf={editWf}
-          onSave={this.onSaveName.bind(this)}
-        />
-      </div>
+      <TabPage>
+        <TabPageHeader title="Workflow Edit">
+        </TabPageHeader>
+
+        <TabPageBody>
+          <WorkflowEditModal
+            {...this.props}
+            noModal
+            allTags={this.getTags()}
+            editWf={editWf}
+            onSave={this.onSaveName.bind(this)}
+          />
+        </TabPageBody>
+      </TabPage>
     )
   }
 }
