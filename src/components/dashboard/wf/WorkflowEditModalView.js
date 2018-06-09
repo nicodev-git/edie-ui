@@ -127,7 +127,6 @@ class WorkflowEditModalView extends React.Component {
                             )}
                         </div>
                     </CardPanel>
-
                 </div>
                 {this.renderButtons()}
             </div>
