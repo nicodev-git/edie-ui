@@ -302,7 +302,6 @@ a, a:focus, a:hover {
 
 .link {
     cursor: pointer;
-    display: inline-block;
 }
 
 .ml-dialog {
@@ -482,4 +481,13 @@ input:-webkit-autofill {
 .wf-item-delete:hover {
     display: inline-block;
     opacity: 1;
+}
+
+.Popover-body {
+    background: #EDEFF1;
+    border-radius: 4px;
+}
+
+.Popover-tip {
+    fill: #EDEFF1;
 }
