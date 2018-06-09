@@ -286,7 +286,7 @@ class WorkflowEditModalView extends React.Component {
     render () {
         const {
             onSubmit, children,
-            tab, onChangeTab
+            tab, onChangeTab, noModal
         } = this.props
 
         const mainStyle = tab === 'wf' ? {
@@ -294,26 +294,32 @@ class WorkflowEditModalView extends React.Component {
             overflow: 'auto'
         } : null
 
+        const content = (
+          <div style={mainStyle}>
+            <form onSubmit={onSubmit}>
+              <AppBar position="static">
+                <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
+                  <Tab label="Filter" value="filter"/>
+                  <Tab label="General" value="general"/>
+                  <Tab label="Workflow" value="wf"/>
+                  <Tab label="Actions" value="actions"/>
+                  <Tab label="Security" value="security"/>
+                  <Tab label="Schedule" value="schedule"/>
+                </Tabs>
+              </AppBar>
+
+              {this.renderTabContent()}
+            </form>
+            {this.renderRuleDetail()}
+            {children}
+          </div>
+        )
+
+        if (noModal) return content
+
         return (
             <Modal title="Workflow" width={1100}>
-                <div style={mainStyle}>
-                    <form onSubmit={onSubmit}>
-                        <AppBar position="static">
-                            <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
-                                <Tab label="Filter" value="filter"/>
-                                <Tab label="General" value="general"/>
-                                <Tab label="Workflow" value="wf"/>
-                                <Tab label="Actions" value="actions"/>
-                                <Tab label="Security" value="security"/>
-                                <Tab label="Schedule" value="schedule"/>
-                            </Tabs>
-                        </AppBar>
-
-                        {this.renderTabContent()}
-                    </form>
-                    {this.renderRuleDetail()}
-                </div>
-                {children}
+              {content}
             </Modal>
         )
     }
