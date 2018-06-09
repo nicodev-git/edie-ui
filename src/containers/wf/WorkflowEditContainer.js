@@ -12,6 +12,7 @@ import {
     addWorkflow,
     updateWorkflow,
     removeWorkflow,
+    fetchWorkflowByName,
 
     fetchGroups,
 
@@ -82,6 +83,7 @@ export default connect(
         addWorkflow,
         updateWorkflow,
         removeWorkflow,
+        fetchWorkflowByName,
 
         fetchGroups,
 

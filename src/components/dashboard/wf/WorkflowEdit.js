@@ -1,12 +1,17 @@
 import React from 'react'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
+import uuid from 'uuid'
 
 import WorkflowEditModal from './WorkflowEditModal'
-import {drawFlows} from './DiagramLoader'
-import {extendShape} from './diagram/DiagramItems'
 
 class WorkflowEditDiagram extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      editWf: null
+    }
+  }
   componentWillMount () {
     this.props.fetchGroups()
     this.props.fetchShapes()
@@ -20,8 +25,9 @@ class WorkflowEditDiagram extends React.Component {
   openWorkflow (name) {
     this.props.fetchWorkflowByName(name, flow => {
       if (flow) {
-        const data = drawFlows(flow.flowItems || [], this.props.shapes.map(p => extendShape(p)))
-        this.props.openDeviceWfDiagramModal('workflow', JSON.stringify(data), flow)
+        this.setState({
+          editWf: flow
+        })
         console.log(flow)
       }
     })
@@ -30,21 +36,47 @@ class WorkflowEditDiagram extends React.Component {
     const {match} = this.props
     const {name} = match.params
     if (name !== prevProps.match.params.name) {
-      this.props.closeDeviceWfDiagramModal('workflow')
+      this.setState({editWf: null})
       this.openWorkflow(name)
     }
   }
 
+  onSaveName (values) {
+    const {editWf} = this.state
+    if (editWf) {
+      this.props.updateWorkflow({
+        ...editWf,
+        ...values
+      })
+    } else {
+      const flow = {
+        ...values,
+        uuid: uuid.v4(),
+        flowItems: []
+      }
+      this.props.addWorkflow(flow)
+    }
+
+  }
+
+  getTags () {
+    const {brainCells} = this.props
+    return brainCells.filter(p => p.type === 'Tag')
+  }
+
   render () {
-    const {wfDiagramModalOpen, shapes} = this.props
-    if (!wfDiagramModalOpen) return <div>Loading...</div>
+    const {editWf} = this.state
+    if (!editWf) return <div>Loading...</div>
 
     return (
       <div className="flex-vertical flex-1">
         <WorkflowEditModal
-        {...this.props}
-        workflowItems={shapes.map(p => extendShape(p))}
-        noModal/>
+          {...this.props}
+          noModal
+          allTags={this.getTags()}
+          editWf={editWf}
+          onSave={this.onSaveName.bind(this)}
+        />
       </div>
     )
   }
