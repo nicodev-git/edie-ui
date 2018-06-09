@@ -46,7 +46,7 @@ export default class TabPageBody extends Component {
 
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        {tabs && tabs.length > 0 ? (<Tabs value={active} onChange={this.navigate.bind(this)}>
+        {tabs && tabs.length > 0 ? (<Tabs value={active} onChange={this.navigate.bind(this)} scrollable scrollButtons="off">
           {tabs.map((item, i) =>
             <Tab key={i} label={item.title} value={i}/>
           )}
