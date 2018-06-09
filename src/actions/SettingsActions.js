@@ -108,8 +108,8 @@ import {
 
   FETCH_BRAIN_CELLS,
   ADD_BRAIN_CELL,
-  // UPDATE_BRAIN_CELL,
-  // REMOVE_BRAIN_CELL,
+  UPDATE_BRAIN_CELL,
+  REMOVE_BRAIN_CELL,
   // SHOW_BRAIN_CELL_MODAL,
   // SHOW_SCRIPT_MODAL,
   // SHOW_GROK_MODAL,
@@ -957,6 +957,18 @@ export function eddieSync () {
 
 //////////////////////////////////////////////////////////////////
 
+export function resetForm(name) {
+  return dispatch => {
+    dispatch(reset(name))
+  }
+}
+
+export function showUserConnectorModal(visible, userConnector) {
+  return dispatch => {
+    dispatch({type: SHOW_USER_CONNECTOR_MODAL, visible, userConnector})
+  }
+}
+
 export function fetchBrainCells() {
   return dispatch => {
     axios.get(`${ROOT_URL}/getAllBraincells`).then(res => {
@@ -967,20 +979,48 @@ export function fetchBrainCells() {
 
 export function addBrainCell(entity) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/braincells`, entity).then(res => {
-      dispatch({type: ADD_BRAIN_CELL, data: res.data})
+    axios.post(`${ROOT_URL}/saveBraincell`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_BRAIN_CELL, data: res.data})
     })
   }
 }
 
-export function resetForm(name) {
+export function updateBrainCell (entity) {
   return dispatch => {
-    dispatch(reset(name))
+    axios.post(`${ROOT_URL}/saveBraincell`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_BRAIN_CELL, data: res.data})
+    })
   }
 }
 
-export function showUserConnectorModal(visible, userConnector) {
+export function removeBrainCell (entity) {
   return dispatch => {
-    dispatch({type: SHOW_USER_CONNECTOR_MODAL, visible, userConnector})
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_BRAIN_CELL, data: entity})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export function showBrainCellModal (visible, data) {
+  return dispatch => {
+    dispatch({type: SHOW_BRAIN_CELL_MODAL, visible, data})
+  }
+}
+
+export function showScriptModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_SCRIPT_MODAL, visible})
+  }
+}
+
+export function showGrokModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_GROK_MODAL, visible})
+  }
+}
+
+export function showCellParamModal (visible, data) {
+  return dispatch => {
+    dispatch({type: SHOW_CELL_PARAM_MODAL, visible, data})
   }
 }

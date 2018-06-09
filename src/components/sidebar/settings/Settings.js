@@ -13,6 +13,7 @@ import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
 import SettingGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
 import SettingConnectorsContainer from 'containers/settings/connector/ConnectorsContainer'
+import SettingBraincellsContainer from 'containers/settings/braincell/BraincellsContainer'
 
 
 class Settings extends React.Component {
@@ -30,6 +31,7 @@ class Settings extends React.Component {
         <Route path="/settings/flowgroups" component={SettingFlowGroupsContainer} />
         <Route path="/settings/globalvars" component={SettingGlobalvarsContainer} />
         <Route path="/settings/connectors" component={SettingConnectorsContainer} />
+        <Route path="/settings/braincells" component={SettingBraincellsContainer} />
       </Switch>
     )
   }
