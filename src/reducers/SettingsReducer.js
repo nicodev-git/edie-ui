@@ -610,9 +610,11 @@ export default function (state = initialState, action) {
     case SHOW_COLLECTOR_MODAL:
       return { ...state, collectorModalOpen: !!action.visible, editCollector: action.collector}
     case ADD_COLLECTOR:
+      return { ...state, collectorDraw: state.collectorDraw + 1, collectors: [...state.collectors, action.data] }
     case UPDATE_COLLECTOR:
+      return { ...state, collectorDraw: state.collectorDraw + 1, collectors: state.collectors.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_COLLECTOR:
-      return { ...state, collectorDraw: state.collectorDraw + 1 }
+      return { ...state, collectorDraw: state.collectorDraw + 1, collectors: state.collectors.filter(p => p.id !== action.data.id) }
     case FETCH_COLLECTORS:
       return { ...state, collectors: action.data }
 

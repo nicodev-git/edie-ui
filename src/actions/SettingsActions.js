@@ -722,8 +722,8 @@ export const updateCollector = (entity) => {
 
 export const removeCollector = (entity) => {
   return (dispatch) => {
-    axios.delete(entity._links.self.href).then(() => {
-      dispatch({type: REMOVE_COLLECTOR, entity})
+    axios.post(`${ROOT_URL}/connector/delete`, entity).then(res => {
+      if (res.data.success) dispatch({type: REMOVE_COLLECTOR, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
 }

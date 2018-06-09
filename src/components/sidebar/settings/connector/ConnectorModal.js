@@ -69,10 +69,8 @@ class ConnectorModal extends Component {
         }
         const entity = {
             ...editCollector,
-            name: values.name,
-            ostype: values.ostype,
+            ...values,
             relatedIPs: this.state.relatedIPs,
-            port: values.port,
             agents
         }
         entity.config = entity.config || {}
