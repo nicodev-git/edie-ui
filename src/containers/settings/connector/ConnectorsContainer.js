@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import Connectors from 'components/sidebar/setting/connector/Connectors'
+import Connectors from 'components/sidebar/settings/connector/Connectors'
 import {
     fetchCollectors,
     showCollectorModal,
@@ -10,8 +10,6 @@ import {
     updateCollector,
     removeCollector,
     showUserConnectorModal,
-
-    showPreloader,
 
     showAgentModal
 } from 'actions'
@@ -43,8 +41,6 @@ export default connect(
         updateCollector,
         removeCollector,
         showUserConnectorModal,
-
-        showPreloader,
 
         showAgentModal
     }

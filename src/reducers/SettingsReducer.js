@@ -167,7 +167,8 @@ import {
   UPDATE_WF_PARAM,
   REMOVE_WF_PARAM,
 
-  FETCH_BRAIN_CELLS
+  FETCH_BRAIN_CELLS,
+  SHOW_USER_CONNECTOR_MODAL
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys} from 'lodash'
@@ -713,7 +714,8 @@ export default function (state = initialState, action) {
 
     case FETCH_BRAIN_CELLS:
       return { ...state, brainCells: action.data }
-
+    case SHOW_USER_CONNECTOR_MODAL:
+      return { ...state, userConnectorModalOpen: action.visible, editUserConnector: action.userConnector }
     default:
       return state
   }

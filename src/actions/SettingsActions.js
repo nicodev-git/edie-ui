@@ -115,6 +115,8 @@ import {
   // SHOW_GROK_MODAL,
   // SHOW_CELL_PARAM_MODAL,
 
+  SHOW_USER_CONNECTOR_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -974,5 +976,11 @@ export function addBrainCell(entity) {
 export function resetForm(name) {
   return dispatch => {
     dispatch(reset(name))
+  }
+}
+
+export function showUserConnectorModal(visible, userConnector) {
+  return dispatch => {
+    dispatch({type: SHOW_USER_CONNECTOR_MODAL, visible, userConnector})
   }
 }
