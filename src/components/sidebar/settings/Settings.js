@@ -12,6 +12,7 @@ import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
 import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
 import SettingGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
+import SettingConnectorsContainer from 'containers/settings/connector/ConnectorsContainer'
 
 
 class Settings extends React.Component {
