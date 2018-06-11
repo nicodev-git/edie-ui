@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {IconButton, TextField} from '@material-ui/core'
+import {IconButton, TextField, FormControl, InputLabel, Select, MenuItem} from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import MessageIcon from '@material-ui/icons/Message'
 import {Table,
@@ -57,6 +57,7 @@ export default class Audit extends React.Component {
       msgs: [],
 
       txtConnectorId: '',
+      filterApp: 'connector',
 
       startDate: moment('2018-01-01'),
       endDate: moment().endOf('year'),
@@ -117,6 +118,12 @@ export default class Audit extends React.Component {
 
   handleChangePage (e, page) {
     this.fetchAudit(page)
+  }
+
+  onChangeFilerApp (e) {
+    this.setState({
+      filterApp: e.target.value
+    })
   }
 
   ////////////////////////////////////
@@ -278,7 +285,21 @@ export default class Audit extends React.Component {
         <div className="pull-left">
           <TextField value={this.state.txtConnectorId}
                      onChange={this.onChangeConnectorId.bind(this)} label="User Connector Id"
-                     style={{width: 350}}/>
+                     style={{width: 350}}
+                     className="valign-top"/>
+
+          <FormControl
+            style={{minWidth: 160}}
+            value={this.state.filterApp}
+            onChange={this.onChangeFilerApp.bind(this)}
+            className="valign-top"
+          >
+            <InputLabel>App</InputLabel>
+            <Select>
+              <MenuItem value="connector">Connector</MenuItem>
+              <MenuItem value="srflow">Srflow</MenuItem>
+            </Select>
+          </FormControl>
 
           <IconButton onClick={this.onClickSearch.bind(this)} className="hidden">
             <SearchIcon />
