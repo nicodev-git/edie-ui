@@ -30,7 +30,6 @@ import WorkflowEditDiagramContainer from 'containers/wf/WorkflowEditDiagramConta
 import WorkflowEditContainer from 'containers/wf/WorkflowEditContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
-// import AuditContainer from 'containers/audit/AuditContainer'
 
 import {
   closeDevice,
@@ -242,7 +241,6 @@ class MainpageContainer extends Component {
         <Route path="/signout" component={SignoutContainer}/>
         <Route path="/settings" component={Settings}/>
         <Route path="/viewlog" component={LogView}/>
-        {/*<Route path="/audits" component={AuditContainer}/>*/}
 
         <Route path="/device/:deviceId" component={DeviceContainer}/>
       </Main>

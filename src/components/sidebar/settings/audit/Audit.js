@@ -1,62 +1,286 @@
 import React from 'react'
 import moment from 'moment'
+import {IconButton, TextField} from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
+import MessageIcon from '@material-ui/icons/Message'
+import {Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow
+} from '@material-ui/core'
+import 'react-dates/initialize'
+import { DateRangePicker } from 'react-dates'
+import 'react-dates/lib/css/_datepicker.css'
+import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet'
+import DefaultTheme from 'react-dates/lib/theme/DefaultTheme'
+import ReactTooltip from 'react-tooltip'
+import {debounce} from 'lodash'
 
-import InfiniteTable from 'components/common/InfiniteTable'
-
-import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
+import SettingTabs from '../SettingTabs'
+
+import AuditDetailModal from './AuditDetailModal'
+import {channelIcons as icons} from 'shared/Global'
+
+const flexStyle = {
+  overflow: 'auto',
+  height: '100%'
+}
 
 export default class Audit extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
+      selected: '',
+      workflow: null,
+      msgs: [],
+
+      txtConnectorId: '',
+
+      startDate: moment('2018-01-01'),
+      endDate: moment().endOf('year'),
+
+      page: 0,
+      rowsPerPage: 15
     }
 
-    this.cells = [{
-      'displayName': 'Time',
-      'columnName': 'time',
-      'customComponent': p => {
-        return <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
-      }
-    }, {
-      'displayName': 'Action',
-      'columnName': 'action'
-    }, {
-      'displayName': 'User',
-      'columnName': 'fullname'
-    }, {
-      'displayName': 'IP',
-      'columnName': 'ipaddress'
-    }]
+    this.auditColumns = [
+      { id: 'time', label: 'Time', padding: 'none', style: {paddingLeft: 8, width: 150} },
+      { id: 'channel', label: 'Channel', padding: 'none', style: {width: 55}},
+      { id: 'app', label: 'App', padding: 'none', style: {width: 55} },
+      { id: 'action', label: 'Action', padding: 'none' },
+      { id: 'details', label: 'Details', padding: 'none' },
+      { id: 'actions', label: 'Actions', padding: 'none' }
+    ]
+
+    this.buildTooltip = debounce(() => {
+      ReactTooltip.rebuild()
+    }, 500)
+  }
+  componentWillMount () {
+    ThemedStyleSheet.registerTheme(DefaultTheme)
+
+    this.fetchAudit(0)
+  }
+  onClickAuditRow (row) {
+    let msgs = []
+    if (row.userConnectorId) {
+      msgs = this.props.audit.filter(p => p.userConnectorId === row.userConnectorId && p.message)
+    }
+    this.setState({
+      msgs
+    })
   }
 
-  renderContent () {
+  fetchAudit (page) {
+    this.props.findAuditByDate({
+      dateFrom: this.state.startDate.valueOf(),
+      dateTo: this.state.endDate.valueOf(),
+      userConnectorId: this.state.txtConnectorId,
+      page: page === null ? this.props.auditPage.page : page,
+      size: this.props.auditPage.size
+    })
+  }
+
+  ////////////////////////////////////
+
+  onChangeConnectorId (e) {
+    this.setState({
+      txtConnectorId: e.target.value
+    })
+  }
+
+  onClickSearch () {
+
+  }
+
+  handleChangePage (e, page) {
+    this.fetchAudit(page)
+  }
+
+  ////////////////////////////////////
+
+  onFocusChange(focusedInput) {
+    this.setState({ focusedInput })
+  }
+
+  onChangeDates({ startDate, endDate }) {
+    this.setState({ startDate, endDate }, () => {
+      this.fetchAudit()
+    })
+  }
+
+  ////////////////////////////////////
+
+  onClickDetail (message) {
+    this.props.showAuditDetailModal(true, message)
+  }
+
+  onClickWf (wfId) {
+    this.props.history.push(`/audits/workflow/${wfId}`)
+  }
+
+  ////////////////////////////////////
+  renderDatePresets() {
     return (
-      <InfiniteTable
-        url="/useraudit"
-        cells={this.cells}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        selectable
-        params={{
-          sort: 'time,desc'
-        }}
-      />
+      <div className="padding-md-left">
+        {presets.map(({ text, start, end }) => {
+          return (
+            <div
+              key={text}
+              className="datepicker-preset"
+              onClick={() => this.setState({ startDate: start, endDate: end })}
+            >
+              {text}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  renderAudit () {
+    const {auditPage} = this.props
+
+    this.buildTooltip()
+
+    return (
+      <div>
+        <Table style={{margin: 'auto', width: 'initial'}} className="bg-white">
+          <TableHead>
+            <TableRow style={{height: 30}}>
+              {this.auditColumns.map(column => {
+                return (
+                  <TableCell key={column.id} padding={column.padding} style={column.style}>
+                    {column.label}
+                  </TableCell>
+                );
+              }, this)}
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {auditPage.page.map(p => {
+              const component = p.component || 'srflow'
+              let iconSize = 16
+              if (component === 'connector' && p.action === 'Incoming') iconSize = 32
+              return (
+                <TableRow key={p.id} style={{height: 30}}>
+                  <TableCell
+                    className="nowrap"
+                    padding={this.auditColumns[0].padding}
+                    style={this.auditColumns[0].style}
+                  >
+                    {moment(p.dateCreated).format('YYYY-MM-DD HH:mm:ss')}
+                  </TableCell>
+                  <TableCell
+                    padding={this.auditColumns[1].padding}
+                    style={this.auditColumns[1].style}
+                  >
+                    {icons[p.channel] ? <img src={`/images/${icons[p.channel]}`} alt="" width={iconSize}/> : p.channel}
+                  </TableCell>
+                  <TableCell
+                    padding={this.auditColumns[2].padding}
+                    style={this.auditColumns[2].style}
+                  >
+                    {icons[component] ? <img src={`/images/${icons[component]}`} alt="" width="32"/> : component}
+                  </TableCell>
+                  <TableCell padding={this.auditColumns[3].padding}>{p.action}</TableCell>
+                  <TableCell padding={this.auditColumns[4].padding}>
+                    <span className="valign-middle">{p.description}</span>
+                    <img className="link valign-middle margin-sm-left" data-tip={p.userConnectorId} alt="" src="/images/userid.png" width="16"/>
+                  </TableCell>
+                  <TableCell className="nowrap" padding={this.auditColumns[5].padding}>
+                    {p.message && <MessageIcon className="link valign-middle" onClick={this.onClickDetail.bind(this, p.message)}/>}
+                    {p.action === 'Running Requested Workflows' && p.messageUniqueId &&
+                    <img className="link valign-middle" onClick={this.onClickWf.bind(this, p.messageUniqueId)} width="32" src="/images/wf.png" alt=""/>
+                    }
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                colSpan={3}
+                count={auditPage.totalElements}
+                rowsPerPage={auditPage.size}
+                page={auditPage.number}
+                onChangePage={this.handleChangePage.bind(this)}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </div>
+    )
+  }
+
+  renderWorkflows () {
+    return (
+      <div className="flex-1"style={flexStyle}>
+        {this.renderAudit()}
+      </div>
+    )
+  }
+
+  renderDetailModal () {
+    if (!this.props.auditDetailModalOpen) return null
+    return (
+      <AuditDetailModal {...this.props}/>
+    )
+  }
+
+  renderToolbar () {
+    return (
+      <div>
+        <div className="pull-left margin-md-right">
+          <DateRangePicker
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onDatesChange={this.onChangeDates.bind(this)}
+            onFocusChange={this.onFocusChange.bind(this)}
+            focusedInput={this.state.focusedInput}
+            startDateId="startDateId"
+            endDateId="endDateId"
+            renderCalendarInfo={this.renderDatePresets.bind(this)}
+
+            enableOutsideDays={false}
+            isDayBlocked={() => false}
+            isOutsideRange={() => false}
+            isDayHighlighted={() => false}
+            keepOpenOnDateSelect={false}
+            readOnly
+          />
+        </div>
+
+        <div className="pull-left">
+          <TextField value={this.state.txtConnectorId}
+                     onChange={this.onChangeConnectorId.bind(this)} label="User Connector Id"
+                     style={{width: 350}}/>
+
+          <IconButton onClick={this.onClickSearch.bind(this)} className="hidden">
+            <SearchIcon />
+          </IconButton>
+        </div>
+      </div>
     )
   }
   render () {
     return (
       <TabPage>
         <TabPageHeader title="Audit">
-          <div className="text-center margin-md-top">
-            <div style={{position: 'absolute', right: '25px'}}/>
-          </div>
+          {this.renderToolbar()}
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location}>
-          {this.renderContent()}
+          {this.renderWorkflows()}
+          {this.renderDetailModal()}
         </TabPageBody>
       </TabPage>
     )

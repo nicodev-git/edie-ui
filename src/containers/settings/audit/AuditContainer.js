@@ -1,14 +1,14 @@
 import React from 'react'
-import Audit from 'components/sidebar/settings/audit/Audit'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 
+import Audit from 'components/sidebar/audit/Audit'
 import {
-  fetchEnvVars,
-  addEnvVar,
-  updateEnvVar,
+  findAuditByDate,
+  fetchProgressWorkflows,
+  fetchFinishedWfs,
 
-  updateUserOption
+  showAuditDetailModal
 } from 'actions'
 
 class AuditContainer extends React.Component {
@@ -20,16 +20,19 @@ class AuditContainer extends React.Component {
 }
 export default connect(
   state => ({
-    envVars: state.settings.envVars,
-    userInfo: state.dashboard.userInfo
-  }),
-  dispatch => ({
-    ...bindActionCreators({
-      fetchEnvVars,
-      addEnvVar,
-      updateEnvVar,
+    audit: state.audit.audit,
+    auditPage: state.audit.auditPage,
+    progressWfs: state.workflow.progressWfs,
+    finishedWfs: state.workflow.finishedWfs,
+    auditModalOpen: state.audit.auditModalOpen,
 
-      updateUserOption
-    }, dispatch)
-  })
-)(AuditContainer)
+    auditDetailModalOpen: state.audit.auditDetailModalOpen,
+    auditDetail: state.audit.auditDetail
+  }), {
+    findAuditByDate,
+    fetchProgressWorkflows,
+    fetchFinishedWfs,
+
+    showAuditDetailModal
+  }
+)(withRouter(AuditContainer))
