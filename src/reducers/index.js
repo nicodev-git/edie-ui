@@ -11,6 +11,8 @@ import AttackersReducer from './AttackersReducer'
 import TagReducer from './TagReducer'
 import GaugeReducer from './GaugeReducer'
 import WorkflowReducer from './WorkflowReducer'
+import AuditReducer from './AuditReducer'
+
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -24,7 +26,8 @@ const rootReducer = combineReducers({
   attackers: AttackersReducer,
   tag: TagReducer,
   gauge: GaugeReducer,
-  workflow: WorkflowReducer
+  workflow: WorkflowReducer,
+  audit: AuditReducer
 })
 
 export default rootReducer

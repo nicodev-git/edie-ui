@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import Audit from 'components/sidebar/audit/Audit'
+import Audit from 'components/sidebar/settings/audit/Audit'
 import {
   findAuditByDate,
   fetchProgressWorkflows,

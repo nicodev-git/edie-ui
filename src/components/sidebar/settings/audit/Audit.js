@@ -32,6 +32,22 @@ const flexStyle = {
   height: '100%'
 }
 
+const presets = [
+  {text: 'Ever', start: moment('2000-01-01'), end: moment().endOf('year')},
+  {text: moment().add('-1', 'years').format('YYYY'), start: moment().add('-1', 'years').startOf('year'), end: moment().add('-1', 'years').endOf('year')},
+  {text: moment().startOf('years').format('YYYY'), start: moment().startOf('year'), end: moment().endOf('year')},
+  {text: moment().add('-1', 'months').format('MMMM'), start: moment().add(-1, 'months').startOf('month'), end: moment().add(-1, 'months').endOf('month')},
+  {text: moment().startOf('month').format('MMMM'), start: moment().startOf('month'), end: moment().endOf('month')},
+  {text: 'Last 30 Days', start: moment().add(-30, 'days').startOf('day'), end: moment().endOf('day')},
+  {text: 'Last 7 Days', start: moment().add(-6, 'days').startOf('day'), end: moment().endOf('day')},
+  {text: 'Last 3 Months', start: moment().add(-3, 'months').startOf('day'), end: moment().endOf('day')},
+  {text: 'Last 6 Months', start: moment().add(-6, 'months').startOf('day'), end: moment().endOf('day')},
+  {text: 'Last 1 Year', start: moment().add(-12, 'months').startOf('day'), end: moment().endOf('day')},
+  {text: 'Since Yesterday', start: moment().add(-1, 'days').startOf('day'), end: moment().endOf('day')},
+  {text: 'Yesterday', start: moment().add(-1, 'days').startOf('day'), end: moment().add(-1, 'days').endOf('day')},
+  {text: 'Today', start: moment().startOf('day'), end: moment().endOf('day')}
+]
+
 export default class Audit extends React.Component {
   constructor(props) {
     super(props)
