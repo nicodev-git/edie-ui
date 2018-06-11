@@ -6,9 +6,9 @@ import MessageIcon from '@material-ui/icons/Message'
 import ReactTooltip from 'react-tooltip'
 import {debounce} from 'lodash'
 
-import TabPage from 'components/shared/tab_page'
-import TabPageBody from 'components/shared/tab_page_body'
-import TabPageHeader from 'components/shared/tab_page_header'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import SimulationModal from './SimulationModal'
 import AuditTabs from './AuditTabs'

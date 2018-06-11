@@ -19,9 +19,9 @@ import DefaultTheme from 'react-dates/lib/theme/DefaultTheme'
 import ReactTooltip from 'react-tooltip'
 import {debounce} from 'lodash'
 
-import TabPage from 'components/shared/tab_page'
-import TabPageBody from 'components/shared/tab_page_body'
-import TabPageHeader from 'components/shared/tab_page_header'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 import AuditTabs from './AuditTabs'
 
 import AuditDetailModal from './AuditDetailModal'
