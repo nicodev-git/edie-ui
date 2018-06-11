@@ -726,3 +726,15 @@ export function getKeyValues(obj, keyField = 'key', valueField = 'value') {
     [valueField]: obj[p]
   }))
 }
+
+export const channelIcons = {
+  'RocketChat': 'app-rocketchat.png',
+  'Slack': 'slack.png',
+  'Rest': 'rest.png',
+  'Mail': 'mail.png',
+  'Gitlab': 'gitlab.png',
+
+  'eddie': 'app-eddie.png',
+  'srflow': 'wf.png',
+  'connector': 'connector.png'
+}
