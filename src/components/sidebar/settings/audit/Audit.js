@@ -288,7 +288,10 @@ export default class Audit extends React.Component {
               value={this.state.filterApp}
               onChange={this.onChangeFilerApp.bind(this)}>
               <MenuItem value="connector">Connector</MenuItem>
+              <MenuItem value="eddie">Eddie</MenuItem>
               <MenuItem value="srflow">Srflow</MenuItem>
+              <MenuItem value="aaa">AAA</MenuItem>
+              <MenuItem value="im">IM</MenuItem>
             </Select>
           </FormControl>
 
