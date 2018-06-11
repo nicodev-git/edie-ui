@@ -7,18 +7,13 @@ import {
     SHOW_CONNECTOR_AUDIT_MODAL
 } from './types'
 
-import {isArray} from 'lodash'
-
-import {ROOT_URL, CONNECTOR_URL} from 'shared/global'
-import {fetchProgressWorkflows, fetchFinishedWfs} from './workflow_actions'
-import {getAuthConfig} from './util'
-import {requestFlowApi} from 'shared/ReqUtil'
+import {ROOT_URL} from 'actions/config'
 
 export function fetchAuditByCloned (clonedFlowId) {
     return dispatch => {
         dispatch({type: FETCH_AUDIT, data: []})
         if (!clonedFlowId) return
-        axios.get(`${ROOT_URL}/audit/findByCloned?id=${clonedFlowId}`, getAuthConfig()).then(res => {
+        axios.get(`${ROOT_URL}/audit/findByCloned?id=${clonedFlowId}`).then(res => {
             dispatch({type: FETCH_AUDIT, data: res.data})
         })
     }
@@ -26,7 +21,7 @@ export function fetchAuditByCloned (clonedFlowId) {
 
 export function findAuditByDate(params) {
     return dispatch => {
-        axios.get(`${ROOT_URL}/audit/findByDate`, getAuthConfig({params})).then(res => {
+        axios.get(`${ROOT_URL}/audit/findByDate`, {params}).then(res => {
             dispatch({type: FETCH_AUDIT_PAGE, data: {
                 ...res.data.page,
                 page: res.data._embedded.audits

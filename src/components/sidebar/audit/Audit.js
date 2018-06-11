@@ -25,7 +25,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import AuditTabs from './AuditTabs'
 
 import AuditDetailModal from './AuditDetailModal'
-import {channelIcons as icons} from 'shared/global'
+import {channelIcons as icons} from 'shared/Global'
 
 const flexStyle = {
   overflow: 'auto',
