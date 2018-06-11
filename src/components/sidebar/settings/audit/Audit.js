@@ -99,6 +99,7 @@ export default class Audit extends React.Component {
       dateFrom: this.state.startDate.valueOf(),
       dateTo: this.state.endDate.valueOf(),
       userConnectorId: this.state.txtConnectorId,
+      component: this.state.filterApp,
       page: page === null ? this.props.auditPage.page : page,
       size: this.props.auditPage.size
     })
@@ -123,7 +124,7 @@ export default class Audit extends React.Component {
   onChangeFilerApp (e) {
     this.setState({
       filterApp: e.target.value
-    })
+    }, () => this.fetchAudit())
   }
 
   ////////////////////////////////////
@@ -133,9 +134,7 @@ export default class Audit extends React.Component {
   }
 
   onChangeDates({ startDate, endDate }) {
-    this.setState({ startDate, endDate }, () => {
-      this.fetchAudit()
-    })
+    this.setState({ startDate, endDate }, () => this.fetchAudit())
   }
 
   ////////////////////////////////////
@@ -244,14 +243,6 @@ export default class Audit extends React.Component {
     )
   }
 
-  renderWorkflows () {
-    return (
-      <div className="flex-1"style={flexStyle}>
-        {this.renderAudit()}
-      </div>
-    )
-  }
-
   renderDetailModal () {
     if (!this.props.auditDetailModalOpen) return null
     return (
@@ -290,12 +281,12 @@ export default class Audit extends React.Component {
 
           <FormControl
             style={{minWidth: 160}}
-            value={this.state.filterApp}
-            onChange={this.onChangeFilerApp.bind(this)}
-            className="valign-top"
+            className="valign-top margin-md-left"
           >
             <InputLabel>App</InputLabel>
-            <Select>
+            <Select
+              value={this.state.filterApp}
+              onChange={this.onChangeFilerApp.bind(this)}>
               <MenuItem value="connector">Connector</MenuItem>
               <MenuItem value="srflow">Srflow</MenuItem>
             </Select>
@@ -316,7 +307,9 @@ export default class Audit extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location}>
-          {this.renderWorkflows()}
+          <div className="flex-1"style={flexStyle}>
+            {this.renderAudit()}
+          </div>
           {this.renderDetailModal()}
         </TabPageBody>
       </TabPage>
