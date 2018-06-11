@@ -154,10 +154,10 @@ export default class Audit extends React.Component {
             >
               {text}
             </div>
-          );
+          )
         })}
       </div>
-    );
+    )
   }
 
   renderAudit () {
@@ -175,7 +175,7 @@ export default class Audit extends React.Component {
                   <TableCell key={column.id} padding={column.padding} style={column.style}>
                     {column.label}
                   </TableCell>
-                );
+                )
               }, this)}
             </TableRow>
           </TableHead>
@@ -183,7 +183,7 @@ export default class Audit extends React.Component {
           <TableBody>
             {auditPage.page.map(p => {
               const component = p.component || 'srflow'
-              let iconSize = 16
+              let iconSize = 32
               if (component === 'connector' && p.action === 'Incoming') iconSize = 32
               return (
                 <TableRow key={p.id} style={{height: 30}}>
@@ -218,7 +218,7 @@ export default class Audit extends React.Component {
                     }
                   </TableCell>
                 </TableRow>
-              );
+              )
             })}
           </TableBody>
           <TableFooter>

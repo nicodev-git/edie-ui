@@ -491,3 +491,23 @@ input:-webkit-autofill {
 .Popover-tip {
     fill: #EDEFF1;
 }
+
+.datepicker-preset {
+    display: inline-block;
+    position: relative !important;
+    height: 100% !important;
+    text-align: center !important;
+    background: none !important;
+    border: 2px solid #00a699 !important;
+    color: #00a699 !important;
+    padding: 4px 12px !important;
+    margin-right: 8px !important;
+    margin-bottom: 4px;
+    font: inherit !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
+    overflow: visible !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+}
