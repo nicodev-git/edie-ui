@@ -835,7 +835,7 @@ export const showAgentPreloader = (visible) => {
 export const fetchCollectors = () => {
   return dispatch => {
     axios.get(`${ROOT_URL}/connector/getAll`).then(({data}) => {
-      dispatch({type: FETCH_COLLECTORS, data})
+      if (data) dispatch({type: FETCH_COLLECTORS, data})
     })
   }
 }
