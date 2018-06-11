@@ -67,6 +67,10 @@ class ConnectorModal extends Component {
             window.alert('Please type address')
             return
         }
+        if (!values.mode) {
+            window.alert('Please choose mode')
+            return
+        }
         const entity = {
             ...editCollector,
             ...values,
