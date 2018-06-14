@@ -6,6 +6,7 @@ import {
 } from './types'
 
 export const apiError = (dispatch, error) => {
+  console.log(error)
   dispatch({
     type: API_ERROR,
     msg: error
