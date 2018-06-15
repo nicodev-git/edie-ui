@@ -81,7 +81,7 @@ export const updateDeviceIncident = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links ? entity._links.self.href : `${ROOT_URL}/incident/${entity.id}`, entity)
+    axios.put(`${ROOT_URL}/incident/${entity.id}`, entity)
       .then(response => updateDeviceIncidentSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }

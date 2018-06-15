@@ -62,7 +62,7 @@ export const updateCredentials = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/credential/${entity.id}`, entity)
       .then(response => updateCredentialsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -82,7 +82,7 @@ export const removeCredentials = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href)
+    axios.delete(`${ROOT_URL}/credential/${entity.id}`)
       .then(() => removeCredentialsSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }

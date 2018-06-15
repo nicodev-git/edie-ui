@@ -372,7 +372,7 @@ const addDeviceWorkflowSuccess = (dispatch, responses, device, cb) => {
   if (!device.workflowids) device.workflowids = []
   responses.forEach(response => device.workflowids.push(response.data.id))
 
-  axios.put(device._links.self.href, device)
+  axios.put(`${ROOT_URL}/device/${device.id}`, device)
     .then(response2 => {
       dispatch({
         type: ADD_DEVICE_WORKFLOW,
@@ -390,7 +390,7 @@ export const updateDeviceWorkflow = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/device/${entity.id}`, entity)
       .then(response => updateDeviceWorkflowSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -406,7 +406,7 @@ const updateDeviceWorkflowSuccess = (dispatch, response) => {
 
 export const removeDeviceWorkflow = (entity, device) => {
   return dispatch => {
-    axios.delete(entity._links.self.href)
+    axios.delete(`${ROOT_URL}/entity/${entity.id}`)
       .then(() => removeDeviceWorkflowSuccess(dispatch, entity, device))
       .catch(error => apiError(dispatch, error))
   }
@@ -417,7 +417,7 @@ const removeDeviceWorkflowSuccess = (dispatch, entity, device) => {
   const index = device.workflowids.indexOf(entity.id)
   device.workflowids.splice(index, 1)
 
-  axios.put(device._links.self.href, device)
+  axios.put(`${ROOT_URL}/device/${device.id}`, device)
     .then(response => {
       dispatch({
         type: REMOVE_DEVICE_WORKFLOW,
@@ -635,7 +635,7 @@ export const updateDeviceTemplate = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/devicetemplate/${entity.id}`, entity)
       .then(response => updateDeviceTemplateSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -654,7 +654,7 @@ export const deleteDeviceTemplate = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href, entity)
+    axios.delete(`${ROOT_URL}/devicetemplate/${entity.id}`, entity)
       .then(() => deleteDeviceTemplateSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
@@ -890,7 +890,7 @@ export const updateGroupDevice = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity).then(response => {
+    axios.put(`${ROOT_URL}/group/${entity.id}`, entity).then(response => {
       dispatch({type: UPDATE_GROUP_DEVICE, data: response.data})
     }).catch(error => apiError(dispatch, error))
   }
@@ -901,7 +901,7 @@ export const removeGroupDevice = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href).then(() => {
+    axios.delete(`${ROOT_URL}/group/${entity.id}`).then(() => {
       dispatch({type: REMOVE_GROUP_DEVICE, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
@@ -924,7 +924,7 @@ export const updateGroupLine = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity).then(response => {
+    axios.put(`${ROOT_URL}/group/${entity.id}`, entity).then(response => {
       dispatch({type: UPDATE_GROUP_LINE, data: response.data})
     }).catch(error => apiError(dispatch, error))
   }
@@ -935,7 +935,7 @@ export const removeGroupLine = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href).then(() => {
+    axios.delete(`${ROOT_URL}/group/${entity.id}`).then(() => {
       dispatch({type: REMOVE_GROUP_LINE, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
@@ -978,7 +978,7 @@ export const removeDeviceGauge = (props, group) => {
 
 const updateMapDevice = (entity, cb) => {
   return dispatch => {
-    axios.put(entity._links.self.href, entity).then(response => {
+    axios.put(`${ROOT_URL}/device/${entity.id}`, entity).then(response => {
       dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
       cb && cb()
     }).catch(error => apiError(dispatch, error))

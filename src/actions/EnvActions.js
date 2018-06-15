@@ -37,7 +37,7 @@ export const updateEnvVar = (entity, cb) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/setting/${entity.id}`, entity)
       .then(response => {
         updateEnvVarSuccess(dispatch, response)
         cb && cb(dispatch, response.data)

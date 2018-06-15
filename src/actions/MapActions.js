@@ -98,7 +98,7 @@ export const updateMap = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/map/${entity.id}`, entity)
       .then(response => updateMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -116,7 +116,7 @@ export const deleteMap = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href)
+    axios.delete(`${ROOT}/map/${entity.id}`)
       .then(() => deleteMapSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
@@ -210,7 +210,7 @@ export const addMapUser = (map, user) => {
     const entity = assign({}, user)
     entity.mapids = concat(entity.mapids || [], map.id)
 
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT}/map/${entity.id}`, entity)
       .then(response => addMapUserSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -231,7 +231,7 @@ export const removeMapUser = (map, user) => {
     const entity = assign({mapids: []}, user)
     entity.mapids = (entity.mapids || []).filter(u => u !== map.id)
 
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT}/map/${entity.id}`, entity)
       .then(() => removeMapUserSuccess(dispatch, user))
       .catch(error => apiError(dispatch, error))
   }
@@ -338,7 +338,7 @@ export const updateMapDevice = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/device/${entity.id}`, entity)
       .then(response => {updateMapDeviceSuccess(dispatch, response)})
       .catch(error => apiError(dispatch, error))
 
@@ -363,7 +363,7 @@ export const deleteMapDevice = (entity) => {
   }
   return (dispatch) => {
     dispatch({type: DELETE_DEVICE_STATE, data: true})
-    axios.delete(entity._links.self.href).then(() => {
+    axios.delete(`${ROOT}/map/${entity.id}`).then(() => {
       deleteMapDeviceSuccess(dispatch, entity)
       dispatch({type: DELETE_DEVICE_STATE, data: false})
     }).catch(error => {

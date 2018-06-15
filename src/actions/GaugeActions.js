@@ -99,7 +99,7 @@ export const addGaugeBoard = (props) => {
 
 export const updateGaugeBoard = (entity) => {
   return dispatch => {
-    axios.put(entity._links.self.href, entity).then(res => {
+    axios.put(`${ROOT_URL}/gaugeboard/${entity.id}`, entity).then(res => {
       dispatch({type: UPDATE_GAUGE_BOARD, data: res.data})
     })
   }
@@ -107,7 +107,7 @@ export const updateGaugeBoard = (entity) => {
 
 export const removeGaugeBoard = (entity) => {
   return dispatch => {
-    axios.delete(entity._links.self.href, entity).then(() => {
+    axios.delete(`${ROOT_URL}/gaugeboard/${entity.id}`, entity).then(() => {
       dispatch({type: REMOVE_GAUGE_BOARD, data: entity})
     })
   }
@@ -125,7 +125,7 @@ export const selectGaugeBoard = (data, url, history, push) => {
 
 export const setDefaultGaugeBoard = (entity) => {
   return dispatch => {
-    axios.put(entity._links.self.href, {
+    axios.put(`${ROOT_URL}/gaugeboard/${entity.id}`, {
       ...entity,
       defaultSetDate: new Date().getTime()
     }).then(res => {
