@@ -62,7 +62,7 @@ export default class GMonitor extends React.Component {
         return
       }
 
-      axios.put(monitorGroup._links.self.href, {
+      axios.put(`${ROOT_URL}/monitorgroup/${monitorGroup.id}`, {
         ...monitorGroup,
         monitorids: gauge.monitorIds
       }).then(res => {

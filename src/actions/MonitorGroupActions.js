@@ -30,7 +30,7 @@ export const addMonitorGroup = (props) => {
 
 export const updateMonitorGroup = (entity) => {
   return dispatch => {
-    axios.put(entity._links.self.href, entity).then(res => {
+    axios.put(`${ROOT_URL}/monitorgroup/${entity.id}`, entity).then(res => {
       dispatch({type: UPDATE_MONITOR_GROUP, data: res.data})
     }).catch(error => apiError(dispatch, error))
   }
@@ -40,7 +40,7 @@ export const updateMonitorGroups = (items) => {
   return dispatch => {
     dispatch({type: UPDATE_MONITOR_GROUPS, data: items})
 
-    const reqs = items.map(entity => axios.put(entity._links.self.href, entity))
+    const reqs = items.map(entity => axios.put(`${ROOT_URL}/monitorgroup/${entity.id}`, entity))
     axios.all(reqs).then(res => {
       dispatch({type: UPDATE_MONITOR_GROUPS, data: res.map(r => r.data)})
     }).catch(error => apiError(dispatch, error))
@@ -49,7 +49,7 @@ export const updateMonitorGroups = (items) => {
 
 export const removeMonitorGroup = (entity) => {
   return dispatch => {
-    axios.delete(entity._links.self.href).then(() => {
+    axios.delete(`${ROOT_URL}/monitorgroup/${entity.id}`).then(() => {
       dispatch({type: REMOVE_MONITOR_GROUP, data: entity})
     }).catch(error => apiError(dispatch, error))
   }

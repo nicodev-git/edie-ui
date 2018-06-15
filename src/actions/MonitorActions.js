@@ -56,7 +56,7 @@ export const updateMonitorTemplate = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/monitortemplate/${entity.id}`, entity)
       .then(response => updateMonitorTemplateSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -75,7 +75,7 @@ export const deleteMonitorTemplate = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href, entity)
+    axios.delete(`${ROOT_URL}/monitortemplate/${entity.id}`, entity)
       .then(() => deleteMonitorTemplateSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
