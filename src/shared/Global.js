@@ -432,10 +432,11 @@ export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
 }
 
 export function getDeviceCollectors (editDevice, collectors) {
-  if (isWindowsDevice(editDevice)) {
-    return collectors.filter(p => p.ostype === 'WINDOWS')
-  }
-  return collectors.filter(p => p.ostype === 'LINUX')
+  // if (isWindowsDevice(editDevice)) {
+  //   return collectors.filter(p => p.ostype === 'WINDOWS')
+  // }
+  // return collectors.filter(p => p.ostype === 'LINUX')
+  return collectors
 }
 
 export function mergeCredentials(device, credentials, deviceGlobalCredentials, deviceCredentials) {
