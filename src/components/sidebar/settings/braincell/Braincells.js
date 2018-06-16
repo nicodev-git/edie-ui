@@ -93,6 +93,7 @@ export default class Braincells extends React.Component {
         return (
             <BrainCellModal
                 {...this.props}
+                type={this.state.type}
                 allTags={this.getTags()}
                 onSave={this.onSave.bind(this)}
                 onClose={this.onCloseModal.bind(this)}

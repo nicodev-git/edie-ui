@@ -57,9 +57,7 @@ export default class BrainCellModalView extends Component {
                 </div>
             )
         } else if (type === 'Function') {
-          return [
-            <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>
-          ]
+          return null
         } else if (valueType === 'WORKFLOW') {
             return (
                 <Field name="value" component={FormSelect} floatingLabel="Value" className="margin-md-right valign-top"
@@ -145,10 +143,18 @@ export default class BrainCellModalView extends Component {
         if (type !== 'CommandPattern' && type !== 'Function') return null
         return (
             <CardPanel title="Category">
-                <Field name="runOn" component={FormSelect} floatingLabel="App" className="margin-md-right valign-top"
-                       options={runOnOptions}/>
-                <Field name="functionCategory" component={FormSelect} floatingLabel="Category" className="margin-md-right valign-top" options={categories}/>
-                <Field name="functionSubcategory" component={FormSelect} floatingLabel="Subcategory" className="margin-md-right valign-top" options={subcategories}/>
+                <div>
+                  <Field name="runOn" component={FormSelect} floatingLabel="App" className="margin-md-right valign-top"
+                         options={runOnOptions}/>
+                </div>
+                <div className="margin-md-top">
+                  <Field name="functionCategory" component={FormSelect} floatingLabel="Category" className="margin-md-right valign-top" options={categories}/>
+                  <Field name="functionSubcategory" component={FormSelect} floatingLabel="Subcategory" className="margin-md-right valign-top" options={subcategories}/>
+
+                  {type === 'Function' ? (
+                    <Field name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>
+                  ) : null}
+                </div>
             </CardPanel>
         )
     }
@@ -329,8 +335,8 @@ export default class BrainCellModalView extends Component {
                 <form onSubmit={onSubmit}>
                     <CardPanel title="BrainCell">
                         <div>
-                            <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right valign-top"/>
-                            <Field name="type" component={FormSelect} floatingLabel="Type" className="margin-md-right valign-top"
+                            <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right valign-top" fullWidth/>
+                            <Field name="type" component={FormSelect} floatingLabel="Type" className="margin-md-right valign-top hidden"
                                    options={brainCellTypes}/>
                             <Field name="description" component={FormInput} floatingLabel="Description"
                                    className="margin-md-right valign-top" fullWidth/>

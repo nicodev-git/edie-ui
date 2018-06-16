@@ -341,7 +341,9 @@ class BrainCellModal extends React.Component {
 }
 export default connect(
     (state, props) => ({
-        initialValues: state.settings.editBrainCell,
+        initialValues: state.settings.editBrainCell || {
+            type: props.type
+        },
         allValues: getFormValues('brainCellForm')(state)
     })
 )(reduxForm({form: 'brainCellForm'})(BrainCellModal))
