@@ -58,8 +58,6 @@ export default class BrainCellModalView extends Component {
             )
         } else if (type === 'Function') {
           return [
-            <Field key="6" name="runOn" component={FormSelect} floatingLabel="App" className="margin-md-right valign-top"
-                   options={runOnOptions}/>,
             <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>
           ]
         } else if (valueType === 'WORKFLOW') {
@@ -147,6 +145,8 @@ export default class BrainCellModalView extends Component {
         if (type !== 'CommandPattern' && type !== 'Function') return null
         return (
             <CardPanel title="Category">
+                <Field name="runOn" component={FormSelect} floatingLabel="App" className="margin-md-right valign-top"
+                       options={runOnOptions}/>
                 <Field name="functionCategory" component={FormSelect} floatingLabel="Category" className="margin-md-right valign-top" options={categories}/>
                 <Field name="functionSubcategory" component={FormSelect} floatingLabel="Subcategory" className="margin-md-right valign-top" options={subcategories}/>
             </CardPanel>
@@ -155,7 +155,7 @@ export default class BrainCellModalView extends Component {
     renderKey () {
         const { allValues } = this.props
         const { type }  = allValues || {}
-        if (type === 'Tag' || type === 'Incident') return null
+        if (type === 'Tag' || type === 'Incident' || type === 'Function') return null
         const label = type === 'Command' ? 'Description' : 'Key'
         return (
             <Field name="key" component={FormInput} floatingLabel={label} className="margin-md-right valign-top"
@@ -186,8 +186,9 @@ export default class BrainCellModalView extends Component {
 
     renderScript () {
         const { allValues, onClickScript } = this.props
-        const { type }  = allValues || {}
+        const { type, runOn }  = allValues || {}
         if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
+        if (runOn !== 'device') return null
         return (
             <CardPanel title="Script">
                 <Field name="params2.script" component={FormCheckbox} label="Script"/>
