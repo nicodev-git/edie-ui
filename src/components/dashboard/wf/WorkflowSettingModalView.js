@@ -9,7 +9,7 @@ export default class WorkflowNameModalView extends React.Component {
             onClickClose, onSubmit
         } = this.props
         return (
-            <Modal title="Setting" onClose={onClickClose}>
+            <Modal title="Setting" onRequestClose={onClickClose}>
                 <form onSubmit={onSubmit}>
                     <CardPanel title="Setting">
                         <Field name="sendToChat" component={FormCheckbox} label="Send Slack"/>
