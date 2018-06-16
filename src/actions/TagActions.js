@@ -45,7 +45,7 @@ export function addTag (props) {
 
 export function updateTag (entity) {
   return dispatch => {
-    axios.put(entity._links.self.href, entity).then(({data}) => {
+    axios.put(`${ROOT_URL}/tag/${entity.id}`, entity).then(({data}) => {
       dispatch({type: UPDATE_TAG, data})
       dispatch(showTagModal(false))
     }).catch(error => {
@@ -56,7 +56,7 @@ export function updateTag (entity) {
 
 export function removeTag (entity) {
   return (dispatch) => {
-    axios.delete(entity._links.self.href).then(() => {
+    axios.delete(`${ROOT_URL}/tag/${entity.id}`).then(() => {
       dispatch({type: REMOVE_TAG, data: entity})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})

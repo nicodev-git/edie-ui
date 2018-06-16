@@ -187,7 +187,7 @@ export const updateSettingMap = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/map/${entity.id}`, entity)
       .then(response => updateSettingMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -206,7 +206,7 @@ export const deleteSettingMap = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href)
+    axios.delete(`${ROOT_URL}/map/${entity.id}`)
       .then(() => deleteSettingMapSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
@@ -407,7 +407,7 @@ export const updateParserType = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/parsertype/${entity.id}`, entity)
       .then(response => updateParserTypeSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -426,7 +426,7 @@ export const removeParserType = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href)
+    axios.delete(`${ROOT_URL}/parsertype/${entity.id}`)
       .then(() => removeParserTypeSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
@@ -785,7 +785,7 @@ export const addCredType = (props) => {
 
 export const updateCredType = (entity) => {
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity).then(({data}) => {
+    axios.put(`${ROOT_URL}/credentialtype/${entity.id}`, entity).then(({data}) => {
       dispatch({type: UPDATE_CRED_TYPE, data})
       dispatch(showCredTypeModal(false))
     }).catch(error => apiError(dispatch, error))
@@ -794,7 +794,7 @@ export const updateCredType = (entity) => {
 
 export const removeCredType = (entity) => {
   return (dispatch) => {
-    axios.delete(entity._links.self.href).then(() => {
+    axios.delete(`${ROOT_URL}/credentialtype/${entity.id}`).then(() => {
       dispatch({type: REMOVE_CRED_TYPE, entity})
     }).catch(error => apiError(dispatch, error))
   }
