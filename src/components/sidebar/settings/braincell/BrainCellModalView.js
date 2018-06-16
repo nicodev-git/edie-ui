@@ -194,7 +194,7 @@ export default class BrainCellModalView extends Component {
         const { allValues, onClickScript } = this.props
         const { type, runOn }  = allValues || {}
         if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
-        // if (runOn !== 'device') return null
+        if (runOn !== 'device') return null
         return (
             <CardPanel title="Script">
                 <Field name="params2.script" component={FormCheckbox} label="Script"/>
