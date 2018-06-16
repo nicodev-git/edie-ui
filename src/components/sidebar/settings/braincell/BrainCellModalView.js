@@ -33,6 +33,12 @@ const runOnOptions = [{
     label: 'Srflow', value: 'srflow'
 }, {
     label: 'IM', value: 'im'
+}, {
+    label: 'AAA', value: 'aaa'
+}, {
+    label: 'Eddie', value: 'eddie'
+}, {
+  label: 'Device', value: 'device'
 }]
 
 export default class BrainCellModalView extends Component {
