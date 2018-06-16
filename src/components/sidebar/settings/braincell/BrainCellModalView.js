@@ -56,6 +56,12 @@ export default class BrainCellModalView extends Component {
                     <Field name="blockIP" component={FormCheckbox} label="BlockIP" className="margin-sm-top"/>
                 </div>
             )
+        } else if (type === 'Function') {
+          return [
+            <Field key="6" name="runOn" component={FormSelect} floatingLabel="App" className="margin-md-right valign-top"
+                   options={runOnOptions}/>,
+            <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>
+          ]
         } else if (valueType === 'WORKFLOW') {
             return (
                 <Field name="value" component={FormSelect} floatingLabel="Value" className="margin-md-right valign-top"
@@ -121,7 +127,7 @@ export default class BrainCellModalView extends Component {
         const { allValues } = this.props
         const { type }  = allValues || {}
 
-        if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
+        if (type === 'Classification' || type === 'Tag' || type === 'Incident' || type === 'Function') return null
 
         const index = findIndex(brainCellTypes, {value: type})
         let valueTypes = []
@@ -138,7 +144,7 @@ export default class BrainCellModalView extends Component {
     renderCategory () {
         const { allValues, categories, subcategories } = this.props
         const { type }  = allValues || {}
-        if (type !== 'CommandPattern') return null
+        if (type !== 'CommandPattern' && type !== 'Function') return null
         return (
             <CardPanel title="Category">
                 <Field name="functionCategory" component={FormSelect} floatingLabel="Category" className="margin-md-right valign-top" options={categories}/>
