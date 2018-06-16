@@ -85,11 +85,11 @@ class Workflows extends React.Component {
     ////////////////////////////////////////////////////////////////
 
     onClickSettings () {
-        this.props.fetchWfSetting(this.props.userInfo.customerId, true)
+        this.props.fetchWfSetting(this.props.userInfo.customerId || this.props.userInfo.id, true)
     }
 
     onSaveSetting (entity) {
-        entity.id = this.props.userInfo.customerId
+        entity.id = this.props.userInfo.customerId || this.props.userInfo.id
         this.props.saveWfSetting(entity)
     }
 
