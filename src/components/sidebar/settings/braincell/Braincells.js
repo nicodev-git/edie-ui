@@ -123,26 +123,30 @@ export default class Braincells extends React.Component {
         }
         if (subgroup !== '[All]') {
             items = items.filter(p => p.functionSubcategory === subgroup)
-        }
+                        }
 
-        this.buildTooltip()
+                        this.buildTooltip()
 
-        return (
-            <div className="flex-1">
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>UUID</td>
-                            <td>Name</td>
-                            <td>Action</td>
-                            <td>Key</td>
-                            <td></td>
-                        </tr>
+                        return (
+                        <div className="flex-1">
+                          <table className="table table-hover">
+                            <thead>
+                            <tr>
+                              <td>UUID</td>
+                              <td>Category</td>
+                              <td>Subcategory</td>
+                              <td>Name</td>
+                              <td>Action</td>
+                              <td>Key</td>
+                              <td></td>
+                            </tr>
                     </thead>
                     <tbody>
                     {items.map(p =>
                     <tr key={p.id} className={p.id === selected ? 'selected' : ''} onClick={() => this.setState({selected: p.id})}>
                         <td>{p.uuid}</td>
+                        <td>{p.functionCategory}</td>
+                        <td>{p.functionSubcategory}</td>
                         <td>
                             <label data-tip={`${p.functionCategory}/${p.functionSubcategory}`}>{p.name}</label>
                         </td>

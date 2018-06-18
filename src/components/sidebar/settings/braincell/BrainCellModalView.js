@@ -64,21 +64,25 @@ export default class BrainCellModalView extends Component {
             )
         } else if (valueType === 'FUNCTION') {
             if (type === 'CommandPattern') {
-              return (
-                <Field name="value" component={FormSelect} floatingLabel="Function" className="margin-md-right valign-top"
-                       options={functions}
-                />
-              )
-                // return [
-                //     <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>,
-                //     <Field key="5" name="externalstatus" component={FormSelect} floatingLabel="Internal/External" className="margin-md-right valign-top"
-                //            options={dirOptions}
-                //     />,
-                //     externalstatus === 'external' ? (
-                //         <Field key="6" name="runOn" component={FormSelect} floatingLabel="Run On" className="margin-md-right valign-top"
-                //                options={runOnOptions}/>
-                //     ) : null
-                // ]
+              // return (
+              //   <Field name="value" component={FormSelect} floatingLabel="Function" className="margin-md-right valign-top"
+              //          options={functions}
+              //   />
+              // )
+                return [
+                    <Field key="3" name="value" component={FormSelect} floatingLabel="Function" className="margin-md-right valign-top"
+                             options={functions}
+                      />,
+                  /*
+                    <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>,
+                    <Field key="5" name="externalstatus" component={FormSelect} floatingLabel="Internal/External" className="margin-md-right valign-top"
+                           options={dirOptions}
+                    />,
+                    externalstatus === 'external' ? (
+                        <Field key="6" name="runOn" component={FormSelect} floatingLabel="Run On" className="margin-md-right valign-top"
+                               options={runOnOptions}/>
+                    ) : null*/
+                ]
             }
         }
 
