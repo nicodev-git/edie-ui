@@ -57,6 +57,10 @@ class BrainCellModal extends React.Component {
             label: p.name, value: p.name
         }))
     }
+    getFunctions () {
+        const {brainCells} = this.props
+        return brainCells.filter(p => p.type === 'Function').map(p => ({label: p.name, value: p.name}))
+    }
     onSubmit (values) {
         const {onSave, editBrainCell} = this.props
         const {params, lines, params2Fields, tags} = this.state
@@ -314,6 +318,7 @@ class BrainCellModal extends React.Component {
 
                 categories={this.getCategories()}
                 subcategories={this.getSubcategories()}
+                functions={this.getFunctions()}
 
                 onAddParam={this.onAddParam.bind(this)}
                 onDeleteParam={this.onDeleteParam.bind(this)}

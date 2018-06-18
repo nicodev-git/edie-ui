@@ -43,7 +43,7 @@ const runOnOptions = [{
 
 export default class BrainCellModalView extends Component {
     renderValue () {
-        const { allValues, workflows } = this.props
+        const { allValues, workflows, functions } = this.props
         const { type, valueType, externalstatus }  = allValues || {}
         if (type === 'Grok' || type === 'Classification' || type === 'Tag') return null
 
@@ -56,12 +56,6 @@ export default class BrainCellModalView extends Component {
                     <Field name="blockIP" component={FormCheckbox} label="BlockIP" className="margin-sm-top"/>
                 </div>
             )
-        } else if (type === 'Function') {
-          return (
-            <Field name="value" component={FormSelect} floatingLabel="Value" className="margin-md-right valign-top"
-                   options={[]}
-            />
-          )
         } else if (valueType === 'WORKFLOW') {
             return (
                 <Field name="value" component={FormSelect} floatingLabel="Value" className="margin-md-right valign-top"
@@ -70,16 +64,21 @@ export default class BrainCellModalView extends Component {
             )
         } else if (valueType === 'FUNCTION') {
             if (type === 'CommandPattern') {
-                return [
-                    <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>,
-                    <Field key="5" name="externalstatus" component={FormSelect} floatingLabel="Internal/External" className="margin-md-right valign-top"
-                           options={dirOptions}
-                    />,
-                    externalstatus === 'external' ? (
-                        <Field key="6" name="runOn" component={FormSelect} floatingLabel="Run On" className="margin-md-right valign-top"
-                               options={runOnOptions}/>
-                    ) : null
-                ]
+              return (
+                <Field name="value" component={FormSelect} floatingLabel="Function" className="margin-md-right valign-top"
+                       options={functions}
+                />
+              )
+                // return [
+                //     <Field key="4" name="functionMethod" component={FormInput} floatingLabel="Method" className="margin-md-right valign-top"/>,
+                //     <Field key="5" name="externalstatus" component={FormSelect} floatingLabel="Internal/External" className="margin-md-right valign-top"
+                //            options={dirOptions}
+                //     />,
+                //     externalstatus === 'external' ? (
+                //         <Field key="6" name="runOn" component={FormSelect} floatingLabel="Run On" className="margin-md-right valign-top"
+                //                options={runOnOptions}/>
+                //     ) : null
+                // ]
             }
         }
 
@@ -196,9 +195,9 @@ export default class BrainCellModalView extends Component {
 
     renderScript () {
         const { allValues, onClickScript } = this.props
-        const { type }  = allValues || {}
+        const { type, runOn }  = allValues || {}
         if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
-        // if (runOn !== 'device') return null
+        if (runOn !== 'device') return null
         return (
             <CardPanel title="Script">
                 <Field name="params2.script" component={FormCheckbox} label="Script"/>
