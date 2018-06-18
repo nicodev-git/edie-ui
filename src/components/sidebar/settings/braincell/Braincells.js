@@ -20,7 +20,8 @@ export default class Braincells extends React.Component {
         this.state = {
             type: 'CommandPattern',
             group: '[All]',
-            subgroup: '[All]'
+            subgroup: '[All]',
+            selected: ''
         }
 
         this.buildTooltip = debounce(() => {
@@ -112,7 +113,7 @@ export default class Braincells extends React.Component {
     }
 
     renderContent () {
-        const {type, group, subgroup} = this.state
+        const {type, group, subgroup, selected} = this.state
         let items = this.props.brainCells
         if (type !== '[All]') {
             items = items.filter(p => p.type === type)
@@ -140,7 +141,7 @@ export default class Braincells extends React.Component {
                     </thead>
                     <tbody>
                     {items.map(p =>
-                    <tr key={p.id}>
+                    <tr key={p.id} className={p.id === selected ? 'selected' : ''} onClick={() => this.setState({selected: p.id})}>
                         <td>{p.uuid}</td>
                         <td>
                             <label data-tip={`${p.functionCategory}/${p.functionSubcategory}`}>{p.name}</label>
