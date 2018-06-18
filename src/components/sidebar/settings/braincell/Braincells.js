@@ -55,7 +55,9 @@ export default class Braincells extends React.Component {
 
     onChangeType (e) {
         this.setState({
-            type: e.target.value
+            type: e.target.value,
+            group: '[All]',
+            subgroup: '[All]'
         })
     }
 
