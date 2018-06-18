@@ -478,7 +478,6 @@ export function getAgentStatusMessage (code) {
   }
   return msg
 }
-
 export function isGaugeDeviceUp (device, gauge, lastUpdate) {
   let time = lastUpdate
   if (!lastUpdate) {
