@@ -164,7 +164,7 @@ export default class Braincells extends React.Component {
         )
     }
     renderGroupCombo() {
-        if (this.state.type !== 'CommandPattern') return null
+        if (this.state.type !== 'Function') return null
         const {brainCells} = this.props
         return (
             <Select value={this.state.group} onChange={this.onChangeGroup.bind(this)} className="margin-md-left">
@@ -177,7 +177,7 @@ export default class Braincells extends React.Component {
     }
 
     renderSubGroupCombo() {
-        if (this.state.type !== 'CommandPattern') return null
+        if (this.state.type !== 'Function') return null
         const {group} = this.state
         const subcategories = this.getSubcategories(group)
 
