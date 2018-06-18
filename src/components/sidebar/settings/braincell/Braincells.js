@@ -58,6 +58,7 @@ export default class Braincells extends React.Component {
             type: e.target.value
         })
     }
+
     onChangeGroup (e) {
         this.setState({
             group: e.target.value,
