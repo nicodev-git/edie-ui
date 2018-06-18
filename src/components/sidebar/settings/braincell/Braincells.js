@@ -105,7 +105,7 @@ export default class Braincells extends React.Component {
     renderValueType (p) {
         if (p.type === 'Grok') return ''
         switch (p.valueType) {
-            case 'FUNCTION': return `${p.functionMethod}(Function)`
+            case 'FUNCTION': return `${p.value}(Function)`
             case 'WORKFLOW': return `${p.value}(Workflow)`
             case 'TEXTRESPONSE': return `${p.value}(TextResponse)`
             default: return p.value
