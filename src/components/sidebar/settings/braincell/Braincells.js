@@ -86,7 +86,6 @@ export default class Braincells extends React.Component {
         const {brainCells} = this.props
         return brainCells.filter(p => p.type === 'Tag')
     }
-
     //////////////////////////////////////////////////////////////////
 
     renderBrainCellModal () {
