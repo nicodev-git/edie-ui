@@ -699,18 +699,18 @@ export const mappingFieldOptions = 'message ip port user description hostname [O
 }))
 
 export const brainCellTypes = [{
+  label: 'Classification', value: 'Classification', valueTypes: ['TEXT']
+}, {
   label: 'CommandPattern', value: 'CommandPattern',
   valueTypes: ['WORKFLOW', 'COMMAND', 'FUNCTION', 'TEXTRESPONSE']
 }, {
-  label: 'Regex', value: 'Regex', valueTypes: ['TEXT']
+  label: 'Function', value: 'Function', valueTypes: ['FUNCTION']
 }, {
   label: 'Grok', value: 'Grok', valueTypes: ['TEXT']
 }, {
-  label: 'Classification', value: 'Classification', valueTypes: ['TEXT']
+  label: 'Regex', value: 'Regex', valueTypes: ['TEXT']
 }, {
   label: 'Tag', value: 'Tag', valueTypes: ['TEXT']
-}, {
-  label: 'Function', value: 'Function', valueTypes: ['FUNCTION']
 }]
 
 export const brainCellValueTypes = [{
