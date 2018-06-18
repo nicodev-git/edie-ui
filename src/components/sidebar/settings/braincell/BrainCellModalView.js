@@ -147,7 +147,7 @@ export default class BrainCellModalView extends Component {
     renderCategory () {
         const { allValues, categories, subcategories } = this.props
         const { type }  = allValues || {}
-        if (type !== 'CommandPattern' && type !== 'Function') return null
+        if (type !== 'Function') return null
         return (
             <CardPanel title="Category">
                 <div>
