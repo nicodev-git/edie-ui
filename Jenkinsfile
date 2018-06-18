@@ -1,6 +1,6 @@
- @Library('sr') _
+@Library('sr') _
 webBuild {
-    name='imui'
-    exposedport='6000'
+    name='eddieui'
+//    exposedport='6000'
     devbranch='2018.1'
 }
