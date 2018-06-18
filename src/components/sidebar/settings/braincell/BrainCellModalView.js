@@ -57,7 +57,11 @@ export default class BrainCellModalView extends Component {
                 </div>
             )
         } else if (type === 'Function') {
-          return null
+          return (
+            <Field name="value" component={FormSelect} floatingLabel="Value" className="margin-md-right valign-top"
+                   options={[]}
+            />
+          )
         } else if (valueType === 'WORKFLOW') {
             return (
                 <Field name="value" component={FormSelect} floatingLabel="Value" className="margin-md-right valign-top"
@@ -192,9 +196,9 @@ export default class BrainCellModalView extends Component {
 
     renderScript () {
         const { allValues, onClickScript } = this.props
-        const { type, runOn }  = allValues || {}
+        const { type }  = allValues || {}
         if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
-        if (runOn !== 'device') return null
+        // if (runOn !== 'device') return null
         return (
             <CardPanel title="Script">
                 <Field name="params2.script" component={FormCheckbox} label="Script"/>
