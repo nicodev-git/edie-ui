@@ -42,7 +42,6 @@ class DeviceTplView extends React.Component {
       this.props.addDeviceTemplate(tpl)
     }
   }
-
   getImageUrl () {
     const {selectedTplImage, deviceTpl} = this.props
     let imgUrl = ''
