@@ -23,11 +23,11 @@ import {
 
 import {brainCellTypes, brainCellValueTypes, severities} from 'shared/Global'
 
-const dirOptions = [{
-    label: 'External', value: 'external'
-}, {
-    label: 'Internal', value: 'internal'
-}]
+// const dirOptions = [{
+//     label: 'External', value: 'external'
+// }, {
+//     label: 'Internal', value: 'internal'
+// }]
 
 const runOnOptions = [{
     label: 'Srflow', value: 'srflow'
@@ -44,7 +44,7 @@ const runOnOptions = [{
 export default class BrainCellModalView extends Component {
     renderValue () {
         const { allValues, workflows, functions } = this.props
-        const { type, valueType, externalstatus }  = allValues || {}
+        const { type, valueType }  = allValues || {}
         if (type === 'Grok' || type === 'Classification' || type === 'Tag') return null
 
         if (type === 'Incident') {
