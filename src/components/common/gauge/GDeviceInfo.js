@@ -58,8 +58,6 @@ export default class GDeviceInfo extends React.Component {
       monitors: 'basic',
       deviceId: this.getDeviceId()
     })
-
-    this.sendHostNameCmd()
   }
 
   onMonitorMessage (msg) {
@@ -75,7 +73,7 @@ export default class GDeviceInfo extends React.Component {
       state.loading = false
 
       if (!this.state.up) {
-        this.sendHostNameCmd()
+        // this.sendHostNameCmd()
       }
 
       this.setState(state)
