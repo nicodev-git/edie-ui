@@ -55,7 +55,7 @@ export default class GIncidents extends React.Component {
 
     const mq = [
       '(fixed:false)',
-      `(deviceid:${this.getDeviceId()})`
+      `((deviceid:${this.getDeviceId()}) OR (agentid:${this.getDeviceId()}))`
     ]
 
     return {
