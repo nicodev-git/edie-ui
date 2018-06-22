@@ -131,19 +131,18 @@ export default class GDeviceInfo extends React.Component {
   renderFrontView () {
     const device = this.getDevice()
     if (!device) return <div />
-
-    const {cpu, memory, disk, os} = this.state
-
     const up = this.state.up
 
     if (up) {
-      const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
+      const basicInfo = this.getBasicMonitorInfo(device)
+      const cpu = basicInfo ? basicInfo.CPU : null
+      const disk = basicInfo ? sumDisks(basicInfo.Disk) : null
+      const memory = basicInfo ? basicInfo.Memory : null
+      const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}` : ''
       const memValue = this.getMemoryInfo(memory)
       const diskValue = disk ? `${disk.UsedSpace}G / ${disk.TotalSpace}G` : ''
 
       const agentVersion = device.agent ? device.agent.version : ''
-
-      const basicInfo = this.getBasicMonitorInfo(device)
 
       const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
       const software = basicInfo ? `Software: ${trimOSName(basicInfo.OS.Name)} ` : ''
