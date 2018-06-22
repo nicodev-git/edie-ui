@@ -7,7 +7,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp, sumDisks} from 'shared/Global'
+import {checkAgentUp, sumDisks, getBasicMonitorInfo} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDeviceBasic extends React.Component {
@@ -136,22 +136,25 @@ export default class GDeviceBasic extends React.Component {
 
     if (!device) return <div />
 
-    const up = this.state.up
+    const up = true//this.state.up
 
     if (up) {
-      const {cpu, memory, disk} = this.state
-      const cpuValue = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
-      const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
+
+      const basicInfo = getBasicMonitorInfo(device)
+
+      const cpuValue = basicInfo ? parseFloat(basicInfo.CPU.Usage.replace('%', '')) : 0
+      const memValue = basicInfo ?  Math.ceil(basicInfo.Memory.UsedSize * 100 / basicInfo.Memory.TotalSize) : 0
+      const disk = basicInfo ? sumDisks(basicInfo.Disk) : null
       const diskValue = disk ? Math.ceil(disk.UsedSpace * 100 / disk.TotalSpace) : 0
 
       const items = [{
-        title1: `${cpuValue}%`,
-        title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
+        title1: `${cpuValue}`,
+        title2: basicInfo ? basicInfo.CPU.Model : '',
         title3: 'CPU Utilization',
         value: cpuValue
       }, {
         title1: `${memValue}%`,
-        title2: memory ? `${(memory.UsedSize / 1024).toFixed(1)}G / ${(memory.TotalSize / 1024).toFixed(1)}G` : '',
+        title2: basicInfo ? `${(basicInfo.Memory.UsedSize / 1024).toFixed(1)}G / ${(basicInfo.Memory.TotalSize / 1024).toFixed(1)}G` : '',
         title3: 'Memory Utilization',
         value: memValue
       }, {
