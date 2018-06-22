@@ -740,3 +740,15 @@ export const channelIcons = {
   'srflow': 'wf.png',
   'connector': 'connector.png'
 }
+
+
+export function getBasicMonitorInfo(device) {
+  const found = (device.monitors || []).filter(p => p.monitortype === 'basic')
+  if (!found.length) return null
+  try {
+    const res = JSON.parse(found[0].checkResult.resultdata)
+    return res
+  } catch(e) {
+  }
+  return null
+}
