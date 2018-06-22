@@ -218,38 +218,7 @@ class InfiniteTable extends React.Component {
   }
 
   renderTable () {
-    // const bodyHeight = this.getBodyHeight()
     const {tableClassName, cells, rowMetadata} = this.props
-
-    // return (
-    //   <Griddle
-    //     key="0"
-    //     id={this.props.id}
-    //     useExternal={false}
-    //     enableSort={false}
-    //
-    //     columns={this.props.cells.map(item => item.columnName)}
-    //     columnMetadata={this.props.cells}
-    //     rowMetadata={rowMetadata}
-    //     rowHeight={this.props.rowHeight}
-    //     bodyHeight={bodyHeight || null}
-    //     showTableHeading={this.props.showTableHeading}
-    //
-    //     results={this.getCurrentData()}
-    //     resultsPerPage={this.getCountPerPage()}
-    //
-    //     tableClassName={`table table-hover ${tableClassName || 'table-panel'}`}
-    //
-    //     useFixedHeader={false}
-    //     noDataMessage={this.props.noDataMessage}
-    //     useGriddleStyles={false}
-    //
-    //     onRowClick={this.onRowClick.bind(this)}
-    //
-    //     onRowDblClick={this.onRowDblClick.bind(this)}
-    //     ref="griddle"
-    //   />
-    // )
 
     return (
       <div key="0" className="griddle">
@@ -282,7 +251,14 @@ class InfiniteTable extends React.Component {
 
                    const tds = cells.map((cell, j) => {
                      const {customComponent, cssClassName, columnName} = cell
-                     let content = columnName ? row[columnName] : ''
+                     let content = ''
+                     if (columnName) {
+                       const columnNameSegments = columnName.split('.')
+                       content = row
+                       columnNameSegments.forEach(seg => {
+                         if (content) content = content[seg]
+                       })
+                     }
                      if (customComponent) {
                        content = customComponent({
                          data: content,
