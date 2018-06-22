@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import {getFormValues} from 'redux-form'
 
 import MonitorWizard from 'components/common/wizard/MonitorWizard'
 
@@ -56,6 +57,7 @@ export default connect(
       ...getRemoveAfter(state.devices.monitorInitialValues),
       ...state.devices.monitorInitialValues
     },
+    allValues: getFormValues('monitorWizardForm')(state),
 
     paramsModalOpen: state.devices.paramsModalOpen,
     paramEditModalOpen: state.devices.paramEditModalOpen,

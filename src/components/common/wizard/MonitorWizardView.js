@@ -26,9 +26,12 @@ const integratedOptions = [{
 
 export default class MonitorWizardView extends React.Component {
   renderBasicMonitor () {
+    const {allValues} = this.props
+    if (!allValues || allValues.monitortype !== 'basic') return
+
     return (
       <CardPanel title="Basic Monitor">
-
+        <BasicMonitorTable />
       </CardPanel>
     )
   }
@@ -116,9 +119,10 @@ export default class MonitorWizardView extends React.Component {
             </CardPanel>
           </div>
 
+          {this.renderBasicMonitor()}
+
           {paramsView}
           {tagsView}
-          {this.renderBasicMonitor()}
 
           <Field name="enabled" component={FormCheckbox} label="Enabled"/>
 

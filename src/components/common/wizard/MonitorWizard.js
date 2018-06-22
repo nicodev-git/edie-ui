@@ -186,13 +186,14 @@ class MonitorWizard extends React.Component {
     )
   }
   render () {
-    const { title, handleSubmit, monitorConfig, selectedDevice, initialValues } = this.props
+    const { title, handleSubmit, monitorConfig, selectedDevice, initialValues, allValues } = this.props
     const header = title || `${monitorConfig ? monitorConfig.name : ''} Monitor`
     const paramEditModal = this.renderParamEditModal()
 
     return (
       <MonitorWizardView
         header={header}
+        allValues={allValues}
         paramEditModal={paramEditModal}
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
