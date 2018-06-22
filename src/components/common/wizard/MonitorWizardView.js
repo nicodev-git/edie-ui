@@ -4,6 +4,7 @@ import {Field} from 'redux-form'
 import {FormControlLabel} from '@material-ui/core'
 
 import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal, FormRadioGroup} from 'components/modal/parts'
+import BasicMonitorTable from 'components/common/wizard/input/BasicMonitorTable'
 
 import {removeAfterDurations, removeAfterDurationUnits} from 'shared/Global'
 
@@ -24,6 +25,13 @@ const integratedOptions = [{
 }]
 
 export default class MonitorWizardView extends React.Component {
+  renderBasicMonitor () {
+    return (
+      <CardPanel title="Basic Monitor">
+
+      </CardPanel>
+    )
+  }
   renderRequiredParams () {
     const {requiredParamKeys} = this.props
     return requiredParamKeys.map(k => {
@@ -110,6 +118,7 @@ export default class MonitorWizardView extends React.Component {
 
           {paramsView}
           {tagsView}
+          {this.renderBasicMonitor()}
 
           <Field name="enabled" component={FormCheckbox} label="Enabled"/>
 

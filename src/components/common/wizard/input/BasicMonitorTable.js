@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormCheckbox } from 'components/modal/parts'
+import { FormCheckbox, FormInput } from 'components/modal/parts'
 
 const monitorTypes = 'cpu disk memory network'.split(' ')
 
@@ -19,7 +19,10 @@ export default class BasicMonitorTable extends React.Component {
           {monitorTypes.map((monitorType, i) =>
             <tr key={i}>
               <td>{monitorType}</td>
-              <td></td>
+              <td>
+                <FormCheckbox name={`params.basicMonitor.${monitorType}.removeEnabled`}/>
+                <FormInput name={`params.basicMonitor.${monitorType}.name`}/>
+              </td>
             </tr>
           )}
           </tbody>
