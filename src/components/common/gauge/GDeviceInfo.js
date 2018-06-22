@@ -142,7 +142,7 @@ export default class GDeviceInfo extends React.Component {
         <div>
           {this.renderRow('Status', up ? 'UP' : 'DOWN')}
           {this.renderRow('IPAddress', device.wanip || device.lanip)}
-          {this.renderRow('DNS Name', hostname)}
+          {this.renderRow('DNS Name', device.hostname)}
           {this.renderRow('System', sysDesc, {height: '4em'})}
 
           {agentVersion && this.renderRow('Agent Version', agentVersion)}
