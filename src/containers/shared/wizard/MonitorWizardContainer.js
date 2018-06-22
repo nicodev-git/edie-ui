@@ -5,7 +5,7 @@ import {getFormValues} from 'redux-form'
 
 import MonitorWizard from 'components/common/wizard/MonitorWizard'
 
-import {isWindowsDevice, getRemoveAfter} from 'shared/Global'
+import {isWindowsDevice, getRemoveAfter, basicMonitorTypes} from 'shared/Global'
 
 import {
   fetchMonitorTemplates,
@@ -43,6 +43,25 @@ const getDefaultCollectorId = (device, collectors) => {
     found = collectors.filter(p => p.ostype === 'LINUX')
   }
   return found.length ? found[0].id : ''
+}
+
+const getDefaultParams = (initialValues) => {
+  const {params} = initialValues
+  if (initialValues.monitortype !== 'basic') return params
+
+  const basicMonitor = {}
+  basicMonitorTypes.forEach(t => {
+    basicMonitor[t] = {
+      removeEnabled: true,
+      duration: 1,
+      durationUnit: 'hours'
+    }
+  })
+
+  return {
+    ...params,
+    basicMonitor
+  }
 }
 
 export default connect(
