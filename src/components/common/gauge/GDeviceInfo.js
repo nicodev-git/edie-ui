@@ -102,6 +102,17 @@ export default class GDeviceInfo extends React.Component {
     return `${memory.UsedSize}M / ${memory.TotalSize}M`
   }
 
+  getBasicMonitorInfo (device) {
+    const found = (device.monitors || []).filter(p => p.monitortype === 'basic')
+    if (!found.length) return null
+    try {
+      const res = JSON.parse(found[0].checkResult.resultdata)
+      return res
+    } catch(e) {
+    }
+    return null
+  }
+
   renderRow (label, text, style) {
     return (
       <div className="row">
@@ -132,8 +143,10 @@ export default class GDeviceInfo extends React.Component {
 
       const agentVersion = device.agent ? device.agent.version : ''
 
+      const basicInfo = this.getBasicMonitorInfo(device)
+
       const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
-      const software = os ? `Software: ${trimOSName(os.Name)} ` : ''
+      const software = basicInfo ? `Software: ${trimOSName(basicInfo.OS.Name)} ` : ''
       const sysDesc = `${hardware}${software}`
 
       return (
