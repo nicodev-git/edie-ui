@@ -48,12 +48,12 @@ const getDefaultCollectorId = (device, collectors) => {
 const getDefaultParams = (initialValues) => {
   const {params} = initialValues
   if (initialValues.monitortype !== 'basic') return params
-
+  if (params.basicMonitor) return params
   const basicMonitor = {}
   basicMonitorTypes.forEach(t => {
     basicMonitor[t] = {
       removeEnabled: true,
-      duration: 1,
+      duration: '1',
       durationUnit: 'hours'
     }
   })
@@ -74,7 +74,8 @@ export default connect(
       ...state.devices.monitorInitialValues.params,
       checkinterval: ((state.devices.monitorInitialValues.params || {}).checkinterval || 0) / 1000,
       ...getRemoveAfter(state.devices.monitorInitialValues),
-      ...state.devices.monitorInitialValues
+      ...state.devices.monitorInitialValues,
+      params: getDefaultParams(state.devices.monitorInitialValues)
     },
     allValues: getFormValues('monitorWizardForm')(state),
 

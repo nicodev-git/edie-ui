@@ -65,9 +65,11 @@ export default class MonitorWizardView extends React.Component {
     const {header, onSubmit, onHide, paramEditModal, tagsView, credPicker, paramsView,
       credentials,
       showAgentType, collectors, agent,
-      isEdit
+      isEdit,
+      allValues
     } = this.props
 
+    const {monitortype} = allValues || {}
     const collectorOptions = collectors.map(p => ({
       label: p.name, value: p.id
     }))
@@ -92,7 +94,7 @@ export default class MonitorWizardView extends React.Component {
           <CardPanel title="Configuration">
             <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
             {this.renderRequiredParams()}
-            <div>
+            <div className={monitortype === 'basic' ? 'hidden' : ''}>
               <div className="inline-block valign-middle margin-md-top margin-md-right" style={{fontSize: '16px', paddingLeft: 7}}>Remove events after</div>
               <Field
                 name="remove_after" component={FormSelect} options={removeAfterDurations}
