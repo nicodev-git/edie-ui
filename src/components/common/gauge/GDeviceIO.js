@@ -183,14 +183,12 @@ export default class GDeviceIO extends React.Component {
 
     if (!device) return <div />
 
-    const up = this.state.up
+    const basicInfo = getBasicMonitorInfo(device)
+    const up = !!basicInfo
 
     if (up) {
-      const basicInfo = getBasicMonitorInfo(device)
-
-      const {network, disk} = this.state
-      const networkValue = this.sumNetworks(network)
-      const diskValue = this.sumDisks(disk)
+      const networkValue = this.sumNetworks(basicInfo.Network)
+      const diskValue = this.sumDisks(basicInfo.Disk)
 
       const items = [{
         title1: `${bytesToSize(networkValue.sent)} / ${bytesToSize(networkValue.received)}`,
