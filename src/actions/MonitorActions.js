@@ -19,7 +19,7 @@ export const fetchMonitorTemplates = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/monitortemplate`)
+    axios.get(`${ROOT_URL}/monitortemplate?size=1000`)
       .then(response => fetchMonitorTemplatesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
