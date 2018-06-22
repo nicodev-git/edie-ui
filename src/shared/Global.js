@@ -752,3 +752,5 @@ export function getBasicMonitorInfo(device) {
   }
   return null
 }
+
+export const basicMonitorTypes = 'cpu disk memory network'.split(' ')
