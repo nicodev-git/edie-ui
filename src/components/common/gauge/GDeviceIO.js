@@ -7,7 +7,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp} from 'shared/Global'
+import {checkAgentUp, getBasicMonitorInfo} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 import {bytesToSize} from 'util/Formatter'
 
@@ -186,6 +186,8 @@ export default class GDeviceIO extends React.Component {
     const up = this.state.up
 
     if (up) {
+      const basicInfo = getBasicMonitorInfo(device)
+
       const {network, disk} = this.state
       const networkValue = this.sumNetworks(network)
       const diskValue = this.sumDisks(disk)
