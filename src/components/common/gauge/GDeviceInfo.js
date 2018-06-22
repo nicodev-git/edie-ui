@@ -123,7 +123,7 @@ export default class GDeviceInfo extends React.Component {
     const device = this.getDevice()
     if (!device) return <div />
 
-    const {cpu, memory, disk, os, hostname} = this.state
+    const {cpu, memory, disk, os} = this.state
 
     const up = this.state.up
 
