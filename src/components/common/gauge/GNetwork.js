@@ -9,6 +9,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
+import {getMonitorResult} from 'shared/Global'
 
 export default class GNetwork extends React.Component {
   constructor (props) {
@@ -27,7 +28,6 @@ export default class GNetwork extends React.Component {
       'columnName': 'Address'
     }, {
       'displayName': 'MAC Address',
-      'columnName': 'MAC'
     }, {
       'displayName': 'Speed',
       'columnName': 'Speed'
@@ -128,9 +128,23 @@ export default class GNetwork extends React.Component {
     if (index < 0) return gauge.name
     return `[${devices[index].name}] ${gauge.name}`
   }
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const device = this.getDevice()
+
+    const networks = getMonitorResult(device, 'network') || []
+
     return (
       <InfiniteTable
         cells={this.columns}
@@ -140,7 +154,7 @@ export default class GNetwork extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={this.state.networks}
+        data={networks}
       />
     )
   }
