@@ -6,6 +6,7 @@ import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
+import {getMonitorResult} from 'shared/Global'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -63,7 +64,7 @@ export default class GNetStat extends React.Component {
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
     })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    // this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
   stopUpdate () {

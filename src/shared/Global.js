@@ -742,15 +742,20 @@ export const channelIcons = {
 }
 
 
-export function getBasicMonitorInfo(device) {
-  const found = (device.monitors || []).filter(p => p.monitortype === 'basic')
+export function getMonitorResult(device, monitortype) {
+  if (!monitortype) return null
+
+  const found = (device.monitors || []).filter(p => p.monitortype === monitortype)
   if (!found.length) return null
   try {
-    const res = JSON.parse(found[0].checkResult.resultdata)
-    return res
+    return JSON.parse(found[0].checkResult.resultdata)
   } catch(e) {
   }
   return null
+}
+
+export function getBasicMonitorInfo(device) {
+  return getMonitorResult(device, 'basic')
 }
 
 export const basicMonitorTypes = 'cpu disk memory network'.split(' ')
