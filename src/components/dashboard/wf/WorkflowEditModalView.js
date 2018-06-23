@@ -1,6 +1,9 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Menu, MenuItem, Tab, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails} from '@material-ui/core'
+import {Menu, MenuItem, Tab,
+  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
+  Checkbox, FormControlLabel
+} from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -270,7 +273,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderAppliedTo() {
-    const {allValues, devices} = this.props
+    const {allValues, devices, onCheckAppliedDevice, applyDeviceIds} = this.props
     const {applyAllDevices} = allValues || {}
 
     const servers = devices.filter(p => !!p.monitors)
@@ -283,14 +286,25 @@ class WorkflowEditModalView extends React.Component {
               <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
             </div>
             <div>
-              {!applyAllDevices ? (
-                <Field name="applyDeviceIds" component={FormMultiSelect} label="Devices"
-                       options={servers.map(p => ({label: p.name, value: p.id}))}/>
-              ) : null}
-
               <table className="table table-hover">
                 <thead><tr><th>Device</th></tr></thead>
                 <tbody>
+                {servers.map(p =>
+                  <tr key={p.id}>
+                    <td>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={applyDeviceIds.includes(p.id)}
+                            onChange={onCheckAppliedDevice}
+                            value={p.id}
+                          />
+                        }
+                        label={p.name}
+                      />
+                    </td>
+                  </tr>
+                )}
                 </tbody>
               </table>
 

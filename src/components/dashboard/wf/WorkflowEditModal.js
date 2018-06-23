@@ -48,6 +48,7 @@ class WorkflowEditModal extends React.Component {
 
             tags: props.editWf ? (props.editWf.tags || []) : [],
             tagInputValue: '',
+            applyDeviceIds: props.editWf ? (props.editWf.applyDeviceIds || []) : [],
 
             rulePanelExpanded: false
         }
@@ -366,6 +367,20 @@ class WorkflowEditModal extends React.Component {
     }
     ////////////////////////////////////////////////////
 
+    onCheckAppliedDevice (e, checked) {
+        let {applyDeviceIds} = this.state
+        const id = e.target.value
+        if (checked) {
+          applyDeviceIds = [...applyDeviceIds, id]
+        } else {
+          applyDeviceIds = applyDeviceIds.filter(p => p !== id)
+        }
+
+        this.setState({applyDeviceIds})
+    }
+
+    ////////////////////////////////////////////////////
+
     renderUserPickModal () {
         if (!this.props.userPickModalOpen) return null
         // return (
@@ -484,6 +499,9 @@ class WorkflowEditModal extends React.Component {
                 shapeModal={this.renderShapeModal()}
                 rulePanelExpanded={this.state.rulePanelExpanded}
                 onExpandRulePanel={this.onExpandRulePanel.bind(this)}
+
+                applyDeviceIds={this.state.applyDeviceIds}
+                onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
             >
                 {this.renderUserPickModal()}
             </WorkflowEditModalView>
