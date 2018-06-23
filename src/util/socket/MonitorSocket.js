@@ -66,6 +66,6 @@ export default class MonitorSocket {
   close () {
     const me = this
     me.needDestroy = true
-    me.ws.close()
+    me.ws && me.ws.close()
   }
 }
