@@ -4,6 +4,7 @@ import {Chip} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import PublicIcon from '@material-ui/icons/Public'
+import axios from 'axios'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -14,11 +15,13 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import {chipStyles} from 'style/common/materialStyles'
 import {showConfirm} from 'components/common/Alert'
 import {getSeverityColor} from 'shared/Global'
+import {ROOT_URL} from 'actions/config'
 
 export default class GWorkflows extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
+      workflows: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -70,6 +73,11 @@ export default class GWorkflows extends React.Component {
       }
     }]
   }
+
+  componentWillMount() {
+    this.fetchWorkflows()
+  }
+
   getDeviceId () {
     return this.props.gauge.deviceId
   }
@@ -79,6 +87,18 @@ export default class GWorkflows extends React.Component {
     const index = findIndex(devices, {id: this.getDeviceId()})
     if (index < 0) return null
     return devices[index]
+  }
+
+  fetchWorkflows () {
+    axios.get(`${ROOT_URL}/getFlowsByDevice`, {
+      params: {
+        deviceId: this.getDeviceId()
+      }
+    }).then(res => {
+      this.setState({
+        workflows: res.data || []
+      })
+    })
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -118,11 +138,6 @@ export default class GWorkflows extends React.Component {
 
   getTitle () {
     return '[Workflows]'
-    // const {gauge} = this.props
-    // const devices = this.props.allDevices || this.props.devices
-    // const index = findIndex(devices, {id: gauge.deviceId})
-    // if (index < 0) return gauge.name
-    // return `[${devices[index].name}] ${gauge.name}`
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -139,11 +154,8 @@ export default class GWorkflows extends React.Component {
           selectable
           tableClassName="table1"
 
-          url="/workflow/search/findById"
-          params={{
-            id: device.workflowids || [],
-            draw: this.props.workflowDraw
-          }}
+          useExternal={false}
+          data={this.state.workflows}
         />
       </div>
     )
