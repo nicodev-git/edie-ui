@@ -115,11 +115,11 @@ export default class GDiskParts extends React.Component {
 
   getDeviceDisk (device) {
     const disk = getMonitorResult(device, 'disk')
-    if (disk) return disk[0]
+    if (disk) return disk
 
     const basicMonitor = getMonitorResult(device, 'basic')
     if (!basicMonitor || !basicMonitor.Disk) return null
-    return basicMonitor.Disk[0]
+    return basicMonitor.Disk
   }
 
   /////////////////////////////////////////////////////
