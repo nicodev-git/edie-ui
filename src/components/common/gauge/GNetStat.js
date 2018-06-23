@@ -119,9 +119,29 @@ export default class GNetStat extends React.Component {
     if (index < 0) return gauge.name
     return `[${devices[index].name}] ${gauge.name}`
   }
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const device = this.getDevice()
+    let netstats = []
+    if (device) {
+      netstats = getMonitorResult(device, 'netstat') || []
+      netstats = netstats.map ((p, i) => ({
+        ...p,
+        'Id': p.Id || i
+      }))
+    }
+
     return (
       <InfiniteTable
         cells={this.columns}
@@ -131,7 +151,7 @@ export default class GNetStat extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={this.state.netstats}
+        data={netstats}
       />
     )
   }
