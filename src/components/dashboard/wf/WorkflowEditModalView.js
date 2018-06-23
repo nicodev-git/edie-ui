@@ -287,6 +287,13 @@ class WorkflowEditModalView extends React.Component {
                 <Field name="applyDeviceIds" component={FormMultiSelect} label="Devices"
                        options={servers.map(p => ({label: p.name, value: p.id}))}/>
               ) : null}
+
+              <table className="table table-hover">
+                <thead><tr><th>Device</th></tr></thead>
+                <tbody>
+                </tbody>
+              </table>
+
             </div>
           </div>
         </CardPanel>
