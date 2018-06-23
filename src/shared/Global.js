@@ -743,7 +743,7 @@ export const channelIcons = {
 
 
 export function getMonitorResult(device, monitortype) {
-  if (!monitortype) return null
+  if (!device || !monitortype) return null
 
   const found = (device.monitors || []).filter(p => p.monitortype === monitortype)
   if (!found.length) return null

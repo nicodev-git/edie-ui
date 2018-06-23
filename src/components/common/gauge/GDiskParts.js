@@ -6,14 +6,14 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp} from 'shared/Global'
+import {checkAgentUp, getMonitorResult} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDiskParts extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: true,
+      loading: false,
       disk: null,
       up: false
     }
@@ -46,11 +46,11 @@ export default class GDiskParts extends React.Component {
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
     })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    // this.monitorSocket.connect(this.onSocketOpen.bind(this))
 
-    checkAgentUp(this.getDeviceId(), up => {
-      this.setState({up, loading: false})
-    })
+    // checkAgentUp(this.getDeviceId(), up => {
+    //   this.setState({up, loading: false})
+    // })
   }
 
   stopUpdate () {
@@ -113,27 +113,13 @@ export default class GDiskParts extends React.Component {
     return `[${devices[index].name}] ${gauge.name}`
   }
 
-  sumDisks (disks) {
-    let read = 0
-    let write = 0
+  getDeviceDisk (device) {
+    const disk = getMonitorResult(device, 'disk')
+    if (disk) return disk[0]
 
-    if (disks) {
-      disks.forEach(p => {
-        read += p.DiskReadBytesPerSec
-        write += p.DiskWriteBytesPerSec
-      })
-    }
-
-    const speed = 500
-
-    const util = Math.min(Math.round(Math.max(read, write) / 1024 / 1024 * 100 / speed), 100)
-
-    return {
-      read,
-      write,
-      util,
-      sum: read + write
-    }
+    const basicMonitor = getMonitorResult(device, 'basic')
+    if (!basicMonitor || !basicMonitor.Disk) return null
+    return basicMonitor.Disk[0]
   }
 
   /////////////////////////////////////////////////////
@@ -142,10 +128,11 @@ export default class GDiskParts extends React.Component {
     const device = this.getDevice()
     if (!device) return <div />
 
-    const up = this.state.up
+    const disk = this.getDeviceDisk(device)
+    // const up = this.state.up
 
-    if (up) {
-      const disk = this.state.disk || []
+    if (disk) {
+      // const disk = this.state.disk || []
 
       return (
         <div className="flex-1 flex-horizontal" style={{overflow: 'auto'}}>
