@@ -30,7 +30,20 @@ class InfiniteTable extends React.Component {
   }
 
   componentDidMount () {
+    // if (this.props.useExternal) {
+    //   this.getExternalData()
+    // }
 
+    // this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
+    // $(this.domNode).on('dblclick', 'tbody tr', (e) => {
+    //   const index = $(e.target).closest('tr').index()
+    //   const data = this.getCurrentData()
+    //   if (data && data[index]) {
+    //     let row = { props: { data: data[index] } }
+    //     this.onRowClick(row)
+    //     this.onRowDblClick(row)
+    //   }
+    // })
   }
 
   componentDidUpdate (prevProps, prevState) {
