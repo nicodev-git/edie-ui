@@ -137,7 +137,8 @@ export default class GDeviceInfo extends React.Component {
     if (up) {
       const basicInfo = getBasicMonitorInfo(device)
       const cpu = basicInfo ? basicInfo.CPU : getMonitorResult(device, 'cpu')
-      const disk = basicInfo ? sumDisks(basicInfo.Disk) : getMonitorResult(device, 'disk')
+      let disk = basicInfo ? basicInfo.Disk : getMonitorResult(device, 'disk')
+      disk = disk ? sumDisks(disk) : null
       const memory = basicInfo ? basicInfo.Memory : getMonitorResult(device, 'memory')
 
       const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}` : ''
@@ -146,7 +147,7 @@ export default class GDeviceInfo extends React.Component {
 
       const agentVersion = device.agent ? device.agent.version : ''
 
-      const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
+      const hardware = cpu && cpu.Model ? `Hardware: ${cpu.Model || ''} ` : ''
       const software = basicInfo ? `Software: ${trimOSName(basicInfo.OS.Name)} ` : ''
       const sysDesc = `${hardware}${software}`
 
