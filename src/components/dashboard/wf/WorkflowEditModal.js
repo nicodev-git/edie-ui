@@ -52,6 +52,11 @@ class WorkflowEditModal extends React.Component {
             rulePanelExpanded: false
         }
     }
+
+    componentWillMount () {
+        this.props.fetchDevices()
+    }
+
     componentDidUpdate(prevProps) {
         if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
             this.props.change('calledDirect', true)

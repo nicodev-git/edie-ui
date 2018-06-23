@@ -270,8 +270,11 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderAppliedTo() {
-    const {allValues} = this.props
+    const {allValues, devices} = this.props
     const {applyAllDevices} = allValues || {}
+
+    const servers = devices.filter(p => !!p.monitors)
+
     return (
       <div>
         <CardPanel title="Applied To">
@@ -281,7 +284,8 @@ class WorkflowEditModalView extends React.Component {
             </div>
             <div>
               {!applyAllDevices ? (
-                <Field name="applyDeviceIds" component={FormMultiSelect} label="Devices" options={[]}/>
+                <Field name="applyDeviceIds" component={FormMultiSelect} label="Devices"
+                       options={servers.map(p => ({label: p.name, value: p.id}))}/>
               ) : null}
             </div>
           </div>
@@ -364,8 +368,6 @@ class WorkflowEditModalView extends React.Component {
         </Modal>
       )
     }
-
-
   }
 }
 

@@ -16,6 +16,7 @@ import {
     fetchWorkflowByName,
 
     fetchGroups,
+    fetchDevices,
 
     addFlowItem,
     updateFlowItem,
@@ -51,6 +52,7 @@ class WorkflowsContainer extends React.Component {
 }
 export default connect(
     state => ({
+        devices: state.devices.devices,
         wfDiagramModalOpen: state.workflow.wfDiagramModalOpen,
 
         workflows: state.workflow.workflows,
@@ -87,6 +89,7 @@ export default connect(
         fetchWorkflowByName,
 
         fetchGroups,
+        fetchDevices,
 
         addFlowItem,
         updateFlowItem,
