@@ -6,7 +6,6 @@ import axios from 'axios'
 import { ROOT_URL } from 'actions/config'
 import WarningIcon from '@material-ui/icons/Warning'
 import DescriptionIcon from '@material-ui/icons/Description'
-import { iconStyle } from 'style/common/materialStyles'
 
 export const dateFormat = 'DD/MM/YYYY HH:mm:ss'
 export const defaultDateFormat = 'YYYY-MM-DD HH:mm:ss'
@@ -61,16 +60,16 @@ export const defaultKeys = [
   'integrated'
 ]
 
-export function getSeverityIcon (severity) {
+export function getSeverityIcon (severity, fontSize = 30) {
   switch ((severity || '').toLowerCase()) {
     case 'high':
-      return <WarningIcon style={iconStyle} nativeColor="#e13e3e" data-tip={severity}/>
+      return <WarningIcon nativeColor="#e13e3e" data-tip={severity} style={{ fontSize }} />
     case 'low':
-      return <WarningIcon style={iconStyle} nativeColor="#ef9f15" data-tip={severity}/>
+      return <WarningIcon nativeColor="#ef9f15" data-tip={severity} style={{ fontSize }} />
     case 'medium':
-      return <WarningIcon style={iconStyle} nativeColor="#52a1be" data-tip={severity}/>
+      return <WarningIcon nativeColor="#52a1be" data-tip={severity} style={{ fontSize }} />
     default:
-      return <DescriptionIcon style={iconStyle} nativeColor="#52a1be" data-tip={severity}/>
+      return <DescriptionIcon nativeColor="#52a1be" data-tip={severity} style={{ fontSize }} />
   }
 }
 

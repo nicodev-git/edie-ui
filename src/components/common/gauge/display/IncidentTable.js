@@ -36,7 +36,7 @@ export default class IncidentTable extends React.Component {
       'columnName': 'entity.severity',
       'cssClassName': 'text-center width-80',
       'customComponent': (props) => {
-        return getSeverityIcon(props.data)
+        return getSeverityIcon(props.data, 24)
       }
     }, {
       'displayName': 'Date/Time',
