@@ -6,7 +6,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp, getMonitorResult} from 'shared/Global'
+import {getMonitorResult} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDiskParts extends React.Component {
