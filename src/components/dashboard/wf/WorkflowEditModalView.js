@@ -298,6 +298,7 @@ class WorkflowEditModalView extends React.Component {
                             checked={applyDeviceIds.includes(p.id)}
                             onChange={onCheckAppliedDevice}
                             value={p.id}
+                            disabled={!!applyAllDevices}
                           />
                         }
                         label={p.name}

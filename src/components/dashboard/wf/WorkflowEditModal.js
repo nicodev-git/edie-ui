@@ -103,13 +103,14 @@ class WorkflowEditModal extends React.Component {
     onSubmit (values) {
         if (!values) return
         const {onSave, userInfo} = this.props
-        const {permitterUsers, wfData, tags} = this.state
+        const {permitterUsers, wfData, tags, applyDeviceIds} = this.state
 
         const entity = {
             ...values,
             permitterUsers,
             flowItems: wfData.objects.map(p => p.data),
-            tags
+            tags,
+            applyDeviceIds
         }
         if (!entity.ownerUser) entity.ownerUser = userInfo.username
 
@@ -367,10 +368,10 @@ class WorkflowEditModal extends React.Component {
     }
     ////////////////////////////////////////////////////
 
-    onCheckAppliedDevice (e, checked) {
+    onCheckAppliedDevice (e) {
         let {applyDeviceIds} = this.state
         const id = e.target.value
-        if (checked) {
+        if (e.target.checked) {
           applyDeviceIds = [...applyDeviceIds, id]
         } else {
           applyDeviceIds = applyDeviceIds.filter(p => p !== id)
