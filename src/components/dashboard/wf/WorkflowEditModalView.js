@@ -270,7 +270,26 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderAppliedTo() {
+    const {allValues} = this.props
+    const {applyAllDevices} = allValues || {}
+    return (
+      <div>
+        <CardPanel title="Applied To">
+          <div style={cardStyle}>
+            <div>
+              <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
+            </div>
+            <div>
+              {!applyAllDevices ? (
+                <Field name="applyDeviceIds" component={FormMultiSelect} label="Devices" options={[]}/>
+              ) : null}
+            </div>
+          </div>
+        </CardPanel>
 
+        {this.renderButtons()}
+      </div>
+    )
   }
 
   renderTabContent() {

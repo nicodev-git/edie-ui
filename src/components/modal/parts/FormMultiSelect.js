@@ -17,7 +17,7 @@ const FormMultiSelect = ({input, label, floatingLabel, fullWidth, className, opt
           const index = findIndex(options, {value})
           if (index >= 0) labels.push(options[index].label)
         })
-        return labels.join(', ')
+        return labels.join(', ') || labels
       }}
       onBlur={() => input.onBlur(input.value)}
     >
