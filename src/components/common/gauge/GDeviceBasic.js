@@ -7,7 +7,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp, sumDisks, getBasicMonitorInfo} from 'shared/Global'
+import {checkAgentUp, sumDisks, getBasicMonitorInfo, getMonitorResult} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDeviceBasic extends React.Component {
@@ -141,10 +141,13 @@ export default class GDeviceBasic extends React.Component {
     if (up) {
 
       const basicInfo = getBasicMonitorInfo(device)
+      const cpu = basicInfo ? basicInfo.CPU : getMonitorResult(device, 'cpu')
+      const memory = basicInfo ? basicInfo.Memory : getMonitorResult(device, 'memory')
+      let disk = basicInfo ? basicInfo : getMonitorResult(device, 'disk')
+      disk = disk ? sumDisks(disk) : null
 
-      const cpuValue = basicInfo ? parseFloat(basicInfo.CPU.Usage.replace('%', '')) : 0
-      const memValue = basicInfo ?  Math.ceil(basicInfo.Memory.UsedSize * 100 / basicInfo.Memory.TotalSize) : 0
-      const disk = basicInfo ? sumDisks(basicInfo.Disk) : null
+      const cpuValue = cpu ? parseFloat(cpu.Usage.replace('%', '')) : 0
+      const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
       const diskValue = disk ? Math.ceil(disk.UsedSpace * 100 / disk.TotalSpace) : 0
 
       const items = [{
