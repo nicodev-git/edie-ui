@@ -25,7 +25,7 @@
 .griddle .table>tbody>tr>td {
     vertical-align: middle;
     word-break: break-all;
-    padding: 4px 6px;
+    padding: 2px 4px;
 }
 
 .griddle .table>tbody>tr.selected>td {

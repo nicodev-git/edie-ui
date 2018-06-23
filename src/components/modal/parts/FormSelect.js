@@ -2,7 +2,7 @@ import React from 'react'
 import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 
 const FormSelect = ({input, label, floatingLabel, fullWidth, className, options, ...custom}) => (
-  <FormControl fullWidth={fullWidth} className={className}>
+  <FormControl fullWidth={fullWidth} className={className} style={{minWidth: 60}}>
     {floatingLabel && <InputLabel>{floatingLabel}</InputLabel>}
     <Select
       {...custom}
