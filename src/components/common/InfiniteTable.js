@@ -273,7 +273,7 @@ class InfiniteTable extends React.Component {
                    })
                    return (
                      <tr
-                       key={rowMetadata.key ? row[rowMetadata.key] : i} className={cls}
+                       key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
                        onClick={this.onRowClick.bind(this, row)}
                        onDoubleClick={this.onRowDblClick.bind(this, row)}
                      >

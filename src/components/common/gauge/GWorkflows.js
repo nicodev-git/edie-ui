@@ -1,9 +1,9 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import {Chip} from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Create'
-import PublicIcon from '@material-ui/icons/Public'
+// import DeleteIcon from '@material-ui/icons/Delete'
+// import EditIcon from '@material-ui/icons/Create'
+// import PublicIcon from '@material-ui/icons/Public'
 import axios from 'axios'
 
 import FlipView from './FlipView'
@@ -14,7 +14,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 
 import {chipStyles} from 'style/common/materialStyles'
 import {showConfirm} from 'components/common/Alert'
-import {getSeverityColor} from 'shared/Global'
+// import {getSeverityColor} from 'shared/Global'
 import {ROOT_URL} from 'actions/config'
 
 export default class GWorkflows extends React.Component {
@@ -35,31 +35,20 @@ export default class GWorkflows extends React.Component {
       'columnName': 'desc',
       'cssClassName': 'width-240'
     }, {
-      'displayName': 'Details',
+      'displayName': 'Tags',
       'columnName': 'isglobal',
       'customComponent': p => {
-        let {severity, tags} = p.rowData
+        let {tags} = p.rowData
         tags = tags || []
         return (
           <div style={chipStyles.wrapper}>
-            {p.data ? <Chip style={chipStyles.smallChip} label="Global"/> : ''}
-
-            <Chip style={{
-              ...chipStyles.smallChip,
-              backgroundColor: getSeverityColor(severity)
-            }} label={severity}/>
-
             {tags.map(t =>
               <Chip key={t} style={chipStyles.smallChip} label={t}/>
             )}
-
-            {p.rowData.isglobal ? (
-              <PublicIcon />
-            ) : null}
           </div>
         )
       }
-    }, {
+    }/*, {
       'displayName': 'Action',
       'columnName': 'id',
       'cssClassName': 'width-120',
@@ -71,7 +60,7 @@ export default class GWorkflows extends React.Component {
           </div>
         )
       }
-    }]
+    }*/]
   }
 
   componentWillMount() {
@@ -150,7 +139,7 @@ export default class GWorkflows extends React.Component {
           id="rule1"
           cells={this.cells}
           ref="table"
-          rowMetadata={{'key': 'id'}}
+          rowMetadata={{'key': 'uuid'}}
           selectable
           tableClassName="table1"
 
