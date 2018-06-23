@@ -157,6 +157,7 @@ export default class IncidentTable extends React.Component {
 
           url="/search/query"
           params={params}
+          rowHeight={40}
         />
 
         {this.state.commentModalVisible &&
