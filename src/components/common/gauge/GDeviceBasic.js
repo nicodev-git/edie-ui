@@ -151,7 +151,7 @@ export default class GDeviceBasic extends React.Component {
       const diskValue = disk ? Math.ceil(disk.UsedSpace * 100 / disk.TotalSpace) : 0
 
       const items = [{
-        title1: `${cpuValue}`,
+        title1: `${cpuValue}%`,
         title2: basicInfo ? basicInfo.CPU.Model : '',
         title3: 'CPU Utilization',
         value: cpuValue
