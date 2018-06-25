@@ -7,7 +7,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp, getBasicMonitorInfo} from 'shared/Global'
+import {checkAgentUp, getBasicMonitorInfo, getMonitorResult} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 import {bytesToSize} from 'util/Formatter'
 
@@ -184,11 +184,13 @@ export default class GDeviceIO extends React.Component {
     if (!device) return <div />
 
     const basicInfo = getBasicMonitorInfo(device)
-    const up = !!basicInfo
+    const resDisk = getMonitorResult(device, 'disk')
+    const resNetwork = getMonitorResult(device, 'network')
+    const up = true
 
     if (up) {
-      const networkValue = this.sumNetworks(basicInfo.Network)
-      const diskValue = this.sumDisks(basicInfo.Disk)
+      const networkValue = this.sumNetworks(basicInfo ? basicInfo.Network : resNetwork)
+      const diskValue = this.sumDisks(basicInfo ? basicInfo.Disk : resDisk)
 
       const items = [{
         title1: `${bytesToSize(networkValue.sent)} / ${bytesToSize(networkValue.received)}`,
