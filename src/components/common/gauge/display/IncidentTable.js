@@ -25,7 +25,6 @@ export default class IncidentTable extends React.Component {
     this.state = {
       openExceptionModal: false,
       commentModalVisible: false,
-
       incident: null
     }
 
