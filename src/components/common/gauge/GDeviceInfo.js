@@ -148,8 +148,8 @@ export default class GDeviceInfo extends React.Component {
 
       const agentVersion = device.agent ? device.agent.version : ''
 
-      const hardware = cpu && cpu.Model ? `Hardware: ${cpu.Model || ''} ` : ''
-      const software = os ? `Software: ${trimOSName(os.Name)} ` : ''
+      const hardware = cpu && cpu.Model ? `${cpu.Model || ''} ` : ''
+      const software = os ? `${trimOSName(os.Name)} ` : ''
       const sysDesc = `${hardware}${software}`
 
       return (
