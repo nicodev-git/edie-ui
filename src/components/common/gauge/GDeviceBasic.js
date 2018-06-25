@@ -152,12 +152,12 @@ export default class GDeviceBasic extends React.Component {
 
       const items = [{
         title1: `${cpuValue}%`,
-        title2: basicInfo ? basicInfo.CPU.Model : '',
+        title2: cpu ? cpu.Model : '',
         title3: 'CPU Utilization',
         value: cpuValue
       }, {
         title1: `${memValue}%`,
-        title2: basicInfo ? `${(basicInfo.Memory.UsedSize / 1024).toFixed(1)}G / ${(basicInfo.Memory.TotalSize / 1024).toFixed(1)}G` : '',
+        title2: memory ? `${(memory.UsedSize / 1024).toFixed(1)}G / ${(memory.TotalSize / 1024).toFixed(1)}G` : '',
         title3: 'Memory Utilization',
         value: memValue
       }, {
