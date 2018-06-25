@@ -143,7 +143,7 @@ export default class GDeviceBasic extends React.Component {
       const basicInfo = getBasicMonitorInfo(device)
       const cpu = basicInfo ? basicInfo.CPU : getMonitorResult(device, 'cpu')
       const memory = basicInfo ? basicInfo.Memory : getMonitorResult(device, 'memory')
-      let disk = basicInfo ? basicInfo : getMonitorResult(device, 'disk')
+      let disk = basicInfo ? basicInfo.Disk : getMonitorResult(device, 'disk')
       disk = disk ? sumDisks(disk) : null
 
       const cpuValue = cpu ? parseFloat(cpu.Usage.replace('%', '')) : 0
