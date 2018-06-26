@@ -163,6 +163,18 @@ export default class GServiceList extends React.Component {
     if (index < 0) return gauge.name
     return `[${devices[index].name}] ${gauge.name}`
   }
+
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
