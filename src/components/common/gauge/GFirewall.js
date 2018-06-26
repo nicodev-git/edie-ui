@@ -156,8 +156,13 @@ export default class GFirewall extends React.Component {
   renderFrontView () {
     const device = this.getDevice()
     const basicMonitor = getBasicMonitorInfo(device)
-    const firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null)
-
+    let firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null)
+    if (firewalls) {
+      firewalls = firewalls.map((p, i) => ({
+        ...p,
+        id: i
+      }))
+    }
     return (
       <InfiniteTable
         cells={this.columns}
