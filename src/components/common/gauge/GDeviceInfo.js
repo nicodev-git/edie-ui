@@ -2,7 +2,7 @@ import React from 'react'
 import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
-import NoDataPanel from './NoDataPanel'
+// import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {checkAgentUp, sumDisks, trimOSName,
@@ -134,7 +134,7 @@ export default class GDeviceInfo extends React.Component {
     if (!device) return <div />
     const up = this.state.up
 
-    if (up) {
+    //if (up) {
       const basicInfo = getBasicMonitorInfo(device)
       const cpu = basicInfo ? basicInfo.CPU : getMonitorResult(device, 'cpu')
       const os = basicInfo ? basicInfo.OS : getMonitorResult(device, 'os')
@@ -166,11 +166,11 @@ export default class GDeviceInfo extends React.Component {
           {this.renderRow('Disk', diskValue)}
         </div>
       )
-    } else {
-      return (
-        <NoDataPanel/>
-      )
-    }
+    // } else {
+    //   return (
+    //     <NoDataPanel/>
+    //   )
+    // }
   }
 
   renderBackView () {
