@@ -9,6 +9,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
+import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 
 export default class GFirewall extends React.Component {
   constructor (props) {
@@ -138,9 +139,25 @@ export default class GFirewall extends React.Component {
     if (index < 0) return gauge.name
     return `[${devices[index].name}] ${gauge.name}`
   }
+
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const device = this.getDevice()
+    const basicMonitor = getBasicMonitorInfo(device)
+    const firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null)
+
     return (
       <InfiniteTable
         cells={this.columns}
@@ -150,7 +167,7 @@ export default class GFirewall extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={this.state.rules}
+        data={firewalls || []}
       />
     )
   }
