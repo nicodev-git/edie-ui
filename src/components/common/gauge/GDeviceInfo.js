@@ -132,7 +132,7 @@ export default class GDeviceInfo extends React.Component {
   renderFrontView () {
     const device = this.getDevice()
     if (!device) return <div />
-    const up = true//this.state.up
+    const up = this.state.up
 
     if (up) {
       const basicInfo = getBasicMonitorInfo(device)
