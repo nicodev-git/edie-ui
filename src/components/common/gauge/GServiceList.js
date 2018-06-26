@@ -10,6 +10,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
+import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 
 export default class GServiceList extends React.Component {
   constructor (props) {
@@ -165,6 +166,10 @@ export default class GServiceList extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const device = this.getDevice()
+    const basicMonitor = getBasicMonitorInfo(device)
+    const services = getMonitorResult(device, 'service') || (basicMonitor ? basicMonitor.service : null)
+
     return (
       <InfiniteTable
         cells={this.columns}
@@ -174,7 +179,7 @@ export default class GServiceList extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={this.state.services}
+        data={services}
       />
     )
   }
