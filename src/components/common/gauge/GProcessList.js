@@ -93,7 +93,7 @@ export default class GProcessList extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////
 
   renderColHeader (col) {
-    const {columnName, displayName} = col
+    const {columnName, title} = col
     const { currentSortCol, currentSortDir } = this.state
     let caretEl = null
 
@@ -103,7 +103,7 @@ export default class GProcessList extends React.Component {
 
     return (
       <span className="nowrap text-black link" onClick={this.onClickColHeader.bind(this, col)}>
-        {displayName}{caretEl}
+        {title}{caretEl}
       </span>
     )
   }
