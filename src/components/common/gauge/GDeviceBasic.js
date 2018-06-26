@@ -136,7 +136,7 @@ export default class GDeviceBasic extends React.Component {
 
     if (!device) return <div />
 
-    const up = true//this.state.up
+    const up = this.state.up
 
     if (up) {
 
