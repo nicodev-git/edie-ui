@@ -11,7 +11,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
 
 import {strSorter, numSorter} from 'util/Sorter'
-import {getMonitorResult} from 'shared/Global'
+import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 
 export default class GProcessList extends React.Component {
   constructor (props) {
@@ -197,8 +197,8 @@ export default class GProcessList extends React.Component {
 
   renderFrontView () {
     const device = this.getDevice()
-    const basicMonitor = getMonitorResult(device, 'basic')
-    const processes = getMonitorResult(device, 'process')
+    const basicMonitor = getBasicMonitorInfo(device)
+    const processes = getMonitorResult(device, 'process') || (basicMonitor ? basicMonitor.process : null)
 
     return (
       <InfiniteTable
