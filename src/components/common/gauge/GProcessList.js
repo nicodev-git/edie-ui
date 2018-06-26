@@ -197,6 +197,7 @@ export default class GProcessList extends React.Component {
 
   renderFrontView () {
     const device = this.getDevice()
+    const basicMonitor = getMonitorResult(device, 'basic')
     const processes = getMonitorResult(device, 'process')
 
     return (
