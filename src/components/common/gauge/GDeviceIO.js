@@ -186,7 +186,7 @@ export default class GDeviceIO extends React.Component {
     const basicInfo = getBasicMonitorInfo(device)
     const resDisk = getMonitorResult(device, 'disk')
     const resNetwork = getMonitorResult(device, 'network')
-    const up = true
+    const up = this.state.up
 
     if (up) {
       const networkValue = this.sumNetworks(basicInfo ? basicInfo.Network : resNetwork)
