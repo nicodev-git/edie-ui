@@ -136,11 +136,11 @@ export default class GDeviceInfo extends React.Component {
 
     //if (up) {
       const basicInfo = getBasicMonitorInfo(device)
-      const cpu = basicInfo ? basicInfo.CPU : getMonitorResult(device, 'cpu')
-      const os = basicInfo ? basicInfo.OS : getMonitorResult(device, 'os')
-      let disk = basicInfo ? basicInfo.Disk : getMonitorResult(device, 'disk')
+      const cpu = basicInfo ? basicInfo.cpu : getMonitorResult(device, 'cpu')
+      const os = basicInfo ? basicInfo.os : getMonitorResult(device, 'os')
+      let disk = basicInfo ? basicInfo.disk : getMonitorResult(device, 'disk')
       disk = disk ? sumDisks(disk) : null
-      const memory = basicInfo ? basicInfo.Memory : getMonitorResult(device, 'memory')
+      const memory = basicInfo ? basicInfo.memory : getMonitorResult(device, 'memory')
 
       const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}` : ''
       const memValue = this.getMemoryInfo(memory)
