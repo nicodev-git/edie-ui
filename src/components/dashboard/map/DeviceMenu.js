@@ -97,7 +97,7 @@ export default class DeviceMenu extends React.Component {
       if (sectionIndex === 0) {
         const newDevices = this.getNewDevices()
         newDevices.forEach(p => {
-          if (p.name.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+          if (!p.name || p.name.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
           const item = {
             id: p.id,
             title: p.name,
