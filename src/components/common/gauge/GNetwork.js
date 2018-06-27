@@ -142,8 +142,6 @@ export default class GNetwork extends React.Component {
 
   renderFrontView () {
     const device = this.getDevice()
-
-
     const basicInfo = getBasicMonitorInfo(device)
     const networks = basicInfo ? basicInfo.network : getMonitorResult(device, 'network')
 
