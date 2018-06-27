@@ -9,7 +9,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
-import {getMonitorResult} from 'shared/Global'
+import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 
 export default class GNetwork extends React.Component {
   constructor (props) {
@@ -143,7 +143,9 @@ export default class GNetwork extends React.Component {
   renderFrontView () {
     const device = this.getDevice()
 
-    const networks = getMonitorResult(device, 'network') || []
+
+    const basicInfo = getBasicMonitorInfo(device)
+    const networks = basicInfo ? basicInfo.network : getMonitorResult(device, 'network')
 
     return (
       <InfiniteTable
@@ -154,7 +156,7 @@ export default class GNetwork extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={networks}
+        data={networks || []}
       />
     )
   }
