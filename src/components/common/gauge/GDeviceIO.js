@@ -189,8 +189,8 @@ export default class GDeviceIO extends React.Component {
     const up = this.state.up
 
     if (up) {
-      const networkValue = this.sumNetworks(basicInfo ? basicInfo.Network : resNetwork)
-      const diskValue = this.sumDisks(basicInfo ? basicInfo.Disk : resDisk)
+      const networkValue = this.sumNetworks(basicInfo ? basicInfo.network : resNetwork)
+      const diskValue = this.sumDisks(basicInfo ? basicInfo.disk : resDisk)
 
       const items = [{
         title1: `${bytesToSize(networkValue.sent)} / ${bytesToSize(networkValue.received)}`,
