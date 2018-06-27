@@ -43,7 +43,6 @@
 
 .devicediv ul li .item-text {
     padding: 3px;
-    float: left;
     color: white;
 }
 
@@ -69,6 +68,7 @@ div.item-icon {
 .item-icon img {
     width: 26px;
     height: 26px;
+    vertical-align: middle;
 }
 
 #linetypediv {
