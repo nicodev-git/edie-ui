@@ -8,7 +8,7 @@ const LineTypesMenu = ({ popover, cover, toggle, lineTypes, onChoose }) => (
         {
           lineTypes.map(item =>
             <li key={item.type} className={item.visible ? 'link' : 'hidden'} onClick={onChoose.bind(this, item)}>
-              <div className="pull-left item-icon">
+              <div className="item-icon">
                 <img src={item.image} data-type={item.type} alt=""/>
               </div>
               <div className="item-text">
