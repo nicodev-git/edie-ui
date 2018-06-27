@@ -43,7 +43,7 @@ class DeviceImg extends React.Component {
     return (
       connectDragSource(
         <div className="link">
-          <span className="pull-left item-icon" ref="div">
+          <span className="item-icon" ref="div">
             <img src={`${extImageBaseUrl}${this.props.img}`} alt=""/>
           </span>
 
