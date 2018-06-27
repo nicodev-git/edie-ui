@@ -94,7 +94,7 @@ export default class Toolbar extends React.Component {
                 this.lineTypes.map(item =>
                   <li key={item.typename}>
                     <div className="link" onClick={this.onClickLineType.bind(this, item)}>
-                      <div className="pull-left item-icon">
+                      <div className="item-icon">
                         <img src={item.image} data-type={item.type} data-typename={item.typename} alt=""/>
                       </div>
                       <div className="item-text">
