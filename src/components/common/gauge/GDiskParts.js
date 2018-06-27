@@ -6,7 +6,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {getMonitorResult} from 'shared/Global'
+import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDiskParts extends React.Component {
@@ -114,7 +114,8 @@ export default class GDiskParts extends React.Component {
   }
 
   getDeviceDisk (device) {
-    const disk = getMonitorResult(device, 'disk')
+    const basicInfo = getBasicMonitorInfo(device)
+    const disk = basicInfo ? basicInfo.disk : getMonitorResult(device, 'disk')
     if (disk) return disk
 
     const basicMonitor = getMonitorResult(device, 'basic')
