@@ -1,10 +1,8 @@
 import React from 'react'
 import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
-import {keys, findIndex} from 'lodash'
 
 import SimulationModalView from './SimulationModalView'
-import {mappingFieldOptions} from 'shared/Global'
 
 class SimulationModal extends React.Component {
   constructor (props) {
@@ -18,9 +16,10 @@ class SimulationModal extends React.Component {
     console.log(values)
   }
   render () {
-    const {handleSubmit, onClickClose} = this.props
+    const {handleSubmit, onClickClose, collectors} = this.props
     return (
       <SimulationModalView
+        collectors={collectors}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
       />

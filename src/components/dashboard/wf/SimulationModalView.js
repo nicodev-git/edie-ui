@@ -1,19 +1,19 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Dialog} from '@material-ui/core'
 
 import {
   FormInput,
   FormSelect,
+  Modal,
   SubmitBlock
 } from 'components/modal/parts'
 
 
 export default class SimulationModalView extends React.Component {
   render () {
-    const {onSubmit, onClickClose} = this.props
+    const {onSubmit, onClickClose, collectors} = this.props
     return (
-      <Dialog open title="Simulation">
+      <Modal title="Simulation" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           <div>
             <Field name="text"
@@ -25,24 +25,17 @@ export default class SimulationModalView extends React.Component {
           </div>
 
           <div>
-            <Field name="ip"
-                   component={FormInput}
-                   floatingLabel="IP"
+            <Field name="connectorId"
+                   component={FormSelect}
+                   floatingLabel="Connector"
                    className="valign-top margin-md-right"
-                   style={{width: 150}}
+                   options={collectors.map(p => ({label: p.name, value: p.id}))}
+                   style={{width: 200}}
             />
-
-            <Field name="channel"
-                   component={FormInput}
-                   floatingLabel="Channel"
-                   className="valign-top margin-md-right"
-                   style={{width: 150}}
-            />
-
           </div>
-          <SubmitBlock name="Save" onCancel={onClickClose}/>
+          <SubmitBlock name="Post"/>
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }

@@ -31,6 +31,7 @@ class Workflows extends React.Component {
     this.props.fetchGroups()
     this.props.fetchShapes()
     this.props.fetchBrainCells()
+    this.props.fetchCollectors();
   }
 
   getTags() {
@@ -227,6 +228,7 @@ class Workflows extends React.Component {
     if (!this.props.wfSimulationModalOpen) return
     return (
       <SimulationModal
+        collectors={this.props.collectors}
         onSubmit={this.onTrySimulate.bind(this)}
         onClickClose={this.onCloseSimulationModal.bind(this)}/>
     )

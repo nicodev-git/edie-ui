@@ -40,7 +40,8 @@ import {
   resetForm,
 
   showWfSimulationModal,
-  simulateWfMessage
+  simulateWfMessage,
+  fetchCollectors
 } from 'actions'
 
 class WorkflowsContainer extends React.Component {
@@ -77,7 +78,8 @@ export default connect(
     editWfSetting: state.workflow.editWfSetting,
     wfSimulationModalOpen: state.workflow.wfSimulationModalOpen,
 
-    brainCells: state.settings.brainCells
+    brainCells: state.settings.brainCells,
+    collectors: state.settings.collectors
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,
@@ -115,6 +117,7 @@ export default connect(
     resetForm,
 
     showWfSimulationModal,
-    simulateWfMessage
+    simulateWfMessage,
+    fetchCollectors
   }
 )(WorkflowsContainer)
