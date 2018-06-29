@@ -13,37 +13,6 @@ class SimulationModal extends React.Component {
     }
   }
 
-  componentDidMount () {
-    const {fields} = this.state
-    fields.forEach(f => {
-      if (f.key) this.props.change(`mapping.from${f.id}`, f.key)
-      if (f.value) {
-        if (findIndex(mappingFieldOptions, {value: f.value}) >= 0) {
-          this.props.change(`mapping.existing${f.id}`, f.value)
-        } else {
-          this.props.change(`mapping.to${f.id}`, f.value)
-        }
-      }
-    })
-  }
-
-  onClickDelete (id) {
-    const {fields} = this.state
-    this.setState({
-      fields: fields.filter(p => p.id !== id)
-    })
-  }
-  onClickAdd () {
-    const {fields} = this.state
-
-    const maxId = Math.max.apply(null, fields.map(p => p.id)) + 1
-    this.setState({
-      fields: [...fields, {
-        id: maxId
-      }]
-    })
-  }
-
   onSubmit (values) {
     if (!values.text) return alert('Please input text')
     console.log(values)
