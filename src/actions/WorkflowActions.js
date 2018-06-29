@@ -42,7 +42,8 @@ import {
   SHOW_USER_PICK_MODAL,
   SHOW_WF_SETTING_MODAL,
 
-  SHOW_WF_SIMULATION_MODAL
+  SHOW_WF_SIMULATION_MODAL,
+  UPDATE_WF_SIM_RES
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -858,9 +859,9 @@ export const showWfSimulationModal = (visible) => {
 export const simulateWfMessage = (data) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/simulateFlowMessage`, data).then(res => {
-      
+      dispatch({type: UPDATE_WF_SIM_RES, data: res.data})
     }).catch(() => {
-
+      dispatch({type: UPDATE_WF_SIM_RES, data: 'Connection failed'})
     })
   }
 }

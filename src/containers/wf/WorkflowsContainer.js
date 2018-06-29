@@ -39,7 +39,8 @@ import {
   fetchBrainCells,
   resetForm,
 
-  showWfSimulationModal
+  showWfSimulationModal,
+  simulateWfMessage
 } from 'actions'
 
 class WorkflowsContainer extends React.Component {
@@ -113,6 +114,7 @@ export default connect(
     fetchBrainCells,
     resetForm,
 
-    showWfSimulationModal
+    showWfSimulationModal,
+    simulateWfMessage
   }
 )(WorkflowsContainer)
