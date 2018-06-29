@@ -9,27 +9,7 @@ import {mappingFieldOptions} from 'shared/Global'
 class SimulationModal extends React.Component {
   constructor (props) {
     super(props)
-
-    const {mapping} = props.workflow
-    const fields = []
-    let id = 0
-    keys(mapping || {}).forEach(key => {
-      fields.push({
-        id,
-        key,
-        value: mapping[key]
-      })
-      id++
-    })
-
-    if (!fields.length) {
-      fields.push({
-        id: 0
-      })
-    }
-
     this.state = {
-      fields
     }
   }
 
@@ -65,31 +45,14 @@ class SimulationModal extends React.Component {
   }
 
   onSubmit (values) {
-    const {fields} = this.state
-    const {onSave} = this.props
-
-    const mapping = {}
-
-    fields.forEach(p => {
-      const key = `from${p.id}`
-      if (values.mapping[key]) {
-        const id = key.replace('from', '')
-        let value = values.mapping[`existing${id}`]
-        if (value === '[Other]') value = values.mapping[`to${id}`]
-        mapping[values.mapping[key]] = value
-      }
-    })
-
-    onSave(mapping)
+    if (!values.text) return alert('Please input text')
+    console.log(values)
   }
   render () {
     const {handleSubmit, onClickClose} = this.props
     return (
       <SimulationModalView
-        fields={this.state.fields}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
-        onClickAdd={this.onClickAdd.bind(this)}
-        onClickDelete={this.onClickDelete.bind(this)}
         onClickClose={onClickClose}
       />
     )
