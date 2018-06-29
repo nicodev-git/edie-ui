@@ -14,251 +14,283 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
+import SimulationModal from './SimulationModal'
 
 class Workflows extends React.Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            editWf: null,
-            groupId: '0',
-            filterTags: []
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      editWf: null,
+      groupId: '0',
+      filterTags: []
     }
-    componentWillMount () {
-        this.props.fetchWorkflows()
-        this.props.fetchGroups()
-        this.props.fetchShapes()
-        this.props.fetchBrainCells()
-    }
+  }
 
-    getTags () {
-        const {brainCells} = this.props
-        return brainCells.filter(p => p.type === 'Tag')
-    }
+  componentWillMount() {
+    this.props.fetchWorkflows()
+    this.props.fetchGroups()
+    this.props.fetchShapes()
+    this.props.fetchBrainCells()
+  }
 
-    onClickAdd () {
-        this.props.showWfNameModal(true)
-        this.setState({
-            editWf: null
-        })
-    }
-    onClickEdit (wf) {
-      this.props.history.push(`/workflow/${wf.name}/diagram`)
-    }
+  getTags() {
+    const {brainCells} = this.props
+    return brainCells.filter(p => p.type === 'Tag')
+  }
 
-    onClickRename (wf) {
-      this.props.history.push(`/workflow/${wf.name}/edit`)
-        // this.setState({
-        //     editWf: wf
-        // })
-        // this.props.showWfNameModal(true)
-    }
+  onClickAdd() {
+    this.props.showWfNameModal(true)
+    this.setState({
+      editWf: null
+    })
+  }
 
-    onSaveName (values) {
-        const {editWf} = this.state
-        if (editWf) {
-            this.props.updateWorkflow({
-                ...editWf,
-                ...values
-            })
-        } else {
-            const flow = {
-                ...values,
-                uuid: uuid.v4(),
-                flowItems: []
-            }
-            this.props.addWorkflow(flow)
-        }
+  onClickEdit(wf) {
+    this.props.history.push(`/workflow/${wf.name}/diagram`)
+  }
 
-    }
-    onClickDelete (wf) {
-        if (!window.confirm('Click OK to delete')) return
-        this.props.removeWorkflow(wf)
+  onClickRename(wf) {
+    this.props.history.push(`/workflow/${wf.name}/edit`)
+    // this.setState({
+    //     editWf: wf
+    // })
+    // this.props.showWfNameModal(true)
+  }
+
+  onSaveName(values) {
+    const {editWf} = this.state
+    if (editWf) {
+      this.props.updateWorkflow({
+        ...editWf,
+        ...values
+      })
+    } else {
+      const flow = {
+        ...values,
+        uuid: uuid.v4(),
+        flowItems: []
+      }
+      this.props.addWorkflow(flow)
     }
 
-    onChangeGroup (e) {
-        this.setState({
-            groupId: e.target.value
-        })
+  }
+
+  onClickDelete(wf) {
+    if (!window.confirm('Click OK to delete')) return
+    this.props.removeWorkflow(wf)
+  }
+
+  onChangeGroup(e) {
+    this.setState({
+      groupId: e.target.value
+    })
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  onClickSettings() {
+    this.props.fetchWfSetting(this.props.userInfo.customerId || this.props.userInfo.id, true)
+  }
+
+  onSaveSetting(entity) {
+    entity.id = this.props.userInfo.customerId || this.props.userInfo.id
+    this.props.saveWfSetting(entity)
+  }
+
+  onCloseSetting() {
+    this.props.showWfSettingModal(false)
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  onAddFilterTag(e) {
+    // const tag = e.target.value
+    // const {filterTags} = this.state
+    // if (!tag || tag === ' ') return
+    // if (filterTags.includes(tag)) return
+
+    this.setState({
+      filterTags: e.target.value
+    })
+  }
+
+  onDeleteFilterTag(tag) {
+    const {filterTags} = this.state
+    this.setState({
+      filterTags: filterTags.filter(p => p !== tag)
+    })
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  onClickSimulate () {
+    this.props.showWfSimulationModal(true)
+  }
+
+  onTrySimulate (values) {
+
+  }
+
+  onCloseSimulationModal () {
+    this.props.showWfSimulationModal(false)
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  renderWorkflows() {
+    const {groupId, filterTags} = this.state
+    let {workflows} = this.props
+    if (groupId !== '0') {
+      workflows = workflows.filter(p => p.groupId === groupId)
     }
-
-    ////////////////////////////////////////////////////////////////
-
-    onClickSettings () {
-        this.props.fetchWfSetting(this.props.userInfo.customerId || this.props.userInfo.id, true)
+    if (filterTags.length) {
+      workflows = workflows.filter(p => (p.tags || []).filter(t => filterTags.includes(t)).length > 0)
     }
+    return (
+      <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Last Updated</th>
+            <th/>
+          </tr>
+          </thead>
+          <tbody>
+          {workflows.map(m =>
+            <tr key={m.uuid || 'z'}>
+              <td>
+                <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>{m.name}</div>
+              </td>
+              <td>{m.description}</td>
+              <td>{m.ownerUser}</td>
+              <td>{m.type || 'normal'}</td>
+              <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
+              <td className="text-right padding-lg-right">
+                <EditIcon className="link margin-md-right" onClick={this.onClickRename.bind(this, m)}/>
+                <DeleteIcon className="link margin-md-right" onClick={this.onClickDelete.bind(this, m)}/>
+                <ArrowForwardIcon className="link margin-md-right" onClick={this.onClickEdit.bind(this, m)}/>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 
-    onSaveSetting (entity) {
-        entity.id = this.props.userInfo.customerId || this.props.userInfo.id
-        this.props.saveWfSetting(entity)
-    }
+  renderWorkflowEditModal() {
+    if (!this.props.wfNameModalOpen) return
 
-    onCloseSetting () {
-        this.props.showWfSettingModal(false)
-    }
+    const {editWf} = this.state
+    return (
+      <WorkflowEditModal
+        {...this.props}
+        allTags={this.getTags()}
+        editWf={editWf}
+        onSave={this.onSaveName.bind(this)}
+      />
+    )
+  }
 
-    ////////////////////////////////////////////////////////////////
+  renderGroups() {
+    const {groups} = this.props
+    return (
+      <Select
+        value={this.state.groupId}
+        onChange={this.onChangeGroup.bind(this)}
+        style={{width: 150}}
+        native={false}
+      >
+        <MenuItem value="0">[All]</MenuItem>
+        {groups.map(p =>
+          <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+        )}
+      </Select>
+    )
+  }
 
-    onAddFilterTag (e) {
-        // const tag = e.target.value
-        // const {filterTags} = this.state
-        // if (!tag || tag === ' ') return
-        // if (filterTags.includes(tag)) return
+  renderSettingModal() {
+    if (!this.props.wfSettingModalOpen) return
+    return (
+      <WorkflowSettingModal
+        onSave={this.onSaveSetting.bind(this)}
+        onClose={this.onCloseSetting.bind(this)}
+      />
+    )
+  }
 
-        this.setState({
-            filterTags: e.target.value
-        })
-    }
+  renderSimulationModal() {
+    if (!this.props.wfSimulationModalOpen) return
+    return (
+      <SimulationModal
+        onSubmit={this.onTrySimulate.bind(this)}
+        onClickClose={this.onCloseSimulationModal.bind(this)}/>
+    )
+  }
 
-    onDeleteFilterTag (tag) {
-        const {filterTags} = this.state
-        this.setState({
-            filterTags: filterTags.filter(p => p !== tag)
-        })
-    }
+  renderFilterTags() {
+    const {filterTags} = this.state
+    const allTags = this.getTags()
 
-    ////////////////////////////////////////////////////////////////
+    return (
+      <div className="inline-block margin-md-left">
+        <FormControl>
+          <InputLabel>Tag</InputLabel>
+          <Select
+            value={filterTags}
+            onChange={this.onAddFilterTag.bind(this)}
+            style={{width: 150}}
+            multiple
+            renderValue={selected => selected.join(', ')}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 50 * 8,
+                }
+              }
+            }}
+          >
+            {allTags.map(p =>
+              <MenuItem key={p.id} value={p.name}>
+                <Checkbox checked={filterTags.includes(p.name)}/>
+                <label>{p.name}</label>
+              </MenuItem>
+            )}
+          </Select>
+        </FormControl>
+      </div>
+    )
+  }
 
-    renderWorkflows () {
-        const {groupId, filterTags} = this.state
-        let {workflows} = this.props
-        if (groupId !== '0') {
-            workflows = workflows.filter(p => p.groupId === groupId)
-        }
-        if (filterTags.length) {
-            workflows = workflows.filter(p => (p.tags || []).filter(t => filterTags.includes(t)).length > 0)
-        }
-        return (
-            <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>User</th>
-                            <th>Type</th>
-                            <th>Last Updated</th>
-                            <th/>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {workflows.map(m =>
-                        <tr key={m.uuid || 'z'}>
-                            <td>
-                                <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>{m.name}</div>
-                            </td>
-                            <td>{m.description}</td>
-                            <td>{m.ownerUser}</td>
-                            <td>{m.type || 'normal'}</td>
-                            <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
-                            <td className="text-right padding-lg-right">
-                                <EditIcon className="link margin-md-right" onClick={this.onClickRename.bind(this, m)}/>
-                                <DeleteIcon className="link margin-md-right" onClick={this.onClickDelete.bind(this, m)}/>
-                                <ArrowForwardIcon className="link margin-md-right" onClick={this.onClickEdit.bind(this, m)}/>
-                            </td>
-                        </tr>
-                    )}
-                    </tbody>
-                </table>
+  render() {
+    return (
+      <TabPage>
+        <TabPageHeader title="Workflows">
+          <div className="text-center margin-md-top">
+            <div className="pull-left text-left">
+              {this.renderGroups()}
+              {this.renderFilterTags()}
             </div>
-        )
-    }
-
-    renderWorkflowEditModal () {
-        if (!this.props.wfNameModalOpen) return
-
-        const {editWf} = this.state
-        return (
-            <WorkflowEditModal
-                {...this.props}
-                allTags={this.getTags()}
-                editWf={editWf}
-                onSave={this.onSaveName.bind(this)}
-            />
-        )
-    }
-    renderGroups () {
-        const {groups} = this.props
-        return (
-            <Select
-                value={this.state.groupId}
-                onChange={this.onChangeGroup.bind(this)}
-                style={{width: 150}}
-                native={false}
-            >
-                <MenuItem value="0">[All]</MenuItem>
-                {groups.map(p =>
-                    <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-                )}
-            </Select>
-        )
-    }
-    renderSettingModal () {
-        if (!this.props.wfSettingModalOpen) return
-        return (
-            <WorkflowSettingModal
-                onSave={this.onSaveSetting.bind(this)}
-                onClose={this.onCloseSetting.bind(this)}
-            />
-        )
-    }
-    renderFilterTags() {
-        const {filterTags} = this.state
-        const allTags = this.getTags()
-
-        return (
-            <div className="inline-block margin-md-left">
-                <FormControl>
-                    <InputLabel>Tag</InputLabel>
-                    <Select
-                        value={filterTags}
-                        onChange={this.onAddFilterTag.bind(this)}
-                        style={{width: 150}}
-                        multiple
-                        renderValue={selected => selected.join(', ')}
-                        MenuProps={{
-                            PaperProps: {
-                                style: {
-                                    maxHeight: 50 * 8,
-                                }
-                            }
-                        }}
-                    >
-                        {allTags.map(p =>
-                            <MenuItem key={p.id} value={p.name}>
-                                <Checkbox checked={filterTags.includes(p.name)}/>
-                                <label>{p.name}</label>
-                            </MenuItem>
-                        )}
-                    </Select>
-                </FormControl>
+            <div className="pull-right">
+              <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
+              <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Settings</Button>&nbsp;
             </div>
-        )
-    }
-    render () {
-        return (
-            <TabPage>
-                <TabPageHeader title="Workflows">
-                    <div className="text-center margin-md-top">
-                        <div className="pull-left text-left">
-                            {this.renderGroups()}
-                            {this.renderFilterTags()}
-                        </div>
-                        <div className="pull-right">
-                            <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
-                            <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Settings</Button>&nbsp;
-                        </div>
-                    </div>
-                </TabPageHeader>
+          </div>
+        </TabPageHeader>
 
-                  <TabPageBody history={this.props.history} location={this.props.location}>
-                    {this.renderWorkflows()}
-                    {this.renderWorkflowEditModal()}
-                    {this.renderSettingModal()}
-                </TabPageBody>
-            </TabPage>
-        )
-    }
+        <TabPageBody history={this.props.history} location={this.props.location}>
+          {this.renderWorkflows()}
+          {this.renderWorkflowEditModal()}
+          {this.renderSettingModal()}
+          {this.renderSimulationModal()}
+        </TabPageBody>
+      </TabPage>
+    )
+  }
 }
 
 export default Workflows

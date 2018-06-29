@@ -854,3 +854,13 @@ export const showWfSimulationModal = (visible) => {
     dispatch({type: SHOW_WF_SIMULATION_MODAL, visible})
   }
 }
+
+export const simulateWfMessage = (data) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/simulateFlowMessage`, data).then(res => {
+      
+    }).catch(() => {
+
+    })
+  }
+}
