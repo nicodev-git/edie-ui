@@ -40,7 +40,9 @@ import {
   FETCH_SHAPES,
 
   SHOW_USER_PICK_MODAL,
-  SHOW_WF_SETTING_MODAL
+  SHOW_WF_SETTING_MODAL,
+
+  SHOW_WF_SIMULATION_MODAL
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -844,5 +846,11 @@ export const removeWorkflowTag = (index) => {
 export const showWorkflowTagModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_WF_TAG_MODAL, visible})
+  }
+}
+
+export const showWfSimulationModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_WF_SIMULATION_MODAL, visible})
   }
 }

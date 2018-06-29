@@ -43,7 +43,7 @@ import {
     resetForm
 } from 'actions'
 
-class WorkflowsContainer extends React.Component {
+class WorkflowEditContainer extends React.Component {
     render () {
         return (
             <WorkflowEdit {...this.props}/>
@@ -115,4 +115,4 @@ export default connect(
         fetchBrainCells,
         resetForm
     }
-)(withRouter(WorkflowsContainer))
+)(withRouter(WorkflowEditContainer))

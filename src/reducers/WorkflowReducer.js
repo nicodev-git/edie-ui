@@ -30,7 +30,9 @@ import {
     FETCH_SHAPES,
 
     SHOW_USER_PICK_MODAL,
-    SHOW_WF_SETTING_MODAL
+    SHOW_WF_SETTING_MODAL,
+
+    SHOW_WF_SIMULATION_MODAL
 } from 'actions/types'
 
 const initialState = {
@@ -107,6 +109,9 @@ export default function (state = initialState, action) {
 
         case SHOW_WF_SETTING_MODAL:
             return { ...state, wfSettingModalOpen: action.visible, editWfSetting: action.data }
+
+        case SHOW_WF_SIMULATION_MODAL:
+            return { ...state, wfSimulationModalOpen: action.visible }
         default: return state
     }
 }
