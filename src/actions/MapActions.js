@@ -363,7 +363,7 @@ export const deleteMapDevice = (entity) => {
   }
   return (dispatch) => {
     dispatch({type: DELETE_DEVICE_STATE, data: true})
-    axios.delete(`${ROOT_URL}/map/${entity.id}`).then(() => {
+    axios.delete(`${ROOT_URL}/device/${entity.id}`).then(() => {
       deleteMapDeviceSuccess(dispatch, entity)
       dispatch({type: DELETE_DEVICE_STATE, data: false})
     }).catch(error => {
