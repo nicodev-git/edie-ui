@@ -23,7 +23,10 @@ export default class ServerItem extends React.Component {
     if (!up) {
       const device = this.props.server
       checkAgentUp(device.id, (up, info, resCode) => {
-        if (!up && info) this.setState({info})
+        this.setState({
+          up,
+          info: up ? '' : info
+        })
         setTimeout(ReactTooltip.rebuild, 100)
       })
     }
