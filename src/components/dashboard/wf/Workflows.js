@@ -31,7 +31,8 @@ class Workflows extends React.Component {
     this.props.fetchGroups()
     this.props.fetchShapes()
     this.props.fetchBrainCells()
-    this.props.fetchCollectors();
+    this.props.fetchCollectors()
+    this.props.fetchSimSamples()
   }
 
   getTags() {

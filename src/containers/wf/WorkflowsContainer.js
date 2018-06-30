@@ -41,7 +41,11 @@ import {
 
   showWfSimulationModal,
   simulateWfMessage,
-  fetchCollectors
+  fetchCollectors,
+
+  fetchSimSamples,
+  addSimSample,
+  removeSimSample
 } from 'actions'
 
 class WorkflowsContainer extends React.Component {
@@ -77,6 +81,7 @@ export default connect(
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
     wfSimulationModalOpen: state.workflow.wfSimulationModalOpen,
+    simSamples: state.workflow.simSamples,
 
     brainCells: state.settings.brainCells,
     collectors: state.settings.collectors
@@ -118,6 +123,10 @@ export default connect(
 
     showWfSimulationModal,
     simulateWfMessage,
-    fetchCollectors
+    fetchCollectors,
+
+    fetchSimSamples,
+    addSimSample,
+    removeSimSample
   }
 )(WorkflowsContainer)
