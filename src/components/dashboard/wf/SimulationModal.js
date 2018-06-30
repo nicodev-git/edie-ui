@@ -12,8 +12,11 @@ class SimulationModal extends React.Component {
   }
 
   onSubmit (values) {
+    const {onSubmit} = this.props
     if (!values.text) return alert('Please input text')
-    console.log(values)
+    if (!values.connectorId) return alert('Please choose connector')
+
+    onSubmit(values)
   }
   render () {
     const {handleSubmit, onClickClose, collectors} = this.props
