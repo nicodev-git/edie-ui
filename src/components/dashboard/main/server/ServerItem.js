@@ -20,16 +20,14 @@ export default class ServerItem extends React.Component {
     const up = getAgentStatus(this.props.server)
     this.setState({ up })
 
-    if (!up) {
-      const device = this.props.server
-      checkAgentUp(device.id, (up, info, resCode) => {
-        this.setState({
-          up,
-          info: up ? '' : info
-        })
-        setTimeout(ReactTooltip.rebuild, 100)
+    const device = this.props.server
+    checkAgentUp(device.id, (up, info, resCode) => {
+      this.setState({
+        up,
+        info: up ? '' : info
       })
-    }
+      setTimeout(ReactTooltip.rebuild, 100)
+    })
   }
 
   renderRightIcons () {
