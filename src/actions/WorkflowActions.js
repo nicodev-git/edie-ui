@@ -856,9 +856,9 @@ export const showWfSimulationModal = (visible) => {
   }
 }
 
-export const simulateWfMessage = (params) => {
+export const simulateWfMessage = (data) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/simulateConnector`, {params}).then(res => {
+    axios.post(`${ROOT_URL}/simulateConnector`, data).then(res => {
       dispatch({type: UPDATE_WF_SIM_RES, data: res.data})
     }).catch(() => {
       dispatch({type: UPDATE_WF_SIM_RES, data: 'Connection failed'})
