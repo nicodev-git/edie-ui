@@ -43,7 +43,11 @@ import {
   SHOW_WF_SETTING_MODAL,
 
   SHOW_WF_SIMULATION_MODAL,
-  UPDATE_WF_SIM_RES
+  UPDATE_WF_SIM_RES,
+
+  FETCH_SIM_SAMPLES,
+  ADD_SIM_SAMPLE,
+  REMOVE_SIM_SAMPLE
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -862,6 +866,30 @@ export const simulateWfMessage = (data) => {
       dispatch({type: UPDATE_WF_SIM_RES, data: res.data})
     }).catch(() => {
       dispatch({type: UPDATE_WF_SIM_RES, data: 'Connection failed'})
+    })
+  }
+}
+
+export const fetchSimSamples = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/simsample?size=1000`).then(res => {
+      dispatch({type: FETCH_SIM_SAMPLES, data: res.data._embedded.simSamples})
+    })
+  }
+}
+
+export const addSimSample = (data) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/simsample`, data).then(res => {
+      dispatch({type: ADD_SIM_SAMPLE, data: res.data})
+    })
+  }
+}
+
+export const removeSimSample = (entity) => {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/simsample/${entity.id}`).then(res => {
+      dispatch({type: REMOVE_SIM_SAMPLE, data: entity})
     })
   }
 }
