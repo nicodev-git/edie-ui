@@ -302,8 +302,8 @@ const fetchWorkflowIds = (uuids, cb) => {
     cb && cb([])
     return
   }
-  axios.get(`${ROOT_URL}/workflow/search/findByUuidIn?size=1000&sort=name&${encodeUrlParams({uuid: uuids})}`).then(res => {
-    cb(res.data._embedded.workflows.map(u => u.id))
+  axios.get(`${ROOT_URL}/flow/search/findByUuidIn?size=1000&sort=name&${encodeUrlParams({uuid: uuids})}`).then(res => {
+    cb(res.data._embedded.flows.map(u => u.id))
   })
 }
 

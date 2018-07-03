@@ -556,8 +556,8 @@ export const updateSelectedDeviceTplMonitors = (monitors) => {
 
 export const fetchDeviceTplWorkflows = (workflowIds) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/workflow/search/findByUuidIn?size=1000&sort=name&${encodeUrlParams({uuid: workflowIds})}`).then(res => {
-      dispatch({type: FETCH_DEVICE_TPL_WORKFLOWS, data: res.data._embedded.workflows})
+    axios.get(`${ROOT_URL}/flow/search/findByUuidIn?size=1000&sort=name&${encodeUrlParams({uuid: workflowIds})}`).then(res => {
+      dispatch({type: FETCH_DEVICE_TPL_WORKFLOWS, data: res.data._embedded.flows})
     }).catch(error => apiError(dispatch, error))
   }
 }
