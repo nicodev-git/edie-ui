@@ -62,7 +62,7 @@ export default class IncidentTable extends React.Component {
         const {workflow} = p.rowData.entity
         return <span>{workflow || p.data}</span>
       }
-    }, {
+    }/*, {
       'displayName': 'Description',
       'columnName': 'entity.description',
       'customComponent': (props) => {
@@ -72,6 +72,13 @@ export default class IncidentTable extends React.Component {
         }
 
         return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
+      }
+    }*/, {
+      'displayName': 'Data',
+      'columnName': 'entity.data',
+      'customComponent': (props) => {
+        const str = props.data ? JSON.stringify(props.data) : ''
+        return str.length > 500 ? `${str.substring(0, 500)}...` : str
       }
     }, {
       'displayName': 'Actions',
