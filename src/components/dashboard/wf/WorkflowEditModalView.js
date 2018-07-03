@@ -22,12 +22,12 @@ import {
 import {severities} from 'shared/Global'
 
 const cardStyle = {
-  height: 250,
+  minHeight: 250,
   width: '100%',
   overflow: 'auto'
 }
 
-const panelHeight = cardStyle.height + 90
+// const panelHeight = cardStyle.height + 90
 
 class WorkflowEditModalView extends React.Component {
   renderWfTab() {
@@ -114,7 +114,7 @@ class WorkflowEditModalView extends React.Component {
     } = this.props
     return (
       <div>
-        <div style={{height: panelHeight, overflow: 'auto'}}>
+        <div>
           <CardPanel title="Existing Tags">
 
             <div className="margin-md-top">
@@ -356,13 +356,13 @@ class WorkflowEditModalView extends React.Component {
       tab, onChangeTab, noModal
     } = this.props
 
-    const mainStyle = tab === 'wf' ? {
-      height: panelHeight + 100,
-      overflow: 'auto'
-    } : null
+    // const mainStyle = tab === 'wf' ? {
+    //   height: panelHeight + 100,
+    //   overflow: 'auto'
+    // } : null
 
     const content = (
-      <div style={mainStyle}>
+      <div>
         <form onSubmit={onSubmit}>
           <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
             <Tab label="Filter" value="filter"/>
