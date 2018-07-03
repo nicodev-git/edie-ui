@@ -76,11 +76,11 @@ class WorkflowEditModal extends React.Component {
                 case 'DECISION':
                 case 'EXCLUDE': {
                     itemLabel = 'Match Text'
-                    var varname = (fieldType === 'field' ? field :
-                        fieldType === 'variable' ? variable : 'message') || ''
-                    const words = varname.split('.')
-                    const lastword = words[words.length - 1]
-                    itemValue = `$\{${lastword}}=${sentence}`
+                    // var varname = (fieldType === 'field' ? field :
+                    //     fieldType === 'variable' ? variable : 'message') || ''
+                    // const words = varname.split('.')
+                    // const lastword = words[words.length - 1]
+                    itemValue = `${sentence}`
                     break
                 }
                 case 'COUNT':
