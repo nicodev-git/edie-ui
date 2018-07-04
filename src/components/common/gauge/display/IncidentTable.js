@@ -18,7 +18,7 @@ import {
   thumbup, thumpdown, done, notdone,
   rawtext, reason, openicon
 } from 'style/common/materialStyles'
-import EntityDetailModal from "../../../sidebar/search/EntityDetailModal";
+import EntityDetailModal from '../../../sidebar/search/EntityDetailModal'
 
 const searchBtnStyle = {
   height: 22,
@@ -167,9 +167,14 @@ export default class IncidentTable extends React.Component {
   }
 
   renderDetailModal () {
-    if (!this.state.detailData) return null
+    const {detailData} = this.state
+    if (!detailData) return null
     return (
-      <EntityDetailModal/>
+      <EntityDetailModal
+        detailEntity={detailData || {}}
+        noHighlight
+        onClose={() => this.setState({detailData: null})}
+      />
     )
   }
 

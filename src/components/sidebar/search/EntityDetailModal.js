@@ -12,15 +12,17 @@ export default class EntityDetailModal extends React.Component {
   }
 
   getEntity () {
+    const {noHighlight} = this.props
     let detailEntity = {...this.props.detailEntity}
     if (!this.state.isShowNull)
       detailEntity = removeNullValues(detailEntity)
-    detailEntity.entity = getHighlighted (detailEntity.entity, detailEntity.highlights)
+    if (!noHighlight) {
+      detailEntity.entity = getHighlighted (detailEntity.entity, detailEntity.highlights)
+      delete detailEntity.highlights
+      delete detailEntity['entity.id']
 
-    delete detailEntity.highlights
-    delete detailEntity['entity.id']
-
-    detailEntity = expandEntity(detailEntity)
+      detailEntity = expandEntity(detailEntity)
+    }
     return detailEntity
   }
 
@@ -31,6 +33,8 @@ export default class EntityDetailModal extends React.Component {
   }
 
   onHide () {
+    const {onClose} = this.props
+    if (onClose) return onClose()
     this.props.showEntityDetailModal(false)
   }
 

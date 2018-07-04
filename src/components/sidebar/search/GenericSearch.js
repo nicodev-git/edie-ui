@@ -19,7 +19,9 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue,
+  getFieldValue, removeField, findField,
+  queryToString, parseDateRange} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
