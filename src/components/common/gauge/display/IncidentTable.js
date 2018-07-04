@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import ReactToolTip from 'react-tooltip'
 import {debounce} from 'lodash'
+import ActionSearch from '@material-ui/icons/Search'
+import {IconButton} from '@material-ui/core'
 
 import { getSeverityIcon } from 'shared/Global'
 import CommentsModal from 'components/common/incident/CommentsModal'
@@ -78,7 +80,12 @@ export default class IncidentTable extends React.Component {
       'columnName': 'entity.data',
       'customComponent': (props) => {
         const str = props.data ? JSON.stringify(props.data) : ''
-        return str.length > 500 ? `${str.substring(0, 500)}...` : str
+        return str.length > 500 ? (
+          <div>
+            {str.substring(0, 500)}...
+            <IconButton tooltip="Search" onClick={this.onClickDetail.bind(this, props.data)}><ActionSearch /></IconButton>
+          </div>
+        ) : str
       }
     }, {
       'displayName': 'Actions',
@@ -145,6 +152,17 @@ export default class IncidentTable extends React.Component {
     this.tooltipRebuild()
   }
 
+  onClickDetail (detailData) {
+    this.setState({
+      detailData
+    })
+  }
+
+  renderDetailModal () {
+    if (!this.state.detailData) return null
+
+  }
+
   render () {
     const {incident} = this.state
     const {params} = this.props
@@ -173,7 +191,7 @@ export default class IncidentTable extends React.Component {
           onClose={() => {
             this.setState({commentModalVisible: false})
           }}/>}
-
+        {this.renderDetailModal()}
         <ReactToolTip/>
       </div>
     )

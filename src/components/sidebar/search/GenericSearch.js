@@ -9,7 +9,6 @@ import NavigationClose from '@material-ui/icons/Close'
 import PageViewIcon from '@material-ui/icons/Pageview'
 import {parse} from 'query-string'
 import QueryParser from 'lucene'
-import ActionSearch from '@material-ui/icons/Search'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
