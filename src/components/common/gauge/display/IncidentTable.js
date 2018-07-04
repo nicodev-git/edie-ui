@@ -2,8 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import ReactToolTip from 'react-tooltip'
 import {debounce} from 'lodash'
-import ActionSearch from '@material-ui/icons/Search'
-import {IconButton} from '@material-ui/core'
+import PageViewIcon from '@material-ui/icons/Pageview'
 
 import { getSeverityIcon } from 'shared/Global'
 import CommentsModal from 'components/common/incident/CommentsModal'
@@ -19,6 +18,11 @@ import {
   thumbup, thumpdown, done, notdone,
   rawtext, reason, openicon
 } from 'style/common/materialStyles'
+
+const searchBtnStyle = {
+  height: 22,
+  marginTop: -4
+}
 
 export default class IncidentTable extends React.Component {
   constructor (props) {
@@ -79,13 +83,16 @@ export default class IncidentTable extends React.Component {
       'displayName': 'Data',
       'columnName': 'entity.data',
       'customComponent': (props) => {
-        const str = props.data ? JSON.stringify(props.data) : ''
-        return str.length > 500 ? (
+        let str = props.data ? JSON.stringify(props.data) : ''
+        if (str.length > 500) str = `${str.substring(0, 500)}...`
+        return (
           <div>
-            {str.substring(0, 500)}...
-            <IconButton tooltip="Search" onClick={this.onClickDetail.bind(this, props.data)}><ActionSearch /></IconButton>
+            {str}
+            <div className="pull-right" style={searchBtnStyle}>
+              <PageViewIcon onClick={this.onClickDetail.bind(this, props.data)} className="link"/>
+            </div>
           </div>
-        ) : str
+        )
       }
     }, {
       'displayName': 'Actions',
