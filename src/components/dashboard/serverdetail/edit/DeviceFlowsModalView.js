@@ -1,12 +1,14 @@
 import React from 'react'
+import AddIcon from '@material-ui/icons/AddCircle'
+
 import { Modal, CardPanel } from 'components/modal/parts'
 
 export default class DeviceFlowsModalView extends React.Component {
   render () {
-    const {onHide, deviceWorkflows} = this.props
+    const {onHide, deviceWorkflows, onClickAdd} = this.props
     return (
       <Modal title="Flows" onRequestClose={onHide}>
-        <CardPanel title="Flows">
+        <CardPanel title="Flows" tools={<AddIcon className="link" onClick={onClickAdd}/>}>
           <table className="table table-hover">
             <thead>
             <tr>
