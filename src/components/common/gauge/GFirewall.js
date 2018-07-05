@@ -11,6 +11,10 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
 import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 
+const cellStyle = {
+  height: 250
+}
+
 export default class GFirewall extends React.Component {
   constructor (props) {
     super (props)
@@ -153,7 +157,7 @@ export default class GFirewall extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  renderFrontView () {
+  renderTable () {
     const device = this.getDevice()
     const basicMonitor = getBasicMonitorInfo(device)
     let firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null)
@@ -163,6 +167,36 @@ export default class GFirewall extends React.Component {
         id: i
       }))
     }
+    return (
+      <InfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        rowHeight={40}
+
+        useExternal={false}
+        data={firewalls || []}
+      />
+    )
+  }
+
+  renderFrontView () {
+    const device = this.getDevice()
+    const basicMonitor = getBasicMonitorInfo(device)
+    const firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null) || []
+
+    return (
+      <div style={{height: '100%', overflow: 'auto'}}>
+        {firewalls.map((f, i) =>
+          <div key={i} style={cellStyle}>
+            {f.Chain}
+          </div>
+        )}
+
+      </div>
+    )
+
     return (
       <InfiniteTable
         cells={this.columns}
