@@ -13,6 +13,7 @@ import {
   updateWorkflow,
   removeWorkflow,
 
+  fetchDevices,
   fetchGroups,
 
   addFlowItem,
@@ -69,6 +70,7 @@ export default connect(
 
     wfNameModalOpen: state.workflow.wfNameModalOpen,
 
+    devices: state.devices.devices,
     groups: state.workflow.groups,
 
     users: state.dashboard.users,
@@ -95,6 +97,7 @@ export default connect(
     updateWorkflow,
     removeWorkflow,
 
+    fetchDevices,
     fetchGroups,
 
     addFlowItem,
