@@ -375,7 +375,7 @@ export default class MainControl extends React.Component {
 
   getMenuItems () {
     const items = [{
-      label: 'Add Flow',
+      label: 'Add Workflow',
       icon: <ComputerIcon/>,
       color: tplColors[0],
       onClick: this.onClickShowFlowPicker.bind(this)
