@@ -4,6 +4,7 @@ import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 
 import MainControl from 'containers/dashboard/serverdetail/MainControlContainer'
+import Monitors from 'containers/dashboard/serverdetail/DeviceMonitorsContainer'
 import EventLogs from 'containers/dashboard/serverdetail/EventLogsContainer'
 import Apps from 'containers/dashboard/serverdetail/AppsContainer'
 import Processes from 'containers/dashboard/serverdetail/ProcessContainer'
@@ -51,7 +52,7 @@ export default class ServerDetail extends React.Component {
     return (
       <Switch>
         <Route path="/dashboard/servers/:name/detail" exact component={MainControl}/>
-        <Route path="/dashboard/servers/:name/detail/monitors" exact component={MainControl}/>
+        <Route path="/dashboard/servers/:name/detail/monitors" exact component={Monitors}/>
         <Route path="/dashboard/servers/:name/detail/eventlog" component={EventLogs}/>
         <Route path="/dashboard/servers/:name/detail/app" component={Apps}/>
         <Route path="/dashboard/servers/:name/detail/process" component={Processes}/>
