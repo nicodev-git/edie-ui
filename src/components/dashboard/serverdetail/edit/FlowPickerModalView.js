@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {Button} from '@material-ui/core'
-import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
+import { Modal, CardPanel } from 'components/modal/parts'
 
 export default class FlowPickerModalView extends React.Component {
   render () {
