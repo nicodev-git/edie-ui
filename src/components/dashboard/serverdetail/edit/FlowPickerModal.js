@@ -1,51 +1,30 @@
 import React from 'react'
 import FlowPickerModalView from './FlowPickerModalView'
 
-class FlowPickerModal extends React.Component {
+export default class FlowPickerModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selected: null
+    }
+  }
   componentWillMount () {
-    this.props.fetchWorkflowCategories()
+    this.props.fetchWorkflows()
   }
 
-  onClickClose () {
-    this.props.closeSearchWfModal()
-  }
-
-  onChangeCategory (e, i, val) {
-    this.props.selectSearchWfCategory(val)
-  }
-
-  getWorkflows () {
-    const { selectedCategory, workflowFilter, workflows } = this.props
-    return workflows.filter(m =>
-      (!selectedCategory || (m.tags || []).includes(selectedCategory)) &&
-      (
-        !workflowFilter ||
-        (m.name && !!m.name.match(new RegExp(workflowFilter, 'i'))) ||
-        (m.desc && !!m.desc.match(new RegExp(workflowFilter, 'i')))
-      )
-    )
-  }
-
-  onChangeWorkflowFilter (e) {
-    this.props.changeSeachWfFilter(e.target.value)
-  }
-
-  onClickRow (workflow) {
-    this.props.selectWfRow(workflow)
+  onClickRow (selected) {
+    this.setState({
+      selected
+    })
   }
 
   render () {
     return (
       <FlowPickerModalView
-        {...this.props}
-        workflows={this.getWorkflows()}
-        onChangeWorkflowFilter={this.onChangeWorkflowFilter.bind(this)}
-        onChangeCategory={this.onChangeCategory.bind(this)}
+        workflows={this.props.workflows}
         onClickRow={this.onClickRow.bind(this)}
-        onClickClose={this.onClickClose.bind(this)}
+        onClickClose={this.props.onClickClose}
       />
     )
   }
 }
-
-export default FlowPickerModal
