@@ -502,24 +502,26 @@ export default class MainControl extends React.Component {
     }
 
     return (
-      <ResponsiveReactGridLayout
-        className="layout" cols={cols} rowHeight={layoutRowHeight}
-        layouts={layouts}
-        style={{marginTop: -10}}
-        margin={[16, 16]}
+      <div>
+        <ResponsiveReactGridLayout
+          className="layout" cols={cols} rowHeight={layoutRowHeight}
+          layouts={layouts}
+          style={{marginTop: -10}}
+          margin={[16, 16]}
 
-        onDragStart={this.onDragStart.bind(this)}
-        onDrag={this.onDrag.bind(this)}
-        onDragStop={this.onLayoutChange.bind(this)}
+          onDragStart={this.onDragStart.bind(this)}
+          onDrag={this.onDrag.bind(this)}
+          onDragStop={this.onLayoutChange.bind(this)}
 
-        onResize={this.onResize.bind(this)}
-        onResizeStop={this.onResizeStop.bind(this)}
+          onResize={this.onResize.bind(this)}
+          onResizeStop={this.onResizeStop.bind(this)}
 
-        isResizable={!device.gaugeLocked}
-        isDraggable={!device.gaugeLocked}
-      >
-        {gauges.map(p => this.renderGauge(p))}
-      </ResponsiveReactGridLayout>
+          isResizable={!device.gaugeLocked}
+          isDraggable={!device.gaugeLocked}
+        >
+          {gauges.map(p => this.renderGauge(p))}
+        </ResponsiveReactGridLayout>
+      </div>
     )
   }
 
