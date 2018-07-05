@@ -191,7 +191,7 @@ export default class GFirewall extends React.Component {
         {firewalls.map((f, i) =>
           <div key={i} style={cellStyle}>
             <div className="flex-vertical" style={{height: '100%', border: '1px solid lightgray'}}>
-              <div>{f.Type} / {f.Chain}</div>
+              <div className="padding-sm-left padding-sm-top text-bold">{f.Type} / {f.Chain}</div>
               <div className="flex-1">
                 {this.renderTable(f)}
               </div>
