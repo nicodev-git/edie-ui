@@ -15,7 +15,10 @@ const cellStyle = {
   height: 250,
   width: '50%',
   display: 'inline-block',
-  position: 'relative'
+  position: 'relative',
+  border: '1px solid lightgray',
+  overflow: 'auto',
+  padding: 4
 }
 
 export default class GFirewall extends React.Component {
@@ -161,15 +164,10 @@ export default class GFirewall extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderTable (data) {
-    const device = this.getDevice()
-    const basicMonitor = getBasicMonitorInfo(device)
-    let firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null)
-    if (firewalls) {
-      firewalls = firewalls.map((p, i) => ({
-        ...p,
-        id: i
-      }))
-    }
+    const firewalls = data.Items.map((p, i) => ({
+      ...p,
+      id: i
+    }))
     return (
       <InfiniteTable
         cells={this.columns}
@@ -179,7 +177,7 @@ export default class GFirewall extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={data.Items}
+        data={firewalls}
       />
     )
   }
@@ -194,6 +192,7 @@ export default class GFirewall extends React.Component {
         {firewalls.map((f, i) =>
           <div key={i} style={cellStyle}>
             {f.Chain}
+            {this.renderTable(f)}
           </div>
         )}
 
