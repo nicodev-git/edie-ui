@@ -18,6 +18,10 @@ export default class FlowPickerModal extends React.Component {
     })
   }
 
+  onClickOK () {
+    this.props.onClickOK(this.state.selected)
+  }
+
   render () {
     return (
       <FlowPickerModalView
@@ -25,6 +29,7 @@ export default class FlowPickerModal extends React.Component {
         workflows={this.props.workflows}
         onClickRow={this.onClickRow.bind(this)}
         onClickClose={this.props.onClickClose}
+        onClickOK={this.onClickOK.bind(this)}
       />
     )
   }

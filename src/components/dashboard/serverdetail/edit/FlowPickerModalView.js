@@ -1,5 +1,6 @@
 import React from 'react'
 
+import {Button} from '@material-ui/core'
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 
 export default class FlowPickerModalView extends React.Component {
@@ -37,7 +38,9 @@ export default class FlowPickerModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
+        <div className="margin-md-top">
+          <Button variant="raised" onClick={onClickOK}>OK</Button>
+        </div>
       </Modal>
     )
   }
