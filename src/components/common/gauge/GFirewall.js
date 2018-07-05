@@ -16,7 +16,6 @@ const cellStyle = {
   width: '50%',
   display: 'inline-block',
   position: 'relative',
-  border: '1px solid lightgray',
   overflow: 'auto',
   padding: 4
 }
@@ -191,12 +190,12 @@ export default class GFirewall extends React.Component {
       <div style={{height: '100%', overflow: 'auto'}}>
         {firewalls.map((f, i) =>
           <div key={i} style={cellStyle}>
-            <div className="flex-vertical" style={{height: '100%'}}>
+            <div className="flex-vertical" style={{height: '100%', border: '1px solid lightgray'}}>
               <div>{f.Type} / {f.Chain}</div>
               <div className="flex-1">
                 {this.renderTable(f)}
               </div>
-            </div>
+          </div>
           </div>
         )}
 
