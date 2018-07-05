@@ -1,15 +1,16 @@
 import React from 'react'
 import {Form} from 'redux-form'
 import { Modal } from 'components/modal/parts'
+import CardPanel from "../../../modal/parts/CardPanel";
 
 export default class DeviceFlowsModalView extends React.Component {
   render () {
-    const {onHide, onSubmit} = this.props
+    const {onHide, workflows} = this.props
     return (
-      <Modal title="Credentials" onRequestClose={onHide}>
-        <Form onSubmit={onSubmit}>
+      <Modal title="Flows" onRequestClose={onHide}>
+        <CardPanel title="Flows">
 
-        </Form>
+        </CardPanel>
       </Modal>
     )
   }

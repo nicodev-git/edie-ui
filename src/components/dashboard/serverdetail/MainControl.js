@@ -30,6 +30,7 @@ import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layo
 import {showConfirm, showAlert} from 'components/common/Alert'
 import {resolveAddr} from 'shared/HostUtil'
 import {hasPermission} from 'shared/Permission'
+import DeviceFlowsModal from "./edit/DeviceFlowsModal";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -40,7 +41,8 @@ export default class MainControl extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      deviceWizardVisible: false
+      deviceWizardVisible: false,
+      flowsModalOpen: false
     }
     this.lastPlaceholder = null
   }
@@ -541,6 +543,17 @@ export default class MainControl extends React.Component {
     )
   }
 
+  renderDeviceFlowsModal (device) {
+    if (!this.state.flowsModalOpen) return null
+    return (
+      <DeviceFlowsModal
+        {...this.props}
+        device={device}
+        onHide={() => this.setState({flowsModalOpen: false})}
+      />
+    )
+  }
+
   renderGaugePicker () {
     if (!this.props.gaugePickerOpen) return null
     return (
@@ -589,6 +602,7 @@ export default class MainControl extends React.Component {
           {this.renderDeviceMonitorsModal()}
           {this.renderGaugePicker()}
           {this.renderDeviceWizard()}
+          {this.renderDeviceFlowsModal(device)}
         </TabPageBody>
       </TabPage>
     )
