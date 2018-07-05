@@ -9,7 +9,7 @@ import RenewIcon from '@material-ui/icons/Autorenew'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import LockOutlineIcon from '@material-ui/icons/LockOutline'
 import LeftArrowIcon from '@material-ui/icons/ArrowBack'
-import TimelineIcon from '@material-ui/icons/Timeline'
+import ComputerIcon from '@material-ui/icons/Computer'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -31,20 +31,22 @@ import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layo
 import {showConfirm, showAlert} from 'components/common/Alert'
 import {resolveAddr} from 'shared/HostUtil'
 import {hasPermission} from 'shared/Permission'
-import DeviceFlowsModal from './edit/DeviceFlowsModal'
-import {deepPurple} from "@material-ui/core/colors/index";
+import FlowPickerModal from './edit/FlowPickerModal'
+import {deepPurple, purple} from "@material-ui/core/colors/index";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command',
   'Incidents', 'Workflows']
 
+const tplColors = [purple[500], deepPurple['A400']]
+
 export default class MainControl extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       deviceWizardVisible: false,
-      flowsModalOpen: false
+      flowPickerOpen: false
     }
     this.lastPlaceholder = null
   }
@@ -243,14 +245,6 @@ export default class MainControl extends React.Component {
 
   /////////////////////////////////////////////////////////////////////
 
-  onClickFlows () {
-    this.setState({
-      flowsModalOpen: true
-    })
-  }
-
-  /////////////////////////////////////////////////////////////////////
-
   findGauge (id) {
     const gauges = this.getGauges()
     const index = findIndex(gauges, {id})
@@ -380,11 +374,39 @@ export default class MainControl extends React.Component {
   /////////////////////////////////////////////////////////////////////
 
   getMenuItems () {
-    //
+    const items = [{
+      label: 'Add Flow',
+      icon: <ComputerIcon/>,
+      color: tplColors[0],
+      onClick: this.onClickShowFlowPicker.bind(this)
+    }]
+    return items
   }
 
-  onClickAddFlow () {
+  onClickShowFlowPicker () {
+    this.setState({
+      flowPickerOpen: true
+    })
+  }
 
+  onClickAddFlow (wf) {
+    const device = this.getDevice()
+    let {workflowids} = device
+
+    this.setState({
+      flowPickerOpen: false
+    })
+
+    if (!device) return
+
+    if (!workflowids) workflowids = []
+    if (workflowids.indexOf(wf.uuid) >= 0) return
+    workflowids = [...workflowids, wf.uuid]
+
+    this.props.updateMapDevice({
+      ...device,
+      workflowids
+    })
   }
 
   /////////////////////////////////////////////////////////////////////
@@ -516,23 +538,17 @@ export default class MainControl extends React.Component {
     )
   }
   renderMenu () {
-    const {gauges} = this.props
-    const items = (gauges || []).filter(p => menuItems.includes(p.name))
-    return (
-      <div>
-        <IconButton><AddCircleIcon /></IconButton>
-        <Menu open={false}>
-          {items.map((p, i) =>
-            <MenuItem key={p.id} onClick={this.onClickMenuItem.bind(this, p)}>{p.name}</MenuItem>
-          )}
-        </Menu>
-      </div>
-    )
-
+    // const {gauges} = this.props
+    // const items = (gauges || []).filter(p => menuItems.includes(p.name))
     // return (
-    //   <IconButton onClick={() => this.props.showGaugePicker(true)}>
-    //     <AddCircleIcon />
-    //   </IconButton>
+    //   <div>
+    //     <IconButton><AddCircleIcon /></IconButton>
+    //     <Menu open={false}>
+    //       {items.map((p, i) =>
+    //         <MenuItem key={p.id} onClick={this.onClickMenuItem.bind(this, p)}>{p.name}</MenuItem>
+    //       )}
+    //     </Menu>
+    //   </div>
     // )
   }
 
@@ -557,13 +573,14 @@ export default class MainControl extends React.Component {
     )
   }
 
-  renderDeviceFlowsModal (device) {
-    if (!this.state.flowsModalOpen) return null
+  renderFlowPicker (device) {
+    if (!this.state.flowPickerOpen) return null
     return (
-      <DeviceFlowsModal
+      <FlowPickerModal
         {...this.props}
         device={device}
-        onHide={() => this.setState({flowsModalOpen: false})}
+        onClickOK={this.onClickAddFlow.bind(this)}
+        onClickClose={() => this.setState({flowPickerOpen: false})}
       />
     )
   }
@@ -601,10 +618,6 @@ export default class MainControl extends React.Component {
           <Tooltip title="Reset">
             <IconButton onClick={this.onClickReset.bind(this)}><RenewIcon/></IconButton>
           </Tooltip>
-
-          <Tooltip title="Flows">
-            <IconButton onClick={this.onClickFlows.bind(this)}><TimelineIcon/></IconButton>
-          </Tooltip>
             {this.renderMenu()}
         </TabPageHeader>
         <TabPageBody
@@ -616,10 +629,10 @@ export default class MainControl extends React.Component {
           {this.renderDeviceMonitorsModal()}
           {this.renderGaugePicker()}
           {this.renderDeviceWizard()}
-          {this.renderDeviceFlowsModal(device)}
-
-          <FloatingMenu menuItems={this.getMenuItems()}/>
+          {this.renderFlowPicker(device)}
         </TabPageBody>
+
+        <FloatingMenu menuItems={this.getMenuItems()}/>
       </TabPage>
     )
   }

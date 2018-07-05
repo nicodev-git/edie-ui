@@ -64,7 +64,7 @@ export default class GWorkflows extends React.Component {
   }
 
   componentWillMount() {
-    this.fetchWorkflows()
+    this.props.fetchWorkflows()
   }
 
   getDeviceId () {
@@ -133,6 +133,11 @@ export default class GWorkflows extends React.Component {
   renderFrontView () {
     const device  = this.getDevice()
     if (!device) return null
+
+    const ids = device.workflowids || []
+
+    const workflows = this.props.workflows.filter(p => ids.indexOf(p.uuid) >= 0)
+
     return (
       <div className="flex-vertical flex-1">
         <InfiniteTable
@@ -144,7 +149,7 @@ export default class GWorkflows extends React.Component {
           tableClassName="table1"
 
           useExternal={false}
-          data={this.state.workflows}
+          data={workflows}
         />
       </div>
     )
