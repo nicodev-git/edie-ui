@@ -21,6 +21,7 @@ import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceCredsModal from './edit/DeviceCredsModal'
 import DeviceMonitorsModal from './edit/DeviceMonitorsModal'
 import ServerCombo from './ServerCombo'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import GaugePicker from 'components/common/gauge/GaugePicker'
@@ -31,6 +32,7 @@ import {showConfirm, showAlert} from 'components/common/Alert'
 import {resolveAddr} from 'shared/HostUtil'
 import {hasPermission} from 'shared/Permission'
 import DeviceFlowsModal from './edit/DeviceFlowsModal'
+import {deepPurple} from "@material-ui/core/colors/index";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -377,6 +379,16 @@ export default class MainControl extends React.Component {
 
   /////////////////////////////////////////////////////////////////////
 
+  getMenuItems () {
+    //
+  }
+
+  onClickAddFlow () {
+
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
@@ -605,6 +617,8 @@ export default class MainControl extends React.Component {
           {this.renderGaugePicker()}
           {this.renderDeviceWizard()}
           {this.renderDeviceFlowsModal(device)}
+
+          <FloatingMenu menuItems={this.getMenuItems()}/>
         </TabPageBody>
       </TabPage>
     )

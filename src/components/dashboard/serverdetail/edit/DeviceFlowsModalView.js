@@ -1,5 +1,6 @@
 import React from 'react'
 import AddIcon from '@material-ui/icons/AddCircle'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import { Modal, CardPanel } from 'components/modal/parts'
 
@@ -14,6 +15,7 @@ export default class DeviceFlowsModalView extends React.Component {
             <tr>
               <th>Name</th>
               <th>Description</th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +23,7 @@ export default class DeviceFlowsModalView extends React.Component {
               <tr key={p.uuid}>
                 <td>{p.name}</td>
                 <td>{p.description}</td>
+                <td></td>
               </tr>
             )}
             </tbody>
