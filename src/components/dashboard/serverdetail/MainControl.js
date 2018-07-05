@@ -371,6 +371,10 @@ export default class MainControl extends React.Component {
     this.updateLayout(layout, oldItem, newItem, true)
   }
 
+  onWidthChange (containerWidth) {
+    console.log(containerWidth)
+  }
+
   /////////////////////////////////////////////////////////////////////
 
   getMenuItems () {
@@ -518,6 +522,8 @@ export default class MainControl extends React.Component {
 
           isResizable={!device.gaugeLocked}
           isDraggable={!device.gaugeLocked}
+
+          onWidthChange={this.onWidthChange.bind(this)}
         >
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
