@@ -234,7 +234,7 @@ export default function (state = INITIAL_STATE, action) {
     //   return { ...state, rules: action.data }
 
     case FETCH_DEVICE_WORKFLOWS:
-      return { ...state, workflows: action.data }
+      return { ...state, workflows: action.data || []}
 
     case OPEN_DEVICE_WORKFLOW_MODAL:
       return { ...state, workflowModalOpen: true, editWorkflow: action.data }

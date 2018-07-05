@@ -5,7 +5,7 @@ import { Modal, CardPanel } from 'components/modal/parts'
 
 export default class DeviceFlowsModalView extends React.Component {
   render () {
-    const {onHide, deviceWorkflows, onClickAdd} = this.props
+    const {onHide, deviceWorkflows, onClickAdd, children} = this.props
     return (
       <Modal title="Flows" onRequestClose={onHide}>
         <CardPanel title="Flows" tools={<AddIcon className="link" onClick={onClickAdd}/>}>
@@ -26,6 +26,7 @@ export default class DeviceFlowsModalView extends React.Component {
             </tbody>
           </table>
         </CardPanel>
+        {children}
       </Modal>
     )
   }

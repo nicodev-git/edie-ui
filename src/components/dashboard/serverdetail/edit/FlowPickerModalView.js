@@ -16,24 +16,20 @@ export default class FlowPickerModalView extends React.Component {
             <table className="table table-hover">
               <thead>
               <tr>
-                <th>Severity</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Version</th>
               </tr>
               </thead>
               <tbody>
               {
                 workflows.map(w =>
                   <tr
-                    key={w.id}
-                    className={selected.id === w.id ? 'selected' : ''}
+                    key={w.uuid}
+                    className={selected && selected.uuid === w.uuid ? 'selected' : ''}
                     onClick={() => onClickRow(w)}>
 
-                    <td>{w.severity}</td>
                     <td>{w.name}</td>
-                    <td>{w.desc}</td>
-                    <td>{w.version}</td>
+                    <td>{w.description}</td>
                   </tr>
                 )
               }

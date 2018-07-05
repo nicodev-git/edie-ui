@@ -28,6 +28,8 @@ export default class DeviceFlowsModal extends React.Component {
     if (!this.state.flowPickerOpen) return
     return (
       <FlowPickerModal
+        fetchWorkflows={this.props.fetchWorkflows}
+        workflows={this.props.workflows}
         onClickClose={() => this.setState({flowPickerOpen: false})}
       />
     )

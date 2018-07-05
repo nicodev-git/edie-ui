@@ -57,7 +57,7 @@ export default function (state = initialState, action) {
     case FETCH_WORKFLOWS:
       return {
         ...state,
-        workflows: action.data,
+        workflows: action.data || [],
         diagrams: action.diagrams/*, selectedWorkflow: action.data.length ? action.data[0] : ''*/
       }
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
