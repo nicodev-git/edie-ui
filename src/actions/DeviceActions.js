@@ -330,7 +330,7 @@ export const fetchDeviceWorkflows = (params) => {
   return (dispatch) => {
     dispatch({type: FETCH_DEVICE_WORKFLOWS, data: []})
 
-    axios.get(`${ROOT_URL}/workflow/search/findById?${encodeUrlParams(params)}`, getWorkflowConfig())
+    axios.get(`${ROOT_URL}/workflow/search/findByUuidIn?${encodeUrlParams(params)}`, getWorkflowConfig())
       .then((response) => {
         dispatch({
           type: FETCH_DEVICE_WORKFLOWS,

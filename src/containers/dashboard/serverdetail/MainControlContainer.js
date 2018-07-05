@@ -31,7 +31,8 @@ import {
   openDeviceMonitorWizard,
 
   showGaugePicker,
-  removeWorkflow
+  removeWorkflow,
+  fetchWorkflows
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -73,6 +74,8 @@ export default connect(
 
     workflowDraw: state.settings.workflowDraw,
 
+    workflows: state.workflow.workflows,
+
     userInfo: state.dashboard.userInfo
   }), {
     fetchGauges,
@@ -102,6 +105,7 @@ export default connect(
     openDeviceMonitorWizard,
 
     showGaugePicker,
-    removeWorkflow
+    removeWorkflow,
+    fetchWorkflows
   }
 )(withRouter(MainControlContainer))
