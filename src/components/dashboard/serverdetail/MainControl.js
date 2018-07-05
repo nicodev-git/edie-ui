@@ -506,7 +506,6 @@ export default class MainControl extends React.Component {
     }
 
     return (
-      <div>
         <ResponsiveReactGridLayout
           className="layout" cols={cols} rowHeight={layoutRowHeight}
           layouts={layouts}
@@ -527,7 +526,6 @@ export default class MainControl extends React.Component {
         >
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
-      </div>
     )
   }
 
