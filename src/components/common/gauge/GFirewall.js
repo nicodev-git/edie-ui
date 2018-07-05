@@ -12,7 +12,10 @@ import {gaugeTitleStyle1} from 'style/common/materialStyles'
 import {getMonitorResult, getBasicMonitorInfo} from 'shared/Global'
 
 const cellStyle = {
-  height: 250
+  height: 250,
+  width: '50%',
+  display: 'inline-block',
+  position: 'relative'
 }
 
 export default class GFirewall extends React.Component {
@@ -157,7 +160,7 @@ export default class GFirewall extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  renderTable () {
+  renderTable (data) {
     const device = this.getDevice()
     const basicMonitor = getBasicMonitorInfo(device)
     let firewalls = getMonitorResult(device, 'firewall') || (basicMonitor ? basicMonitor.firewall : null)
@@ -176,7 +179,7 @@ export default class GFirewall extends React.Component {
         rowHeight={40}
 
         useExternal={false}
-        data={firewalls || []}
+        data={data.Items}
       />
     )
   }
@@ -195,19 +198,6 @@ export default class GFirewall extends React.Component {
         )}
 
       </div>
-    )
-
-    return (
-      <InfiniteTable
-        cells={this.columns}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        selectable
-        rowHeight={40}
-
-        useExternal={false}
-        data={firewalls || []}
-      />
     )
   }
   renderBackView (options) {
