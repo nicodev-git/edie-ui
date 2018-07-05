@@ -9,6 +9,7 @@ import RenewIcon from '@material-ui/icons/Autorenew'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import LockOutlineIcon from '@material-ui/icons/LockOutline'
 import LeftArrowIcon from '@material-ui/icons/ArrowBack'
+import TimelineIcon from '@material-ui/icons/Timeline'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -237,6 +238,13 @@ export default class MainControl extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////
+
+  onClickFlows () {
+
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
   findGauge (id) {
     const gauges = this.getGauges()
     const index = findIndex(gauges, {id})
@@ -565,6 +573,10 @@ export default class MainControl extends React.Component {
           </Tooltip>
           <Tooltip title="Reset">
             <IconButton onClick={this.onClickReset.bind(this)}><RenewIcon/></IconButton>
+          </Tooltip>
+
+          <Tooltip title="Flows">
+            <IconButton onClick={this.onClickFlows.bind(this)}><TimelineIcon/></IconButton>
           </Tooltip>
             {this.renderMenu()}
         </TabPageHeader>
