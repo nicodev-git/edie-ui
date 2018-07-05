@@ -9,6 +9,8 @@ import {
   fetchCredentials,
   fetchGaugeBoards,
 
+  fetchDeviceWorkflows,
+
   showDeviceEditModal,
   updateMapDevice,
   showDeviceFixModal,
@@ -42,6 +44,7 @@ class MainControlContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
+    deviceWorkflows: state.devices.workflows,
     allDevices: state.devices.deviceAndGroups,
     deviceEditModalOpen: state.devices.deviceEditModalOpen,
     editDevice: state.devices.editDevice,
@@ -76,6 +79,8 @@ export default connect(
     fetchCredTypes,
     fetchCredentials,
     fetchGaugeBoards,
+
+    fetchDeviceWorkflows,
 
     showDeviceEditModal,
     updateMapDevice,

@@ -328,17 +328,16 @@ export const fetchDeviceWorkflows = (params) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/workflow/search/findById?${encodeUrlParams(params)}`, getWorkflowConfig())
-      .then((response) => fetchDeviceWorkflowsSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
-  }
-}
+    dispatch({type: FETCH_DEVICE_WORKFLOWS, data: []})
 
-const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
-  dispatch({
-    type: FETCH_DEVICE_WORKFLOWS,
-    data: response.data._embedded.workflows
-  })
+    axios.get(`${ROOT_URL}/workflow/search/findById?${encodeUrlParams(params)}`, getWorkflowConfig())
+      .then((response) => {
+        dispatch({
+          type: FETCH_DEVICE_WORKFLOWS,
+          data: response.data._embedded.workflows
+        })
+      }).catch(error => apiError(dispatch, error))
+  }
 }
 
 export const addDeviceWorkflow = (props, device, cb) => {

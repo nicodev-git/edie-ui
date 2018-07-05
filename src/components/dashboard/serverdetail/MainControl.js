@@ -30,7 +30,7 @@ import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layo
 import {showConfirm, showAlert} from 'components/common/Alert'
 import {resolveAddr} from 'shared/HostUtil'
 import {hasPermission} from 'shared/Permission'
-import DeviceFlowsModal from "./edit/DeviceFlowsModal";
+import DeviceFlowsModal from './edit/DeviceFlowsModal'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -242,7 +242,9 @@ export default class MainControl extends React.Component {
   /////////////////////////////////////////////////////////////////////
 
   onClickFlows () {
-
+    this.setState({
+      flowsModalOpen: true
+    })
   }
 
   /////////////////////////////////////////////////////////////////////
