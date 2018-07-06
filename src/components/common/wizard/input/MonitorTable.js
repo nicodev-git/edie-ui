@@ -108,6 +108,7 @@ export default class MonitorTable extends Component {
     this.onClickEdit()
   }
 
+
   getMonitorImage (item) {
     let img = item.image
     if (!img && item.monitortype) {
