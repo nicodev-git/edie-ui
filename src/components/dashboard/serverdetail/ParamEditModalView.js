@@ -5,12 +5,12 @@ import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts
 
 export default class ParamEditModalView extends Component {
   render () {
-    const {onSubmit, onHide, styles, defaultKeys, onKeyClick} = this.props
+    const {onSubmit, onHide, styles, defaultKeys, onKeyClick, hideDefaults} = this.props
     return (
       <Modal title="Param" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Param">
-            <div className="margin-md-bottom" style={styles.wrapper}>
+            {!hideDefaults && <div className="margin-md-bottom" style={styles.wrapper}>
               {defaultKeys.map(k =>
                 <Chip
                   key={k}
@@ -19,7 +19,7 @@ export default class ParamEditModalView extends Component {
                   label={k}
                 />
               )}
-            </div>
+            </div>}
             <div className="form-column">
               <Field name="key" component={FormInput} label="Key"/>
               <Field name="value" component={FormInput} label="Value"/>

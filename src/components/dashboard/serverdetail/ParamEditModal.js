@@ -1,14 +1,7 @@
 import React from 'react'
 import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
-import {assign} from 'lodash'
 import ParamEditModalView from './ParamEditModalView'
-import {
-  closeParamEditModal,
-  updateParam,
-  addParam
-} from 'actions'
-
 import {defaultKeys} from 'shared/Global'
 
 const styles = {
@@ -48,12 +41,13 @@ class ParamEditModal extends React.Component {
   }
 
   render () {
-    const {handleSubmit} = this.props
+    const {handleSubmit, hideDefaults} = this.props
     return (
       <ParamEditModalView
         onHide={this.onClickClose.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         styles={styles}
+        hideDefaults={hideDefaults}
         defaultKeys={defaultKeys}
         onKeyClick={this.onClickDefaultKey.bind(this)}
       />

@@ -22,9 +22,9 @@ export default class DeviceMonitors extends Component {
 
   ////////////////////////////////////////////////////////////
 
-  onClickParam (type, key, value) {
+  onClickParam (context, key, value) {
     this.setState({
-      editParamType: type,
+      editParamContext: context,
       editParam: {key, value},
       paramModalOpen: true
     })
@@ -38,16 +38,12 @@ export default class DeviceMonitors extends Component {
 
   ////////////////////////////////////////////////////////////
 
-  renderParamModal () {
-    if (!this.state.paramModalOpen) return null
-  }
-
   renderParams (monitortype, params, context) {
     const itemKeys = thresholdKeys[monitortype] || []
     return (
       <div>
         {itemKeys.map(p =>
-          <Chip key={p} label={`${p} = ${params[p] ||  ''}`} onClick={() => this.onClickParam('normal')}/>
+          <Chip key={p} label={`${p} = ${params[p] ||  ''}`} onClick={() => this.onClickParam(context, p, params[p])}/>
         )}
       </div>
     )
@@ -58,7 +54,7 @@ export default class DeviceMonitors extends Component {
     rows.push(
       <tr key={monitor.uid}>
         <td>{monitor.monitortype}</td>
-        <td>{this.renderParams(monitor.monitortype, monitor.params)}</td>
+        <td>{this.renderParams(monitor.monitortype, monitor.params, {type: 'normal', monitor})}</td>
       </tr>
     )
 
@@ -72,7 +68,7 @@ export default class DeviceMonitors extends Component {
                 <span className="padding-md-left">{basicMonitorType}</span>
               </td>
               <td>
-                {this.renderParams(basicMonitorType, basicMonitor[basicMonitorType] || {})}
+                {this.renderParams(basicMonitorType, basicMonitor[basicMonitorType] || {}, {type: 'basic', monitor, basicMonitorType})}
               </td>
             </tr>
           )
@@ -87,6 +83,7 @@ export default class DeviceMonitors extends Component {
     if (!this.props.paramModalOpen) return null
     return (
       <ParamEditModal
+        hideDefaults
         editParam={this.state.editParam}
         onClose={this.onCloseParamEdit.bind(this)}
       />
@@ -120,6 +117,7 @@ export default class DeviceMonitors extends Component {
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.slug, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}
+          {this.renderParamEditModal()}
         </TabPageBody>
       </TabPage>
     )
