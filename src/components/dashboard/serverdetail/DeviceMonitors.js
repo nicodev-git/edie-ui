@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {keys} from 'lodash'
+import {Chip} from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -10,9 +11,19 @@ import StatusImg from './StatusImg'
 import {thresholdKeys} from 'shared/MonitorConst'
 
 export default class DeviceMonitors extends Component {
+  onClickParam(type, key, value) {
+
+  }
+
   renderParams (monitortype, params) {
     const itemKeys = thresholdKeys[monitortype] || []
-    return itemKeys.map(p => `${p} = ${params[p] ||  ''}`).join(' ')
+    return (
+      <div>
+        {itemKeys.map(p =>
+          <Chip key={p} label={`${p} = ${params[p] ||  ''}`}/>
+        )}
+      </div>
+    )
   }
 
   renderMonitor (monitor) {
