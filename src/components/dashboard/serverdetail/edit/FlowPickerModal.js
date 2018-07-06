@@ -22,6 +22,12 @@ export default class FlowPickerModal extends React.Component {
     this.props.onClickOK(this.state.selected)
   }
 
+  getWorkflows () {
+    const {device, workflows} = this.props
+    if (!device) return workflows
+  }
+
+
   render () {
     return (
       <FlowPickerModalView
