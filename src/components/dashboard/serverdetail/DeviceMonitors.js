@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
+import {keys} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
-import {keys} from 'lodash'
 
-// import { extImageBaseUrl } from 'shared/Global'
+import {thresholdKeys} from 'shared/MonitorConst'
 
 export default class DeviceMonitors extends Component {
-  renderParams (params) {
-    let str = ''
-
-
-    return str
+  renderParams (monitortype, params) {
+    const itemKeys = thresholdKeys[monitortype] || []
+    return itemKeys.map(p => `${p} = ${params[p] ||  ''}`).join(' ')
   }
 
   renderMonitor (monitor) {
@@ -22,7 +20,7 @@ export default class DeviceMonitors extends Component {
     rows.push(
       <tr key={monitor.uid}>
         <td>{monitor.monitortype}</td>
-        <td>{this.renderParams(monitor.params)}</td>
+        <td>{this.renderParams(monitor.monitortype, monitor.params)}</td>
       </tr>
     )
 
@@ -32,8 +30,12 @@ export default class DeviceMonitors extends Component {
         keys(basicMonitor).forEach(basicMonitorType => {
           rows.push(
             <tr key={monitor.uid + '-' + basicMonitorType}>
-              <td>{basicMonitorType}</td>
-              <td></td>
+              <td>
+                <span className="padding-md-left">{basicMonitorType}</span>
+              </td>
+              <td>
+                {this.renderParams(basicMonitorType, basicMonitor[basicMonitorType] || {})}
+              </td>
             </tr>
           )
         })
