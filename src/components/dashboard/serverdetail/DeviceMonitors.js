@@ -16,6 +16,7 @@ export default class DeviceMonitors extends Component {
     super(props)
     this.state = {
       paramModalOpen: false,
+      editParamContext: null,
       editParam: null
     }
   }
@@ -34,6 +35,16 @@ export default class DeviceMonitors extends Component {
     this.setState({
       paramModalOpen: false
     })
+  }
+
+  onSaveParam (param) {
+    const {editParamContext} = this.state
+    if (editParamContext.type === 'normal') {
+
+    } else {
+
+    }
+
   }
 
   ////////////////////////////////////////////////////////////
@@ -80,12 +91,13 @@ export default class DeviceMonitors extends Component {
   }
 
   renderParamEditModal () {
-    if (!this.props.paramModalOpen) return null
+    if (!this.state.paramModalOpen) return null
     return (
       <ParamEditModal
         hideDefaults
         editParam={this.state.editParam}
         onClose={this.onCloseParamEdit.bind(this)}
+        onSave={this.onSaveParam.bind(this)}
       />
     )
   }

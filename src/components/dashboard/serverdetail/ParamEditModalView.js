@@ -21,8 +21,8 @@ export default class ParamEditModalView extends Component {
               )}
             </div>}
             <div className="form-column">
-              <Field name="key" component={FormInput} label="Key"/>
-              <Field name="value" component={FormInput} label="Value"/>
+              <Field name="key" component={FormInput} floatingLabel="Key"/>
+              <Field name="value" component={FormInput} floatingLabel="Value"/>
             </div>
           </CardPanel>
           <SubmitBlock name="Save"/>
