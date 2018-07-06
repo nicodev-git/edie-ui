@@ -12,9 +12,7 @@ import {keys} from 'lodash'
 export default class DeviceMonitors extends Component {
   renderParams (params) {
     let str = ''
-    keys(params).forEach(k => {
-      str += `${k} = ${params[k]} `
-    })
+
 
     return str
   }
@@ -23,9 +21,6 @@ export default class DeviceMonitors extends Component {
     const rows = []
     rows.push(
       <tr key={monitor.uid}>
-        <td>
-          {monitor.name}
-        </td>
         <td>{monitor.monitortype}</td>
         <td>{this.renderParams(monitor.params)}</td>
       </tr>
@@ -33,6 +28,16 @@ export default class DeviceMonitors extends Component {
 
     if (monitor.monitortype === 'basic') {
       const {basicMonitor} = monitor.params || {}
+      if (basicMonitor) {
+        keys(basicMonitor).forEach(basicMonitorType => {
+          rows.push(
+            <tr key={monitor.uid + '-' + basicMonitorType}>
+              <td>{basicMonitorType}</td>
+              <td></td>
+            </tr>
+          )
+        })
+      }
     }
 
     return rows
@@ -45,7 +50,6 @@ export default class DeviceMonitors extends Component {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th>Name</th>
               <th>Type</th>
               <th>Config</th>
             </tr>
