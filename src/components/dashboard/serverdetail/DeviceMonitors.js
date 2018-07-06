@@ -7,20 +7,47 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
+import ParamEditModal from './ParamEditModal'
 
 import {thresholdKeys} from 'shared/MonitorConst'
 
 export default class DeviceMonitors extends Component {
-  onClickParam(type, key, value) {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      paramModalOpen: false,
+      editParam: null
+    }
   }
 
-  renderParams (monitortype, params) {
+  ////////////////////////////////////////////////////////////
+
+  onClickParam (type, key, value) {
+    this.setState({
+      editParamType: type,
+      editParam: {key, value},
+      paramModalOpen: true
+    })
+  }
+
+  onCloseParamEdit () {
+    this.setState({
+      paramModalOpen: false
+    })
+  }
+
+  ////////////////////////////////////////////////////////////
+
+  renderParamModal () {
+    if (!this.state.paramModalOpen) return null
+  }
+
+  renderParams (monitortype, params, context) {
     const itemKeys = thresholdKeys[monitortype] || []
     return (
       <div>
         {itemKeys.map(p =>
-          <Chip key={p} label={`${p} = ${params[p] ||  ''}`}/>
+          <Chip key={p} label={`${p} = ${params[p] ||  ''}`} onClick={() => this.onClickParam('normal')}/>
         )}
       </div>
     )
@@ -54,6 +81,16 @@ export default class DeviceMonitors extends Component {
     }
 
     return rows
+  }
+
+  renderParamEditModal () {
+    if (!this.props.paramModalOpen) return null
+    return (
+      <ParamEditModal
+        editParam={this.state.editParam}
+        onClose={this.onCloseParamEdit.bind(this)}
+      />
+    )
   }
 
   renderBody () {
