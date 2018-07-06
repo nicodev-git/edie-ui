@@ -7,10 +7,16 @@ import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
 
 export default class DeviceMonitors extends Component {
+  renderMonitor (monitor) {
+
+  }
+
   renderBody () {
+    const {device} = this.props
     return (
-      <div>
+      <div className="bg-white" style={{height: '100%', overflow: 'auto'}}>
         Monitors
+        {(device.monitors || []).map(monitor => this.renderMonitor(monitor))}
       </div>
     )
   }
