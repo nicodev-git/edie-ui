@@ -5,11 +5,20 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
-// import {findIndex} from 'lodash'
+import {keys} from 'lodash'
 
 // import { extImageBaseUrl } from 'shared/Global'
 
 export default class DeviceMonitors extends Component {
+  renderParams (params) {
+    let str = ''
+    keys(params).forEach(k => {
+      str += `${k} = ${params[k]} `
+    })
+
+    return str
+  }
+
   renderMonitor (monitor) {
     const rows = []
     rows.push(
@@ -18,7 +27,7 @@ export default class DeviceMonitors extends Component {
           {monitor.name}
         </td>
         <td>{monitor.monitortype}</td>
-        <td></td>
+        <td>{this.renderParams(monitor.params)}</td>
       </tr>
     )
 
@@ -38,7 +47,7 @@ export default class DeviceMonitors extends Component {
             <tr>
               <th>Name</th>
               <th>Type</th>
-              <td>Config</td>
+              <th>Config</th>
             </tr>
           </thead>
           <tbody>
