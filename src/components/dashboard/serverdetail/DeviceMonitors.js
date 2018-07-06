@@ -43,7 +43,7 @@ export default class DeviceMonitors extends Component {
 
     this.onCloseParamEdit()
 
-    let monitor = device.monitors.filter(p => p.uid === editParamContext.monitor.uid)
+    let monitor = device.monitors.filter(p => p.uid === editParamContext.monitor.uid)[0]
     if (!monitor) return
 
     if (editParamContext.type === 'normal') {
