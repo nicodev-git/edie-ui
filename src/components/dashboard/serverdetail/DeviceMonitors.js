@@ -18,6 +18,7 @@ export default class DeviceMonitors extends Component {
           {monitor.name}
         </td>
         <td>{monitor.monitortype}</td>
+        <td></td>
       </tr>
     )
 
@@ -37,6 +38,7 @@ export default class DeviceMonitors extends Component {
             <tr>
               <th>Name</th>
               <th>Type</th>
+              <td>Config</td>
             </tr>
           </thead>
           <tbody>
