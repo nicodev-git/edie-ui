@@ -55,18 +55,27 @@ export default class DeviceMonitors extends Component {
         }
       }
     } else {
+      const {basicMonitor} = monitor.params || {}
+      const {basicMonitorType} = editParamContext
       monitor = {
         ...monitor,
         params: {
           ...monitor.params,
           basicMonitor: {
-            ...monitor.params.basicMonitor,
-
+            ...basicMonitor,
+            [basicMonitorType]: {
+              ...basicMonitor[basicMonitorType],
+              [param.key]: param.value
+            }
           }
         }
       }
     }
 
+    this.props.updateMapDevice({
+      ...device,
+      monitors: device.monitors.map(p => p.uid === monitor.uid ? monitor : p)
+    })
   }
 
   ////////////////////////////////////////////////////////////
