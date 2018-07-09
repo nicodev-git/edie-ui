@@ -7,11 +7,12 @@ import {
   Modal,
   SubmitBlock
 } from 'components/modal/parts'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 
 export default class SimulationModalView extends React.Component {
   render () {
-    const {onSubmit, onClickClose, collectors} = this.props
+    const {onSubmit, onClickClose, collectors, wfSimulationState} = this.props
     return (
       <Modal title="Simulation" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
@@ -33,6 +34,7 @@ export default class SimulationModalView extends React.Component {
                    style={{width: 200}}
             />
           </div>
+          {wfSimulationState ? <RefreshOverlay/> : null}
           <SubmitBlock name="Post"/>
         </form>
       </Modal>

@@ -230,6 +230,8 @@ class Workflows extends React.Component {
     return (
       <SimulationModal
         collectors={this.props.collectors}
+        wfSimulationState={this.props.wfSimulationState}
+        wfSimulationRes={this.props.wfSimulationRes}
         onSubmit={this.onTrySimulate.bind(this)}
         onClickClose={this.onCloseSimulationModal.bind(this)}/>
     )

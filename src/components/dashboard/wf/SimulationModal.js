@@ -3,6 +3,7 @@ import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
 import SimulationModalView from './SimulationModalView'
+import {showAlert} from "../../common/Alert";
 
 class SimulationModal extends React.Component {
   constructor (props) {
@@ -19,9 +20,10 @@ class SimulationModal extends React.Component {
     onSubmit(values)
   }
   render () {
-    const {handleSubmit, onClickClose, collectors} = this.props
+    const {handleSubmit, onClickClose, collectors, wfSimulationState} = this.props
     return (
       <SimulationModalView
+        wfSimulationState={wfSimulationState}
         collectors={collectors}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
