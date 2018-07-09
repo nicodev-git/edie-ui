@@ -866,7 +866,7 @@ export const simulateWfMessage = (data) => {
     dispatch({type: UPDATE_WF_SIM_STATE, data: true})
     dispatch({type: UPDATE_WF_SIM_RES, data: ''})
     axios.post(`${ROOT_URL}/simulateConnector`, data).then(res => {
-      dispatch({type: UPDATE_WF_SIM_RES, data: res.data})
+      dispatch({type: UPDATE_WF_SIM_RES, data: res.data === 'OK' ? 'Successfully sent' : res.data})
       dispatch({type: UPDATE_WF_SIM_STATE, data: false})
     }).catch(() => {
       dispatch({type: UPDATE_WF_SIM_RES, data: 'Connection failed'})

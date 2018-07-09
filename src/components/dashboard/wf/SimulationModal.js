@@ -3,12 +3,19 @@ import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
 import SimulationModalView from './SimulationModalView'
-import {showAlert} from "../../common/Alert";
+import {showAlert} from 'components/common/Alert'
 
 class SimulationModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+    }
+  }
+
+  componentDidUpdate(props) {
+    const {wfSimulationRes} = this.props
+    if (!props.wfSimulationRes && wfSimulationRes) {
+      showAlert(wfSimulationRes)
     }
   }
 
