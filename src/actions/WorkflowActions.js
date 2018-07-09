@@ -44,6 +44,7 @@ import {
 
   SHOW_WF_SIMULATION_MODAL,
   UPDATE_WF_SIM_RES,
+  UPDATE_WF_SIM_STATE,
 
   FETCH_SIM_SAMPLES,
   ADD_SIM_SAMPLE,
@@ -862,10 +863,13 @@ export const showWfSimulationModal = (visible) => {
 
 export const simulateWfMessage = (data) => {
   return dispatch => {
+    dispatch({type: UPDATE_WF_SIM_STATE, data: true})
     axios.post(`${ROOT_URL}/simulateConnector`, data).then(res => {
       dispatch({type: UPDATE_WF_SIM_RES, data: res.data})
+      dispatch({type: UPDATE_WF_SIM_STATE, data: false})
     }).catch(() => {
       dispatch({type: UPDATE_WF_SIM_RES, data: 'Connection failed'})
+      dispatch({type: UPDATE_WF_SIM_STATE, data: false})
     })
   }
 }

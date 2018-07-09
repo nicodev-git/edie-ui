@@ -84,6 +84,7 @@ export default connect(
     editWfSetting: state.workflow.editWfSetting,
     wfSimulationModalOpen: state.workflow.wfSimulationModalOpen,
     simSamples: state.workflow.simSamples,
+    wfSimulationState: state.workflow.wfSimulationState,
 
     brainCells: state.settings.brainCells,
     collectors: state.settings.collectors

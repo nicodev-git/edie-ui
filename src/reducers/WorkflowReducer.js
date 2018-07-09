@@ -35,7 +35,8 @@ import {
   SHOW_WF_SIMULATION_MODAL,
   FETCH_SIM_SAMPLES,
   ADD_SIM_SAMPLE,
-  REMOVE_SIM_SAMPLE
+  REMOVE_SIM_SAMPLE,
+  UPDATE_WF_SIM_STATE
 } from 'actions/types'
 import {UPDATE_WF_SIM_RES} from "../actions/types";
 
@@ -50,7 +51,8 @@ const initialState = {
   finishedWfs: [],
   globalVars: [],
   shapes: [],
-  simSamples: []
+  simSamples: [],
+  wfSimulationState: false
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -127,6 +129,8 @@ export default function (state = initialState, action) {
       return {...state, wfSimulationModalOpen: action.visible}
     case UPDATE_WF_SIM_RES:
       return {...state, wfSimulationRes: action.data}
+    case UPDATE_WF_SIM_STATE:
+      return { ...state, wfSimulationState: action.data }
 
     case FETCH_SIM_SAMPLES:
       return { ...state, simSamples: action.data }
@@ -134,6 +138,7 @@ export default function (state = initialState, action) {
       return { ...state, simSamples: [...state.simSamples, action.data]}
     case REMOVE_SIM_SAMPLE:
       return { ...state, simSamples: state.simSamples.filter(p => p.id !== action.data.id) }
+
     default:
       return state
   }
