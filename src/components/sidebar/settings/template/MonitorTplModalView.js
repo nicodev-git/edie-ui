@@ -30,8 +30,6 @@ export default class MonitorTplModalView extends Component {
       basicMonitor} = this.props
     const {monitortype} = allValues || {}
     if (monitortype !== 'basic') return
-
-
     return (
       <CardPanel title="Basic Monitor" tools={<AddCircle onClick={onClickAddBasic} className="link"/>}>
         <table className="table table-hover">
