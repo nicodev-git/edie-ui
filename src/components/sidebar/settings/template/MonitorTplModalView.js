@@ -79,7 +79,7 @@ export default class MonitorTplModalView extends Component {
               <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
             </div>
 
-            <Field name="enabled" component={FormCheckbox} label="Enabled" labelPosition="right"/>
+            <Field name="enabled" component={FormCheckbox} label="Enabled" />
           </CardPanel>
 
           <CardPanel title="Tag" className="margin-md-top">
@@ -99,6 +99,9 @@ export default class MonitorTplModalView extends Component {
               <Chip style={chipStyles.chip} onClick={onClickAddCredType} label={<b>+</b>}/>
             </div>
           </CardPanel>
+
+          {this.renderBasicMonitor()}
+
           <br/>
           {tagModal}
           {credTypeModal}

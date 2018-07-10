@@ -41,6 +41,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
       credentialTypes: monitorTplCredTypes
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
+    if (tpl.monitortype === 'basic') tpl.params.basicMonitor = this.state.basicMonitor
 
     if (selectedDeviceTpl) {
       if (monitorTpl) {
