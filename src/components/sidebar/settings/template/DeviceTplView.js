@@ -91,7 +91,7 @@ class DeviceTplView extends React.Component {
   }
 
   render () {
-    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag, deviceTpl, canEdit } = this.props
+    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag, /*deviceTpl, */canEdit } = this.props
     let header = 'Device Template'
     let imgUrl = this.getImageUrl()
     let options = this.renderOptions()

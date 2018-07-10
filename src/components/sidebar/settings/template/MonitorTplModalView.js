@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import {Chip} from '@material-ui/core'
 import { Field } from 'redux-form'
+import { keys } from 'lodash'
+import AddCircle from '@material-ui/icons/AddCircle'
+import DeleteIcon from '@material-ui/icons/Delete'
+
 import { SubmitBlock, FormInput, ImageUploader, FormCheckbox, Modal, CardPanel } from 'components/modal/parts'
 
 import { chipStyles } from 'style/common/materialStyles'
@@ -10,6 +14,53 @@ const contentStyle = {
 }
 
 export default class MonitorTplModalView extends Component {
+  renderBasicMonitorParams (type) {
+    const {basicMonitor, onClickDeleteBasicParam} = this.props
+    const items = keys(basicMonitor[type] || {}).map(name =>
+      <Chip key={name} label={`${name} = ${basicMonitor[type][name]}`}
+            onDelete={() => onClickDeleteBasicParam(type, name)}/>
+    )
+    return items
+  }
+
+  renderBasicMonitor () {
+    const {
+      allValues, onClickAddBasic,
+      onClickAddBasicParam, onClickRemoveBasic,
+      basicMonitor} = this.props
+    const {monitortype} = allValues || {}
+    if (monitortype !== 'basic') return
+
+
+    return (
+      <CardPanel title="Basic Monitor" tools={<AddCircle onClick={onClickAddBasic} className="link"/>}>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>Monitor Type</th>
+            <th>Config</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          {keys(basicMonitor).map(type =>
+            <tr key={type}>
+              <td>{type}</td>
+              <td>
+                {this.renderBasicMonitorParams(type)}
+                <Chip onClick={() => onClickAddBasicParam(type)} label={<b>+</b>}/>
+              </td>
+              <td>
+                <DeleteIcon className="link" onClick={() => onClickRemoveBasic(type)}/>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </CardPanel>
+    )
+  }
+
   render () {
     const {
       header, imgUrl, onSubmit, onHide, onChange,
