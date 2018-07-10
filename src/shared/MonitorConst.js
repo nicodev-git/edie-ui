@@ -1,6 +1,5 @@
 export const thresholdKeys = {
-  'disk': 'mediumDisk highDisk'.split(' '),
-  'cpu': 'mediumCpu highCpu'.split(' '),
-  'memory': 'mediumMemory highMemory'.split(' '),
-  'service': 'mediumService highService'.split(' ')
+  'disk': 'mediumUsage highUsage'.split(' '),
+  'cpu': 'mediumUsage highUsage'.split(' '),
+  'memory': 'mediumUsage highUsage'.split(' ')
 }
