@@ -103,7 +103,7 @@ class DeviceTplView extends React.Component {
         monitors={this.props.monitors}
         monitorTemplates={this.props.monitorTemplates}
         workflows={this.props.editTplWorkflows}
-        onSubmit={deviceTpl.origin === 'SYSTEM' || !canEdit ? null : handleSubmit(this.handleFormSubmit.bind(this))}
+        onSubmit={/*deviceTpl.origin === 'SYSTEM' || */!canEdit ? null : handleSubmit(this.handleFormSubmit.bind(this))}
         options={options}
         imgUrl={imgUrl}
         onChange={this.onClickChangeImage.bind(this)}
