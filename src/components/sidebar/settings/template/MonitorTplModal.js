@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, getFormValues } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
 
@@ -11,7 +11,9 @@ import CredTypePicker from 'containers/settings/credentials/CredTypePickerContai
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      basicMonitor: props.monitorTpl && props.monitorTpl.params ? (props.monitorTpl.params.basicMonitor || {}) : {}
+    }
     this.getImageUrl = this.getImageUrl.bind(this)
     this.onClickChangeImage = this.onClickChangeImage.bind(this)
     console.log(props.selectedDeviceTpl)
@@ -94,6 +96,58 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
       this.props.updateMonitorTplCredTypes([...monitorTplCredTypes, sel.name])
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////
+
+  onClickAddBasic () {
+    const {basicMonitor} = this.state
+    const type = prompt('Please input monitor type')
+    if (!type) return
+    if (basicMonitor[type]) return
+    this.setState({
+      basicMonitor: {
+        ...basicMonitor,
+        [type]: {}
+      }
+    })
+  }
+
+  onClickRemoveBasic (type) {
+    const {basicMonitor} = this.state
+    if (!window.confirm('Click OK to remove')) return
+    const value = {...basicMonitor}
+    delete value[type]
+    this.setState({basicMonitor: value})
+  }
+
+  onClickAddBasicParam (type) {
+    const name = prompt('Please input name')
+    if (!name) return
+    const value = prompt('Please type value')
+    if (value === null) return
+    const {basicMonitor} = this.state
+    if (basicMonitor[type][name] !== undefined) return
+    this.setState({
+      basicMonitor: {
+        ...basicMonitor,
+        [type]: {
+          ...basicMonitor[type],
+          [name]: value
+        }
+      }
+    })
+  }
+
+  onClickDeleteBasicParam (type, name) {
+    if (!window.confirm('Click OK to remove')) return
+    const {basicMonitor} = this.state
+    const value = {...basicMonitor}
+    delete value[type][name]
+    this.setState({basicMonitor: value})
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+
   renderTagsModal () {
     if (!this.props.monitorTplTagModalOpen) return null
     return (
@@ -109,7 +163,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     )
   }
   render () {
-    const { handleSubmit, monitorTplTags, monitorTplCredTypes } = this.props
+    const { handleSubmit, monitorTplTags, monitorTplCredTypes, allValues } = this.props
     let header = 'Monitor Template'
     let imgUrl = this.getImageUrl()
     return (
@@ -121,6 +175,8 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
         imgUrl={imgUrl}
         onChange={this.onClickChangeImage}
 
+        allValues={allValues}
+
         tags={monitorTplTags}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
@@ -130,6 +186,13 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
         monitorTplCredTypes={monitorTplCredTypes}
         onClickAddCredType={this.onClickAddCredType.bind(this)}
         onClickDeleteCredType={this.onClickDeleteCredType.bind(this)}
+
+        basicMonitor={this.state.basicMonitor}
+        onClickAddBasic={this.onClickAddBasic.bind(this)}
+        onClickRemoveBasic={this.onClickRemoveBasic.bind(this)}
+
+        onClickAddBasicParam={this.onClickAddBasicParam.bind(this)}
+        onClickDeleteBasicParam={this.onClickDeleteBasicParam.bind(this)}
       />
     )
   }
@@ -137,6 +200,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
 
 export default connect(
   state => ({
-    initialValues: state.settings.monitorTpl || {}
+    initialValues: state.settings.monitorTpl || {},
+    allValues: getFormValues('monitorTplEdit')(state)
   })
 )(reduxForm({form: 'monitorTplEdit'})(MonitorTplModal))
