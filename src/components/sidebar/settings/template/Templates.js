@@ -124,17 +124,17 @@ export default class Templates extends Component {
                 <td>{item.description}</td>
                 <td>{item.enabled ? 'Enabled' : 'Disabled'}</td>
                 <td className="text-right fa-lg">
-                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
+                  {/*item.origin !== 'SYSTEM' && */canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickShareMonitorTpl.bind(this, item)}>
                     <Share nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
-                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
+                  {/*item.origin !== 'SYSTEM' && */canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickEditMonitorTpl.bind(this, item)}>
                     <EditIcon nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
-                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
+                  {/*item.origin !== 'SYSTEM' && */canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
                     <DeleteIcon nativeColor="#545454" hovercolor="#f44336"/>
