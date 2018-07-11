@@ -7,7 +7,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import WorkflowEditModal from './WorkflowEditModal'
 
-export default class WorkflowEdit extends React.Component {
+export default class WorkflowAdd extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
