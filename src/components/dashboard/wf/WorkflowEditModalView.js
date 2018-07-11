@@ -1,6 +1,7 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Menu, MenuItem, Tab,
+import {
+  MenuItem, Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel
 } from '@material-ui/core'
@@ -35,7 +36,7 @@ class WorkflowEditModalView extends React.Component {
   }
   renderWfTab() {
     const {
-      wfDataItems, onClickAddShape, onCloseShapeMenu, shapeAnchorEl,
+      wfDataItems, /*onClickAddShape, onCloseShapeMenu, shapeAnchorEl,*/
       shapes, onClickShape, onClickDeleteShape, onClickEditShape
     } = this.props
     return (
