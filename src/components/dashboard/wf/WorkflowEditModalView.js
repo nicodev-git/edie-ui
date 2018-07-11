@@ -44,8 +44,8 @@ class WorkflowEditModalView extends React.Component {
           <Typography>Rules</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <div style={{width: '100%'}}>
-            <div>
+          <div style={{width: '100%'}} className="flex-horizontal">
+            <div style={{overflow: 'auto', maxHeight: 500}}>
               {shapes.map((p, i) =>
                 <MenuItem key={i} onClick={() => onClickShape(p)}>
                   <div className="inline-block valign-middle">
@@ -56,7 +56,7 @@ class WorkflowEditModalView extends React.Component {
                 </MenuItem>
               )}
             </div>
-            <div>
+            <div className="flex-1">
               {wfDataItems.map((p, i) =>
                 <div key={i} className="text-center">
                   <div>
@@ -73,9 +73,6 @@ class WorkflowEditModalView extends React.Component {
                   </div>
                 </div>
               )}
-            </div>
-
-            <div>
               {this.renderButtons()}
             </div>
           </div>
