@@ -30,6 +30,9 @@ const cardStyle = {
 // const panelHeight = cardStyle.height + 90
 
 class WorkflowEditModalView extends React.Component {
+  renderShapeMenu () {
+
+  }
   renderWfTab() {
     const {
       wfDataItems, onClickAddShape, onCloseShapeMenu, shapeAnchorEl,
@@ -43,24 +46,15 @@ class WorkflowEditModalView extends React.Component {
         <ExpansionPanelDetails>
           <div style={{width: '100%'}}>
             <div>
-              <AddIcon onClick={onClickAddShape}/>
-              {shapeAnchorEl ? (
-                <Menu
-                  anchorEl={shapeAnchorEl}
-                  open
-                  onClose={onCloseShapeMenu}
-                >
-                  {shapes.map((p, i) =>
-                    <MenuItem key={i} onClick={() => onClickShape(p)}>
-                      <div className="inline-block valign-middle">
-                        <img src={`/images/${p.img}`} width={24} height={24} alt=""/>
-                      </div>
-                      &nbsp;&nbsp;
-                      <span>{p.title}</span>
-                    </MenuItem>
-                  )}
-                </Menu>
-              ) : null}
+              {shapes.map((p, i) =>
+                <MenuItem key={i} onClick={() => onClickShape(p)}>
+                  <div className="inline-block valign-middle">
+                    <img src={`/images/${p.img}`} width={24} height={24} alt=""/>
+                  </div>
+                  &nbsp;&nbsp;
+                  <span>{p.title}</span>
+                </MenuItem>
+              )}
             </div>
             <div>
               {wfDataItems.map((p, i) =>
