@@ -41,10 +41,12 @@ class Workflows extends React.Component {
   }
 
   onClickAdd() {
-    this.props.showWfNameModal(true)
-    this.setState({
-      editWf: null
-    })
+    // this.props.showWfNameModal(true)
+    // this.setState({
+    //   editWf: null
+    // })
+
+    this.props.history.push(`/workflow/add`)
   }
 
   onClickEdit(wf) {

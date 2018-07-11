@@ -47,7 +47,7 @@ export default class WorkflowAdd extends React.Component {
             {...this.props}
             noModal
             allTags={this.getTags()}
-            editWf={editWf}
+            editWf={null}
             onSave={this.onSaveName.bind(this)}
           />
         </TabPageBody>
