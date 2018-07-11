@@ -18,49 +18,17 @@ export default class WorkflowAdd extends React.Component {
     this.props.fetchGroups()
     this.props.fetchShapes()
     this.props.fetchBrainCells()
-
-    const {match} = this.props
-    const {name} = match.params
-    this.openWorkflow(name)
   }
 
-  openWorkflow (name) {
-    this.props.fetchWorkflowByName(name, flow => {
-      if (flow) {
-        this.setState({
-          editWf: flow
-        })
-        console.log(flow)
-      }
-    })
-  }
-  componentDidUpdate (prevProps) {
-    const {match} = this.props
-    const {name} = match.params
-    if (name !== prevProps.match.params.name) {
-      this.setState({editWf: null})
-      this.openWorkflow(name)
-    }
-  }
 
   onSaveName (values) {
-    const {editWf} = this.state
-    if (editWf) {
-      this.props.updateWorkflow({
-        ...editWf,
-        ...values
-      })
-    } else {
-      const flow = {
-        ...values,
-        uuid: uuid.v4(),
-        flowItems: []
-      }
-      this.props.addWorkflow(flow)
+    const flow = {
+      ...values,
+      uuid: uuid.v4(),
+      flowItems: []
     }
-
+    this.props.addWorkflow(flow)
     this.props.history.push('/workflow')
-
   }
 
   getTags () {
@@ -69,9 +37,6 @@ export default class WorkflowAdd extends React.Component {
   }
 
   render () {
-    const {editWf} = this.state
-    if (!editWf) return <div>Loading...</div>
-
     return (
       <TabPage>
         <TabPageHeader title="Workflow Edit">
