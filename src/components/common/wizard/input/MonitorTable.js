@@ -67,6 +67,7 @@ export default class MonitorTable extends Component {
   onClickAddBasic () {
     const {device} = this.props
     this.props.addBasicMonitors(device)
+    this.setState({ monitorPickerVisible: false })
   }
 
   onClickAddDevice () {
@@ -176,6 +177,13 @@ export default class MonitorTable extends Component {
     )
   }
 
+  renderBasicMonitor () {
+    const {monitors} = this.props
+    const hasBasic = monitors.filter(p => p.basic).length > 0
+    if (!hasBasic) return null
+
+  }
+
   renderDevices () {
     if (this.props.hideDevices) return null
     return (
@@ -198,12 +206,13 @@ export default class MonitorTable extends Component {
         <CardPanel title="Monitors" tools={this.renderTools()}>
           <div style={{height: 326, overflow: 'auto', padding: '3px'}}>
             <ul className="web-applet-cards">
+              {this.renderBasicMonitor()}
               {
                 this.props.monitors.map((item, index) =>
                   <AppletCard
                     key={index}
                     className="small"
-                    color={colors[index % colors.length]}
+                    color={colors[(index + 1) % colors.length]}
                     name={item.name}
                     desc={item.monitortype}
                     img={this.getMonitorImage(item)}
