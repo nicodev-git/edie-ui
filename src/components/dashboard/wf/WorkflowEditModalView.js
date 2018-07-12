@@ -1,7 +1,7 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import {
-  MenuItem, Tab,
+  Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel
 } from '@material-ui/core'
@@ -38,7 +38,7 @@ const itemStyle = {
 
 class WorkflowEditModalView extends React.Component {
   renderSidebar () {
-    const { active, shapes } = this.props
+    const { active, shapes, onClickSidebarGroup, onClickShape } = this.props
     let groups = []
 
     shapes.forEach((m, index) => {
@@ -48,7 +48,7 @@ class WorkflowEditModalView extends React.Component {
       if (gindex < 0) groups.push({key: group, items: groupItems})
       else groupItems = groups[gindex].items
       groupItems.push(
-        <div key={index}>
+        <div key={index} onClick={() => onClickShape(m)} className="link">
           <div className="inline-block valign-middle">
             <img src={`/images/${m.img}`} style={itemStyle} alt=""/>
           </div>&nbsp;&nbsp;
@@ -61,12 +61,12 @@ class WorkflowEditModalView extends React.Component {
       <div className="draw-sidebar">
         {groups.map((g, i) =>
           <div key={i}>
-            <div className="group-title link" onClick={() => this.setState({active: i})}>
+            <div className="group-title link" onClick={() => onClickSidebarGroup(i)}>
               <img src={active === i ? '/images/minus.png' : '/images/plus.png'}
                    alt="" className="link valign-middle" width="16"/>
               <span className="valign-middle">{g.key}</span>
             </div>
-            <div className={active === i ? '' : 'hidden'}>
+            <div className={active === i ? 'padding-sm-left' : 'hidden'}>
               {g.items}
             </div>
           </div>
@@ -78,7 +78,7 @@ class WorkflowEditModalView extends React.Component {
   renderWfTab() {
     const {
       wfDataItems, /*onClickAddShape, onCloseShapeMenu, shapeAnchorEl,*/
-      shapes, onClickShape, onClickDeleteShape, onClickEditShape
+      onClickDeleteShape, onClickEditShape
     } = this.props
     return (
       <ExpansionPanel defaultExpanded>
@@ -87,7 +87,9 @@ class WorkflowEditModalView extends React.Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div style={{width: '100%'}} className="flex-horizontal">
-            {this.renderSidebar()}
+            <div className="diagram">
+              {this.renderSidebar()}
+            </div>
             <div className="flex-1">
               {wfDataItems.map((p, i) =>
                 <div key={i} className="text-center">

@@ -500,6 +500,7 @@ class WorkflowEditModal extends React.Component {
                 onClickExistingTag={this.onClickExistingTag.bind(this)}
 
                 active={this.state.active}
+                onClickSidebarGroup={i => this.setState({active: i})}
                 shapeModal={this.renderShapeModal()}
                 rulePanelExpanded={this.state.rulePanelExpanded}
                 onExpandRulePanel={this.onExpandRulePanel.bind(this)}
