@@ -18,7 +18,6 @@ import {
   showDeviceCredsModal,
   selectDeviceCreds,
   showDeviceCredsPicker,
-  addBasicMonitors,
 
   removeCredentials,
   addCredentials,

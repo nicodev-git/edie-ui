@@ -6,7 +6,7 @@ import MonitorTable from 'components/common/wizard/input/MonitorTable'
 export default class DeviceMonitorsModalView extends React.Component {
   renderMonitors () {
     const {monitors, monitorTemplates, onChangedMonitors, openDeviceMonitorWizard,
-      deviceTemplates, collectors} = this.props
+      deviceTemplates, collectors, addBasicMonitors, editDevice} = this.props
     return (
       <MonitorTable
         monitors={monitors}
@@ -16,6 +16,8 @@ export default class DeviceMonitorsModalView extends React.Component {
         deviceTemplates={deviceTemplates}
         collectors={collectors}
         hideDevices
+        device={editDevice}
+        addBasicMonitors={addBasicMonitors}
       />
     )
   }
