@@ -10,11 +10,26 @@ export default class MonitorPickModalView extends React.Component {
     return (
       <AppletCard
         key={tpl.id}
-        color={colors[i % colors.length]}
+        color={colors[(i + 1) % colors.length]}
         name={tpl.name}
         desc={tpl.description}
         img={`${extImageBaseUrl}${tpl.image}`}
         onClick={() => onClick(tpl)}
+        verified
+      />
+    )
+  }
+
+  renderBasic () {
+    const {onClickBasic} = this.props
+    if (!onClickBasic) return null
+    return (
+      <AppletCard
+        color={colors[0]}
+        name="Basic"
+        desc="Check basic info"
+        img="/resources/images/dashboard/basic.png"
+        onClick={onClickBasic}
         verified
       />
     )
@@ -25,6 +40,7 @@ export default class MonitorPickModalView extends React.Component {
     return (
       <Modal title="Monitors" onRequestClose={onHide} contentStyle={{width: 1058, maxWidth: 'initial'}}>
         <ul className="web-applet-cards" style={{marginTop: 40}}>
+          {this.renderBasic()}
           {this.props.templates.map(this.renderTpl.bind(this))}
         </ul>
       </Modal>
