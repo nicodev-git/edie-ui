@@ -78,6 +78,7 @@ export default class MonitorTplModalView extends Component {
             </div>
 
             <Field name="enabled" component={FormCheckbox} label="Enabled" />
+            <Field name="basic" component={FormCheckbox} label="Basic Monitor" />
           </CardPanel>
 
           <CardPanel title="Tag" className="margin-md-top">
