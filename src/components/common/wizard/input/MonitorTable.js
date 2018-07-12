@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { findIndex, assign } from 'lodash'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
+import NoteAddIcon from '@material-ui/icons/NoteAdd'
 import {IconButton, RadioGroup, Radio} from '@material-ui/core'
 import {Field} from 'redux-form'
 
@@ -32,9 +33,8 @@ export default class MonitorTable extends Component {
   renderTools () {
     return (
       <div>
-        <IconButton onClick={this.onClickAdd.bind(this)}>
-          <AddCircleIcon size={32}/>
-        </IconButton>
+        <NoteAddIcon onClick={this.onClickAddBasic.bind(this)} className="link"/>
+        <AddCircleIcon onClick={this.onClickAdd.bind(this)} className="link"/>
       </div>
     )
   }
@@ -64,6 +64,10 @@ export default class MonitorTable extends Component {
 
   onClickAdd (e) {
     this.setState({ monitorPickerVisible: true })
+  }
+
+  onClickAddBasic () {
+
   }
 
   onClickAddDevice () {
@@ -187,7 +191,7 @@ export default class MonitorTable extends Component {
 
   render () {
     return (
-      <div style={{/*marginTop: -22*/}}>
+      <div>
         {this.renderDevices()}
         {this.renderMonitorGroup()}
 
