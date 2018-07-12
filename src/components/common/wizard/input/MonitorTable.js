@@ -65,7 +65,8 @@ export default class MonitorTable extends Component {
   }
 
   onClickAddBasic () {
-    this.props.addBasicMonitors()
+    const {device} = this.props
+    this.props.addBasicMonitors(device)
   }
 
   onClickAddDevice () {

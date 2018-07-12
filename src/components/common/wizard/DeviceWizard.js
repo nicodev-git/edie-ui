@@ -354,6 +354,7 @@ class DeviceWizard extends Component {
         deviceTemplates={this.props.deviceTemplates}
         collectors={this.props.collectors}
         hideDevices
+        addBasicMonitors={this.props.addBasicMonitors}
       />
     )
   }

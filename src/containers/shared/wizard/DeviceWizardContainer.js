@@ -13,6 +13,7 @@ import {
   showCredListModal,
 
   fetchDevice,
+  addBasicMonitors,
 
   fetchMonitorGroups,
   fetchCollectors,
@@ -89,6 +90,7 @@ export default connect(
       showCredListModal,
 
       fetchDevice,
+      addBasicMonitors,
 
       fetchMonitorGroups,
       fetchCollectors,
