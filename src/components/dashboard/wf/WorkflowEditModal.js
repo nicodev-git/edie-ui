@@ -50,7 +50,9 @@ class WorkflowEditModal extends React.Component {
             tagInputValue: '',
             applyDeviceIds: props.editWf ? (props.editWf.applyDeviceIds || []) : [],
 
-            rulePanelExpanded: false
+            rulePanelExpanded: false,
+
+            active: 1
         }
     }
 
@@ -497,6 +499,7 @@ class WorkflowEditModal extends React.Component {
                 onClickDeleteTag={this.onClickDeleteTag.bind(this)}
                 onClickExistingTag={this.onClickExistingTag.bind(this)}
 
+                active={this.state.active}
                 shapeModal={this.renderShapeModal()}
                 rulePanelExpanded={this.state.rulePanelExpanded}
                 onExpandRulePanel={this.onExpandRulePanel.bind(this)}

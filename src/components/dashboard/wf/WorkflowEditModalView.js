@@ -21,6 +21,7 @@ import {
   CardPanel
 } from 'components/modal/parts'
 import {severities} from 'shared/Global'
+import {findIndex} from "lodash";
 
 const cardStyle = {
   minHeight: 250,
@@ -30,10 +31,50 @@ const cardStyle = {
 
 // const panelHeight = cardStyle.height + 90
 
-class WorkflowEditModalView extends React.Component {
-  renderShapeMenu () {
+const itemStyle = {
+  width: '24px',
+  height: '24px'
+}
 
+class WorkflowEditModalView extends React.Component {
+  renderSidebar () {
+    const { active, shapes } = this.props
+    let groups = []
+
+    shapes.forEach((m, index) => {
+      const group = m.group || 'General'
+      const gindex = findIndex(groups, {key: group})
+      let groupItems = []
+      if (gindex < 0) groups.push({key: group, items: groupItems})
+      else groupItems = groups[gindex].items
+      groupItems.push(
+        <div key={index}>
+          <div className="inline-block valign-middle">
+            <img src={`/images/${m.img}`} style={itemStyle} alt=""/>
+          </div>&nbsp;&nbsp;
+          <span>{m.title}</span>
+        </div>
+      )
+    })
+
+    return (
+      <div className="draw-sidebar">
+        {groups.map((g, i) =>
+          <div key={i}>
+            <div className="group-title link" onClick={() => this.setState({active: i})}>
+              <img src={active === i ? '/images/minus.png' : '/images/plus.png'}
+                   alt="" className="link valign-middle" width="16"/>
+              <span className="valign-middle">{g.key}</span>
+            </div>
+            <div className={active === i ? '' : 'hidden'}>
+              {g.items}
+            </div>
+          </div>
+        )}
+      </div>
+    )
   }
+
   renderWfTab() {
     const {
       wfDataItems, /*onClickAddShape, onCloseShapeMenu, shapeAnchorEl,*/
@@ -46,17 +87,7 @@ class WorkflowEditModalView extends React.Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div style={{width: '100%'}} className="flex-horizontal">
-            <div style={{overflow: 'auto', maxHeight: 500}}>
-              {shapes.map((p, i) =>
-                <MenuItem key={i} onClick={() => onClickShape(p)}>
-                  <div className="inline-block valign-middle">
-                    <img src={`/images/${p.img}`} width={24} height={24} alt=""/>
-                  </div>
-                  &nbsp;&nbsp;
-                  <span>{p.title}</span>
-                </MenuItem>
-              )}
-            </div>
+            {this.renderSidebar()}
             <div className="flex-1">
               {wfDataItems.map((p, i) =>
                 <div key={i} className="text-center">
