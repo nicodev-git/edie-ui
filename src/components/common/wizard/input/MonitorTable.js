@@ -181,7 +181,18 @@ export default class MonitorTable extends Component {
     const {monitors} = this.props
     const hasBasic = monitors.filter(p => p.basic).length > 0
     if (!hasBasic) return null
-
+    return (
+      <AppletCard
+        className="small"
+        color={colors[0]}
+        name="Basic"
+        desc="basic"
+        img="/resources/images/dashboard/basic.png"
+        onClick={null}
+        onClickDelete={this.onClickRemoveMonitor.bind(this, 'basic')}
+        verified
+      />
+    )
   }
 
   renderDevices () {
@@ -209,17 +220,19 @@ export default class MonitorTable extends Component {
               {this.renderBasicMonitor()}
               {
                 this.props.monitors.map((item, index) =>
-                  <AppletCard
-                    key={index}
-                    className="small"
-                    color={colors[(index + 1) % colors.length]}
-                    name={item.name}
-                    desc={item.monitortype}
-                    img={this.getMonitorImage(item)}
-                    onClick={this.onClickEditMonitor.bind(this, item)}
-                    onClickDelete={this.onClickRemoveMonitor.bind(this, item)}
-                    verified
-                  />
+                  !item.basic ? (
+                    <AppletCard
+                      key={index}
+                      className="small"
+                      color={colors[(index + 1) % colors.length]}
+                      name={item.name}
+                      desc={item.monitortype}
+                      img={this.getMonitorImage(item)}
+                      onClick={this.onClickEditMonitor.bind(this, item)}
+                      onClickDelete={this.onClickRemoveMonitor.bind(this, item)}
+                      verified
+                    />
+                  ) : null
                 )
               }
             </ul>
