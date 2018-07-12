@@ -35,6 +35,7 @@ import {
   fetchMonitorTemplates,
   openDeviceMonitorWizard,
   updateDeviceHost,
+  addBasicMonitors,
 
   fetchDevice,
   updateInstallAgentStatus
@@ -160,6 +161,7 @@ export default connect(
     fetchMonitorTemplates,
     openDeviceMonitorWizard,
     updateDeviceHost,
+    addBasicMonitors,
 
     fetchDevice,
     updateInstallAgentStatus

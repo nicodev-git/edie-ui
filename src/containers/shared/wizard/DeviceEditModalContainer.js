@@ -20,6 +20,7 @@ import {
   updateInstallAgentStatus,
 
   updateMapDevice,
+  addBasicMonitors,
 
   openTplImageModal,
   closeTplImageModal,
@@ -82,6 +83,7 @@ export default connect(
     updateInstallAgentStatus,
 
     updateMapDevice,
+    addBasicMonitors,
 
     openTplImageModal,
     closeTplImageModal,
