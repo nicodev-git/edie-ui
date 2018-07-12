@@ -985,6 +985,16 @@ const updateMapDevice = (entity, cb) => {
   }
 }
 
+export const addBasicMonitors = (entity) => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/monitor/addBasicMonitor`, {
+      params: {id: entity.id}
+    }).then(response => {
+      dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
 export const openSysWorkflowsModal = () => {
   return dispatch => {
     dispatch({type: OPEN_SYS_WORKFLOWS_MODAL})
