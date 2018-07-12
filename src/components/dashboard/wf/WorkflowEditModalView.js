@@ -11,6 +11,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import Tabs from '@material-ui/core/Tabs'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
+import {findIndex} from 'lodash'
+
 import {
   FormInput,
   FormSelect,
@@ -21,7 +23,6 @@ import {
   CardPanel
 } from 'components/modal/parts'
 import {severities} from 'shared/Global'
-import {findIndex} from "lodash";
 
 const cardStyle = {
   minHeight: 250,
