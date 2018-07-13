@@ -447,6 +447,9 @@ input:-webkit-autofill {
     border-radius: 4px;
     cursor: pointer;
     text-align: left;
+    max-width: 600px;
+    margin: auto;
+    display: flex;
 }
 .wf-item-label {
     color: black;
