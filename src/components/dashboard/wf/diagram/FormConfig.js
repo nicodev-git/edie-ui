@@ -318,6 +318,14 @@ const forms = {
         "key": "saveMsg",
         "name": "Save Message",
         "type": "checkbox"
-    }]
+    }],
+  "timeLastForm": [{
+    "key": "name",
+    "name": "Name",
+  }, {
+    "key": "sentence",
+    "name": "Minutes",
+    "default": "10"
+  }]
 }
 export default forms
