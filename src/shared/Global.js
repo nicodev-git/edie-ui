@@ -709,6 +709,8 @@ export const brainCellTypes = [{
   label: 'Regex', value: 'Regex', valueTypes: ['TEXT']
 }, {
   label: 'Tag', value: 'Tag', valueTypes: ['TEXT']
+}, {
+  label: 'Incident', value: 'Incident', valueTypes: ['TEXT']
 }]
 
 export const brainCellValueTypes = [{
