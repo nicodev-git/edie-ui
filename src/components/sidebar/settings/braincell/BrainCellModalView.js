@@ -52,7 +52,7 @@ export default class BrainCellModalView extends Component {
                 <div>
                     <Field name="value" component={FormInput} floatingLabel="Format" className="margin-md-right valign-top" fullWidth/>
                     <Field name="severity" component={FormSelect} className="margin-md-right valign-top" floatingLabel="Severity"
-                           options={severities.map(p => ({label: p, value: p}))}/>
+                           options={severities}/>
                     <Field name="blockIP" component={FormCheckbox} label="BlockIP" className="margin-sm-top"/>
                 </div>
             )
