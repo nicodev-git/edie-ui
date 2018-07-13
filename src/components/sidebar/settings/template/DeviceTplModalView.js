@@ -39,7 +39,7 @@ export default class DeviceTplModalView extends Component {
         </CardPanel>
         <CardPanel title="Monitors">
           <div className="margin-md-top flex-horizontal" style={{height: 250}}>
-            <div className="flex-1">
+            <div className="flex-1" style={{overflow: 'auto'}}>
               <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
             </div>
             <div className="flex-1" style={{maxHeight: 250 , overflow: 'auto'}}>
