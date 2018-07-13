@@ -100,7 +100,9 @@ class WorkflowEditModalView extends React.Component {
                     ) : null}
                   </div>
                   <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
-                    <div className="inline-block wf-item-label">{p.label}</div>
+                    <div className="inline-block wf-item-label">
+                      <div className="position-vm">{p.label}</div>
+                    </div>
                     <label className="wf-item-value">{p.value}</label>
                     <div className="wf-item-delete">
                       <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
