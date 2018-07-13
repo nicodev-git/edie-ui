@@ -80,13 +80,17 @@ export default class MonitorTable extends Component {
   }
 
   onClickRemoveMonitor (monitor) {
-    const {monitors, onChanged} = this.props
-    const index = monitors.indexOf(monitor)
-    if (index < 0) return
+    const {monitors, onChanged, device} = this.props
     showConfirm('Click OK to remove', btn => {
       if (btn !== 'ok') return
-      monitors.splice(index, 1)
-      onChanged && onChanged(monitors)
+      if (monitor === 'basic') {
+        this.props.removeBasicMonitors(device)
+      } else {
+        const index = monitors.indexOf(monitor)
+        if (index < 0) return
+        monitors.splice(index, 1)
+        onChanged && onChanged(monitors)
+      }
     })
   }
 

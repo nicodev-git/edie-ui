@@ -391,7 +391,7 @@ class DeviceEditWizard extends React.Component {
 
   buildMonitors () {
     const {monitorTemplates, openDeviceMonitorWizard,
-      deviceTemplates, collectors, addBasicMonitors, selectedDevice} = this.props
+      deviceTemplates, collectors, addBasicMonitors, selectedDevice, removeBasicMonitors} = this.props
     return (
       <MonitorTable
         device={selectedDevice}
@@ -403,6 +403,7 @@ class DeviceEditWizard extends React.Component {
         collectors={collectors}
         hideDevices
         addBasicMonitors={addBasicMonitors}
+        removeBasicMonitors={removeBasicMonitors}
       />
     )
   }
