@@ -27,6 +27,7 @@ import {
   showCredListModal,
   fetchMonitorTemplates,
   addBasicMonitors,
+  removeBasicMonitors,
 
   showDeviceMonitorsModal,
   openDeviceMonitorWizard,
@@ -102,6 +103,7 @@ export default connect(
     showCredListModal,
     fetchMonitorTemplates,
     addBasicMonitors,
+    removeBasicMonitors,
 
     showDeviceMonitorsModal,
     openDeviceMonitorWizard,

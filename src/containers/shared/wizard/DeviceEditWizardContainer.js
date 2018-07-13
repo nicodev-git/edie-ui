@@ -36,6 +36,7 @@ import {
   openDeviceMonitorWizard,
   updateDeviceHost,
   addBasicMonitors,
+  removeBasicMonitors,
 
   fetchDevice,
   updateInstallAgentStatus
@@ -162,6 +163,7 @@ export default connect(
     openDeviceMonitorWizard,
     updateDeviceHost,
     addBasicMonitors,
+    removeBasicMonitors,
 
     fetchDevice,
     updateInstallAgentStatus
