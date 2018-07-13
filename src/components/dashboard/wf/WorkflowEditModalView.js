@@ -199,6 +199,7 @@ class WorkflowEditModalView extends React.Component {
               <Field name="calledDirect" component={FormCheckbox} label="Called Direct"/>
               <Field name="paused" component={FormCheckbox} label="Stopped"/>
               <Field name="sendBack" component={FormCheckbox} label="Send Result"/>
+              <Field name="runByDevice" component={FormCheckbox} label="Run By Device"/>
             </div>
 
             <div className="margin-md-top">
