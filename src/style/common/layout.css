@@ -493,9 +493,14 @@ input:-webkit-autofill {
     right: 100%;
     top: 50%;
     transform: translate(0, -50%);
-    margin-right: 8px;
-    color: darkred;
+    color: white;
     font-weight: bold;
+
+    background: #4472c4;
+    padding: 7px 14px;
+    border-radius: 4px;
+    min-width: 100px;
+    height: 100%;
 }
 
 .wf-item-main:hover .wf-item-delete,
