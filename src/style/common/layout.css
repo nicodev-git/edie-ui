@@ -457,6 +457,7 @@ input:-webkit-autofill {
     max-width: 500px;
     margin: auto;
     display: flex;
+    position: relative;
 }
 .wf-item-label {
     color: black;
@@ -485,6 +486,16 @@ input:-webkit-autofill {
     right: -24px;
     top: 0;
     opacity: 0;
+}
+
+.wf-item-prelabel {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-right: 8px;
+    color: darkred;
+    font-weight: bold;
 }
 
 .wf-item-main:hover .wf-item-delete,

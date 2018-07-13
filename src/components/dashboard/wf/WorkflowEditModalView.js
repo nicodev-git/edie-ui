@@ -100,6 +100,11 @@ class WorkflowEditModalView extends React.Component {
                     ) : null}
                   </div>
                   <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
+                    {p.prelabel ? (
+                      <div className="wf-item-prelabel">
+                        {p.prelabel}
+                      </div>
+                    ) : null}
                     <div className="inline-block wf-item-label">
                       <div className="position-vm">{p.label}</div>
                     </div>

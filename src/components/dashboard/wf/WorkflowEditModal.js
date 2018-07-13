@@ -70,8 +70,9 @@ class WorkflowEditModal extends React.Component {
   getWfDataItems() {
     const wfDataItems = this.state.wfData.objects.map(p => {
       const {type} = p.config
-      const {sentence, name, variable, condition} = p.data
+      const {sentence, name, variable, condition, fieldType, field} = p.data
 
+      let itemPreLabel = ''
       let itemLabel = ''
       let itemValue = ''
 
@@ -80,12 +81,13 @@ class WorkflowEditModal extends React.Component {
         case 'EXCLUDE': {
           itemLabel = 'Match Text'
           if (condition === 'greaterThan') itemLabel = 'Greater Than'
-          // var varname = (fieldType === 'field' ? field :
-          //     fieldType === 'variable' ? variable : 'message') || ''
-          // const words = varname.split('.')
-          // const lastword = words[words.length - 1]
-            itemValue = `${sentence}`
-            break
+          var varname = (fieldType === 'field' ? field :
+              fieldType === 'variable' ? variable : 'message') || ''
+          const words = varname.split('.')
+          const lastword = words[words.length - 1]
+          itemPreLabel = lastword
+          itemValue = `${sentence}`
+          break
         }
         case 'COUNT':
           itemLabel = type
@@ -101,6 +103,7 @@ class WorkflowEditModal extends React.Component {
       }
 
       return {
+        prelabel: itemPreLabel,
         label: itemLabel,
         value: itemValue
       }
