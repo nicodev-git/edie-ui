@@ -141,11 +141,11 @@ export default class GDiskParts extends React.Component {
             <thead>
               <tr>
                 <th>Filesystem</th>
+                <th>Mount</th>
                 <th>Size</th>
                 <th>Used</th>
                 <th>Avail</th>
                 <th>Use%</th>
-                <th>Mount</th>
               </tr>
             </thead>
             <tbody>
@@ -154,11 +154,11 @@ export default class GDiskParts extends React.Component {
                 return (
                   <tr key={d.DeviceID + p.Name}>
                     <td>{p.Name}</td>
+                    <td>{p.Mount}</td>
                     <td>{p.TotalSpace}G</td>
                     <td>{p.TotalSpace - p.FreeSpace}G</td>
                     <td>{p.FreeSpace}G</td>
                     <td>{((p.TotalSpace - p.FreeSpace) * 100 / (p.TotalSpace || 1)).toFixed(1)}%</td>
-                    <td>{p.Mount}</td>
                   </tr>
                 )
               }))
