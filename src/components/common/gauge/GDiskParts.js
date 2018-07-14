@@ -145,6 +145,7 @@ export default class GDiskParts extends React.Component {
                 <th>Used</th>
                 <th>Avail</th>
                 <th>Use%</th>
+                <th>Mount</th>
               </tr>
             </thead>
             <tbody>
@@ -157,6 +158,7 @@ export default class GDiskParts extends React.Component {
                     <td>{p.TotalSpace - p.FreeSpace}G</td>
                     <td>{p.FreeSpace}G</td>
                     <td>{((p.TotalSpace - p.FreeSpace) * 100 / (p.TotalSpace || 1)).toFixed(1)}%</td>
+                    <td>{p.Mount}</td>
                   </tr>
                 )
               }))
