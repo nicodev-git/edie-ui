@@ -24,7 +24,7 @@ export default class ServerItem extends React.Component {
     checkAgentUp(device.id, (up, info, resCode) => {
       this.setState({
         up,
-        info: up ? '' : (info || 'Not Reachable')
+        info: up ? '' : (info || 'ping is ok (last 1m ago) credential problem')
       })
       setTimeout(ReactTooltip.rebuild, 100)
     })
