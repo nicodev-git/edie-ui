@@ -3,7 +3,7 @@ import {Field} from 'redux-form'
 import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
-  Checkbox, FormControlLabel
+  Checkbox, FormControlLabel, Button
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
@@ -263,6 +263,7 @@ class WorkflowEditModalView extends React.Component {
               <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
               <Field name="incidentTemplateId" component={FormSelect}
                      options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
+              <Button variant="raised" className="margin-md-left">Edit</Button>
 
               <Field name="incidentSeverity" component={FormSelect}
                      options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
