@@ -59,38 +59,23 @@ export default class IncidentTable extends React.Component {
       }
     }, {
       'displayName': 'System',
-      'columnName': 'entity.devicename',
-      'cssClassName': 'width-200'
-    }, {
-      'displayName': 'Monitor/Workflow',
       'columnName': 'entity.monitorName',
       'cssClassName': 'width-200',
       'customComponent': p => {
         const {workflow} = p.rowData.entity
-        return <span>{workflow || p.data}</span>
+        return <span>{p.rowData.entity.devicename}({workflow || p.data})</span>
       }
-    }/*, {
-      'displayName': 'Description',
-      'columnName': 'entity.description',
-      'customComponent': (props) => {
-        let str = props.data
-        if (props.rowData.lastcomment) {
-          str += `<br/><b>Reason:</b> ${props.rowData.lastcomment}`
-        }
-
-        return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
-      }
-    }*/, {
+    }, {
       'displayName': 'Data',
       'columnName': 'entity.data',
       'customComponent': (props) => {
-        let str = props.data ? JSON.stringify(props.data) : ''
+        let str = props.data ? JSON.stringify(props.data) : (props.rowData.entity.description || '')
         if (str.length > 500) str = `${str.substring(0, 500)}...`
         return (
           <div>
             {str}
             <div className="pull-right" style={searchBtnStyle}>
-              <PageViewIcon onClick={this.onClickDetail.bind(this, props.data)} className="link"/>
+              <PageViewIcon onClick={this.onClickDetail.bind(this, props.rowData.entity)} className="link"/>
             </div>
           </div>
         )
