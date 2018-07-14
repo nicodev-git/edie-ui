@@ -10,6 +10,7 @@ import DiagramObjectModal from 'components/dashboard/wf/diagram/DiagramObjectMod
 import {drawFlows} from "components/dashboard/wf/DiagramLoader"
 import {extendShape} from 'components/dashboard/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
+import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 
 const typeOptions = [{
   label: 'Normal', value: 'normal'
@@ -52,6 +53,7 @@ class WorkflowEditModal extends React.Component {
       applyDeviceIds: props.editWf ? (props.editWf.applyDeviceIds || []) : [],
 
       rulePanelExpanded: false,
+      brainCellType: 'Incident',
 
       active: 1
     }
@@ -398,10 +400,29 @@ class WorkflowEditModal extends React.Component {
   ////////////////////////////////////////////////////
 
   onClickEditIncident () {
-    const {allValues} = this.props
+    const {allValues, brainCells} = this.props
     const {incidentTemplateId} = allValues || {}
     if (!incidentTemplateId) return null
+    const entity = brainCells.filter(p => p.id === incidentTemplateId)[0]
+    if (!entity) return
+    this.props.showBrainCellModal(true, entity)
+  }
 
+  getTags () {
+    const {brainCells} = this.props
+    return brainCells.filter(p => p.type === 'Tag')
+  }
+
+  onSaveBraincell (entity) {
+    if (entity.id) {
+      this.props.updateBrainCell(entity)
+    } else {
+      this.props.addBrainCell(entity)
+    }
+  }
+
+  onCloseBraincellModal () {
+    this.props.showBrainCellModal(false)
   }
 
   ////////////////////////////////////////////////////
@@ -414,6 +435,29 @@ class WorkflowEditModal extends React.Component {
     //         onClose={this.onCloseAddUser.bind(this)}
     //     />
     // )
+  }
+
+  renderBraincellModal () {
+    if (!this.props.brainCellModalOpen) return null
+    return (
+      <BrainCellModal
+        type={this.state.brainCellType}
+        allTags={this.getTags()}
+        onSave={this.onSaveBraincell.bind(this)}
+        onClose={this.onCloseBraincellModal.bind(this)}
+
+        brainCells={this.props.brainCells}
+        editBrainCell={this.props.editBrainCell}
+
+        showScriptModal={this.props.showScriptModal}
+        showGrokModal={this.props.showGrokModal}
+        showCellParamModal={this.props.showCellParamModal}
+        scriptModalOpen={this.props.scriptModalOpen}
+        grokModalOpen={this.props.grokModalOpen}
+        editCellParam={this.props.editCellParam}
+        cellParamModalOpen={this.props.cellParamModalOpen}
+      />
+    )
   }
 
   renderShapeModal() {
@@ -531,6 +575,7 @@ class WorkflowEditModal extends React.Component {
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
       >
         {this.renderUserPickModal()}
+        {this.renderBraincellModal()}
       </WorkflowEditModalView>
     )
   }
