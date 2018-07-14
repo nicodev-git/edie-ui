@@ -66,7 +66,7 @@ export default class IncidentTable extends React.Component {
         return <span>{p.rowData.entity.devicename}({workflow || p.data})</span>
       }
     }, {
-      'displayName': 'Data',
+      'displayName': 'Incident',
       'columnName': 'entity.data',
       'customComponent': (props) => {
         let str = props.data ? JSON.stringify(props.data) : (props.rowData.entity.description || '')
