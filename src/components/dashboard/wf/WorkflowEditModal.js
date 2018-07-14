@@ -397,6 +397,14 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
+  onClickEditIncident () {
+    const {allValues} = this.props
+    const {incidentTemplateId} = allValues || {}
+    if (!incidentTemplateId) return null
+
+  }
+
+  ////////////////////////////////////////////////////
   renderUserPickModal() {
     if (!this.props.userPickModalOpen) return null
     // return (
@@ -517,6 +525,7 @@ class WorkflowEditModal extends React.Component {
         shapeModal={this.renderShapeModal()}
         rulePanelExpanded={this.state.rulePanelExpanded}
         onExpandRulePanel={this.onExpandRulePanel.bind(this)}
+        onClickEditIncident={this.onClickEditIncident.bind(this)}
 
         applyDeviceIds={this.state.applyDeviceIds}
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}

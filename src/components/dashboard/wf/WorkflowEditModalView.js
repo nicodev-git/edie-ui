@@ -253,7 +253,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderTabActions() {
-    const {brainCells} = this.props
+    const {brainCells, onClickEditIncident} = this.props
     const incidentCells = brainCells.filter(p => p.type === 'Incident');
     return (
       <div>
@@ -263,7 +263,7 @@ class WorkflowEditModalView extends React.Component {
               <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
               <Field name="incidentTemplateId" component={FormSelect}
                      options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
-              <Button variant="raised" className="margin-md-left">Edit</Button>
+              <Button variant="raised" className="margin-md-left" onClick={onClickEditIncident}>Edit</Button>
 
               <Field name="incidentSeverity" component={FormSelect}
                      options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
