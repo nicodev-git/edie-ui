@@ -83,7 +83,13 @@ export default connect(
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
 
-    brainCells: state.settings.brainCells
+    brainCells: state.settings.brainCells,
+    brainCellModalOpen: state.settings.brainCellModalOpen,
+    editBrainCell: state.settings.editBrainCell,
+    scriptModalOpen: state.settings.scriptModalOpen,
+    grokModalOpen: state.settings.grokModalOpen,
+    editCellParam: state.settings.editCellParam,
+    cellParamModalOpen: state.settings.cellParamModalOpen,
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,

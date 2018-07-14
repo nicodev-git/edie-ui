@@ -38,8 +38,14 @@ import {
   fetchWfSetting,
   saveWfSetting,
 
+  showBrainCellModal,
   addBrainCell,
+  updateBrainCell,
   fetchBrainCells,
+  showScriptModal,
+  showGrokModal,
+  showCellParamModal,
+
   resetForm
 } from 'actions'
 
@@ -76,7 +82,13 @@ export default connect(
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
 
-    brainCells: state.settings.brainCells
+    brainCells: state.settings.brainCells,
+    brainCellModalOpen: state.settings.brainCellModalOpen,
+    editBrainCell: state.settings.editBrainCell,
+    scriptModalOpen: state.settings.scriptModalOpen,
+    grokModalOpen: state.settings.grokModalOpen,
+    editCellParam: state.settings.editCellParam,
+    cellParamModalOpen: state.settings.cellParamModalOpen,
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,
@@ -111,8 +123,14 @@ export default connect(
     fetchWfSetting,
     saveWfSetting,
 
+    showBrainCellModal,
     addBrainCell,
+    updateBrainCell,
     fetchBrainCells,
+    showScriptModal,
+    showGrokModal,
+    showCellParamModal,
+
     resetForm
   }
 )(withRouter(WorkflowAddContainer))
