@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {keys} from 'lodash'
 import {Chip} from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
@@ -45,29 +44,11 @@ export default class DeviceMonitors extends Component {
     let monitor = device.monitors.filter(p => p.uid === editParamContext.monitor.uid)[0]
     if (!monitor) return
 
-    if (editParamContext.type === 'normal') {
-      monitor = {
-        ...monitor,
-        params: {
-          ...monitor.params,
-          [param.key]: param.value
-        }
-      }
-    } else {
-      const {basicMonitor} = monitor.params || {}
-      const {basicMonitorType} = editParamContext
-      monitor = {
-        ...monitor,
-        params: {
-          ...monitor.params,
-          basicMonitor: {
-            ...basicMonitor,
-            [basicMonitorType]: {
-              ...basicMonitor[basicMonitorType],
-              [param.key]: param.value
-            }
-          }
-        }
+    monitor = {
+      ...monitor,
+      params: {
+        ...monitor.params,
+        [param.key]: param.value
       }
     }
 
@@ -91,33 +72,12 @@ export default class DeviceMonitors extends Component {
   }
 
   renderMonitor (monitor) {
-    const rows = []
-    rows.push(
+    return (
       <tr key={monitor.uid}>
         <td>{monitor.monitortype}</td>
-        <td>{this.renderParams(monitor.monitortype, monitor.params, {type: 'normal', monitor})}</td>
+        <td>{this.renderParams(monitor.monitortype, monitor.params, {monitor})}</td>
       </tr>
     )
-
-    if (monitor.monitortype === 'basic') {
-      const {basicMonitor} = monitor.params || {}
-      if (basicMonitor) {
-        keys(basicMonitor).forEach(basicMonitorType => {
-          rows.push(
-            <tr key={monitor.uid + '-' + basicMonitorType}>
-              <td>
-                <span className="padding-md-left">{basicMonitorType}</span>
-              </td>
-              <td>
-                {this.renderParams(basicMonitorType, basicMonitor[basicMonitorType] || {}, {type: 'basic', monitor, basicMonitorType})}
-              </td>
-            </tr>
-          )
-        })
-      }
-    }
-
-    return rows
   }
 
   renderParamEditModal () {
