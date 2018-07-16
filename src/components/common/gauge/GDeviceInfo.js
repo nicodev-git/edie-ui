@@ -136,32 +136,29 @@ export default class GDeviceInfo extends React.Component {
 
     //if (up) {
       const basicInfo = getBasicMonitorInfo(device)
-      const cpu = basicInfo ? basicInfo.cpu : getMonitorResult(device, 'cpu')
+      const hardware = getMonitorResult(device, 'hardware')
       const os = basicInfo ? basicInfo.os : getMonitorResult(device, 'os')
       let disk = basicInfo ? basicInfo.disk : getMonitorResult(device, 'disk')
       disk = disk ? sumDisks(disk) : null
       const memory = basicInfo ? basicInfo.memory : getMonitorResult(device, 'memory')
 
-      const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}` : ''
       const memValue = this.getMemoryInfo(memory)
       const diskValue = disk ? `${disk.UsedSpace}G / ${disk.TotalSpace}G` : ''
 
       const agentVersion = device.agent ? device.agent.version : ''
 
-      const hardware = cpu && cpu.Model ? `${cpu.Model || ''} ` : ''
       const software = os ? `${trimOSName(os.Name)} ` : ''
-      const sysDesc = `${hardware}${software}`
 
       return (
         <div>
           {this.renderRow('Status', up ? 'UP' : 'DOWN')}
           {this.renderRow('IPAddress', device.wanip || device.lanip)}
           {this.renderRow('DNS Name', device.hostname)}
-          {this.renderRow('System', sysDesc, {height: '4em'})}
+          {this.renderRow('System', software, {height: '4em'})}
 
           {agentVersion && this.renderRow('Agent Version', agentVersion)}
 
-          {this.renderRow('CPU', cpuValue)}
+          {this.renderRow('CPU', hardware.cpu.Model)}
           {this.renderRow('RAM', memValue)}
           {this.renderRow('Disk', diskValue)}
         </div>
