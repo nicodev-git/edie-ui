@@ -731,7 +731,15 @@ export function showWfMappingModal (visible) {
 export function fetchGroups () {
   return dispatch => {
     axios.get(`${ROOT_URL}/getAllFlowGroups`).then(res => {
-      dispatch({type: FETCH_GROUPS, data: res.data || []})
+      const data = res.data || []
+      data.sort((a, b) => {
+        const a1 = a.name.toLowerCase()
+        const b1 = b.name.toLowerCase()
+        if (a1 > b1) return 1
+        if (a1 < b1) return -1
+        return 0
+      })
+      dispatch({type: FETCH_GROUPS, data: data})
     })
   }
 }
