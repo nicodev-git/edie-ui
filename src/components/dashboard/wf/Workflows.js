@@ -141,15 +141,29 @@ class Workflows extends React.Component {
     this.props.showWfSimulationModal(false)
   }
 
-  ////////////////////////////////////////////////////////////////
 
-  renderSeverity (wf) {
+  getIncidentCell(wf) {
     const {brainCells} = this.props
     const {incidentTemplateId, openIncident} = wf
     if (!openIncident || !incidentTemplateId) return null
     const index = findIndex(brainCells, {id: incidentTemplateId})
     if (index < 0) return null
-    return getSeverityIcon(brainCells[index].severity)
+    return brainCells[index]
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  renderSeverity (wf) {
+    const cell = this.getIncidentCell(wf)
+    if (!cell) return null
+    return getSeverityIcon(cell.severity)
+  }
+
+  renderTags (wf) {
+    const cell = this.getIncidentCell(wf)
+    if (!cell) return null
+    const {params2} = this.props
+    cell.params2
   }
 
   renderWorkflows() {
@@ -185,7 +199,7 @@ class Workflows extends React.Component {
                 </div>
               </td>
               <td>{m.description}</td>
-              <td>{m.severity}</td>
+              <td>{this.renderTags(m)}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
