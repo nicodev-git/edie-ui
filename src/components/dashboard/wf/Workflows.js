@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import FormControl from '@material-ui/core/FormControl'
+import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -15,6 +16,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
 import SimulationModal from './SimulationModal'
+import {getSeverityIcon} from 'shared/Global'
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -141,6 +143,15 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
+  renderSeverity (wf) {
+    const {brainCells} = this.props
+    const {incidentTemplateId, openIncident} = wf
+    if (!openIncident || !incidentTemplateId) return null
+    const index = findIndex(brainCells, {id: incidentTemplateId})
+    if (index < 0) return null
+    return getSeverityIcon(brainCells[index].severity)
+  }
+
   renderWorkflows() {
     const {groupId, filterTags} = this.state
     let {workflows} = this.props
@@ -168,7 +179,10 @@ class Workflows extends React.Component {
           {workflows.map(m =>
             <tr key={m.uuid || 'z'}>
               <td>
-                <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>{m.name}</div>
+                <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>
+                  <span>{m.name}</span>&nbsp;
+                  <span>{this.renderSeverity(m)}</span>
+                </div>
               </td>
               <td>{m.description}</td>
               <td>{m.severity}</td>
