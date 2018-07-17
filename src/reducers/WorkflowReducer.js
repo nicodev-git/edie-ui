@@ -1,3 +1,4 @@
+import {sortBy} from 'lodash'
 import {
   OPEN_DEVICE_WF_DIAGRAM_MODAL,
   CLOSE_DEVICE_WF_DIAGRAM_MODAL,
@@ -36,9 +37,9 @@ import {
   FETCH_SIM_SAMPLES,
   ADD_SIM_SAMPLE,
   REMOVE_SIM_SAMPLE,
-  UPDATE_WF_SIM_STATE
+  UPDATE_WF_SIM_STATE,
+  UPDATE_WF_SIM_RES
 } from 'actions/types'
-import {UPDATE_WF_SIM_RES} from "../actions/types";
 
 const initialState = {
   workflows: [],
@@ -104,9 +105,9 @@ export default function (state = initialState, action) {
       return {...state, groupModalOpen: action.visible, editGroup: action.group}
 
     case ADD_GROUP:
-      return {...state, groups: [...state.groups, action.data]}
+      return {...state, groups: sortBy([...state.groups, action.data], a => a.name.toLowerCase())}
     case UPDATE_GROUP:
-      return {...state, groups: state.groups.map(p => p.id === action.data.id ? action.data : p)}
+      return {...state, groups: sortBy(state.groups.map(p => p.id === action.data.id ? action.data : p), a => a.name.toLowerCase())}
     case REMOVE_GROUP:
       return {...state, groups: state.groups.filter(p => p.id !== action.data.id)}
 

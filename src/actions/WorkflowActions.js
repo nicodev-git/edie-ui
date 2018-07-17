@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { merge, assign, findIndex, reverse } from 'lodash'
+import { merge, assign, findIndex, reverse, sortBy } from 'lodash'
 import {
   FETCH_WORKFLOW,
 
@@ -732,14 +732,7 @@ export function fetchGroups () {
   return dispatch => {
     axios.get(`${ROOT_URL}/getAllFlowGroups`).then(res => {
       const data = res.data || []
-      data.sort((a, b) => {
-        const a1 = a.name.toLowerCase()
-        const b1 = b.name.toLowerCase()
-        if (a1 > b1) return 1
-        if (a1 < b1) return -1
-        return 0
-      })
-      dispatch({type: FETCH_GROUPS, data: data})
+      dispatch({type: FETCH_GROUPS, data: sortBy(data, a => a.name.toLowerCase())})
     })
   }
 }
