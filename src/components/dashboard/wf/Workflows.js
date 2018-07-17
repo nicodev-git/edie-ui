@@ -157,6 +157,7 @@ class Workflows extends React.Component {
           <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Severity</th>
             <th>User</th>
             <th>Type</th>
             <th>Last Updated</th>
@@ -170,6 +171,7 @@ class Workflows extends React.Component {
                 <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>{m.name}</div>
               </td>
               <td>{m.description}</td>
+              <td>{m.severity}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
