@@ -136,7 +136,6 @@ export default class GCommand extends React.Component {
               value={command}
               onChange={e => this.setState({command: e.target.value})}
               onKeyDown={this.onKeyDownInput.bind(this)}
-              autoFocus
             />
           </div>
         </div>
