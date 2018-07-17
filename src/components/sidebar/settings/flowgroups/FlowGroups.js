@@ -29,7 +29,7 @@ export default class FlowGroups extends React.Component {
   }
 
   onSaveGroup (values) {
-    const {editGroup} = this.props
+    const {editGroup, groups} = this.props
     const entity = {
       ...editGroup,
       ...values
@@ -37,6 +37,8 @@ export default class FlowGroups extends React.Component {
     if (editGroup) {
       this.props.updateGroup(entity)
     } else {
+      const found = groups.filter(p => p.name.toLowerCase() == entity.name.toLowerCase())
+      if (found.length) return alert('Group with the same name exists.')
       this.props.addGroup(entity)
     }
     this.onCloseGroupModal()
