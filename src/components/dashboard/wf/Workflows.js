@@ -163,7 +163,14 @@ class Workflows extends React.Component {
     const cell = this.getIncidentCell(wf)
     if (!cell) return null
     const {params2} = this.props
-    cell.params2
+    const {tags} = params2 || {}
+    return tags.map((t, i) =>
+      <Chip
+        key={i}
+        label={t}
+        className="margin-md-right"
+      />
+    )
   }
 
   renderWorkflows() {
@@ -194,8 +201,8 @@ class Workflows extends React.Component {
             <tr key={m.uuid || 'z'}>
               <td>
                 <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>
-                  <span>{m.name}</span>&nbsp;
-                  <span>{this.renderSeverity(m)}</span>
+                  <span>{this.renderSeverity(m)}</span>&nbsp;
+                  <span>{m.name}</span>
                 </div>
               </td>
               <td>{m.description}</td>
