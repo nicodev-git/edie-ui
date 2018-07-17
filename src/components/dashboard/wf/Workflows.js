@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Select, MenuItem} from '@material-ui/core'
+import {Button, Select, MenuItem, Chip} from '@material-ui/core'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import moment from 'moment'
@@ -162,9 +162,9 @@ class Workflows extends React.Component {
   renderTags (wf) {
     const cell = this.getIncidentCell(wf)
     if (!cell) return null
-    const {params2} = this.props
+    const {params2} = cell
     const {tags} = params2 || {}
-    return tags.map((t, i) =>
+    return (tags || []).map((t, i) =>
       <Chip
         key={i}
         label={t}
