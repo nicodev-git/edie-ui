@@ -129,6 +129,12 @@ export const addWorkflow = (data, cb) => {
   }
 }
 
+export const addIncidentCellAndWorkflow = (data) => {
+  return dispatch => {
+
+  }
+}
+
 const getTargetIds = (item) => {
   const lines = item.uiprops.lines || []
   const ids = []

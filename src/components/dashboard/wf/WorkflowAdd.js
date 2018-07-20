@@ -27,6 +27,9 @@ export default class WorkflowAdd extends React.Component {
       uuid: uuid.v4(),
       flowItems: []
     }
+    if (flow.autoAddIncidentCell) {
+
+    }
     this.props.addWorkflow(flow)
     this.props.history.push('/workflow')
   }
