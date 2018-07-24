@@ -9,6 +9,7 @@ class TestCaseModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      messages: []
     }
   }
   onSubmit (values) {
@@ -25,6 +26,7 @@ class TestCaseModal extends React.Component {
     } = this.props
     return (
       <TestCaseModalView
+        messages={this.state.messages}
         allValues={allValues}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}

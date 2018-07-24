@@ -11,7 +11,7 @@ class SimulationModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      testCaseModalOpen: false
+      testCaseModalOpen: false,
     }
   }
 
@@ -47,18 +47,34 @@ class SimulationModal extends React.Component {
   //////////////////////////////////////////////////////////////
 
   onClickAddCase () {
-    const {groupId} = this.props.allValues || {}
-    if (!groupId) return alert('Please choose test group')
-    const name = prompt('Please type test case name')
-    if (!name) return
+    // const {groupId} = this.props.allValues || {}
+    // if (!groupId) return alert('Please choose test group')
+    // const name = prompt('Please type test case name')
+    // if (!name) return
+    //
+    //
+    // this.props.addTestCase({
+    //   name,
+    //   groupId
+    // }, data => {
+    //   if (!data) return
+    //   this.props.change('testCaseId', data.id)
+    // })
+    this.setState({
+      testCaseModalOpen: true,
+      editTestCase: null
+    })
+  }
 
+  onSaveTestCase () {
+    this.setState({
+      testCaseModalOpen: false
+    })
+  }
 
-    this.props.addTestCase({
-      name,
-      groupId
-    }, data => {
-      if (!data) return
-      this.props.change('testCaseId', data.id)
+  onCloseTestCase () {
+    this.setState({
+      testCaseModalOpen: false
     })
   }
 
@@ -67,7 +83,10 @@ class SimulationModal extends React.Component {
   renderTestCaseModal () {
     if (!this.state.testCaseModalOpen) return null
     return (
-      <TestCaseModal/>
+      <TestCaseModal
+        onSubmit={this.onSaveTestCase.bind(this)}
+        onClickClose={this.onCloseTestCase.bind(this)}
+      />
     )
   }
 

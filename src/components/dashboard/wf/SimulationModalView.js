@@ -27,7 +27,7 @@ export default class SimulationModalView extends React.Component {
     const {collectors, testGroups, testCases, onClickAddGroup, onClickAddCase, allValues} = this.props
     const {groupId} = allValues || {}
     return (
-      <CardPanel tools={<AddIcon onClick={onClickAddCase} className="link"/>}>
+      <CardPanel title="Tests" tools={<AddIcon onClick={onClickAddCase} className="link"/>}>
         <div>
           <Field name="groupId"
                  component={FormSelect}
