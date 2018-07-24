@@ -27,7 +27,7 @@ export default class SimulationModalView extends React.Component {
     const {collectors, testGroups, testCases, onClickAddGroup, onClickAddCase, allValues} = this.props
     const {groupId} = allValues || {}
     return (
-      <CardPanel>
+      <CardPanel tools={<AddIcon onClick={onClickAddCase} className="link"/>}>
         <div>
           <Field name="groupId"
                  component={FormSelect}
@@ -39,7 +39,7 @@ export default class SimulationModalView extends React.Component {
           />
           <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
         </div>
-        <div>
+        <div className="hidden">
           <Field name="testCaseId"
                  component={FormSelect}
                  floatingLabel="Test Case"
@@ -48,7 +48,22 @@ export default class SimulationModalView extends React.Component {
                  style={{minWidth: 200}}
                  className="valign-middle"
           />
-          <AddIcon onClick={onClickAddCase} className="link valign-middle margin-sm-top"/>
+        </div>
+        <div>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+            {testCases.filter(p => p.groupId === groupId).map(p =>
+              <tr key={p.id}>
+                <td>{p.name}</td>
+              </tr>
+            )}
+            </tbody>
+          </table>
         </div>
 
         <div className="hidden">
@@ -83,6 +98,7 @@ export default class SimulationModalView extends React.Component {
           {wfSimulationState ? <RefreshOverlay/> : null}
           {/*<SubmitBlock name="Post"/>*/}
         </form>
+        {this.props.children}
       </Modal>
     )
   }
