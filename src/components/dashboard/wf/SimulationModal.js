@@ -28,8 +28,10 @@ class SimulationModal extends React.Component {
     onSubmit(values)
   }
 
-  onChangeTab () {
-
+  onChangeTab(e, value) {
+    this.setState({
+      tab: value
+    })
   }
 
   renderAdvanced () {
