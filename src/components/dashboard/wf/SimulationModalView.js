@@ -17,7 +17,11 @@ export default class SimulationModalView extends React.Component {
     const {allValues} = this.props
     const {testCaseId} = allValues || {}
     if (!testCaseId) return null
+    return (
+      <CardPanel title="Messages">
 
+      </CardPanel>
+    )
   }
   renderContent () {
     const {collectors, testGroups, testCases, onClickAddGroup, onClickAddCase, allValues} = this.props
