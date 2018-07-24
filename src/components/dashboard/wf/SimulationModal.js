@@ -5,10 +5,13 @@ import {connect} from 'react-redux'
 import SimulationModalView from './SimulationModalView'
 import {showAlert} from 'components/common/Alert'
 
+import TestCaseModal from './TestCaseModal'
+
 class SimulationModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      testCaseModalOpen: false
     }
   }
 
@@ -61,9 +64,13 @@ class SimulationModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
-  renderAdvanced () {
-    return null
+  renderTestCaseModal () {
+    if (!this.state.testCaseModalOpen) return null
+    return (
+      <TestCaseModal/>
+    )
   }
+
   render () {
     const {
       handleSubmit, onClickClose, collectors, wfSimulationState,
@@ -82,7 +89,9 @@ class SimulationModal extends React.Component {
 
         testCases={testCases}
         onClickAddCase={this.onClickAddCase.bind(this)}
-      />
+      >
+        {this.renderTestCaseModal()}
+      </SimulationModalView>
     )
   }
 }
