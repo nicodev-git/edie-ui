@@ -13,8 +13,15 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 
 export default class SimulationModalView extends React.Component {
+  renderMessages () {
+    const {allValues} = this.props
+    const {testCaseId} = allValues || {}
+    if (!testCaseId) return null
+
+  }
   renderContent () {
-    const {collectors, testGroups, testCases, onClickAddGroup, onClickAddCase} = this.props
+    const {collectors, testGroups, testCases, onClickAddGroup, onClickAddCase, allValues} = this.props
+    const {groupId} = allValues || {}
     return (
       <CardPanel>
         <div>
@@ -33,13 +40,14 @@ export default class SimulationModalView extends React.Component {
                  component={FormSelect}
                  floatingLabel="Test Case"
                  className="valign-top margin-md-right"
-                 options={testCases.map(p => ({label: p.name, value: p.id}))}
+                 options={testCases.filter(p => p.groupId === groupId).map(p => ({label: p.name, value: p.id}))}
                  style={{minWidth: 200}}
                  className="valign-middle"
           />
           <AddIcon onClick={onClickAddCase} className="link valign-middle margin-sm-top"/>
         </div>
-        <div>
+
+        <div className="hidden">
           <Field name="text"
                  component={FormInput}
                  floatingLabel="Text"
@@ -48,7 +56,7 @@ export default class SimulationModalView extends React.Component {
           />
         </div>
 
-        <div>
+        <div className="hidden">
           <Field name="connectorId"
                  component={FormSelect}
                  floatingLabel="Connector"
@@ -67,9 +75,9 @@ export default class SimulationModalView extends React.Component {
       <Modal title="Simulation" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
-
+          {this.renderMessages()}
           {wfSimulationState ? <RefreshOverlay/> : null}
-          <SubmitBlock name="Post"/>
+          {/*<SubmitBlock name="Post"/>*/}
         </form>
       </Modal>
     )

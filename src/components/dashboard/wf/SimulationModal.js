@@ -1,5 +1,5 @@
 import React from 'react'
-import {reduxForm} from 'redux-form'
+import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
 
 import SimulationModalView from './SimulationModalView'
@@ -38,7 +38,25 @@ class SimulationModal extends React.Component {
   onClickAddGroup () {
     const name = prompt('Please type test group name')
     if (!name) return
-    this.props.addTestGroup(name)
+    this.props.addTestGroup({name})
+  }
+
+  //////////////////////////////////////////////////////////////
+
+  onClickAddCase () {
+    const {groupId} = this.props.allValues || {}
+    if (!groupId) return alert('Please choose test group')
+    const name = prompt('Please type test case name')
+    if (!name) return
+
+
+    this.props.addTestCase({
+      name,
+      groupId
+    }, data => {
+      if (!data) return
+      this.props.change('testCaseId', data.id)
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -49,10 +67,11 @@ class SimulationModal extends React.Component {
   render () {
     const {
       handleSubmit, onClickClose, collectors, wfSimulationState,
-      testGroups
+      testGroups, testCases, allValues
     } = this.props
     return (
       <SimulationModalView
+        allValues={allValues}
         wfSimulationState={wfSimulationState}
         collectors={collectors}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
@@ -60,6 +79,9 @@ class SimulationModal extends React.Component {
 
         testGroups={testGroups}
         onClickAddGroup={this.onClickAddGroup.bind(this)}
+
+        testCases={testCases}
+        onClickAddCase={this.onClickAddCase.bind(this)}
       />
     )
   }
@@ -67,7 +89,7 @@ class SimulationModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: {
-    }
+    initialValues: {},
+    allValues: getFormValues('wfSimulationForm')(state)
   })
 )(reduxForm({form: 'wfSimulationForm'})(SimulationModal))
