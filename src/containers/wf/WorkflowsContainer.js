@@ -51,7 +51,8 @@ import {
   fetchTestGroups,
   addTestGroup,
 
-  fetchTestCases
+  fetchTestCases,
+  addTestCase
 } from 'actions'
 
 class WorkflowsContainer extends React.Component {
@@ -145,6 +146,7 @@ export default connect(
     fetchTestGroups,
     addTestGroup,
 
-    fetchTestCases
+    fetchTestCases,
+    addTestCase
   }
 )(WorkflowsContainer)

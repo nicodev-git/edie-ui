@@ -14,7 +14,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class SimulationModalView extends React.Component {
   renderContent () {
-    const {collectors, testGroups, onClickAddGroup} = this.props
+    const {collectors, testGroups, testCases, onClickAddGroup, onClickAddCase} = this.props
     return (
       <CardPanel>
         <div>
@@ -22,12 +22,22 @@ export default class SimulationModalView extends React.Component {
                  component={FormSelect}
                  floatingLabel="Test Group"
                  className="valign-top margin-md-right"
-                 options={testGroups.map(p => ({name: p.name, value: p.id}))}
+                 options={testGroups.map(p => ({label: p.name, value: p.id}))}
                  style={{minWidth: 200}}
                  className="valign-middle"
           />
-          <AddIcon onClick={onClickAddGroup} className="valign-middle"/>
-
+          <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
+        </div>
+        <div>
+          <Field name="testCaseId"
+                 component={FormSelect}
+                 floatingLabel="Test Case"
+                 className="valign-top margin-md-right"
+                 options={testCases.map(p => ({label: p.name, value: p.id}))}
+                 style={{minWidth: 200}}
+                 className="valign-middle"
+          />
+          <AddIcon onClick={onClickAddCase} className="link valign-middle margin-sm-top"/>
         </div>
         <div>
           <Field name="text"

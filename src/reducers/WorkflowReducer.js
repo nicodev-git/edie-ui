@@ -43,7 +43,8 @@ import {
   FETCH_TEST_GROUPS,
   ADD_TEST_GROUP,
 
-  FETCH_TEST_CASES
+  FETCH_TEST_CASES,
+  ADD_TEST_CASE
 } from 'actions/types'
 
 const initialState = {
@@ -155,6 +156,8 @@ export default function (state = initialState, action) {
 
     case FETCH_TEST_CASES:
       return { ...state, testCases: action.data }
+    case ADD_TEST_CASE:
+      return { ...state, testCases: [...state.testCases, action.data] }
 
     default:
       return state
