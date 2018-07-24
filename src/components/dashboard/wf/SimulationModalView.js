@@ -1,6 +1,8 @@
 import React from 'react'
 import {Field} from 'redux-form'
 
+import { Tabs, Tab } from '@material-ui/core'
+
 import {
   FormInput,
   FormSelect,
@@ -11,11 +13,21 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 
 export default class SimulationModalView extends React.Component {
+  renderTabContent () {
+    const {tab} = this.props
+
+
+  }
+
   render () {
-    const {onSubmit, onClickClose, collectors, wfSimulationState} = this.props
+    const {onSubmit, onClickClose, collectors, wfSimulationState, tab, onChangeTab} = this.props
     return (
       <Modal title="Simulation" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
+          <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
+            <Tab label="Simple" value="simple"/>
+            <Tab label="Advanced" value="advanced"/>
+          </Tabs>
           <div>
             <Field name="text"
                    component={FormInput}
