@@ -1,5 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import AddIcon from '@material-ui/icons/AddCircle'
 
 import {
   FormInput,
@@ -13,9 +14,21 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class SimulationModalView extends React.Component {
   renderContent () {
-    const {collectors} = this.props
+    const {collectors, testGroups, onClickAddGroup} = this.props
     return (
       <CardPanel>
+        <div>
+          <Field name="groupId"
+                 component={FormSelect}
+                 floatingLabel="Test Group"
+                 className="valign-top margin-md-right"
+                 options={testGroups.map(p => ({name: p.name, value: p.id}))}
+                 style={{minWidth: 200}}
+                 className="valign-middle"
+          />
+          <AddIcon onClick={onClickAddGroup} className="valign-middle"/>
+
+        </div>
         <div>
           <Field name="text"
                  component={FormInput}

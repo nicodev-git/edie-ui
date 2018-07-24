@@ -51,6 +51,7 @@ import {
   REMOVE_SIM_SAMPLE,
 
   FETCH_TEST_GROUPS,
+  ADD_TEST_GROUP,
   FETCH_TEST_CASES
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
@@ -923,6 +924,14 @@ export const fetchTestCases = (entity) => {
   return dispatch => {
     axios.get(`${ROOT_URL}/flowtestcase?size=1000`).then(res => {
       dispatch({type: FETCH_TEST_CASES, data: res.data})
+    })
+  }
+}
+
+export const addTestGroup = (entity) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/flowtestgroup`, entity).then(res => {
+      dispatch({type: ADD_TEST_GROUP, data: res.data})
     })
   }
 }

@@ -32,17 +32,34 @@ class SimulationModal extends React.Component {
     onSubmit(values)
   }
 
+
+  //////////////////////////////////////////////////////////////
+
+  onClickAddGroup () {
+    const name = prompt('Please type test group name')
+    if (!name) return
+    this.props.addTestGroup(name)
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderAdvanced () {
     return null
   }
   render () {
-    const {handleSubmit, onClickClose, collectors, wfSimulationState} = this.props
+    const {
+      handleSubmit, onClickClose, collectors, wfSimulationState,
+      testGroups
+    } = this.props
     return (
       <SimulationModalView
         wfSimulationState={wfSimulationState}
         collectors={collectors}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
+
+        testGroups={testGroups}
+        onClickAddGroup={this.onClickAddGroup.bind(this)}
       />
     )
   }

@@ -49,6 +49,8 @@ import {
   removeSimSample,
 
   fetchTestGroups,
+  addTestGroup,
+
   fetchTestCases
 } from 'actions'
 
@@ -141,6 +143,8 @@ export default connect(
     removeSimSample,
 
     fetchTestGroups,
+    addTestGroup,
+
     fetchTestCases
   }
 )(WorkflowsContainer)

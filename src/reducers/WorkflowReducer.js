@@ -41,6 +41,8 @@ import {
   UPDATE_WF_SIM_RES,
 
   FETCH_TEST_GROUPS,
+  ADD_TEST_GROUP,
+
   FETCH_TEST_CASES
 } from 'actions/types'
 
@@ -148,6 +150,9 @@ export default function (state = initialState, action) {
 
     case FETCH_TEST_GROUPS:
       return { ...state, testGroups: action.data }
+    case ADD_TEST_GROUP:
+      return { ...state, testGroups: [...state.testGroups, action.data] }
+
     case FETCH_TEST_CASES:
       return { ...state, testCases: action.data }
 
