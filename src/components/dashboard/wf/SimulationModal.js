@@ -9,7 +9,6 @@ class SimulationModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tab: 'simple'
     }
   }
 
@@ -28,12 +27,6 @@ class SimulationModal extends React.Component {
     onSubmit(values)
   }
 
-  onChangeTab(e, value) {
-    this.setState({
-      tab: value
-    })
-  }
-
   renderAdvanced () {
     return null
   }
@@ -45,9 +38,6 @@ class SimulationModal extends React.Component {
         collectors={collectors}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
-
-        tab={this.state.tab}
-        onChangeTab={this.onChangeTab.bind(this)}
       />
     )
   }

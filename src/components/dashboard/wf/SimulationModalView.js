@@ -1,8 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
 
-import { Tabs, Tab } from '@material-ui/core'
-
 import {
   FormInput,
   FormSelect,
@@ -14,18 +12,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 
 export default class SimulationModalView extends React.Component {
-  renderTabContent () {
-    const {tab} = this.props
-
-    switch (tab) {
-      case 'advanced':
-        return this.renderAdvanced()
-      default:
-        return this.renderSimple()
-    }
-  }
-
-  renderSimple () {
+  renderContent () {
     const {collectors} = this.props
     return (
       <CardPanel>
@@ -51,25 +38,12 @@ export default class SimulationModalView extends React.Component {
     )
   }
 
-  renderAdvanced () {
-    return (
-      <CardPanel>
-
-      </CardPanel>
-    )
-  }
-
   render () {
-    const {onSubmit, onClickClose, wfSimulationState, tab, onChangeTab} = this.props
+    const {onSubmit, onClickClose, wfSimulationState} = this.props
     return (
       <Modal title="Simulation" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
-          <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
-            <Tab label="Simple" value="simple"/>
-            <Tab label="Advanced" value="advanced"/>
-          </Tabs>
-
-          {this.renderTabContent()}
+          {this.renderContent()}
 
           {wfSimulationState ? <RefreshOverlay/> : null}
           <SubmitBlock name="Post"/>
