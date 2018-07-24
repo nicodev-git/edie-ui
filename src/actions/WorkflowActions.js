@@ -917,3 +917,9 @@ export const fetchTestGroups = (entity) => {
     })
   }
 }
+
+export const fetchTestCases = (entity) => {
+  return dispatch => {
+
+  }
+}
