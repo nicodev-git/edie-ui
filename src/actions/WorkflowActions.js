@@ -48,7 +48,9 @@ import {
 
   FETCH_SIM_SAMPLES,
   ADD_SIM_SAMPLE,
-  REMOVE_SIM_SAMPLE
+  REMOVE_SIM_SAMPLE,
+
+  FETCH_TEST_GROUPS
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -902,6 +904,16 @@ export const removeSimSample = (entity) => {
   return dispatch => {
     axios.delete(`${ROOT_URL}/simsample/${entity.id}`).then(res => {
       dispatch({type: REMOVE_SIM_SAMPLE, data: entity})
+    })
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+export const fetchTestGroups = (entity) => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/flowtestgroup?size=1000`).then(res => {
+      dispatch({type: FETCH_TEST_GROUPS, data: res.data})
     })
   }
 }
