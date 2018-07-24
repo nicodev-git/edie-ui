@@ -265,12 +265,10 @@ class Workflows extends React.Component {
   }
 
   renderSimulationModal() {
-    if (!this.props.wfSimulationModalOpen) return
+    if (!this.props.wfSimulationModalOpen ) return
     return (
       <SimulationModal
-        collectors={this.props.collectors}
-        wfSimulationState={this.props.wfSimulationState}
-        wfSimulationRes={this.props.wfSimulationRes}
+        {...this.props}
         onSubmit={this.onTrySimulate.bind(this)}
         onClickClose={this.onCloseSimulationModal.bind(this)}/>
     )

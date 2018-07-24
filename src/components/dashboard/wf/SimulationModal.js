@@ -12,6 +12,11 @@ class SimulationModal extends React.Component {
     }
   }
 
+  componentWillMount () {
+    this.props.fetchTestGroups()
+    this.props.fetchTestCases()
+  }
+
   componentDidUpdate(props) {
     const {wfSimulationRes} = this.props
     if (!props.wfSimulationRes && wfSimulationRes) {
