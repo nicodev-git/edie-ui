@@ -26,6 +26,9 @@ class SimulationModal extends React.Component {
 
     onSubmit(values)
   }
+  renderAdvanced () {
+    return null
+  }
   render () {
     const {handleSubmit, onClickClose, collectors, wfSimulationState} = this.props
     return (
