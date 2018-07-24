@@ -38,7 +38,10 @@ import {
   ADD_SIM_SAMPLE,
   REMOVE_SIM_SAMPLE,
   UPDATE_WF_SIM_STATE,
-  UPDATE_WF_SIM_RES
+  UPDATE_WF_SIM_RES,
+
+  FETCH_TEST_GROUPS,
+  FETCH_TEST_CASES
 } from 'actions/types'
 
 const initialState = {
@@ -53,7 +56,10 @@ const initialState = {
   globalVars: [],
   shapes: [],
   simSamples: [],
-  wfSimulationState: false
+  wfSimulationState: false,
+
+  testGroups: [],
+  testCases: []
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -139,6 +145,11 @@ export default function (state = initialState, action) {
       return { ...state, simSamples: [...state.simSamples, action.data]}
     case REMOVE_SIM_SAMPLE:
       return { ...state, simSamples: state.simSamples.filter(p => p.id !== action.data.id) }
+
+    case FETCH_TEST_GROUPS:
+      return { ...state, testGroups: action.data }
+    case FETCH_TEST_CASES:
+      return { ...state, testCases: action.data }
 
     default:
       return state

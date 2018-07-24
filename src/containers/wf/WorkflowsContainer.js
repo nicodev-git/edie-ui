@@ -46,7 +46,10 @@ import {
 
   fetchSimSamples,
   addSimSample,
-  removeSimSample
+  removeSimSample,
+
+  fetchTestGroups,
+  fetchTestCases
 } from 'actions'
 
 class WorkflowsContainer extends React.Component {
@@ -86,6 +89,9 @@ export default connect(
     simSamples: state.workflow.simSamples,
     wfSimulationState: state.workflow.wfSimulationState,
     wfSimulationRes: state.workflow.wfSimulationRes,
+
+    testGroups: state.workflow.testGroups,
+    testCases: state.workflow.testCases,
 
     brainCells: state.settings.brainCells,
     collectors: state.settings.collectors
@@ -132,6 +138,9 @@ export default connect(
 
     fetchSimSamples,
     addSimSample,
-    removeSimSample
+    removeSimSample,
+
+    fetchTestGroups,
+    fetchTestCases
   }
 )(WorkflowsContainer)
