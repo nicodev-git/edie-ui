@@ -66,7 +66,8 @@ class SimulationModal extends React.Component {
     })
   }
 
-  onSaveTestCase () {
+  onSaveTestCase (entity) {
+    if (entity.id) {}
     this.setState({
       testCaseModalOpen: false
     })
@@ -84,6 +85,7 @@ class SimulationModal extends React.Component {
     if (!this.state.testCaseModalOpen) return null
     return (
       <TestCaseModal
+        editCase={this.state.editCase}
         onSubmit={this.onSaveTestCase.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}
       />
