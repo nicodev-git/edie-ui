@@ -1,6 +1,7 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
 
 import {
   FormInput,
@@ -12,7 +13,7 @@ import {
 
 export default class TestCaseModalView extends React.Component {
   renderContent () {
-    const {messages, onClickAddMsg} = this.props
+    const {messages, onClickAddMsg, onClickEditMsg} = this.props
     return (
       <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
         <Field
@@ -26,12 +27,14 @@ export default class TestCaseModalView extends React.Component {
             <thead>
             <tr>
               <th>Message</th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
             {messages.map((p, i) =>
               <tr key={i}>
                 <td>{JSON.stringify(p)}</td>
+                <td><EditIcon className="link" onClick={() => onClickEditMsg(p)}/></td>
               </tr>
             )}
             </tbody>

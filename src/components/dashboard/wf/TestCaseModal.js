@@ -31,8 +31,11 @@ class TestCaseModal extends React.Component {
     })
   }
 
-  onClickEditMsg () {
-
+  onClickEditMsg (editMsg) {
+    this.setState({
+      msgModalOpen: true,
+      editMsg
+    })
   }
 
   onCloseMsgModal () {
@@ -54,7 +57,8 @@ class TestCaseModal extends React.Component {
     }
 
     this.setState({
-      messages
+      messages,
+      msgModalOpen: false
     })
   }
 
@@ -64,6 +68,7 @@ class TestCaseModal extends React.Component {
     if (!this.state.msgModalOpen) return null
     return (
       <TestMessageModal
+        editMsg={this.state.editMsg}
         onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}
       />
@@ -80,6 +85,7 @@ class TestCaseModal extends React.Component {
         allValues={allValues}
 
         onClickAddMsg={this.onClickAddMsg.bind(this)}
+        onClickEditMsg={this.onClickEditMsg.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}

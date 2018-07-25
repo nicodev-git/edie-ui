@@ -80,7 +80,7 @@ class TestMessageModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: {},
+    initialValues: props.editMsg,
     allValues: getFormValues('wfTestMsgForm')(state)
   })
 )(reduxForm({form: 'wfTestMsgForm'})(TestMessageModal))
