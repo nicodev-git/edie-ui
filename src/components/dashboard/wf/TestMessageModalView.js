@@ -13,29 +13,19 @@ export default class TestMessageModalView extends React.Component {
   renderContent () {
     const {messages, onClickAddMsg} = this.props
     return (
-      <CardPanel title="Test Message Modal">
-        <Field
-          name="name"
-          component={FormInput}
-          floatingLabel="Name"
-          className="valign-top margin-md-right"
-        />
-        <div>
-          <table className="table table-hover">
-            <thead>
-            <tr>
-              <th>Message</th>
-            </tr>
-            </thead>
-            <tbody>
-            {messages.map(p =>
-              <tr>
-                <td></td>
-              </tr>
-            )}
-            </tbody>
-          </table>
-        </div>
+      <CardPanel title="Message">
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>Field</th>
+            <th>Value</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+
       </CardPanel>
     )
   }
