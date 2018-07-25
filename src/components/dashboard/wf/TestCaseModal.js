@@ -10,7 +10,7 @@ class TestCaseModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      messages: [],
+      messages: props.editCase ? (props.editCase.messages || []) : [],
 
       msgModalOpen: false,
       editMsg: null

@@ -3,8 +3,6 @@ import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 
 import {
-  FormInput,
-  FormSelect,
   Modal,
   CardPanel
 } from 'components/modal/parts'
