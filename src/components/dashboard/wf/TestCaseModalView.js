@@ -2,6 +2,7 @@ import React from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
+import beautify from 'json-beautify'
 
 import {
   FormInput,
@@ -33,7 +34,7 @@ export default class TestCaseModalView extends React.Component {
             <tbody>
             {messages.map((p, i) =>
               <tr key={i}>
-                <td>{JSON.stringify(p)}</td>
+                <td>{beautify(p)}</td>
                 <td><EditIcon className="link" onClick={() => onClickEditMsg(p)}/></td>
               </tr>
             )}

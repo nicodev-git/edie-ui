@@ -20,6 +20,17 @@ class TestMessageModal extends React.Component {
       fields
     }
   }
+
+  componentDidMount () {
+    const {fields} = this.state
+    fields.forEach(f => {
+      if (f.name) {
+        this.props.change(`param.name${f.id}`, f.name)
+        this.props.change(`param.value${f.id}`, f.value)
+      }
+    })
+  }
+
   onSubmit (values) {
     const {onSubmit} = this.props
 
