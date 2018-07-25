@@ -6,7 +6,6 @@ import beautify from 'json-beautify'
 
 import {
   FormInput,
-  FormSelect,
   Modal,
   SubmitBlock,
   CardPanel

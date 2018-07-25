@@ -5,7 +5,6 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import {
   FormInput,
-  FormSelect,
   Modal,
   SubmitBlock,
   CardPanel

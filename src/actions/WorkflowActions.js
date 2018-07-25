@@ -955,3 +955,11 @@ export const updateTestCase = (entity) => {
     })
   }
 }
+
+export const removeTestCase = (entity) => {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/flowtestcase/${entity.id}`).then(res =>{
+      dispatch({type: REMOVE_TEST_CASE, data: entity})
+    })
+  }
+}

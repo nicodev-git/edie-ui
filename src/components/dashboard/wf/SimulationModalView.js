@@ -24,41 +24,52 @@ export default class SimulationModalView extends React.Component {
       </CardPanel>
     )
   }
-  renderContent () {
-    const {collectors, testGroups, testCases, onClickAddGroup,
-      onClickAddCase, allValues, onClickEditCase, onClickDeleteCase} = this.props
+
+  renderTestCases () {
+    const {testGroups, testCases, allValues, onClickAddGroup, selectedCaseId,
+      selectCaseId} = this.props
     const {groupId} = allValues || {}
+
+    return (
+      <div style={{width: 300}}>
+        <div>
+          <Field name="groupId"
+                 component={FormSelect}
+                 floatingLabel="Test Group"
+                 options={testGroups.map(p => ({label: p.name, value: p.id}))}
+                 style={{minWidth: 200}}
+                 className="valign-middle"
+          />
+          <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
+        </div>
+        <div>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Test Case</th>
+            </tr>
+            </thead>
+            <tbody>
+            {testCases.filter(p => p.groupId === groupId).map(p =>
+              <tr key={p.id} className={selectedCaseId === p.id ? 'selected' : ''}
+                  onClick={() => selectCaseId(p.id)}>
+                <td>{p.name}</td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+
+  renderContent () {
+    const { onClickAddCase } = this.props
     return (
       <CardPanel title="Tests" tools={<AddIcon onClick={onClickAddCase} className="link"/>}>
         <div className="flex-horizontal">
+          {this.renderTestCases()}
           <div className="flex-1">
-            <div>
-              <Field name="groupId"
-                     component={FormSelect}
-                     floatingLabel="Test Group"
-                     options={testGroups.map(p => ({label: p.name, value: p.id}))}
-                     style={{minWidth: 200}}
-                     className="valign-middle"
-              />
-              <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
-            </div>
-            <div>
-              <table className="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Test Case</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                {testCases.filter(p => p.groupId === groupId).map(p =>
-                  <tr key={p.id}>
-                    <td>{p.name}</td>
-                  </tr>
-                )}
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
       </CardPanel>
@@ -66,7 +77,7 @@ export default class SimulationModalView extends React.Component {
   }
 
   render () {
-    const {onSubmit, onClickClose, wfSimulationState} = this.props
+    const {onClickClose, wfSimulationState} = this.props
     return (
       <Modal title="Simulation" onRequestClose={onClickClose} contentStyle={{width: 1000}}>
         {this.renderContent()}
