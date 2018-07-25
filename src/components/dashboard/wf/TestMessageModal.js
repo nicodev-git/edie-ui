@@ -9,11 +9,11 @@ class TestMessageModal extends React.Component {
   constructor (props) {
     super(props)
 
-    const names = keys(props.initialValues || {})
+    const names = keys(props.editMsg || {})
     const fields = names.map((name, id) => ({
       id,
       name,
-      value: props.initialValues[name]
+      value: props.editMsg[name]
     }))
 
     this.state = {
@@ -22,7 +22,6 @@ class TestMessageModal extends React.Component {
   }
   onSubmit (values) {
     const {onSubmit} = this.props
-
 
     const msg = {}
     const paramKeys = keys(values.param || {})
@@ -80,7 +79,6 @@ class TestMessageModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editMsg,
     allValues: getFormValues('wfTestMsgForm')(state)
   })
 )(reduxForm({form: 'wfTestMsgForm'})(TestMessageModal))
