@@ -41,12 +41,30 @@ class TestCaseModal extends React.Component {
     })
   }
 
+  onSubmitMsg (msg) {
+    const {editMsg} = this.props
+    let {messages} = this.state
+    if (editMsg) {
+      const index = messages.indexOf(editMsg)
+      if (index >= 0) {
+        messages = messages.map((p, i) => i === index ? msg : p)
+      }
+    } else {
+      messages = [...messages, msg]
+    }
+
+    this.setState({
+      messages
+    })
+  }
+
   ////////////////////////////////////////////////////////
 
   renderMsgModal () {
     if (!this.state.msgModalOpen) return null
     return (
       <TestMessageModal
+        onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}
       />
     )

@@ -29,9 +29,9 @@ export default class TestCaseModalView extends React.Component {
             </tr>
             </thead>
             <tbody>
-            {messages.map(p =>
-              <tr>
-                <td></td>
+            {messages.map((p, i) =>
+              <tr key={i}>
+                <td>{JSON.stringify(p)}</td>
               </tr>
             )}
             </tbody>
@@ -47,6 +47,7 @@ export default class TestCaseModalView extends React.Component {
       <Modal title="Test Case" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
+          <SubmitBlock name="Save"/>
         </form>
         {this.props.children}
       </Modal>
