@@ -36,7 +36,6 @@ export default class SimulationModalView extends React.Component {
               {testGroups.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
             </Select>
           </FormControl>
-
           <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
         </div>
         <div>
