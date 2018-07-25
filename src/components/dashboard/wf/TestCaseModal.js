@@ -42,6 +42,15 @@ class TestCaseModal extends React.Component {
     })
   }
 
+  onClickDeleteMsg (index) {
+    if (!window.confirm('Click OK to delete')) return
+    const {messages} = this.state
+    messages.splice(index, 1)
+    this.setState({
+      messages
+    })
+  }
+
   onCloseMsgModal () {
     this.setState({
       msgModalOpen: false
@@ -90,6 +99,7 @@ class TestCaseModal extends React.Component {
 
         onClickAddMsg={this.onClickAddMsg.bind(this)}
         onClickEditMsg={this.onClickEditMsg.bind(this)}
+        onClickDeleteMsg={this.onClickDeleteMsg.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}

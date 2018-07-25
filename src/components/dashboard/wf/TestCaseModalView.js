@@ -15,7 +15,8 @@ import {
 export default class TestCaseModalView extends React.Component {
   render () {
     const {onSubmit, onClickClose, messages,
-      onClickAddMsg, onClickEditMsg, noModal} = this.props
+      onClickAddMsg, onClickEditMsg, onClickDeleteMsg,
+      noModal} = this.props
 
     const content = (
       <div>
@@ -40,7 +41,10 @@ export default class TestCaseModalView extends React.Component {
             {messages.map((p, i) =>
               <tr key={i}>
                 <td>{beautify(p, null, 2, 60)}</td>
-                <td><EditIcon className="link" onClick={() => onClickEditMsg(p)}/></td>
+                <td>
+                  <EditIcon className="link" onClick={() => onClickEditMsg(p)}/>
+                  <DeleteIcon className="link" onClick={() => onClickDeleteMsg(i)}/>
+                </td>
               </tr>
             )}
             </tbody>

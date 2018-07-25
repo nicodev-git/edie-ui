@@ -72,7 +72,7 @@ export default class SimulationModalView extends React.Component {
   render () {
     const {onClickClose, wfSimulationState} = this.props
     return (
-      <Modal title="Simulation" onRequestClose={onClickClose} contentStyle={{width: 1000}}>
+      <Modal title="Simulation" onRequestClose={onClickClose} contentStyle={{width: 1200}}>
         {this.renderContent()}
         {wfSimulationState ? <RefreshOverlay/> : null}
         {this.props.children}
