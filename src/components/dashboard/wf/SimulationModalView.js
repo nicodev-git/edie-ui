@@ -51,13 +51,15 @@ export default class SimulationModalView extends React.Component {
           <table className="table table-hover">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Test Case</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
             {testCases.filter(p => p.groupId === groupId).map(p =>
               <tr key={p.id}>
                 <td>{p.name}</td>
+                <td></td>
               </tr>
             )}
             </tbody>

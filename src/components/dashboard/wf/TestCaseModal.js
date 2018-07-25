@@ -19,6 +19,13 @@ class TestCaseModal extends React.Component {
     onSubmit(values)
   }
 
+  onClickAddMsg () {
+
+  }
+
+  onClickEditMsg () {
+    
+  }
 
   render () {
     const {
@@ -28,6 +35,8 @@ class TestCaseModal extends React.Component {
       <TestCaseModalView
         messages={this.state.messages}
         allValues={allValues}
+
+        onClickAddMsg={this.onClickAddMsg.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}

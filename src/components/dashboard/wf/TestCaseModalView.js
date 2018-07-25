@@ -1,5 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import AddIcon from '@material-ui/icons/AddCircle'
 
 import {
   FormInput,
@@ -11,9 +12,9 @@ import {
 
 export default class TestCaseModalView extends React.Component {
   renderContent () {
-    const {messages} = this.props
+    const {messages, onClickAddMsg} = this.props
     return (
-      <CardPanel>
+      <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
         <Field
           name="name"
           component={FormInput}
