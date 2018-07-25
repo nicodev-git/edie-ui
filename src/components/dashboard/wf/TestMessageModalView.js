@@ -54,7 +54,7 @@ export default class TestMessageModalView extends React.Component {
       <Modal title="Test Message" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
-          <SubmitBlock name="Save"/>
+          <SubmitBlock name="OK"/>
         </form>
         {this.props.children}
       </Modal>

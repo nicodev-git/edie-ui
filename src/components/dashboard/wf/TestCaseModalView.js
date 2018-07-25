@@ -50,10 +50,13 @@ export default class TestCaseModalView extends React.Component {
 
     if (noModal) {
       return (
-        <form onSubmit={onSubmit}>
-          {content}
-          <SubmitBlock name="Save"/>
-        </form>
+        <div>
+          <form onSubmit={onSubmit}>
+            {content}
+            <SubmitBlock name="Save"/>
+          </form>
+          {this.props.children}
+        </div>
       )
     }
 
