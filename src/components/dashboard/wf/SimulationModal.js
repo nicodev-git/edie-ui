@@ -97,7 +97,12 @@ export default class SimulationModal extends React.Component {
       selectedCaseId: selectedCase.id
     })
 
-    this.onClickEditCase(selectedCase)
+    this.setState({
+      testCaseModalOpen: false
+    }, () => {
+      this.onClickEditCase(selectedCase)
+    })
+
   }
 
   //////////////////////////////////////////////////////////////
