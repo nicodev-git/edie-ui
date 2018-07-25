@@ -27,7 +27,7 @@ class TestMessageModal extends React.Component {
     onSubmit(values)
   }
 
-  onClickAddMsg () {
+  onClickAdd () {
     const {fields} = this.state
 
     const maxId = Math.max.apply(null, fields.map(p => p.id)) + 1
@@ -38,15 +38,27 @@ class TestMessageModal extends React.Component {
     })
   }
 
+  onClickDelete (id) {
+    const {fields} = this.state
+
+    this.props.change(`param.name${id}`, '')
+    this.props.change(`param.value${id}`, '')
+
+    this.setState({
+      fields: fields.filter(p => p.id !== id)
+    })
+  }
+
   render() {
     const {handleSubmit, onClose} = this.props
     return (
       <TestMessageModalView
-        messages={this.state.messages}
+        fields={this.state.fields}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClose}
 
-        onClickAddMsg={this.onClickAddMsg.bind(this)}
+        onClickAdd={this.onClickAdd.bind(this)}
+        onClickDelete={this.onClickDelete.bind(this)}
       />
     )
   }
