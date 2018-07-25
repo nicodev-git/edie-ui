@@ -53,7 +53,9 @@ import {
   FETCH_TEST_GROUPS,
   ADD_TEST_GROUP,
   FETCH_TEST_CASES,
-  ADD_TEST_CASE
+  ADD_TEST_CASE,
+  UPDATE_TEST_CASE,
+  REMOVE_TEST_CASE
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -942,6 +944,14 @@ export const addTestCase = (entity, cb) => {
     axios.post(`${ROOT_URL}/flowtestcase`, entity).then(res => {
       dispatch({type: ADD_TEST_CASE, data: res.data})
       cb && cb(res.data)
+    })
+  }
+}
+
+export const updateTestCase = (entity) => {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/flowtestcase/${entity.id}`, entity).then(res => {
+      dispatch({type: UPDATE_TEST_CASE, data: res.data})
     })
   }
 }
