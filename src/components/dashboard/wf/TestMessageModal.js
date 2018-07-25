@@ -30,7 +30,7 @@ class TestMessageModal extends React.Component {
   onClickAdd () {
     const {fields} = this.state
 
-    const maxId = Math.max.apply(null, fields.map(p => p.id)) + 1
+    const maxId = fields.length ? (Math.max.apply(null, fields.map(p => p.id)) + 1) : 1
     this.setState({
       fields: [...fields, {
         id: maxId

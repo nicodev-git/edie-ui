@@ -31,7 +31,6 @@ export default class SimulationModalView extends React.Component {
           <Field name="groupId"
                  component={FormSelect}
                  floatingLabel="Test Group"
-                 className="valign-top margin-md-right"
                  options={testGroups.map(p => ({label: p.name, value: p.id}))}
                  style={{minWidth: 200}}
                  className="valign-middle"

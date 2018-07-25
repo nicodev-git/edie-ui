@@ -19,8 +19,9 @@ export default class TestMessageModalView extends React.Component {
         <table className="table table-hover">
           <thead>
           <tr>
-            <th>Field</th>
+            <th width="100">Field</th>
             <th>Value</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -32,13 +33,12 @@ export default class TestMessageModalView extends React.Component {
               </td>
               <td>
                 <Field name={`param.value${p.id}`} component={FormInput} label="Value"
-                       className="valign-top margin-md-right"/>
-
-                <div className="inline-block valign-top" style={{marginTop: 8}}>
-                  <DeleteIcon
-                    className="link"
-                    onClick={() => onClickDelete(p.id)}/>
-                </div>
+                       className="valign-top margin-md-right" fullWidth/>
+              </td>
+              <td>
+                <DeleteIcon
+                  className="link"
+                  onClick={() => onClickDelete(p.id)}/>
               </td>
             </tr>
           )}
