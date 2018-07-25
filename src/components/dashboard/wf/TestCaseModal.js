@@ -3,7 +3,7 @@ import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
 
 import TestCaseModalView from './TestCaseModalView'
-import {showAlert} from 'components/common/Alert'
+// import {showAlert} from 'components/common/Alert'
 
 class TestCaseModal extends React.Component {
   constructor (props) {
