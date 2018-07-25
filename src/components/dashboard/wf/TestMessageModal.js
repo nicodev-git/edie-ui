@@ -1,6 +1,7 @@
 import React from 'react'
 import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
+import {keys} from 'lodash'
 
 import TestMessageModalView from './TestMessageModalView'
 
@@ -8,17 +9,15 @@ class TestMessageModal extends React.Component {
   constructor (props) {
     super(props)
 
-    const fields = []
-
-    let {messages} = props.initialValues || {}
-    messages = messages || []
-    messages = messages.map((value, id) => ({
+    const names = keys(props.initialValues || {})
+    const fields = names.map((name, id) => ({
       id,
-      ...value
+      name,
+      value: props.initialValues[name]
     }))
 
     this.state = {
-      messages
+      fields
     }
   }
   onSubmit (values) {
@@ -28,13 +27,26 @@ class TestMessageModal extends React.Component {
     onSubmit(values)
   }
 
+  onClickAddMsg () {
+    const {fields} = this.state
+
+    const maxId = Math.max.apply(null, fields.map(p => p.id)) + 1
+    this.setState({
+      fields: [...fields, {
+        id: maxId
+      }]
+    })
+  }
+
   render() {
-    const {handleSubmit, onClickClose} = this.props
+    const {handleSubmit, onClose} = this.props
     return (
       <TestMessageModalView
         messages={this.state.messages}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
-        onClickClose={onClickClose}
+        onClickClose={onClose}
+
+        onClickAddMsg={this.onClickAddMsg.bind(this)}
       />
     )
   }

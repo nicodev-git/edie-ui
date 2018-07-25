@@ -66,7 +66,7 @@ class TestCaseModal extends React.Component {
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
       >
-
+        {this.renderMsgModal()}
       </TestCaseModalView>
     )
   }

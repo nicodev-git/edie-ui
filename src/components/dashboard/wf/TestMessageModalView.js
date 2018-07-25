@@ -1,5 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import AddIcon from '@material-ui/icons/AddCircle'
 
 import {
   FormInput,
@@ -13,7 +14,7 @@ export default class TestMessageModalView extends React.Component {
   renderContent () {
     const {messages, onClickAddMsg} = this.props
     return (
-      <CardPanel title="Message">
+      <CardPanel title="Message" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
         <table className="table table-hover">
           <thead>
           <tr>
