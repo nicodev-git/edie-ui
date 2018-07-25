@@ -56,10 +56,10 @@ export default class SimulationModal extends React.Component {
     if (!selectedGroupId) return alert('Please choose test group')
 
     this.setState({
-      testCaseModalOpen: false
+      testCaseModalOpen: false,
+      selectedCaseId: null
     }, () => {
       this.onClickEditCase({})
-
     })
   }
 

@@ -21,7 +21,7 @@ export default class SimulationModalView extends React.Component {
 
   renderTestCases () {
     const {testGroups, testCases, onClickAddGroup, selectedCaseId, selectCaseId,
-      selectedGroupId, selectGroupId} = this.props
+      selectedGroupId, selectGroupId, onClickAddCase} = this.props
 
     return (
       <div className="margin-md-right" style={{width: 300}}>
@@ -38,7 +38,10 @@ export default class SimulationModalView extends React.Component {
           <table className="table table-hover">
             <thead>
             <tr>
-              <th>Test Case</th>
+              <th>
+                <span className="valing-middle">Test Case</span>
+                <AddIcon onClick={onClickAddCase} className="link valign-middle margin-md-left"/>
+              </th>
             </tr>
             </thead>
             <tbody>
@@ -56,9 +59,8 @@ export default class SimulationModalView extends React.Component {
   }
 
   renderContent () {
-    const { onClickAddCase } = this.props
     return (
-      <CardPanel title="Tests" tools={<AddIcon onClick={onClickAddCase} className="link"/>}>
+      <CardPanel title="Tests">
         <div className="flex-horizontal">
           {this.renderTestCases()}
           {this.renderMessages()}

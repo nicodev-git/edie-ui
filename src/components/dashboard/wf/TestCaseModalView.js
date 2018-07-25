@@ -13,7 +13,8 @@ import {
 
 export default class TestCaseModalView extends React.Component {
   render () {
-    const {onSubmit, onClickClose, messages, onClickAddMsg, onClickEditMsg, noModal} = this.props
+    const {onSubmit, onClickClose, messages,
+      onClickAddMsg, onClickEditMsg, noModal} = this.props
 
     const content = (
       <div>
@@ -27,7 +28,10 @@ export default class TestCaseModalView extends React.Component {
           <table className="table table-hover">
             <thead>
             <tr>
-              <th>Message</th>
+              <th>
+                <span>Message</span>
+                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddMsg}/>
+              </th>
               <th></th>
             </tr>
             </thead>
@@ -56,7 +60,7 @@ export default class TestCaseModalView extends React.Component {
     return (
       <Modal title="Test Case" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
-          <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
+          <CardPanel title="Test Case">
             {content}
           </CardPanel>
           <SubmitBlock name="Save"/>
