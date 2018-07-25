@@ -18,10 +18,13 @@ class TestCaseModal extends React.Component {
   }
 
   onSubmit (values) {
-    const {onSubmit} = this.props
+    const {onSubmit, editCase} = this.props
+    const {messages} = this.state
 
-
-    onSubmit(values)
+    onSubmit({
+      name: values.name,
+      messages
+    })
   }
 
   onClickAddMsg () {

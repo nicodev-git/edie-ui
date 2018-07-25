@@ -34,7 +34,7 @@ export default class TestCaseModalView extends React.Component {
             <tbody>
             {messages.map((p, i) =>
               <tr key={i}>
-                <td>{beautify(p)}</td>
+                <td>{beautify(p, null, 2, 60)}</td>
                 <td><EditIcon className="link" onClick={() => onClickEditMsg(p)}/></td>
               </tr>
             )}
