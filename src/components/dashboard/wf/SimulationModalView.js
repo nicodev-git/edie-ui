@@ -6,7 +6,6 @@ import {
   FormInput,
   FormSelect,
   Modal,
-  SubmitBlock,
   CardPanel
 } from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -43,7 +42,6 @@ export default class SimulationModalView extends React.Component {
           <Field name="testCaseId"
                  component={FormSelect}
                  floatingLabel="Test Case"
-                 className="valign-top margin-md-right"
                  options={testCases.filter(p => p.groupId === groupId).map(p => ({label: p.name, value: p.id}))}
                  style={{minWidth: 200}}
                  className="valign-middle"

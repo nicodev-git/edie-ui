@@ -43,7 +43,7 @@ export default class TestCaseModalView extends React.Component {
   render () {
     const {onSubmit, onClickClose} = this.props
     return (
-      <Modal title="Simulation" onRequestClose={onClickClose}>
+      <Modal title="Test Case" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
         </form>
