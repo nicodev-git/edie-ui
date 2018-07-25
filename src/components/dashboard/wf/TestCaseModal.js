@@ -22,6 +22,7 @@ class TestCaseModal extends React.Component {
     const {messages} = this.state
 
     onSubmit({
+      ...editCase,
       name: values.name,
       messages
     })
@@ -48,8 +49,7 @@ class TestCaseModal extends React.Component {
   }
 
   onSubmitMsg (msg) {
-    const {editMsg} = this.props
-    let {messages} = this.state
+    let {messages, editMsg} = this.state
     if (editMsg) {
       const index = messages.indexOf(editMsg)
       if (index >= 0) {

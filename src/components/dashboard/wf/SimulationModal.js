@@ -47,8 +47,8 @@ class SimulationModal extends React.Component {
   //////////////////////////////////////////////////////////////
 
   onClickAddCase () {
-    // const {groupId} = this.props.allValues || {}
-    // if (!groupId) return alert('Please choose test group')
+    const {groupId} = this.props.allValues || {}
+    if (!groupId) return alert('Please choose test group')
     // const name = prompt('Please type test case name')
     // if (!name) return
     //
@@ -66,8 +66,26 @@ class SimulationModal extends React.Component {
     })
   }
 
+  onClickEditCase (editTestCase) {
+    this.setState({
+      testCaseModalOpen: true,
+      editTestCase
+    })
+  }
+
+  onclickDeleteCase (entity) {
+    if (!window.confirm('Click OK to delete')) return
+    this.props.removeTestCase(entity)
+  }
+
   onSaveTestCase (entity) {
-    if (entity.id) {}
+    if (entity.id) {
+      this.props.updateTestCase(entity)
+    } else {
+      const {groupId} = this.props.allValues || {}
+      entity.groupId = groupId
+      this.props.addTestCase(entity)
+    }
     this.setState({
       testCaseModalOpen: false
     })
@@ -110,6 +128,8 @@ class SimulationModal extends React.Component {
 
         testCases={testCases}
         onClickAddCase={this.onClickAddCase.bind(this)}
+        onClickEditCase={this.onClickEditCase.bind(this)}
+        onClickDeleteCase={this.onclickDeleteCase.bind(this)}
       >
         {this.renderTestCaseModal()}
       </SimulationModalView>
