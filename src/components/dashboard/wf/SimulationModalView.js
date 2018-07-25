@@ -28,8 +28,8 @@ export default class SimulationModalView extends React.Component {
       selectedGroupId, selectGroupId} = this.props
 
     return (
-      <div style={{width: 300}}>
-        <div className="margin-md-right">
+      <div className="margin-md-right" style={{width: 300}}>
+        <div>
           <FormControl className="valign-middle" style={{minWidth: 200}}>
             <InputLabel>Test Group</InputLabel>
             <Select displayEmpty value={selectedGroupId || ''} onChange={selectGroupId}>
