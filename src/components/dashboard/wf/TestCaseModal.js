@@ -3,15 +3,20 @@ import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
 
 import TestCaseModalView from './TestCaseModalView'
+import TestMessageModal from './TestMessageModal'
 // import {showAlert} from 'components/common/Alert'
 
 class TestCaseModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      messages: []
+      messages: [],
+
+      msgModalOpen: false,
+      editMsg: null
     }
   }
+
   onSubmit (values) {
     const {onSubmit} = this.props
 
@@ -20,11 +25,31 @@ class TestCaseModal extends React.Component {
   }
 
   onClickAddMsg () {
-
+    this.setState({
+      msgModalOpen: true,
+      editMsg: null
+    })
   }
 
   onClickEditMsg () {
-    
+
+  }
+
+  onCloseMsgModal () {
+    this.setState({
+      msgModalOpen: false
+    })
+  }
+
+  ////////////////////////////////////////////////////////
+
+  renderMsgModal () {
+    if (!this.state.msgModalOpen) return null
+    return (
+      <TestMessageModal
+        onClose={this.onCloseMsgModal.bind(this)}
+      />
+    )
   }
 
   render () {
@@ -40,7 +65,9 @@ class TestCaseModal extends React.Component {
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
-      />
+      >
+
+      </TestCaseModalView>
     )
   }
 }

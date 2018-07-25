@@ -48,6 +48,7 @@ export default class TestCaseModalView extends React.Component {
         <form onSubmit={onSubmit}>
           {this.renderContent()}
         </form>
+        {this.props.children}
       </Modal>
     )
   }
