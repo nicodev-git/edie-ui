@@ -61,10 +61,10 @@ export default class SimulationModal extends React.Component {
     })
   }
 
-  onClickEditCase (editTestCase) {
+  onClickEditCase (editCase) {
     this.setState({
       testCaseModalOpen: true,
-      editTestCase
+      editCase
     })
   }
 
@@ -92,10 +92,12 @@ export default class SimulationModal extends React.Component {
     })
   }
 
-  selectCaseId (e) {
+  selectCaseId (selectedCase) {
     this.setState({
-      selectedCaseId: e.target.value
+      selectedCaseId: selectedCase.id
     })
+
+    this.onClickEditCase(selectedCase)
   }
 
   //////////////////////////////////////////////////////////////
@@ -104,6 +106,7 @@ export default class SimulationModal extends React.Component {
     if (!this.state.testCaseModalOpen) return null
     return (
       <TestCaseModal
+        noModal
         editCase={this.state.editCase}
         onSubmit={this.onSaveTestCase.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}
@@ -133,8 +136,8 @@ export default class SimulationModal extends React.Component {
         onClickDeleteCase={this.onClickDeleteCase.bind(this)}
         selectedCaseId={this.state.selectedCaseId}
         selectCaseId={this.selectCaseId.bind(this)}
+        caseModal={this.renderTestCaseModal()}
       >
-        {this.renderTestCaseModal()}
       </SimulationModalView>
     )
   }

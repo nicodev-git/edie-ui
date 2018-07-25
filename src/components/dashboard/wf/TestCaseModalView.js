@@ -12,8 +12,9 @@ import {
 } from 'components/modal/parts'
 
 export default class TestCaseModalView extends React.Component {
-  renderContent () {
-    const {messages, onClickAddMsg, onClickEditMsg, noModal} = this.props
+  render () {
+    const {onSubmit, onClickClose, messages, onClickAddMsg, onClickEditMsg, noModal} = this.props
+
     const content = (
       <div>
         <Field
@@ -43,21 +44,21 @@ export default class TestCaseModalView extends React.Component {
       </div>
     )
 
-    if (noModal) return content
+    if (noModal) {
+      return (
+        <form onSubmit={onSubmit}>
+          {content}
+          <SubmitBlock name="Save"/>
+        </form>
+      )
+    }
 
-    return (
-      <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
-        {content}
-      </CardPanel>
-    )
-  }
-
-  render () {
-    const {onSubmit, onClickClose} = this.props
     return (
       <Modal title="Test Case" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
-          {this.renderContent()}
+          <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
+            {content}
+          </CardPanel>
           <SubmitBlock name="Save"/>
         </form>
         {this.props.children}

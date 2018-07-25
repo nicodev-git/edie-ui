@@ -15,22 +15,21 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class SimulationModalView extends React.Component {
   renderMessages () {
-    const {allValues} = this.props
-    const {testCaseId} = allValues || {}
-    if (!testCaseId) return null
+    const {caseModal} = this.props
     return (
       <div className="flex-1">
+        {caseModal}
       </div>
     )
   }
 
   renderTestCases () {
-    const {testGroups, testCases, onClickAddGroup, selectedCaseId, selectedGroupId,
-      selectGroupId} = this.props
+    const {testGroups, testCases, onClickAddGroup, selectedCaseId, selectCaseId,
+      selectedGroupId, selectGroupId} = this.props
 
     return (
       <div style={{width: 300}}>
-        <div>
+        <div className="margin-md-right">
           <FormControl className="valign-middle" style={{minWidth: 200}}>
             <InputLabel>Test Group</InputLabel>
             <Select displayEmpty value={selectedGroupId || ''} onChange={selectGroupId}>
@@ -50,7 +49,7 @@ export default class SimulationModalView extends React.Component {
             <tbody>
             {testCases.filter(p => p.groupId === selectedGroupId).map(p =>
               <tr key={p.id} className={selectedCaseId === p.id ? 'selected' : ''}
-                  onClick={() => selectCaseId(p.id)}>
+                  onClick={() => selectCaseId(p)}>
                 <td>{p.name}</td>
               </tr>
             )}

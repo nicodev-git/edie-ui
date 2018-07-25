@@ -102,7 +102,7 @@ class TestCaseModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: {},
+    initialValues: props.editCase,
     allValues: getFormValues('wfTestCaseForm')(state)
   })
 )(reduxForm({form: 'wfTestCaseForm'})(TestCaseModal))
