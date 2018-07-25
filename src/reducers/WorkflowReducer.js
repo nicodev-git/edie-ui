@@ -44,7 +44,8 @@ import {
   ADD_TEST_GROUP,
 
   FETCH_TEST_CASES,
-  ADD_TEST_CASE
+  ADD_TEST_CASE,
+  UPDATE_TEST_CASE
 } from 'actions/types'
 
 const initialState = {
@@ -158,7 +159,8 @@ export default function (state = initialState, action) {
       return { ...state, testCases: action.data }
     case ADD_TEST_CASE:
       return { ...state, testCases: [...state.testCases, action.data] }
-
+    case UPDATE_TEST_CASE:
+      return { ...state, testCases: state.testCases.map(p => p.id === action.data.id ? action.data : p) }
     default:
       return state
   }
