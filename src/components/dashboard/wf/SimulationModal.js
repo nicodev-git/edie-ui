@@ -1,18 +1,17 @@
 import React from 'react'
-import {reduxForm, getFormValues} from 'redux-form'
-import {connect} from 'react-redux'
 
 import SimulationModalView from './SimulationModalView'
 import {showAlert} from 'components/common/Alert'
 
 import TestCaseModal from './TestCaseModal'
 
-class SimulationModal extends React.Component {
+export default class SimulationModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       testCaseModalOpen: false,
-      selectedCaseId: null
+      selectedCaseId: null,
+      selectedGroupId: null
     }
   }
 
@@ -44,11 +43,17 @@ class SimulationModal extends React.Component {
     this.props.addTestGroup({name})
   }
 
+  selectGroupId (e) {
+    this.setState({
+      selectedGroupId: e.target.value
+    })
+  }
+
   //////////////////////////////////////////////////////////////
 
   onClickAddCase () {
-    const {groupId} = this.props.allValues || {}
-    if (!groupId) return alert('Please choose test group')
+    const {selectedGroupId} = this.state
+    if (!selectedGroupId) return alert('Please choose test group')
 
     this.setState({
       testCaseModalOpen: true,
@@ -72,8 +77,8 @@ class SimulationModal extends React.Component {
     if (entity.id) {
       this.props.updateTestCase(entity)
     } else {
-      const {groupId} = this.props.allValues || {}
-      entity.groupId = groupId
+      const {selectedGroupId} = this.state
+      entity.groupId = selectedGroupId
       this.props.addTestCase(entity)
     }
     this.setState({
@@ -108,17 +113,17 @@ class SimulationModal extends React.Component {
 
   render () {
     const {
-      handleSubmit, onClickClose, collectors, wfSimulationState,
-      testGroups, testCases, allValues
+      onClickClose, collectors, wfSimulationState,
+      testGroups, testCases
     } = this.props
     return (
       <SimulationModalView
-        allValues={allValues}
         wfSimulationState={wfSimulationState}
         collectors={collectors}
-        onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
 
+        selectedGroupId={this.state.selectedGroupId}
+        selectGroupId={this.selectGroupId.bind(this)}
         testGroups={testGroups}
         onClickAddGroup={this.onClickAddGroup.bind(this)}
 
@@ -134,10 +139,3 @@ class SimulationModal extends React.Component {
     )
   }
 }
-
-export default connect(
-  (state, props) => ({
-    initialValues: {},
-    allValues: getFormValues('wfSimulationForm')(state)
-  })
-)(reduxForm({form: 'wfSimulationForm'})(SimulationModal))

@@ -80,12 +80,13 @@ class TestCaseModal extends React.Component {
 
   render () {
     const {
-      handleSubmit, onClickClose, allValues
+      handleSubmit, onClickClose, allValues, noModal
     } = this.props
     return (
       <TestCaseModalView
         messages={this.state.messages}
         allValues={allValues}
+        noModal={noModal}
 
         onClickAddMsg={this.onClickAddMsg.bind(this)}
         onClickEditMsg={this.onClickEditMsg.bind(this)}

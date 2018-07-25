@@ -13,16 +13,16 @@ import {
 
 export default class TestCaseModalView extends React.Component {
   renderContent () {
-    const {messages, onClickAddMsg, onClickEditMsg} = this.props
-    return (
-      <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
+    const {messages, onClickAddMsg, onClickEditMsg, noModal} = this.props
+    const content = (
+      <div>
         <Field
           name="name"
           component={FormInput}
           floatingLabel="Name"
           className="valign-top margin-md-right"
         />
-        <div>
+        <div style={{overflow: 'auto', maxHeight: 400}}>
           <table className="table table-hover">
             <thead>
             <tr>
@@ -40,6 +40,14 @@ export default class TestCaseModalView extends React.Component {
             </tbody>
           </table>
         </div>
+      </div>
+    )
+
+    if (noModal) return content
+
+    return (
+      <CardPanel title="Test Case" tools={<AddIcon className="link" onClick={onClickAddMsg}/>}>
+        {content}
       </CardPanel>
     )
   }

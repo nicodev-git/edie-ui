@@ -1,5 +1,5 @@
 import React from 'react'
-import {Field} from 'redux-form'
+import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -19,9 +19,8 @@ export default class SimulationModalView extends React.Component {
     const {testCaseId} = allValues || {}
     if (!testCaseId) return null
     return (
-      <CardPanel title="Messages">
-
-      </CardPanel>
+      <div className="flex-1">
+      </div>
     )
   }
 
@@ -33,13 +32,13 @@ export default class SimulationModalView extends React.Component {
     return (
       <div style={{width: 300}}>
         <div>
-          <Field name="groupId"
-                 component={FormSelect}
-                 floatingLabel="Test Group"
-                 options={testGroups.map(p => ({label: p.name, value: p.id}))}
-                 style={{minWidth: 200}}
-                 className="valign-middle"
-          />
+          <FormControl className="valign-middle" style={{minWidth: 200}}>
+            <InputLabel>Test Group</InputLabel>
+            <Select value={selectedCaseId || ''} onChange={selectCaseId}>
+              {testGroups.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            </Select>
+          </FormControl>
+
           <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
         </div>
         <div>
@@ -69,8 +68,7 @@ export default class SimulationModalView extends React.Component {
       <CardPanel title="Tests" tools={<AddIcon onClick={onClickAddCase} className="link"/>}>
         <div className="flex-horizontal">
           {this.renderTestCases()}
-          <div className="flex-1">
-          </div>
+          {this.renderMessages()}
         </div>
       </CardPanel>
     )
@@ -81,7 +79,6 @@ export default class SimulationModalView extends React.Component {
     return (
       <Modal title="Simulation" onRequestClose={onClickClose} contentStyle={{width: 1000}}>
         {this.renderContent()}
-        {this.renderMessages()}
         {wfSimulationState ? <RefreshOverlay/> : null}
         {this.props.children}
       </Modal>
