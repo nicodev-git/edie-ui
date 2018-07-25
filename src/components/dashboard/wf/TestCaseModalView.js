@@ -2,6 +2,7 @@ import React from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 import beautify from 'json-beautify'
 
 import {
