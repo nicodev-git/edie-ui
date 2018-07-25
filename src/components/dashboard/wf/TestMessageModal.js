@@ -4,7 +4,23 @@ import {connect} from 'react-redux'
 
 import TestMessageModalView from './TestMessageModalView'
 
-export default class TestMessageModal extends React.Component {
+class TestMessageModal extends React.Component {
+  constructor (props) {
+    super(props)
+
+    const fields = []
+
+    let {messages} = props.initialValues || {}
+    messages = messages || []
+    messages = messages.map((value, id) => ({
+      id,
+      ...value
+    }))
+
+    this.state = {
+      messages
+    }
+  }
   onSubmit (values) {
     const {onSubmit} = this.props
 
@@ -13,8 +29,10 @@ export default class TestMessageModal extends React.Component {
   }
 
   render() {
+    const {handleSubmit, onClickClose} = this.props
     return (
       <TestMessageModalView
+        messages={this.state.messages}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
       />
@@ -27,4 +45,4 @@ export default connect(
     initialValues: {},
     allValues: getFormValues('wfTestMsgForm')(state)
   })
-)(reduxForm({form: 'wfTestMsgForm'})(TestCaseModal))
+)(reduxForm({form: 'wfTestMsgForm'})(TestMessageModal))
