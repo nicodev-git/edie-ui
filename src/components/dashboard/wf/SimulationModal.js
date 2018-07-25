@@ -92,9 +92,9 @@ export default class SimulationModal extends React.Component {
     })
   }
 
-  selectCaseId (selectedCaseId) {
+  selectCaseId (e) {
     this.setState({
-      selectedCaseId
+      selectedCaseId: e.target.value
     })
   }
 

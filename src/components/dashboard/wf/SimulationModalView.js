@@ -25,16 +25,15 @@ export default class SimulationModalView extends React.Component {
   }
 
   renderTestCases () {
-    const {testGroups, testCases, allValues, onClickAddGroup, selectedCaseId,
-      selectCaseId} = this.props
-    const {groupId} = allValues || {}
+    const {testGroups, testCases, onClickAddGroup, selectedCaseId, selectedGroupId,
+      selectGroupId} = this.props
 
     return (
       <div style={{width: 300}}>
         <div>
           <FormControl className="valign-middle" style={{minWidth: 200}}>
             <InputLabel>Test Group</InputLabel>
-            <Select value={selectedCaseId || ''} onChange={selectCaseId}>
+            <Select displayEmpty value={selectedGroupId || ''} onChange={selectGroupId}>
               {testGroups.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
             </Select>
           </FormControl>
@@ -49,7 +48,7 @@ export default class SimulationModalView extends React.Component {
             </tr>
             </thead>
             <tbody>
-            {testCases.filter(p => p.groupId === groupId).map(p =>
+            {testCases.filter(p => p.groupId === selectedGroupId).map(p =>
               <tr key={p.id} className={selectedCaseId === p.id ? 'selected' : ''}
                   onClick={() => selectCaseId(p.id)}>
                 <td>{p.name}</td>
