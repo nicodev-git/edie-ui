@@ -91,8 +91,9 @@ export default class SimulationModal extends React.Component {
     this.props.removeTestCase(entity)
     this.setState({
       selectedCaseId: null,
-      testCaseModalOpen: false
     })
+
+    this.onCloseTestCase()
   }
 
   onSaveTestCase (entity) {
@@ -103,9 +104,7 @@ export default class SimulationModal extends React.Component {
       entity.groupId = selectedGroupId
       this.props.addTestCase(entity)
     }
-    this.setState({
-      testCaseModalOpen: false
-    })
+    this.onCloseTestCase()
   }
 
   onCloseTestCase () {
