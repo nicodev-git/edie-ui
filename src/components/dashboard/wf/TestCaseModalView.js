@@ -62,7 +62,7 @@ export default class TestCaseModalView extends React.Component {
             {content}
 
 
-            <div className="form-buttons">
+            <div className="text-right">
               {onClickPost && <Button variant="contained" color="primary" onClick={onClickPost} className="margin-md-right">Post</Button>}
               <Button variant="contained" type="submit">Save</Button>
             </div>

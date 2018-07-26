@@ -113,7 +113,8 @@ export default class SimulationModal extends React.Component {
     })
   }
 
-  onClickPost () {
+  onClickPost (messages) {
+    if (!messages || !messages.length) return alert('No message')
 
   }
 
