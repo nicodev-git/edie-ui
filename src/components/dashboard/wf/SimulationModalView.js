@@ -2,6 +2,7 @@ import React from 'react'
 import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import {
   Modal,
@@ -14,7 +15,7 @@ export default class SimulationModalView extends React.Component {
   renderMessages () {
     const {caseModal} = this.props
     return (
-      <div className="flex-1">
+      <div className="flex-1" style={{minHeight: 300}}>
         {caseModal}
       </div>
     )
@@ -24,7 +25,8 @@ export default class SimulationModalView extends React.Component {
     const {testGroups, testCases,
       onClickAddGroup, onClickEditGroup,
       selectedCaseId, selectCaseId,
-      selectedGroupId, selectGroupId, onClickAddCase} = this.props
+      selectedGroupId, selectGroupId,
+      onClickAddCase, onClickDeleteCase} = this.props
 
     return (
       <div className="margin-md-right" style={{width: 300}}>
@@ -46,6 +48,7 @@ export default class SimulationModalView extends React.Component {
                 <span className="valing-middle">Test Case</span>
                 <AddIcon onClick={onClickAddCase} className="link valign-middle margin-md-left"/>
               </th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -53,6 +56,9 @@ export default class SimulationModalView extends React.Component {
               <tr key={p.id} className={selectedCaseId === p.id ? 'selected' : ''}
                   onClick={() => selectCaseId(p)}>
                 <td>{p.name}</td>
+                <td>
+                  <DeleteIcon onClick={() => onClickDeleteCase(p)}/>
+                </td>
               </tr>
             )}
             </tbody>

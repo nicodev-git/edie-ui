@@ -45,7 +45,8 @@ import {
 
   FETCH_TEST_CASES,
   ADD_TEST_CASE,
-  UPDATE_TEST_CASE
+  UPDATE_TEST_CASE,
+  REMOVE_TEST_CASE
 } from 'actions/types'
 import {UPDATE_TEST_GROUP} from "../actions/types";
 
@@ -164,6 +165,8 @@ export default function (state = initialState, action) {
       return { ...state, testCases: [...state.testCases, action.data] }
     case UPDATE_TEST_CASE:
       return { ...state, testCases: state.testCases.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_TEST_CASE:
+      return { ...state, testCases: state.testCases.filter(p => p.id !== action.data.id) }
     default:
       return state
   }
