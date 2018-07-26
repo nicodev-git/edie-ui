@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Field} from 'redux-form'
-import {Button, Checkbox, IconButton} from '@material-ui/core'
+import {Button, Checkbox, IconButton, Tooltip} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Typography from '@material-ui/core/Typography'
@@ -320,12 +320,14 @@ export default class BrainCellModalView extends Component {
                 <CardPanel title="Selected Tags">
                     <div>
                         {tags.map((t, i) =>
+                          <Tooltip title="Tag">
                             <Chip
                                 key={i}
                                 label={t}
                                 onDelete={() => onClickDeleteTag(i)}
                                 className="margin-md-right"
                             />
+                          </Tooltip>
                         )}
                     </div>
                 </CardPanel>
