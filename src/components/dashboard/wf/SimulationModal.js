@@ -116,6 +116,7 @@ export default class SimulationModal extends React.Component {
   onClickPost (messages) {
     if (!messages || !messages.length) return alert('No message')
 
+    this.props.postSimulate(messages)
   }
 
   selectCaseId (selectedCase) {
