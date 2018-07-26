@@ -291,6 +291,18 @@ export default class BrainCellModalView extends Component {
         )
     }
 
+    renderTagTooltip (tag) {
+      const {
+        allValues, brainCells
+      } = this.props
+      const { type }  = allValues || {}
+      if (type !== 'Grok') return ''
+
+      const cell = brainCells.filter(p => p.type === 'Classification' && ((p.params2 || {}).tags || []).includes(tag))
+      if (!cell.length) return ''
+      return cell[0].key || ''
+    }
+
     renderTags () {
         const {
             allValues, onClickAddTag, onClickDeleteTag, tags, allTags, onClickExistingTag
@@ -320,9 +332,11 @@ export default class BrainCellModalView extends Component {
                 <CardPanel title="Selected Tags">
                     <div>
                         {tags.map((t, i) =>
-                          <Tooltip title="Tag">
+                          <Tooltip
+                            key={i}
+                            title={this.renderTagTooltip(t)}
+                          >
                             <Chip
-                                key={i}
                                 label={t}
                                 onDelete={() => onClickDeleteTag(i)}
                                 className="margin-md-right"
