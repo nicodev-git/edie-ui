@@ -88,7 +88,7 @@ class TestCaseModal extends React.Component {
 
   render () {
     const {
-      handleSubmit, onClickClose, allValues, noModal
+      handleSubmit, onClickClose, allValues, noModal, onClickPost
     } = this.props
     return (
       <TestCaseModalView
@@ -100,6 +100,7 @@ class TestCaseModal extends React.Component {
         onClickEditMsg={this.onClickEditMsg.bind(this)}
         onClickDeleteMsg={this.onClickDeleteMsg.bind(this)}
 
+        onClickPost={onClickPost}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
       >

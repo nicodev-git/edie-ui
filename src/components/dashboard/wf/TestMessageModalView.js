@@ -2,7 +2,6 @@ import React from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
-import {Button} from '@material-ui/core'
 
 import {
   FormInput,
@@ -55,7 +54,6 @@ export default class TestMessageModalView extends React.Component {
       <Modal title="Test Message" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
-          <Button>Post</Button>
           <SubmitBlock name="OK"/>
         </form>
         {this.props.children}
