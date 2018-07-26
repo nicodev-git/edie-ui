@@ -36,7 +36,7 @@ export default class SimulationModalView extends React.Component {
             </Select>
           </FormControl>
           <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
-          <AddIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
+          <EditIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
         </div>
         <div>
           <table className="table table-hover">

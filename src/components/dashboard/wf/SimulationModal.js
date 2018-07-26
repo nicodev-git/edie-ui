@@ -48,7 +48,15 @@ export default class SimulationModal extends React.Component {
     const {selectedGroupId} = this.state
     if (!selectedGroupId) return
 
-    const name = prompt('')
+    const group = find(this.props.testGroups, {id: selectedGroupId})
+    if (!group) return
+    const name = prompt('Please type test group name', group.name)
+    if (!name) return
+
+    this.props.updateTestGroup({
+      ...group,
+      name
+    })
   }
 
   selectGroupId (e) {

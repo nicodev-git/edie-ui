@@ -52,6 +52,8 @@ import {
 
   FETCH_TEST_GROUPS,
   ADD_TEST_GROUP,
+  UPDATE_TEST_GROUP,
+
   FETCH_TEST_CASES,
   ADD_TEST_CASE,
   UPDATE_TEST_CASE,
@@ -935,6 +937,14 @@ export const addTestGroup = (entity) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/flowtestgroup`, entity).then(res => {
       dispatch({type: ADD_TEST_GROUP, data: res.data})
+    })
+  }
+}
+
+export const updateTestGroup = (entity) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/flowtestgroup`, entity).then(res => {
+      dispatch({type: UPDATE_TEST_GROUP, data: res.data})
     })
   }
 }
