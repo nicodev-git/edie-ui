@@ -1,6 +1,7 @@
 import React from 'react'
 import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
 
 import {
   Modal,
@@ -20,7 +21,9 @@ export default class SimulationModalView extends React.Component {
   }
 
   renderTestCases () {
-    const {testGroups, testCases, onClickAddGroup, selectedCaseId, selectCaseId,
+    const {testGroups, testCases,
+      onClickAddGroup, onClickEditGroup,
+      selectedCaseId, selectCaseId,
       selectedGroupId, selectGroupId, onClickAddCase} = this.props
 
     return (
@@ -33,6 +36,7 @@ export default class SimulationModalView extends React.Component {
             </Select>
           </FormControl>
           <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
+          <AddIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
         </div>
         <div>
           <table className="table table-hover">

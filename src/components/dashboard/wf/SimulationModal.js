@@ -1,4 +1,5 @@
 import React from 'react'
+import {find} from 'lodash'
 
 import SimulationModalView from './SimulationModalView'
 import {showAlert} from 'components/common/Alert'
@@ -41,6 +42,13 @@ export default class SimulationModal extends React.Component {
     const name = prompt('Please type test group name')
     if (!name) return
     this.props.addTestGroup({name})
+  }
+
+  onClickEditGroup () {
+    const {selectedGroupId} = this.state
+    if (!selectedGroupId) return
+
+    const name = prompt('')
   }
 
   selectGroupId (e) {
@@ -136,6 +144,7 @@ export default class SimulationModal extends React.Component {
         selectGroupId={this.selectGroupId.bind(this)}
         testGroups={testGroups}
         onClickAddGroup={this.onClickAddGroup.bind(this)}
+        onClickEditGroup={this.onClickEditGroup.bind(this)}
 
         testCases={testCases}
         onClickAddCase={this.onClickAddCase.bind(this)}
