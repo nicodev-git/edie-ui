@@ -45,9 +45,8 @@ class TestCaseModal extends React.Component {
   onClickDeleteMsg (index) {
     if (!window.confirm('Click OK to delete')) return
     const {messages} = this.state
-    messages.splice(index, 1)
     this.setState({
-      messages
+      messages: messages.filter((p, i) => i !== index)
     })
   }
 
