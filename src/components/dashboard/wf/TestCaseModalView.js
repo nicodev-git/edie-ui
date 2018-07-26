@@ -3,6 +3,7 @@ import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import {Button} from '@material-ui/core'
 import beautify from 'json-beautify'
 
 import {
@@ -16,6 +17,7 @@ export default class TestCaseModalView extends React.Component {
   render () {
     const {onSubmit, onClickClose, messages,
       onClickAddMsg, onClickEditMsg, onClickDeleteMsg,
+      onClickPost,
       noModal} = this.props
 
     const content = (
@@ -58,7 +60,12 @@ export default class TestCaseModalView extends React.Component {
         <div>
           <form onSubmit={onSubmit}>
             {content}
-            <SubmitBlock name="Save"/>
+
+
+            <div className="form-buttons">
+              {onClickPost && <Button variant="raised" color="primary" onClick={onClickPost} className="margin-md-right">Post</Button>}
+              <Button variant="raised" type="submit">Save</Button>
+            </div>
           </form>
           {this.props.children}
         </div>

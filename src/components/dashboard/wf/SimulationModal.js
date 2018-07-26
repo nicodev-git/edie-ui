@@ -113,6 +113,10 @@ export default class SimulationModal extends React.Component {
     })
   }
 
+  onClickPost () {
+
+  }
+
   selectCaseId (selectedCase) {
     this.setState({
       selectedCaseId: selectedCase.id
@@ -135,6 +139,7 @@ export default class SimulationModal extends React.Component {
         noModal
         editCase={this.state.editCase}
         onSubmit={this.onSaveTestCase.bind(this)}
+        onClickPost={this.onClickPost.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}
       />
     )
