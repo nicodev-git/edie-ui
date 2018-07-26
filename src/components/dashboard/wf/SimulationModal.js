@@ -89,6 +89,10 @@ export default class SimulationModal extends React.Component {
   onClickDeleteCase (entity) {
     if (!window.confirm('Click OK to delete')) return
     this.props.removeTestCase(entity)
+    this.setState({
+      selectedCaseId: null,
+      testCaseModalOpen: false
+    })
   }
 
   onSaveTestCase (entity) {
