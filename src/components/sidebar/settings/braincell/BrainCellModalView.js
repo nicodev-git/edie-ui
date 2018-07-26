@@ -168,7 +168,7 @@ export default class BrainCellModalView extends Component {
     renderKey () {
         const { allValues } = this.props
         const { type }  = allValues || {}
-        if (type === 'Tag' || type === 'Incident' || type === 'Function') return null
+        if (type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok') return null
         const label = type === 'Command' ? 'Description' : 'Key'
         return (
             <Field name="key" component={FormInput} floatingLabel={label} className="margin-md-right valign-top"
@@ -297,7 +297,7 @@ export default class BrainCellModalView extends Component {
             // tagInputValue, onChangeTagInput, getTagSuggestionValue
         } = this.props
         const { type }  = allValues || {}
-        if (type !== 'Classification' && type !== 'Incident') return null
+        if (type !== 'Classification' && type !== 'Incident' && type !== 'Grok') return null
         return (
             <div>
                 <CardPanel title="Existing Tags">
