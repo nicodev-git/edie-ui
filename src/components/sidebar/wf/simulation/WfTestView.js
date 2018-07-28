@@ -53,7 +53,7 @@ export default class WfTestView extends React.Component {
               <tr key={p.id} className={selectedCaseId === p.id ? 'selected' : ''}
                   onClick={() => selectCaseId(p)}>
                 <td>{p.name}</td>
-                <td></td>
+                <td>{p.description}</td>
                 <td>
                   <PlayIcon className="link"/>
                   <DeleteIcon className="link margin-md-left" onClick={() => onClickDeleteCase(p)}/>
