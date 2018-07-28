@@ -158,7 +158,7 @@ export default class WfTest extends React.Component {
       testGroups, testCases
     } = this.props
     return (
-      <SimulationModalView
+      <WfTestView
         wfSimulationState={wfSimulationState}
         collectors={collectors}
         onClickClose={onClickClose}
@@ -177,7 +177,7 @@ export default class WfTest extends React.Component {
         selectCaseId={this.selectCaseId.bind(this)}
         caseModal={this.renderTestCaseModal()}
       >
-      </SimulationModalView>
+      </WfTestView>
     )
   }
 }

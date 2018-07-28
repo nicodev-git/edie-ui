@@ -5,7 +5,6 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import {
-  Modal,
   CardPanel
 } from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -65,12 +64,6 @@ export default class WfTestView extends React.Component {
           </table>
         </div>
       </div>
-    )
-  }
-
-  renderContent () {
-    return (
-
     )
   }
 
