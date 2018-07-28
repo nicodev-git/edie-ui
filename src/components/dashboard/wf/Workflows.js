@@ -129,7 +129,7 @@ class Workflows extends React.Component {
   ////////////////////////////////////////////////////////////////
 
   onClickSimulate () {
-    // this.props.showWfSimulationModal(true)
+    this.props.history.push(`/workflow/test`)
   }
 
   getIncidentCell(wf) {
