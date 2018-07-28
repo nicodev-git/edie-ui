@@ -22,9 +22,14 @@ export default class SimulationModal extends React.Component {
   }
 
   componentDidUpdate(props) {
-    const {wfSimulationRes} = this.props
+    const {wfSimulationRes, testGroups} = this.props
     if (!props.wfSimulationRes && wfSimulationRes) {
       showAlert(wfSimulationRes)
+    }
+    if (!this.state.selectedGroupId && testGroups.length) {
+      this.setState({
+        selectedGroupId: testGroups[0].id
+      })
     }
   }
 
