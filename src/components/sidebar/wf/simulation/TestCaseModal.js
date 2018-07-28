@@ -83,11 +83,6 @@ class TestCaseModal extends React.Component {
     }
   }
 
-  onClickPost () {
-    const {messages} = this.state
-    this.props.onClickPost(messages)
-  }
-
   ////////////////////////////////////////////////////////
 
   renderMsgModal () {
@@ -115,7 +110,6 @@ class TestCaseModal extends React.Component {
         onClickEditMsg={this.onClickEditMsg.bind(this)}
         onClickDeleteMsg={this.onClickDeleteMsg.bind(this)}
 
-        onClickPost={this.onClickPost.bind(this)}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
       >

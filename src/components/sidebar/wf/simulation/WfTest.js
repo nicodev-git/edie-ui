@@ -128,7 +128,8 @@ export default class WfTest extends React.Component {
     })
   }
 
-  onClickPost (messages) {
+  onClickPost (testCase) {
+    const {messages} = testCase
     if (!messages || !messages.length) return alert('No message')
 
     this.props.simulateWfMessage(messages)
@@ -158,7 +159,6 @@ export default class WfTest extends React.Component {
         editCase={this.state.editCase}
         submitForm={submitForm}
         onSubmit={this.onSaveTestCase.bind(this)}
-        onClickPost={this.onClickPost.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}
       />
     )
@@ -181,6 +181,8 @@ export default class WfTest extends React.Component {
         selectedCaseId={this.state.selectedCaseId}
         selectCaseId={this.selectCaseId.bind(this)}
         caseModal={this.renderTestCaseModal()}
+
+        onClickPost={this.onClickPost.bind(this)}
       >
       </WfTestView>
     )

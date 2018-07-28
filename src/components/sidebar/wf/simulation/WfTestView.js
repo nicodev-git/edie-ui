@@ -34,7 +34,7 @@ export default class WfTestView extends React.Component {
     const {
       selectedGroupId, testCases,
       selectedCaseId, selectCaseId,
-      onClickDeleteCase
+      onClickDeleteCase, onClickPost
     } = this.props
 
     return (
@@ -55,7 +55,7 @@ export default class WfTestView extends React.Component {
                 <td>{p.name}</td>
                 <td>{p.description}</td>
                 <td>
-                  <PlayIcon className="link"/>
+                  <PlayIcon className="link" onClick={() => onClickPost(p)}/>
                   <DeleteIcon className="link margin-md-left" onClick={() => onClickDeleteCase(p)}/>
                 </td>
               </tr>
