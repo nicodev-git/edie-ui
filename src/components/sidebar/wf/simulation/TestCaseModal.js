@@ -57,6 +57,7 @@ class TestCaseModal extends React.Component {
   }
 
   onSubmitMsg (msg) {
+    const {editCase} = this.props
     let {messages, editMsg} = this.state
     if (editMsg) {
       const index = messages.indexOf(editMsg)
@@ -71,6 +72,10 @@ class TestCaseModal extends React.Component {
       messages,
       msgModalOpen: false
     })
+
+    if (editCase.id) {
+      this.props.submitForm('wfTestCaseForm')
+    }
   }
 
   onClickPost () {

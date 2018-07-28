@@ -118,8 +118,8 @@ export default class WfTest extends React.Component {
       const {selectedGroupId} = this.state
       entity.groupId = selectedGroupId
       this.props.addTestCase(entity)
+      this.onCloseTestCase()
     }
-    this.onCloseTestCase()
   }
 
   onCloseTestCase () {
@@ -150,11 +150,13 @@ export default class WfTest extends React.Component {
   //////////////////////////////////////////////////////////////
 
   renderTestCaseModal () {
+    const {submitForm} = this.props
     if (!this.state.testCaseModalOpen) return null
     return (
       <TestCaseModal
         noModal
         editCase={this.state.editCase}
+        submitForm={submitForm}
         onSubmit={this.onSaveTestCase.bind(this)}
         onClickPost={this.onClickPost.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}

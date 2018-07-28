@@ -39,6 +39,7 @@ import {
   addBrainCell,
   fetchBrainCells,
   resetForm,
+  submitForm,
 
   showWfSimulationModal,
   simulateWfMessage,
@@ -137,6 +138,7 @@ export default connect(
     addBrainCell,
     fetchBrainCells,
     resetForm,
+    submitForm,
 
     showWfSimulationModal,
     simulateWfMessage,
