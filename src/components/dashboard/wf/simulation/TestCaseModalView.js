@@ -26,7 +26,13 @@ export default class TestCaseModalView extends React.Component {
           name="name"
           component={FormInput}
           floatingLabel="Name"
-          className="valign-top margin-md-right"
+        />
+        <Field
+          name="description"
+          component={FormInput}
+          floatingLabel="Description"
+          className="margin-md-top"
+          fullWidth
         />
         <div style={{overflow: 'auto', maxHeight: 400}}>
           <table className="table table-hover">

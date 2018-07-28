@@ -10,7 +10,6 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
-
 export default class WfTestView extends React.Component {
   renderMessages () {
     const {caseModal} = this.props
@@ -50,6 +49,7 @@ export default class WfTestView extends React.Component {
                 Description
               </th>
               <th>
+                Actions
               </th>
             </tr>
             </thead>
