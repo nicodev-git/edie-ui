@@ -79,18 +79,18 @@ export default class WfTestView extends React.Component {
     return (
       <TabPage>
         <TabPageHeader title="Simulation">
-          <div className="text-center margin-md-top">
+          <div className="margin-md-top">
             <div style={{background: '#dadada', paddingLeft: 10}}>
               <div style={{height: 60}}>
-                <div className="pull-left text-left">
-                  <FormControl className="valign-middle" style={{minWidth: 200}}>
+                <div className="text-left inline-block">
+                  <FormControl className="valign-middle margin-sm-top" style={{minWidth: 200}}>
                     <InputLabel>Test Group</InputLabel>
                     <Select displayEmpty value={selectedGroupId || ''} onChange={selectGroupId}>
                       {testGroups.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
                     </Select>
                   </FormControl>
                 </div>
-                <div className="pull-right margin-xs-top">
+                <div className="pull-right margin-md-top margin-md-right">
                   <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
                   <EditIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
                 </div>
