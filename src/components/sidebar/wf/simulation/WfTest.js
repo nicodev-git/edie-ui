@@ -5,6 +5,10 @@ import WfTestView from './WfTestView'
 import {showAlert} from 'components/common/Alert'
 
 import TestCaseModal from './TestCaseModal'
+import IconParam from '@material-ui/icons/Input'
+// import IconGroup from "@material-ui/icons/GroupWork";
+// import {deepPurple, purple} from "@material-ui/core/colors";
+// import IconWork from "@material-ui/icons/Work";
 
 export default class WfTest extends React.Component {
   constructor (props) {
@@ -14,6 +18,12 @@ export default class WfTest extends React.Component {
       selectedCaseId: null,
       selectedGroupId: null
     }
+
+    this.mainMenuItems = [{
+      label: 'Add Test Case',
+      icon: <IconParam/>,
+      onClick: this.onClickAddCase.bind(this)
+    }]
   }
 
   componentWillMount () {
@@ -156,6 +166,7 @@ export default class WfTest extends React.Component {
     return (
       <WfTestView
         {...this.props}
+        mainMenuItems={this.mainMenuItems}
 
         selectedGroupId={this.state.selectedGroupId}
         selectGroupId={this.selectGroupId.bind(this)}

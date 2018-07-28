@@ -3,12 +3,14 @@ import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import PlayIcon from '@material-ui/icons/PlayArrow'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 export default class WfTestView extends React.Component {
   renderMessages () {
@@ -32,7 +34,7 @@ export default class WfTestView extends React.Component {
     const {
       selectedGroupId, testCases,
       selectedCaseId, selectCaseId,
-      onClickAddCase, onClickDeleteCase
+      onClickDeleteCase
     } = this.props
 
     return (
@@ -41,16 +43,9 @@ export default class WfTestView extends React.Component {
           <table className="table table-hover">
             <thead>
             <tr>
-              <th>
-                <span className="valing-middle">Name</span>
-                <AddIcon onClick={onClickAddCase} className="link valign-middle margin-md-left"/>
-              </th>
-              <th>
-                Description
-              </th>
-              <th>
-                Actions
-              </th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -60,7 +55,8 @@ export default class WfTestView extends React.Component {
                 <td>{p.name}</td>
                 <td></td>
                 <td>
-                  <DeleteIcon onClick={() => onClickDeleteCase(p)}/>
+                  <PlayIcon className="link"/>
+                  <DeleteIcon className="link margin-md-left" onClick={() => onClickDeleteCase(p)}/>
                 </td>
               </tr>
             )}
@@ -75,7 +71,7 @@ export default class WfTestView extends React.Component {
     const {
       testGroups, selectedGroupId, selectGroupId,
       onClickAddGroup, onClickEditGroup,
-      wfSimulationState
+      wfSimulationState, mainMenuItems
     } = this.props
     return (
       <TabPage>
@@ -90,8 +86,7 @@ export default class WfTestView extends React.Component {
                       {testGroups.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
                     </Select>
                   </FormControl>
-                </div>
-                <div className="pull-right margin-md-top margin-md-right">
+
                   <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
                   <EditIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
                 </div>
@@ -108,6 +103,7 @@ export default class WfTestView extends React.Component {
             </div>
             {this.renderIncidents()}
           </div>
+          <FloatingMenu menuItems={mainMenuItems}/>
           {wfSimulationState ? <RefreshOverlay/> : null}
           {this.props.children}
         </TabPageBody>
