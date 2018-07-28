@@ -15,7 +15,6 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
-import SimulationModal from './SimulationModal'
 import {getSeverityIcon} from 'shared/Global'
 
 class Workflows extends React.Component {
@@ -130,17 +129,8 @@ class Workflows extends React.Component {
   ////////////////////////////////////////////////////////////////
 
   onClickSimulate () {
-    this.props.showWfSimulationModal(true)
+    // this.props.showWfSimulationModal(true)
   }
-
-  onTrySimulate (values) {
-    this.props.simulateWfMessage(values)
-  }
-
-  onCloseSimulationModal () {
-    this.props.showWfSimulationModal(false)
-  }
-
 
   getIncidentCell(wf) {
     const {brainCells} = this.props
@@ -264,16 +254,6 @@ class Workflows extends React.Component {
     )
   }
 
-  renderSimulationModal() {
-    if (!this.props.wfSimulationModalOpen ) return
-    return (
-      <SimulationModal
-        {...this.props}
-        onSubmit={this.onTrySimulate.bind(this)}
-        onClickClose={this.onCloseSimulationModal.bind(this)}/>
-    )
-  }
-
   renderFilterTags() {
     const {filterTags} = this.state
     const allTags = this.getTags()
@@ -329,7 +309,6 @@ class Workflows extends React.Component {
           {this.renderWorkflows()}
           {this.renderWorkflowEditModal()}
           {this.renderSettingModal()}
-          {this.renderSimulationModal()}
         </TabPageBody>
       </TabPage>
     )

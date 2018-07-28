@@ -11,7 +11,7 @@ import {
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 
-export default class SimulationModalView extends React.Component {
+export default class WfTestView extends React.Component {
   renderMessages () {
     const {caseModal} = this.props
     return (
@@ -70,23 +70,22 @@ export default class SimulationModalView extends React.Component {
 
   renderContent () {
     return (
+
+    )
+  }
+
+  render () {
+    const {wfSimulationState} = this.props
+    return (
       <CardPanel title="Tests">
         <div className="flex-horizontal">
           {this.renderTestCases()}
           {this.renderMessages()}
         </div>
-      </CardPanel>
-    )
-  }
 
-  render () {
-    const {onClickClose, wfSimulationState} = this.props
-    return (
-      <Modal title="Simulation" onRequestClose={onClickClose} contentStyle={{width: 1200}}>
-        {this.renderContent()}
         {wfSimulationState ? <RefreshOverlay/> : null}
         {this.props.children}
-      </Modal>
+      </CardPanel>
     )
   }
 }

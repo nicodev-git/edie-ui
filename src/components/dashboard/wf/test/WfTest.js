@@ -1,12 +1,12 @@
 import React from 'react'
 import {find} from 'lodash'
 
-import SimulationModalView from './SimulationModalView'
+import WfTestView from './WfTestView'
 import {showAlert} from 'components/common/Alert'
 
 import TestCaseModal from './TestCaseModal'
 
-export default class SimulationModal extends React.Component {
+export default class WfTest extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
