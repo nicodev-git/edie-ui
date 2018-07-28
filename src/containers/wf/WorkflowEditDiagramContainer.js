@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import WorkflowEditDiagram from 'components/dashboard/wf/WorkflowEditDiagram'
+import WorkflowEditDiagram from 'components/sidebar/wf/WorkflowEditDiagram'
 
 import {
     fetchWorkflow,

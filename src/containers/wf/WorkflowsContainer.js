@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import Workflows from 'components/dashboard/wf/Workflows'
+import Workflows from 'components/sidebar/wf/Workflows'
 
 import {
   openDeviceWfDiagramModal,

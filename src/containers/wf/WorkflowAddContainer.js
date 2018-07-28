@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import WorkflowAdd from 'components/dashboard/wf/WorkflowAdd'
+import WorkflowAdd from 'components/sidebar/wf/WorkflowAdd'
 
 import {
   openDeviceWfDiagramModal,

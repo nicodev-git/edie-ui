@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import WfTest from 'components/dashboard/wf/test/WfTest'
+import WfTest from 'components/sidebar/wf/simulation/WfTest'
 
 import {
   openDeviceWfDiagramModal,

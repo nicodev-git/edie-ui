@@ -6,9 +6,9 @@ import {assign, merge, findIndex, keys} from 'lodash'
 
 import WorkflowEditModalView from './WorkflowEditModalView'
 // import UserPickModal from './UserPickModal'
-import DiagramObjectModal from 'components/dashboard/wf/diagram/DiagramObjectModal'
-import {drawFlows} from "components/dashboard/wf/DiagramLoader"
-import {extendShape} from 'components/dashboard/wf/diagram/DiagramItems'
+import DiagramObjectModal from 'components/sidebar/wf/diagram/DiagramObjectModal'
+import {drawFlows} from "components/sidebar/wf/DiagramLoader"
+import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 

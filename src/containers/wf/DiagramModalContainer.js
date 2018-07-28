@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import DiagramModal from 'components/dashboard/wf/DiagramModal'
+import DiagramModal from 'components/sidebar/wf/DiagramModal'
 
 import {
   closeDeviceWfDiagramModal,
