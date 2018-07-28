@@ -17,7 +17,8 @@ class TestMessageModal extends React.Component {
     }))
 
     this.state = {
-      fields
+      fields,
+      json: props.editMsg || {}
     }
   }
 
@@ -73,10 +74,18 @@ class TestMessageModal extends React.Component {
     })
   }
 
+  onEditJson () {
+
+  }
+
   render() {
     const {handleSubmit, onClose} = this.props
+    const {json} = this.state
     return (
       <TestMessageModalView
+        json={json}
+        onEditJson={this.onEditJson.bind(this)}
+
         fields={this.state.fields}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClose}

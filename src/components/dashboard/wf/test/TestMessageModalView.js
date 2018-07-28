@@ -2,6 +2,7 @@ import React from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
+import ReactJson from 'react-json-view'
 
 import {
   FormInput,
@@ -12,10 +13,15 @@ import {
 
 export default class TestMessageModalView extends React.Component {
   renderContent () {
-    const {fields, onClickAdd, onClickDelete} = this.props
+    const {fields, onClickAdd, onClickDelete, json, onEditJson} = this.props
     return (
       <CardPanel title="Message" tools={<AddIcon className="link" onClick={onClickAdd}/>}>
-        <table className="table table-hover">
+        <ReactJson
+          src={json}
+          onEdit={onEditJson}
+        />
+
+        <table className="table table-hover hidden">
           <thead>
           <tr>
             <th width="100">Field</th>
