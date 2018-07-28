@@ -26,12 +26,13 @@ export default class TestCaseModalView extends React.Component {
           name="name"
           component={FormInput}
           floatingLabel="Name"
+          className="hidden"
         />
         <Field
           name="description"
           component={FormInput}
           floatingLabel="Description"
-          className="margin-md-top"
+          className="margin-md-top hidden"
           fullWidth
         />
         <div style={{overflow: 'auto', maxHeight: 400}}>
@@ -70,7 +71,7 @@ export default class TestCaseModalView extends React.Component {
 
             <div className="text-right">
               {onClickPost && <Button variant="contained" color="primary" onClick={onClickPost} className="margin-md-right">Post</Button>}
-              <Button variant="contained" type="submit">Save</Button>
+              {/*<Button variant="contained" type="submit">Save</Button>*/}
             </div>
           </form>
           {this.props.children}
@@ -84,7 +85,7 @@ export default class TestCaseModalView extends React.Component {
           <CardPanel title="Test Case">
             {content}
           </CardPanel>
-          <SubmitBlock name="Save"/>
+          {/*<SubmitBlock name="Save"/>*/}
         </form>
         {this.props.children}
       </Modal>
