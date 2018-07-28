@@ -20,6 +20,14 @@ export default class WfTestView extends React.Component {
     )
   }
 
+  renderIncidents () {
+    return (
+      <div className="flex-1">
+
+      </div>
+    )
+  }
+
   renderTestCases () {
     const {
       selectedGroupId, testCases,
@@ -87,10 +95,13 @@ export default class WfTestView extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody history={this.props.history} location={this.props.location}>
-          <div className="flex-horizontal padding-sm ">
-            {this.renderTestCases()}
-            {this.renderMessages()}
+        <TabPageBody history={this.props.history} location={this.props.location} transparent>
+          <div className="flex-vertical padding-sm">
+            <div className="flex-1 flex-horizontal">
+              {this.renderTestCases()}
+              {this.renderMessages()}
+            </div>
+            {this.renderIncidents()}
           </div>
           {wfSimulationState ? <RefreshOverlay/> : null}
           {this.props.children}
