@@ -14,7 +14,7 @@ export default class WfTestView extends React.Component {
   renderMessages () {
     const {caseModal} = this.props
     return (
-      <div className="flex-1 bg-white">
+      <div className="flex-1 bg-white padding-sm" style={{overflow: 'auto'}}>
         {caseModal}
       </div>
     )
@@ -22,7 +22,7 @@ export default class WfTestView extends React.Component {
 
   renderIncidents () {
     return (
-      <div className="flex-1 bg-white margin-md-top">
+      <div className="flex-1 bg-white margin-md-top padding-sm">
 
       </div>
     )
@@ -36,7 +36,7 @@ export default class WfTestView extends React.Component {
     } = this.props
 
     return (
-      <div className="flex-1 margin-md-right bg-white">
+      <div className="flex-1 margin-md-right bg-white padding-sm" style={{overflow: 'auto'}}>
         <div>
           <table className="table table-hover">
             <thead>
