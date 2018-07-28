@@ -41,7 +41,6 @@ export default class WfTestView extends React.Component {
                 Description
               </th>
               <th>
-
               </th>
             </tr>
             </thead>
@@ -89,7 +88,7 @@ export default class WfTestView extends React.Component {
         </TabPageHeader>
 
         <TabPageBody history={this.props.history} location={this.props.location}>
-          <div className="flex-horizontal padding-sm">
+          <div className="flex-horizontal padding-sm ">
             {this.renderTestCases()}
             {this.renderMessages()}
           </div>
