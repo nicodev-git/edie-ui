@@ -35,21 +35,21 @@ class TestMessageModal extends React.Component {
   onSubmit (values) {
     const {onSubmit} = this.props
 
-    const msg = {}
-    const paramKeys = keys(values.param || {})
-    paramKeys.forEach(key => {
-      if (values.param[key] && key.startsWith('name')) {
-        const pid = key.replace('name', '')
+    // const msg = {}
+    // const paramKeys = keys(values.param || {})
+    // paramKeys.forEach(key => {
+    //   if (values.param[key] && key.startsWith('name')) {
+    //     const pid = key.replace('name', '')
+    //
+    //     const name = values.param[key]
+    //     const value = values.param[`value${pid}`]
+    //
+    //     msg[name] = value
+    //   }
+    // })
 
-        const name = values.param[key]
-        const value = values.param[`value${pid}`]
 
-        msg[name] = value
-      }
-    })
-
-
-    onSubmit(msg)
+    onSubmit(this.state.json)
   }
 
   onClickAdd () {
@@ -74,8 +74,22 @@ class TestMessageModal extends React.Component {
     })
   }
 
-  onEditJson () {
+  onAddJson ({updated_src}) {
+    this.setState({
+      json: updated_src
+    })
+  }
 
+  onEditJson ({updated_src}) {
+    this.setState({
+      json: updated_src
+    })
+  }
+
+  onDeleteJson ({updated_src}) {
+    this.setState({
+      json: updated_src
+    })
   }
 
   render() {
@@ -84,7 +98,9 @@ class TestMessageModal extends React.Component {
     return (
       <TestMessageModalView
         json={json}
+        onAddJson={this.onAddJson.bind(this)}
         onEditJson={this.onEditJson.bind(this)}
+        onDeleteJson={this.onDeleteJson.bind(this)}
 
         fields={this.state.fields}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}

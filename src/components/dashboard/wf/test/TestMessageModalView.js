@@ -13,12 +13,18 @@ import {
 
 export default class TestMessageModalView extends React.Component {
   renderContent () {
-    const {fields, onClickAdd, onClickDelete, json, onEditJson} = this.props
+    const {fields, onClickAdd, onClickDelete, json, onAddJson, onEditJson, onDeleteJson} = this.props
     return (
-      <CardPanel title="Message" tools={<AddIcon className="link" onClick={onClickAdd}/>}>
+      <CardPanel title="Message" tools={<AddIcon className="link hidden" onClick={onClickAdd}/>}>
         <ReactJson
           src={json}
+          name="Message"
+          onAdd={onAddJson}
           onEdit={onEditJson}
+          onDelete={onDeleteJson}
+          enableClipboard={false}
+          displayDataTypes={false}
+          displayObjectSize={false}
         />
 
         <table className="table table-hover hidden">
