@@ -28,7 +28,7 @@ export default class WfTestView extends React.Component {
     } = this.props
 
     return (
-      <div className="margin-md-right" style={{width: 300}}>
+      <div className="margin-md-right" style={{width: 350}}>
         <div>
           <table className="table table-hover">
             <thead>
@@ -89,7 +89,7 @@ export default class WfTestView extends React.Component {
         </TabPageHeader>
 
         <TabPageBody history={this.props.history} location={this.props.location}>
-          <div className="flex-horizontal">
+          <div className="flex-horizontal padding-sm">
             {this.renderTestCases()}
             {this.renderMessages()}
           </div>
