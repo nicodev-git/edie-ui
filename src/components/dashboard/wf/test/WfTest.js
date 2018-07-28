@@ -153,23 +153,15 @@ export default class WfTest extends React.Component {
   }
 
   render () {
-    const {
-      onClickClose, collectors, wfSimulationState,
-      testGroups, testCases
-    } = this.props
     return (
       <WfTestView
-        wfSimulationState={wfSimulationState}
-        collectors={collectors}
-        onClickClose={onClickClose}
+        {...this.props}
 
         selectedGroupId={this.state.selectedGroupId}
         selectGroupId={this.selectGroupId.bind(this)}
-        testGroups={testGroups}
         onClickAddGroup={this.onClickAddGroup.bind(this)}
         onClickEditGroup={this.onClickEditGroup.bind(this)}
 
-        testCases={testCases}
         onClickAddCase={this.onClickAddCase.bind(this)}
         onClickEditCase={this.onClickEditCase.bind(this)}
         onClickDeleteCase={this.onClickDeleteCase.bind(this)}

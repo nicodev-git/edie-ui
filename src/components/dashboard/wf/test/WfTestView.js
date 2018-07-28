@@ -1,8 +1,11 @@
 import React from 'react'
-import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
+import {Select, MenuItem, InputLabel, FormControl, Button} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import {
   CardPanel
@@ -70,15 +73,23 @@ export default class WfTestView extends React.Component {
   render () {
     const {wfSimulationState} = this.props
     return (
-      <CardPanel title="Tests">
-        <div className="flex-horizontal">
+      <TabPage>
+        <TabPageHeader title="Tests">
+          <div className="text-center margin-md-top">
+            <div className="pull-left text-left">
+            </div>
+            <div className="pull-right">
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody history={this.props.history} location={this.props.location}>
           {this.renderTestCases()}
           {this.renderMessages()}
-        </div>
-
-        {wfSimulationState ? <RefreshOverlay/> : null}
-        {this.props.children}
-      </CardPanel>
+          {wfSimulationState ? <RefreshOverlay/> : null}
+          {this.props.children}
+        </TabPageBody>
+      </TabPage>
     )
   }
 }
