@@ -71,11 +71,13 @@ class TestCaseModal extends React.Component {
     this.setState({
       messages,
       msgModalOpen: false
+    }, () => {
+      if (editCase.id) {
+        this.props.submitForm('wfTestCaseForm')
+      }
     })
 
-    if (editCase.id) {
-      this.props.submitForm('wfTestCaseForm')
-    }
+
   }
 
   onClickPost () {
