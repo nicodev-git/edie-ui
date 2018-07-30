@@ -53,6 +53,7 @@ import {
   FETCH_TEST_GROUPS,
   ADD_TEST_GROUP,
   UPDATE_TEST_GROUP,
+  REMOVE_TEST_GROUP,
 
   FETCH_TEST_CASES,
   ADD_TEST_CASE,
@@ -945,6 +946,14 @@ export const updateTestGroup = (entity) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/flowtestgroup`, entity).then(res => {
       dispatch({type: UPDATE_TEST_GROUP, data: res.data})
+    })
+  }
+}
+
+export const removeTestGroup = (entity) => {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/flowtestgroup/${entity.id}`).then(res =>{
+      dispatch({type: REMOVE_TEST_GROUP, data: entity})
     })
   }
 }

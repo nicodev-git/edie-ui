@@ -52,6 +52,7 @@ import {
   fetchTestGroups,
   addTestGroup,
   updateTestGroup,
+  removeTestGroup,
 
   fetchTestCases,
   addTestCase,
@@ -151,6 +152,7 @@ export default connect(
     fetchTestGroups,
     addTestGroup,
     updateTestGroup,
+    removeTestGroup,
 
     fetchTestCases,
     addTestCase,

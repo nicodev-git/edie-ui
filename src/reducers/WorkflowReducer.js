@@ -42,13 +42,14 @@ import {
 
   FETCH_TEST_GROUPS,
   ADD_TEST_GROUP,
+  UPDATE_TEST_GROUP,
+  REMOVE_TEST_GROUP,
 
   FETCH_TEST_CASES,
   ADD_TEST_CASE,
   UPDATE_TEST_CASE,
   REMOVE_TEST_CASE
 } from 'actions/types'
-import {UPDATE_TEST_GROUP} from "../actions/types";
 
 const initialState = {
   workflows: [],
@@ -158,6 +159,8 @@ export default function (state = initialState, action) {
       return { ...state, testGroups: [...state.testGroups, action.data] }
     case UPDATE_TEST_GROUP:
       return { ...state, testGroups: state.testGroups.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_TEST_GROUP:
+      return { ...state, testGroups: state.testGroups.filter(p => p.id !== action.data.id) }
 
     case FETCH_TEST_CASES:
       return { ...state, testCases: action.data }

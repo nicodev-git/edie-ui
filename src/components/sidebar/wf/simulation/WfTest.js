@@ -75,7 +75,21 @@ export default class WfTest extends React.Component {
   }
 
   onClickDeleteGroup () {
+    const {selectedGroupId} = this.state
+    const {testGroups} = this.props
+    if (!selectedGroupId) return
 
+    const group = find(testGroups, {id: selectedGroupId})
+    if (!group) return
+
+    if (!window.confirm('Click OK to remove group')) return
+
+    this.props.removeTestGroup(group)
+
+    const found = testGroups.filter(p => p.id !== selectedGroupId)[0]
+    this.setState({
+      selectedGroupId: found ? found.id : ''
+    })
   }
 
   selectGroupId (e) {
