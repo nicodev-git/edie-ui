@@ -3,6 +3,7 @@ import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import CopyIcon from '@material-ui/icons/ContentCopy'
 import {Button} from '@material-ui/core'
 import beautify from 'json-beautify'
 
@@ -15,7 +16,7 @@ import {
 export default class TestCaseModalView extends React.Component {
   render () {
     const {onSubmit, onClickClose, messages,
-      onClickAddMsg, onClickEditMsg, onClickDeleteMsg,
+      onClickAddMsg, onClickEditMsg, onClickDeleteMsg, onClickCopyMsg,
       onClickPost,
       noModal} = this.props
 
@@ -50,6 +51,7 @@ export default class TestCaseModalView extends React.Component {
               <tr key={i}>
                 <td>{beautify(p, null, 2, 60)}</td>
                 <td>
+                  <CopyIcon className="link" onClick={() => onClickCopyMsg(p)}/>
                   <EditIcon className="link" onClick={() => onClickEditMsg(p)}/>
                   <DeleteIcon className="link" onClick={() => onClickDeleteMsg(i)}/>
                 </td>

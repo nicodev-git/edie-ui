@@ -50,6 +50,12 @@ class TestCaseModal extends React.Component {
     })
   }
 
+  onClickCopyMsg (editMsg) {
+    this.setState({
+      messages: [...this.state.messages, editMsg]
+    })
+  }
+
   onCloseMsgModal () {
     this.setState({
       msgModalOpen: false
@@ -83,6 +89,17 @@ class TestCaseModal extends React.Component {
     }
   }
 
+  triggerSave () {
+    const {editCase, onSubmit, allValues} = this.props
+    let {messages} = this.state
+
+    onSubmit({
+      ...editCase,
+      ...allValues,
+      messages
+    })
+  }
+
   ////////////////////////////////////////////////////////
 
   renderMsgModal () {
@@ -109,6 +126,7 @@ class TestCaseModal extends React.Component {
         onClickAddMsg={this.onClickAddMsg.bind(this)}
         onClickEditMsg={this.onClickEditMsg.bind(this)}
         onClickDeleteMsg={this.onClickDeleteMsg.bind(this)}
+        onClickCopyMsg={this.onClickCopyMsg.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
