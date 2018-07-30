@@ -51,8 +51,13 @@ class TestCaseModal extends React.Component {
   }
 
   onClickCopyMsg (editMsg) {
+    const {editCase} = this.props
     this.setState({
       messages: [...this.state.messages, editMsg]
+    }, () => {
+      if (editCase.id) {
+        this.triggerSave()
+      }
     })
   }
 
@@ -63,7 +68,7 @@ class TestCaseModal extends React.Component {
   }
 
   onSubmitMsg (msg) {
-    const {editCase, onSubmit, allValues} = this.props
+    const {editCase} = this.props
     let {messages, editMsg} = this.state
     if (editMsg) {
       const index = messages.indexOf(editMsg)
@@ -77,16 +82,11 @@ class TestCaseModal extends React.Component {
     this.setState({
       messages,
       msgModalOpen: false
+    }, () => {
+      if (editCase.id) {
+        this.triggerSave()
+      }
     })
-
-
-    if (editCase.id) {
-      onSubmit({
-        ...editCase,
-        ...allValues,
-        messages
-      })
-    }
   }
 
   triggerSave () {
