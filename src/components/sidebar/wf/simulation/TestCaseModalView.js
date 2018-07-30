@@ -58,7 +58,7 @@ export default class TestCaseModalView extends React.Component {
                     return valueKeys.map((k, ki) =>
                       [
                         <span key={k} className="field-key">
-                          {k} =
+                          {k}{` = `}
                         </span>,
                         <span key={`${k}-1`} className="field-value">
                           {p.values[k]}

@@ -89,15 +89,26 @@ export default class WfTest extends React.Component {
     this.setState({
       selectedGroupId: found ? found.id : ''
     })
+
+    this.clearCaseSelection()
   }
 
   selectGroupId (e) {
     this.setState({
       selectedGroupId: e.target.value
     })
+
+    this.clearCaseSelection()
   }
 
   //////////////////////////////////////////////////////////////
+
+  clearCaseSelection() {
+    this.setState({
+      testCaseModalOpen: false,
+      selectedCaseId: null
+    })
+  }
 
   onClickAddCase () {
     const {selectedGroupId} = this.state
@@ -131,11 +142,7 @@ export default class WfTest extends React.Component {
   onClickDeleteCase (entity) {
     if (!window.confirm('Click OK to delete')) return
     this.props.removeTestCase(entity)
-    this.setState({
-      selectedCaseId: null,
-    })
-
-    this.onCloseTestCase()
+    this.clearCaseSelection()
   }
 
   onSaveTestCase (entity) {
