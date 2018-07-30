@@ -31,9 +31,11 @@ export default class TestTemplateModalView extends React.Component {
       <Modal
         title="Message" onRequestClose={onClickClose}
         contentStyle={{width: 1058, maxWidth: 'initial'}}>
-        <ul className="web-applet-cards" style={{marginTop: 40}}>
-          {messageTypes.map(this.renderTpl.bind(this))}
-        </ul>
+        <CardPanel title="Message">
+          <ul className="web-applet-cards">
+            {messageTypes.map(this.renderTpl.bind(this))}
+          </ul>
+        </CardPanel>
       </Modal>
     )
   }

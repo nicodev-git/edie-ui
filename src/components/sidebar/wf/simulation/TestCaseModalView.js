@@ -43,14 +43,16 @@ export default class TestCaseModalView extends React.Component {
               <th>
                 <span>Message</span>
               </th>
-              <th></th>
+              <th>
+                Actions
+              </th>
             </tr>
             </thead>
             <tbody>
             {messages.map((p, i) =>
               <tr key={i}>
                 <td>{beautify(p, null, 2, 60)}</td>
-                <td>
+                <td className="nowrap">
                   <CopyIcon className="link" onClick={() => onClickCopyMsg(p)}/>
                   <EditIcon className="link" onClick={() => onClickEditMsg(p)}/>
                   <DeleteIcon className="link" onClick={() => onClickDeleteMsg(i)}/>
