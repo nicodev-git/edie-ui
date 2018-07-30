@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import TestCaseModalView from './TestCaseModalView'
 import TestMessageModal from './TestMessageModal'
-import TestTemplateModal from "./TestTemplateModal";
+import TestTemplateModal from './TestTemplateModal'
 // import {showAlert} from 'components/common/Alert'
 
 class TestCaseModal extends React.Component {
@@ -106,8 +106,9 @@ class TestCaseModal extends React.Component {
 
   ////////////////////////////////////////////////////////
 
-  onClickTpl () {
-
+  onClickTpl (tpl) {
+    console.log(tpl)
+    this.onCloseTplModal()
   }
 
   onCloseTplModal () {

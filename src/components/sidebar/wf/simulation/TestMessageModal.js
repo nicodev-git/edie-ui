@@ -34,21 +34,6 @@ class TestMessageModal extends React.Component {
 
   onSubmit (values) {
     const {onSubmit} = this.props
-
-    // const msg = {}
-    // const paramKeys = keys(values.param || {})
-    // paramKeys.forEach(key => {
-    //   if (values.param[key] && key.startsWith('name')) {
-    //     const pid = key.replace('name', '')
-    //
-    //     const name = values.param[key]
-    //     const value = values.param[`value${pid}`]
-    //
-    //     msg[name] = value
-    //   }
-    // })
-
-
     onSubmit(this.state.json)
   }
 
