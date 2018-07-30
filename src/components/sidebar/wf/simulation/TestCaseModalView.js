@@ -19,7 +19,8 @@ export default class TestCaseModalView extends React.Component {
     const {onSubmit, onClickClose, messages,
       onClickAddMsg, onClickEditMsg, onClickDeleteMsg, onClickCopyMsg,
       onClickPost,
-      noModal} = this.props
+      noModal
+    } = this.props
 
     const content = (
       <div>
