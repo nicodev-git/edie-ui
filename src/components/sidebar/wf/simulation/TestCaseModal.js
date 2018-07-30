@@ -33,7 +33,7 @@ class TestCaseModal extends React.Component {
 
   onClickAddMsg () {
     this.setState({
-      tplModalOpen: false
+      tplModalOpen: true
       // msgModalOpen: true,
       // editMsg: null
     })
@@ -152,6 +152,7 @@ class TestCaseModal extends React.Component {
         onClickClose={onClickClose}
       >
         {this.renderMsgModal()}
+        {this.renderTplModal()}
       </TestCaseModalView>
     )
   }
