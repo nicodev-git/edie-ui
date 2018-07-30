@@ -1,6 +1,7 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
+import AddSimpleIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CopyIcon from '@material-ui/icons/ContentCopy'
@@ -65,15 +66,20 @@ export default class TestCaseModalView extends React.Component {
 
     if (noModal) {
       return (
-        <div>
-          <form onSubmit={onSubmit}>
-            {content}
-            <div className="text-right">
-              {onClickPost && <Button variant="contained" color="primary" onClick={onClickPost} className="margin-md-right">Post</Button>}
-              {/*<Button variant="contained" type="submit">Save</Button>*/}
-            </div>
-          </form>
-          {this.props.children}
+        <div className="relative" style={{height: '100%'}}>
+          <div style={{height: '100%', overflow: 'auto'}}>
+            <form onSubmit={onSubmit}>
+              {content}
+              <div className="text-right">
+                {onClickPost && <Button variant="contained" color="primary" onClick={onClickPost} className="margin-md-right">Post</Button>}
+                {/*<Button variant="contained" type="submit">Save</Button>*/}
+              </div>
+            </form>
+            {this.props.children}
+          </div>
+          <Button variant="fab" color="primary" aria-label="Add" style={{position: 'absolute', right: 10, bottom: 10}}>
+            <AddSimpleIcon />
+          </Button>
         </div>
       )
     }
