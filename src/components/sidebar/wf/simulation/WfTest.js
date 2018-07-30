@@ -139,10 +139,12 @@ export default class WfTest extends React.Component {
     })
   }
 
-  onClickDeleteCase (entity) {
-    if (!window.confirm('Click OK to delete')) return
+  onClickDeleteCase (entity, e) {
+    e.preventDefault()
+    if (!window.confirm('Click OK to delete')) return false
     this.props.removeTestCase(entity)
     this.clearCaseSelection()
+    return false
   }
 
   onSaveTestCase (entity) {
@@ -180,6 +182,7 @@ export default class WfTest extends React.Component {
       this.onClickEditCase(selectedCase)
     })
 
+    return false
   }
 
   //////////////////////////////////////////////////////////////
