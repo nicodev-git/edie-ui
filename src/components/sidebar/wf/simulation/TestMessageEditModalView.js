@@ -21,7 +21,7 @@ export default class TestMessageEditModalView extends React.Component {
                     key={p.key}
                     name={`${p.key}`}
                     component={FormInput}
-                    label={p.label}
+                    floatingLabel={p.label}
                     className="valign-top margin-md-right"/>
                 )
               }

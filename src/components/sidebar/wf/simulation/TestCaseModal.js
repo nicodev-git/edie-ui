@@ -136,10 +136,11 @@ class TestCaseModal extends React.Component {
   ////////////////////////////////////////////////////////
   renderMsgModal () {
     if (!this.state.msgModalOpen) return null
+    const {editMsg} = this.state
     return (
       <TestMessageEditModal
-        typeName={this.state.editTypeName}
-        editMsg={this.state.editMsg}
+        typeName={editMsg.typeName}
+        editMsg={editMsg}
         onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}
       />

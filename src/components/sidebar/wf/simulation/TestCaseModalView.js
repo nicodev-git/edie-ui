@@ -64,7 +64,7 @@ export default class TestCaseModalView extends React.Component {
                           {p.values[k]}
                         </span>,
                         (valueKeys.length - 1) !== ki ?
-                          <div className="field-separator"></div> : null
+                          <div key={`${k}-2`} className="field-separator"></div> : null
                       ]
                     )
                   })()

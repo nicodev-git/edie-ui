@@ -1,5 +1,5 @@
 import React from 'react'
-import {find} from 'lodash'
+import {keys, find} from 'lodash'
 import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
 
@@ -20,7 +20,12 @@ class TestMessageEditModal extends React.Component {
   }
 
   onSubmit (values) {
-    console.log(values)
+    const entity = {
+      ...this.props.editMsg,
+      values
+    }
+
+    this.props.onSubmit(entity)
   }
 
   render() {
@@ -38,6 +43,7 @@ class TestMessageEditModal extends React.Component {
 
 export default connect(
   (state, props) => ({
+    initialValues: props.editMsg ? props.editMsg.values : {},
     allValues: getFormValues('wfTestMsgEditForm')(state)
   })
 )(reduxForm({form: 'wfTestMsgEditForm'})(TestMessageEditModal))
