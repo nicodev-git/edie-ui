@@ -115,9 +115,12 @@ class TestCaseModal extends React.Component {
 
       }
     }
-    this.onSubmitMsg({
 
+    tpl.data.forEach(p => {
+      msg.values[p.key] = p.default
     })
+
+    this.onSubmitMsg(msg)
     // this.setState({
     //   editTypeName: tpl.name
     // })

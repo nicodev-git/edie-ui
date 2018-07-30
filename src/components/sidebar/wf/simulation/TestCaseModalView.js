@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CopyIcon from '@material-ui/icons/ContentCopy'
 import {Button} from '@material-ui/core'
-import beautify from 'json-beautify'
+import {keys} from 'lodash'
 
 import {
   FormInput,
@@ -52,7 +52,11 @@ export default class TestCaseModalView extends React.Component {
             <tbody>
             {messages.map((p, i) =>
               <tr key={i}>
-                <td>{beautify(p, null, 2, 60)}</td>
+                <td>{
+                  keys(p.values).map(k => {
+
+                  })
+                }</td>
                 <td className="nowrap">
                   <CopyIcon className="link" onClick={() => onClickCopyMsg(p)}/>
                   <EditIcon className="link" onClick={() => onClickEditMsg(p)}/>
