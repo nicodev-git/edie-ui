@@ -106,6 +106,10 @@ class TestCaseModal extends React.Component {
 
   ////////////////////////////////////////////////////////
 
+  onClickTpl () {
+
+  }
+
   onCloseTplModal () {
     this.setState({
       tplModalOpen: false
@@ -129,6 +133,7 @@ class TestCaseModal extends React.Component {
     return (
       <TestTemplateModal
         onClose={this.onCloseTplModal.bind(this)}
+        onClickTpl={this.onClickTpl.bind(this)}
       />
     )
   }

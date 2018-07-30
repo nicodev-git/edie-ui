@@ -11,7 +11,7 @@ import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class TestTemplateModalView extends React.Component {
   renderTpl (tpl, i) {
-    const {onClickType} = this.props
+    const {onClickTpl} = this.props
     return (
       <AppletCard
         key={i}
@@ -19,7 +19,7 @@ export default class TestTemplateModalView extends React.Component {
         name={tpl.name}
         desc=""
         img={`/images/${tpl.img}`}
-        onClick={() => onClickType(tpl)}
+        onClick={() => onClickTpl(tpl)}
         verified
       />
     )
