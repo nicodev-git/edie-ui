@@ -47,7 +47,6 @@ export default class WfTest extends React.Component {
     const {onSubmit} = this.props
     if (!values.text) return alert('Please input text')
     if (!values.connectorId) return alert('Please choose connector')
-
     onSubmit(values)
   }
 
