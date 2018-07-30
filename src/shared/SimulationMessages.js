@@ -19,5 +19,5 @@ export const messageTypes = [{
     key: 'time',
     label: 'Time'
   }],
-  json: ''
+  json: '{"incident":{"monitorName":"Logfile","monitortype":"logfile","description":"","startTimestamp":${time},"data":{"file":"/var/log/secure","line":"Jul 20 17:51:15 cloud4 sshd[15564]: Accepted password for root from 192.168.254.207 port 54376 ssh2"},"params":{"parse":"{\\"line\\":\\"AnyLine\\"}"}}}'
 }]
