@@ -108,7 +108,17 @@ export default class WfTest extends React.Component {
       testCaseModalOpen: false,
       selectedCaseId: null
     }, () => {
-      this.onClickEditCase({})
+      //this.onClickEditCase({})
+
+      const name = prompt('Please type name')
+      if (!name) return
+      const {selectedGroupId} = this.state
+      const entity = {
+        name,
+        groupId: selectedGroupId,
+        messages: []
+      }
+      this.props.addTestCase(entity)
     })
   }
 
