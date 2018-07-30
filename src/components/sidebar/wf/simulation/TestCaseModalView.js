@@ -42,7 +42,6 @@ export default class TestCaseModalView extends React.Component {
             <tr>
               <th>
                 <span>Message</span>
-                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddMsg}/>
               </th>
               <th></th>
             </tr>
@@ -77,7 +76,8 @@ export default class TestCaseModalView extends React.Component {
             </form>
             {this.props.children}
           </div>
-          <Button variant="fab" color="primary" aria-label="Add" style={{position: 'absolute', right: 10, bottom: 10}}>
+          <Button variant="fab" color="primary" aria-label="Add" style={{position: 'absolute', right: 10, bottom: 10}}
+                  onClick={onClickAddMsg}>
             <AddSimpleIcon />
           </Button>
         </div>
