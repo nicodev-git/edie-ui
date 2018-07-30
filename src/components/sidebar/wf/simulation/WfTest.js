@@ -74,6 +74,10 @@ export default class WfTest extends React.Component {
     })
   }
 
+  onClickDeleteGroup () {
+
+  }
+
   selectGroupId (e) {
     this.setState({
       selectedGroupId: e.target.value
@@ -174,6 +178,7 @@ export default class WfTest extends React.Component {
         selectGroupId={this.selectGroupId.bind(this)}
         onClickAddGroup={this.onClickAddGroup.bind(this)}
         onClickEditGroup={this.onClickEditGroup.bind(this)}
+        onClickDeleteGroup={this.onClickDeleteGroup.bind(this)}
 
         onClickAddCase={this.onClickAddCase.bind(this)}
         onClickEditCase={this.onClickEditCase.bind(this)}

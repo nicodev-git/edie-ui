@@ -70,7 +70,7 @@ export default class WfTestView extends React.Component {
   render () {
     const {
       testGroups, selectedGroupId, selectGroupId,
-      onClickAddGroup, onClickEditGroup,
+      onClickAddGroup, onClickEditGroup, onClickDeleteGroup,
       wfSimulationState, mainMenuItems
     } = this.props
     return (
@@ -89,6 +89,7 @@ export default class WfTestView extends React.Component {
 
                   <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
                   <EditIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
+                  <DeleteIcon onClick={onClickDeleteGroup} className="link valign-middle margin-sm-top"/>
                 </div>
               </div>
             </div>
