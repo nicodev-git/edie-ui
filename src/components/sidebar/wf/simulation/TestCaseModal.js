@@ -16,7 +16,8 @@ class TestCaseModal extends React.Component {
       msgModalOpen: false,
       editMsg: null,
 
-      tplModalOpen: false
+      tplModalOpen: false,
+      editTypeName: ''
     }
   }
 
@@ -108,6 +109,9 @@ class TestCaseModal extends React.Component {
     console.log(tpl)
     this.onCloseTplModal()
 
+    this.setState({
+      editTypeName: tpl.name
+    })
     this.onClickEditMsg(null)
   }
 
@@ -122,6 +126,7 @@ class TestCaseModal extends React.Component {
     if (!this.state.msgModalOpen) return null
     return (
       <TestMessageEditModal
+        typeName={this.state.editTypeName}
         editMsg={this.state.editMsg}
         onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}

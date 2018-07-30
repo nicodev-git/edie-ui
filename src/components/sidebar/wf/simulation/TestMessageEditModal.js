@@ -1,10 +1,12 @@
 import React from 'react'
 import {find} from 'lodash'
+import {reduxForm, getFormValues} from 'redux-form'
+import {connect} from 'react-redux'
 
 import TestMessageEditModalView from './TestMessageEditModalView'
 import {messageTypes} from 'shared/SimulationMessages'
 
-export default class TestMessageEditModal extends React.Component {
+class TestMessageEditModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -17,12 +19,27 @@ export default class TestMessageEditModal extends React.Component {
     return msgType
   }
 
+  onSubmit (values) {
+    console.log(values)
+    // const {onSubmit} = this.props
+    // onSubmit(this.state.json)
+  }
+
   render() {
-    const {onClose} = this.props
+    const {handleSubmit, onClose} = this.props
     return (
       <TestMessageEditModalView
+        msgType={this.getMessageType()}
+
+        onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClose}
       />
     )
   }
 }
+
+export default connect(
+  (state, props) => ({
+    allValues: getFormValues('wfTestMsgEditForm')(state)
+  })
+)(reduxForm({form: 'wfTestMsgEditForm'})(TestMessageEditModal))
