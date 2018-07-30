@@ -8,7 +8,6 @@ export default class TestMessageEditModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
     }
   }
 
