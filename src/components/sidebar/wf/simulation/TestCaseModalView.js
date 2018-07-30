@@ -53,9 +53,12 @@ export default class TestCaseModalView extends React.Component {
             {messages.map((p, i) =>
               <tr key={i}>
                 <td>{
-                  keys(p.values).map(k => {
-
-                  })
+                  (() => {
+                    const valueKeys = keys(p.values)
+                    return valueKeys.map((k, ki) =>
+                      <span key={k}>{k} : {p.values[k]}{(valueKeys.length - 1) === ki ? '' : ', '}</span>
+                    )
+                  })()
                 }</td>
                 <td className="nowrap">
                   <CopyIcon className="link" onClick={() => onClickCopyMsg(p)}/>
