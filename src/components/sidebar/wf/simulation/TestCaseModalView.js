@@ -12,6 +12,7 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
+import {messageTypes} from 'shared/SimulationMessages'
 
 export default class TestCaseModalView extends React.Component {
   render () {
@@ -41,7 +42,7 @@ export default class TestCaseModalView extends React.Component {
             <tr>
               <th>
                 <span>Message</span>
-                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddMsg}/>
+                {/*<AddIcon className="link valign-middle margin-md-left" onClick={onClickAddMsg}/>*/}
               </th>
               <th></th>
             </tr>
@@ -66,6 +67,15 @@ export default class TestCaseModalView extends React.Component {
     if (noModal) {
       return (
         <div>
+          <div style={{background: '#dadada', paddingLeft: 10}}>
+            <div style={{height: 48}} className="flex-horizontal flex-vcenter">
+              {messageTypes.map((p, i) =>
+                <div className="margin-md-right" key={i}>
+                  <img src={`/images/${p.img}`} width={32} height={32}/>
+                </div>
+              )}
+            </div>
+          </div>
           <form onSubmit={onSubmit}>
             {content}
 

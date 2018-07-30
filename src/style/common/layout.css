@@ -191,6 +191,10 @@ a, a:focus, a:hover {
     flex-direction: row;
 }
 
+.flex-vcenter {
+    align-items: center;
+}
+
 .flex-1,
 .flex-vertical > .tab-content {
     flex: 1;
