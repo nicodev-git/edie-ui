@@ -3,7 +3,7 @@ import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
 
 import TestCaseModalView from './TestCaseModalView'
-import TestMessageModal from './TestMessageModal'
+import TestMessageEditModal from './TestMessageEditModal'
 import TestTemplateModal from './TestTemplateModal'
 // import {showAlert} from 'components/common/Alert'
 
@@ -34,8 +34,6 @@ class TestCaseModal extends React.Component {
   onClickAddMsg () {
     this.setState({
       tplModalOpen: true
-      // msgModalOpen: true,
-      // editMsg: null
     })
   }
 
@@ -109,6 +107,8 @@ class TestCaseModal extends React.Component {
   onClickTpl (tpl) {
     console.log(tpl)
     this.onCloseTplModal()
+
+    this.onClickEditMsg(null)
   }
 
   onCloseTplModal () {
@@ -121,7 +121,7 @@ class TestCaseModal extends React.Component {
   renderMsgModal () {
     if (!this.state.msgModalOpen) return null
     return (
-      <TestMessageModal
+      <TestMessageEditModal
         editMsg={this.state.editMsg}
         onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}
