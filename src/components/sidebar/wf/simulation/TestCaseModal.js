@@ -109,13 +109,19 @@ class TestCaseModal extends React.Component {
     console.log(tpl)
     this.onCloseTplModal()
 
+    const msg = {
+      typeName: tpl.name,
+      values: {
+
+      }
+    }
+    this.onSubmitMsg({
+
+    })
     // this.setState({
     //   editTypeName: tpl.name
     // })
-
-
-
-    this.onClickEditMsg(null)
+    // this.onClickEditMsg(null)
   }
 
   onCloseTplModal () {
