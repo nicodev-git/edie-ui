@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 import TestCaseModalView from './TestCaseModalView'
 import TestMessageModal from './TestMessageModal'
+import TestTemplateModal from "./TestTemplateModal";
 // import {showAlert} from 'components/common/Alert'
 
 class TestCaseModal extends React.Component {
@@ -13,7 +14,9 @@ class TestCaseModal extends React.Component {
       messages: props.editCase ? (props.editCase.messages || []) : [],
 
       msgModalOpen: false,
-      editMsg: null
+      editMsg: null,
+
+      tplModalOpen: false
     }
   }
 
@@ -30,8 +33,9 @@ class TestCaseModal extends React.Component {
 
   onClickAddMsg () {
     this.setState({
-      msgModalOpen: true,
-      editMsg: null
+      tplModalOpen: false
+      // msgModalOpen: true,
+      // editMsg: null
     })
   }
 
@@ -102,6 +106,13 @@ class TestCaseModal extends React.Component {
 
   ////////////////////////////////////////////////////////
 
+  onCloseTplModal () {
+    this.setState({
+      tplModalOpen: false
+    })
+  }
+
+  ////////////////////////////////////////////////////////
   renderMsgModal () {
     if (!this.state.msgModalOpen) return null
     return (
@@ -109,6 +120,15 @@ class TestCaseModal extends React.Component {
         editMsg={this.state.editMsg}
         onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}
+      />
+    )
+  }
+
+  renderTplModal () {
+    if (!this.state.tplModalOpen) return null
+    return (
+      <TestTemplateModal
+        onClose={this.onCloseTplModal.bind(this)}
       />
     )
   }
