@@ -56,7 +56,16 @@ export default class TestCaseModalView extends React.Component {
                   (() => {
                     const valueKeys = keys(p.values)
                     return valueKeys.map((k, ki) =>
-                      <span key={k}>{k} : {p.values[k]}{(valueKeys.length - 1) === ki ? '' : ', '}</span>
+                      [
+                        <span key={k} className="field-key">
+                          {k} =
+                        </span>,
+                        <span key={`${k}-1`} className="field-value">
+                          {p.values[k]}
+                        </span>,
+                        (valueKeys.length - 1) !== ki ?
+                          <div className="field-separator"></div> : null
+                      ]
                     )
                   })()
                 }</td>
