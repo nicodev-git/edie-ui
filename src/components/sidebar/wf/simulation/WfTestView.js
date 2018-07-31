@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import PlayIcon from '@material-ui/icons/PlayArrow'
 import RefreshIcon from '@material-ui/icons/Refresh'
+import moment from 'moment'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -33,6 +34,7 @@ export default class WfTestView extends React.Component {
           <thead>
             <tr>
               <th>Severity</th>
+              <th>Date/Time</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -40,6 +42,9 @@ export default class WfTestView extends React.Component {
           {testIncidents.map(p =>
             <tr key={p.id}>
               <td>{getSeverityIcon(p.severity, 24)}</td>
+              <td>
+                {moment(new Date(p.startTimestamp)).fromNow()}
+              </td>
               <td>{p.description}</td>
             </tr>
           )}
