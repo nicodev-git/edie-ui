@@ -48,7 +48,9 @@ import {
   FETCH_TEST_CASES,
   ADD_TEST_CASE,
   UPDATE_TEST_CASE,
-  REMOVE_TEST_CASE
+  REMOVE_TEST_CASE,
+
+  FETCH_TEST_INCIDENTS
 } from 'actions/types'
 
 const initialState = {
@@ -66,7 +68,8 @@ const initialState = {
   wfSimulationState: false,
 
   testGroups: [],
-  testCases: []
+  testCases: [],
+  testIncidents: []
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -170,6 +173,8 @@ export default function (state = initialState, action) {
       return { ...state, testCases: state.testCases.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_TEST_CASE:
       return { ...state, testCases: state.testCases.filter(p => p.id !== action.data.id) }
+    case FETCH_TEST_INCIDENTS:
+      return { ...state, testIncidents: action.data }
     default:
       return state
   }

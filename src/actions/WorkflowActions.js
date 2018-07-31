@@ -58,7 +58,9 @@ import {
   FETCH_TEST_CASES,
   ADD_TEST_CASE,
   UPDATE_TEST_CASE,
-  REMOVE_TEST_CASE
+  REMOVE_TEST_CASE,
+
+  FETCH_TEST_INCIDENTS
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -979,6 +981,14 @@ export const removeTestCase = (entity) => {
   return dispatch => {
     axios.delete(`${ROOT_URL}/flowtestcase/${entity.id}`).then(res =>{
       dispatch({type: REMOVE_TEST_CASE, data: entity})
+    })
+  }
+}
+
+export const fetchTestIncidents = () => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/getTestQueueList`).then(res => {
+      dispatch({type: FETCH_TEST_INCIDENTS, data: res.data})
     })
   }
 }
