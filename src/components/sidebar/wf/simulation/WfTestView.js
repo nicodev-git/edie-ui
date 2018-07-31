@@ -35,6 +35,7 @@ export default class WfTestView extends React.Component {
             <tr>
               <th>Severity</th>
               <th>Date/Time</th>
+              <th>System</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -45,6 +46,7 @@ export default class WfTestView extends React.Component {
               <td>
                 {moment(new Date(p.startTimestamp)).fromNow()}
               </td>
+              <td>{p.monitorName}</td>
               <td>{p.description}</td>
             </tr>
           )}
