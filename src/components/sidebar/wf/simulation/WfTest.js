@@ -170,11 +170,10 @@ export default class WfTest extends React.Component {
     messages.forEach(p => {
       const tpl = find(messageTypes, {name: p.typeName})
       if (!tpl) return
-      const valueKeys = keys(tpl.values)
 
       let json = tpl.json
-      valueKeys.forEach(k => {
-        json = json.replace(new RegExp('/\$\{' + k + '\}/g'), tpl.values[k])
+      tpl.data.forEach(k => {
+        json = json.replace(new RegExp('/${' + k.key + '}/g'), p.values[k])
       })
 
       try {
