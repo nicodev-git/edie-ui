@@ -13,6 +13,8 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
+import { getSeverityIcon } from 'shared/Global'
+
 export default class WfTestView extends React.Component {
   renderMessages () {
     const {caseModal} = this.props
@@ -37,7 +39,7 @@ export default class WfTestView extends React.Component {
           <tbody>
           {testIncidents.map(p =>
             <tr key={p.id}>
-              <td>{p.severity}</td>
+              <td>{getSeverityIcon(p.severity, 24)}</td>
               <td>{p.description}</td>
             </tr>
           )}
