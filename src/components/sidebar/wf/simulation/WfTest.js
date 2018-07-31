@@ -6,9 +6,6 @@ import {showAlert} from 'components/common/Alert'
 
 import TestCaseModal from './TestCaseModal'
 import IconParam from '@material-ui/icons/Input'
-// import IconGroup from "@material-ui/icons/GroupWork";
-// import {deepPurple, purple} from "@material-ui/core/colors";
-// import IconWork from "@material-ui/icons/Work";
 
 export default class WfTest extends React.Component {
   constructor (props) {
