@@ -987,7 +987,7 @@ export const removeTestCase = (entity) => {
 
 export const fetchTestIncidents = () => {
   return dispatch => {
-    axios.post(`${ROOT_URL}/getTestQueueList`).then(res => {
+    axios.get(`${ROOT_URL}/getTestQueueList`).then(res => {
       dispatch({type: FETCH_TEST_INCIDENTS, data: res.data})
     })
   }
