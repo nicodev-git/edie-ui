@@ -1,6 +1,5 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import AddIcon from '@material-ui/icons/AddCircle'
 import AddSimpleIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'

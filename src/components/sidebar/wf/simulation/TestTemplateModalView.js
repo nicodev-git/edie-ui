@@ -1,13 +1,11 @@
 import React from 'react'
 
 import {
-  FormInput,
   Modal,
-  SubmitBlock,
   CardPanel
 } from 'components/modal/parts'
 import AppletCard from 'components/common/AppletCard'
-import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
+import { appletColors as colors } from 'shared/Global'
 
 export default class TestTemplateModalView extends React.Component {
   renderTpl (tpl, i) {
