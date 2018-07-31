@@ -27,6 +27,7 @@ export default class WfTest extends React.Component {
   componentWillMount () {
     this.props.fetchTestGroups()
     this.props.fetchTestCases()
+    this.props.fetchTestIncidents()
   }
 
   componentDidUpdate(props) {

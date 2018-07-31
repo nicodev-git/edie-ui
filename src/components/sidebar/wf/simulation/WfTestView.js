@@ -23,9 +23,25 @@ export default class WfTestView extends React.Component {
   }
 
   renderIncidents () {
+    const {testIncidents} = this.props
     return (
-      <div className="flex-1 bg-white margin-md-top padding-sm">
-
+      <div className="flex-1 bg-white margin-md-top padding-sm" style={{overflow: 'auto'}}>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+          {testIncidents.map(p =>
+            <tr key={p.id}>
+              <td>{p.severity}</td>
+              <td>{p.description}</td>
+            </tr>
+          )}
+          </tbody>
+        </table>
       </div>
     )
   }

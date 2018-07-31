@@ -57,7 +57,8 @@ import {
   fetchTestCases,
   addTestCase,
   updateTestCase,
-  removeTestCase
+  removeTestCase,
+  fetchTestIncidents
 } from 'actions'
 
 class WfTestContainer extends React.Component {
@@ -100,6 +101,7 @@ export default connect(
 
     testGroups: state.workflow.testGroups,
     testCases: state.workflow.testCases,
+    testIncidents: state.workflow.testIncidents,
 
     brainCells: state.settings.brainCells,
     collectors: state.settings.collectors
@@ -157,6 +159,7 @@ export default connect(
     fetchTestCases,
     addTestCase,
     updateTestCase,
-    removeTestCase
+    removeTestCase,
+    fetchTestIncidents
   }
 )(WfTestContainer)
