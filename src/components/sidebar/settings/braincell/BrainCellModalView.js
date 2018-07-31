@@ -374,13 +374,13 @@ export default class BrainCellModalView extends Component {
                         </div>
                     </CardPanel>
 
-                    {this.renderGrokLines()}
 
                     {this.renderCategory()}
                     {this.renderScript()}
                     {this.renderParams()}
                     {this.renderParams2()}
                     {this.renderTags()}
+                    {this.renderGrokLines()}
 
                     <div className="margin-md-top">
                         <Button variant="raised" type="submit">OK</Button>
