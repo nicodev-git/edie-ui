@@ -174,11 +174,19 @@ export default class WfTest extends React.Component {
 
       let json = tpl.json
       valueKeys.forEach(k => {
-        json = json.replace(new Regex('\$\{\}'))
+        json = json.replace(new RegExp('/\$\{' + k + '\}/g'), tpl.values[k])
       })
+
+      try {
+          const entity = JSON.parse(json)
+          if (entity) entities.push(entity)
+      } catch (e) {
+        console.log(e)
+      }
     })
 
-    this.props.simulateWfMessage(entities)
+    console.log(entities)
+    // this.props.simulateWfMessage(entities)
   }
 
   selectCaseId (selectedCase) {
