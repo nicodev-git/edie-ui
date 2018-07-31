@@ -8,7 +8,8 @@ export const messageTypes = [{
   }, {
     key: 'timestamp',
     label: 'Timestamp',
-    default: 1532080275000
+    default: 1532080275000,
+    type: 'datetime'
   }],
   json: ''
 }, {
@@ -25,7 +26,8 @@ export const messageTypes = [{
   }, {
     key: 'timestamp',
     label: 'Timestamp',
-    default: 1532080275000
+    default: 1532080275000,
+    type: 'datetime'
   }, {
     key: 'user',
     label: 'User',
