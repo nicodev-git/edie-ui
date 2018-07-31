@@ -1,5 +1,5 @@
 import React from 'react'
-import {keys, find} from 'lodash'
+import {find} from 'lodash'
 
 import WfTestView from './WfTestView'
 import {showAlert} from 'components/common/Alert'
@@ -173,7 +173,7 @@ export default class WfTest extends React.Component {
 
       let json = tpl.json
       tpl.data.forEach(k => {
-        json = json.replace(new RegExp('\\$\\{' + k.key + '\\}', 'g'), p.values[k])
+        json = json.replace(new RegExp('\\$\\{' + k.key + '\\}', 'g'), p.values[k.key])
       })
 
       try {
@@ -181,11 +181,12 @@ export default class WfTest extends React.Component {
           if (entity) entities.push(entity)
       } catch (e) {
         console.log(e)
+        return alert('Invalid values typed')
       }
     })
 
-    console.log(entities)
-    // this.props.simulateWfMessage(entities)
+    // console.log(entities)
+    this.props.simulateWfMessage(entities)
   }
 
   selectCaseId (selectedCase) {
