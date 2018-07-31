@@ -47,9 +47,14 @@ class TestCaseModal extends React.Component {
 
   onClickDeleteMsg (index) {
     if (!window.confirm('Click OK to delete')) return
+    const {editCase} = this.props
     const {messages} = this.state
     this.setState({
       messages: messages.filter((p, i) => i !== index)
+    }, () => {
+      if (editCase.id) {
+        this.triggerSave()
+      }
     })
   }
 
