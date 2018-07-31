@@ -195,7 +195,8 @@ export default class WfTest extends React.Component {
     this.props.fetchTestIncidents()
   }
 
-  selectCaseId (selectedCase) {
+  selectCaseId (selectedCase, e) {
+    e.preventDefault()
     this.setState({
       selectedCaseId: selectedCase.id
     })

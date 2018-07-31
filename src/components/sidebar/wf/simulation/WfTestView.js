@@ -70,12 +70,12 @@ export default class WfTestView extends React.Component {
             <tbody>
             {testCases.filter(p => p.groupId === selectedGroupId).map(p =>
               <tr key={p.id} className={selectedCaseId === p.id ? 'selected' : ''}
-                  onClick={() => selectCaseId(p)}>
+                  onClick={e => selectCaseId(p, e)}>
                 <td>{p.name}</td>
                 <td>{p.description}</td>
                 <td>
                   <PlayIcon className="link" onClick={() => onClickPost(p)}/>
-                  <DeleteIcon className="link margin-md-left" onClick={() => onClickDeleteCase(p)}/>
+                  <DeleteIcon className="link margin-md-left" onClick={e => onClickDeleteCase(p, e)}/>
                 </td>
               </tr>
             )}
