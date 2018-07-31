@@ -187,7 +187,12 @@ export default class WfTest extends React.Component {
     })
 
     // console.log(entities)
-    this.props.simulateWfMessage(entities)
+    this.props.simulateWfMessage(entities, true)
+    setTimeout(this.props.fetchTestIncidents, 3000)
+  }
+
+  onClickRefreshIncidents () {
+    this.props.fetchTestIncidents()
   }
 
   selectCaseId (selectedCase) {
@@ -240,6 +245,7 @@ export default class WfTest extends React.Component {
         caseModal={this.renderTestCaseModal()}
 
         onClickPost={this.onClickPost.bind(this)}
+        onClickRefreshIncidents={this.onClickRefreshIncidents.bind(this)}
       >
       </WfTestView>
     )

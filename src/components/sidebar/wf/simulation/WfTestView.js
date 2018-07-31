@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import PlayIcon from '@material-ui/icons/PlayArrow'
+import RefreshIcon from '@material-ui/icons/Refresh'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -87,7 +88,7 @@ export default class WfTestView extends React.Component {
     const {
       testGroups, selectedGroupId, selectGroupId,
       onClickAddGroup, onClickEditGroup, onClickDeleteGroup,
-      wfSimulationState, mainMenuItems
+      wfSimulationState, mainMenuItems, onClickRefreshIncidents
     } = this.props
     return (
       <TabPage>
@@ -106,6 +107,10 @@ export default class WfTestView extends React.Component {
                   <AddIcon onClick={onClickAddGroup} className="link valign-middle margin-sm-top"/>
                   <EditIcon onClick={onClickEditGroup} className="link valign-middle margin-sm-top"/>
                   <DeleteIcon onClick={onClickDeleteGroup} className="link valign-middle margin-sm-top"/>
+                </div>
+
+                <div className="pull-right">
+                  <RefreshIcon className="link margin-md-top margin-md-right" onClick={onClickRefreshIncidents}/>
                 </div>
               </div>
             </div>
