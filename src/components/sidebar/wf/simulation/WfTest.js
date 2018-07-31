@@ -173,7 +173,7 @@ export default class WfTest extends React.Component {
 
       let json = tpl.json
       tpl.data.forEach(k => {
-        json = json.replace(new RegExp('/${' + k.key + '}/g'), p.values[k])
+        json = json.replace(new RegExp('\\$\\{' + k.key + '\\}', 'g'), p.values[k])
       })
 
       try {
