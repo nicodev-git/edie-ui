@@ -1,11 +1,12 @@
 import React from 'react'
-import {find} from 'lodash'
+import {keys, find} from 'lodash'
 
 import WfTestView from './WfTestView'
 import {showAlert} from 'components/common/Alert'
 
 import TestCaseModal from './TestCaseModal'
 import IconParam from '@material-ui/icons/Input'
+import {messageTypes} from 'shared/SimulationMessages'
 
 export default class WfTest extends React.Component {
   constructor (props) {
@@ -165,7 +166,19 @@ export default class WfTest extends React.Component {
     const {messages} = testCase
     if (!messages || !messages.length) return alert('No message')
 
-    this.props.simulateWfMessage(messages)
+    var entities = []
+    messages.forEach(p => {
+      const tpl = find(messageTypes, {name: p.typeName})
+      if (!tpl) return
+      const valueKeys = keys(tpl.values)
+
+      let json = tpl.json
+      valueKeys.forEach(k => {
+        json = json.replace(new Regex('\$\{\}'))
+      })
+    })
+
+    this.props.simulateWfMessage(entities)
   }
 
   selectCaseId (selectedCase) {
