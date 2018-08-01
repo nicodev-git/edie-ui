@@ -83,37 +83,40 @@ class WorkflowEditModalView extends React.Component {
       onClickDeleteShape, onClickEditShape
     } = this.props
     return (
-      <div style={{width: '100%'}} className="flex-horizontal">
-        <div className="diagram">
-          {this.renderSidebar()}
-        </div>
-        <div className="flex-1">
-          {wfDataItems.map((p, i) =>
-            <div key={i} className="text-center">
-              <div>
-                {i ? (
-                  <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
-                ) : null}
-              </div>
-              <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
-                {p.prelabel ? (
-                  <div className="wf-item-prelabel">
-                    <div className="position-vm text-center">{p.prelabel}</div>
+      <CardPanel title="Workflow">
+        <div style={{width: '100%'}} className="flex-horizontal">
+          <div className="diagram">
+            {this.renderSidebar()}
+          </div>
+          <div className="flex-1">
+            {wfDataItems.map((p, i) =>
+              <div key={i} className="text-center">
+                <div>
+                  {i ? (
+                    <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
+                  ) : null}
+                </div>
+                <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
+                  {p.prelabel ? (
+                    <div className="wf-item-prelabel">
+                      <div className="position-vm text-center">{p.prelabel}</div>
+                    </div>
+                  ) : null}
+                  <div className="inline-block wf-item-label">
+                    <div className="position-vm">{p.label}</div>
                   </div>
-                ) : null}
-                <div className="inline-block wf-item-label">
-                  <div className="position-vm">{p.label}</div>
-                </div>
-                <label className="wf-item-value">{p.value}</label>
-                <div className="wf-item-delete">
-                  <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+                  <label className="wf-item-value">{p.value}</label>
+                  <div className="wf-item-delete">
+                    <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-          {this.renderButtons()}
+            )}
+            {this.renderButtons()}
+          </div>
         </div>
-      </div>
+        {this.renderEditPopover()}
+      </CardPanel>
     )
   }
 
