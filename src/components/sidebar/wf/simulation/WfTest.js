@@ -108,6 +108,16 @@ export default class WfTest extends React.Component {
     this.clearCaseSelection()
   }
 
+  onSaveTestGroup () {
+
+  }
+
+  onCloseTestGroup () {
+    this.setState({
+      testGroupModalOpen: false
+    })
+  }
+
   //////////////////////////////////////////////////////////////
 
   clearCaseSelection() {
@@ -216,16 +226,6 @@ export default class WfTest extends React.Component {
     })
 
     return false
-  }
-
-  //////////////////////////////////////////////////////////////
-
-  onSaveTestGroup () {
-
-  }
-
-  onCloseTestGroup () {
-
   }
 
   //////////////////////////////////////////////////////////////
