@@ -96,7 +96,7 @@ class WorkflowEditModalView extends React.Component {
                     <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
                   ) : null}
                 </div>
-                <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
+                <div className="inline-block wf-item-main" onClick={(e) => onClickEditShape(i, e)}>
                   {p.prelabel ? (
                     <div className="wf-item-prelabel">
                       <div className="position-vm text-center">{p.prelabel}</div>
@@ -379,6 +379,8 @@ class WorkflowEditModalView extends React.Component {
   renderEditPopover () {
     const {shapeModal, onCloseShapeModal, shapeAnchorEl} = this.props
     if (!shapeModal) return null
+
+    const rt = shapeAnchorEl.getBoundingClientRect()
     return (
       <Popover
         appendTarget={document.body}
@@ -388,7 +390,8 @@ class WorkflowEditModalView extends React.Component {
         preferPlace="right"
         tipSize={12}
       >
-        <div></div>
+        <div style={{position: 'absolute', left: `${rt.left}px`, top: `${rt.top}px`}}>
+        </div>
       </Popover>
     )
   }

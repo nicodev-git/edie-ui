@@ -190,14 +190,14 @@ class WorkflowEditModal extends React.Component {
     this.onCloseShapeMenu()
 
     this.setState({
-      shapeModalOpen: false
+      shapeModalOpen: false,
+      shapeAnchorEl: e.target
     }, () => {
       this.setState({
         shapeModalOpen: true,
         rulePanelExpanded: true,
         editShape: null,
-        shape,
-        shapeAnchorEl: e.target
+        shape
       })
     })
   }
@@ -308,7 +308,7 @@ class WorkflowEditModal extends React.Component {
     return false
   }
 
-  onClickEditShape(index) {
+  onClickEditShape(index, e) {
     const {wfData} = this.state
     const {objects} = wfData
     const current = objects[index]
@@ -320,7 +320,8 @@ class WorkflowEditModal extends React.Component {
     if (shapeIndex < 0) return alert('Shape not found')
 
     this.setState({
-      shapeModalOpen: false
+      shapeModalOpen: false,
+      shapeAnchorEl: e.target
     }, () => {
       this.setState({
         shapeModalOpen: true,
