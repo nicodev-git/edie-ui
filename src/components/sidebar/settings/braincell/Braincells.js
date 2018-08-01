@@ -115,8 +115,13 @@ export default class Braincells extends React.Component {
     }
 
     renderKey (p) {
-        if (p.type === 'Grok') return ((p.params2 || {}).tags || []).join(', ')
-        return <Chip>{p.key}</Chip>
+        if (p.type === 'Grok') {
+            const tags =  (p.params2 || {}).tags || []
+            return tags.map((tag, i) =>
+                <Chip key={i} label={tag}/>
+            )
+        }
+        return p.key
     }
 
     renderContent () {
