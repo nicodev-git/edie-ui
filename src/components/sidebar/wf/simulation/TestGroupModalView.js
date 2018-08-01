@@ -14,9 +14,9 @@ export default class TestGroupModalView extends React.Component {
   render () {
     const {onClickClose, onSubmit, msgType} = this.props
     return (
-      <Modal title="Message" onRequestClose={onClickClose}>
+      <Modal title="Group" onRequestClose={onClickClose}>
         <form  onSubmit={onSubmit}>
-          <CardPanel title={msgType.name}>
+          <CardPanel title="Group">
               <Field
                 name="name"
                 component={FormInput}

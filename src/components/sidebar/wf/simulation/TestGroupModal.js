@@ -7,6 +7,10 @@ import TestGroupModalView from './TestGroupModalView'
 class TestGroupModal extends React.Component {
   onSubmit (values) {
     console.log(values)
+    if (!values.name) return alert('Please input name')
+    if (!values.type) return alert('Please check type')
+
+    this.props.onSubmit(values)
   }
 
   render () {

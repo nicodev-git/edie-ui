@@ -7,6 +7,7 @@ import {showAlert} from 'components/common/Alert'
 import TestCaseModal from './TestCaseModal'
 import IconParam from '@material-ui/icons/Input'
 import {messageTypes} from 'shared/SimulationMessages'
+import TestGroupModal from "./TestGroupModal";
 
 export default class WfTest extends React.Component {
   constructor (props) {
@@ -14,7 +15,10 @@ export default class WfTest extends React.Component {
     this.state = {
       testCaseModalOpen: false,
       selectedCaseId: null,
-      selectedGroupId: null
+      selectedGroupId: null,
+
+      testGroupModalOpen: false,
+      editGroup: null
     }
 
     this.mainMenuItems = [{
@@ -52,9 +56,13 @@ export default class WfTest extends React.Component {
   //////////////////////////////////////////////////////////////
 
   onClickAddGroup () {
-    const name = prompt('Please type test group name')
-    if (!name) return
-    this.props.addTestGroup({name})
+    // const name = prompt('Please type test group name')
+    // if (!name) return
+    // this.props.addTestGroup({name})
+    this.setState({
+      testGroupModalOpen: true,
+      editGroup: null
+    })
   }
 
   onClickEditGroup () {
@@ -212,6 +220,16 @@ export default class WfTest extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  onSaveTestGroup () {
+
+  }
+
+  onCloseTestGroup () {
+
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderTestCaseModal () {
     const {submitForm} = this.props
     if (!this.state.testCaseModalOpen) return null
@@ -222,6 +240,17 @@ export default class WfTest extends React.Component {
         submitForm={submitForm}
         onSubmit={this.onSaveTestCase.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}
+      />
+    )
+  }
+
+  renderGroupModal () {
+    if (!this.state.testGroupModalOpen) return null
+    return (
+      <TestGroupModal
+        editGroup={this.state.editGroup}
+        onSubmit={this.onSaveTestGroup.bind(this)}
+        onClickClose={this.onCloseTestGroup.bind(this)}
       />
     )
   }
@@ -248,6 +277,7 @@ export default class WfTest extends React.Component {
         onClickPost={this.onClickPost.bind(this)}
         onClickRefreshIncidents={this.onClickRefreshIncidents.bind(this)}
       >
+        {this.renderGroupModal()}
       </WfTestView>
     )
   }
