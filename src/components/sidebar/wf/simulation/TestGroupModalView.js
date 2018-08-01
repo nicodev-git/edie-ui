@@ -17,7 +17,7 @@ export default class TestGroupModalView extends React.Component {
       <Modal title="Group" onRequestClose={onClickClose}>
         <form  onSubmit={onSubmit}>
           <CardPanel title="Group">
-              <Field
+            <Field
                 name="name"
                 component={FormInput}
                 floatingLabel="Name"
