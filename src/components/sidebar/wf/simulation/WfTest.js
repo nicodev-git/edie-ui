@@ -63,18 +63,16 @@ export default class WfTest extends React.Component {
   }
 
   onClickEditGroup () {
-    // const {selectedGroupId} = this.state
-    // if (!selectedGroupId) return
-    //
-    // const group = find(this.props.testGroups, {id: selectedGroupId})
-    // if (!group) return
-    // const name = prompt('Please type test group name', group.name)
-    // if (!name) return
-    //
-    // this.props.updateTestGroup({
-    //   ...group,
-    //   name
-    // })
+    const {selectedGroupId} = this.state
+    if (!selectedGroupId) return
+
+    const group = find(this.props.testGroups, {id: selectedGroupId})
+    if (!group) return
+
+    this.setState({
+      testGroupModalOpen: true,
+      editGroup: group
+    })
   }
 
   onClickDeleteGroup () {
@@ -116,6 +114,7 @@ export default class WfTest extends React.Component {
       this.props.addTestGroup(entity)
     }
 
+    this.onCloseTestGroup()
   }
 
   onCloseTestGroup () {
