@@ -28,6 +28,7 @@ export default class TestGroupModalView extends React.Component {
               component={FormSelect}
               floatingLabel="Type"
               options={simulationTypes}
+              style={{minWidth: 150}}
             />
           </CardPanel>
           <SubmitBlock name="OK"/>

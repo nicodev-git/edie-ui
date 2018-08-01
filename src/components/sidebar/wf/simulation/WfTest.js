@@ -56,9 +56,6 @@ export default class WfTest extends React.Component {
   //////////////////////////////////////////////////////////////
 
   onClickAddGroup () {
-    // const name = prompt('Please type test group name')
-    // if (!name) return
-    // this.props.addTestGroup({name})
     this.setState({
       testGroupModalOpen: true,
       editGroup: null
@@ -66,18 +63,18 @@ export default class WfTest extends React.Component {
   }
 
   onClickEditGroup () {
-    const {selectedGroupId} = this.state
-    if (!selectedGroupId) return
-
-    const group = find(this.props.testGroups, {id: selectedGroupId})
-    if (!group) return
-    const name = prompt('Please type test group name', group.name)
-    if (!name) return
-
-    this.props.updateTestGroup({
-      ...group,
-      name
-    })
+    // const {selectedGroupId} = this.state
+    // if (!selectedGroupId) return
+    //
+    // const group = find(this.props.testGroups, {id: selectedGroupId})
+    // if (!group) return
+    // const name = prompt('Please type test group name', group.name)
+    // if (!name) return
+    //
+    // this.props.updateTestGroup({
+    //   ...group,
+    //   name
+    // })
   }
 
   onClickDeleteGroup () {
@@ -108,7 +105,16 @@ export default class WfTest extends React.Component {
     this.clearCaseSelection()
   }
 
-  onSaveTestGroup () {
+  onSaveTestGroup (entity) {
+    const {editGroup} = this.state
+    if (editGroup) {
+      this.props.updateTestGroup({
+        ...editGroup,
+        ...entity
+      })
+    } else {
+      this.props.addTestGroup(entity)
+    }
 
   }
 
