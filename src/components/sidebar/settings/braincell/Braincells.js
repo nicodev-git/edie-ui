@@ -114,6 +114,11 @@ export default class Braincells extends React.Component {
         }
     }
 
+    renderKey (p) {
+        if (p.type === 'Grok') return ((p.params2 || {}).tags || []).join(', ')
+        return p.key
+    }
+
     renderContent () {
         const {type, group, subgroup, selected} = this.state
         let items = this.props.brainCells
@@ -153,7 +158,7 @@ export default class Braincells extends React.Component {
                             <label data-tip={`${p.functionCategory}/${p.functionSubcategory}`}>{p.name}</label>
                         </td>
                         <td>{this.renderValueType(p)}</td>
-                        <td>{p.key}</td>
+                        <td>{this.renderKey(p)}</td>
                         <td>
                             <EditIcon className="link" onClick={this.onClickEdit.bind(this, p)}/>
                             <DeleteIcon className="link" onClick={this.onClickDelete.bind(this, p)}/>
