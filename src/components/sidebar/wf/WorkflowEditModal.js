@@ -524,7 +524,6 @@ class WorkflowEditModal extends React.Component {
 
         commands={[]}
         noModal
-        embedded
       />
     )
   }

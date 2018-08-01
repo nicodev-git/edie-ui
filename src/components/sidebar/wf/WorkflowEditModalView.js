@@ -115,7 +115,6 @@ class WorkflowEditModalView extends React.Component {
             {this.renderButtons()}
           </div>
         </div>
-        {this.renderEditPopover()}
       </CardPanel>
     )
   }
@@ -382,14 +381,14 @@ class WorkflowEditModalView extends React.Component {
     if (!shapeModal) return null
     return (
       <Popover
-        open
-        anchorEl={shapeAnchorEl}
-        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-        onClose={onCloseShapeModal}
-        className="padding-md tag-picker"
-        style={{maxWidth: 800, minWidth: 400}}
+        appendTarget={document.body}
+        isOpen
+        body={shapeModal}
+        target={shapeAnchorEl}
+        preferPlace="right"
+        tipSize={12}
       >
-        {shapeModal}
+        <div></div>
       </Popover>
     )
   }
@@ -427,6 +426,7 @@ class WorkflowEditModalView extends React.Component {
 
           {this.renderTabContent()}
         </form>
+        {this.renderEditPopover()}
         {/*{this.renderRuleDetail()}*/}
         {children}
       </div>
