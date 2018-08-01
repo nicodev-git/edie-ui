@@ -12,7 +12,7 @@ export const messageTypes = [{
     type: 'datetime',
     format: ''
   }],
-  json: '{"tags": ["monitorcpu"],"incident":{"monitorName":"CPU","monitortype":"cpu","description":"Usage is ${usage}","startTimestamp":${timestamp},"data":{"Usage":"${usage}"}}}'
+  json: '{"tags": ["monitorcpu"],"incident":{"monitorName":"CPU","monitortype":"cpu","description":"Usage is ${usage}%","startTimestamp":${timestamp},"data":{"Usage":"${usage}%"}}}'
 }, {
   name: 'Root Login',
   img: 'credential.png',
