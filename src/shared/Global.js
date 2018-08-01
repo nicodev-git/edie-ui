@@ -760,3 +760,11 @@ export function getBasicMonitorInfo(device) {
 }
 
 export const basicMonitorTypes = 'cpu disk memory network'.split(' ')
+
+export const simulationTypes = [{
+  label: 'Internal', value: 'internal'
+}, {
+  label: 'Syslog', value: 'syslog'
+}, {
+  label: 'SrFlow', value: 'srflow'
+}]

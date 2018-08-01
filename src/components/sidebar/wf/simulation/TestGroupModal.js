@@ -2,37 +2,22 @@ import React from 'react'
 import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
 
-import TestCaseModalView from './TestCaseModalView'
-import TestMessageEditModal from './TestMessageEditModal'
-import TestTemplateModal from './TestTemplateModal'
-// import {showAlert} from 'components/common/Alert'
+import TestGroupModalView from './TestGroupModalView'
 
 class TestGroupModal extends React.Component {
   onSubmit (values) {
-
+    console.log(values)
   }
 
   render () {
     const {
-      handleSubmit, onClickClose, allValues, noModal
+      handleSubmit, onClickClose
     } = this.props
     return (
-      <TestCaseModalView
-        messages={this.state.messages}
-        allValues={allValues}
-        noModal={noModal}
-
-        onClickAddMsg={this.onClickAddMsg.bind(this)}
-        onClickEditMsg={this.onClickEditMsg.bind(this)}
-        onClickDeleteMsg={this.onClickDeleteMsg.bind(this)}
-        onClickCopyMsg={this.onClickCopyMsg.bind(this)}
-
+      <TestGroupModalView
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClickClose}
-      >
-        {this.renderMsgModal()}
-        {this.renderTplModal()}
-      </TestCaseModalView>
+      />
     )
   }
 }

@@ -3,10 +3,12 @@ import {Field} from 'redux-form'
 
 import {
   FormInput,
+  FormSelect,
   Modal,
   SubmitBlock,
   CardPanel
 } from 'components/modal/parts'
+import {simulationTypes} from 'shared/Global'
 
 export default class TestGroupModalView extends React.Component {
   render () {
@@ -15,16 +17,18 @@ export default class TestGroupModalView extends React.Component {
       <Modal title="Message" onRequestClose={onClickClose}>
         <form  onSubmit={onSubmit}>
           <CardPanel title={msgType.name}>
-            {
-              msgType.data.map(p =>
-                <Field
-                  key={p.key}
-                  name={`${p.key}`}
-                  component={FormInput}
-                  floatingLabel={p.label}
-                  className="valign-top margin-md-right"/>
-              )
-            }
+              <Field
+                name="name"
+                component={FormInput}
+                floatingLabel="Name"
+                className="valign-top margin-md-right"/>
+
+            <Field
+              name="type"
+              component={FormSelect}
+              floatingLabel="Type"
+              options={simulationTypes}
+            />
           </CardPanel>
           <SubmitBlock name="OK"/>
         </form>
