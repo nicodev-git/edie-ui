@@ -3,7 +3,7 @@ import {Field} from 'redux-form'
 import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
-  Checkbox, FormControlLabel, Button
+  Checkbox, FormControlLabel, Button, Popover
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import {findIndex} from 'lodash'
 
+import Popover from 'components/common/popover'
 import {
   FormInput,
   FormSelect,
@@ -378,6 +379,23 @@ class WorkflowEditModalView extends React.Component {
       default:
         return null
     }
+  }
+
+  renderEditPopover () {
+    // return (
+    //   <Popover
+    //     open
+    //     anchorEl={anchorEl}
+    //     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+    //     onClose={onClickClose}
+    //     className="padding-md tag-picker"
+    //     style={{maxWidth: 800, minWidth: 400}}
+    //   >
+    //     {this.renderContent()}
+    //     {this.renderSelected()}
+    //     <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
+    //   </Popover>
+    // )
   }
 
   renderButtons() {
