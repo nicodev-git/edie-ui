@@ -186,7 +186,7 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
-  onClickShape(shape) {
+  onClickShape(shape, e) {
     this.onCloseShapeMenu()
 
     this.setState({
@@ -196,7 +196,8 @@ class WorkflowEditModal extends React.Component {
         shapeModalOpen: true,
         rulePanelExpanded: true,
         editShape: null,
-        shape
+        shape,
+        shapeAnchorEl: e.target
       })
     })
   }
@@ -567,6 +568,7 @@ class WorkflowEditModal extends React.Component {
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
         shapeModal={this.renderShapeModal()}
+        onCloseShapeModal={this.onCloseShapeModal.bind(this)}
         rulePanelExpanded={this.state.rulePanelExpanded}
         onExpandRulePanel={this.onExpandRulePanel.bind(this)}
         onClickEditIncident={this.onClickEditIncident.bind(this)}

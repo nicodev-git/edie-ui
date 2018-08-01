@@ -3,7 +3,7 @@ import {Field} from 'redux-form'
 import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
-  Checkbox, FormControlLabel, Button, Popover
+  Checkbox, FormControlLabel, Button
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
@@ -50,7 +50,7 @@ class WorkflowEditModalView extends React.Component {
       if (gindex < 0) groups.push({key: group, items: groupItems})
       else groupItems = groups[gindex].items
       groupItems.push(
-        <div key={index} onClick={() => onClickShape(m)} className="link">
+        <div key={index} onClick={(e) => onClickShape(m, e)} className="link">
           <div className="inline-block valign-middle">
             <img src={`/images/${m.img}`} style={itemStyle} alt=""/>
           </div>&nbsp;&nbsp;
@@ -83,44 +83,37 @@ class WorkflowEditModalView extends React.Component {
       onClickDeleteShape, onClickEditShape
     } = this.props
     return (
-      <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-          <Typography>Rules</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <div style={{width: '100%'}} className="flex-horizontal">
-            <div className="diagram">
-              {this.renderSidebar()}
-            </div>
-            <div className="flex-1">
-              {wfDataItems.map((p, i) =>
-                <div key={i} className="text-center">
-                  <div>
-                    {i ? (
-                      <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
-                    ) : null}
+      <div style={{width: '100%'}} className="flex-horizontal">
+        <div className="diagram">
+          {this.renderSidebar()}
+        </div>
+        <div className="flex-1">
+          {wfDataItems.map((p, i) =>
+            <div key={i} className="text-center">
+              <div>
+                {i ? (
+                  <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
+                ) : null}
+              </div>
+              <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
+                {p.prelabel ? (
+                  <div className="wf-item-prelabel">
+                    <div className="position-vm text-center">{p.prelabel}</div>
                   </div>
-                  <div className="inline-block wf-item-main" onClick={() => onClickEditShape(i)}>
-                    {p.prelabel ? (
-                      <div className="wf-item-prelabel">
-                        <div className="position-vm text-center">{p.prelabel}</div>
-                      </div>
-                    ) : null}
-                    <div className="inline-block wf-item-label">
-                      <div className="position-vm">{p.label}</div>
-                    </div>
-                    <label className="wf-item-value">{p.value}</label>
-                    <div className="wf-item-delete">
-                      <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
-                    </div>
-                  </div>
+                ) : null}
+                <div className="inline-block wf-item-label">
+                  <div className="position-vm">{p.label}</div>
                 </div>
-              )}
-              {this.renderButtons()}
+                <label className="wf-item-value">{p.value}</label>
+                <div className="wf-item-delete">
+                  <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+                </div>
+              </div>
             </div>
-          </div>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+          )}
+          {this.renderButtons()}
+        </div>
+      </div>
     )
   }
 
@@ -382,20 +375,20 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderEditPopover () {
-    // return (
-    //   <Popover
-    //     open
-    //     anchorEl={anchorEl}
-    //     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-    //     onClose={onClickClose}
-    //     className="padding-md tag-picker"
-    //     style={{maxWidth: 800, minWidth: 400}}
-    //   >
-    //     {this.renderContent()}
-    //     {this.renderSelected()}
-    //     <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
-    //   </Popover>
-    // )
+    const {shapeModal, onCloseShapeModal, shapeAnchorEl} = this.props
+    if (!shapeModal) return null
+    return (
+      <Popover
+        open
+        anchorEl={shapeAnchorEl}
+        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+        onClose={onCloseShapeModal}
+        className="padding-md tag-picker"
+        style={{maxWidth: 800, minWidth: 400}}
+      >
+        {shapeModal}
+      </Popover>
+    )
   }
 
   renderButtons() {
@@ -431,7 +424,7 @@ class WorkflowEditModalView extends React.Component {
 
           {this.renderTabContent()}
         </form>
-        {this.renderRuleDetail()}
+        {/*{this.renderRuleDetail()}*/}
         {children}
       </div>
     )
