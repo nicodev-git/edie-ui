@@ -63,7 +63,7 @@ const buildField = elem => {
   }
 }
 
-const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal, embedded, rowCls, keyFieldMode, ...props}) => {
+const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal, embedded, rowCls, ...props}) => {
   let formInputs
   if (content.length === 1 && content[0].form) {
     const FormItems = FormMapping[content[0].form]
@@ -71,8 +71,12 @@ const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal
       <FormItems {...props}/>
     )
   } else {
-    if (keyFieldMode) {
-      formInputs = content.filter(e => e.keyField).map(buildField)
+    if (props.keyFieldMode) {
+      formInputs = (
+        <div className="padding-md">
+          {content.filter(e => e.keyField).map(buildField)}
+        </div>
+      )
     } else {
       formInputs = (
         <CardPanel title="Details">

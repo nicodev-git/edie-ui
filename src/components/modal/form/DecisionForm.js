@@ -136,7 +136,9 @@ class DecisionForm extends React.Component {
     const {keyFieldMode} = this.props
     if (keyFieldMode) {
       return (
-        <Field name="sentence" component={FormInput} label="Sentence" fullWidth style={{minWidth: 250}}/>
+        <div className="padding-md">
+          <Field name="sentence" component={FormInput} label="Sentence" fullWidth style={{minWidth: 250}}/>
+        </div>
       )
     }
 
