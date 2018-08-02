@@ -144,6 +144,12 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
+  onClickAdvanced (e) {
+    this.setState({
+      menuAnchor: e.target
+    })
+  }
+
   onCloseMenu () {
     this.setState({
       menuAnchor: null
@@ -326,6 +332,8 @@ class Workflows extends React.Component {
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
               <Button variant="raised" onClick={this.onClickAdvanced.bind(this)}>Advanced</Button>&nbsp;
               <Button variant="raised" onClick={this.onClickSimulate.bind(this)}>Simulate</Button>&nbsp;
+
+              {this.renderMenu()}
             </div>
           </div>
         </TabPageHeader>
