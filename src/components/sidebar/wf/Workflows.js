@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Select, MenuItem, Chip} from '@material-ui/core'
+import {Button, Select, Menu, MenuItem, Chip} from '@material-ui/core'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import moment from 'moment'
@@ -23,7 +23,8 @@ class Workflows extends React.Component {
     this.state = {
       editWf: null,
       groupId: '0',
-      filterTags: []
+      filterTags: [],
+      menuAnchor: null
     }
   }
 
@@ -139,6 +140,14 @@ class Workflows extends React.Component {
     const index = findIndex(brainCells, {id: incidentTemplateId})
     if (index < 0) return null
     return brainCells[index]
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  onCloseMenu () {
+    this.setState({
+      menuAnchor: null
+    })
   }
 
   ////////////////////////////////////////////////////////////////
@@ -289,7 +298,19 @@ class Workflows extends React.Component {
   }
 
   renderMenu () {
-
+    const {menuAnchor} = this.state
+    if (!menuAnchor) return null
+    return (
+      <Menu
+        anchorEl={menuAnchor}
+        open={Boolean(menuAnchor)}
+        onClose={this.onCloseMenu.bind(this)}
+      >
+        <MenuItem onClick={null}>Flow Group</MenuItem>
+        <MenuItem onClick={null}>Global Variables</MenuItem>
+        <MenuItem onClick={this.onClickSettings.bind(this)}>Settings</MenuItem>
+      </Menu>
+    )
   }
 
   render() {
@@ -303,7 +324,7 @@ class Workflows extends React.Component {
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
-              <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Advanced</Button>&nbsp;
+              <Button variant="raised" onClick={this.onClickAdvanced.bind(this)}>Advanced</Button>&nbsp;
               <Button variant="raised" onClick={this.onClickSimulate.bind(this)}>Simulate</Button>&nbsp;
             </div>
           </div>
