@@ -376,17 +376,32 @@ class WorkflowEditModalView extends React.Component {
     }
   }
 
+  cumulativeOffset(element) {
+    var top = 0, left = 0;
+    do {
+      top += element.offsetTop  || 0;
+      left += element.offsetLeft || 0;
+      element = element.offsetParent
+    } while(element)
+
+    return {
+      top: top,
+      left: left
+    }
+  }
+
   renderEditPopover () {
-    const {shapeModal, shapeAnchorEl, editShape} = this.props
+    const {shapeModal, shapeAnchorEl, editShape, onCloseShapeModal} = this.props
     if (!shapeModal) return null
 
-    const rt = shapeAnchorEl.getBoundingClientRect()
+    const rt = this.cumulativeOffset(shapeAnchorEl)
     return (
       <Popover
         appendTarget={document.body}
         isOpen
         body={shapeModal}
         target={shapeAnchorEl}
+        onOuterAction={onCloseShapeModal}
         preferPlace={editShape ? "left" : "right"}
         tipSize={1}
       >
