@@ -21,6 +21,48 @@ const headerStyle = {
   background: 'rgb(50, 68, 84)'
 }
 
+const buildField = elem => {
+  switch (elem.type || '') {
+    case 'select':
+      return (<Field
+        key={elem.name.replace(/\s+/g, '')}
+        name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
+        component={FormSelect}
+        floatingLabel={elem.name}
+        options={elem.options}
+        className="valign-top margin-lg-right"
+        fullWidth={elem.fullWidth}
+      />)
+    case 'password':
+      return (<Field
+        key={elem.name.replace(/\s+/g, '')}
+        name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
+        type="password"
+        component={FormInput}
+        floatingLabel={elem.name}
+        className="valign-top margin-lg-right"
+        fullWidth={elem.fullWidth}
+      />)
+    case 'checkbox':
+      return (<Field
+        key={elem.name.replace(/\s+/g, '')}
+        name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
+        component={FormCheckbox}
+        label={elem.name}
+        className="valign-top margin-lg-right"
+      />)
+    default:
+      return (<Field
+        key={elem.name.replace(/\s+/g, '')}
+        name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
+        component={FormInput}
+        floatingLabel={elem.name}
+        className="valign-top margin-lg-right"
+        fullWidth={elem.fullWidth}
+      />)
+  }
+}
+
 const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal, embedded, rowCls, keyFieldMode, ...props}) => {
   let formInputs
   if (content.length === 1 && content[0].form) {
@@ -29,51 +71,15 @@ const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal
       <FormItems {...props}/>
     )
   } else {
-    formInputs = (
-      <CardPanel title="Details">
-        {content.map(elem => {
-          switch (elem.type || '') {
-            case 'select':
-              return (<Field
-                key={elem.name.replace(/\s+/g, '')}
-                name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
-                component={FormSelect}
-                floatingLabel={elem.name}
-                options={elem.options}
-                className="valign-top margin-lg-right"
-                fullWidth={elem.fullWidth}
-              />)
-            case 'password':
-              return (<Field
-                key={elem.name.replace(/\s+/g, '')}
-                name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
-                type="password"
-                component={FormInput}
-                floatingLabel={elem.name}
-                className="valign-top margin-lg-right"
-                fullWidth={elem.fullWidth}
-              />)
-            case 'checkbox':
-              return (<Field
-                key={elem.name.replace(/\s+/g, '')}
-                name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
-                component={FormCheckbox}
-                label={elem.name}
-                className="valign-top margin-lg-right"
-              />)
-            default:
-              return (<Field
-                key={elem.name.replace(/\s+/g, '')}
-                name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
-                component={FormInput}
-                floatingLabel={elem.name}
-                className="valign-top margin-lg-right"
-                fullWidth={elem.fullWidth}
-              />)
-          }
-        })}
-      </CardPanel>
-    )
+    if (keyFieldMode) {
+      formInputs = content.filter(e => e.keyField).map(buildField)
+    } else {
+      formInputs = (
+        <CardPanel title="Details">
+          {content.map(buildField)}
+        </CardPanel>
+      )
+    }
   }
   const form = (
     <Form onSubmit={onSubmit}>

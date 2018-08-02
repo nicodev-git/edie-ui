@@ -18,11 +18,11 @@ class SimpleModalContainer extends Component {
     let buttonText = (this.props.buttonText) ? (this.props.buttonText) : 'Save'
     return (
       <SimpleModalForm
-        {...props}
         show
         onHide={this.onHide.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         buttonText={buttonText}
+        {...props}
       />
     )
   }
