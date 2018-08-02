@@ -95,6 +95,7 @@ class Workflows extends React.Component {
   ////////////////////////////////////////////////////////////////
 
   onClickSettings() {
+    this.onCloseMenu()
     this.props.fetchWfSetting(this.props.userInfo.customerId || this.props.userInfo.id, true)
   }
 
