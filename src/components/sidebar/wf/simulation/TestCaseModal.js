@@ -1,6 +1,7 @@
 import React from 'react'
 import {reduxForm, getFormValues} from 'redux-form'
 import {connect} from 'react-redux'
+import {find} from 'lodash'
 
 import TestCaseModalView from './TestCaseModalView'
 import TestMessageEditModal from './TestMessageEditModal'
@@ -19,6 +20,12 @@ class TestCaseModal extends React.Component {
       tplModalOpen: false,
       editTypeName: ''
     }
+  }
+
+  getGroup () {
+    const {testGroups, editCase} = this.props
+    const group = find(testGroups, {id: editCase.groupId})
+    return group
   }
 
   onSubmit (values) {
@@ -111,7 +118,6 @@ class TestCaseModal extends React.Component {
   ////////////////////////////////////////////////////////
 
   onClickTpl (tpl) {
-    console.log(tpl)
     this.onCloseTplModal()
 
     const msg = {
@@ -156,6 +162,7 @@ class TestCaseModal extends React.Component {
     if (!this.state.tplModalOpen) return null
     return (
       <TestTemplateModal
+        groupType={this.getGroup().type}
         onClose={this.onCloseTplModal.bind(this)}
         onClickTpl={this.onClickTpl.bind(this)}
       />

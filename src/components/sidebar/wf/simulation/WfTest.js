@@ -236,12 +236,13 @@ export default class WfTest extends React.Component {
   //////////////////////////////////////////////////////////////
 
   renderTestCaseModal () {
-    const {submitForm} = this.props
+    const {submitForm, testGroups} = this.props
     if (!this.state.testCaseModalOpen) return null
     return (
       <TestCaseModal
         noModal
         editCase={this.state.editCase}
+        testGroups={testGroups}
         submitForm={submitForm}
         onSubmit={this.onSaveTestCase.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}

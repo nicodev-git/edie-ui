@@ -6,10 +6,10 @@ import {messageTypes} from 'shared/SimulationMessages'
 
 export default class TestTemplateModal extends React.Component {
   render() {
-    const {onClose, onClickTpl} = this.props
+    const {onClose, onClickTpl, groupType} = this.props
     return (
       <TestTemplateModalView
-        messageTypes={messageTypes}
+        messageTypes={messageTypes.filter(p => p.group === groupType)}
         onClickClose={onClose}
         onClickTpl={onClickTpl}
       />
