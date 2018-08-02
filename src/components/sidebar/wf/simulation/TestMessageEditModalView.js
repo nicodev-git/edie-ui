@@ -22,7 +22,10 @@ export default class TestMessageEditModalView extends React.Component {
                     name={`${p.key}`}
                     component={FormInput}
                     floatingLabel={p.label}
-                    className="valign-top margin-md-right"/>
+                    className="valign-top margin-md-right"
+                    multiline={p.type === 'multiline'}
+                    fullWidth={!!p.fullWidth}
+                  />
                 )
               }
           </CardPanel>
