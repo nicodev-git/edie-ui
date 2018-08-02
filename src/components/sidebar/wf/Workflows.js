@@ -299,7 +299,7 @@ class Workflows extends React.Component {
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
-              <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Settings</Button>&nbsp;
+              <Button variant="raised" onClick={this.onClickSettings.bind(this)}>Advanced</Button>&nbsp;
               <Button variant="raised" onClick={this.onClickSimulate.bind(this)}>Simulate</Button>&nbsp;
             </div>
           </div>
