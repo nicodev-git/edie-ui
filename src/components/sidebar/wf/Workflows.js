@@ -109,11 +109,9 @@ class Workflows extends React.Component {
   }
 
   onClickFlowGroup () {
-
   }
 
   onClickGlobalVars () {
-
   }
 
   ////////////////////////////////////////////////////////////////
