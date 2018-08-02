@@ -1,6 +1,7 @@
 export const messageTypes = [{
   name: 'CPU',
   img: 'cpu.png',
+  group: 'internal',
   data: [{
     key: 'usage',
     label: 'Usage',
@@ -16,6 +17,7 @@ export const messageTypes = [{
 }, {
   name: 'Root Login',
   img: 'credential.png',
+  group: 'internal',
   data: [{
     key: 'ip',
     label: 'IP',
@@ -39,6 +41,7 @@ export const messageTypes = [{
 }, {
   name: 'Login Failure',
   img: 'credential.png',
+  group: 'internal',
   data: [{
     key: 'ip',
     label: 'IP',
@@ -59,4 +62,18 @@ export const messageTypes = [{
     default: 'root'
   }],
   json: '{"incident":{"monitorName":"Logfile","monitortype":"logfile","description":"","startTimestamp":${timestamp},"data":{"file":"/var/log/secure","line":"${time} cloud4 sshd[21332]: Failed password for root from ${ip} port 2086 ssh2"},"params":{"parse":"{\\"line\\":\\"AnyLine\\"}"}}}'
+}, {
+  name: 'Syslog',
+  img: 'group.png',
+  group: 'syslog',
+  data: [{
+    key: 'connectorId',
+    label: 'Connector Id',
+    default: ''
+  }, {
+    key: 'text',
+    label: 'Text',
+    default: ''
+  }],
+  json: '{"text": "${text}", "connectorId": "${connectorId}"}'
 }]
