@@ -112,6 +112,10 @@ class Workflows extends React.Component {
 
   }
 
+  onClickGlobalVars () {
+
+  }
+
   ////////////////////////////////////////////////////////////////
 
   onAddFilterTag(e) {
@@ -318,7 +322,7 @@ class Workflows extends React.Component {
         onClose={this.onCloseMenu.bind(this)}
       >
         <MenuItem onClick={this.onClickFlowGroup.bind(this)}>Flow Group</MenuItem>
-        <MenuItem onClick={null}>Global Variables</MenuItem>
+        <MenuItem onClick={this.onClickGlobalVars.bind(this)}>Global Variables</MenuItem>
         <MenuItem onClick={this.onClickSettings.bind(this)}>Settings</MenuItem>
       </Menu>
     )
