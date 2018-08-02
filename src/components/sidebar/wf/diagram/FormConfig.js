@@ -221,7 +221,8 @@ const forms = {
     }, {
       "key": "sentence",
       "name": "Sentence",
-      "fullWidth": true
+      "fullWidth": true,
+      "keyField": true
     }
   ],
   "callForm": [
@@ -276,7 +277,8 @@ const forms = {
         "label": "Update user online status",
         "value": "updateUserOnlineStatus"
       }
-    ]
+    ],
+    "keyField": true
   }, {
     "key": "variable",
     "name": "Variable",
