@@ -12,7 +12,7 @@ import {simulationTypes} from 'shared/Global'
 
 export default class TestGroupModalView extends React.Component {
   render () {
-    const {onClickClose, onSubmit, msgType} = this.props
+    const {onClickClose, onSubmit} = this.props
     return (
       <Modal title="Group" onRequestClose={onClickClose}>
         <form  onSubmit={onSubmit}>

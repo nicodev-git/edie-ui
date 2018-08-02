@@ -377,7 +377,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderEditPopover () {
-    const {shapeModal, onCloseShapeModal, shapeAnchorEl} = this.props
+    const {shapeModal, shapeAnchorEl} = this.props
     if (!shapeModal) return null
 
     const rt = shapeAnchorEl.getBoundingClientRect()
