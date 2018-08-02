@@ -313,7 +313,8 @@ const forms = {
         "name": "Variable"
     }, {
         "key": "sentence",
-        "name": "Value"
+        "name": "Value",
+        "keyField": true
     }, {
         "key": "saveMsg",
         "name": "Save Message",
