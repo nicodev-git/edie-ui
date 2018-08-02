@@ -288,6 +288,10 @@ class Workflows extends React.Component {
     )
   }
 
+  renderMenu () {
+
+  }
+
   render() {
     return (
       <TabPage>
