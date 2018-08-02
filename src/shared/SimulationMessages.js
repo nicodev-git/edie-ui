@@ -69,11 +69,14 @@ export const messageTypes = [{
   data: [{
     key: 'connectorId',
     label: 'Connector Id',
-    default: ''
+    default: '',
+    fullWidth: true
   }, {
     key: 'text',
     label: 'Text',
-    default: ''
+    default: '',
+    type: 'multiline',
+    fullWidth: true
   }],
   json: '{"text": "${text}", "connectorId": "${connectorId}"}'
 }]
