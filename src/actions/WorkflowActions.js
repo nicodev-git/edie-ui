@@ -880,11 +880,14 @@ export const showWfSimulationModal = (visible) => {
   }
 }
 
-export const simulateWfMessage = (data, refresh) => {
+export const simulateWfMessage = (type, data, refresh) => {
   return dispatch => {
     dispatch({type: UPDATE_WF_SIM_STATE, data: true})
     dispatch({type: UPDATE_WF_SIM_RES, data: ''})
-    axios.post(`${ROOT_URL}/simulateMessages`, data).then(res => {
+
+    const url = type === 'syslog' ? 'simulateConnector' : 'simulateMessages'
+
+    axios.post(`${ROOT_URL}/${url}`, data).then(res => {
       dispatch({type: UPDATE_WF_SIM_RES, data: res.data.success ? 'Successfully sent' : 'Failed'})
       dispatch({type: UPDATE_WF_SIM_STATE, data: false})
 

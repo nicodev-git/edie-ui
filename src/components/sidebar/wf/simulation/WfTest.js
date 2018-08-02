@@ -55,6 +55,13 @@ export default class WfTest extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  getSelectedGroup () {
+    const {selectedGroupId} = this.state
+    if (!selectedGroupId) return
+    const group = find(this.props.testGroups, {id: selectedGroupId})
+    return group
+  }
+
   onClickAddGroup () {
     this.setState({
       testGroupModalOpen: true,
@@ -63,10 +70,7 @@ export default class WfTest extends React.Component {
   }
 
   onClickEditGroup () {
-    const {selectedGroupId} = this.state
-    if (!selectedGroupId) return
-
-    const group = find(this.props.testGroups, {id: selectedGroupId})
+    const group = this.getSelectedGroup()
     if (!group) return
 
     this.setState({
@@ -76,18 +80,15 @@ export default class WfTest extends React.Component {
   }
 
   onClickDeleteGroup () {
-    const {selectedGroupId} = this.state
     const {testGroups} = this.props
-    if (!selectedGroupId) return
-
-    const group = find(testGroups, {id: selectedGroupId})
+    const group = this.getSelectedGroup()
     if (!group) return
 
     if (!window.confirm('Click OK to remove group')) return
 
     this.props.removeTestGroup(group)
 
-    const found = testGroups.filter(p => p.id !== selectedGroupId)[0]
+    const found = testGroups.filter(p => p.id !== group.id)[0]
     this.setState({
       selectedGroupId: found ? found.id : ''
     })
@@ -189,6 +190,7 @@ export default class WfTest extends React.Component {
   onClickPost (testCase) {
     const {messages} = testCase
     if (!messages || !messages.length) return alert('No message')
+    const group = this.getSelectedGroup()
 
     var entities = []
     messages.forEach(p => {
@@ -209,8 +211,8 @@ export default class WfTest extends React.Component {
       }
     })
 
-    // console.log(entities)
-    this.props.simulateWfMessage(entities, true)
+    console.log(entities)
+    this.props.simulateWfMessage(group.type, entities, true)
     setTimeout(this.props.fetchTestIncidents, 3000)
   }
 
