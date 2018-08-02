@@ -32,9 +32,8 @@ import WorkflowAddContainer from 'containers/wf/WorkflowAddContainer'
 import WorkflowTestContainer from 'containers/wf/WfTestContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
-
-import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
-import SettingGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
+import WorkflowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
+import WorkflowGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
 
 import {
   closeDevice,
