@@ -190,7 +190,7 @@ class Workflows extends React.Component {
           {workflows.map(m =>
             <tr key={m.uuid || 'z'}>
               <td>
-                <div className="link text-info" onClick={this.onClickEdit.bind(this, m)}>
+                <div className="link text-info" onClick={this.onClickRename.bind(this, m)}>
                   <span>{this.renderSeverity(m)}</span>&nbsp;
                   <span>{m.name}</span>
                 </div>
