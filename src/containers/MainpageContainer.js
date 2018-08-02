@@ -33,6 +33,9 @@ import WorkflowTestContainer from 'containers/wf/WfTestContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
 
+import SettingFlowGroupsContainer from 'containers/settings/flowgroups/FlowgroupsContainer'
+import SettingGlobalvarsContainer from 'containers/settings/globalvar/GlobalvarsContainer'
+
 import {
   closeDevice,
   closeApiErrorModal,
