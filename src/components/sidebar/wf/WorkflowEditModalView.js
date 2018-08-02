@@ -402,10 +402,10 @@ class WorkflowEditModalView extends React.Component {
         body={shapeModal}
         target={shapeAnchorEl}
         onOuterAction={onCloseShapeModal}
-        preferPlace={editShape ? "left" : "right"}
+        place={editShape ? "below" : "right"}
         tipSize={1}
       >
-        <div style={{position: 'absolute', left: `${rt.left}px`, top: `${rt.top}px`}}>
+        <div style={{position: 'absolute', left: `${rt.left + 100}px`, top: `${rt.top - 110}px`}}>
         </div>
       </Popover>
     )
