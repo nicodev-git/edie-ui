@@ -108,6 +108,10 @@ class Workflows extends React.Component {
     this.props.showWfSettingModal(false)
   }
 
+  onClickFlowGroup () {
+
+  }
+
   ////////////////////////////////////////////////////////////////
 
   onAddFilterTag(e) {
@@ -313,7 +317,7 @@ class Workflows extends React.Component {
         open={Boolean(menuAnchor)}
         onClose={this.onCloseMenu.bind(this)}
       >
-        <MenuItem onClick={null}>Flow Group</MenuItem>
+        <MenuItem onClick={this.onClickFlowGroup.bind(this)}>Flow Group</MenuItem>
         <MenuItem onClick={null}>Global Variables</MenuItem>
         <MenuItem onClick={this.onClickSettings.bind(this)}>Settings</MenuItem>
       </Menu>
