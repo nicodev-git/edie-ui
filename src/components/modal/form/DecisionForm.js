@@ -4,191 +4,211 @@ import {Radio, RadioGroup, Select, MenuItem, TextField, FormControlLabel} from '
 import {findIndex} from 'lodash'
 
 import {
-    FormInput, FormSelect,
-    CardPanel
+  FormInput, FormSelect,
+  CardPanel
 } from 'components/modal/parts'
 
 const conditions = [{
-    "label": "If Match Text",
-    "value": "If Match Text"
+  "label": "If Match Text",
+  "value": "If Match Text"
 }, {
-    "label": "If Contains Text",
-    "value": "contains"
+  "label": "If Contains Text",
+  "value": "contains"
 }, {
-    "label": "If Older Than",
-    "value": "olderThan"
+  "label": "If Older Than",
+  "value": "olderThan"
 }, {
-    "label": "If Match Regex",
-    "value": "matchRegex"
+  "label": "If Match Regex",
+  "value": "matchRegex"
 }, {
-    "label": "If Greater Than",
-    "value": "greaterThan"
+  "label": "If Greater Than",
+  "value": "greaterThan"
 }]
 
 const gotoOptions = [{
-    "label": "Go to start",
-    "value": "start"
+  "label": "Go to start",
+  "value": "start"
 }, {
-    "label": "Continue",
-    "value": "continue"
+  "label": "Continue",
+  "value": "continue"
 }, {
-    "label": "Finish",
-    "value": "finish"
+  "label": "Finish",
+  "value": "finish"
 }]
 
 const labelStyle = {
-    fontSize: 16,
-    marginTop: 4,
-    verticalAlign: 'middle',
-    display: 'inline-block',
-    marginRight: 16
+  fontSize: 16,
+  marginTop: 4,
+  verticalAlign: 'middle',
+  display: 'inline-block',
+  marginRight: 16
 }
 
 export const variableOptions = 'count [Other]'.split(' ').map(p => ({
-    label: p,
-    value: p
+  label: p,
+  value: p
 }))
 
 class DecisionForm extends React.Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            fieldType: '',
-            varName: '',
-            existingVar: '[Other]'
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      fieldType: '',
+      varName: '',
+      existingVar: '[Other]'
+    }
+  }
+
+  componentDidMount() {
+    let {fieldType, varField} = this.props.initialValues
+    fieldType = fieldType || 'message'
+
+    const state = {
+      fieldType
+    }
+    if (fieldType === 'variable') {
+      if (findIndex(variableOptions, {value: varField}) >= 0) {
+        state.existingVar = varField
+      } else {
+        state.existingVar = '[Other]'
+      }
+      if (state.existingVar === '[Other]') {
+        state.varName = varField
+      }
+    }
+    this.setState(state)
+  }
+
+  onChangeFieldType(e) {
+    this.setState({
+      fieldType: e.target.value
+    })
+    this.props.change('fieldType', e.target.value)
+  }
+
+  onChangeExistingVar(e) {
+    this.setState({
+      existingVar: e.target.value
+    }, () => this.updateVarName())
+  }
+
+  onChangeVarName(e) {
+    this.setState({
+      varName: e.target.value
+    }, () => this.updateVarName())
+  }
+
+  updateVarName() {
+    const {existingVar, varName} = this.state
+    this.props.change('varField', existingVar === '[Other]' ? varName : existingVar)
+  }
+
+  renderVarField (style) {
+    return (
+      <div style={style}>
+        <div className="inline-block">
+          <Select placeholder="Existing" className="valign-middle margin-md-right"
+                  style={{width: 130}} value={this.state.existingVar}
+                  onChange={this.onChangeExistingVar.bind(this)}>
+            {variableOptions.map(p =>
+              <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
+            )}
+          </Select>
+        </div>
+        <div className="inline-block">
+          <TextField placeholder="Variable" className="valign-middle margin-md-right"
+                     value={this.state.varName} onChange={this.onChangeVarName.bind(this)}
+                     style={{width: 130}}/>
+        </div>
+      </div>
+    )
+  }
+
+  renderField (style, fullWidth) {
+    return (
+      <div style={style}>
+        <Field name="field" component={FormInput} label="Field" fullWidth={fullWidth}/>
+      </div>
+    )
+  }
+
+  render() {
+    const {keyFieldMode} = this.props
+    if (keyFieldMode) {
+      return (
+        <Field name="sentence" component={FormInput} label="Sentence" fullWidth/>
+      )
     }
 
-    componentDidMount () {
-        let {fieldType, varField} = this.props.initialValues
-        fieldType = fieldType || 'message'
+    return (
+      <div>
+        <CardPanel title="Basic">
+          <Field name="name" component={FormInput} label="Name"
+                 className="valign-top margin-md-right"/>
+        </CardPanel>
+        <CardPanel title="Type">
+          <div className="relative">
+            <RadioGroup
+              name="fieldType"
+              value={this.state.fieldType} onChange={this.onChangeFieldType.bind(this)}>
+              <FormControlLabel
+                value="message"
+                label="Message"
+                control={<Radio/>}
+              />
+              <FormControlLabel
+                value="variable"
+                label="Variable"
+                control={<Radio/>}
+              />
+              <FormControlLabel
+                value="field"
+                label="Field"
+                control={<Radio/>}
+              />
+            </RadioGroup>
 
-        const state = {
-            fieldType
-        }
-        if (fieldType === 'variable') {
-            if (findIndex(variableOptions, {value: varField}) >= 0) {
-                state.existingVar = varField
-            } else {
-                state.existingVar = '[Other]'
-            }
-            if (state.existingVar === '[Other]') {
-                state.varName = varField
-            }
-        }
-        this.setState(state)
-    }
+            {this.renderVarField({position: 'absolute', left: 125, right: 0, bottom: 55})}
+            {this.renderField({position: 'absolute', left: 125, right: 0, bottom: 7})}
 
-    onChangeFieldType (e) {
-        this.setState({
-            fieldType: e.target.value
-        })
-        this.props.change('fieldType', e.target.value)
-    }
+          </div>
+          <div className="hidden">
+            <Field name="fieldType" component={FormInput}/>
+            <Field name="varField" component={FormInput}/>
+          </div>
+        </CardPanel>
 
-    onChangeExistingVar (e) {
-        this.setState({
-            existingVar: e.target.value
-        }, () => this.updateVarName())
-    }
+        <CardPanel title="Match">
+          <div>
+            <Field name="condition" component={FormSelect} label="Condition"
+                   options={conditions} className="valign-top margin-md-right"
+                   style={{width: 180}}/>
 
-    onChangeVarName (e) {
-        this.setState({
-            varName: e.target.value
-        }, () => this.updateVarName())
-    }
+            <Field name="sentence" component={FormInput} label="Sentence"
+                   className="valign-top margin-md-right"
+                   style={{width: 150}}/>
 
-    updateVarName () {
-        const {existingVar, varName} = this.state
-        this.props.change('varField', existingVar === '[Other]' ? varName : existingVar)
-    }
+            <label style={labelStyle}> then set parameter </label>
+            <Field name="variable" component={FormInput} label="Variable"
+                   className="valign-top margin-md-right"
+                   style={{width: 150}}/>
 
-    render () {
-        return (
-            <div>
-                <CardPanel title="Basic">
-                    <Field name="name" component={FormInput} label="Name"
-                           className="valign-top margin-md-right"/>
-                </CardPanel>
-                <CardPanel title="Type">
-                    <div className="relative">
-                        <RadioGroup
-                            name="fieldType"
-                            value={this.state.fieldType} onChange={this.onChangeFieldType.bind(this)}>
-                            <FormControlLabel
-                                value="message"
-                                label="Message"
-                                control={<Radio />}
-                            />
-                            <FormControlLabel
-                                value="variable"
-                                label="Variable"
-                                control={<Radio />}
-                            />
-                            <FormControlLabel
-                                value="field"
-                                label="Field"
-                                control={<Radio />}
-                            />
-                        </RadioGroup>
+            <label style={labelStyle}> with value </label>
 
-                        <div style={{position: 'absolute', left: 125, right: 0, bottom: 55}}>
-                            <div className="inline-block">
-                                <Select placeholder="Existing" className="valign-middle margin-md-right"
-                                             style={{width: 130}} value={this.state.existingVar} onChange={this.onChangeExistingVar.bind(this)}>
-                                    {variableOptions.map(p =>
-                                        <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
-                                    )}
-                                </Select>
-                            </div>
-                            <div className="inline-block">
-                                <TextField placeholder="Variable" className="valign-middle margin-md-right"
-                                           value={this.state.varName} onChange={this.onChangeVarName.bind(this)}
-                                           style={{width: 130}}/>
-                            </div>
-                        </div>
+            <Field name="response" component={FormInput} label="Response"
+                   className="valign-top margin-md-right"
+                   style={{width: 150}}/>
+          </div>
+          <div className="margin-md-top">
+            <label style={labelStyle}>If not match</label>
+            <Field name="gotoIfFalse" component={FormSelect} options={gotoOptions}
+                   className="valign-top margin-md-right"/>
+          </div>
+        </CardPanel>
 
-                        <div style={{position: 'absolute', left: 125, right: 0, bottom: 7}}>
-                            <Field name="field" component={FormInput} label="Field"/>
-                        </div>
-                    </div>
-                    <div className="hidden">
-                        <Field name="fieldType" component={FormInput}/>
-                        <Field name="varField" component={FormInput}/>
-                    </div>
-                </CardPanel>
-
-                <CardPanel title="Match">
-                    <div>
-                        <Field name="condition" component={FormSelect} label="Condition"
-                               options={conditions} className="valign-top margin-md-right"
-                               style={{width: 180}}/>
-
-                        <Field name="sentence" component={FormInput} label="Sentence"
-                               className="valign-top margin-md-right"
-                               style={{width: 150}}/>
-
-                        <label style={labelStyle}> then set parameter </label>
-                        <Field name="variable" component={FormInput} label="Variable"
-                               className="valign-top margin-md-right"
-                               style={{width: 150}}/>
-
-                        <label style={labelStyle}> with value </label>
-
-                        <Field name="response" component={FormInput} label="Response"
-                               className="valign-top margin-md-right"
-                               style={{width: 150}}/>
-                    </div>
-                    <div className="margin-md-top">
-                        <label style={labelStyle}>If not match</label>
-                        <Field name="gotoIfFalse" component={FormSelect} options={gotoOptions}
-                               className="valign-top margin-md-right"/>
-                    </div>
-                </CardPanel>
-
-            </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 
 export default DecisionForm

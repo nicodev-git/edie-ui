@@ -24,7 +24,7 @@ class DiagramObjectModal extends React.Component {
   }
 
   render() {
-    const {initialValues, contents, noModal, header, embedded} = this.props
+    const {initialValues, contents, noModal, header, embedded, keyFieldMode} = this.props
     return (
       <SimpleModalContainer
         header={header}
@@ -35,6 +35,7 @@ class DiagramObjectModal extends React.Component {
         rowCls=" "
         noModal={noModal}
         embedded={embedded}
+        keyFieldMode={keyFieldMode}
       />
     )
   }

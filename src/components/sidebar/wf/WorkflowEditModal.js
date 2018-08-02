@@ -525,6 +525,7 @@ class WorkflowEditModal extends React.Component {
 
         commands={[]}
         noModal
+        keyFieldMode={!!editShape}
       />
     )
   }
@@ -548,6 +549,7 @@ class WorkflowEditModal extends React.Component {
         onClickAddUser={this.onClickAddUser.bind(this)}
         onClickRemoveUser={this.onClickRemoveUser.bind(this)}
 
+        editShape={this.state.editShape}
         shapeAnchorEl={this.state.shapeAnchorEl}
         wfDataItems={this.getWfDataItems()}
         shapes={shapes}

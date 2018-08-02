@@ -377,7 +377,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderEditPopover () {
-    const {shapeModal, shapeAnchorEl} = this.props
+    const {shapeModal, shapeAnchorEl, editShape} = this.props
     if (!shapeModal) return null
 
     const rt = shapeAnchorEl.getBoundingClientRect()
@@ -387,7 +387,7 @@ class WorkflowEditModalView extends React.Component {
         isOpen
         body={shapeModal}
         target={shapeAnchorEl}
-        preferPlace="left"
+        preferPlace={editShape ? "left" : "right"}
         tipSize={1}
       >
         <div style={{position: 'absolute', left: `${rt.left}px`, top: `${rt.top}px`}}>
