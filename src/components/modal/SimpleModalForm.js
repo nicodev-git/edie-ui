@@ -21,7 +21,7 @@ const headerStyle = {
   background: 'rgb(50, 68, 84)'
 }
 
-const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal, embedded, rowCls, ...props}) => {
+const SimpleModalForm = ({onHide, onSubmit, header, buttonText, content, noModal, embedded, rowCls, keyFieldMode, ...props}) => {
   let formInputs
   if (content.length === 1 && content[0].form) {
     const FormItems = FormMapping[content[0].form]
