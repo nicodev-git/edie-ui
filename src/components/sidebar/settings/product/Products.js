@@ -15,7 +15,7 @@ export default class Tags extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedProductId: 'p1',
+      selectedProductId: '',
       productModalOpen: false,
       editProduct: null
     }
@@ -25,8 +25,9 @@ export default class Tags extends React.Component {
   }
 
   onChangeProduct (e) {
+    const selectedProductId = e.target.value
     this.setState({
-      selectedProductId: e.target.value
+      selectedProductId
     })
   }
 
@@ -53,12 +54,14 @@ export default class Tags extends React.Component {
   }
 
   renderProductCombo () {
+    const {vendorProducts} = this.props
     return (
       <FormControl style={{minWidth: 100}}>
         <InputLabel>Products</InputLabel>
         <Select value={this.state.selectedProductId} onChange={this.onChangeProduct.bind(this)}>
-          <MenuItem value="p1">Product1</MenuItem>
-          <MenuItem value="p2">Product2</MenuItem>
+          {vendorProducts.map(p =>
+            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+          )}
         </Select>
       </FormControl>
     )
