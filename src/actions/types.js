@@ -605,3 +605,10 @@ export const UPDATE_TEST_CASE = 'UPDATE_TEST_CASE'
 export const REMOVE_TEST_CASE = 'REMOVE_TEST_CASE'
 
 export const FETCH_TEST_INCIDENTS = 'FETCH_TEST_INCIDENTS'
+
+//////////////////////////////////////////////////////////////////
+
+export const FETCH_VENDOR_PRODUCTS = 'FETCH_VENDOR_PRODUCTS'
+export const ADD_VENDOR_PRODUCT = 'ADD_VENDOR_PRODUCT'
+export const UPDATE_VENDOR_PRODUCT = 'UPDATE_VENDOR_PRODUCT'
+export const REMOVE_VENDOR_PRODUCT = 'REMOVE_VENDOR_PRODUCT'

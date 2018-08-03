@@ -117,6 +117,11 @@ import {
 
   SHOW_USER_CONNECTOR_MODAL,
 
+  FETCH_VENDOR_PRODUCTS,
+  ADD_VENDOR_PRODUCT,
+  UPDATE_VENDOR_PRODUCT,
+  REMOVE_VENDOR_PRODUCT,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1022,5 +1027,38 @@ export function showGrokModal (visible) {
 export function showCellParamModal (visible, data) {
   return dispatch => {
     dispatch({type: SHOW_CELL_PARAM_MODAL, visible, data})
+  }
+}
+
+
+export function fetchVendorProducts () {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/vendorproduct?size=1000`).then(res => {
+      dispatch({type: FETCH_BRAIN_CELLS, data: res.data})
+    })
+  }
+}
+
+export function addVendorProduct (entity) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/vendorproduct`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_BRAIN_CELL, data: res.data})
+    })
+  }
+}
+
+export function updateVendorProduct (entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/vendorproduct/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_BRAIN_CELL, data: res.data})
+    })
+  }
+}
+
+export function removeVendorProduct (entity) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/vendorproduct/${entity.id}`).then(res => {
+      if (res.data.success) dispatch({type: REMOVE_BRAIN_CELL, data: entity})
+    }).catch(error => apiError(dispatch, error))
   }
 }
