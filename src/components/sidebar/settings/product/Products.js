@@ -37,8 +37,12 @@ export default class Tags extends React.Component {
     })
   }
 
-  onSaveProduct () {
+  onSaveProduct (values) {
+    const {editProduct} = this.state
+    if (editProduct) {
 
+    } else {
+    }
   }
 
   renderProductCombo () {
@@ -59,6 +63,7 @@ export default class Tags extends React.Component {
       <VendorProductModal
         {...this.props}
         onSave={this.onSaveProduct.bind(this)}
+        onClose={this.onCloseProductModal.bind(this)}
       />
     )
   }
