@@ -17,6 +17,7 @@ import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
 import {getSeverityIcon} from 'shared/Global'
 import FlowGroupsModal from './flowgroups/FlowGroupsModal'
+import GlobalVarsModal from './globalvar/GlobalVarsModal'
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -344,6 +345,8 @@ class Workflows extends React.Component {
       />
     )
   }
+
+  renderGlo
 
   render() {
     return (
