@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import FlowGroups from 'components/sidebar/settings/flowgroups/FlowGroups'
+import FlowGroups from 'components/sidebar/wf/flowgroups/FlowGroups'
 
 import {
   fetchGroups,

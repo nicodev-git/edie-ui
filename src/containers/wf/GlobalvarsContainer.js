@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import GlobalVars from 'components/sidebar/settings/globalvar/GlobalVars'
+import GlobalVars from 'components/sidebar/wf/globalvar/GlobalVars'
 
 import {
     fetchGlobalVars

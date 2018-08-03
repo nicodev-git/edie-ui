@@ -3,7 +3,6 @@ import {Button} from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Create'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
@@ -98,7 +97,7 @@ export default class FlowGroups extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={8} history={this.props.history} location={this.props.location}>
+        <TabPageBody history={this.props.history} location={this.props.location}>
           {this.renderGroups()}
           {this.renderGroupModal()}
         </TabPageBody>

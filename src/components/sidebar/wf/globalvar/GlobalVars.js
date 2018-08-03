@@ -1,6 +1,5 @@
 import React from 'react'
 
-import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
@@ -45,7 +44,7 @@ export default class GlobalVars extends React.Component {
                     </div>
                 </TabPageHeader>
 
-                <TabPageBody tabs={SettingTabs} tab={9} history={this.props.history} location={this.props.location}>
+                <TabPageBody history={this.props.history} location={this.props.location}>
                     {this.renderContents()}
                 </TabPageBody>
             </TabPage>
