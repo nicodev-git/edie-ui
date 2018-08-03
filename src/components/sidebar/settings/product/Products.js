@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core'
+import {Select, MenuItem, InputLabel, FormControl, Button} from '@material-ui/core'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -17,12 +17,17 @@ export default class Tags extends React.Component {
     }
   }
   componentWillMount () {
+    this.props.fetchVendorProducts()
   }
 
   onChangeProduct (e) {
     this.setState({
       selectedProductId: e.target.value
     })
+  }
+
+  onClickAdd () {
+
   }
 
   renderProductCombo () {
@@ -39,14 +44,14 @@ export default class Tags extends React.Component {
 
   render () {
     const {userInfo} = this.props
-    // const canEdit = hasPermission(userInfo, 'EditSettings')
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Products">
           <div className="margin-md-top">
             {this.renderProductCombo()}
             <div className="pull-right">
-              {/*{canEdit && <Button variant="raised" onClick={this.onAddTag.bind(this)}>Add</Button>}&nbsp;*/}
+              {canEdit && <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>}
               {/*{canEdit && <Button variant="raised" onClick={this.onEditTag.bind(this)}>Edit</Button>}&nbsp;*/}
             </div>
           </div>
