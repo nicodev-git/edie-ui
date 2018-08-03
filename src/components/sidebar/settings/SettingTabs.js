@@ -23,12 +23,6 @@ const tabs = [{
   title: 'Advanced',
   path: '/settings/advanced'
 }, {
-  title: 'Flow Groups',
-  path: '/settings/flowgroups'
-}, {
-  title: 'Global Vars',
-  path: '/settings/globalvars'
-}, {
   title: 'Braincells',
   path: '/settings/braincells'
 }]

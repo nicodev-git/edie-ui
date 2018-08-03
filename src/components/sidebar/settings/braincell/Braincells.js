@@ -222,7 +222,7 @@ export default class Braincells extends React.Component {
                     </div>
                 </TabPageHeader>
 
-                <TabPageBody tabs={SettingTabs} tab={10} history={this.props.history} location={this.props.location}>
+                <TabPageBody tabs={SettingTabs} tab={8} history={this.props.history} location={this.props.location}>
                     {this.renderContent()}
                     {this.renderBrainCellModal()}
                 </TabPageBody>
