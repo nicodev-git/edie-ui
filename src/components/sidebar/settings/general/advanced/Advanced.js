@@ -72,41 +72,8 @@ export default class Advanced extends React.Component {
     })
   }
   render () {
-    const {pageIndex} = this.state
     const {userInfo} = this.props
     const canEdit = hasPermission(userInfo, 'EditSettings')
-    return (
-      <TabPage>
-        <TabPageHeader title="Settings">
-          <div className="text-center margin-md-top">
-            <div style={{position: 'absolute', right: '25px'}}>
-              {pageIndex === 2 && <Button variant="raised" onClick={this.onClickRouting.bind(this)}>Routing</Button>}&nbsp;
-              <Menu
-                open={this.state.routeOpen}
-                anchorEl={this.state.anchorEl}
-                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                onClose={this.handleRequestClose.bind(this)}>
-                <MenuItem onClick={this.onClickAddRouting.bind(this)}>Add</MenuItem>
-                <MenuItem onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
-              </Menu>
-              <Button variant="raised" onClick={this.handleTouchTap.bind(this)} className="hidden"><SettingIcon /></Button>
-              <Menu
-                open={this.state.open}
-                anchorEl={this.state.anchorEl}
-                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                onClose={this.handleRequestClose.bind(this)}>
-                <MenuItem onClick={this.onClickTab.bind(this, 0)}>Main</MenuItem>
-                <MenuItem onClick={this.onClickTab.bind(this, 1)}>Websocket</MenuItem>
-                <MenuItem onClick={this.onClickTab.bind(this, 2)}>Routing</MenuItem>
-              </Menu>
-            </div>
-          </div>
-        </TabPageHeader>
-
-        <TabPageBody tabs={SettingTabs} tab={7} history={this.props.history} location={this.props.location}>
-          {this.renderContent(canEdit)}
-        </TabPageBody>
-      </TabPage>
-    )
+    return this.renderContent(canEdit)
   }
 }

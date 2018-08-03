@@ -13,7 +13,12 @@ import {
 
   fetchRoles,
   updateRole,
-  eddieSync
+  eddieSync,
+
+  showImportSyncModal,
+  importSyncData,
+  showSimulationModal,
+  postIncidentSimulation
 } from 'actions'
 
 class GeneralContainer extends React.Component {
@@ -28,7 +33,11 @@ export default connect(
     envVars: state.settings.envVars,
     userInfo: state.dashboard.userInfo,
 
-    roles: state.settings.roles
+    roles: state.settings.roles,
+
+    syncStatus: state.settings.syncStatus,
+    importSyncModalOpen: state.settings.importSyncModalOpen,
+    simulationModalOpen: state.settings.simulationModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -41,7 +50,12 @@ export default connect(
 
       fetchRoles,
       updateRole,
-      eddieSync
+      eddieSync,
+
+      showImportSyncModal,
+      importSyncData,
+      showSimulationModal,
+      postIncidentSimulation
     }, dispatch)
   })
 )(GeneralContainer)
