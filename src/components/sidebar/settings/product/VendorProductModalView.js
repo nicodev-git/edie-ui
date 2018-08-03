@@ -1,11 +1,12 @@
 import React from 'react'
 import { Field } from 'redux-form'
 
-import { SubmitBlock, FormInput, CardPanel } from 'components/modal/parts'
+import {Button} from '@material-ui/core'
+import { FormInput } from 'components/modal/parts'
 
 export default class SimulationModalView extends React.Component {
   render () {
-    const {onHide, onSubmit} = this.props
+    const {onSubmit} = this.props
     return (
       <div className="flex-1 padding-md">
         <form onSubmit={onSubmit}>
@@ -18,7 +19,7 @@ export default class SimulationModalView extends React.Component {
             </div>
           </div>
 
-          <SubmitBlock name="Save"/>
+          <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
         </form>
       </div>
     )
