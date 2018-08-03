@@ -101,7 +101,7 @@ export default class MainSettings extends Component {
   render () {
     const {canEdit} = this.props
     return (
-      <div className="padding-md">
+      <div>
         <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div>
             <FormControlLabel
