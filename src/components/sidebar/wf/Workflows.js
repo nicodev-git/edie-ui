@@ -28,7 +28,8 @@ class Workflows extends React.Component {
       filterTags: [],
       menuAnchor: null,
 
-      groupsModalOpen: false
+      groupsModalOpen: false,
+      globalVarsModalOpen: false
     }
   }
 
@@ -121,7 +122,11 @@ class Workflows extends React.Component {
   }
 
   onClickGlobalVars () {
-    this.props.history.push('/workflow/globalvars')
+    // this.props.history.push('/workflow/globalvars')
+    this.setState({
+      globalVarsModalOpen: true
+    })
+    this.onCloseMenu()
   }
 
   ////////////////////////////////////////////////////////////////
@@ -346,7 +351,15 @@ class Workflows extends React.Component {
     )
   }
 
-  renderGlo
+  renderGlobalVarsModal() {
+    if (!this.state.globalVarsModalOpen) return null
+    return (
+      <GlobalVarsModal
+        {...this.props}
+        onClickClose={() => this.setState({globalVarsModalOpen: false})}
+      />
+    )
+  }
 
   render() {
     return (
@@ -372,6 +385,7 @@ class Workflows extends React.Component {
           {this.renderWorkflowEditModal()}
           {this.renderSettingModal()}
           {this.renderFlowGroupsModal()}
+          {this.renderGlobalVarsModal()}
         </TabPageBody>
       </TabPage>
     )

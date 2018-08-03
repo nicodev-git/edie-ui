@@ -60,7 +60,9 @@ import {
   showGroupModal,
   addGroup,
   updateGroup,
-  removeGroup
+  removeGroup,
+
+  fetchGlobalVars
 } from 'actions'
 
 class WorkflowsContainer extends React.Component {
@@ -107,7 +109,9 @@ export default connect(
     testCases: state.workflow.testCases,
 
     brainCells: state.settings.brainCells,
-    collectors: state.settings.collectors
+    collectors: state.settings.collectors,
+
+    globalVars: state.workflow.globalVars
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,
@@ -165,7 +169,8 @@ export default connect(
     showGroupModal,
     addGroup,
     updateGroup,
-    removeGroup
+    removeGroup,
 
+    fetchGlobalVars
   }
 )(WorkflowsContainer)
