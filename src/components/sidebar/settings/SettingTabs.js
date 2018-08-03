@@ -22,6 +22,9 @@ const tabs = [{
 }, {
   title: 'Braincells',
   path: '/settings/braincells'
+}, {
+  title: 'Products',
+  path: '/settings/products'
 }]
 
 export default tabs
