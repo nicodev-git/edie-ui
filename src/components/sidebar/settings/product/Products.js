@@ -9,11 +9,14 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import {hasPermission} from 'shared/Permission'
 
+import VendorProductModal from './VendorProductModal'
+
 export default class Tags extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedProductId: 'p1'
+      selectedProductId: 'p1',
+      productModalOpen: false
     }
   }
   componentWillMount () {
@@ -30,6 +33,10 @@ export default class Tags extends React.Component {
 
   }
 
+  onSaveProduct () {
+
+  }
+
   renderProductCombo () {
     return (
       <FormControl style={{minWidth: 100}}>
@@ -39,6 +46,16 @@ export default class Tags extends React.Component {
           <MenuItem value="p2">Product2</MenuItem>
         </Select>
       </FormControl>
+    )
+  }
+
+  renderProductModal () {
+    if (!this.state.productModalOpen) return null
+    return (
+      <VendorProductModal
+        {...this.props}
+        onSave={this.onSaveProduct.bind(this)}
+      />
     )
   }
 
