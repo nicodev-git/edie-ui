@@ -1,20 +1,55 @@
 import React, {Component} from 'react'
-import {Button} from '@material-ui/core'
-import EditIcon from '@material-ui/icons/Create'
-import DeleteIcon from '@material-ui/icons/Delete'
-
-import TabPage from 'components/common/TabPage'
-import TabPageBody from 'components/common/TabPageBody'
-import TabPageHeader from 'components/common/TabPageHeader'
 
 import FlowGroupModal from './FlowGroupModal'
-
 import FlowGroupsModalView from './FlowGroupsModalView'
 
 export default class FlowGroupsModal extends Component {
 
   componentWillMount () {
     this.props.fetchGroups()
+  }
+
+  onClickAdd () {
+    this.props.showGroupModal(true)
+  }
+
+  onClickEdit (group) {
+    this.props.showGroupModal(true, group)
+  }
+
+  onClickDelete (group) {
+    if (!window.confirm('Click OK to remove. Workflows will be changed to default group.')) return null
+    this.props.removeGroup(group)
+  }
+
+  onSaveGroup (values) {
+    const {editGroup, groups} = this.props
+    const entity = {
+      ...editGroup,
+      ...values
+    }
+    if (editGroup) {
+      this.props.updateGroup(entity)
+    } else {
+      const found = groups.filter(p => p.name.toLowerCase() === entity.name.toLowerCase())
+      if (found.length) return alert('Group with the same name exists.')
+      this.props.addGroup(entity)
+    }
+    this.onCloseGroupModal()
+  }
+
+  onCloseGroupModal () {
+    this.props.showGroupModal(false)
+  }
+  renderGroupModal () {
+    if (!this.props.groupModalOpen) return
+
+    return (
+      <FlowGroupModal
+        onSave={this.onSaveGroup.bind(this)}
+        onClose={this.onCloseGroupModal.bind(this)}
+      />
+    )
   }
 
   onHide () {
