@@ -32,7 +32,6 @@ import WorkflowAddContainer from 'containers/wf/WorkflowAddContainer'
 import WorkflowTestContainer from 'containers/wf/WfTestContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
-import WorkflowGroupsContainer from 'containers/wf/FlowgroupsContainer'
 import WorkflowGlobalvarsContainer from 'containers/wf/GlobalvarsContainer'
 
 import {
@@ -236,7 +235,6 @@ class MainpageContainer extends Component {
         <Route path="/:device/editwf/diagram/:id" component={EditWfDiagramContainer}/>
         <Route path="/workflow/add" component={WorkflowAddContainer} exact/>
         <Route path="/workflow/simulation" component={WorkflowTestContainer} exact/>
-        <Route path="/workflow/groups" component={WorkflowGroupsContainer} exact/>
         <Route path="/workflow/globalvars" component={WorkflowGlobalvarsContainer} exact/>
         <Route path="/workflow/:name/diagram" component={WorkflowEditDiagramContainer} exact/>
         <Route path="/workflow/:name/edit" component={WorkflowEditContainer} exact/>

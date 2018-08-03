@@ -11,10 +11,8 @@ import {
 } from 'components/modal/parts'
 
 export default class FlowGroupsModalView extends Component {
-
-
   renderGroups () {
-    const {groups} = this.props
+    const {groups, onClickEdit, onClickDelete} = this.props
     return (
       <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
         <table className="table table-hover">
@@ -31,8 +29,8 @@ export default class FlowGroupsModalView extends Component {
                 {m.name}
               </td>
               <td className="text-right padding-lg-right">
-                <EditIcon className="link margin-md-right" onClick={this.onClickEdit.bind(this, m)}/>
-                <DeleteIcon className="link margin-md-right" onClick={this.onClickDelete.bind(this, m)}/>
+                <EditIcon className="link margin-md-right" onClick={() => onClickEdit(m)}/>
+                <DeleteIcon className="link margin-md-right" onClick={() => onClickDelete(m)}/>
               </td>
             </tr>
           )}

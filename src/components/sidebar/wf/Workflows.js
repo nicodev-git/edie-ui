@@ -116,6 +116,7 @@ class Workflows extends React.Component {
     this.setState({
       groupsModalOpen: true
     })
+    this.onCloseMenu()
   }
 
   onClickGlobalVars () {
@@ -335,7 +336,7 @@ class Workflows extends React.Component {
   }
 
   renderFlowGroupsModal () {
-    if (!this.props.groupsModalOpen) return null
+    if (!this.state.groupsModalOpen) return null
     return (
       <FlowGroupsModal
         {...this.props}
