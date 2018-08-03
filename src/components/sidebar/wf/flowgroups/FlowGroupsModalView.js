@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Create'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -41,10 +42,10 @@ export default class FlowGroupsModalView extends Component {
   }
 
   render () {
-    const {onClickClose} = this.props
+    const {onClickClose, onClickAdd} = this.props
     return (
       <Modal title="Groups" onRequestClose={onClickClose}>
-          <CardPanel title="Groups">
+          <CardPanel title="Groups" tools={<AddIcon className="link" onClick={onClickAdd}/>}>
             {this.renderGroups()}
           </CardPanel>
           {this.props.children}

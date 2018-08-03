@@ -53,15 +53,12 @@ export default class FlowGroupsModal extends Component {
     )
   }
 
-  onHide () {
-    this.props.onClose()
-  }
-
   render () {
     return (
       <FlowGroupsModalView
         groups={this.props.groups}
-        onClickClose={this.onHide.bind(this)}
+        onClickClose={this.props.onClickClose}
+        onClickAdd={this.onClickAdd.bind(this)}
         onClickEdit={this.onClickEdit.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
       >

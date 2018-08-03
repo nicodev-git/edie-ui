@@ -86,6 +86,8 @@ export default connect(
 
     devices: state.devices.devices,
     groups: state.workflow.groups,
+    groupModalOpen: state.workflow.groupModalOpen,
+    editGroup: state.workflow.editGroup,
 
     users: state.dashboard.users,
     userPickModalOpen: state.workflow.userPickModalOpen,
