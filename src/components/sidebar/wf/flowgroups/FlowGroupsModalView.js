@@ -5,8 +5,6 @@ import EditIcon from '@material-ui/icons/Create'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import {
-  FormInput,
-  SubmitBlock,
   Modal,
   CardPanel
 } from 'components/modal/parts'

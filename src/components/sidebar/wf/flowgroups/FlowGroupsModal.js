@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Button} from '@material-ui/core'
 
 import FlowGroupModal from './FlowGroupModal'
 import FlowGroupsModalView from './FlowGroupsModalView'

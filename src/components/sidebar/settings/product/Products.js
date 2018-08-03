@@ -39,7 +39,7 @@ export default class Tags extends React.Component {
 
   render () {
     const {userInfo} = this.props
-    const canEdit = hasPermission(userInfo, 'EditSettings')
+    // const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Products">

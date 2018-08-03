@@ -176,7 +176,12 @@ import {
   SHOW_GROK_MODAL,
   SHOW_CELL_PARAM_MODAL,
 
-  SHOW_USER_CONNECTOR_MODAL
+  SHOW_USER_CONNECTOR_MODAL,
+
+  FETCH_VENDOR_PRODUCTS,
+  ADD_VENDOR_PRODUCT,
+  UPDATE_VENDOR_PRODUCT,
+  REMOVE_VENDOR_PRODUCT
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys} from 'lodash'
@@ -231,6 +236,8 @@ const initialState = {
   permissions: [],
 
   brainCells: [],
+
+  vendorProducts: [],
 
   workflowDraw: 1
 }
@@ -740,6 +747,15 @@ export default function (state = initialState, action) {
       return { ...state, cellParamModalOpen: action.visible, editCellParam: action.data }
     case SHOW_USER_CONNECTOR_MODAL:
       return { ...state, userConnectorModalOpen: action.visible, editUserConnector: action.userConnector }
+
+    case FETCH_VENDOR_PRODUCTS:
+      return { ...state, vendorProducts: action.data }
+    case ADD_VENDOR_PRODUCT:
+      return { ...state, vendorProducts: [...state.vendorProducts, action.data] }
+    case UPDATE_VENDOR_PRODUCT:
+      return { ...state, vendorProducts: state.vendorProducts.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_VENDOR_PRODUCT:
+      return { ...state, vendorProducts: state.vendorProducts.filter(p => p.id !== action.data.id) }
     default:
       return state
   }
