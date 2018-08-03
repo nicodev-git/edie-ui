@@ -109,9 +109,11 @@ class Workflows extends React.Component {
   }
 
   onClickFlowGroup () {
+    this.props.history.push('/workflow/groups')
   }
 
   onClickGlobalVars () {
+    this.props.history.push('/workflow/globalvars')
   }
 
   ////////////////////////////////////////////////////////////////
