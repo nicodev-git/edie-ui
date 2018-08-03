@@ -16,7 +16,8 @@ export default class Tags extends React.Component {
     super(props)
     this.state = {
       selectedProductId: 'p1',
-      productModalOpen: false
+      productModalOpen: false,
+      editProduct: null
     }
   }
   componentWillMount () {
@@ -30,7 +31,10 @@ export default class Tags extends React.Component {
   }
 
   onClickAdd () {
-
+    this.setState({
+      editProduct: null,
+      productModalOpen: true
+    })
   }
 
   onSaveProduct () {
@@ -75,7 +79,7 @@ export default class Tags extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={8} history={this.props.history} location={this.props.location}>
-
+          {this.renderProductModal()}
         </TabPageBody>
       </TabPage>
     )

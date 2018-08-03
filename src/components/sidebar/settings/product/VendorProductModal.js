@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
 
-import SimulationModalView from './SimulationModalView'
+import VendorProductModalView from './VendorProductModalView'
 
 class VendorProductModal extends React.Component {
   handleFormSubmit (values) {
@@ -11,7 +11,7 @@ class VendorProductModal extends React.Component {
   render () {
     const {handleSubmit, onClickClose} = this.props
     return (
-      <SimulationModalView
+      <VendorProductModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onHide={onClickClose}/>
     )
