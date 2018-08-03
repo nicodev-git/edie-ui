@@ -1,4 +1,5 @@
 import React from 'react'
+import {find} from 'lodash'
 
 import {Select, MenuItem, InputLabel, FormControl, Button} from '@material-ui/core'
 
@@ -26,9 +27,25 @@ export default class Tags extends React.Component {
 
   onChangeProduct (e) {
     const selectedProductId = e.target.value
+    const {vendorProducts} = this.props
     this.setState({
       selectedProductId
     })
+    if (selectedProductId) {
+      const product = find(vendorProducts, {id: selectedProductId})
+      if (product) {
+        this.setState({
+          productModalOpen: false,
+          editProduct: null
+        }, () => {
+          this.setState({
+            productModalOpen: true,
+            editProduct: product
+          })
+        })
+      }
+
+    }
   }
 
   onClickAdd () {
@@ -41,7 +58,10 @@ export default class Tags extends React.Component {
   onSaveProduct (values) {
     const {editProduct} = this.state
     if (editProduct) {
-
+      this.props.updateVendorProduct({
+        ...editProduct,
+        ...values
+      })
     } else {
       this.props.addVendorProduct(values)
     }
@@ -72,6 +92,7 @@ export default class Tags extends React.Component {
     return (
       <VendorProductModal
         {...this.props}
+        editProduct={this.state.editProduct}
         onSave={this.onSaveProduct.bind(this)}
         onClose={this.onCloseProductModal.bind(this)}
       />
