@@ -10,6 +10,7 @@ import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 import SettingConnectorsContainer from 'containers/settings/connector/ConnectorsContainer'
 import SettingBraincellsContainer from 'containers/settings/braincell/BraincellsContainer'
+import ProductsContainer from 'containers/settings/product/ProductsContainer'
 
 
 class Settings extends React.Component {
@@ -25,6 +26,7 @@ class Settings extends React.Component {
         <Route path="/settings/audit" component={SettingAudit} />
         <Route path="/settings/connectors" component={SettingConnectorsContainer} />
         <Route path="/settings/braincells" component={SettingBraincellsContainer} />
+        <Route path="/settings/products" component={ProductsContainer} />
       </Switch>
     )
   }
