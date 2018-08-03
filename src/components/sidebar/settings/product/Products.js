@@ -42,7 +42,14 @@ export default class Tags extends React.Component {
     if (editProduct) {
 
     } else {
+      this.props.addVendorProduct(values)
     }
+  }
+
+  onCloseProductModal () {
+    this.setState({
+      productModalOpen: false
+    })
   }
 
   renderProductCombo () {
