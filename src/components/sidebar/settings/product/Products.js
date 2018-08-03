@@ -31,14 +31,8 @@ export default class Tags extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
-          <div className="padding-md">
-            <div><b>Tags</b></div>
-            {this.renderTags(canEdit)}
-            <div>Related</div>
-            {this.renderItems()}
-          </div>
-          {this.renderTagModal()}
+        <TabPageBody tabs={SettingTabs} tab={8} history={this.props.history} location={this.props.location}>
+
         </TabPageBody>
       </TabPage>
     )

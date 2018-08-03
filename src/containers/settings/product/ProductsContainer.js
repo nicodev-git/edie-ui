@@ -1,5 +1,5 @@
 import React from 'react'
-import Agents from 'components/sidebar/settings/agent/Agents'
+import Products from 'components/sidebar/settings/product/Products'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
@@ -20,7 +20,7 @@ import {
 class ProductsContainer extends React.Component {
   render () {
     return (
-      <Agents {...this.props} />
+      <Products {...this.props} />
     )
   }
 }
