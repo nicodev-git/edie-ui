@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 
-import {Button} from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Create'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -10,8 +9,6 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import EditIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 export default class FlowGroupsModalView extends Component {
 
@@ -52,6 +49,7 @@ export default class FlowGroupsModalView extends Component {
           <CardPanel title="Groups">
             {this.renderGroups()}
           </CardPanel>
+          {this.props.children}
       </Modal>
     )
   }

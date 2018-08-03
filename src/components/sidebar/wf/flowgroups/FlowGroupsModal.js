@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Button} from '@material-ui/core'
 
 import FlowGroupModal from './FlowGroupModal'
 import FlowGroupsModalView from './FlowGroupsModalView'
@@ -58,9 +59,9 @@ export default class FlowGroupsModal extends Component {
 
   render () {
     return (
-      <FlowGroupsModalView
-        onClickClose={this.onHide.bind(this)}
-      />
+      <FlowGroupsModalView onClickClose={this.onHide.bind(this)}>
+        {this.renderGroupModal()}
+      </FlowGroupsModalView>
     )
   }
 }

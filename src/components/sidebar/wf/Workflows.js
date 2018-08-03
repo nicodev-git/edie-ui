@@ -16,6 +16,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import WorkflowEditModal from './WorkflowEditModal'
 import WorkflowSettingModal from './WorkflowSettingModal'
 import {getSeverityIcon} from 'shared/Global'
+import FlowGroupsModal from './flowgroups/FlowGroupsModal'
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -24,7 +25,9 @@ class Workflows extends React.Component {
       editWf: null,
       groupId: '0',
       filterTags: [],
-      menuAnchor: null
+      menuAnchor: null,
+
+      groupsModalOpen: false
     }
   }
 
@@ -109,7 +112,10 @@ class Workflows extends React.Component {
   }
 
   onClickFlowGroup () {
-    this.props.history.push('/workflow/groups')
+    // this.props.history.push('/workflow/groups')
+    this.setState({
+      groupsModalOpen: true
+    })
   }
 
   onClickGlobalVars () {
@@ -328,6 +334,16 @@ class Workflows extends React.Component {
     )
   }
 
+  renderFlowGroupsModal () {
+    if (!this.props.groupsModalOpen) return null
+    return (
+      <FlowGroupsModal
+        {...this.props}
+        onClickClose={() => this.setState({groupsModalOpen: false})}
+      />
+    )
+  }
+
   render() {
     return (
       <TabPage>
@@ -351,6 +367,7 @@ class Workflows extends React.Component {
           {this.renderWorkflows()}
           {this.renderWorkflowEditModal()}
           {this.renderSettingModal()}
+          {this.renderFlowGroupsModal()}
         </TabPageBody>
       </TabPage>
     )
