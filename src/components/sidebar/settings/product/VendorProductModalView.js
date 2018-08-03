@@ -25,12 +25,15 @@ export default class SimulationModalView extends React.Component {
           </CardPanel>
 
           <CardPanel title="Tags">
+
           </CardPanel>
 
           <CardPanel title="Classifiers">
+
           </CardPanel>
 
           <CardPanel title="Parsers">
+
           </CardPanel>
 
           <CardPanel title="Workflows">
