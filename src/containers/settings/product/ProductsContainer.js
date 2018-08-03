@@ -7,7 +7,9 @@ import {
   fetchVendorProducts,
   addVendorProduct,
   updateVendorProduct,
-  removeVendorProduct
+  removeVendorProduct,
+
+  fetchBrainCells
 } from 'actions'
 
 class ProductsContainer extends React.Component {
@@ -19,11 +21,15 @@ class ProductsContainer extends React.Component {
 }
 export default connect(
   state => ({
-    vendorProducts: state.settings.vendorProducts
+    vendorProducts: state.settings.vendorProducts,
+
+    brainCells: state.settings.brainCells
   }), {
     fetchVendorProducts,
     addVendorProduct,
     updateVendorProduct,
-    removeVendorProduct
+    removeVendorProduct,
+
+    fetchBrainCells
   }
 )(withRouter(ProductsContainer))
