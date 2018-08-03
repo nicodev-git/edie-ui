@@ -1,14 +1,14 @@
 import React from 'react'
-import {Button, Menu, MenuItem} from '@material-ui/core'
-import SettingIcon from '@material-ui/icons/Settings'
+// import {Button, Menu, MenuItem} from '@material-ui/core'
+// import SettingIcon from '@material-ui/icons/Settings'
 
 import MainSettings from './MainSettings'
 import Websocket from './websocket/Websocket'
 
-import SettingTabs from '../SettingTabs'
-import TabPage from 'components/common/TabPage'
-import TabPageBody from 'components/common/TabPageBody'
-import TabPageHeader from 'components/common/TabPageHeader'
+// import SettingTabs from '../SettingTabs'
+// import TabPage from 'components/common/TabPage'
+// import TabPageBody from 'components/common/TabPageBody'
+// import TabPageHeader from 'components/common/TabPageHeader'
 import {showAlert} from 'components/common/Alert'
 import {hasPermission} from 'shared/Permission'
 

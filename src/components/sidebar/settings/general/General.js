@@ -15,6 +15,7 @@ import TabPageHeader from 'components/common/TabPageHeader' // Never used
 import {defaultDateFormat} from 'shared/Global'
 import {CardPanel} from 'components/modal/parts'
 import {rolePermissions, hasPermission} from 'shared/Permission'
+import Advanced from './advanced/Advanced'
 
 const rowStyle = {
   width: '100%',
@@ -414,6 +415,16 @@ export default class General extends React.Component {
     )
   }
 
+  renderAdvanced () {
+    return (
+      <CardPanel title="Advanced">
+        <div style={{minHeight: 485, overflow: 'auto'}}>
+          <Advanced {...this.props}/>
+        </div>
+      </CardPanel>
+    )
+  }
+
   render () {
     const {userInfo} = this.props
     const canEdit = hasPermission(userInfo, 'EditSettings')
@@ -435,7 +446,7 @@ export default class General extends React.Component {
               {this.renderCustomer()}
             </div>
             <div className="col-md-6">
-              {this.renderMenuConfig(canEdit)}
+              {this.renderAdvanced()}
             </div>
           </div>
           <br/>&nbsp;
