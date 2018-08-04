@@ -17,7 +17,10 @@ class VendorProductModal extends React.Component {
       tagModalOpen: false,
 
       classifiers: (editProduct ? editProduct.classifiers : []) || [],
-      classModalOpen: false
+      classModalOpen: false,
+
+      parsers: [],
+      parserModalOpen: false
     }
   }
 
