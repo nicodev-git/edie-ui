@@ -20,7 +20,7 @@ const tabs = [{
   title: 'Audit',
   path: '/settings/audit'
 }, {
-  title: 'Braincells',
+  title: 'Advanced',
   path: '/settings/braincells'
 }, {
   title: 'Products',
