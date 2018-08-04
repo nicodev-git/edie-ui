@@ -86,6 +86,9 @@ export default class Tags extends React.Component {
       })
     } else {
       this.props.addVendorProduct(values)
+      this.setState({
+        productModalOpen: false
+      })
     }
   }
 
