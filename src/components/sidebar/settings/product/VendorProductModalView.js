@@ -19,7 +19,7 @@ class SimulationModalView extends React.Component {
         </div>
         <div className="panel-body">
           {tags.map(t =>
-            <Chip key={t} label={t}/>
+            <Chip key={t} label={t} className="margin-sm"/>
           )}
         </div>
       </div>
