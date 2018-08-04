@@ -67,7 +67,16 @@ class SimulationModalView extends React.Component {
   }
 
   renderWorkflows () {
-
+    const {workflows, onClickAddWf, onClickDeleteWf} = this.props
+    return (
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3>Workflows</h3>
+        </div>
+        <div className="panel-body">
+        </div>
+      </div>
+    )
   }
 
   render () {
@@ -98,14 +107,7 @@ class SimulationModalView extends React.Component {
           {this.renderTags()}
           {this.renderClasses()}
           {this.renderGroks()}
-
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3>Workflows</h3>
-            </div>
-            <div className="panel-body">
-            </div>
-          </div>
+          {this.renderWorkflows()}
 
           <div className="panel panel-default">
             <div className="panel-heading">

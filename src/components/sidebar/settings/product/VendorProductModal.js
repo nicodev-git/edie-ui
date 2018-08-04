@@ -249,6 +249,10 @@ class VendorProductModal extends React.Component {
         grokCells={this.getGrokCells()}
         onClickAddGrok={this.onClickAddGrok.bind(this)}
         onClickDeleteGrok={this.onClickDeleteGrok.bind(this)}
+
+        workflows={this.getPickedWorkflows()}
+        onClickAddWf={this.onClickAddWf.bind(this)}
+        onClickDeleteWf={this.onClickDeleteWf.bind(this)}
       >
         {this.renderTagPickerModal()}
         {this.renderClassPickerModal()}
