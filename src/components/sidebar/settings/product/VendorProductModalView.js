@@ -26,6 +26,20 @@ class SimulationModalView extends React.Component {
     )
   }
 
+  renderClasses () {
+    const {classifiers, onClickAddClass, onClickDeleteClass} = this.props
+    return (
+      <div className="panel panel-default">
+        <div className="panel-heading" onClick={onClickAddClass}>
+          <h3>Classifiers</h3>
+        </div>
+        <div className="panel-body">
+
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const {onSubmit} = this.props
     return (
@@ -53,13 +67,7 @@ class SimulationModalView extends React.Component {
 
           {this.renderTags()}
 
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3>Classifiers</h3>
-            </div>
-            <div className="panel-body">
-            </div>
-          </div>
+          {this.renderClasses()}
 
           <div className="panel panel-default">
             <div className="panel-heading">
