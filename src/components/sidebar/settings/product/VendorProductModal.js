@@ -10,7 +10,8 @@ class VendorProductModal extends React.Component {
 
     const {editProduct} = this.props
     this.state = {
-      tags: (editProduct ? editProduct.tags : []) || []
+      tags: (editProduct ? editProduct.tags : []) || [],
+      tagModalOpen: false
     }
   }
 
@@ -18,12 +19,33 @@ class VendorProductModal extends React.Component {
     this.props.onSave(values)
   }
 
+  //////////////////////////////////////////////////////////////
+
+  onClickAddTag () {
+    this.setState({
+      tagModalOpen: true
+    })
+  }
+
+  //////////////////////////////////////////////////////////////
+
+  renderTagPickerModal () {
+    if (!this.state.tagModalOpen) return null
+
+
+  }
+
   render () {
     const {handleSubmit, onClose} = this.props
     return (
       <VendorProductModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-        onHide={onClose}/>
+        onHide={onClose}
+
+        tags={this.state.tags}
+        onClickAddTag={this.onClickAddTag.bind(this)}>
+        {this.renderTagPickerModal()}
+      </VendorProductModalView>
     )
   }
 }

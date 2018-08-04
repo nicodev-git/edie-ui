@@ -1,12 +1,31 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
-import {Button} from '@material-ui/core'
+import {Button, Chip} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 
 import { FormInput, CardPanel } from 'components/modal/parts'
 
 class SimulationModalView extends React.Component {
+  renderTags () {
+    const {tags, onClickAddTag} = this.props
+    return (
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3>Tags</h3>
+          <div className="panel-options">
+            <AddIcon className="link margin-md-top" onClick={onClickAddTag}/>
+          </div>
+        </div>
+        <div className="panel-body">
+          {tags.map(t =>
+            <Chip key={t} label={t}/>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const {onSubmit} = this.props
     return (
@@ -32,16 +51,7 @@ class SimulationModalView extends React.Component {
             </div>
           </div>
 
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3>Tags</h3>
-              <div className="panel-options">
-                <AddIcon className="link margin-md-top"/>
-              </div>
-            </div>
-            <div className="panel-body">
-            </div>
-          </div>
+          {this.renderTags()}
 
           <div className="panel panel-default">
             <div className="panel-heading">
@@ -79,6 +89,8 @@ class SimulationModalView extends React.Component {
             <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
           </div>
         </form>
+
+        {this.props.children}
       </div>
     )
   }
