@@ -3,6 +3,7 @@ import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
 import {Button, Chip, Tooltip} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import { FormInput } from 'components/modal/parts'
 
@@ -77,9 +78,26 @@ class SimulationModalView extends React.Component {
           </div>
         </div>
         <div className="panel-body">
-          {workflows.map((t, i) =>
-            <Chip key={t.id} label={t.name} className="margin-sm" onDelete={() => onClickDeleteWf(t.id)}/>
-          )}
+          <div style={{maxHeight: 300, overflow: 'auto'}}>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {workflows.map((t, i) =>
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>{t.description}</td>
+                  <td><DeleteIcon onClick={() => onClickDeleteWf(t.id)}/></td>
+                </tr>
+              )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     )

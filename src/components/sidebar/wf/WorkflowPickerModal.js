@@ -15,7 +15,7 @@ export default class WorkflowPickerModal extends React.Component {
 
   onClickRow (selIndex) {
     this.setState({selIndex})
-    this.props.onPick(this.props.cells[selIndex])
+    this.props.onPick(this.props.workflows[selIndex])
   }
 
   render() {
