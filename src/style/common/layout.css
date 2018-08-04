@@ -241,7 +241,7 @@ a, a:focus, a:hover {
     border-color: #dddddd; }
 .panel-default > .panel-heading, .panel-default > form > .panel-heading {
     color: #333333;
-    background-color: #F2F3F3;;
+    background-color: #FAFAFA;;
     border-color: #dddddd; }
 .panel-default > .panel-heading .panel-title + p, .panel-default > form > .panel-heading .panel-title + p {
     color: #666666; }

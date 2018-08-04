@@ -12,10 +12,10 @@ class SimulationModalView extends React.Component {
     const {tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
       <div>
-        <div className="group-header">
-          <div>Tags</div>
-          <div className="panel-options">
-            <AddIcon className="link margin-md-top" onClick={onClickAddTag}/>
+        <div className="group-header padding-md-top padding-md-bottom">
+          <div>
+            <span className="valign-middle">Tags</span>
+            <AddIcon className="link valign-middle" onClick={onClickAddTag}/>
           </div>
         </div>
         <div>
@@ -31,10 +31,10 @@ class SimulationModalView extends React.Component {
     const {classifierCells, onClickAddClass, onClickDeleteClass} = this.props
     return (
       <div>
-        <div className="group-header">
-          <div>Classifiers</div>
-          <div className="panel-options">
-            <AddIcon className="link margin-md-top" onClick={onClickAddClass}/>
+        <div className="group-header padding-md-top padding-md-bottom">
+          <div>
+            <span className="valign-middle">Classifiers</span>
+            <AddIcon className="link valign-middle" onClick={onClickAddClass}/>
           </div>
         </div>
         <div>
@@ -139,14 +139,16 @@ class SimulationModalView extends React.Component {
                 </div>
               </div>
 
-
               {this.renderTags()}
+
               {this.renderClasses()}
-              {this.renderGroks()}
-              {this.renderWorkflows()}
-              {this.renderIncidents()}
             </div>
           </div>
+
+
+          {/*{this.renderGroks()}*/}
+          {/*{this.renderWorkflows()}*/}
+          {/*{this.renderIncidents()}*/}
 
           <div className="padding-md">
             <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
