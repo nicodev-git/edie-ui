@@ -30,8 +30,11 @@ class SimulationModalView extends React.Component {
     const {classifiers, onClickAddClass, onClickDeleteClass} = this.props
     return (
       <div className="panel panel-default">
-        <div className="panel-heading" onClick={onClickAddClass}>
+        <div className="panel-heading">
           <h3>Classifiers</h3>
+          <div className="panel-options">
+            <AddIcon className="link margin-md-top" onClick={onClickAddClass}/>
+          </div>
         </div>
         <div className="panel-body">
 
