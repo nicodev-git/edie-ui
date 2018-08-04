@@ -12,13 +12,13 @@ class SimulationModalView extends React.Component {
     const {tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
       <div>
-        <div className="padding-md">
-          <h3>Tags</h3>
+        <div className="group-header">
+          <div>Tags</div>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddTag}/>
           </div>
         </div>
-        <div className="panel-body">
+        <div>
           {tags.map((t, i) =>
             <Chip key={t} label={t} className="margin-sm" onDelete={() => onClickDeleteTag(i)}/>
           )}
@@ -31,13 +31,13 @@ class SimulationModalView extends React.Component {
     const {classifierCells, onClickAddClass, onClickDeleteClass} = this.props
     return (
       <div>
-        <div className="padding-md">
-          <h3>Classifiers</h3>
+        <div className="group-header">
+          <div>Classifiers</div>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddClass}/>
           </div>
         </div>
-        <div className="panel-body">
+        <div>
           {classifierCells.map((t, i) =>
             <Tooltip key={t.id} title={t.key}>
               <Chip label={t.name} className="margin-sm" onDelete={() => onClickDeleteClass(t.id)}/>
@@ -52,13 +52,13 @@ class SimulationModalView extends React.Component {
     const {grokCells, onClickAddGrok, onClickDeleteGrok} = this.props
     return (
       <div>
-        <div className="padding-md">
-          <h3>Parser</h3>
+        <div className="group-header">
+          <div>Parser</div>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddGrok}/>
           </div>
         </div>
-        <div className="panel-body">
+        <div>
           {grokCells.map((t, i) =>
             <Chip key={t.id} label={t.name} className="margin-sm" onDelete={() => onClickDeleteGrok(t.id)}/>
           )}
@@ -71,13 +71,13 @@ class SimulationModalView extends React.Component {
     const {workflows, onClickAddWf, onClickDeleteWf} = this.props
     return (
       <div>
-        <div className="padding-md">
-          <h3>Workflows</h3>
+        <div className="group-header">
+          <div>Workflows</div>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddWf}/>
           </div>
         </div>
-        <div className="panel-body">
+        <div >
           <div style={{maxHeight: 300, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
@@ -109,7 +109,7 @@ class SimulationModalView extends React.Component {
         <div className="padding-md">
           <h3>Incidents</h3>
         </div>
-        <div className="panel-body">
+        <div>
 
         </div>
       </div>
@@ -138,14 +138,15 @@ class SimulationModalView extends React.Component {
                   <Field name="description" component={FormInput} floatingLabel="Description" className="margin-md-right" fullWidth/>
                 </div>
               </div>
+
+
+              {this.renderTags()}
+              {this.renderClasses()}
+              {this.renderGroks()}
+              {this.renderWorkflows()}
+              {this.renderIncidents()}
             </div>
           </div>
-
-          {this.renderTags()}
-          {this.renderClasses()}
-          {this.renderGroks()}
-          {this.renderWorkflows()}
-          {this.renderIncidents()}
 
           <div className="padding-md">
             <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
