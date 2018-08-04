@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
+import {find} from 'lodash'
 
 import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
@@ -15,13 +16,17 @@ class VendorProductModal extends React.Component {
       tags: (editProduct ? editProduct.tags : []) || [],
       tagModalOpen: false,
 
-      classifiers: [],
+      classifiers: (editProduct ? editProduct.classifiers : []) || [],
       classModalOpen: false
     }
   }
 
   handleFormSubmit (values) {
-    this.props.onSave(values)
+    const {tags, classifiers} = this.state
+    this.props.onSave({
+      ...values,
+      tags,classifiers
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -76,16 +81,23 @@ class VendorProductModal extends React.Component {
     })
   }
 
-  onClickDeleteClass (index) {
+  onClickDeleteClass (id) {
     if (!window.confirm('Click OK to remove')) return
     const {classifiers} = this.state
     this.setState({
-      classifiers: classifiers.filter((p, i) => i !== index)
+      classifiers: classifiers.filter(p => p !== id)
     })
   }
 
   getClassifierCells () {
-
+    const {brainCells} = this.props
+    const {classifiers} = this.state
+    const cells = []
+    classifiers.forEach(id => {
+      const cell = find(brainCells, {id, type: 'Classification'})
+      if (cell) cells.push(cell)
+    })
+    return cells
   }
 
   //////////////////////////////////////////////////////////////
@@ -106,7 +118,7 @@ class VendorProductModal extends React.Component {
   renderClassPickerModal () {
     if (!this.state.classModalOpen) return null
     const {brainCells} = this.props
-    const cells = brainCells.filter(p => p.type === 'Classifier')
+    const cells = brainCells.filter(p => p.type === 'Classification')
     return (
       <BraincellClassPickerModal
         cells={cells}
@@ -127,11 +139,12 @@ class VendorProductModal extends React.Component {
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
 
-        classifierCells={this.state.classifiers}
+        classifierCells={this.getClassifierCells()}
         onClickAddClass={this.onClickAddClass.bind(this)}
         onClickDeleteClass={this.onClickDeleteClass.bind(this)}
       >
         {this.renderTagPickerModal()}
+        {this.renderClassPickerModal()}
       </VendorProductModalView>
     )
   }

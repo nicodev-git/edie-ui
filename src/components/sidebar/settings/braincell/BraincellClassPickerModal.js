@@ -23,8 +23,8 @@ export default class BraincellClassPickerModal extends React.Component {
     const {selIndex} = this.state
 
     return (
-      <Modal title="Tags" onRequestClose={onClose}>
-        <CardPanel title="Tags">
+      <Modal title="Classification" onRequestClose={onClose}>
+        <CardPanel title="Classification">
           <div style={{maxHeight: 600, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
-import {Button, Chip} from '@material-ui/core'
+import {Button, Chip, Tooltip} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 
 import { FormInput } from 'components/modal/parts'
@@ -27,7 +27,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderClasses () {
-    const {classifiers, onClickAddClass, onClickDeleteClass} = this.props
+    const {classifierCells, onClickAddClass, onClickDeleteClass} = this.props
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -37,8 +37,10 @@ class SimulationModalView extends React.Component {
           </div>
         </div>
         <div className="panel-body">
-          {classifiers.map((t, i) =>
-            <Chip key={t} label={t} className="margin-sm" onDelete={() => onClickDeleteClass(i)}/>
+          {classifierCells.map((t, i) =>
+            <Tooltip key={t.id} title={t.key}>
+              <Chip label={t.name} className="margin-sm" onDelete={() => onClickDeleteClass(t.id)}/>
+            </Tooltip>
           )}
         </div>
       </div>
