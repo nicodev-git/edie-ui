@@ -122,7 +122,7 @@ class SimulationModalView extends React.Component {
       <div className="flex-1">
         <form onSubmit={onSubmit}>
 
-          <div className="panel panel-default">
+          <div className="panel panel-default" style={{width: 1000, height: 623}}>
             <div className="panel-heading">
               <h3>Vendor Product Info</h3>
             </div>
