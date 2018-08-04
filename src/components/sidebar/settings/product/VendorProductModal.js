@@ -231,6 +231,11 @@ class VendorProductModal extends React.Component {
     )
   }
 
+  renderWfPickerModal () {
+    if (!this.state.wfModalOpen) return null
+
+  }
+
   render () {
     const {handleSubmit, onClose} = this.props
     return (

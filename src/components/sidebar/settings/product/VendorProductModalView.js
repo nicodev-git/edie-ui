@@ -72,8 +72,14 @@ class SimulationModalView extends React.Component {
       <div className="panel panel-default">
         <div className="panel-heading">
           <h3>Workflows</h3>
+          <div className="panel-options">
+            <AddIcon className="link margin-md-top" onClick={onClickAddWf}/>
+          </div>
         </div>
         <div className="panel-body">
+          {workflows.map((t, i) =>
+            <Chip key={t.id} label={t.name} className="margin-sm" onDelete={() => onClickDeleteWf(t.id)}/>
+          )}
         </div>
       </div>
     )
