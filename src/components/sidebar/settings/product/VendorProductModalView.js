@@ -124,7 +124,6 @@ class SimulationModalView extends React.Component {
     return (
       <div className="flex-1">
         <form onSubmit={onSubmit}>
-
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
               <h3>Vendor Product Info</h3>
