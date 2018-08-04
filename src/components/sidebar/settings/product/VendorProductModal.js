@@ -20,16 +20,16 @@ class VendorProductModal extends React.Component {
       classifiers: (editProduct ? editProduct.classifiers : []) || [],
       classModalOpen: false,
 
-      parsers: [],
+      parsers: (editProduct ? editProduct.parsers : []) || [],
       grokModalOpen: false
     }
   }
 
   handleFormSubmit (values) {
-    const {tags, classifiers} = this.state
+    const {tags, classifiers, parsers} = this.state
     this.props.onSave({
       ...values,
-      tags,classifiers
+      tags,classifiers, parsers
     })
   }
 
@@ -106,7 +106,12 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
-  onPickGrok () {
+  onPickGrok (cell) {
+    const {parsers} = this.state
+    if (parsers.indexOf(cell.id) >= 0) return alert('Already exists')
+    this.setState({
+      parsers: [...parsers, cell.id]
+    })
     this.onClosePickGrok()
   }
 
@@ -192,6 +197,10 @@ class VendorProductModal extends React.Component {
         tags={this.state.tags}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+
+        classifierCells={this.getClassifierCells()}
+        onClickAddClass={this.onClickAddClass.bind(this)}
+        onClickDeleteClass={this.onClickDeleteClass.bind(this)}
 
         grokCells={this.getGrokCells()}
         onClickAddGrok={this.onClickAddGrok.bind(this)}
