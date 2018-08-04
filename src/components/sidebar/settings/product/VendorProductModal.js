@@ -6,6 +6,7 @@ import {find} from 'lodash'
 import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
 import BraincellClassPickerModal from 'components/sidebar/settings/braincell/BraincellClassPickerModal'
+import BraincellGrokPickerModal from 'components/sidebar/settings/braincell/BraincellGrokPickerModal'
 
 class VendorProductModal extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class VendorProductModal extends React.Component {
       classModalOpen: false,
 
       parsers: [],
-      parserModalOpen: false
+      grokModalOpen: false
     }
   }
 
@@ -105,6 +106,43 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  onPickGrok () {
+    this.onClosePickGrok()
+  }
+
+  onClosePickGrok () {
+    this.setState({
+      grokModalOpen: false
+    })
+  }
+
+  getGrokCells () {
+    const {brainCells} = this.props
+    const {parsers} = this.state
+    const cells = []
+    parsers.forEach(id => {
+      const cell = find(brainCells, {id, type: 'Grok'})
+      if (cell) cells.push(cell)
+    })
+    return cells
+  }
+
+  onClickAddGrok () {
+    this.setState({
+      grokModalOpen: true
+    })
+  }
+
+  onClickDeleteGrok (id) {
+    if (!window.confirm('Click OK to remove')) return
+    const {parsers} = this.state
+    this.setState({
+      parsers: parsers.filter(p => p !== id)
+    })
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
     const {brainCells} = this.props
@@ -131,6 +169,19 @@ class VendorProductModal extends React.Component {
     )
   }
 
+  renderGrokPickerModal () {
+    if (!this.state.grokModalOpen) return
+    const {brainCells} = this.props
+    const cells = brainCells.filter(p => p.type === 'Grok')
+    return (
+      <BraincellGrokPickerModal
+        cells={cells}
+        onPick={this.onPickGrok.bind(this)}
+        onClose={this.onClosePickGrok.bind(this)}
+      />
+    )
+  }
+
   render () {
     const {handleSubmit, onClose} = this.props
     return (
@@ -142,12 +193,13 @@ class VendorProductModal extends React.Component {
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
 
-        classifierCells={this.getClassifierCells()}
-        onClickAddClass={this.onClickAddClass.bind(this)}
-        onClickDeleteClass={this.onClickDeleteClass.bind(this)}
+        grokCells={this.getGrokCells()}
+        onClickAddGrok={this.onClickAddGrok.bind(this)}
+        onClickDeleteGrok={this.onClickDeleteGrok.bind(this)}
       >
         {this.renderTagPickerModal()}
         {this.renderClassPickerModal()}
+        {this.renderGrokPickerModal()}
       </VendorProductModalView>
     )
   }

@@ -47,6 +47,25 @@ class SimulationModalView extends React.Component {
     )
   }
 
+  renderGroks () {
+    const {grokCells, onClickAddGrok, onClickDeleteGrok} = this.props
+    return (
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3>Parser</h3>
+          <div className="panel-options">
+            <AddIcon className="link margin-md-top" onClick={onClickAddGrok}/>
+          </div>
+        </div>
+        <div className="panel-body">
+          {grokCells.map((t, i) =>
+            <Chip key={t.id} label={t.name} className="margin-sm" onDelete={() => onClickDeleteGrok(t.id)}/>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const {onSubmit} = this.props
     return (
@@ -73,16 +92,8 @@ class SimulationModalView extends React.Component {
           </div>
 
           {this.renderTags()}
-
           {this.renderClasses()}
-
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3>Parser</h3>
-            </div>
-            <div className="panel-body">
-            </div>
-          </div>
+          {this.renderGroks()}
 
           <div className="panel panel-default">
             <div className="panel-heading">
