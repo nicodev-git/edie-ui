@@ -61,11 +61,30 @@ class VendorProductModal extends React.Component {
     })
   }
 
-  onPickClass () {
-
+  onPickClass (cell) {
+    const {classifiers} = this.state
+    if (classifiers.indexOf(cell.id) >= 0) return alert('Already exists')
+    this.setState({
+      classifiers: [...classifiers, cell.id]
+    })
+    this.onClosePickClass()
   }
 
   onClosePickClass () {
+    this.setState({
+      classModalOpen: false
+    })
+  }
+
+  onClickDeleteClass (index) {
+    if (!window.confirm('Click OK to remove')) return
+    const {classifiers} = this.state
+    this.setState({
+      classifiers: classifiers.filter((p, i) => i !== index)
+    })
+  }
+
+  getClassifierCells () {
 
   }
 
@@ -108,7 +127,9 @@ class VendorProductModal extends React.Component {
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
 
-        //classifiers={}
+        classifierCells={this.state.classifiers}
+        onClickAddClass={this.onClickAddClass.bind(this)}
+        onClickDeleteClass={this.onClickDeleteClass.bind(this)}
       >
         {this.renderTagPickerModal()}
       </VendorProductModalView>

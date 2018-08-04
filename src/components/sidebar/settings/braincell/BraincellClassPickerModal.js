@@ -15,6 +15,7 @@ export default class BraincellClassPickerModal extends React.Component {
 
   onClickRow (selIndex) {
     this.setState({selIndex})
+    this.props.onPick(this.props.cells[selIndex])
   }
 
   render() {
@@ -29,6 +30,7 @@ export default class BraincellClassPickerModal extends React.Component {
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Key</th>
                 </tr>
               </thead>
               <tbody>
@@ -36,6 +38,7 @@ export default class BraincellClassPickerModal extends React.Component {
                   <tr key={t.id} className={i === selIndex ? 'selected' : ''}
                     onClick={() => this.onClickRow(i)}>
                     <td>{t.name}</td>
+                    <td>{t.key}</td>
                   </tr>
                 )}
               </tbody>

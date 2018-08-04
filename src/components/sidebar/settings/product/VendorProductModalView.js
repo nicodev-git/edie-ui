@@ -37,7 +37,9 @@ class SimulationModalView extends React.Component {
           </div>
         </div>
         <div className="panel-body">
-
+          {classifiers.map((t, i) =>
+            <Chip key={t} label={t} className="margin-sm" onDelete={() => onClickDeleteClass(i)}/>
+          )}
         </div>
       </div>
     )
