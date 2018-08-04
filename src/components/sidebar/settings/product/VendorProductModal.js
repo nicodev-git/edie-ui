@@ -30,10 +30,10 @@ class VendorProductModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const {tags, classifiers, parsers} = this.state
+    const {tags, classifiers, parsers, workflows} = this.state
     this.props.onSave({
       ...values,
-      tags,classifiers, parsers
+      tags,classifiers, parsers, workflows
     })
   }
 

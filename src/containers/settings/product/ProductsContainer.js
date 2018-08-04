@@ -25,7 +25,7 @@ export default connect(
     vendorProducts: state.settings.vendorProducts,
 
     brainCells: state.settings.brainCells,
-    workflows: state.settings.workflows,
+    workflows: state.workflow.workflows,
   }), {
     fetchVendorProducts,
     addVendorProduct,
