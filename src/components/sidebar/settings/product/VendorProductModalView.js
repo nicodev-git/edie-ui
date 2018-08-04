@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import {Button, Chip} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 
-import { FormInput, CardPanel } from 'components/modal/parts'
+import { FormInput } from 'components/modal/parts'
 
 class SimulationModalView extends React.Component {
   renderTags () {
-    const {tags, onClickAddTag} = this.props
+    const {tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -18,8 +18,8 @@ class SimulationModalView extends React.Component {
           </div>
         </div>
         <div className="panel-body">
-          {tags.map(t =>
-            <Chip key={t} label={t} className="margin-sm"/>
+          {tags.map((t, i) =>
+            <Chip key={t} label={t} className="margin-sm" onDelete={() => onClickDeleteTag(i)}/>
           )}
         </div>
       </div>

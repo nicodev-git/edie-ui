@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
+import {findIndex} from 'lodash'
 
 import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
@@ -29,7 +30,7 @@ class VendorProductModal extends React.Component {
   }
 
   onPickTag (tag) {
-    const {tags} = this.props
+    const {tags} = this.state
     if (tags.indexOf(tag) >= 0) return alert('Already exists')
     this.setState({
       tags: [...tags, tag]
@@ -39,6 +40,14 @@ class VendorProductModal extends React.Component {
 
   onClosePickTag () {
     this.setState({tagModalOpen: false})
+  }
+
+  onClickDeleteTag (index) {
+    if (!window.confirm('Click OK to remove')) return
+    const {tags} = this.state
+    this.setState({
+      tags: tags.filter((p, i) => i !== index)
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -64,7 +73,9 @@ class VendorProductModal extends React.Component {
         onHide={onClose}
 
         tags={this.state.tags}
-        onClickAddTag={this.onClickAddTag.bind(this)}>
+        onClickAddTag={this.onClickAddTag.bind(this)}
+        onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+      >
         {this.renderTagPickerModal()}
       </VendorProductModalView>
     )

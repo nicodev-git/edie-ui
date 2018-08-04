@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Chip} from '@material-ui/core'
+import {Chip} from '@material-ui/core'
 
 import {
   Modal,
