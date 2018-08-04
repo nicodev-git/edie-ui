@@ -66,6 +66,10 @@ class SimulationModalView extends React.Component {
     )
   }
 
+  renderWorkflows () {
+
+  }
+
   render () {
     const {onSubmit} = this.props
     return (

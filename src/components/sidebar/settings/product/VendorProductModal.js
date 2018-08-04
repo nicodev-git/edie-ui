@@ -21,7 +21,10 @@ class VendorProductModal extends React.Component {
       classModalOpen: false,
 
       parsers: (editProduct ? editProduct.parsers : []) || [],
-      grokModalOpen: false
+      grokModalOpen: false,
+
+      workflows: (editProduct ? editProduct.workflows : []) || [],
+      wfModalOpen: false
     }
   }
 
@@ -143,6 +146,47 @@ class VendorProductModal extends React.Component {
     const {parsers} = this.state
     this.setState({
       parsers: parsers.filter(p => p !== id)
+    })
+  }
+
+  //////////////////////////////////////////////////////////////
+
+  onPickWf (cell) {
+    const {workflows} = this.state
+    if (workflows.indexOf(cell.id) >= 0) return alert('Already exists')
+    this.setState({
+      workflows: [...workflows, cell.id]
+    })
+    this.onClosePickWf()
+  }
+
+  onClosePickWf () {
+    this.setState({
+      wfModalOpen: false
+    })
+  }
+
+  getPickedWorkflows () {
+    const {workflows} = this.state
+    const cells = []
+    workflows.forEach(id => {
+      const cell = find(this.props.workflows, {id})
+      if (cell) cells.push(cell)
+    })
+    return cells
+  }
+
+  onClickAddWf () {
+    this.setState({
+      wfModalOpen: true
+    })
+  }
+
+  onClickDeleteWf (id) {
+    if (!window.confirm('Click OK to remove')) return
+    const {workflows} = this.state
+    this.setState({
+      workflows: workflows.filter(p => p !== id)
     })
   }
 
