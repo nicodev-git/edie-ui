@@ -7,6 +7,7 @@ import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
 import BraincellClassPickerModal from 'components/sidebar/settings/braincell/BraincellClassPickerModal'
 import BraincellGrokPickerModal from 'components/sidebar/settings/braincell/BraincellGrokPickerModal'
+import WorkflowPickerModal from "components/sidebar/wf/WorkflowPickerModal";
 
 class VendorProductModal extends React.Component {
   constructor(props) {
@@ -233,7 +234,13 @@ class VendorProductModal extends React.Component {
 
   renderWfPickerModal () {
     if (!this.state.wfModalOpen) return null
-
+    return (
+      <WorkflowPickerModal
+        workflows={this.props.workflows}
+        onPick={this.onPickWf.bind(this)}
+        onClose={this.onClosePickWf.bind(this)}
+      />
+    )
   }
 
   render () {
