@@ -68,28 +68,48 @@ class SimulationModalView extends React.Component {
   }
 
   renderWorkflows () {
-    const {workflows, onClickAddWf, onClickDeleteWf} = this.props
+    const {workflows, onClickDeleteWf} = this.props
+    return (
+      <div >
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          {workflows.map((t, i) =>
+            <tr key={t.id}>
+              <td>{t.name}</td>
+              <td>{t.description}</td>
+              <td><DeleteIcon className="link" onClick={() => onClickDeleteWf(t.id)}/></td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  renderIncidents () {
+    const {incidentCells, onClickDeleteIncident} = this.props
     return (
       <div>
-        <div className="group-header">
-          <span className="valign-middle">Workflows</span>
-          <AddIcon className="link valign-middle" onClick={onClickAddWf}/>
-        </div>
-        <div >
+        <div>
           <table className="table table-hover">
             <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th></th>
-              </tr>
+            <tr>
+              <th>Name</th>
+              <th></th>
+            </tr>
             </thead>
             <tbody>
-            {workflows.map((t, i) =>
+            {incidentCells.map((t, i) =>
               <tr key={t.id}>
                 <td>{t.name}</td>
-                <td>{t.description}</td>
-                <td><DeleteIcon onClick={() => onClickDeleteWf(t.id)}/></td>
+                <td><DeleteIcon className="link" onClick={() => onClickDeleteIncident(t.id)}/></td>
               </tr>
             )}
             </tbody>
@@ -99,23 +119,8 @@ class SimulationModalView extends React.Component {
     )
   }
 
-  renderIncidents () {
-    const {onClickAddIncident, onClickDeleteIncident} = this.props
-    return (
-      <div>
-        <div className="group-header">
-          <span className="valign-middle">Incidents</span>
-          <AddIcon className="link valign-middle" onClick={onClickAddIncident}/>
-        </div>
-        <div>
-
-        </div>
-      </div>
-    )
-  }
-
   render () {
-    const {onSubmit} = this.props
+    const {onSubmit, onClickAddWf, onClickAddIncident} = this.props
     return (
       <div className="flex-1">
         <form onSubmit={onSubmit}>
@@ -149,7 +154,10 @@ class SimulationModalView extends React.Component {
 
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
-              <h3>Workflows</h3>
+              <h3>
+                <span className="valign-middle">Workflows</span>
+                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddWf}/>
+              </h3>
             </div>
             <div className="panel-body">
               {this.renderWorkflows()}
@@ -158,7 +166,10 @@ class SimulationModalView extends React.Component {
 
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
-              <h3>Incidents</h3>
+              <h3>
+                <span className="valign-middle">Incidents</span>
+                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddIncident}/>
+              </h3>
             </div>
             <div className="panel-body">
               {this.renderIncidents()}

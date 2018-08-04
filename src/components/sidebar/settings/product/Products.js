@@ -38,7 +38,7 @@ export default class Tags extends React.Component {
       if (product) {
         this.setState({
           productModalOpen: false,
-          editProduct: null
+          editProduct: null,
         }, () => {
           this.setState({
             productModalOpen: true,
@@ -51,9 +51,30 @@ export default class Tags extends React.Component {
 
   onClickAdd () {
     this.setState({
+      productModalOpen: false,
       editProduct: null,
-      productModalOpen: true
+      selectedProductId: ''
+    }, () => {
+      this.setState({
+        editProduct: null,
+        productModalOpen: true
+      })
     })
+  }
+
+  onClickDelete () {
+    const {selectedProductId} = this.state
+    const {vendorProducts} = this.props
+    const product = find(vendorProducts, {id: selectedProductId})
+
+    console.log(product)
+    if (!product || !window.confirm('Click OK to remove.')) return
+
+    this.setState({
+      selectedProductId: '',
+      productModalOpen: false
+    })
+    this.props.removeVendorProduct(product)
   }
 
   onSaveProduct (values) {
@@ -102,6 +123,7 @@ export default class Tags extends React.Component {
 
   render () {
     const {userInfo} = this.props
+    const {selectedProductId} = this.state
     const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
@@ -110,7 +132,7 @@ export default class Tags extends React.Component {
             {this.renderProductCombo()}
             <div className="pull-right">
               {canEdit && <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>}
-              {/*{canEdit && <Button variant="raised" onClick={this.onEditTag.bind(this)}>Edit</Button>}&nbsp;*/}
+              {canEdit && selectedProductId && <Button variant="raised" onClick={this.onClickDelete.bind(this)}>Delete</Button>}&nbsp;
             </div>
           </div>
         </TabPageHeader>
