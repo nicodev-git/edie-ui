@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
-import {findIndex} from 'lodash'
 
 import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
+import BraincellClassPickerModal from 'components/sidebar/settings/braincell/BraincellClassPickerModal'
 
 class VendorProductModal extends React.Component {
   constructor(props) {
@@ -13,7 +13,10 @@ class VendorProductModal extends React.Component {
     const {editProduct} = this.props
     this.state = {
       tags: (editProduct ? editProduct.tags : []) || [],
-      tagModalOpen: false
+      tagModalOpen: false,
+
+      classifiers: [],
+      classModalOpen: false
     }
   }
 
@@ -52,6 +55,22 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  onClickAddClass () {
+    this.setState({
+      classModalOpen: true
+    })
+  }
+
+  onPickClass () {
+
+  }
+
+  onClosePickClass () {
+
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
     const {brainCells} = this.props
@@ -61,6 +80,19 @@ class VendorProductModal extends React.Component {
         tags={tags}
         onPick={this.onPickTag.bind(this)}
         onClose={this.onClosePickTag.bind(this)}
+      />
+    )
+  }
+
+  renderClassPickerModal () {
+    if (!this.state.classModalOpen) return null
+    const {brainCells} = this.props
+    const cells = brainCells.filter(p => p.type === 'Classifier')
+    return (
+      <BraincellClassPickerModal
+        cells={cells}
+        onPick={this.onPickClass.bind(this)}
+        onClose={this.onClosePickClass.bind(this)}
       />
     )
   }
@@ -75,6 +107,8 @@ class VendorProductModal extends React.Component {
         tags={this.state.tags}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+
+        //classifiers={}
       >
         {this.renderTagPickerModal()}
       </VendorProductModalView>

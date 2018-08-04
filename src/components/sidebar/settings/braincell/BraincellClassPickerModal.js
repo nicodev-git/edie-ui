@@ -1,5 +1,4 @@
 import React from 'react'
-import {Chip} from '@material-ui/core'
 
 import {
   Modal,
@@ -10,12 +9,18 @@ export default class BraincellClassPickerModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      selIndex: -1
     }
   }
 
+  onClickRow (selIndex) {
+    this.setState({selIndex})
+  }
+
   render() {
-    const {cells, onClose, onPick} = this.props
+    const {cells, onClose} = this.props
+    const {selIndex} = this.state
+
     return (
       <Modal title="Tags" onRequestClose={onClose}>
         <CardPanel title="Tags">
@@ -28,7 +33,8 @@ export default class BraincellClassPickerModal extends React.Component {
               </thead>
               <tbody>
                 {cells.map((t, i) =>
-                  <tr key={t.id}>
+                  <tr key={t.id} className={i === selIndex ? 'selected' : ''}
+                    onClick={() => this.onClickRow(i)}>
                     <td>{t.name}</td>
                   </tr>
                 )}
