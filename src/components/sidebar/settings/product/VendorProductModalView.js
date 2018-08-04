@@ -9,7 +9,7 @@ class SimulationModalView extends React.Component {
   render () {
     const {onSubmit} = this.props
     return (
-      <div className="flex-1 padding-md">
+      <div className="flex-1">
         <form onSubmit={onSubmit}>
 
           <div className="panel panel-default">
@@ -32,27 +32,49 @@ class SimulationModalView extends React.Component {
           </div>
 
 
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3>Tags</h3>
+            </div>
+            <div className="panel-body">
+            </div>
+          </div>
 
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3>Classifiers</h3>
+            </div>
+            <div className="panel-body">
+            </div>
+          </div>
 
-          <CardPanel title="Tags">
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3>Parser</h3>
+            </div>
+            <div className="panel-body">
+            </div>
+          </div>
 
-          </CardPanel>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3>Workflows</h3>
+            </div>
+            <div className="panel-body">
+            </div>
+          </div>
 
-          <CardPanel title="Classifiers">
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3>Incidents</h3>
+            </div>
+            <div className="panel-body">
+            </div>
+          </div>
 
-          </CardPanel>
-
-          <CardPanel title="Parsers">
-
-          </CardPanel>
-
-          <CardPanel title="Workflows">
-          </CardPanel>
-
-          <CardPanel title="Incidents">
-          </CardPanel>
-
-          <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
+          <div className="padding-md">
+            <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
+          </div>
         </form>
       </div>
     )
