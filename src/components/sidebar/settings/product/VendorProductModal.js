@@ -7,6 +7,7 @@ import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
 import BraincellClassPickerModal from 'components/sidebar/settings/braincell/BraincellClassPickerModal'
 import BraincellGrokPickerModal from 'components/sidebar/settings/braincell/BraincellGrokPickerModal'
+import BraincellIncidentPickerModal from 'components/sidebar/settings/braincell/BraincellIncidentPickerModal'
 import WorkflowPickerModal from 'components/sidebar/wf/WorkflowPickerModal'
 
 class VendorProductModal extends React.Component {
@@ -216,7 +217,7 @@ class VendorProductModal extends React.Component {
     const {incidents} = this.state
     const cells = []
     incidents.forEach(id => {
-      const cell = find(brainCells, {id, type: 'Grok'})
+      const cell = find(brainCells, {id, type: 'Incident'})
       if (cell) cells.push(cell)
     })
     return cells
@@ -224,15 +225,15 @@ class VendorProductModal extends React.Component {
 
   onClickAddIncident () {
     this.setState({
-      grokModalOpen: true
+      incidentModalOpen: true
     })
   }
 
   onClickDeleteIncident (id) {
     if (!window.confirm('Click OK to remove')) return
-    const {parsers} = this.state
+    const {incidents} = this.state
     this.setState({
-      parsers: parsers.filter(p => p !== id)
+      incidents: incidents.filter(p => p !== id)
     })
   }
 
@@ -290,6 +291,15 @@ class VendorProductModal extends React.Component {
 
   renderIncidentPickerModal () {
     if (!this.state.incidentModalOpen) return null
+    const {brainCells} = this.props
+    const cells = brainCells.filter(p => p.type === 'Incident')
+    return (
+      <BraincellIncidentPickerModal
+        cells={cells}
+        onPick={this.onPickIncident.bind(this)}
+        onClose={this.onClosePickIncident.bind(this)}
+      />
+    )
   }
 
   render () {
@@ -314,6 +324,10 @@ class VendorProductModal extends React.Component {
         workflows={this.getPickedWorkflows()}
         onClickAddWf={this.onClickAddWf.bind(this)}
         onClickDeleteWf={this.onClickDeleteWf.bind(this)}
+
+        incidentCells={this.getIncidentCells()}
+        onClickAddIncident={this.onClickAddIncident.bind(this)}
+        onClickDeleteIncident={this.onClickDeleteIncident.bind(this)}
       >
         {this.renderTagPickerModal()}
         {this.renderClassPickerModal()}

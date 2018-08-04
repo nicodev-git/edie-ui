@@ -46,7 +46,6 @@ export default class Tags extends React.Component {
           })
         })
       }
-
     }
   }
 

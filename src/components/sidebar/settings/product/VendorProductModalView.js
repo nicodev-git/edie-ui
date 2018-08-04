@@ -100,7 +100,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderIncidents () {
-    const {onClickAddIncident} = this.props
+    const {onClickAddIncident, onClickDeleteIncident} = this.props
     return (
       <div>
         <div className="group-header">
@@ -126,12 +126,16 @@ class SimulationModalView extends React.Component {
             </div>
             <div className="panel-body">
               <div className="row">
-                <div className="col-md-2 col-lg-2">
+                <div className="col-md-8 col-lg-6">
                   <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
                 </div>
-                <div className="col-md-2 col-lg-2">
+              </div>
+              <div className="row margin-md-top">
+                <div className="col-md-8 col-lg-6">
                   <Field name="version" component={FormInput} floatingLabel="Version" className="margin-md-right" fullWidth/>
                 </div>
+              </div>
+              <div className="row margin-md-top">
                 <div className="col-md-8 col-lg-6">
                   <Field name="description" component={FormInput} floatingLabel="Description" className="margin-md-right" fullWidth/>
                 </div>
@@ -140,7 +144,6 @@ class SimulationModalView extends React.Component {
               {this.renderTags()}
               {this.renderClasses()}
               {this.renderGroks()}
-
             </div>
           </div>
 
