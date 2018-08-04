@@ -11,8 +11,8 @@ class SimulationModalView extends React.Component {
   renderTags () {
     const {tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
+      <div>
+        <div className="padding-md">
           <h3>Tags</h3>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddTag}/>
@@ -30,8 +30,8 @@ class SimulationModalView extends React.Component {
   renderClasses () {
     const {classifierCells, onClickAddClass, onClickDeleteClass} = this.props
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
+      <div>
+        <div className="padding-md">
           <h3>Classifiers</h3>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddClass}/>
@@ -51,8 +51,8 @@ class SimulationModalView extends React.Component {
   renderGroks () {
     const {grokCells, onClickAddGrok, onClickDeleteGrok} = this.props
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
+      <div>
+        <div className="padding-md">
           <h3>Parser</h3>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddGrok}/>
@@ -70,8 +70,8 @@ class SimulationModalView extends React.Component {
   renderWorkflows () {
     const {workflows, onClickAddWf, onClickDeleteWf} = this.props
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
+      <div>
+        <div className="padding-md">
           <h3>Workflows</h3>
           <div className="panel-options">
             <AddIcon className="link margin-md-top" onClick={onClickAddWf}/>
@@ -98,6 +98,19 @@ class SimulationModalView extends React.Component {
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+    )
+  }
+
+  renderIncidents () {
+    return (
+      <div>
+        <div className="padding-md">
+          <h3>Incidents</h3>
+        </div>
+        <div className="panel-body">
+
         </div>
       </div>
     )
@@ -132,14 +145,7 @@ class SimulationModalView extends React.Component {
           {this.renderClasses()}
           {this.renderGroks()}
           {this.renderWorkflows()}
-
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3>Incidents</h3>
-            </div>
-            <div className="panel-body">
-            </div>
-          </div>
+          {this.renderIncidents()}
 
           <div className="padding-md">
             <Button variant="raised" type="submit" className="margin-md-top">Save</Button>

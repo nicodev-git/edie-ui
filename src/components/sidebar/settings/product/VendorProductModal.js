@@ -25,7 +25,10 @@ class VendorProductModal extends React.Component {
       grokModalOpen: false,
 
       workflows: (editProduct ? editProduct.workflows : []) || [],
-      wfModalOpen: false
+      wfModalOpen: false,
+
+      incidents: (editProduct ? editProduct.incidents : []) || [],
+      incidentModalOpen: false
     }
   }
 
@@ -193,6 +196,48 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  onPickIncident (cell) {
+    const {incidents} = this.state
+    if (incidents.indexOf(cell.id) >= 0) return alert('Already exists')
+    this.setState({
+      incidents: [...incidents, cell.id]
+    })
+    this.onClosePickIncident()
+  }
+
+  onClosePickIncident () {
+    this.setState({
+      incidentModalOpen: false
+    })
+  }
+
+  getIncidentCells () {
+    const {brainCells} = this.props
+    const {incidents} = this.state
+    const cells = []
+    incidents.forEach(id => {
+      const cell = find(brainCells, {id, type: 'Grok'})
+      if (cell) cells.push(cell)
+    })
+    return cells
+  }
+
+  onClickAddIncident () {
+    this.setState({
+      grokModalOpen: true
+    })
+  }
+
+  onClickDeleteIncident (id) {
+    if (!window.confirm('Click OK to remove')) return
+    const {parsers} = this.state
+    this.setState({
+      parsers: parsers.filter(p => p !== id)
+    })
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
     const {brainCells} = this.props
@@ -243,6 +288,10 @@ class VendorProductModal extends React.Component {
     )
   }
 
+  renderIncidentPickerModal () {
+    if (!this.state.incidentModalOpen) return null
+  }
+
   render () {
     const {handleSubmit, onClose} = this.props
     return (
@@ -270,6 +319,7 @@ class VendorProductModal extends React.Component {
         {this.renderClassPickerModal()}
         {this.renderGrokPickerModal()}
         {this.renderWfPickerModal()}
+        {this.renderIncidentPickerModal()}
       </VendorProductModalView>
     )
   }
