@@ -237,6 +237,29 @@ a, a:focus, a:hover {
 }
 
 /* Misc */
+.panel-default {
+    border-color: #dddddd; }
+.panel-default > .panel-heading, .panel-default > form > .panel-heading {
+    color: #333333;
+    background-color: whitesmoke;
+    border-color: #dddddd; }
+.panel-default > .panel-heading .panel-title + p, .panel-default > form > .panel-heading .panel-title + p {
+    color: #666666; }
+.panel-default > .panel-heading + .panel-collapse > .panel-body, .panel-default > form > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #dddddd; }
+.panel-default > .panel-footer, .panel-default > form > .panel-footer {
+    color: #333333;
+    background-color: whitesmoke;
+    border-color: #dddddd; }
+.panel-default > .panel-footer + .panel-collapse > .panel-body, .panel-default > form > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #dddddd; }
+.panel-default .panel-body + .panel-body {
+    border-top: 1px solid #dddddd; }
+.panel-default.panel-full {
+    background-color: whitesmoke; }
+.panel-default.panel-full > .panel-body, .panel-default.panel-full > form > .panel-body {
+    border-color: #dddddd;
+    color: #46484a; }
 
 .panel-group {
     overflow: auto;
