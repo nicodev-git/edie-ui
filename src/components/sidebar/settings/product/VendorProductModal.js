@@ -5,9 +5,19 @@ import {reduxForm} from 'redux-form'
 import VendorProductModalView from './VendorProductModalView'
 
 class VendorProductModal extends React.Component {
+  constructor(props) {
+    super(props)
+
+    const {editProduct} = this.props
+    this.state = {
+      tags: (editProduct ? editProduct.tags : []) || []
+    }
+  }
+
   handleFormSubmit (values) {
     this.props.onSave(values)
   }
+
   render () {
     const {handleSubmit, onClose} = this.props
     return (

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
+import {Button} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/AddCircle'
 
-import {Button, AppBar, Toolbar, Typography} from '@material-ui/core'
 import { FormInput, CardPanel } from 'components/modal/parts'
 
 class SimulationModalView extends React.Component {
@@ -31,10 +32,12 @@ class SimulationModalView extends React.Component {
             </div>
           </div>
 
-
           <div className="panel panel-default">
             <div className="panel-heading">
               <h3>Tags</h3>
+              <div className="panel-options">
+                <AddIcon className="link margin-md-top"/>
+              </div>
             </div>
             <div className="panel-body">
             </div>

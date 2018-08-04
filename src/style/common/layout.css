@@ -261,6 +261,13 @@ a, a:focus, a:hover {
     border-color: #dddddd;
     color: #46484a; }
 
+.panel-options {
+    position: absolute;
+    top: 10px;
+    right: 15px; }
+.panel-options a {
+    color: inherit; }
+
 .panel-group {
     overflow: auto;
 }

@@ -23,6 +23,7 @@ export default class Tags extends React.Component {
   }
   componentWillMount () {
     this.props.fetchVendorProducts()
+    this.props.fetchBrainCells()
   }
 
   onChangeProduct (e) {
