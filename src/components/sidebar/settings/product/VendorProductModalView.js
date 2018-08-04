@@ -7,6 +7,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import { FormInput } from 'components/modal/parts'
 
+const panelStyle = {width: 1000, height: 623, overflow: 'auto'}
+
 class SimulationModalView extends React.Component {
   renderTags () {
     const {tags, onClickAddTag, onClickDeleteTag} = this.props
@@ -52,11 +54,9 @@ class SimulationModalView extends React.Component {
     const {grokCells, onClickAddGrok, onClickDeleteGrok} = this.props
     return (
       <div>
-        <div className="group-header">
-          <div>Parser</div>
-          <div className="panel-options">
-            <AddIcon className="link margin-md-top" onClick={onClickAddGrok}/>
-          </div>
+        <div className="group-header padding-md-top padding-md-bottom">
+          <span className="valign-middle">Parser</span>
+          <AddIcon className="link valign-middle" onClick={onClickAddGrok}/>
         </div>
         <div>
           {grokCells.map((t, i) =>
@@ -72,42 +72,40 @@ class SimulationModalView extends React.Component {
     return (
       <div>
         <div className="group-header">
-          <div>Workflows</div>
-          <div className="panel-options">
-            <AddIcon className="link margin-md-top" onClick={onClickAddWf}/>
-          </div>
+          <span className="valign-middle">Workflows</span>
+          <AddIcon className="link valign-middle" onClick={onClickAddWf}/>
         </div>
         <div >
-          <div style={{maxHeight: 300, overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              {workflows.map((t, i) =>
-                <tr key={t.id}>
-                  <td>{t.name}</td>
-                  <td>{t.description}</td>
-                  <td><DeleteIcon onClick={() => onClickDeleteWf(t.id)}/></td>
-                </tr>
-              )}
-              </tbody>
-            </table>
-          </div>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            {workflows.map((t, i) =>
+              <tr key={t.id}>
+                <td>{t.name}</td>
+                <td>{t.description}</td>
+                <td><DeleteIcon onClick={() => onClickDeleteWf(t.id)}/></td>
+              </tr>
+            )}
+            </tbody>
+          </table>
         </div>
       </div>
     )
   }
 
   renderIncidents () {
+    const {onClickAddIncident} = this.props
     return (
       <div>
-        <div className="padding-md">
-          <h3>Incidents</h3>
+        <div className="group-header">
+          <span className="valign-middle">Incidents</span>
+          <AddIcon className="link valign-middle" onClick={onClickAddIncident}/>
         </div>
         <div>
 
@@ -122,7 +120,7 @@ class SimulationModalView extends React.Component {
       <div className="flex-1">
         <form onSubmit={onSubmit}>
 
-          <div className="panel panel-default" style={{width: 1000, height: 623}}>
+          <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
               <h3>Vendor Product Info</h3>
             </div>
@@ -140,15 +138,29 @@ class SimulationModalView extends React.Component {
               </div>
 
               {this.renderTags()}
-
               {this.renderClasses()}
+              {this.renderGroks()}
+
             </div>
           </div>
 
+          <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
+            <div className="panel-heading">
+              <h3>Workflows</h3>
+            </div>
+            <div className="panel-body">
+              {this.renderWorkflows()}
+            </div>
+          </div>
 
-          {/*{this.renderGroks()}*/}
-          {/*{this.renderWorkflows()}*/}
-          {/*{this.renderIncidents()}*/}
+          <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
+            <div className="panel-heading">
+              <h3>Incidents</h3>
+            </div>
+            <div className="panel-body">
+              {this.renderIncidents()}
+            </div>
+          </div>
 
           <div className="padding-md">
             <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
