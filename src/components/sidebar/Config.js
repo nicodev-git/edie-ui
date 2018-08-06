@@ -11,11 +11,9 @@ import { sidebarIconsColor } from 'style/common/materialStyles'
 import MapIcon from '@material-ui/icons/Map'
 import DashboardServerIcon from '@material-ui/icons/Devices'
 import DashboardWfIcon from '@material-ui/icons/TrendingUp'
-import DashboardAppIcon from '@material-ui/icons/SettingsApplications'
 import LogIcon from '@material-ui/icons/EventAvailable'
 import DeviceWfIcon from '@material-ui/icons/DeveloperBoard'
 
-// const home = <HomeIcon nativeColor={sidebarIconsColor}/>
 const search = <SearchIcon nativeColor={sidebarIconsColor}/>
 const chat = <ChatIcon nativeColor={sidebarIconsColor}/>
 const threatmap = <BugReportIcon nativeColor={sidebarIconsColor}/>
@@ -29,14 +27,12 @@ const logIcon = <LogIcon nativeColor={sidebarIconsColor}/>
 const deviceWfIcon = <DeviceWfIcon nativeColor={sidebarIconsColor}/>
 const dservers = <DashboardServerIcon nativeColor={sidebarIconsColor}/>
 const dworkflow = <DashboardWfIcon nativeColor={sidebarIconsColor}/>
-const dapp = <DashboardAppIcon nativeColor={sidebarIconsColor}/>
 
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true, roleMenuId: 'Dashboard'},
   {id: 'home', title: 'Map', icon: map, path: '/', roleMenuId: 'Map'},
   {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers', roleMenuId: 'Servers'},
   {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/workflow', roleMenuId: 'Workflows'},
-  {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true, roleMenuId: 'Apps'},
   {id: 'search', title: 'Search', icon: search, path: '/search', roleMenuId: 'Search'},
   {id: 'devicewf', title: 'Device Workflow', icon: deviceWfIcon, path: '/devicewf', roleMenuId: 'DeviceWorkflows'},
   {id: 'log', title: 'Logs', icon: logIcon, path: '/logs', roleMenuId: 'Logs'},
