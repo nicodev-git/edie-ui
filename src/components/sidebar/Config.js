@@ -15,7 +15,7 @@ import DashboardAppIcon from '@material-ui/icons/SettingsApplications'
 import LogIcon from '@material-ui/icons/EventAvailable'
 import DeviceWfIcon from '@material-ui/icons/DeveloperBoard'
 
-const home = <HomeIcon nativeColor={sidebarIconsColor}/>
+// const home = <HomeIcon nativeColor={sidebarIconsColor}/>
 const search = <SearchIcon nativeColor={sidebarIconsColor}/>
 const chat = <ChatIcon nativeColor={sidebarIconsColor}/>
 const threatmap = <BugReportIcon nativeColor={sidebarIconsColor}/>

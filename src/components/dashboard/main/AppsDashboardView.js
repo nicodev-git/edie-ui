@@ -1,11 +1,16 @@
 import React from 'react'
-import {IconButton, TextField} from '@material-ui/core'
+import {Button, IconButton, TextField} from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Create'
 
 import EditConfigModal from './apps/EditConfigModal'
 import AppletCard from 'components/common/AppletCard'
 import { appletColors as colors } from 'shared/Global'
 import AppDevicesModal from './apps/AppDevicesModal'
+
+
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 export default class AppsDashboardView extends React.Component {
   constructor (props) {
@@ -85,7 +90,7 @@ export default class AppsDashboardView extends React.Component {
 
   renderAddMenu () {
     return (
-      <div className="text-right" style={{position: 'absolute', top: -68, right: 0}}>
+      <div>
         <TextField name="filter" value={this.state.filter} onChange={this.onChangeFilter.bind(this)}
                    label="Search"
                    className="valign-top"/>
@@ -118,15 +123,22 @@ export default class AppsDashboardView extends React.Component {
 
   render () {
     return (
-      <div>
-        {this.renderAddMenu()}
-        <ul className="web-applet-cards">
-          {this.getServers().map(this.renderServer.bind(this))}
-        </ul>
+      <TabPage>
+        <TabPageHeader title="Apps">
+          <div className="margin-md-top">
+            {this.renderAddMenu()}
+          </div>
+        </TabPageHeader>
 
-        {this.renderPrefModal()}
-        {this.renderDevicesModal()}
-      </div>
+        <TabPageBody history={this.props.history} location={this.props.location}>
+          <ul className="web-applet-cards">
+            {this.getServers().map(this.renderServer.bind(this))}
+          </ul>
+
+          {this.renderPrefModal()}
+          {this.renderDevicesModal()}
+        </TabPageBody>
+      </TabPage>
     )
   }
 }
