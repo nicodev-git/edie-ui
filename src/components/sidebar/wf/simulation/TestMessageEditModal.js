@@ -24,7 +24,6 @@ class TestMessageEditModal extends React.Component {
       ...this.props.editMsg,
       values
     }
-
     this.props.onSubmit(entity)
   }
 
