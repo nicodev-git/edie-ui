@@ -89,6 +89,8 @@ class TestCaseModal extends React.Component {
       const index = messages.indexOf(editMsg)
       if (index >= 0) {
         messages = messages.map((p, i) => i === index ? msg : p)
+      } else {
+        messages = [...messages, msg]
       }
     } else {
       messages = [...messages, msg]
