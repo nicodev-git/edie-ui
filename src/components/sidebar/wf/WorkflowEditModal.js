@@ -81,6 +81,10 @@ class WorkflowEditModal extends React.Component {
       let itemLabel = ''
       let itemValue = ''
 
+      let itemPreLabelKey = ''
+      let itemLabelKey = ''
+      let itemValueKey = ''
+
       switch (type) {
         case 'DECISION':
         case 'EXCLUDE': {
