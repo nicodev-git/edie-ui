@@ -55,6 +55,9 @@ class WorkflowEditModal extends React.Component {
       rulePanelExpanded: false,
       brainCellType: 'Incident',
 
+      editShape: null,
+      keyField: null,
+
       active: 1
     }
   }
@@ -197,6 +200,7 @@ class WorkflowEditModal extends React.Component {
         shapeModalOpen: true,
         rulePanelExpanded: true,
         editShape: null,
+        keyField: null,
         shape
       })
     })
@@ -329,6 +333,7 @@ class WorkflowEditModal extends React.Component {
         shapeModalOpen: true,
         rulePanelExpanded: true,
         editShape: current,
+        keyField: '',
         shape: this.props.shapes[shapeIndex]
       })
     })
@@ -468,7 +473,7 @@ class WorkflowEditModal extends React.Component {
     if (!this.state.shapeModalOpen) return null
 
     // if (objectConfig.data.uuid) return null
-    const {shape, editShape, wfData} = this.state
+    const {shape, editShape, wfData, keyField} = this.state
     const {objects} = wfData
 
 
