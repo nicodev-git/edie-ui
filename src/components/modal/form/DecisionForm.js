@@ -136,8 +136,20 @@ class DecisionForm extends React.Component {
     const {keyFieldMode} = this.props
     if (keyFieldMode) {
       switch (keyFieldMode) {
-        case 'fieldType':
-
+        case 'field':
+          return (
+            <div className="padding-md">
+              <Field name="field" component={FormInput} label="Field" style={{minWidth: 250}}/>
+            </div>
+          )
+        case 'variable':
+          return (
+            <div className="padding-md">
+              <TextField placeholder="Variable" className="valign-middle margin-md-right"
+                         value={this.state.varName} onChange={this.onChangeVarName.bind(this)}
+                         style={{minWidth: 250}}/>
+            </div>
+          )
         case 'condition':
           return (
             <div className="padding-md">

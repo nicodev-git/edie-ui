@@ -97,7 +97,7 @@ class WorkflowEditModal extends React.Component {
           itemPreLabel = lastword
           itemValue = `${sentence}`
 
-          itemPreLabelKey = 'fieldType'
+          itemPreLabelKey = fieldType === 'message' ? '' : fieldType
           itemLabelKey = 'condition'
           break
         }
@@ -324,7 +324,7 @@ class WorkflowEditModal extends React.Component {
     return false
   }
 
-  onClickEditShape(index, type, e) {
+  onClickEditShape(index, keyField, e) {
     const {wfData} = this.state
     const {objects} = wfData
     const current = objects[index]
@@ -335,7 +335,7 @@ class WorkflowEditModal extends React.Component {
 
     if (shapeIndex < 0) return alert('Shape not found')
 
-    console.log(type)
+    console.log(keyField)
 
     this.setState({
       shapeModalOpen: false,
@@ -345,7 +345,7 @@ class WorkflowEditModal extends React.Component {
         shapeModalOpen: true,
         rulePanelExpanded: true,
         editShape: current,
-        keyField: '',
+        keyField,
         shape: this.props.shapes[shapeIndex]
       })
     })
@@ -545,7 +545,7 @@ class WorkflowEditModal extends React.Component {
         commands={[]}
         noModal
         embedded
-        keyFieldMode={!!editShape}
+        keyFieldMode={keyField}
       />
     )
   }
