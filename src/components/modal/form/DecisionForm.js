@@ -137,6 +137,7 @@ class DecisionForm extends React.Component {
     if (keyFieldMode) {
       switch (keyFieldMode) {
         case 'fieldType':
+
         case 'condition':
           return (
             <div className="padding-md">
