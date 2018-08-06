@@ -888,7 +888,7 @@ export const simulateWfMessage = (type, data, refresh) => {
     const url = type === 'syslog' ? 'simulateConnector' : 'simulateMessages'
 
     axios.post(`${ROOT_URL}/${url}`, data).then(res => {
-      dispatch({type: UPDATE_WF_SIM_RES, data: res.data.success ? 'Successfully sent' : ''})
+      dispatch({type: UPDATE_WF_SIM_RES, data: res.data.success ? '' : 'Failed'})
       dispatch({type: UPDATE_WF_SIM_STATE, data: false})
 
       if (refresh) dispatch(fetchTestIncidents())
