@@ -330,7 +330,6 @@ class WorkflowEditModal extends React.Component {
     const current = objects[index]
 
     if (!keyField) return
-
     const shapeIndex = findIndex(this.props.shapes, {
       type: current.config.type
     })
