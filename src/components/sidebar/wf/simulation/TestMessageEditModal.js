@@ -29,10 +29,12 @@ class TestMessageEditModal extends React.Component {
   }
 
   render() {
-    const {handleSubmit, onClose} = this.props
+    const {handleSubmit, onClose, userConnectors} = this.props
     return (
       <TestMessageEditModalView
         msgType={this.getMessageType()}
+
+        userConnectors={userConnectors}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={onClose}

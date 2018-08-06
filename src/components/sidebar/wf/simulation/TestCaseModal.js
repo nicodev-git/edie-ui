@@ -155,6 +155,9 @@ class TestCaseModal extends React.Component {
       <TestMessageEditModal
         typeName={editMsg.typeName}
         editMsg={editMsg}
+
+        userConnectors={[]}
+
         onSubmit={this.onSubmitMsg.bind(this)}
         onClose={this.onCloseMsgModal.bind(this)}
       />
