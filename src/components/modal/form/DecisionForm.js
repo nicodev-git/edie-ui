@@ -137,6 +137,14 @@ class DecisionForm extends React.Component {
     if (keyFieldMode) {
       switch (keyFieldMode) {
         case 'fieldType':
+        case 'condition':
+          return (
+            <div className="padding-md">
+              <Field name="condition" component={FormSelect} label="Condition"
+                     options={conditions} className="valign-top margin-md-right"
+                     style={{minWidth: 250}}/>
+            </div>
+          )
         default:
           return (
             <div className="padding-md">
