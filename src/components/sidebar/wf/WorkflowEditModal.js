@@ -329,13 +329,13 @@ class WorkflowEditModal extends React.Component {
     const {objects} = wfData
     const current = objects[index]
 
+    if (!keyField) return
+
     const shapeIndex = findIndex(this.props.shapes, {
       type: current.config.type
     })
 
     if (shapeIndex < 0) return alert('Shape not found')
-
-    console.log('Param:' + keyField)
 
     this.setState({
       shapeModalOpen: false,
