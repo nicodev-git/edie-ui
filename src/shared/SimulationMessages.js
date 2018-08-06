@@ -94,5 +94,5 @@ export const messageTypes = [{
     type: 'datetime',
     format: ''
   }],
-  json: '{"tags": [],"incident":{"monitorid": "5ad4712552faff0001196425aa123", "agentid": "5ad4712552faff0001196425", "deviceid": ["5ad4712552faff0001196425"], "monitorName":"Disk","monitortype":"disk","description":"Usage is ${usage}%","startTimestamp":${timestamp},"data":{"Usage":"${usage}%"}}}'
+  json: '{"tags": [],"incident":{"monitorid": "5ad4712552faff0001196425aa123", "agentid": "5ad4712552faff0001196425", "deviceid": ["5ad4712552faff0001196425"], "monitorName":"Disk","monitortype":"disk","description":"Disk usage is ${usage}%","startTimestamp":${timestamp},"data":{"Usage":"${usage}%"}}}'
 }]
