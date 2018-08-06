@@ -79,4 +79,20 @@ export const messageTypes = [{
     fullWidth: true
   }],
   json: '{"text": "${text}", "connectorId": "${connectorId}"}'
+}, {
+  name: 'Disk',
+  img: 'disk.png',
+  group: 'internal',
+  data: [{
+    key: 'usage',
+    label: 'Usage',
+    default: '80%'
+  }, {
+    key: 'timestamp',
+    label: 'Timestamp',
+    default: 1532080275000,
+    type: 'datetime',
+    format: ''
+  }],
+  json: '{"tags": [],"incident":{"monitorid": "5ad4712552faff0001196425aa123", "agentid": "5ad4712552faff0001196425", "deviceid": ["5ad4712552faff0001196425"], "monitorName":"Disk","monitortype":"disk","description":"Usage is ${usage}%","startTimestamp":${timestamp},"data":{"Usage":"${usage}%"}}}'
 }]
