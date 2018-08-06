@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, IconButton, TextField} from '@material-ui/core'
+import {IconButton, TextField} from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Create'
 
 import EditConfigModal from './apps/EditConfigModal'
