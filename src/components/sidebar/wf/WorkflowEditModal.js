@@ -308,7 +308,7 @@ class WorkflowEditModal extends React.Component {
     return false
   }
 
-  onClickEditShape(index, e) {
+  onClickEditShape(index, type, e) {
     const {wfData} = this.state
     const {objects} = wfData
     const current = objects[index]
@@ -318,6 +318,8 @@ class WorkflowEditModal extends React.Component {
     })
 
     if (shapeIndex < 0) return alert('Shape not found')
+
+    console.log(type)
 
     this.setState({
       shapeModalOpen: false,
