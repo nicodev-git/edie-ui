@@ -83,7 +83,7 @@ class WorkflowEditModal extends React.Component {
 
       let itemPreLabelKey = ''
       let itemLabelKey = ''
-      let itemValueKey = ''
+      let itemValueKey = 'sentence'
 
       switch (type) {
         case 'DECISION':
@@ -99,13 +99,13 @@ class WorkflowEditModal extends React.Component {
 
           itemPreLabelKey = 'fieldType'
           itemLabelKey = 'condition'
-          itemValueKey = 'sentence'
-
           break
         }
         case 'COUNT':
           itemLabel = type
           itemValue = `${variable} > ${sentence}`
+
+          itemLabelKey = 'variable'
           break
         case 'TIMELAST':
           itemLabel = type
@@ -118,8 +118,11 @@ class WorkflowEditModal extends React.Component {
 
       return {
         prelabel: itemPreLabel,
+        prelabelKey: itemPreLabelKey,
         label: itemLabel,
-        value: itemValue
+        labelKey: itemLabelKey,
+        value: itemValue,
+        valueKey: itemValueKey
       }
     })
     return wfDataItems
