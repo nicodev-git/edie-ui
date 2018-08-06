@@ -27,7 +27,7 @@ export default class InlineEdit extends React.Component {
 
   static defaultProps = {
     minLength: 1,
-    maxLength: 256,
+    maxLength: 4095,
     editingElement: 'input',
     staticElement: 'span',
     tabIndex: 0,
