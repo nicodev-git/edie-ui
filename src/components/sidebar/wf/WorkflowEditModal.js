@@ -96,6 +96,11 @@ class WorkflowEditModal extends React.Component {
           const lastword = words[words.length - 1]
           itemPreLabel = lastword
           itemValue = `${sentence}`
+
+          itemPreLabelKey = 'fieldType'
+          itemLabelKey = 'condition'
+          itemValueKey = 'sentence'
+
           break
         }
         case 'COUNT':
