@@ -309,7 +309,7 @@ export default class Audit extends React.Component {
           {this.renderToolbar()}
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={7} history={this.props.history} location={this.props.location}>
           <div className="flex-1"style={flexStyle}>
             {this.renderAudit()}
           </div>

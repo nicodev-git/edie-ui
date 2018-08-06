@@ -17,14 +17,14 @@ const tabs = [{
   title: 'Tags',
   path: '/settings/tags'
 }, {
+  title: 'Products',
+  path: '/settings/products'
+}, {
   title: 'Audit',
   path: '/settings/audit'
 }, {
   title: 'Advanced',
   path: '/settings/braincells'
-}, {
-  title: 'Products',
-  path: '/settings/products'
 }]
 
 export default tabs

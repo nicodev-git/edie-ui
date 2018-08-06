@@ -1058,7 +1058,7 @@ export function updateVendorProduct (entity) {
 export function removeVendorProduct (entity) {
   return dispatch => {
     axios.delete(`${ROOT_URL}/vendorproduct/${entity.id}`).then(res => {
-      if (res.data.success) dispatch({type: REMOVE_VENDOR_PRODUCT, data: entity})
+      dispatch({type: REMOVE_VENDOR_PRODUCT, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
 }
