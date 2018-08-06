@@ -70,7 +70,8 @@ export const messageTypes = [{
     key: 'connectorId',
     label: 'Connector Id',
     default: '',
-    fullWidth: true
+    fullWidth: true,
+    type: 'connector'
   }, {
     key: 'text',
     label: 'Text',
