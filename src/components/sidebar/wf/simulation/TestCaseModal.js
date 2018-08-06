@@ -92,6 +92,7 @@ class TestCaseModal extends React.Component {
       } else {
         messages = [...messages, msg]
       }
+
     } else {
       messages = [...messages, msg]
     }
