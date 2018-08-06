@@ -335,7 +335,7 @@ class WorkflowEditModal extends React.Component {
 
     if (shapeIndex < 0) return alert('Shape not found')
 
-    console.log(keyField)
+    console.log('Param:' + keyField)
 
     this.setState({
       shapeModalOpen: false,
