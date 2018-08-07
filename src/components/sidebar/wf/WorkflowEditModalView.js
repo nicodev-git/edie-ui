@@ -3,7 +3,7 @@ import {Field} from 'redux-form'
 import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
-  Checkbox, FormControlLabel, Button
+  Checkbox, FormControlLabel, Button, Popover
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
@@ -13,7 +13,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import {findIndex} from 'lodash'
 
-import Popover from 'components/common/popover'
+// import Popover from 'components/common/popover'
 import {
   FormInput,
   FormSelect,
