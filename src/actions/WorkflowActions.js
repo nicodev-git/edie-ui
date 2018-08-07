@@ -928,7 +928,7 @@ export const removeSimSample = (entity) => {
 export const fetchTestGroups = (entity) => {
   return dispatch => {
     axios.get(`${ROOT_URL}/flowtestgroup?size=1000`).then(res => {
-      dispatch({type: FETCH_TEST_GROUPS, data: res.data})
+      dispatch({type: FETCH_TEST_GROUPS, data: sortBy(res.data, a => a.name.toLowerCase())})
     })
   }
 }
