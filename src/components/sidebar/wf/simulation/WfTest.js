@@ -213,17 +213,18 @@ export default class WfTest extends React.Component {
     })
 
     console.log(entities)
-    this.props.simulateWfMessage(group.type, entities, true)
-    setTimeout(() => {
-      const {incidentDraw} = this.state
-      this.setState({
-        incidentDraw: incidentDraw + 1
-      })
-    }, 3000)
+    this.props.simulateWfMessage(group.type, entities, () => {
+      this.onClickRefreshIncidents()
+    })
+
+    setTimeout(this.onClickRefreshIncidents.bind(this), 5000)
   }
 
   onClickRefreshIncidents () {
-
+    const {incidentDraw} = this.state
+    this.setState({
+      incidentDraw: incidentDraw + 1
+    })
   }
 
   selectCaseId (selectedCase, e) {

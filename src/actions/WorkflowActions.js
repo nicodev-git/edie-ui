@@ -880,7 +880,7 @@ export const showWfSimulationModal = (visible) => {
   }
 }
 
-export const simulateWfMessage = (type, data, refresh) => {
+export const simulateWfMessage = (type, data, cb) => {
   return dispatch => {
     dispatch({type: UPDATE_WF_SIM_STATE, data: true})
     dispatch({type: UPDATE_WF_SIM_RES, data: ''})
@@ -890,8 +890,7 @@ export const simulateWfMessage = (type, data, refresh) => {
     axios.post(`${ROOT_URL}/${url}`, data).then(res => {
       dispatch({type: UPDATE_WF_SIM_RES, data: res.data.success ? '' : 'Failed'})
       dispatch({type: UPDATE_WF_SIM_STATE, data: false})
-
-      if (refresh) dispatch(fetchTestIncidents())
+      cb && cb()
     }).catch(() => {
       dispatch({type: UPDATE_WF_SIM_RES, data: 'Connection failed'})
       dispatch({type: UPDATE_WF_SIM_STATE, data: false})
