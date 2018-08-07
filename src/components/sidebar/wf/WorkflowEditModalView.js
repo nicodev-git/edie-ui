@@ -349,45 +349,6 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
-  renderTabContent() {
-    const {
-      tab
-    } = this.props
-
-    switch (tab) {
-      case "wf":
-        return this.renderWfTab()
-      case "filter":
-        return this.renderFilterTab()
-      case "general":
-        return this.renderGeneralTab()
-      case "security":
-        return this.renderSecurityTab()
-      case "actions":
-        return this.renderTabActions()
-      case "schedule":
-        return this.renderTabSchedule()
-      case "appliedto":
-        return this.renderAppliedTo()
-      default:
-        return null
-    }
-  }
-
-  cumulativeOffset(element) {
-    var top = 0, left = 0;
-    do {
-      top += element.offsetTop  || 0;
-      left += element.offsetLeft || 0;
-      element = element.offsetParent
-    } while(element)
-
-    return {
-      top: top,
-      left: left
-    }
-  }
-
   renderEditPopover () {
     const {shapeModal, shapeAnchorEl, onCloseShapeModal} = this.props
     if (!shapeModal) return null
@@ -413,34 +374,22 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderContent () {
+
+  }
+
   render() {
     const {
       onSubmit, children,
       tab, onChangeTab, noModal
     } = this.props
 
-    // const mainStyle = tab === 'wf' ? {
-    //   height: panelHeight + 100,
-    //   overflow: 'auto'
-    // } : null
-
     const content = (
       <div>
         <form onSubmit={onSubmit}>
-          <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
-            <Tab label="Filter" value="filter"/>
-            <Tab label="General" value="general"/>
-            <Tab label="Workflow" value="wf"/>
-            <Tab label="Actions" value="actions"/>
-            <Tab label="Security" value="security"/>
-            <Tab label="Schedule" value="schedule"/>
-            <Tab label="Applied To" value="appliedto"/>
-          </Tabs>
-
-          {this.renderTabContent()}
+          {this.renderContent()}
         </form>
         {this.renderEditPopover()}
-        {/*{this.renderRuleDetail()}*/}
         {children}
       </div>
     )
