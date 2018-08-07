@@ -11,7 +11,7 @@ import {
 
 export default class TestMessageEditModalView extends React.Component {
   renderField (field) {
-    const {userConnectors} = this.props
+    const {connectors} = this.props
     switch (field.type) {
       case 'connector':
         return (
@@ -21,7 +21,7 @@ export default class TestMessageEditModalView extends React.Component {
             component={FormSelect}
             floatingLabel={field.label}
             className="valign-top margin-md-right"
-            options={userConnectors}
+            options={connectors.map(p => ({label: p.name, value: p.id}))}
             fullWidth={!!field.fullWidth}
           />
         )
