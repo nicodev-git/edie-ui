@@ -29,6 +29,7 @@ export default class WfTest extends React.Component {
   }
 
   componentWillMount () {
+    this.props.fetchCollectors()
     this.props.fetchTestGroups()
     this.props.fetchTestCases()
     this.props.fetchTestIncidents()
@@ -238,7 +239,7 @@ export default class WfTest extends React.Component {
   //////////////////////////////////////////////////////////////
 
   renderTestCaseModal () {
-    const {submitForm, testGroups} = this.props
+    const {submitForm, testGroups, collectors} = this.props
     if (!this.state.testCaseModalOpen) return null
     return (
       <TestCaseModal
@@ -248,6 +249,8 @@ export default class WfTest extends React.Component {
         submitForm={submitForm}
         onSubmit={this.onSaveTestCase.bind(this)}
         onClickClose={this.onCloseTestCase.bind(this)}
+
+        connectors={collectors}
       />
     )
   }
