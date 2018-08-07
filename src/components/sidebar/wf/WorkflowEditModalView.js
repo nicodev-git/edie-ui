@@ -13,7 +13,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import {findIndex} from 'lodash'
 
-// import Popover from 'components/common/popover'
 import {
   FormInput,
   FormSelect,
@@ -30,8 +29,6 @@ const cardStyle = {
   width: '100%',
   overflow: 'auto'
 }
-
-// const panelHeight = cardStyle.height + 90
 
 const itemStyle = {
   width: '24px',
@@ -79,7 +76,7 @@ class WorkflowEditModalView extends React.Component {
 
   renderWfTab() {
     const {
-      wfDataItems, /*onClickAddShape, onCloseShapeMenu, shapeAnchorEl,*/
+      wfDataItems,
       onClickDeleteShape, onClickEditShape
     } = this.props
     return (
@@ -392,10 +389,8 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderEditPopover () {
-    const {shapeModal, shapeAnchorEl, editShape, onCloseShapeModal} = this.props
+    const {shapeModal, shapeAnchorEl, onCloseShapeModal} = this.props
     if (!shapeModal) return null
-
-    const rt = this.cumulativeOffset(shapeAnchorEl)
 
     return (
       <Popover
@@ -405,7 +400,7 @@ class WorkflowEditModalView extends React.Component {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <div className="padding-sm">
-        {shapeModal}
+          {shapeModal}
         </div>
       </Popover>
     )
