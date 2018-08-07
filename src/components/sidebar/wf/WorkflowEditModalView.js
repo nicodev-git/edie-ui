@@ -248,7 +248,7 @@ class WorkflowEditModalView extends React.Component {
                options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
         <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
 
-        <Field name="autoAddIncidentCell" component={FormCheckbox} label="Auto Add Incident Cell"/>
+        <Field name="autoAddIncidentCell" component={FormCheckbox} label="Auto Add Incident Cell" className="margin-md-left"/>
       </div>
     )
   }
@@ -361,15 +361,21 @@ class WorkflowEditModalView extends React.Component {
         <Field name="name" component={FormInput} floatingLabel="Name"
                className="valign-top margin-md-right"/>
 
-        <div style={{width: '100%', overflow: 'auto'}} className="nowrap">
-          {tags.map((t, i) =>
-            <Chip
-              key={i}
-              label={t}
-              onDelete={() => onClickDeleteTag(i)}
-              className="margin-md-right"
-            />
-          )}
+        <h4>Tags</h4>
+        <div className="flex-horizontal">
+          <div className="flex-1 nowrap" style={{overflow: 'auto'}}>
+            {tags.map((t, i) =>
+              <Chip
+                key={i}
+                label={t}
+                onDelete={() => onClickDeleteTag(i)}
+                className="margin-md-right"
+              />
+            )}
+          </div>
+          <div>
+
+          </div>
         </div>
 
         {this.renderWfTab()}
@@ -387,6 +393,7 @@ class WorkflowEditModalView extends React.Component {
       <div>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
+          {this.renderButtons()}
         </form>
         {this.renderEditPopover()}
         {children}
