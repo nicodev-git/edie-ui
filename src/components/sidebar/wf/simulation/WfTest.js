@@ -18,7 +18,8 @@ export default class WfTest extends React.Component {
       selectedGroupId: null,
 
       testGroupModalOpen: false,
-      editGroup: null
+      editGroup: null,
+      incidentDraw: 1
     }
 
     this.mainMenuItems = [{
@@ -32,7 +33,6 @@ export default class WfTest extends React.Component {
     this.props.fetchCollectors()
     this.props.fetchTestGroups()
     this.props.fetchTestCases()
-    this.props.fetchTestIncidents()
   }
 
   componentDidUpdate(props) {
@@ -214,11 +214,11 @@ export default class WfTest extends React.Component {
 
     console.log(entities)
     this.props.simulateWfMessage(group.type, entities, true)
-    setTimeout(this.props.fetchTestIncidents, 3000)
+    // setTimeout(this.props.fetchTestIncidents, 3000)
   }
 
   onClickRefreshIncidents () {
-    this.props.fetchTestIncidents()
+
   }
 
   selectCaseId (selectedCase, e) {
@@ -286,6 +286,7 @@ export default class WfTest extends React.Component {
         caseModal={this.renderTestCaseModal()}
 
         onClickPost={this.onClickPost.bind(this)}
+        incidentDraw={this.state.incidentDraw}
         onClickRefreshIncidents={this.onClickRefreshIncidents.bind(this)}
       >
         {this.renderGroupModal()}

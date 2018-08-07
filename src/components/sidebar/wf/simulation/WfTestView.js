@@ -145,6 +145,7 @@ export default class WfTestView extends React.Component {
   // }
 
   renderIncidents () {
+    const {incidentDraw} = this.props
     return (
       <div className="flex-1 bg-white margin-md-top">
         <InfiniteTable
@@ -154,7 +155,7 @@ export default class WfTestView extends React.Component {
           rowMetadata={{'key': 'id'}}
           selectable
           params={{
-            draw: 1,
+            draw: incidentDraw,
             sort: 'startTimestamp,desc'
           }}
         />
