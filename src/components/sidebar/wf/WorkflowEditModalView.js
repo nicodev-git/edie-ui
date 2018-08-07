@@ -344,9 +344,9 @@ class WorkflowEditModalView extends React.Component {
   renderButtons() {
     const {onClickClose} = this.props
     return (
-      <div>
+      <div className="form-buttons">
         <Button variant="raised" onClick={onClickClose} className="margin-md-right">Advanced</Button>
-        <Button variant="raised" type="submit">Save</Button>
+        <Button variant="raised" color="primary" type="submit">Save</Button>
       </div>
     )
   }
