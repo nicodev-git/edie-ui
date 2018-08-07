@@ -16,7 +16,59 @@ import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 import { getSeverityIcon } from 'shared/Global'
 
+import { thumbup, thumpdown, done, notdone,
+  rawtext, reason } from 'style/common/materialStyles'
+
+
 export default class WfTestView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {}
+
+    this.cells = [{
+      'displayName': 'Severity',
+      'columnName': 'severity',
+      'cssClassName': 'text-center width-80',
+      'customComponent': (props) => {
+        return <span>{getSeverityIcon(props.data)}</span> // eslint-disable-line react/no-danger
+      }
+    }, {
+      'displayName': 'Date/Time',
+      'columnName': 'startTimestamp',
+      'cssClassName': 'nowrap text-center width-180',
+      'customComponent': (props) => {
+        const {data} = props
+        if (!data) return <span/>
+        return (
+          <span>
+            {moment(new Date(data)).fromNow()}
+          </span>
+        )
+      }
+    }, {
+      'displayName': 'System',
+      'columnName': 'devicename',
+      'cssClassName': 'width-200',
+      'customComponent': p => {
+        const {workflow} = p.rowData
+        return <span>{p.data}{workflow ? `(${workflow})` : ''}</span>
+      }
+    }]
+  }
+  ackIncident () {
+
+  }
+  onClickFixIncident () {
+
+  }
+  onClickViewRaw () {
+
+  }
+  showIncidentComments () {
+
+  }
+
+
   renderMessages () {
     const {caseModal} = this.props
     return (
