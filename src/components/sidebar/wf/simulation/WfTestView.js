@@ -113,35 +113,54 @@ export default class WfTestView extends React.Component {
     )
   }
 
+  // renderIncidents () {
+  //   const {testIncidents} = this.props
+  //   return (
+  //     <div className="flex-1 bg-white margin-md-top padding-sm" style={{overflow: 'auto'}}>
+  //       <table className="table table-hover">
+  //         <thead>
+  //           <tr>
+  //             <th>Severity</th>
+  //             <th>Date/Time</th>
+  //             <th>System</th>
+  //             <th>Description</th>
+  //           </tr>
+  //         </thead>
+  //         <tbody>
+  //         {testIncidents.map(p =>
+  //           <tr key={p.id}>
+  //             <td>{getSeverityIcon(p.severity, 24)}</td>
+  //             <td>
+  //               {moment(new Date(p.startTimestamp)).fromNow()}
+  //             </td>
+  //             <td>{p.monitorName}</td>
+  //             <td>{p.description}</td>
+  //           </tr>
+  //         )}
+  //         </tbody>
+  //       </table>
+  //     </div>
+  //   )
+  // }
+
   renderIncidents () {
-    const {testIncidents} = this.props
     return (
-      <div className="flex-1 bg-white margin-md-top padding-sm" style={{overflow: 'auto'}}>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Severity</th>
-              <th>Date/Time</th>
-              <th>System</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-          {testIncidents.map(p =>
-            <tr key={p.id}>
-              <td>{getSeverityIcon(p.severity, 24)}</td>
-              <td>
-                {moment(new Date(p.startTimestamp)).fromNow()}
-              </td>
-              <td>{p.monitorName}</td>
-              <td>{p.description}</td>
-            </tr>
-          )}
-          </tbody>
-        </table>
+      <div className="flex-1 bg-white margin-md-top padding-sm">
+        <InfiniteTable
+          url="/incident/search/findBySimulation"
+          cells={this.cells}
+          ref="table"
+          rowMetadata={{'key': 'id'}}
+          selectable
+          params={{
+            draw: 1,
+            sort: 'startTimestamp,desc'
+          }}
+        />
       </div>
     )
   }
+
 
   renderTestCases () {
     const {
