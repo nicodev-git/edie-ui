@@ -15,6 +15,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 import { getSeverityIcon } from 'shared/Global'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 import { thumbup, thumpdown, done, notdone,
   rawtext, reason } from 'style/common/materialStyles'
@@ -107,7 +108,7 @@ export default class WfTestView extends React.Component {
   renderMessages () {
     const {caseModal} = this.props
     return (
-      <div className="flex-1 bg-white padding-sm" style={{overflow: 'auto'}}>
+      <div className="flex-1 bg-white" style={{overflow: 'auto'}}>
         {caseModal}
       </div>
     )
@@ -145,7 +146,7 @@ export default class WfTestView extends React.Component {
 
   renderIncidents () {
     return (
-      <div className="flex-1 bg-white margin-md-top padding-sm">
+      <div className="flex-1 bg-white margin-md-top">
         <InfiniteTable
           url="/incident/search/findBySimulation"
           cells={this.cells}
