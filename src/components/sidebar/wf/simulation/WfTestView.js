@@ -53,6 +53,41 @@ export default class WfTestView extends React.Component {
         const {workflow} = p.rowData
         return <span>{p.data}{workflow ? `(${workflow})` : ''}</span>
       }
+    }, {
+      'displayName': 'Description',
+      'columnName': 'description',
+      'weight': 1
+    }, {
+      'displayName': 'Actions',
+      'columnName': 'actions',
+      'cssClassName': 'width-180',
+      'customComponent': (p) => {
+        const row = p.rowData
+        return (
+          <div className = "table-icons-container">
+            <div onClick={() => this.ackIncident(row)}>
+              {row.acknowledged ? thumbup : thumpdown}
+            </div>
+
+            <div onClick={() => this.onClickFixIncident(row)}>
+              {row.fixed ? done : notdone}
+            </div>
+
+            <div onClick={this.onClickViewRaw.bind(this, row)}>
+              {rawtext}
+            </div>
+
+            {
+              (row.fixed && !row.whathappened)
+                ? <div onClick={this.showIncidentComments.bind(this, row)}>
+                  {reason}
+                </div>
+                : null
+            }
+
+          </div>
+        )
+      }
     }]
   }
   ackIncident () {
