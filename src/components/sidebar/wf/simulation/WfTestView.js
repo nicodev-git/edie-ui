@@ -156,7 +156,8 @@ export default class WfTestView extends React.Component {
           selectable
           params={{
             draw: incidentDraw,
-            sort: 'startTimestamp,desc'
+            sort: 'startTimestamp,desc',
+            size: 10
           }}
         />
       </div>
