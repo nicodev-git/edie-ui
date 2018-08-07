@@ -416,9 +416,11 @@ class WorkflowEditModalView extends React.Component {
         open
         anchorEl={shapeAnchorEl}
         onClose={onCloseShapeModal}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center',}}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
+        <div className="padding-sm">
         {shapeModal}
+        </div>
       </Popover>
     )
   }
