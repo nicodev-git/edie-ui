@@ -110,7 +110,6 @@ class WorkflowEditModalView extends React.Component {
                 </div>
               </div>
             )}
-            {this.renderButtons()}
           </div>
         </div>
       </div>
@@ -157,16 +156,7 @@ class WorkflowEditModalView extends React.Component {
           </CardPanel>
 
           <CardPanel title="Selected Tags">
-            <div>
-              {tags.map((t, i) =>
-                <Chip
-                  key={i}
-                  label={t}
-                  onDelete={() => onClickDeleteTag(i)}
-                  className="margin-md-right"
-                />
-              )}
-            </div>
+
           </CardPanel>
         </div>
         {this.renderButtons()}
@@ -183,8 +173,6 @@ class WorkflowEditModalView extends React.Component {
         <CardPanel title="General">
           <div style={cardStyle}>
             <div>
-              <Field name="name" component={FormInput} floatingLabel="Name"
-                     className="valign-top margin-md-right"/>
               <Field name="description" component={FormInput} floatingLabel="Description" style={{minWidth: 400}}/>
             </div>
 
@@ -251,28 +239,16 @@ class WorkflowEditModalView extends React.Component {
     const incidentCells = brainCells.filter(p => p.type === 'Incident');
     return (
       <div>
-        <CardPanel title="Actions">
-          <div style={cardStyle}>
-            <div>
-              <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
-              <Field name="incidentTemplateId" component={FormSelect}
-                     options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
-              <Button variant="raised" className="margin-md-left" onClick={onClickEditIncident}>Edit</Button>
+        <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
+        <Field name="incidentTemplateId" component={FormSelect}
+               options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
+        <Button variant="raised" className="margin-md-left" onClick={onClickEditIncident}>Edit</Button>
 
-              <Field name="incidentSeverity" component={FormSelect}
-                     options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
-              <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
+        <Field name="incidentSeverity" component={FormSelect}
+               options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
+        <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
 
-              <Field name="autoAddIncidentCell" component={FormCheckbox} label="Auto Add Incident Cell"/>
-            </div>
-
-            <div className="margin-md-top hidden">
-              <Field name="blockIP" component={FormCheckbox} label="Block IP"/>
-            </div>
-          </div>
-        </CardPanel>
-
-        {this.renderButtons()}
+        <Field name="autoAddIncidentCell" component={FormCheckbox} label="Auto Add Incident Cell"/>
       </div>
     )
   }
@@ -375,13 +351,36 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderContent () {
+    const {
+      onClickDeleteTag, tags, allTags,
+      onClickExistingTag
+    } = this.props
 
+    return (
+      <CardPanel>
+        <Field name="name" component={FormInput} floatingLabel="Name"
+               className="valign-top margin-md-right"/>
+
+        <div style={{width: '100%', overflow: 'auto'}} className="nowrap">
+          {tags.map((t, i) =>
+            <Chip
+              key={i}
+              label={t}
+              onDelete={() => onClickDeleteTag(i)}
+              className="margin-md-right"
+            />
+          )}
+        </div>
+
+        {this.renderWfTab()}
+        {this.renderTabActions()}
+      </CardPanel>
+    )
   }
 
   render() {
     const {
-      onSubmit, children,
-      tab, onChangeTab, noModal
+      onSubmit, children, noModal
     } = this.props
 
     const content = (
