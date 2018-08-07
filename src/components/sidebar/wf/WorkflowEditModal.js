@@ -606,7 +606,10 @@ class WorkflowEditModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editWf || {type: 'normal'},
+    initialValues: props.editWf || {
+      type: 'normal',
+      autoAddIncidentCell: true
+    },
     allValues: getFormValues('wfNameForm')(state)
   })
 )(reduxForm({form: 'wfNameForm'})(WorkflowEditModal))
