@@ -982,10 +982,13 @@ export function fetchBrainCells() {
   }
 }
 
-export function addBrainCell(entity) {
+export function addBrainCell(entity, cb) {
   return dispatch => {
     axios.post(`${ROOT_URL}/saveBraincell`, entity).then(res => {
-      if (res.data) dispatch({type: ADD_BRAIN_CELL, data: res.data})
+      if (res.data) {
+        dispatch({type: ADD_BRAIN_CELL, data: res.data})
+        cb && cb(res.data)
+      }
     })
   }
 }

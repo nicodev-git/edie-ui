@@ -11,6 +11,7 @@ import {drawFlows} from "components/sidebar/wf/DiagramLoader"
 import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 const typeOptions = [{
   label: 'Normal', value: 'normal'
@@ -58,7 +59,10 @@ class WorkflowEditModal extends React.Component {
       editShape: null,
       keyField: null,
 
-      active: 1
+      active: 1,
+
+      loading: false,
+      editValues: null
     }
   }
 
@@ -149,8 +153,11 @@ class WorkflowEditModal extends React.Component {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
     }
 
-    if (editWf && entity.autoAddIncidentCell) {
-
+    if (entity.autoAddIncidentCell && !entity.incidentTemplateId) {
+      this.setState({
+        editValues: entity
+      })
+      this.props.showBrainCellModal(true, null)
       return
     }
 
@@ -442,7 +449,9 @@ class WorkflowEditModal extends React.Component {
     if (entity.id) {
       this.props.updateBrainCell(entity)
     } else {
-      this.props.addBrainCell(entity)
+      this.props.addBrainCell(entity, () => {
+
+      })
     }
   }
 
@@ -482,6 +491,13 @@ class WorkflowEditModal extends React.Component {
         editCellParam={this.props.editCellParam}
         cellParamModalOpen={this.props.cellParamModalOpen}
       />
+    )
+  }
+
+  renderLoader () {
+    if (!this.state.loading) return null
+    return (
+      <RefreshOverlay/>
     )
   }
 
@@ -604,6 +620,7 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
+        {this.renderLoader()}
       </WorkflowEditModalView>
     )
   }
