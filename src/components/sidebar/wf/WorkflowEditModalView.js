@@ -83,7 +83,8 @@ class WorkflowEditModalView extends React.Component {
       onClickDeleteShape, onClickEditShape
     } = this.props
     return (
-      <CardPanel title="Workflow">
+      <div>
+        <div className="margin-lg-top margin-sm-bottom">Workflow</div>
         <div style={{width: '100%'}} className="flex-horizontal">
           <div className="diagram">
             {this.renderSidebar()}
@@ -115,7 +116,7 @@ class WorkflowEditModalView extends React.Component {
             {this.renderButtons()}
           </div>
         </div>
-      </CardPanel>
+      </div>
     )
   }
 
