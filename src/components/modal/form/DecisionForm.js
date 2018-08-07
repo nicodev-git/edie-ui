@@ -24,7 +24,6 @@ const conditions = [{
   "label": "If Greater Than",
   "value": "greaterThan"
 }]
-
 const gotoOptions = [{
   "label": "Go to start",
   "value": "start"
