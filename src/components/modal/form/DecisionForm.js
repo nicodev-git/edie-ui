@@ -165,7 +165,6 @@ class DecisionForm extends React.Component {
           )
       }
     }
-
     return (
       <div>
         <CardPanel title="Basic">
