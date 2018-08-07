@@ -1,14 +1,12 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import {
-  Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel, Button, Popover
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
-import Tabs from '@material-ui/core/Tabs'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import {findIndex} from 'lodash'
@@ -353,7 +351,7 @@ class WorkflowEditModalView extends React.Component {
   renderContent () {
     const {
       onClickDeleteTag, tags, allTags,
-      onClickExistingTag
+      onClickExistingTag, onClickTagPick
     } = this.props
 
     return (
@@ -374,7 +372,7 @@ class WorkflowEditModalView extends React.Component {
             )}
           </div>
           <div>
-
+            <AddIcon className="link" onClick={onClickTagPick}/>
           </div>
         </div>
 

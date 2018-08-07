@@ -12,6 +12,7 @@ import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
+import BraincellTagPickerModal from "../settings/braincell/BraincellTagPickerModal";
 
 const typeOptions = [{
   label: 'Normal', value: 'normal'
@@ -49,6 +50,7 @@ class WorkflowEditModal extends React.Component {
       shapeModalOpen: false,
       wfData,
 
+      tagPickModalOpen: false,
       tags: props.editWf ? (props.editWf.tags || []) : [],
       tagInputValue: '',
       applyDeviceIds: props.editWf ? (props.editWf.applyDeviceIds || []) : [],
@@ -407,6 +409,25 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
+  onClickTagPick () {
+    this.setState({
+      tagPickModalOpen: true
+    })
+  }
+
+  onPickTag (tag) {
+    const {tags} = this.state
+    if (tags.indexOf(tag) >= 0) return alert('Already exists')
+    this.setState({
+      tags: [...tags, tag]
+    })
+    this.onClosePickTag()
+  }
+
+  onClosePickTag () {
+    this.setState({tagPickModalOpen: false})
+  }
+
   ////////////////////////////////////////////////////
 
   onExpandRulePanel(e, expanded) {
@@ -501,6 +522,19 @@ class WorkflowEditModal extends React.Component {
         grokModalOpen={this.props.grokModalOpen}
         editCellParam={this.props.editCellParam}
         cellParamModalOpen={this.props.cellParamModalOpen}
+      />
+    )
+  }
+
+  renderTagPickModal () {
+    if (!this.state.tagPickModalOpen) return null
+    const {brainCells} = this.props
+    const tags = brainCells.filter(p => p.type === 'Tag').map(p => p.name)
+    return (
+      <BraincellTagPickerModal
+        tags={tags}
+        onPick={this.onPickTag.bind(this)}
+        onClose={this.onClosePickTag.bind(this)}
       />
     )
   }
@@ -614,6 +648,7 @@ class WorkflowEditModal extends React.Component {
         tagInputValue={this.state.tagInputValue}
         onChangeTagInput={this.onChangeTagInput.bind(this)}
         getTagSuggestionValue={t => t.name}
+        onClickTagPick={this.onClickTagPick.bind(this)}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
         onClickExistingTag={this.onClickExistingTag.bind(this)}
@@ -631,6 +666,7 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
+        {this.renderTagPickModal()}
         {this.renderLoader()}
       </WorkflowEditModalView>
     )
