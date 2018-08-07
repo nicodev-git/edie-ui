@@ -7,7 +7,7 @@ import {showAlert} from 'components/common/Alert'
 import TestCaseModal from './TestCaseModal'
 import IconParam from '@material-ui/icons/Input'
 import {messageTypes} from 'shared/SimulationMessages'
-import TestGroupModal from "./TestGroupModal";
+import TestGroupModal from './TestGroupModal'
 
 export default class WfTest extends React.Component {
   constructor (props) {
@@ -33,6 +33,8 @@ export default class WfTest extends React.Component {
     this.props.fetchCollectors()
     this.props.fetchTestGroups()
     this.props.fetchTestCases()
+
+    this.timer = setInterval(this.onClickRefreshIncidents.bind(this), 5000)
   }
 
   componentDidUpdate(props) {
@@ -45,6 +47,10 @@ export default class WfTest extends React.Component {
         selectedGroupId: testGroups[0].id
       })
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   onSubmit (values) {
@@ -213,11 +219,7 @@ export default class WfTest extends React.Component {
     })
 
     console.log(entities)
-    this.props.simulateWfMessage(group.type, entities, () => {
-      this.onClickRefreshIncidents()
-    })
-
-    setTimeout(this.onClickRefreshIncidents.bind(this), 5000)
+    this.props.simulateWfMessage(group.type, entities)
   }
 
   onClickRefreshIncidents () {
