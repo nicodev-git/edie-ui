@@ -130,7 +130,7 @@ class WorkflowEditModal extends React.Component {
 
   onSubmit(values) {
     if (!values) return
-    const {onSave, userInfo} = this.props
+    const {onSave, userInfo, editWf} = this.props
     const {permitterUsers, wfData, tags, applyDeviceIds} = this.state
 
     const entity = {
@@ -147,6 +147,11 @@ class WorkflowEditModal extends React.Component {
       if (tagIndex < 0) entity.tags.push(SCHEDULED)
     } else {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
+    }
+
+    if (editWf && entity.autoAddIncidentCell) {
+
+      return
     }
 
     onSave && onSave(entity)
