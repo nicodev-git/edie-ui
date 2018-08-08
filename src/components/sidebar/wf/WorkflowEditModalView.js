@@ -211,26 +211,20 @@ class WorkflowEditModalView extends React.Component {
   renderTabSchedule() {
     const {timeOptions} = this.props
     return (
-      <div>
-        <CardPanel title="Schedule">
-          <div style={cardStyle}>
-            <div>
-              <Field name="scheduled" component={FormCheckbox} label="Enable Scheduling"/>
-            </div>
+      <CardPanel title="Schedule">
+        <div>
+          <Field name="scheduled" component={FormCheckbox} label="Enable Scheduling"/>
+        </div>
 
-            <div>
-              <Field name="interval" component={FormInput} floatingLabel="Repeat every"
-                     className="valign-top margin-md-right" style={{width: 120}}/>
-              <Field name="intervalUnit" component={FormSelect} floatingLabel="Time"
-                     className="valign-top" options={timeOptions}
-                     style={{width: 120}}
-              />
-            </div>
-          </div>
-        </CardPanel>
-
-        {this.renderButtons()}
-      </div>
+        <div>
+          <Field name="interval" component={FormInput} floatingLabel="Repeat every"
+                 className="valign-top margin-md-right" style={{width: 120}}/>
+          <Field name="intervalUnit" component={FormSelect} floatingLabel="Time"
+                 className="valign-top" options={timeOptions}
+                 style={{width: 120}}
+          />
+        </div>
+      </CardPanel>
     )
   }
 
@@ -334,6 +328,7 @@ class WorkflowEditModalView extends React.Component {
         </CardPanel>
 
         {this.renderSecurityTab()}
+        {this.renderTabSchedule()}
       </Modal>
     )
   }
