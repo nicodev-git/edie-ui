@@ -195,6 +195,10 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickAddNewWf () {
+
+  }
+
   //////////////////////////////////////////////////////////////
 
   onPickIncident (cell) {
@@ -283,6 +287,7 @@ class VendorProductModal extends React.Component {
     return (
       <WorkflowPickerModal
         workflows={this.props.workflows}
+        onClickAdd={this.onClickAddNewWf.bind(this)}
         onPick={this.onPickWf.bind(this)}
         onClose={this.onClosePickWf.bind(this)}
       />
