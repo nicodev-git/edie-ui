@@ -9,7 +9,7 @@ import BraincellClassPickerModal from 'components/sidebar/settings/braincell/Bra
 import BraincellGrokPickerModal from 'components/sidebar/settings/braincell/BraincellGrokPickerModal'
 import BraincellIncidentPickerModal from 'components/sidebar/settings/braincell/BraincellIncidentPickerModal'
 import WorkflowPickerModal from 'components/sidebar/wf/WorkflowPickerModal'
-import WorkflowEditContainer from 'components/sidebar/wf/WorkflowEditContainer'
+import WorkflowEditContainer from 'containers/wf/WorkflowEditContainer'
 
 class VendorProductModal extends React.Component {
   constructor(props) {
