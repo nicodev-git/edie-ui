@@ -80,7 +80,7 @@ class WorkflowEditModal extends React.Component {
       this.props.change('calledDirect', true)
     }
 
-    if (allValues && allValues.openIncident && allValues.autoAddIncidentCell && !allValues.incidentTemplateId &&
+    if (allValues && allValues.openIncident && !allValues.incidentTemplateId &&
       (prevProps.allValues && !prevProps.allValues.openIncident)) {
       // console.log('show modal now')
       setTimeout(() => {
@@ -166,7 +166,7 @@ class WorkflowEditModal extends React.Component {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
     }
 
-    // if (entity.openIncident && entity.autoAddIncidentCell && !entity.incidentTemplateId) {
+    // if (entity.openIncident && !entity.incidentTemplateId) {
     //   this.setState({
     //     editValues: entity
     //   })
@@ -708,8 +708,7 @@ class WorkflowEditModal extends React.Component {
 export default connect(
   (state, props) => ({
     initialValues: props.editWf || {
-      type: 'normal',
-      autoAddIncidentCell: true
+      type: 'normal'
     },
     allValues: getFormValues('wfNameForm')(state)
   })
