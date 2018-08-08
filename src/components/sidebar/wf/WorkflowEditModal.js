@@ -5,7 +5,7 @@ import uuid from 'uuid'
 import {assign, merge, findIndex, keys} from 'lodash'
 
 import WorkflowEditModalView from './WorkflowEditModalView'
-// import UserPickModal from './UserPickModal'
+import WorkflowEditModalView1 from './WorkflowEditModalView1'
 import DiagramObjectModal from 'components/sidebar/wf/diagram/DiagramObjectModal'
 import {drawFlows} from "components/sidebar/wf/DiagramLoader"
 import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
@@ -632,9 +632,10 @@ class WorkflowEditModal extends React.Component {
   }
 
   render() {
-    const {handleSubmit, groups, shapes} = this.props
+    const {handleSubmit, groups, shapes, newView} = this.props
+    const ModalView = newView ? WorkflowEditModalView1 : WorkflowEditModalView
     return (
-      <WorkflowEditModalView
+      <ModalView
         {...this.props}
         groupOptions={groups.map(p => ({label: p.name, value: p.id}))}
         typeOptions={typeOptions}
@@ -688,7 +689,7 @@ class WorkflowEditModal extends React.Component {
         {this.renderBraincellModal()}
         {this.renderTagPickModal()}
         {this.renderLoader()}
-      </WorkflowEditModalView>
+      </ModalView>
     )
   }
 }

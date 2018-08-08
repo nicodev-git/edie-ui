@@ -314,7 +314,9 @@ class VendorProductModal extends React.Component {
   renderWFModal () {
     if (!this.state.newWfModalOpen) return null
     return (
-      <WorkflowEditModalContainer/>
+      <WorkflowEditModalContainer
+        newView
+      />
     )
   }
 
