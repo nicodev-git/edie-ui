@@ -75,6 +75,7 @@ class WorkflowEditModal extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const {allValues} = this.props
     if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
       this.props.change('calledDirect', true)
     }
