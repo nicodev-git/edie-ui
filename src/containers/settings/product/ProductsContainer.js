@@ -11,6 +11,9 @@ import {
 
   fetchBrainCells,
   fetchWorkflows,
+
+  addWorkflow,
+  updateWorkflow
 } from 'actions'
 
 class ProductsContainer extends React.Component {
@@ -33,6 +36,9 @@ export default connect(
     removeVendorProduct,
 
     fetchBrainCells,
-    fetchWorkflows
+    fetchWorkflows,
+
+    addWorkflow,
+    updateWorkflow
   }
 )(withRouter(ProductsContainer))
