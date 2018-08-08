@@ -72,6 +72,7 @@ class WorkflowEditModal extends React.Component {
 
   componentWillMount() {
     this.props.fetchDevices()
+    this.props.fetchShapes()
   }
 
   componentDidUpdate(prevProps) {
