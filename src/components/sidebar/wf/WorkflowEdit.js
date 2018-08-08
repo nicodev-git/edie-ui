@@ -21,7 +21,7 @@ export default class WorkflowEdit extends React.Component {
 
     const {match} = this.props
     const {name} = match.params
-    this.openWorkflow(name)
+    this.openWorkflow(decodeURIComponent(name))
   }
 
   openWorkflow (name) {
@@ -39,7 +39,7 @@ export default class WorkflowEdit extends React.Component {
     const {name} = match.params
     if (name !== prevProps.match.params.name) {
       this.setState({editWf: null})
-      this.openWorkflow(name)
+      this.openWorkflow(decodeURIComponent(name))
     }
   }
 
