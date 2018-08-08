@@ -351,6 +351,7 @@ class VendorProductModal extends React.Component {
         {this.renderGrokPickerModal()}
         {this.renderWfPickerModal()}
         {this.renderIncidentPickerModal()}
+        {this.renderWFModal()}
       </VendorProductModalView>
     )
   }

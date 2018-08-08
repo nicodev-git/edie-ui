@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
-import WorkflowEdit from 'components/sidebar/wf/WorkflowEdit'
+import WorkflowEditModal from 'components/sidebar/wf/WorkflowEditModal'
 
 import {
   openDeviceWfDiagramModal,
@@ -52,7 +52,7 @@ import {
 class WorkflowEditContainer extends React.Component {
   render() {
     return (
-      <WorkflowEdit {...this.props}/>
+      <WorkflowEditModal{...this.props}/>
     )
   }
 }
