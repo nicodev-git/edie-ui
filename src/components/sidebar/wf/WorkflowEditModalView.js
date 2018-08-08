@@ -162,44 +162,6 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
-  renderGeneralTab() {
-    const {
-      groupOptions, typeOptions, conditionOptions
-    } = this.props
-    return (
-      <div>
-        <CardPanel title="General">
-          <div style={cardStyle}>
-            <div>
-              <Field name="description" component={FormInput} floatingLabel="Description" style={{minWidth: 400}}/>
-            </div>
-
-            <div className="margin-lg-top">
-              <Field name="type" component={FormSelect} options={typeOptions} floatingLabel="Type"
-                     className="valign-top margin-md-right" style={{minWidth: 120}}/>
-
-              <Field name="groupId" component={FormSelect} options={groupOptions} floatingLabel="Group"
-                     className="valign-top margin-md-right" style={{minWidth: 160}}/>
-            </div>
-
-            <div className="margin-lg-top">
-              <Field name="calledDirect" component={FormCheckbox} label="Called Direct"/>
-              <Field name="paused" component={FormCheckbox} label="Stopped"/>
-              <Field name="sendBack" component={FormCheckbox} label="Send Result"/>
-              <Field name="runByDevice" component={FormCheckbox} label="Run By Device"/>
-            </div>
-
-            <div className="margin-md-top">
-              <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
-              <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
-            </div>
-          </div>
-        </CardPanel>
-        {this.renderButtons()}
-      </div>
-    )
-  }
-
   renderSecurityTab() {
     const {permitterUsers, onClickAddUser, onClickRemoveUser} = this.props
     return (
@@ -342,11 +304,39 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderAdvanced () {
-    const {advancedModalOpen} = this.props
+    const {
+      advancedModalOpen, onCloseAdvanced,
+      groupOptions, typeOptions, conditionOptions
+    } = this.props
     if (!advancedModalOpen) return null
 
     return (
-      <Modal title="Workflow" width={1100}>
+      <Modal title="Workflow" width={1100} onRequestClose={onCloseAdvanced}>
+        <CardPanel>
+          <div>
+            <Field name="description" component={FormInput} floatingLabel="Description" style={{minWidth: 400}}/>
+          </div>
+
+          <div className="margin-lg-top">
+            <Field name="type" component={FormSelect} options={typeOptions} floatingLabel="Type"
+                   className="valign-top margin-md-right" style={{minWidth: 120}}/>
+
+            <Field name="groupId" component={FormSelect} options={groupOptions} floatingLabel="Group"
+                   className="valign-top margin-md-right" style={{minWidth: 160}}/>
+          </div>
+
+          <div className="margin-lg-top">
+            <Field name="calledDirect" component={FormCheckbox} label="Called Direct"/>
+            <Field name="paused" component={FormCheckbox} label="Stopped"/>
+            <Field name="sendBack" component={FormCheckbox} label="Send Result"/>
+            <Field name="runByDevice" component={FormCheckbox} label="Run By Device"/>
+          </div>
+
+          <div className="margin-md-top">
+            <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
+            <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
+          </div>
+        </CardPanel>
       </Modal>
     )
   }

@@ -501,6 +501,12 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
+  onCloseAdvanced () {
+    this.setState({
+      advancedModalOpen: false
+    })
+  }
+
   ////////////////////////////////////////////////////
   renderUserPickModal() {
     if (!this.props.userPickModalOpen) return null
@@ -636,7 +642,10 @@ class WorkflowEditModal extends React.Component {
         timeOptions={timeOptions}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={this.onClickClose.bind(this)}
+
+        advancedModalOpen={this.state.advancedModalOpen}
         onClickAdvanced={this.onClickAdvanced.bind(this)}
+        onCloseAdvanced={this.onCloseAdvanced.bind(this)}
 
         tab={this.state.tab}
         onChangeTab={this.onChangeTab.bind(this)}
