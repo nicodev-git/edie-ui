@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
 import {find} from 'lodash'
+import uuid from 'uuid'
 
 import VendorProductModalView from './VendorProductModalView'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
@@ -206,6 +207,23 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onSaveWf (values) {
+    const {editWf} = this.state
+    if (editWf) {
+      this.props.updateWorkflow({
+        ...editWf,
+        ...values
+      })
+    } else {
+      const flow = {
+        ...values,
+        uuid: uuid.v4(),
+        flowItems: []
+      }
+      this.props.addWorkflow(flow)
+    }
+  }
+
   //////////////////////////////////////////////////////////////
 
   onPickIncident (cell) {
@@ -318,6 +336,7 @@ class VendorProductModal extends React.Component {
       <WorkflowEditModalContainer
         newView
         allTags={this.getAllTags()}
+        onSave={this.onSaveWf.bind(this)}
         onClose={() => this.setState({newWfModalOpen: false})}
       />
     )
