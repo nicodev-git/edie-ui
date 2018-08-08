@@ -41,7 +41,7 @@ export function drawFlows (flows, items) {
         let itemIndex = findIndex(items, {config: {type}})
         if (itemIndex < 0) itemIndex = 0
 
-        const typeConfig = items[itemIndex]
+        const typeConfig = items[itemIndex] || {}
         const obj = {
             name: f.name || '[]',
             imgIndex: itemIndex,

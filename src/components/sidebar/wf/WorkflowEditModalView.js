@@ -165,32 +165,27 @@ class WorkflowEditModalView extends React.Component {
   renderSecurityTab() {
     const {permitterUsers, onClickAddUser, onClickRemoveUser} = this.props
     return (
-      <div>
-        <CardPanel title="Permitted Users"
-                   tools={<AddIcon className="link" onClick={onClickAddUser}/>}>
-          <div style={cardStyle}>
-            <table className="table table-hover">
-              <thead>
-              <tr>
-                <th>User</th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              {permitterUsers.map(p =>
-                <tr key={p}>
-                  <td>{p}</td>
-                  <td className="text-right">
-                    <DeleteIcon className="link" onClick={() => onClickRemoveUser(p)}/>
-                  </td>
-                </tr>
-              )}
-              </tbody>
-            </table>
-          </div>
-        </CardPanel>
-        {this.renderButtons()}
-      </div>
+      <CardPanel title="Permitted Users"
+                 tools={<AddIcon className="link" onClick={onClickAddUser}/>}>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>User</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          {permitterUsers.map(p =>
+            <tr key={p}>
+              <td>{p}</td>
+              <td className="text-right">
+                <DeleteIcon className="link" onClick={() => onClickRemoveUser(p)}/>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </CardPanel>
     )
   }
 
@@ -337,6 +332,8 @@ class WorkflowEditModalView extends React.Component {
             <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
           </div>
         </CardPanel>
+
+        {this.renderSecurityTab()}
       </Modal>
     )
   }
@@ -360,7 +357,7 @@ class WorkflowEditModalView extends React.Component {
     return (
       <CardPanel>
         <Field name="name" component={FormInput} floatingLabel="Name"
-               className="valign-top margin-md-right"/>
+               className="valign-top margin-md-right" style={{minWidth: 250}}/>
 
         <h4>Tags</h4>
         <div className="flex-horizontal">
@@ -394,6 +391,7 @@ class WorkflowEditModalView extends React.Component {
       <div>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
+          {this.renderAdvanced()}
           {this.renderButtons()}
         </form>
         {this.renderEditPopover()}
