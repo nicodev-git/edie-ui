@@ -79,6 +79,12 @@ class WorkflowEditModal extends React.Component {
     if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
       this.props.change('calledDirect', true)
     }
+
+    if (allValues && allValues.openIncident && allValues.autoAddIncidentCell && !allValues.incidentTemplateId &&
+      (prevProps.allValues && !prevProps.openIncident)) {
+      console.log('show modal now')
+      // this.props.showBrainCellModal(true, null)
+    }
   }
 
   getWfDataItems() {
@@ -158,13 +164,13 @@ class WorkflowEditModal extends React.Component {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
     }
 
-    if (entity.openIncident && entity.autoAddIncidentCell && !entity.incidentTemplateId) {
-      this.setState({
-        editValues: entity
-      })
-      this.props.showBrainCellModal(true, null)
-      return
-    }
+    // if (entity.openIncident && entity.autoAddIncidentCell && !entity.incidentTemplateId) {
+    //   this.setState({
+    //     editValues: entity
+    //   })
+    //   this.props.showBrainCellModal(true, null)
+    //   return
+    // }
 
     onSave && onSave(entity)
     this.onClickClose()
@@ -482,11 +488,12 @@ class WorkflowEditModal extends React.Component {
           loading: false
         })
 
-        const {editValues} = this.state
-        editValues.incidentTemplateId = incidentTpl.id
+        // const {editValues} = this.state
+        // editValues.incidentTemplateId = incidentTpl.id
+        this.props.change('incidentTemplateId', incidentTpl.id)
 
-        this.props.onSave(editValues)
-        this.onClickClose()
+        // this.props.onSave(editValues)
+        // this.onClickClose()
       })
     }
   }
