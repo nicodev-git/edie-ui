@@ -27,6 +27,7 @@ class VendorProductModal extends React.Component {
 
       workflows: (editProduct ? editProduct.workflows : []) || [],
       wfModalOpen: false,
+      newWfModalOpen: false,
 
       incidents: (editProduct ? editProduct.incidents : []) || [],
       incidentModalOpen: false
@@ -196,7 +197,9 @@ class VendorProductModal extends React.Component {
   }
 
   onClickAddNewWf () {
-
+    this.setState({
+      newWfModalOpen: true
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -305,6 +308,10 @@ class VendorProductModal extends React.Component {
         onClose={this.onClosePickIncident.bind(this)}
       />
     )
+  }
+
+  renderWFModal () {
+    if (!this.state.newWfModalOpen) return null
   }
 
   render () {
