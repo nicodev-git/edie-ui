@@ -16,17 +16,10 @@ import {
   FormSelect,
   FormMultiSelect,
   FormCheckbox,
-  SubmitBlock,
   Modal,
   CardPanel
 } from 'components/modal/parts'
 import {severities} from 'shared/Global'
-
-const cardStyle = {
-  minHeight: 250,
-  width: '100%',
-  overflow: 'auto'
-}
 
 const itemStyle = {
   width: '24px',
@@ -133,8 +126,8 @@ class WorkflowEditModalView extends React.Component {
 
   renderFilterTab() {
     const {
-      onClickDeleteTag, tags, allTags,
-      onClickExistingTag
+      tags,
+      allTags, onClickExistingTag, onClickDeleteTag
     } = this.props
     return (
       <div>
@@ -235,42 +228,36 @@ class WorkflowEditModalView extends React.Component {
     const servers = devices.filter(p => !!p.monitors)
 
     return (
-      <div>
-        <CardPanel title="Applied To">
-          <div style={cardStyle}>
-            <div>
-              <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
-            </div>
-            <div>
-              <table className="table table-hover">
-                <thead><tr><th>Device</th></tr></thead>
-                <tbody>
-                {servers.map(p =>
-                  <tr key={p.id}>
-                    <td>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={applyDeviceIds.includes(p.id)}
-                            onChange={onCheckAppliedDevice}
-                            value={p.id}
-                            disabled={!!applyAllDevices}
-                          />
-                        }
-                        label={p.name}
+      <CardPanel title="Applied To">
+        <div>
+          <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
+        </div>
+        <div>
+          <table className="table table-hover">
+            <thead><tr><th>Device</th></tr></thead>
+            <tbody>
+            {servers.map(p =>
+              <tr key={p.id}>
+                <td>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={applyDeviceIds.includes(p.id)}
+                        onChange={onCheckAppliedDevice}
+                        value={p.id}
+                        disabled={!!applyAllDevices}
                       />
-                    </td>
-                  </tr>
-                )}
-                </tbody>
-              </table>
+                    }
+                    label={p.name}
+                  />
+                </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
 
-            </div>
-          </div>
-        </CardPanel>
-
-        {this.renderButtons()}
-      </div>
+        </div>
+      </CardPanel>
     )
   }
 
@@ -329,6 +316,8 @@ class WorkflowEditModalView extends React.Component {
 
         {this.renderSecurityTab()}
         {this.renderTabSchedule()}
+        {this.renderAppliedTo()}
+
       </Modal>
     )
   }
