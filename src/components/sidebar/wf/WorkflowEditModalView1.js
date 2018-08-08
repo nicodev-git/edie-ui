@@ -385,7 +385,7 @@ class WorkflowEditModalView extends React.Component {
       return content
     } else {
       return (
-        <Modal title="Workflow" width={1100} onRequestClose={onClickClose}>
+        <Modal title="Workflow" contentStyle={{width: 1200}} onRequestClose={onClickClose}>
           {content}
         </Modal>
       )
