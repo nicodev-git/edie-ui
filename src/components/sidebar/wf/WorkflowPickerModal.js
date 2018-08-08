@@ -1,4 +1,5 @@
 import React from 'react'
+import AddIcon from '@material-ui/icons/AddCircle'
 
 import {
   Modal,
@@ -18,13 +19,21 @@ export default class WorkflowPickerModal extends React.Component {
     this.props.onPick(this.props.workflows[selIndex])
   }
 
+  renderTools () {
+    const {onClickAdd} = this.props
+    if (!onClickAdd) return null
+    return (
+      <AddIcon className="link" onClick={onClickAdd}/>
+    )
+  }
+
   render() {
     const {workflows, onClose} = this.props
     const {selIndex} = this.state
 
     return (
       <Modal title="Workflow" onRequestClose={onClose}>
-        <CardPanel title="Workflow">
+        <CardPanel title="Workflow" tools={this.renderTools()}>
           <div style={{maxHeight: 600, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
