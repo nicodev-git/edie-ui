@@ -170,7 +170,8 @@ class WorkflowEditModal extends React.Component {
   }
 
   onClickClose() {
-    this.props.showWfNameModal(false)
+    const {onClose} = this.props
+    onClose && onClose()
   }
 
   onClickAddUser() {

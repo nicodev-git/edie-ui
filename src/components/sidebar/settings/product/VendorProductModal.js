@@ -44,6 +44,9 @@ class VendorProductModal extends React.Component {
   }
 
   //////////////////////////////////////////////////////////////
+  getAllTags () {
+    return this.props.brainCells.filter(p => p.type === 'Tag').map(p => p.name)
+  }
 
   onClickAddTag () {
     this.setState({
@@ -249,11 +252,9 @@ class VendorProductModal extends React.Component {
 
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
-    const {brainCells} = this.props
-    const tags = brainCells.filter(p => p.type === 'Tag').map(p => p.name)
     return (
       <BraincellTagPickerModal
-        tags={tags}
+        tags={this.getAllTags()}
         onPick={this.onPickTag.bind(this)}
         onClose={this.onClosePickTag.bind(this)}
       />
@@ -316,6 +317,8 @@ class VendorProductModal extends React.Component {
     return (
       <WorkflowEditModalContainer
         newView
+        allTags={this.getAllTags()}
+        onClose={() => this.setState({newWfModalOpen: false})}
       />
     )
   }

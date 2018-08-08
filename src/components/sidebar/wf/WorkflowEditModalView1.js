@@ -345,7 +345,7 @@ class WorkflowEditModalView extends React.Component {
 
         <h4>Tags</h4>
         <div className="flex-horizontal" style={{alignItems: 'center'}}>
-          <div className="flex-1 nowrap padding-sm" style={{overflow: 'auto', border: '1px solid gray'}}>
+          <div className="flex-1 nowrap padding-sm" style={{overflow: 'auto', border: '1px solid gray', height: 46}}>
             {tags.map((t, i) =>
               <Chip
                 key={i}
@@ -366,7 +366,7 @@ class WorkflowEditModalView extends React.Component {
 
   render() {
     const {
-      onSubmit, children, noModal
+      onSubmit, children, noModal, onClickClose
     } = this.props
 
     const content = (
@@ -385,7 +385,7 @@ class WorkflowEditModalView extends React.Component {
       return content
     } else {
       return (
-        <Modal title="Workflow" width={1100}>
+        <Modal title="Workflow" width={1100} onRequestClose={onClickClose}>
           {content}
         </Modal>
       )
