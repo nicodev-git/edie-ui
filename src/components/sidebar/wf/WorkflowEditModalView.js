@@ -344,8 +344,8 @@ class WorkflowEditModalView extends React.Component {
                className="valign-top margin-md-right" style={{minWidth: 250}}/>
 
         <h4>Tags</h4>
-        <div className="flex-horizontal">
-          <div className="flex-1 nowrap" style={{overflow: 'auto'}}>
+        <div className="flex-horizontal" style={{alignItems: 'center'}}>
+          <div className="flex-1 nowrap padding-sm" style={{overflow: 'auto', border: '1px solid gray'}}>
             {tags.map((t, i) =>
               <Chip
                 key={i}
@@ -355,9 +355,7 @@ class WorkflowEditModalView extends React.Component {
               />
             )}
           </div>
-          <div>
-            <AddIcon className="link" onClick={onClickTagPick}/>
-          </div>
+          <AddIcon className="link" onClick={onClickTagPick}/>
         </div>
 
         {this.renderWfTab()}
