@@ -81,9 +81,11 @@ class WorkflowEditModal extends React.Component {
     }
 
     if (allValues && allValues.openIncident && allValues.autoAddIncidentCell && !allValues.incidentTemplateId &&
-      (prevProps.allValues && !prevProps.openIncident)) {
-      console.log('show modal now')
-      // this.props.showBrainCellModal(true, null)
+      (prevProps.allValues && !prevProps.allValues.openIncident)) {
+      // console.log('show modal now')
+      setTimeout(() => {
+        this.props.showBrainCellModal(true, null)
+      }, 1)
     }
   }
 
