@@ -17,7 +17,7 @@ class SimulationModalView extends React.Component {
         <div className="group-header padding-md-top padding-md-bottom">
           <div>
             <span className="valign-middle">Tags</span>
-            <AddIcon className="link valign-middle" onClick={onClickAddTag}/>
+            {/*<AddIcon className="link valign-middle" onClick={onClickAddTag}/>*/}
           </div>
         </div>
         <div>
@@ -36,7 +36,7 @@ class SimulationModalView extends React.Component {
         <div className="group-header padding-md-top padding-md-bottom">
           <div>
             <span className="valign-middle">Classifiers</span>
-            <AddIcon className="link valign-middle" onClick={onClickAddClass}/>
+            {/*<AddIcon className="link valign-middle" onClick={onClickAddClass}/>*/}
           </div>
         </div>
         <div>
@@ -56,7 +56,7 @@ class SimulationModalView extends React.Component {
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
           <span className="valign-middle">Parser</span>
-          <AddIcon className="link valign-middle" onClick={onClickAddGrok}/>
+          {/*<AddIcon className="link valign-middle" onClick={onClickAddGrok}/>*/}
         </div>
         <div>
           {grokCells.map((t, i) =>
