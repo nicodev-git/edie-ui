@@ -341,6 +341,16 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderAdvanced () {
+    const {advancedModalOpen} = this.props
+    if (!advancedModalOpen) return null
+
+    return (
+      <Modal title="Workflow" width={1100}>
+      </Modal>
+    )
+  }
+
   renderButtons() {
     const {onClickAdvanced} = this.props
     return (
