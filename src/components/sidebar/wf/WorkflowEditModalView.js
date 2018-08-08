@@ -1,12 +1,14 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import {
+  Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel, Button, Popover
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Tabs from '@material-ui/core/Tabs'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import {findIndex} from 'lodash'
@@ -16,10 +18,17 @@ import {
   FormSelect,
   FormMultiSelect,
   FormCheckbox,
+  SubmitBlock,
   Modal,
   CardPanel
 } from 'components/modal/parts'
 import {severities} from 'shared/Global'
+
+const cardStyle = {
+  minHeight: 250,
+  width: '100%',
+  overflow: 'auto'
+}
 
 const itemStyle = {
   width: '24px',
@@ -101,6 +110,7 @@ class WorkflowEditModalView extends React.Component {
                 </div>
               </div>
             )}
+            {this.renderButtons()}
           </div>
         </div>
       </div>
@@ -126,8 +136,8 @@ class WorkflowEditModalView extends React.Component {
 
   renderFilterTab() {
     const {
-      tags,
-      allTags, onClickExistingTag, onClickDeleteTag
+      onClickDeleteTag, tags, allTags,
+      onClickExistingTag
     } = this.props
     return (
       <div>
@@ -147,9 +157,58 @@ class WorkflowEditModalView extends React.Component {
           </CardPanel>
 
           <CardPanel title="Selected Tags">
-
+            <div>
+              {tags.map((t, i) =>
+                <Chip
+                  key={i}
+                  label={t}
+                  onDelete={() => onClickDeleteTag(i)}
+                  className="margin-md-right"
+                />
+              )}
+            </div>
           </CardPanel>
         </div>
+        {this.renderButtons()}
+      </div>
+    )
+  }
+
+  renderGeneralTab() {
+    const {
+      groupOptions, typeOptions, conditionOptions
+    } = this.props
+    return (
+      <div>
+        <CardPanel title="General">
+          <div style={cardStyle}>
+            <div>
+              <Field name="name" component={FormInput} floatingLabel="Name"
+                     className="valign-top margin-md-right"/>
+              <Field name="description" component={FormInput} floatingLabel="Description" style={{minWidth: 400}}/>
+            </div>
+
+            <div className="margin-lg-top">
+              <Field name="type" component={FormSelect} options={typeOptions} floatingLabel="Type"
+                     className="valign-top margin-md-right" style={{minWidth: 120}}/>
+
+              <Field name="groupId" component={FormSelect} options={groupOptions} floatingLabel="Group"
+                     className="valign-top margin-md-right" style={{minWidth: 160}}/>
+            </div>
+
+            <div className="margin-lg-top">
+              <Field name="calledDirect" component={FormCheckbox} label="Called Direct"/>
+              <Field name="paused" component={FormCheckbox} label="Stopped"/>
+              <Field name="sendBack" component={FormCheckbox} label="Send Result"/>
+              <Field name="runByDevice" component={FormCheckbox} label="Run By Device"/>
+            </div>
+
+            <div className="margin-md-top">
+              <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
+              <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
+            </div>
+          </div>
+        </CardPanel>
         {this.renderButtons()}
       </div>
     )
@@ -158,27 +217,32 @@ class WorkflowEditModalView extends React.Component {
   renderSecurityTab() {
     const {permitterUsers, onClickAddUser, onClickRemoveUser} = this.props
     return (
-      <CardPanel title="Permitted Users"
-                 tools={<AddIcon className="link" onClick={onClickAddUser}/>}>
-        <table className="table table-hover">
-          <thead>
-          <tr>
-            <th>User</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          {permitterUsers.map(p =>
-            <tr key={p}>
-              <td>{p}</td>
-              <td className="text-right">
-                <DeleteIcon className="link" onClick={() => onClickRemoveUser(p)}/>
-              </td>
-            </tr>
-          )}
-          </tbody>
-        </table>
-      </CardPanel>
+      <div>
+        <CardPanel title="Permitted Users"
+                   tools={<AddIcon className="link" onClick={onClickAddUser}/>}>
+          <div style={cardStyle}>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>User</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              {permitterUsers.map(p =>
+                <tr key={p}>
+                  <td>{p}</td>
+                  <td className="text-right">
+                    <DeleteIcon className="link" onClick={() => onClickRemoveUser(p)}/>
+                  </td>
+                </tr>
+              )}
+              </tbody>
+            </table>
+          </div>
+        </CardPanel>
+        {this.renderButtons()}
+      </div>
     )
   }
 
@@ -187,16 +251,28 @@ class WorkflowEditModalView extends React.Component {
     const incidentCells = brainCells.filter(p => p.type === 'Incident');
     return (
       <div>
-        <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
-        <Field name="incidentTemplateId" component={FormSelect}
-               options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
-        <Button variant="raised" className="margin-md-left" onClick={onClickEditIncident}>Edit</Button>
+        <CardPanel title="Actions">
+          <div style={cardStyle}>
+            <div>
+              <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
+              <Field name="incidentTemplateId" component={FormSelect}
+                     options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
+              <Button variant="raised" className="margin-md-left" onClick={onClickEditIncident}>Edit</Button>
 
-        <Field name="incidentSeverity" component={FormSelect}
-               options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
-        <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
+              <Field name="incidentSeverity" component={FormSelect}
+                     options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
+              <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
 
-        <Field name="autoAddIncidentCell" component={FormCheckbox} label="Auto Add Incident Cell" className="margin-md-left"/>
+              <Field name="autoAddIncidentCell" component={FormCheckbox} label="Auto Add Incident Cell"/>
+            </div>
+
+            <div className="margin-md-top hidden">
+              <Field name="blockIP" component={FormCheckbox} label="Block IP"/>
+            </div>
+          </div>
+        </CardPanel>
+
+        {this.renderButtons()}
       </div>
     )
   }
@@ -204,20 +280,26 @@ class WorkflowEditModalView extends React.Component {
   renderTabSchedule() {
     const {timeOptions} = this.props
     return (
-      <CardPanel title="Schedule">
-        <div>
-          <Field name="scheduled" component={FormCheckbox} label="Enable Scheduling"/>
-        </div>
+      <div>
+        <CardPanel title="Schedule">
+          <div style={cardStyle}>
+            <div>
+              <Field name="scheduled" component={FormCheckbox} label="Enable Scheduling"/>
+            </div>
 
-        <div>
-          <Field name="interval" component={FormInput} floatingLabel="Repeat every"
-                 className="valign-top margin-md-right" style={{width: 120}}/>
-          <Field name="intervalUnit" component={FormSelect} floatingLabel="Time"
-                 className="valign-top" options={timeOptions}
-                 style={{width: 120}}
-          />
-        </div>
-      </CardPanel>
+            <div>
+              <Field name="interval" component={FormInput} floatingLabel="Repeat every"
+                     className="valign-top margin-md-right" style={{width: 120}}/>
+              <Field name="intervalUnit" component={FormSelect} floatingLabel="Time"
+                     className="valign-top" options={timeOptions}
+                     style={{width: 120}}
+              />
+            </div>
+          </div>
+        </CardPanel>
+
+        {this.renderButtons()}
+      </div>
     )
   }
 
@@ -228,37 +310,82 @@ class WorkflowEditModalView extends React.Component {
     const servers = devices.filter(p => !!p.monitors)
 
     return (
-      <CardPanel title="Applied To">
-        <div>
-          <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
-        </div>
-        <div>
-          <table className="table table-hover">
-            <thead><tr><th>Device</th></tr></thead>
-            <tbody>
-            {servers.map(p =>
-              <tr key={p.id}>
-                <td>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={applyDeviceIds.includes(p.id)}
-                        onChange={onCheckAppliedDevice}
-                        value={p.id}
-                        disabled={!!applyAllDevices}
+      <div>
+        <CardPanel title="Applied To">
+          <div style={cardStyle}>
+            <div>
+              <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
+            </div>
+            <div>
+              <table className="table table-hover">
+                <thead><tr><th>Device</th></tr></thead>
+                <tbody>
+                {servers.map(p =>
+                  <tr key={p.id}>
+                    <td>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={applyDeviceIds.includes(p.id)}
+                            onChange={onCheckAppliedDevice}
+                            value={p.id}
+                            disabled={!!applyAllDevices}
+                          />
+                        }
+                        label={p.name}
                       />
-                    }
-                    label={p.name}
-                  />
-                </td>
-              </tr>
-            )}
-            </tbody>
-          </table>
+                    </td>
+                  </tr>
+                )}
+                </tbody>
+              </table>
 
-        </div>
-      </CardPanel>
+            </div>
+          </div>
+        </CardPanel>
+
+        {this.renderButtons()}
+      </div>
     )
+  }
+
+  renderTabContent() {
+    const {
+      tab
+    } = this.props
+
+    switch (tab) {
+      case "wf":
+        return this.renderWfTab()
+      case "filter":
+        return this.renderFilterTab()
+      case "general":
+        return this.renderGeneralTab()
+      case "security":
+        return this.renderSecurityTab()
+      case "actions":
+        return this.renderTabActions()
+      case "schedule":
+        return this.renderTabSchedule()
+      case "appliedto":
+        return this.renderAppliedTo()
+      default:
+        return null
+    }
+  }
+
+  cumulativeOffset(element) {
+    var top = 0, left = 0;
+    do {
+      top += element.offsetTop  || 0;
+      left += element.offsetLeft || 0;
+      element = element.offsetParent
+    } while(element)
+
+    return {
+      top: top,
+      left: left
+    }
   }
 
   renderEditPopover () {
@@ -279,104 +406,41 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
-  renderAdvanced () {
-    const {
-      advancedModalOpen, onCloseAdvanced,
-      groupOptions, typeOptions, conditionOptions
-    } = this.props
-    if (!advancedModalOpen) return null
-
-    return (
-      <Modal title="Workflow" width={1100} onRequestClose={onCloseAdvanced}>
-        <CardPanel>
-          <div>
-            <Field name="description" component={FormInput} floatingLabel="Description" style={{minWidth: 400}}/>
-          </div>
-
-          <div className="margin-lg-top">
-            <Field name="type" component={FormSelect} options={typeOptions} floatingLabel="Type"
-                   className="valign-top margin-md-right" style={{minWidth: 120}}/>
-
-            <Field name="groupId" component={FormSelect} options={groupOptions} floatingLabel="Group"
-                   className="valign-top margin-md-right" style={{minWidth: 160}}/>
-          </div>
-
-          <div className="margin-lg-top">
-            <Field name="calledDirect" component={FormCheckbox} label="Called Direct"/>
-            <Field name="paused" component={FormCheckbox} label="Stopped"/>
-            <Field name="sendBack" component={FormCheckbox} label="Send Result"/>
-            <Field name="runByDevice" component={FormCheckbox} label="Run By Device"/>
-          </div>
-
-          <div className="margin-md-top">
-            <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
-            <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
-          </div>
-        </CardPanel>
-
-        {this.renderSecurityTab()}
-        {this.renderTabSchedule()}
-        {this.renderAppliedTo()}
-
-      </Modal>
-    )
-  }
-
   renderButtons() {
-    const {onClickAdvanced} = this.props
+    const {onClickClose, noModal} = this.props
     return (
-      <div className="form-buttons">
-        <Button variant="raised" onClick={onClickAdvanced} className="margin-md-right">Advanced</Button>
-        <Button variant="raised" color="primary" type="submit">Save</Button>
-      </div>
-    )
-  }
-
-  renderContent () {
-    const {
-      onClickDeleteTag, tags, allTags,
-      onClickExistingTag, onClickTagPick
-    } = this.props
-
-    return (
-      <CardPanel>
-        <Field name="name" component={FormInput} floatingLabel="Name"
-               className="valign-top margin-md-right" style={{minWidth: 250}}/>
-
-        <h4>Tags</h4>
-        <div className="flex-horizontal" style={{alignItems: 'center'}}>
-          <div className="flex-1 nowrap padding-sm" style={{overflow: 'auto', border: '1px solid gray'}}>
-            {tags.map((t, i) =>
-              <Chip
-                key={i}
-                label={t}
-                onDelete={() => onClickDeleteTag(i)}
-                className="margin-md-right"
-              />
-            )}
-          </div>
-          <AddIcon className="link" onClick={onClickTagPick}/>
-        </div>
-
-        {this.renderWfTab()}
-        {this.renderTabActions()}
-      </CardPanel>
+      <SubmitBlock name="Save" onCancel={noModal ? null : onClickClose}/>
     )
   }
 
   render() {
     const {
-      onSubmit, children, noModal
+      onSubmit, children,
+      tab, onChangeTab, noModal
     } = this.props
+
+    // const mainStyle = tab === 'wf' ? {
+    //   height: panelHeight + 100,
+    //   overflow: 'auto'
+    // } : null
 
     const content = (
       <div>
         <form onSubmit={onSubmit}>
-          {this.renderContent()}
-          {this.renderAdvanced()}
-          {this.renderButtons()}
+          <Tabs value={tab} onChange={onChangeTab} scrollable scrollButtons="off">
+            <Tab label="Filter" value="filter"/>
+            <Tab label="General" value="general"/>
+            <Tab label="Workflow" value="wf"/>
+            <Tab label="Actions" value="actions"/>
+            <Tab label="Security" value="security"/>
+            <Tab label="Schedule" value="schedule"/>
+            <Tab label="Applied To" value="appliedto"/>
+          </Tabs>
+
+          {this.renderTabContent()}
         </form>
         {this.renderEditPopover()}
+        {/*{this.renderRuleDetail()}*/}
         {children}
       </div>
     )
