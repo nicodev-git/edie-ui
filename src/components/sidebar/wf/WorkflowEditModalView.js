@@ -317,8 +317,20 @@ class WorkflowEditModalView extends React.Component {
             </div>
             <div>
               <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell padding="checkbox" style={{maxWidth: 80}}>
+                      <Checkbox
+                        indeterminate={applyDeviceIds.length > 0}
+                        checked={applyDeviceIds.length === servers.length}
+                        onChange={() => {}}
+                      />
+                    </TableCell>
+                    <TableCell padding="none">Device</TableCell>
+                  </TableRow>
+                </TableHead>
                 <TableBody>
-                  {servers(p => {
+                  {servers.map(p => {
                       const isSelected = applyDeviceIds.includes(p.id)
                       return (
                         <TableRow
@@ -330,15 +342,13 @@ class WorkflowEditModalView extends React.Component {
                           selected={isSelected}
                         >
                           <TableCell padding="checkbox">
-                            <Checkbox checked={isSelected} onChange={onCheckAppliedDevice}/>
+                            <Checkbox checked={isSelected} onChange={onCheckAppliedDevice}
+                                      value={p.id}
+                                      disabled={!!applyAllDevices}/>
                           </TableCell>
                           <TableCell component="th" scope="row" padding="none">
-                            {n.name}
+                            {p.name}
                           </TableCell>
-                          <TableCell numeric>{n.calories}</TableCell>
-                          <TableCell numeric>{n.fat}</TableCell>
-                          <TableCell numeric>{n.carbs}</TableCell>
-                          <TableCell numeric>{n.protein}</TableCell>
                         </TableRow>
                       );
                     })}
