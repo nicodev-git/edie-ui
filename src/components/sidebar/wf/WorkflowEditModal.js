@@ -468,11 +468,15 @@ class WorkflowEditModal extends React.Component {
 
   onCheckAppliedDevice(e) {
     let {applyDeviceIds} = this.state
+    const {devices} = this.props
     const {applyAllDevices} = this.props.allValues || {}
 
     const id = e.target.value
     if (e.target.checked) {
       applyDeviceIds = [...applyDeviceIds, id]
+      if (applyDeviceIds.length === devices.filter(p => !!p.monitors).length) {
+        this.props.change('applyAllDevices', true)
+      }
     } else {
       applyDeviceIds = applyDeviceIds.filter(p => p !== id)
       if (applyAllDevices) {
@@ -487,9 +491,10 @@ class WorkflowEditModal extends React.Component {
 
   onChangeApplyAllDevices (e) {
     const {devices} = this.props
+    console.log(e.target)
     if (e.target.checked) {
       this.setState({
-        applyDeviceIds: devices.filter(p => !!p.monitors)
+        applyDeviceIds: devices.filter(p => !!p.monitors).map(p => p.id)
       })
     } else {
       this.setState({
