@@ -138,7 +138,11 @@ export default class Tags extends React.Component {
 
   renderProductVendorModal () {
     if (!this.state.productVendorModalOpen) return null
-
+    return (
+      <ProductModal
+        {...this.props}
+      />
+    )
   }
 
   render () {
