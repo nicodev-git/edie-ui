@@ -246,10 +246,18 @@ class VendorProductModal extends React.Component {
     } else {
       const flow = {
         ...values,
-        uuid: uuid.v4(),
-        flowItems: []
+        uuid: uuid.v4()
       }
-      this.props.addWorkflow(flow)
+      this.setState({
+        loading: true
+      })
+      this.props.addWorkflow(flow, entity => {
+        this.setState({
+          loading: false
+        })
+        if (!entity) return
+        this.onPickWf(entity)
+      })
     }
   }
 
@@ -321,6 +329,7 @@ class VendorProductModal extends React.Component {
         if (brainCellType === 'Tag') this.onPickTag(cell.name)
         else if (brainCellType === 'Classification') this.onPickClass(cell)
         else if (brainCellType === 'Grok') this.onPickGrok(cell)
+        else if (brainCellType === 'Incident') this.onPickIncident(cell)
       })
     }
   }
@@ -453,6 +462,7 @@ class VendorProductModal extends React.Component {
         workflows={this.getPickedWorkflows()}
         onClickAddWf={this.onClickAddWf.bind(this)}
         onClickDeleteWf={this.onClickDeleteWf.bind(this)}
+        onClickAddNewWf={this.onClickAddNewWf.bind(this)}
 
         incidentCells={this.getIncidentCells()}
         onClickAddIncident={this.onClickAddIncident.bind(this)}

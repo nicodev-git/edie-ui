@@ -124,7 +124,8 @@ class SimulationModalView extends React.Component {
   }
 
   render () {
-    const {onSubmit, onClickAddWf, onClickAddIncident, onClickNewIncident} = this.props
+    const {onSubmit, onClickAddWf, onClickAddNewWf,
+      onClickAddIncident, onClickNewIncident} = this.props
     return (
       <div className="flex-1">
         <form onSubmit={onSubmit}>
@@ -160,7 +161,7 @@ class SimulationModalView extends React.Component {
               <h3>
                 <span className="valign-middle">Workflows</span>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddWf}>Add</Button>
-                <Button variant="outlined" size="small" className="valign-middle margin-md-left">Create New</Button>
+                <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddNewWf}>Create New</Button>
               </h3>
             </div>
             <div className="panel-body">
