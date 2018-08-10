@@ -4,7 +4,7 @@ import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel, Button, Popover,
-  Table, TableBody, TableCell, TableHead
+  Table, TableBody, TableCell, TableHead, TableRow
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
@@ -316,7 +316,36 @@ class WorkflowEditModalView extends React.Component {
               <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
             </div>
             <div>
-              <table className="table table-hover">
+              <Table>
+                <TableBody>
+                  {servers(p => {
+                      const isSelected = applyDeviceIds.includes(p.id)
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          aria-checked={isSelected}
+                          tabIndex={-1}
+                          key={p.id}
+                          selected={isSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox checked={isSelected} onChange={onCheckAppliedDevice}/>
+                          </TableCell>
+                          <TableCell component="th" scope="row" padding="none">
+                            {n.name}
+                          </TableCell>
+                          <TableCell numeric>{n.calories}</TableCell>
+                          <TableCell numeric>{n.fat}</TableCell>
+                          <TableCell numeric>{n.carbs}</TableCell>
+                          <TableCell numeric>{n.protein}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+
+              <table className="table table-hover hidden">
                 <thead><tr><th>Device</th></tr></thead>
                 <tbody>
                 {servers.map(p =>
