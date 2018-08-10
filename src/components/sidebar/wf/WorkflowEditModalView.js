@@ -4,15 +4,17 @@ import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel, Button, Popover,
-  Table, TableBody, TableCell, TableHead, TableRow
+  Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Tabs from '@material-ui/core/Tabs'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Typography from '@material-ui/core/Typography'
-import {findIndex} from 'lodash'
+import { findIndex } from 'lodash'
+import { withStyles } from '@material-ui/core/styles'
+import { lighten } from '@material-ui/core/styles/colorManipulator'
+import classNames from 'classnames'
 
 import {
   FormInput,
@@ -35,6 +37,32 @@ const itemStyle = {
   width: '24px',
   height: '24px'
 }
+
+
+const toolbarStyles = theme => ({
+  root: {
+    paddingRight: theme.spacing.unit,
+  },
+  highlight:
+    theme.palette.type === 'light'
+      ? {
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
+      : {
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
+  spacer: {
+    flex: '1 1 100%',
+  },
+  actions: {
+    color: theme.palette.text.secondary,
+  },
+  title: {
+    flex: '0 0 auto',
+  },
+})
 
 class WorkflowEditModalView extends React.Component {
   renderSidebar () {
@@ -303,7 +331,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderAppliedTo() {
-    const {allValues, devices, onCheckAppliedDevice, applyDeviceIds} = this.props
+    const {allValues, devices, onCheckAppliedDevice, applyDeviceIds, classes} = this.props
     const {applyAllDevices} = allValues || {}
 
     const servers = devices.filter(p => !!p.monitors)
@@ -313,11 +341,26 @@ class WorkflowEditModalView extends React.Component {
         <CardPanel title="Applied To">
           <div style={cardStyle}>
             <div>
+              <Toolbar className={classNames(classes.root, {
+                [classes.highlight]: applyDeviceIds.length > 0,
+              })}>
+                <div className={classes.title}>
+                  {applyDeviceIds.length > 0 ? (
+                    <Typography color="inherit" variant="subheading">
+                      {applyDeviceIds.length} selected
+                    </Typography>
+                  ) : (
+                    <Typography variant="title">
+                      Applied Devices
+                    </Typography>
+                  )}
+                </div>
+              </Toolbar>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell padding="checkbox" style={{width: 80}}>
-                      <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
+                    <TableCell padding="default" style={{width: 80}}>
+                      <Field name="applyAllDevices" component={FormCheckbox} label=""/>
                     </TableCell>
                     <TableCell padding="none"><b>Device</b></TableCell>
                   </TableRow>
@@ -334,7 +377,7 @@ class WorkflowEditModalView extends React.Component {
                           key={p.id}
                           selected={isSelected}
                         >
-                          <TableCell padding="checkbox">
+                          <TableCell padding="checkbox" style={{width: 80}}>
                             <Checkbox checked={isSelected} onChange={onCheckAppliedDevice}
                                       value={p.id}
                                       disabled={!!applyAllDevices}/>
@@ -488,4 +531,4 @@ class WorkflowEditModalView extends React.Component {
   }
 }
 
-export default WorkflowEditModalView
+export default withStyles(toolbarStyles)(WorkflowEditModalView)
