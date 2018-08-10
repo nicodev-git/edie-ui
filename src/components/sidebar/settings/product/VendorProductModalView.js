@@ -17,6 +17,8 @@ class SimulationModalView extends React.Component {
         <div className="group-header padding-md-top padding-md-bottom">
           <div>
             <span className="valign-middle">Tags</span>
+            <Button className="valign-middle">Add</Button>
+            <Button className="valign-middle">Create New</Button>
             {/*<AddIcon className="link valign-middle" onClick={onClickAddTag}/>*/}
           </div>
         </div>
