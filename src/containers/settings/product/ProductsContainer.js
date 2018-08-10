@@ -9,11 +9,17 @@ import {
   updateVendorProduct,
   removeVendorProduct,
 
-  fetchBrainCells,
   fetchWorkflows,
-
   addWorkflow,
-  updateWorkflow
+  updateWorkflow,
+
+  showBrainCellModal,
+  addBrainCell,
+  updateBrainCell,
+  fetchBrainCells,
+  showScriptModal,
+  showGrokModal,
+  showCellParamModal
 } from 'actions'
 
 class ProductsContainer extends React.Component {
@@ -28,6 +34,13 @@ export default connect(
     vendorProducts: state.settings.vendorProducts,
 
     brainCells: state.settings.brainCells,
+    brainCellModalOpen: state.settings.brainCellModalOpen,
+    editBrainCell: state.settings.editBrainCell,
+    scriptModalOpen: state.settings.scriptModalOpen,
+    grokModalOpen: state.settings.grokModalOpen,
+    editCellParam: state.settings.editCellParam,
+    cellParamModalOpen: state.settings.cellParamModalOpen,
+
     workflows: state.workflow.workflows,
   }), {
     fetchVendorProducts,
@@ -35,10 +48,16 @@ export default connect(
     updateVendorProduct,
     removeVendorProduct,
 
-    fetchBrainCells,
     fetchWorkflows,
-
     addWorkflow,
-    updateWorkflow
+    updateWorkflow,
+
+    showBrainCellModal,
+    addBrainCell,
+    updateBrainCell,
+    fetchBrainCells,
+    showScriptModal,
+    showGrokModal,
+    showCellParamModal
   }
 )(withRouter(ProductsContainer))
