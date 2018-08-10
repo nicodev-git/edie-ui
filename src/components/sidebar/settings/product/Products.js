@@ -141,6 +141,7 @@ export default class Tags extends React.Component {
     return (
       <ProductModal
         {...this.props}
+        onClickClose={() => this.setState({productVendorModalOpen: false})}
       />
     )
   }

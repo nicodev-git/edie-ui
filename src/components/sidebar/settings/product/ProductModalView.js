@@ -1,7 +1,7 @@
 import React from 'react'
-import {Field} from 'redux-form'
 
 import {Modal, CardPanel} from 'components/modal/parts'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 const divStyle = {
   minHeight: 500
@@ -17,13 +17,16 @@ export default class ProductModalView extends React.Component {
             <div style={divStyle}>
 
             </div>
+
+            <FloatingMenu menuItems={[]}/>
           </CardPanel>
           <div style={{width: 12}}>
           </div>
-          <CardPanel title="List" className="flex-1">
+          <CardPanel title="Vendor Type" className="flex-1">
             <div style={divStyle}>
 
             </div>
+            <FloatingMenu menuItems={[]}/>
           </CardPanel>
         </div>
       </Modal>
