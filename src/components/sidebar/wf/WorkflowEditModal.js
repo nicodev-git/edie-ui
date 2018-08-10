@@ -148,7 +148,7 @@ class WorkflowEditModal extends React.Component {
 
   onSubmit(values) {
     if (!values) return
-    const {onSave, userInfo, editWf} = this.props
+    const {onSave, userInfo} = this.props
     const {permitterUsers, wfData, tags, applyDeviceIds} = this.state
 
     const entity = {
