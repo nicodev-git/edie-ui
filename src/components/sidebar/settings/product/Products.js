@@ -11,6 +11,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import {hasPermission} from 'shared/Permission'
 
 import VendorProductModal from './VendorProductModal'
+import ProductModal from './ProductModal'
 
 export default class Tags extends React.Component {
   constructor (props) {
@@ -18,7 +19,8 @@ export default class Tags extends React.Component {
     this.state = {
       selectedProductId: '',
       productModalOpen: false,
-      editProduct: null
+      editProduct: null,
+      productVendorModalOpen: false
     }
   }
   componentWillMount () {
@@ -98,6 +100,16 @@ export default class Tags extends React.Component {
     })
   }
 
+  ///////////////////////////////////////////////////////////////
+
+  onClickProductVendor () {
+    this.setState({
+      productVendorModalOpen: true
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////
+
   renderProductCombo () {
     const {vendorProducts} = this.props
     return (
@@ -124,6 +136,11 @@ export default class Tags extends React.Component {
     )
   }
 
+  renderProductVendorModal () {
+    if (!this.state.productVendorModalOpen) return null
+
+  }
+
   render () {
     const {userInfo} = this.props
     const {selectedProductId} = this.state
@@ -134,7 +151,7 @@ export default class Tags extends React.Component {
           <div className="margin-md-top">
             {this.renderProductCombo()}
             <div className="pull-right">
-              {canEdit && <Button variant="raised">Product</Button>}
+              {canEdit && <Button variant="raised" onClick={this.onClickProductVendor.bind(this)}>Product</Button>}
 
               {canEdit && <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>}
               {canEdit && selectedProductId && <Button variant="raised" onClick={this.onClickDelete.bind(this)}>Delete</Button>}&nbsp;
@@ -144,6 +161,7 @@ export default class Tags extends React.Component {
 
         <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location} transparent>
           {this.renderProductModal()}
+          {this.renderProductVendorModal()}
         </TabPageBody>
       </TabPage>
     )
