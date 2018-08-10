@@ -345,9 +345,9 @@ class WorkflowEditModalView extends React.Component {
                 [classes.highlight]: applyDeviceIds.length > 0,
               })}>
                 <div className={classes.title}>
-                  {applyDeviceIds.length > 0 ? (
+                  {applyAllDevices || applyDeviceIds.length > 0 ? (
                     <Typography color="inherit" variant="subheading">
-                      {applyDeviceIds.length} selected
+                      {applyAllDevices ? 'All' : applyDeviceIds.length} selected
                     </Typography>
                   ) : (
                     <Typography variant="title">
@@ -378,9 +378,8 @@ class WorkflowEditModalView extends React.Component {
                           selected={isSelected}
                         >
                           <TableCell padding="checkbox" style={{width: 50}}>
-                            <Checkbox checked={isSelected} onChange={onCheckAppliedDevice}
-                                      value={p.id}
-                                      disabled={!!applyAllDevices}/>
+                            <Checkbox checked={applyAllDevices || isSelected} onChange={onCheckAppliedDevice}
+                                      value={p.id}/>
                           </TableCell>
                           <TableCell component="th" scope="row" padding="none">
                             {p.name}

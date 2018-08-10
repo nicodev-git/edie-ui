@@ -76,18 +76,33 @@ class WorkflowEditModal extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {allValues} = this.props
+    const {allValues, devices} = this.props
     if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
       this.props.change('calledDirect', true)
     }
 
-    if (allValues && allValues.openIncident && !allValues.incidentTemplateId &&
-      (prevProps.allValues && !prevProps.allValues.openIncident)) {
-      // console.log('show modal now')
-      setTimeout(() => {
-        this.props.showBrainCellModal(true, null)
-      }, 1)
+    if (allValues) {
+      if (allValues.openIncident && !allValues.incidentTemplateId &&
+        (prevProps.allValues && !prevProps.allValues.openIncident)) {
+        // console.log('show modal now')
+        setTimeout(() => {
+          this.props.showBrainCellModal(true, null)
+        }, 1)
+      }
+
+      if (allValues.applyAllDevices && prevProps.allValues && !prevProps.allValues.applyAllDevices) {
+        this.setState({
+          applyDeviceIds: devices.filter(p => !!p.monitors)
+        })
+      }
+
+      if (!allValues.applyAllDevices && prevProps.allValues && prevProps.allValues.applyAllDevices) {
+        this.setState({
+          applyDeviceIds: []
+        })
+      }
     }
+
   }
 
   getWfDataItems() {
