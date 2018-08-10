@@ -468,14 +468,21 @@ class WorkflowEditModal extends React.Component {
 
   onCheckAppliedDevice(e) {
     let {applyDeviceIds} = this.state
+    const {applyAllDevices} = this.props.allValues || {}
+
     const id = e.target.value
     if (e.target.checked) {
       applyDeviceIds = [...applyDeviceIds, id]
     } else {
       applyDeviceIds = applyDeviceIds.filter(p => p !== id)
+      if (applyAllDevices) {
+        this.props.change('applyAllDevices', false)
+      }
     }
 
-    this.setState({applyDeviceIds})
+    this.setState({
+      applyDeviceIds
+    })
   }
 
   ////////////////////////////////////////////////////
