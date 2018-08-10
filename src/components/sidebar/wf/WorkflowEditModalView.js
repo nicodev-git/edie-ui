@@ -360,7 +360,12 @@ class WorkflowEditModalView extends React.Component {
                 <TableHead>
                   <TableRow>
                     <TableCell padding="default" style={{width: 50}}>
-                      <Field name="applyAllDevices" component={FormCheckbox} label="" onChange={onChangeApplyAllDevices}/>
+                      <Field
+                        name="applyAllDevices"
+                        component={FormCheckbox} label=""
+                        onChange={onChangeApplyAllDevices}
+                        indeterminate={applyDeviceIds.length > 0 && applyDeviceIds.length < servers.length}
+                      />
                     </TableCell>
                     <TableCell padding="none"><b>All Devices</b></TableCell>
                   </TableRow>
