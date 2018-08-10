@@ -181,6 +181,9 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickNewGrok () {
+  }
+
   //////////////////////////////////////////////////////////////
 
   onPickWf (cell) {
@@ -302,9 +305,8 @@ class VendorProductModal extends React.Component {
         })
 
         const {brainCellType} = this.state
-        if (brainCellType === 'Tag') {
-          this.onPickTag(cell.name)
-        }
+        if (brainCellType === 'Tag') this.onPickTag(cell.name)
+        else if (brainCellType === 'Classification') this.onPickClass(cell)
       })
     }
   }
