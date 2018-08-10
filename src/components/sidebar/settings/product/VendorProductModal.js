@@ -182,6 +182,11 @@ class VendorProductModal extends React.Component {
   }
 
   onClickNewGrok () {
+    this.setState({
+      brainCellType: 'Grok'
+    }, () => {
+      this.props.showBrainCellModal(true)
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -290,6 +295,14 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickNewIncident () {
+    this.setState({
+      brainCellType: 'Incident'
+    }, () => {
+      this.props.showBrainCellModal(true)
+    })
+  }
+
   //////////////////////////////////////////////////////////////
 
   onSaveBraincell (entity) {
@@ -307,6 +320,7 @@ class VendorProductModal extends React.Component {
         const {brainCellType} = this.state
         if (brainCellType === 'Tag') this.onPickTag(cell.name)
         else if (brainCellType === 'Classification') this.onPickClass(cell)
+        else if (brainCellType === 'Grok') this.onPickGrok(cell)
       })
     }
   }
@@ -434,6 +448,7 @@ class VendorProductModal extends React.Component {
         grokCells={this.getGrokCells()}
         onClickAddGrok={this.onClickAddGrok.bind(this)}
         onClickDeleteGrok={this.onClickDeleteGrok.bind(this)}
+        onClickNewGrok={this.onClickNewGrok.bind(this)}
 
         workflows={this.getPickedWorkflows()}
         onClickAddWf={this.onClickAddWf.bind(this)}
@@ -442,6 +457,7 @@ class VendorProductModal extends React.Component {
         incidentCells={this.getIncidentCells()}
         onClickAddIncident={this.onClickAddIncident.bind(this)}
         onClickDeleteIncident={this.onClickDeleteIncident.bind(this)}
+        onClickNewIncident={this.onClickNewIncident.bind(this)}
 
         loading={this.state.loading}
       >

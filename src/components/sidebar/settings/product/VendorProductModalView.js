@@ -54,13 +54,13 @@ class SimulationModalView extends React.Component {
   }
 
   renderGroks () {
-    const {grokCells, onClickAddGrok, onClickDeleteGrok} = this.props
+    const {grokCells, onClickAddGrok, onClickDeleteGrok, onClickNewGrok} = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
           <span className="valign-middle">Parser</span>
           <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddGrok}>Add</Button>
-          <Button variant="outlined" size="small" className="valign-middle margin-md-left">Create New</Button>
+          <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickNewGrok}>Create New</Button>
         </div>
         <div>
           {grokCells.map((t, i) =>
@@ -124,7 +124,7 @@ class SimulationModalView extends React.Component {
   }
 
   render () {
-    const {onSubmit, onClickAddWf, onClickAddIncident} = this.props
+    const {onSubmit, onClickAddWf, onClickAddIncident, onClickNewIncident} = this.props
     return (
       <div className="flex-1">
         <form onSubmit={onSubmit}>
@@ -173,7 +173,7 @@ class SimulationModalView extends React.Component {
               <h3>
                 <span className="valign-middle">Incidents</span>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddIncident}>Add</Button>
-                <Button variant="outlined" size="small" className="valign-middle margin-md-left">Create New</Button>
+                <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickNewIncident}>Create New</Button>
               </h3>
             </div>
             <div className="panel-body">
