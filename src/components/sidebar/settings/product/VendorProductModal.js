@@ -11,6 +11,7 @@ import BraincellGrokPickerModal from 'components/sidebar/settings/braincell/Brai
 import BraincellIncidentPickerModal from 'components/sidebar/settings/braincell/BraincellIncidentPickerModal'
 import WorkflowPickerModal from 'components/sidebar/wf/WorkflowPickerModal'
 import WorkflowEditModalContainer from 'containers/wf/WorkflowEditModalContainer'
+import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 
 class VendorProductModal extends React.Component {
   constructor(props) {
@@ -338,6 +339,29 @@ class VendorProductModal extends React.Component {
         allTags={this.getAllTags()}
         onSave={this.onSaveWf.bind(this)}
         onClose={() => this.setState({newWfModalOpen: false})}
+      />
+    )
+  }
+
+  renderBraincellModal () {
+    if (!this.props.brainCellModalOpen) return null
+    return (
+      <BrainCellModal
+        type={this.state.brainCellType}
+        allTags={this.getTags()}
+        onSave={this.onSaveBraincell.bind(this)}
+        onClose={this.onCloseBraincellModal.bind(this)}
+
+        brainCells={this.props.brainCells}
+        editBrainCell={this.props.editBrainCell}
+
+        showScriptModal={this.props.showScriptModal}
+        showGrokModal={this.props.showGrokModal}
+        showCellParamModal={this.props.showCellParamModal}
+        scriptModalOpen={this.props.scriptModalOpen}
+        grokModalOpen={this.props.grokModalOpen}
+        editCellParam={this.props.editCellParam}
+        cellParamModalOpen={this.props.cellParamModalOpen}
       />
     )
   }

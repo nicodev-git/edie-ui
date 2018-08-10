@@ -12,7 +12,7 @@ import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import BraincellTagPickerModal from "../settings/braincell/BraincellTagPickerModal";
+import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
 
 const typeOptions = [{
   label: 'Normal', value: 'normal'
