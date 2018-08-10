@@ -359,10 +359,10 @@ class WorkflowEditModalView extends React.Component {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell padding="default" style={{width: 80}}>
+                    <TableCell padding="default" style={{width: 50}}>
                       <Field name="applyAllDevices" component={FormCheckbox} label=""/>
                     </TableCell>
-                    <TableCell padding="none"><b>Device</b></TableCell>
+                    <TableCell padding="none"><b>All Devices</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -377,7 +377,7 @@ class WorkflowEditModalView extends React.Component {
                           key={p.id}
                           selected={isSelected}
                         >
-                          <TableCell padding="checkbox" style={{width: 80}}>
+                          <TableCell padding="checkbox" style={{width: 50}}>
                             <Checkbox checked={isSelected} onChange={onCheckAppliedDevice}
                                       value={p.id}
                                       disabled={!!applyAllDevices}/>
