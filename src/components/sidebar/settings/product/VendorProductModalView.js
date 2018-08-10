@@ -10,14 +10,14 @@ const panelStyle = {width: 1000, height: 623, overflow: 'auto'}
 
 class SimulationModalView extends React.Component {
   renderTags () {
-    const {tags, onClickAddTag, onClickDeleteTag} = this.props
+    const {tags, onClickAddTag, onClickDeleteTag, onClickNewTag} = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
           <div>
             <span className="valign-middle">Tags</span>
             <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddTag}>Add</Button>
-            <Button variant="outlined" size="small" className="valign-middle margin-md-left">Create New</Button>
+            <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickNewTag}>Create New</Button>
           </div>
         </div>
         <div>

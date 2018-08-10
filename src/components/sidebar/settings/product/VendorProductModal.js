@@ -33,7 +33,9 @@ class VendorProductModal extends React.Component {
       newWfModalOpen: false,
 
       incidents: (editProduct ? editProduct.incidents : []) || [],
-      incidentModalOpen: false
+      incidentModalOpen: false,
+
+      loading: false
     }
   }
 
@@ -74,6 +76,14 @@ class VendorProductModal extends React.Component {
     const {tags} = this.state
     this.setState({
       tags: tags.filter((p, i) => i !== index)
+    })
+  }
+
+  onClickNewTag () {
+    this.setState({
+      brainCellType: 'Tag'
+    }, () => {
+      this.props.showBrainCellModal(true)
     })
   }
 
@@ -269,6 +279,29 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  onSaveBraincell (entity) {
+    if (entity.id) {
+      this.props.updateBrainCell(entity)
+    } else {
+      this.setState({
+        loading: true
+      })
+      this.props.addBrainCell(entity, (incidentTpl) => {
+        this.setState({
+          loading: false
+        })
+        //this.props.change('incidentTemplateId', incidentTpl.id)
+
+      })
+    }
+  }
+
+  onCloseBraincellModal () {
+    this.props.showBrainCellModal(false)
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
     return (
@@ -348,7 +381,7 @@ class VendorProductModal extends React.Component {
     return (
       <BrainCellModal
         type={this.state.brainCellType}
-        allTags={this.getTags()}
+        allTags={this.getAllTags()}
         onSave={this.onSaveBraincell.bind(this)}
         onClose={this.onCloseBraincellModal.bind(this)}
 
@@ -376,6 +409,7 @@ class VendorProductModal extends React.Component {
         tags={this.state.tags}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+        onClickNewTag={this.onClickNewTag.bind(this)}
 
         classifierCells={this.getClassifierCells()}
         onClickAddClass={this.onClickAddClass.bind(this)}
@@ -392,6 +426,8 @@ class VendorProductModal extends React.Component {
         incidentCells={this.getIncidentCells()}
         onClickAddIncident={this.onClickAddIncident.bind(this)}
         onClickDeleteIncident={this.onClickDeleteIncident.bind(this)}
+
+        loading={this.state.loading}
       >
         {this.renderTagPickerModal()}
         {this.renderClassPickerModal()}
@@ -399,6 +435,7 @@ class VendorProductModal extends React.Component {
         {this.renderWfPickerModal()}
         {this.renderIncidentPickerModal()}
         {this.renderWFModal()}
+        {this.renderBraincellModal()}
       </VendorProductModalView>
     )
   }
