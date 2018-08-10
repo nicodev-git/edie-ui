@@ -3,7 +3,8 @@ import {Field} from 'redux-form'
 import {
   Tab,
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
-  Checkbox, FormControlLabel, Button, Popover
+  Checkbox, FormControlLabel, Button, Popover,
+  Table, TableBody, TableCell, TableHead
 } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
