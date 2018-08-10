@@ -313,20 +313,13 @@ class WorkflowEditModalView extends React.Component {
         <CardPanel title="Applied To">
           <div style={cardStyle}>
             <div>
-              <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
-            </div>
-            <div>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell padding="checkbox" style={{maxWidth: 80}}>
-                      <Checkbox
-                        indeterminate={applyDeviceIds.length > 0}
-                        checked={applyDeviceIds.length === servers.length}
-                        onChange={() => {}}
-                      />
+                    <TableCell padding="checkbox" style={{width: 80}}>
+                      <Field name="applyAllDevices" component={FormCheckbox} label="All Devices"/>
                     </TableCell>
-                    <TableCell padding="none">Device</TableCell>
+                    <TableCell padding="none"><b>Device</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
