@@ -76,7 +76,7 @@ class WorkflowEditModal extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {allValues, devices} = this.props
+    const {allValues} = this.props
     if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
       this.props.change('calledDirect', true)
     }
@@ -90,17 +90,17 @@ class WorkflowEditModal extends React.Component {
         }, 1)
       }
 
-      if (allValues.applyAllDevices && prevProps.allValues && !prevProps.allValues.applyAllDevices) {
-        this.setState({
-          applyDeviceIds: devices.filter(p => !!p.monitors)
-        })
-      }
-
-      if (!allValues.applyAllDevices && prevProps.allValues && prevProps.allValues.applyAllDevices) {
-        this.setState({
-          applyDeviceIds: []
-        })
-      }
+      // if (allValues.applyAllDevices && prevProps.allValues && !prevProps.allValues.applyAllDevices) {
+      //   this.setState({
+      //     applyDeviceIds: devices.filter(p => !!p.monitors)
+      //   })
+      // }
+      //
+      // if (!allValues.applyAllDevices && prevProps.allValues && prevProps.allValues.applyAllDevices) {
+      //   this.setState({
+      //     applyDeviceIds: []
+      //   })
+      // }
     }
 
   }
@@ -485,6 +485,19 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
+  onChangeApplyAllDevices (e) {
+    const {devices} = this.props
+    if (e.target.checked) {
+      this.setState({
+        applyDeviceIds: devices.filter(p => !!p.monitors)
+      })
+    } else {
+      this.setState({
+        applyDeviceIds: []
+      })
+    }
+  }
+
   ////////////////////////////////////////////////////
 
   onClickEditIncident () {
@@ -718,6 +731,7 @@ class WorkflowEditModal extends React.Component {
 
         applyDeviceIds={this.state.applyDeviceIds}
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
+        onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}

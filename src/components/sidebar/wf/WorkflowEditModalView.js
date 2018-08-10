@@ -331,7 +331,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderAppliedTo() {
-    const {allValues, devices, onCheckAppliedDevice, applyDeviceIds, classes} = this.props
+    const {allValues, devices, onCheckAppliedDevice, applyDeviceIds, classes, onChangeApplyAllDevices} = this.props
     const {applyAllDevices} = allValues || {}
 
     const servers = devices.filter(p => !!p.monitors)
@@ -360,7 +360,7 @@ class WorkflowEditModalView extends React.Component {
                 <TableHead>
                   <TableRow>
                     <TableCell padding="default" style={{width: 50}}>
-                      <Field name="applyAllDevices" component={FormCheckbox} label=""/>
+                      <Field name="applyAllDevices" component={FormCheckbox} label="" onChange={onChangeApplyAllDevices}/>
                     </TableCell>
                     <TableCell padding="none"><b>All Devices</b></TableCell>
                   </TableRow>

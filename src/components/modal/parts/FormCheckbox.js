@@ -9,7 +9,6 @@ const FormCheckbox = ({input, label, meta: {touched, error}, ...custom}) => (
         {...input}
         {...custom}
         checked={!!input.value}
-        onChange={(event, isInputChecked) => input.onChange(isInputChecked)}
         value=""
       />
     }
