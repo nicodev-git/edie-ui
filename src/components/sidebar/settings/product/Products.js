@@ -134,6 +134,9 @@ export default class Tags extends React.Component {
           <div className="margin-md-top">
             {this.renderProductCombo()}
             <div className="pull-right">
+              {canEdit && <Button variant="raised">Product Types</Button>}
+              {canEdit && <Button variant="raised">Product Vendor</Button>}
+
               {canEdit && <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>}
               {canEdit && selectedProductId && <Button variant="raised" onClick={this.onClickDelete.bind(this)}>Delete</Button>}&nbsp;
             </div>
