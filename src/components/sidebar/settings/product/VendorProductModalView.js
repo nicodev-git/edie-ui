@@ -31,7 +31,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderClasses () {
-    const {classifierCells, onClickAddClass, onClickDeleteClass} = this.props
+    const {classifierCells, onClickAddClass, onClickNewClass, onClickDeleteClass} = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
@@ -39,7 +39,7 @@ class SimulationModalView extends React.Component {
             <span className="valign-middle">Classifiers</span>
             {/*<AddIcon className="link valign-middle" onClick={onClickAddClass}/>*/}
             <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddClass}>Add</Button>
-            <Button variant="outlined" size="small" className="valign-middle margin-md-left">Create New</Button>
+            <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickNewClass}>Create New</Button>
           </div>
         </div>
         <div>

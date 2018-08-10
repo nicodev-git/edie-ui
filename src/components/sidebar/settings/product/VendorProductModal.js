@@ -48,8 +48,10 @@ class VendorProductModal extends React.Component {
   }
 
   //////////////////////////////////////////////////////////////
-  getAllTags () {
-    return this.props.brainCells.filter(p => p.type === 'Tag').map(p => p.name)
+  getAllTags (isEntity) {
+    const items = this.props.brainCells.filter(p => p.type === 'Tag')
+    if (isEntity) return items;
+    return items.map(p => p.name)
   }
 
   onClickAddTag () {
@@ -127,6 +129,14 @@ class VendorProductModal extends React.Component {
       if (cell) cells.push(cell)
     })
     return cells
+  }
+
+  onClickNewClass () {
+    this.setState({
+      brainCellType: 'Classification'
+    }, () => {
+      this.props.showBrainCellModal(true)
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -384,7 +394,7 @@ class VendorProductModal extends React.Component {
     return (
       <BrainCellModal
         type={this.state.brainCellType}
-        allTags={this.getAllTags()}
+        allTags={this.getAllTags(true)}
         onSave={this.onSaveBraincell.bind(this)}
         onClose={this.onCloseBraincellModal.bind(this)}
 
@@ -417,6 +427,7 @@ class VendorProductModal extends React.Component {
         classifierCells={this.getClassifierCells()}
         onClickAddClass={this.onClickAddClass.bind(this)}
         onClickDeleteClass={this.onClickDeleteClass.bind(this)}
+        onClickNewClass={this.onClickNewClass.bind(this)}
 
         grokCells={this.getGrokCells()}
         onClickAddGrok={this.onClickAddGrok.bind(this)}
