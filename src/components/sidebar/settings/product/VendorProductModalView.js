@@ -17,8 +17,8 @@ class SimulationModalView extends React.Component {
         <div className="group-header padding-md-top padding-md-bottom">
           <div>
             <span className="valign-middle">Tags</span>
-            <Button className="valign-middle">Add</Button>
-            <Button className="valign-middle">Create New</Button>
+            <Button variant="outlined" className="valign-middle margin-md-left">Add</Button>
+            <Button variant="outlined" className="valign-middle margin-md-left">Create New</Button>
             {/*<AddIcon className="link valign-middle" onClick={onClickAddTag}/>*/}
           </div>
         </div>
@@ -39,6 +39,8 @@ class SimulationModalView extends React.Component {
           <div>
             <span className="valign-middle">Classifiers</span>
             {/*<AddIcon className="link valign-middle" onClick={onClickAddClass}/>*/}
+            <Button variant="raised" className="valign-middle">Add</Button>
+            <Button variant="raised" className="valign-middle">Create New</Button>
           </div>
         </div>
         <div>
@@ -59,6 +61,8 @@ class SimulationModalView extends React.Component {
         <div className="group-header padding-md-top padding-md-bottom">
           <span className="valign-middle">Parser</span>
           {/*<AddIcon className="link valign-middle" onClick={onClickAddGrok}/>*/}
+          <Button className="valign-middle">Add</Button>
+          <Button className="valign-middle">Create New</Button>
         </div>
         <div>
           {grokCells.map((t, i) =>
@@ -157,7 +161,9 @@ class SimulationModalView extends React.Component {
             <div className="panel-heading">
               <h3>
                 <span className="valign-middle">Workflows</span>
-                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddWf}/>
+                {/*<AddIcon className="link valign-middle margin-md-left" onClick={onClickAddWf}/>*/}
+                <Button className="valign-middle">Add</Button>
+                <Button className="valign-middle">Create New</Button>
               </h3>
             </div>
             <div className="panel-body">
@@ -169,7 +175,9 @@ class SimulationModalView extends React.Component {
             <div className="panel-heading">
               <h3>
                 <span className="valign-middle">Incidents</span>
-                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddIncident}/>
+                {/*<AddIcon className="link valign-middle margin-md-left" onClick={onClickAddIncident}/>*/}
+                <Button className="valign-middle">Add</Button>
+                <Button className="valign-middle">Create New</Button>
               </h3>
             </div>
             <div className="panel-body">
