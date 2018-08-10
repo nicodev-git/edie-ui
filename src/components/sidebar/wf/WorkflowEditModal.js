@@ -15,9 +15,9 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
 
 const typeOptions = [{
-  label: 'Normal', value: 'normal'
+  label: 'Customer', value: 'normal'
 }, {
-  label: 'System', value: 'system'
+  label: 'Builtin', value: 'system'
 }]
 
 const timeOptions = [{
