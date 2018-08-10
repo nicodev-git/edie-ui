@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {reset} from 'redux-form'
-import {assign} from 'lodash'
+import {assign, sortBy} from 'lodash'
 
 import {
   FETCH_SETTING_MAPS,
@@ -1037,7 +1037,7 @@ export function showCellParamModal (visible, data) {
 export function fetchVendorProducts () {
   return dispatch => {
     axios.get(`${ROOT_URL}/vendorproduct?size=1000`).then(res => {
-      dispatch({type: FETCH_VENDOR_PRODUCTS, data: res.data._embedded.vendorProducts})
+      dispatch({type: FETCH_VENDOR_PRODUCTS, data: sortBy(res.data._embedded.vendorProducts, p => (p.name || '').toLowerCase())})
     })
   }
 }
