@@ -286,12 +286,15 @@ class VendorProductModal extends React.Component {
       this.setState({
         loading: true
       })
-      this.props.addBrainCell(entity, (incidentTpl) => {
+      this.props.addBrainCell(entity, (cell) => {
         this.setState({
           loading: false
         })
-        //this.props.change('incidentTemplateId', incidentTpl.id)
 
+        const {brainCellType} = this.state
+        if (brainCellType === 'Tag') {
+          this.onPickTag(cell.name)
+        }
       })
     }
   }

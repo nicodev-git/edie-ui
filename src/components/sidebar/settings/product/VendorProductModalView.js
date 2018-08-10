@@ -3,6 +3,7 @@ import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
 import {Button, Chip, Tooltip} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { FormInput } from 'components/modal/parts'
 
@@ -185,6 +186,7 @@ class SimulationModalView extends React.Component {
           </div>
         </form>
 
+        {this.props.loading && <RefreshOverlay/>}
         {this.props.children}
       </div>
     )
