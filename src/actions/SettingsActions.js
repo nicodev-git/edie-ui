@@ -1073,6 +1073,32 @@ export function removeVendorProduct (entity) {
 
 export function fetchProductTypes () {
   return dispatch => {
+    axios.get(`${ROOT_URL}/producttype?size=1000`).then(res => {
+      dispatch({type: FETCH_PRODUCT_TYPES, data: res.data._embedded.productTypes})
+    })
+  }
+}
 
+export function addProductType(enttity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/producttype/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_PRODUCT_TYPE, data: res.data})
+    })
+  }
+}
+
+export function updateProductType (entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/producttype/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_PRODUCT_TYPE, data: res.data})
+    })
+  }
+}
+
+export function removeProductType (entity) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/producttype/${entity.id}`).then(res => {
+      dispatch({type: REMOVE_PRODUCT_TYPE, data: entity})
+    }).catch(error => apiError(dispatch, error))
   }
 }

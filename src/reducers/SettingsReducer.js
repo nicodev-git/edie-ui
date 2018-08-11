@@ -181,7 +181,12 @@ import {
   FETCH_VENDOR_PRODUCTS,
   ADD_VENDOR_PRODUCT,
   UPDATE_VENDOR_PRODUCT,
-  REMOVE_VENDOR_PRODUCT
+  REMOVE_VENDOR_PRODUCT,
+
+  FETCH_PRODUCT_TYPES,
+  ADD_PRODUCT_TYPE,
+  UPDATE_PRODUCT_TYPE,
+  REMOVE_PRODUCT_TYPE
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys} from 'lodash'
@@ -238,6 +243,8 @@ const initialState = {
   brainCells: [],
 
   vendorProducts: [],
+  productTypes: [],
+  productVendors: [],
 
   workflowDraw: 1
 }
@@ -756,6 +763,16 @@ export default function (state = initialState, action) {
       return { ...state, vendorProducts: state.vendorProducts.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_VENDOR_PRODUCT:
       return { ...state, vendorProducts: state.vendorProducts.filter(p => p.id !== action.data.id) }
+
+    case FETCH_PRODUCT_TYPES:
+      return { ...state, productTypes: action.data }
+    case ADD_PRODUCT_TYPE:
+      return { ...state, productTypes: [...state.productTypes, action.data] }
+    case UPDATE_PRODUCT_TYPE:
+      return { ...state, productTypes: state.productTypes.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_PRODUCT_TYPE:
+      return { ...state, productTypes: state.productTypes.filter(p => p.id !== action.data.id) }
+
     default:
       return state
   }
