@@ -63,7 +63,8 @@ export default class ProductTypeVendorModal extends React.Component {
   }
 
   getSelectedType () {
-    const {selectedTypeId, productTypes} = this.props
+    const {selectedTypeId} = this.state
+    const {productTypes} = this.props
     if (!selectedTypeId) return null
     const type = find(productTypes, {id: selectedTypeId})
     return type
@@ -72,6 +73,8 @@ export default class ProductTypeVendorModal extends React.Component {
   ///////////////////////////////////////////////////////////////////
 
   onClickAddVendor () {
+    const type = this.getSelectedType()
+    if (!type) return alert('Please choose product type first.')
     this.setState({
       vendorPickModalOpen: true
       // vendorModalOpen: true,
@@ -104,12 +107,31 @@ export default class ProductTypeVendorModal extends React.Component {
 
   ///////////////////////////////////////////////////////////////////
 
-  onAddNewVendorToType (entity) {
-    this.props.addProductVendor(entity)
+  addNewVendorIdToType(type, vendorId) {
+    const {vendorIds} = type
+    this.props.updateProductType({
+      ...type,
+      vendorIds: [...vendorIds, vendorId]
+    })
   }
 
-  onPickVendorForType () {
+  onAddNewVendorToType (entity) {
+    const type = this.getSelectedType()
+    if (!type) return
+    this.props.addProductVendor(entity, vendor => {
+      if (vendor) this.addNewVendorIdToType(type, vendor.id)
+    })
+    this.onCloseVendorPick()
+  }
 
+  onPickVendorForType (vendorId) {
+    const type = this.getSelectedType()
+    if (!type) return
+    let {vendorIds} = type
+    if (!vendorIds) vendorIds = []
+    if (vendorIds.indexOf(vendorId) >= 0) return alert('Already added')
+    this.addNewVendorIdToType(type, vendorId)
+    this.onCloseVendorPick()
   }
 
   onCloseVendorPick () {
