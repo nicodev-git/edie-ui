@@ -696,8 +696,10 @@ export const mappingFieldOptions = 'message ip port user description hostname [O
   value: p
 }))
 
-export const brainCellTypes = [{
+export const brainCellTypes = [/*{
   label: 'Classification', value: 'Classification', valueTypes: ['TEXT']
+}, */{
+  label: 'Product Classification', value: 'ProductClassification', valueTypes: ['TEXT']
 }, {
   label: 'CommandPattern', value: 'CommandPattern',
   valueTypes: ['WORKFLOW', 'COMMAND', 'FUNCTION', 'TEXTRESPONSE']
@@ -711,8 +713,6 @@ export const brainCellTypes = [{
   label: 'Tag', value: 'Tag', valueTypes: ['TEXT']
 }, {
   label: 'Incident', value: 'Incident', valueTypes: ['TEXT']
-}, {
-  label: 'Product Classification', value: 'ProductClassification', valueTypes: ['TEXT']
 }]
 
 export const brainCellValueTypes = [{
