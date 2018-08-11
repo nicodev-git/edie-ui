@@ -32,7 +32,8 @@ export default class ProductTypeVendorModal extends React.Component {
   }
 
   onClickDeleteType (editType) {
-
+    if (!window.confirm('Click OK to remove')) return
+    this.props.removeProductType(editType)
   }
 
   onSaveType (entity) {
