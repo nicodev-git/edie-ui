@@ -19,7 +19,12 @@ import {
   fetchBrainCells,
   showScriptModal,
   showGrokModal,
-  showCellParamModal
+  showCellParamModal,
+
+  fetchProductTypes,
+  addProductType,
+  updateProductType,
+  removeProductType
 } from 'actions'
 
 class ProductsContainer extends React.Component {
@@ -32,6 +37,7 @@ class ProductsContainer extends React.Component {
 export default connect(
   state => ({
     vendorProducts: state.settings.vendorProducts,
+    productTypes: state.settings.productTypes,
 
     brainCells: state.settings.brainCells,
     brainCellModalOpen: state.settings.brainCellModalOpen,
@@ -58,6 +64,11 @@ export default connect(
     fetchBrainCells,
     showScriptModal,
     showGrokModal,
-    showCellParamModal
+    showCellParamModal,
+
+    fetchProductTypes,
+    addProductType,
+    updateProductType,
+    removeProductType
   }
 )(withRouter(ProductsContainer))
