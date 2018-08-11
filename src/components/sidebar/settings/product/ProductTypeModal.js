@@ -12,7 +12,11 @@ class ProductTypeModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    console.log(values)
+    const {editType} = this.props
+    this.props.onSave({
+      ...editType,
+      ...values
+    })
   }
 
   render () {

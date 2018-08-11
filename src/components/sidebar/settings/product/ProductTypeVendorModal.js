@@ -24,12 +24,11 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
-  onSaveType () {
-    const {editType} = this.state
-    if (editType) {
-
+  onSaveType (entity) {
+    if (entity.id) {
+      this.props.updateProductType(entity)
     } else {
-
+      this.props.addProductType(entity)
     }
   }
 
@@ -37,6 +36,7 @@ export default class ProductTypeVendorModal extends React.Component {
     if (!this.state.typeModalOpen) return null
     return (
       <ProductTypeModal
+        editType={this.state.editType}
         onSave={this.onSaveType.bind(this)}
         onClose={() => this.setState({typeModalOpen: false})}
       />
