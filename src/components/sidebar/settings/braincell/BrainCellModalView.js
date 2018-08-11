@@ -45,7 +45,7 @@ export default class BrainCellModalView extends Component {
     renderValue () {
         const { allValues, workflows, functions } = this.props
         const { type, valueType }  = allValues || {}
-        if (type === 'Grok' || type === 'Classification' || type === 'Tag') return null
+        if (type === 'Grok' || type === 'Classification' || type === 'ProductClassification' || type === 'Tag') return null
 
         if (type === 'Incident') {
             return (
@@ -130,7 +130,7 @@ export default class BrainCellModalView extends Component {
         const { allValues } = this.props
         const { type }  = allValues || {}
 
-        if (type === 'Classification' || type === 'Tag' || type === 'Incident' || type === 'Function') return null
+        if (type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'Incident' || type === 'Function') return null
 
         const index = findIndex(brainCellTypes, {value: type})
         let valueTypes = []
@@ -200,7 +200,7 @@ export default class BrainCellModalView extends Component {
     renderScript () {
         const { allValues, onClickScript } = this.props
         const { type, runOn }  = allValues || {}
-        if (type === 'Classification' || type === 'Tag' || type === 'Incident') return null
+        if (type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'Incident') return null
         if (runOn !== 'device') return null
         return (
             <CardPanel title="Script">
@@ -298,7 +298,7 @@ export default class BrainCellModalView extends Component {
       const { type }  = allValues || {}
       if (type !== 'Grok') return ''
 
-      const cell = brainCells.filter(p => p.type === 'Classification' && ((p.params2 || {}).tags || []).includes(tag))
+      const cell = brainCells.filter(p => (p.type === 'Classification' || p.type === 'ProductClassification') && ((p.params2 || {}).tags || []).includes(tag))
       if (!cell.length) return ''
       return cell[0].key || ''
     }
@@ -309,7 +309,7 @@ export default class BrainCellModalView extends Component {
             // tagInputValue, onChangeTagInput, getTagSuggestionValue
         } = this.props
         const { type }  = allValues || {}
-        if (type !== 'Classification' && type !== 'Incident' && type !== 'Grok') return null
+        if (type !== 'Classification' && type !== 'ProductClassification' && type !== 'Incident' && type !== 'Grok') return null
         return (
             <div>
                 <CardPanel title="Existing Tags">

@@ -125,7 +125,7 @@ class VendorProductModal extends React.Component {
     const {classifiers} = this.state
     const cells = []
     classifiers.forEach(id => {
-      const cell = find(brainCells, {id, type: 'Classification'})
+      const cell = find(brainCells, {id, type: 'ProductClassification'})
       if (cell) cells.push(cell)
     })
     return cells
@@ -133,7 +133,7 @@ class VendorProductModal extends React.Component {
 
   onClickNewClass () {
     this.setState({
-      brainCellType: 'Classification'
+      brainCellType: 'ProductClassification'
     }, () => {
       this.props.showBrainCellModal(true)
     })
@@ -327,7 +327,7 @@ class VendorProductModal extends React.Component {
 
         const {brainCellType} = this.state
         if (brainCellType === 'Tag') this.onPickTag(cell.name)
-        else if (brainCellType === 'Classification') this.onPickClass(cell)
+        else if (brainCellType === 'ProductClassification') this.onPickClass(cell)
         else if (brainCellType === 'Grok') this.onPickGrok(cell)
         else if (brainCellType === 'Incident') this.onPickIncident(cell)
       })
@@ -354,7 +354,7 @@ class VendorProductModal extends React.Component {
   renderClassPickerModal () {
     if (!this.state.classModalOpen) return null
     const {brainCells} = this.props
-    const cells = brainCells.filter(p => p.type === 'Classification')
+    const cells = brainCells.filter(p => p.type === 'ProductClassification')
     return (
       <BraincellClassPickerModal
         cells={cells}
