@@ -1,4 +1,5 @@
 import React from 'react'
+import {find} from 'lodash'
 
 import ProductTypeVendorModalView from './ProductTypeVendorModalView'
 import ProductTypeModal from './ProductTypeModal'
@@ -61,6 +62,13 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
+  getSelectedType () {
+    const {selectedTypeId, productTypes} = this.props
+    if (!selectedTypeId) return null
+    const type = find(productTypes, {id: selectedTypeId})
+    return type
+  }
+
   ///////////////////////////////////////////////////////////////////
 
   onClickAddVendor () {
@@ -96,12 +104,18 @@ export default class ProductTypeVendorModal extends React.Component {
 
   ///////////////////////////////////////////////////////////////////
 
-  onAddNewVendorToType () {
-
+  onAddNewVendorToType (entity) {
+    this.props.addProductVendor(entity)
   }
 
   onPickVendorForType () {
 
+  }
+
+  onCloseVendorPick () {
+    this.setState({
+      vendorPickModalOpen: false
+    })
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -134,6 +148,7 @@ export default class ProductTypeVendorModal extends React.Component {
       <ProductVendorPickModal
         onAdd={this.onAddNewVendorToType.bind(this)}
         onPick={this.onPickVendorForType.bind(this)}
+        onClose={this.onCloseVendorPick.bind(this)}
       />
     )
   }

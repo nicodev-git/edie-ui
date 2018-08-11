@@ -17,7 +17,7 @@ class ProductVendorPickModal extends React.Component {
   }
 
   onChooseExisting () {
-    const {existingId} = this.props.allValues
+    const {existingId} = this.props.allValues || {}
     if (!existingId) return window.alert('Please choose one')
     this.props.onPick(existingId)
   }
@@ -37,7 +37,7 @@ class ProductVendorPickModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editVendor,
+    initialValues: {},
     allValues: getFormValues('productVendorPickForm')(state)
   })
 )(reduxForm({form: 'productVendorPickForm'})(ProductVendorPickModal))
