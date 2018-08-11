@@ -437,7 +437,7 @@ class VendorProductModal extends React.Component {
   }
 
   render () {
-    const {handleSubmit, onClose} = this.props
+    const {handleSubmit, onClose, productTypes, productVendors} = this.props
     return (
       <VendorProductModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
@@ -467,6 +467,9 @@ class VendorProductModal extends React.Component {
         onClickAddIncident={this.onClickAddIncident.bind(this)}
         onClickDeleteIncident={this.onClickDeleteIncident.bind(this)}
         onClickNewIncident={this.onClickNewIncident.bind(this)}
+
+        productTypes={productTypes}
+        productVendors={productVendors}
 
         loading={this.state.loading}
       >

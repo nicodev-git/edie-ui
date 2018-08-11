@@ -5,7 +5,7 @@ import {Button, Chip, Tooltip} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
-import { FormInput } from 'components/modal/parts'
+import { FormInput, FormSelect } from 'components/modal/parts'
 
 const panelStyle = {width: 1000, height: 623, overflow: 'auto'}
 
@@ -125,7 +125,9 @@ class SimulationModalView extends React.Component {
 
   render () {
     const {onSubmit, onClickAddWf, onClickAddNewWf,
-      onClickAddIncident, onClickNewIncident} = this.props
+      onClickAddIncident, onClickNewIncident,
+      productTypes, productVendors
+    } = this.props
     return (
       <div className="flex-1">
         <form onSubmit={onSubmit}>
@@ -136,12 +138,21 @@ class SimulationModalView extends React.Component {
             <div className="panel-body">
               <div className="row">
                 <div className="col-md-8 col-lg-6">
-                  <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
+                  <Field name="name" component={FormInput} floatingLabel="Name" fullWidth/>
+                </div>
+                <div className="col-md-3 col-lg-2">
+                  <Field name="type" component={FormSelect} floatingLabel="Type" fullWidth
+                         options={productTypes.map(p => ({label: p.name, value: p.id}))}/>
                 </div>
               </div>
               <div className="row margin-md-top">
                 <div className="col-md-8 col-lg-6">
                   <Field name="version" component={FormInput} floatingLabel="Version" className="margin-md-right" fullWidth/>
+                </div>
+
+                <div className="col-md-3 col-lg-2">
+                  <Field name="vendor" component={FormSelect} floatingLabel="Vendor" fullWidth
+                         options={productVendors.map(p => ({label: p.name, value: p.id}))}/>
                 </div>
               </div>
               <div className="row margin-md-top">
@@ -158,7 +169,7 @@ class SimulationModalView extends React.Component {
 
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
-              <h3>
+              <h3>/
                 <span className="valign-middle">Workflows</span>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddWf}>Add</Button>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddNewWf}>Create New</Button>
