@@ -2,6 +2,7 @@ import React from 'react'
 
 import ProductTypeVendorModalView from './ProductTypeVendorModalView'
 import ProductTypeModal from './ProductTypeModal'
+import ProductVendorModal from './ProductVendorModal'
 
 export default class ProductTypeVendorModal extends React.Component {
   constructor(props) {
@@ -99,7 +100,7 @@ export default class ProductTypeVendorModal extends React.Component {
   renderVendorModal () {
     if (!this.state.vendorModalOpen) return null
     return (
-      <ProductTypeModal
+      <ProductVendorModal
         editVendor={this.state.editVendor}
         onSave={this.onSaveVendor.bind(this)}
         onClose={() => this.setState({vendorModalOpen: false})}
