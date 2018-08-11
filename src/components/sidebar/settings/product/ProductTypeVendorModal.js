@@ -3,6 +3,7 @@ import React from 'react'
 import ProductTypeVendorModalView from './ProductTypeVendorModalView'
 import ProductTypeModal from './ProductTypeModal'
 import ProductVendorModal from './ProductVendorModal'
+import ProductVendorPickModal from './ProductVendorPickModal'
 
 export default class ProductTypeVendorModal extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ export default class ProductTypeVendorModal extends React.Component {
       editType: null,
 
       vendorModalOpen: false,
-      editVendor: null
+      editVendor: null,
+      vendorPickModalOpen: false
     }
   }
 
@@ -115,6 +117,14 @@ export default class ProductTypeVendorModal extends React.Component {
     )
   }
 
+  renderVendorPickModal () {
+    if (!this.state.vendorPickModalOpen) return null
+    return (
+      <ProductVendorPickModal
+      />
+    )
+  }
+
   render () {
     const {onClickClose} = this.props
     return (
@@ -136,6 +146,7 @@ export default class ProductTypeVendorModal extends React.Component {
       >
         {this.renderTypeModal()}
         {this.renderVendorModal()}
+        {this.renderVendorPickModal()}
       </ProductTypeVendorModalView>
     )
   }
