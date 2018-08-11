@@ -1113,7 +1113,7 @@ export function removeProductType (entity) {
 export function fetchProductVendors() {
   return dispatch => {
     axios.get(`${ROOT_URL}/productvendor?size=1000`).then(res => {
-      dispatch({type: FETCH_PRODUCT_VENDORS, data: res.data._embedded.productTypes})
+      dispatch({type: FETCH_PRODUCT_VENDORS, data: res.data._embedded.productVendors})
     })
   }
 }

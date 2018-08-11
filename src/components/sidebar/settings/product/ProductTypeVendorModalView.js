@@ -7,7 +7,8 @@ import {Modal, CardPanel} from 'components/modal/parts'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 const divStyle = {
-  minHeight: 500
+  height: 500,
+  overflow: 'auto'
 }
 
 export default class ProductTypeVendorModalView extends React.Component {
@@ -30,8 +31,8 @@ export default class ProductTypeVendorModalView extends React.Component {
                   <TableCell  component="th" scope="row">
                     {p.name}
                   </TableCell>
-                  <TableCell>
-                    <EditIcon className="link margin-md-right" onClick={() => onClickEditType(p)}/>
+                  <TableCell className="nowrap">
+                    <EditIcon className="link margin-sm-right" onClick={() => onClickEditType(p)}/>
                     <DeleteIcon className="link" onClick={() => onClickDeleteType(p)}/>
                   </TableCell>
                 </TableRow>
@@ -47,7 +48,7 @@ export default class ProductTypeVendorModalView extends React.Component {
     const {productVendors, onClickAddVendor, onClickEditVendor, onClickDeleteVendor} = this.props
 
     return (
-      <CardPanel title="Vendor Type" className="flex-1">
+      <CardPanel title="Vendor" className="flex-1">
         <div style={divStyle}>
           <Table>
             <TableHead>
@@ -63,8 +64,8 @@ export default class ProductTypeVendorModalView extends React.Component {
                   <TableCell  component="th" scope="row">
                     {p.name}
                   </TableCell>
-                  <TableCell>
-                    <EditIcon className="link margin-md-right" onClick={() => onClickEditVendor(p)}/>
+                  <TableCell className="nowrap">
+                    <EditIcon className="link margin-sm-right" onClick={() => onClickEditVendor(p)}/>
                     <DeleteIcon className="link" onClick={() => onClickDeleteVendor(p)}/>
                   </TableCell>
                 </TableRow>
@@ -79,7 +80,7 @@ export default class ProductTypeVendorModalView extends React.Component {
   render () {
     const {onClickClose} = this.props
     return (
-      <Modal title="Product" onRequestClose={onClickClose}>
+      <Modal title="Product" onRequestClose={onClickClose} contentStyle={{width: 1000}}>
         <div className="flex-horizontal">
           {this.renderTypes()}
           <div style={{width: 12}}></div>
