@@ -309,7 +309,7 @@ export default class BrainCellModalView extends Component {
             // tagInputValue, onChangeTagInput, getTagSuggestionValue
         } = this.props
         const { type }  = allValues || {}
-        if (type !== 'Classification' && type !== 'ProductClassification' && type !== 'Incident' && type !== 'Grok') return null
+        if (type !== 'Classification' && type !== 'Incident' && type !== 'Grok') return null
         return (
             <div>
                 <CardPanel title="Existing Tags">
