@@ -24,6 +24,15 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
+  renderTypeModal () {
+    if (!this.state.typeModalOpen) return null
+    return (
+      <ProductTypeModal
+        onClose={() => this.setState({typeModalOpen: false})}
+      />
+    )
+  }
+
   render () {
     const {onClickClose} = this.props
     return (
@@ -32,7 +41,7 @@ export default class ProductTypeVendorModal extends React.Component {
         onClickClose={onClickClose}
         onClickAddType={this.onClickAddType.bind(this)}
       >
-
+        {this.renderTypeModal()}
       </ProductTypeVendorModalView>
     )
   }

@@ -1,7 +1,9 @@
 import React from 'react'
 import ProductTypeModalView from './ProductTypeModalView'
+import {connect} from "react-redux"
+import {reduxForm} from 'redux-form'
 
-export default class ProductTypeModal extends React.Component {
+class ProductTypeModal extends React.Component {
   constructor(props) {
     super(props)
 
@@ -9,12 +11,23 @@ export default class ProductTypeModal extends React.Component {
     }
   }
 
-  render () {
-    const {onClickClose} = this.props
-    return (
-      <ProductTypeModalView>
+  handleFormSubmit (values) {
+    console.log(values)
+  }
 
-      </ProductTypeModalView>
+  render () {
+    const {handleSubmit, onClose} = this.props
+    return (
+      <ProductTypeModalView
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onClose={onClose}
+      />
     )
   }
 }
+
+export default connect(
+  (state, props) => ({
+    initialValues: props.editType
+  })
+)(reduxForm({form: 'productTypeForm'})(ProductTypeModal))
