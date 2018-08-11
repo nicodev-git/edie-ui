@@ -711,6 +711,8 @@ export const brainCellTypes = [{
   label: 'Tag', value: 'Tag', valueTypes: ['TEXT']
 }, {
   label: 'Incident', value: 'Incident', valueTypes: ['TEXT']
+}, {
+  label: 'Product Classification', value: 'ProductClassification', valueTypes: ['TEXT']
 }]
 
 export const brainCellValueTypes = [{
