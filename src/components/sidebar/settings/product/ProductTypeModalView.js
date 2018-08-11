@@ -1,5 +1,6 @@
 import React from 'react'
-import {Modal, CardPanel, SubmitBlock} from 'components/modal/parts'
+import {Field} from 'redux-form'
+import {Modal, CardPanel, SubmitBlock, FormInput} from 'components/modal/parts'
 
 export default class ProductTypeModalView extends React.Component {
   render () {
@@ -8,9 +9,8 @@ export default class ProductTypeModalView extends React.Component {
       <Modal title="Product Type" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Product Type">
-
+            <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
           </CardPanel>
-
           <SubmitBlock name="Save"/>
         </form>
       </Modal>

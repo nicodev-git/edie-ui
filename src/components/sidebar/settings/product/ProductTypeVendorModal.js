@@ -24,10 +24,20 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
+  onSaveType () {
+    const {editType} = this.state
+    if (editType) {
+
+    } else {
+
+    }
+  }
+
   renderTypeModal () {
     if (!this.state.typeModalOpen) return null
     return (
       <ProductTypeModal
+        onSave={this.onSaveType.bind(this)}
         onClose={() => this.setState({typeModalOpen: false})}
       />
     )
