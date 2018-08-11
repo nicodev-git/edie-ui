@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ProductTypeVendorModalView from './ProductModalView'
+import ProductTypeVendorModalView from './ProductTypeVendorModalView'
 
 export default class ProductTypeVendorModal extends React.Component {
   constructor(props) {

@@ -11,7 +11,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import {hasPermission} from 'shared/Permission'
 
 import VendorProductModal from './VendorProductModal'
-`import ProductTypeVendorModal from './ProductTypeVendorModal'
+import ProductTypeVendorModal from './ProductTypeVendorModal'
 
 export default class Tags extends React.Component {
   constructor (props) {
