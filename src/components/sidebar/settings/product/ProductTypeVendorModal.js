@@ -65,8 +65,9 @@ export default class ProductTypeVendorModal extends React.Component {
 
   onClickAddVendor () {
     this.setState({
-      vendorModalOpen: true,
-      editVendor: null
+      vendorPickModalOpen: true
+      // vendorModalOpen: true,
+      // editVendor: null
     })
   }
 
@@ -91,6 +92,16 @@ export default class ProductTypeVendorModal extends React.Component {
     this.setState({
       vendorModalOpen: false
     })
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  onAddNewVendorToType () {
+
+  }
+
+  onPickVendorForType () {
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -121,6 +132,8 @@ export default class ProductTypeVendorModal extends React.Component {
     if (!this.state.vendorPickModalOpen) return null
     return (
       <ProductVendorPickModal
+        onAdd={this.onAddNewVendorToType.bind(this)}
+        onPick={this.onPickVendorForType.bind(this)}
       />
     )
   }

@@ -15,7 +15,8 @@ export default class ProductVendorPickModalView extends React.Component {
           </CardPanel>
 
           <CardPanel title="Existing">
-            <Field name="existingId" component={FormSelect} floatingLabel="Existing" className="margin-md-right"/>
+            <Field name="existingId" component={FormSelect} floatingLabel="Existing" className="margin-md-right" options={[]}
+              style={{minWidth: 120}}/>
             <Button variant="raised" onClick={onChooseExisting}>Add</Button>
           </CardPanel>
         </form>

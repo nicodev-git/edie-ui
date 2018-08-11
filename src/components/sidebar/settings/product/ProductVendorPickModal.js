@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from "react-redux"
-import {reduxForm} from 'redux-form'
+import {reduxForm, getFormValues} from 'redux-form'
 
-import ProductVendorModalView from './ProductVendorModalView'
+import ProductVendorPickModalView from './ProductVendorPickModalView'
 
 class ProductVendorPickModal extends React.Component {
   constructor(props) {
@@ -13,17 +13,19 @@ class ProductVendorPickModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    this.props.onSave(values)
+    this.props.onAdd(values)
   }
 
   onChooseExisting () {
-
+    const {existingId} = this.props.allValues
+    if (!existingId) return window.alert('Please choose one')
+    this.props.onPick(existingId)
   }
 
   render () {
     const {handleSubmit, onClose} = this.props
     return (
-      <ProductVendorModalView
+      <ProductVendorPickModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
 
@@ -35,6 +37,7 @@ class ProductVendorPickModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editVendor
+    initialValues: props.editVendor,
+    allValues: getFormValues('productVendorPickForm')(state)
   })
 )(reduxForm({form: 'productVendorPickForm'})(ProductVendorPickModal))
