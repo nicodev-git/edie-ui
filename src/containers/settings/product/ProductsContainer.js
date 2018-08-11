@@ -24,7 +24,12 @@ import {
   fetchProductTypes,
   addProductType,
   updateProductType,
-  removeProductType
+  removeProductType,
+
+  fetchProductVendors,
+  addProductVendor,
+  updateProductVendor,
+  removeProductVendor
 } from 'actions'
 
 class ProductsContainer extends React.Component {
@@ -38,6 +43,7 @@ export default connect(
   state => ({
     vendorProducts: state.settings.vendorProducts,
     productTypes: state.settings.productTypes,
+    productVendors: state.settings.productVendors,
 
     brainCells: state.settings.brainCells,
     brainCellModalOpen: state.settings.brainCellModalOpen,
@@ -69,6 +75,11 @@ export default connect(
     fetchProductTypes,
     addProductType,
     updateProductType,
-    removeProductType
+    removeProductType,
+
+    fetchProductVendors,
+    addProductVendor,
+    updateProductVendor,
+    removeProductVendor
   }
 )(withRouter(ProductsContainer))

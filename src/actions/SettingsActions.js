@@ -127,6 +127,11 @@ import {
   UPDATE_PRODUCT_TYPE,
   REMOVE_PRODUCT_TYPE,
 
+  FETCH_PRODUCT_VENDORS,
+  ADD_PRODUCT_VENDOR,
+  UPDATE_PRODUCT_VENDOR,
+  REMOVE_PRODUCT_VENDOR,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1102,3 +1107,38 @@ export function removeProductType (entity) {
     }).catch(error => apiError(dispatch, error))
   }
 }
+
+//////////////////////////////////////////
+
+export function fetchProductVendors() {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/productvendor?size=1000`).then(res => {
+      dispatch({type: FETCH_PRODUCT_VENDORS, data: res.data._embedded.productTypes})
+    })
+  }
+}
+
+export function addProductVendor(entity) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/productvendor`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_PRODUCT_VENDOR, data: res.data})
+    })
+  }
+}
+
+export function updateProductVendor(entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/productvendor/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_PRODUCT_VENDOR, data: res.data})
+    })
+  }
+}
+
+export function removeProductVendor(entity) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/productvendor/${entity.id}`).then(res => {
+      dispatch({type: REMOVE_PRODUCT_VENDOR, data: entity})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+

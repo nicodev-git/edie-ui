@@ -186,7 +186,12 @@ import {
   FETCH_PRODUCT_TYPES,
   ADD_PRODUCT_TYPE,
   UPDATE_PRODUCT_TYPE,
-  REMOVE_PRODUCT_TYPE
+  REMOVE_PRODUCT_TYPE,
+
+  FETCH_PRODUCT_VENDORS,
+  ADD_PRODUCT_VENDOR,
+  UPDATE_PRODUCT_VENDOR,
+  REMOVE_PRODUCT_VENDOR
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys} from 'lodash'
@@ -772,6 +777,15 @@ export default function (state = initialState, action) {
       return { ...state, productTypes: state.productTypes.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_PRODUCT_TYPE:
       return { ...state, productTypes: state.productTypes.filter(p => p.id !== action.data.id) }
+
+    case FETCH_PRODUCT_VENDORS:
+      return { ...state, productVendors: action.data }
+    case ADD_PRODUCT_VENDOR:
+      return { ...state, productVendors: [...state.productVendors, action.data] }
+    case UPDATE_PRODUCT_VENDOR:
+      return { ...state, productVendors: state.productVendors.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_PRODUCT_VENDOR:
+      return { ...state, productVendors: state.productVendors.filter(p => p.id !== action.data.id) }
 
     default:
       return state
