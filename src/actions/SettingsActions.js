@@ -122,6 +122,11 @@ import {
   UPDATE_VENDOR_PRODUCT,
   REMOVE_VENDOR_PRODUCT,
 
+  FETCH_PRODUCT_TYPES,
+  ADD_PRODUCT_TYPE,
+  UPDATE_PRODUCT_TYPE,
+  REMOVE_PRODUCT_TYPE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1063,5 +1068,11 @@ export function removeVendorProduct (entity) {
     axios.delete(`${ROOT_URL}/vendorproduct/${entity.id}`).then(res => {
       dispatch({type: REMOVE_VENDOR_PRODUCT, data: entity})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export function fetchProductTypes () {
+  return dispatch => {
+
   }
 }
