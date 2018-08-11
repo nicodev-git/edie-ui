@@ -13,7 +13,8 @@ const divStyle = {
 
 export default class ProductTypeVendorModalView extends React.Component {
   renderTypes () {
-    const {productTypes, onClickAddType, onClickEditType, onClickDeleteType} = this.props
+    const {productTypes, onClickAddType, onClickEditType, onClickDeleteType,
+      selectedTypeId, onSelectType} = this.props
     return (
       <CardPanel title="Vendor Type" className="flex-1">
         <div style={divStyle}>
@@ -27,7 +28,11 @@ export default class ProductTypeVendorModalView extends React.Component {
 
             <TableBody>
               {productTypes.map(p =>
-                <TableRow key={p.id}>
+                <TableRow
+                  key={p.id}
+                  selected={selectedTypeId === p.id}
+                  onClick={() => onSelectType(p)}
+                >
                   <TableCell  component="th" scope="row">
                     {p.name}
                   </TableCell>

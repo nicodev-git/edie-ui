@@ -9,6 +9,7 @@ export default class ProductTypeVendorModal extends React.Component {
     super(props)
 
     this.state = {
+      selectedTypeId: null,
       typeModalOpen: false,
       editType: null,
 
@@ -49,6 +50,12 @@ export default class ProductTypeVendorModal extends React.Component {
     }
     this.setState({
       typeModalOpen: false
+    })
+  }
+
+  onSelectType (type) {
+    this.setState({
+      selectedTypeId: type.id
     })
   }
 
@@ -114,6 +121,10 @@ export default class ProductTypeVendorModal extends React.Component {
       <ProductTypeVendorModalView
         {...this.props}
         onClickClose={onClickClose}
+
+        selectedTypeId={this.state.selectedTypeId}
+        onSelectType={this.onSelectType.bind(this)}
+
         onClickAddType={this.onClickAddType.bind(this)}
         onClickEditType={this.onClickEditType.bind(this)}
         onClickDeleteType={this.onClickDeleteType.bind(this)}
