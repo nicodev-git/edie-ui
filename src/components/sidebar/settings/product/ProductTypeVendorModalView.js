@@ -1,5 +1,8 @@
 import React from 'react'
 import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
+
 import {Modal, CardPanel} from 'components/modal/parts'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
@@ -9,7 +12,7 @@ const divStyle = {
 
 export default class ProductTypeVendorModalView extends React.Component {
   renderTypes () {
-    const {productTypes, onClickAddType} = this.props
+    const {productTypes, onClickAddType, onClickEditType, onClickDeleteType} = this.props
     return (
       <CardPanel title="Vendor Type" className="flex-1">
         <div style={divStyle}>
@@ -28,6 +31,8 @@ export default class ProductTypeVendorModalView extends React.Component {
                     {p.name}
                   </TableCell>
                   <TableCell>
+                    <EditIcon className="link margin-md-right" onClick={() => onClickEditType(p)}/>
+                    <DeleteIcon className="link" onClick={() => onClickDeleteType(p)}/>
                   </TableCell>
                 </TableRow>
               )}

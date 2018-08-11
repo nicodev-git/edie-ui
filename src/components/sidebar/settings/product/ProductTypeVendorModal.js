@@ -24,12 +24,26 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
+  onClickEditType (editType) {
+    this.setState({
+      typeModalOpen: true,
+      editType
+    })
+  }
+
+  onClickDeleteType (editType) {
+
+  }
+
   onSaveType (entity) {
     if (entity.id) {
       this.props.updateProductType(entity)
     } else {
       this.props.addProductType(entity)
     }
+    this.setState({
+      typeModalOpen: false
+    })
   }
 
   renderTypeModal () {
@@ -50,6 +64,8 @@ export default class ProductTypeVendorModal extends React.Component {
         {...this.props}
         onClickClose={onClickClose}
         onClickAddType={this.onClickAddType.bind(this)}
+        onClickEditType={this.onClickEditType.bind(this)}
+        onClickDeleteType={this.onClickDeleteType.bind(this)}
       >
         {this.renderTypeModal()}
       </ProductTypeVendorModalView>
