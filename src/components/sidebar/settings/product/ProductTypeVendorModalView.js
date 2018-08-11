@@ -43,19 +43,47 @@ export default class ProductTypeVendorModalView extends React.Component {
       </CardPanel>
     )
   }
+  renderVendors () {
+    const {productVendors, onClickAddVendor, onClickEditVendor, onClickDeleteVendor} = this.props
+
+    return (
+      <CardPanel title="Vendor Type" className="flex-1">
+        <div style={divStyle}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {productVendors.map(p =>
+                <TableRow key={p.id}>
+                  <TableCell  component="th" scope="row">
+                    {p.name}
+                  </TableCell>
+                  <TableCell>
+                    <EditIcon className="link margin-md-right" onClick={() => onClickEditVendor(p)}/>
+                    <DeleteIcon className="link" onClick={() => onClickDeleteVendor(p)}/>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+        <FloatingMenu menuItems={[]} onClickMain={onClickAddVendor}/>
+      </CardPanel>
+    )
+  }
   render () {
     const {onClickClose} = this.props
     return (
       <Modal title="Product" onRequestClose={onClickClose}>
         <div className="flex-horizontal">
-          <CardPanel title="Vendor" className="flex-1">
-            <div style={divStyle}>
-
-            </div>
-            <FloatingMenu menuItems={[]}/>
-          </CardPanel>
-          <div style={{width: 12}}></div>
           {this.renderTypes()}
+          <div style={{width: 12}}></div>
+          {this.renderVendors()}
         </div>
         {this.props.children}
       </Modal>

@@ -15,6 +15,7 @@ export default class ProductTypeVendorModal extends React.Component {
 
   componentWillMount() {
     this.props.fetchProductTypes()
+    this.props.fetchProductVendors()
   }
 
   onClickAddType () {
