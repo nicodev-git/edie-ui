@@ -1,8 +1,8 @@
 import React from 'react'
 
-import ProductModalView from './ProductModalView'
+import ProductTypeVendorModalView from './ProductModalView'
 
-export default class ProductModal extends React.Component {
+export default class ProductTypeVendorModal extends React.Component {
   constructor(props) {
     super(props)
 
@@ -10,10 +10,14 @@ export default class ProductModal extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.props.fetchProductTypes()
+  }
+
   render () {
     const {onClickClose} = this.props
     return (
-      <ProductModalView
+      <ProductTypeVendorModalView
         {...this.props}
         onClickClose={onClickClose}
       />

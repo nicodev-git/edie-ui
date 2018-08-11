@@ -11,7 +11,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import {hasPermission} from 'shared/Permission'
 
 import VendorProductModal from './VendorProductModal'
-import ProductModal from './ProductModal'
+`import ProductTypeVendorModal from './ProductTypeVendorModal'
 
 export default class Tags extends React.Component {
   constructor (props) {
@@ -20,7 +20,7 @@ export default class Tags extends React.Component {
       selectedProductId: '',
       productModalOpen: false,
       editProduct: null,
-      productVendorModalOpen: false
+      productTypeVendorModalOpen: false
     }
   }
   componentWillMount () {
@@ -102,9 +102,9 @@ export default class Tags extends React.Component {
 
   ///////////////////////////////////////////////////////////////
 
-  onClickProductVendor () {
+  onClickProductTypeVendor () {
     this.setState({
-      productVendorModalOpen: true
+      productTypeVendorModalOpen: true
     })
   }
 
@@ -136,12 +136,12 @@ export default class Tags extends React.Component {
     )
   }
 
-  renderProductVendorModal () {
-    if (!this.state.productVendorModalOpen) return null
+  renderProductTypeVendorModal () {
+    if (!this.state.productTypeVendorModalOpen) return null
     return (
-      <ProductModal
+      <ProductTypeVendorModal
         {...this.props}
-        onClickClose={() => this.setState({productVendorModalOpen: false})}
+        onClickClose={() => this.setState({productTypeVendorModalOpen: false})}
       />
     )
   }
@@ -156,7 +156,7 @@ export default class Tags extends React.Component {
           <div className="margin-md-top">
             {this.renderProductCombo()}
             <div className="pull-right">
-              {canEdit && <Button variant="raised" onClick={this.onClickProductVendor.bind(this)}>Product</Button>}
+              {canEdit && <Button variant="raised" onClick={this.onClickProductTypeVendor.bind(this)}>Product</Button>}
 
               {canEdit && <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>}
               {canEdit && selectedProductId && <Button variant="raised" onClick={this.onClickDelete.bind(this)}>Delete</Button>}&nbsp;
@@ -166,7 +166,7 @@ export default class Tags extends React.Component {
 
         <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location} transparent>
           {this.renderProductModal()}
-          {this.renderProductVendorModal()}
+          {this.renderProductTypeVendorModal()}
         </TabPageBody>
       </TabPage>
     )
