@@ -1079,7 +1079,7 @@ export function removeVendorProduct (entity) {
 export function fetchProductTypes () {
   return dispatch => {
     axios.get(`${ROOT_URL}/producttype?size=1000`).then(res => {
-      dispatch({type: FETCH_PRODUCT_TYPES, data: res.data._embedded.productTypes})
+      dispatch({type: FETCH_PRODUCT_TYPES, data: sortBy(res.data._embedded.productTypes, p => p.name.toLowerCase())})
     })
   }
 }
@@ -1113,7 +1113,7 @@ export function removeProductType (entity) {
 export function fetchProductVendors() {
   return dispatch => {
     axios.get(`${ROOT_URL}/productvendor?size=1000`).then(res => {
-      dispatch({type: FETCH_PRODUCT_VENDORS, data: res.data._embedded.productVendors})
+      dispatch({type: FETCH_PRODUCT_VENDORS, data: sortBy(res.data._embedded.productVendors, p => p.name.toLowerCase())})
     })
   }
 }
