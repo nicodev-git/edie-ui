@@ -9,7 +9,7 @@ const divStyle = {
 
 export default class ProductTypeVendorModalView extends React.Component {
   renderTypes () {
-    const {productTypes} = this.props
+    const {productTypes, onClickAddType} = this.props
     return (
       <CardPanel title="Vendor" className="flex-1">
         <div style={divStyle}>
@@ -34,7 +34,7 @@ export default class ProductTypeVendorModalView extends React.Component {
             </TableBody>
           </Table>
         </div>
-        <FloatingMenu menuItems={[]}/>
+        <FloatingMenu menuItems={[]} onClickMain={onClickAddType}/>
       </CardPanel>
     )
   }
@@ -53,6 +53,7 @@ export default class ProductTypeVendorModalView extends React.Component {
             <FloatingMenu menuItems={[]}/>
           </CardPanel>
         </div>
+        {this.props.children}
       </Modal>
     )
   }

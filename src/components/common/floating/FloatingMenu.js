@@ -40,12 +40,13 @@ export default class FloatingMenu extends React.Component {
         )
     }
     render () {
+        const {onClickMain} = this.props
         return (
             <div style={containerStyle}
                  onMouseEnter={this.onMouseEnter}
                  onMouseLeave={this.onMouseLeave}>
                 {this.renderMenu()}
-                <Button variant="fab" color="secondary">
+                <Button variant="fab" color="secondary" onClick={onClickMain}>
                     <EditIcon />
                 </Button>
             </div>
