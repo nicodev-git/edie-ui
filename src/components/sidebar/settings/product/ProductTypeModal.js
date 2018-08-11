@@ -7,7 +7,9 @@ class ProductTypeModal extends React.Component {
   constructor(props) {
     super(props)
 
+    const {editType} = props
     this.state = {
+      actions: (editType ? editType.actions : []) || []
     }
   }
 
@@ -19,12 +21,29 @@ class ProductTypeModal extends React.Component {
     })
   }
 
+  onClickAddAction () {
+
+  }
+
+  onClickEditAction () {
+
+  }
+
+  onClickDeleteAction () {
+
+  }
+
   render () {
     const {handleSubmit, onClose} = this.props
     return (
       <ProductTypeModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
+
+        actions={this.state.actions}
+        onClickAddAction={this.onClickAddAction.bind(this)}
+        onClickEditAction={this.onClickEditAction.bind(this)}
+        onClickDeleteAction={this.onClickDeleteAction.bind(this)}
       />
     )
   }
