@@ -98,7 +98,7 @@ export default class ProductTypeVendorModalView extends React.Component {
     )
   }
   renderProducts () {
-    const {filteredProducts, onClickAddProduct} = this.props
+    const {filteredProducts, onClickAddProduct, onClickEditProduct, onClickDeleteProduct} = this.props
     return (
       <CardPanel title="Product" className="flex-1">
         <div style={divStyle}>
@@ -116,8 +116,8 @@ export default class ProductTypeVendorModalView extends React.Component {
                     {p.name}
                   </TableCell>
                   <TableCell className="nowrap">
-                    <EditIcon className="link margin-sm-right" />
-                    <DeleteIcon className="link" />
+                    <EditIcon className="link margin-sm-right" onClick={() => onClickEditProduct(p)}/>
+                    <DeleteIcon className="link" onClick={() => onClickDeleteProduct(p)}/>
                   </TableCell>
                 </TableRow>
               )}

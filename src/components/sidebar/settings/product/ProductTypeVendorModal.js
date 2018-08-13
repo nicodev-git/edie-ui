@@ -188,12 +188,33 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
-  onSaveProduct (entity) {
+  onClickEditProduct (product) {
+    this.setState({
+      productModalOpen: true,
+      editProduct: product
+    })
+  }
+
+  onClickDeleteProduct (product) {
+    if (!window.confirm('Click OK to remove')) return
     const vendor = this.getSelectedVendor()
-    if (!vendor) return null
+    if (vendor) {
+      const productIds = vendor.productIds || []
+      this.props.updateProductVendor({
+        ...vendor,
+        productIds: productIds.filter(p => p !== product.id)
+      })
+    } else {
+      this.props.removeVendorProduct(product)
+    }
+  }
+
+  onSaveProduct (entity) {
     if (entity.id) {
       this.props.updateVendorProduct(entity)
     } else {
+      const vendor = this.getSelectedVendor()
+      if (!vendor) return null
       this.props.addVendorProduct(entity, product => {
         if (product) this.addNewProductIdToVendor(vendor, product.id)
       })
@@ -247,7 +268,7 @@ export default class ProductTypeVendorModal extends React.Component {
     if (!this.state.productModalOpen) return null
     return (
       <ProductEditModal
-        editVendor={this.state.editProduct}
+        editProduct={this.state.editProduct}
         onSave={this.onSaveProduct.bind(this)}
         onClose={() => this.setState({productModalOpen: false})}
       />
@@ -292,6 +313,8 @@ export default class ProductTypeVendorModal extends React.Component {
 
         filteredProducts={this.getFilteredProducts()}
         onClickAddProduct={this.onClickAddProduct.bind(this)}
+        onClickEditProduct={this.onClickEditProduct.bind(this)}
+        onClickDeleteProduct={this.onClickDeleteProduct.bind(this)}
       >
         {this.renderTypeModal()}
         {this.renderVendorModal()}
