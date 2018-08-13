@@ -363,6 +363,8 @@ class VendorProductModal extends React.Component {
 
         allTags={this.getAllTags(true)}
 
+        productTypes={this.props.productTypes}
+        productVendors={this.props.productVendors}
         vendorProducts={this.props.vendorProducts}
 
         addBrainCell={this.props.addBrainCell}

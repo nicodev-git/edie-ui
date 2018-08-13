@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Typography from '@material-ui/core/Typography'
 import Chip from '@material-ui/core/Chip'
-import {findIndex} from 'lodash'
+import {findIndex, find} from 'lodash'
 import {
   Table,
   TableBody,
@@ -188,8 +188,20 @@ export default class BrainCellModalView extends Component {
 
   renderProduct() {
     const {allValues, productTypes, productVendors, vendorProducts} = this.props
-    const {type} = allValues || {}
+    const {type, productTypeId, productVendorId} = allValues || {}
     if (type !== 'ProductClassification') return null
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
+
     return (
       <div className="margin-md-top">
         <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
@@ -197,11 +209,11 @@ export default class BrainCellModalView extends Component {
                style={{minWidth: 150}} className="margin-sm-right"
         />
         <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
-               options={(productVendors || []).map(p => ({label: p.name, value: p.id}))}
+               options={vendors.map(p => ({label: p.name, value: p.id}))}
                style={{minWidth: 150}} className="margin-sm-right"
         />
         <Field name="productId" component={FormSelect} floatingLabel="Product"
-               options={(vendorProducts || []).map(p => ({label: p.name, value: p.id}))}
+               options={(products || []).map(p => ({label: p.name, value: p.id}))}
                style={{minWidth: 150}}
         />
       </div>
