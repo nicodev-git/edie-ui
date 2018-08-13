@@ -295,13 +295,15 @@ class BrainCellModal extends React.Component {
     }
 
     render () {
-        const { handleSubmit, allValues, workflows, allTags, brainCells } = this.props
+        const { handleSubmit, allValues, workflows, allTags, brainCells, vendorProducts } = this.props
         return (
             <BrainCellModalView
                 params={this.state.params}
                 workflows={workflows}
                 allValues={allValues}
                 brainCells={brainCells}
+
+                vendorProducts={vendorProducts}
 
                 lines={this.state.lines}
                 selectedLineIndex={this.state.selectedLineIndex}

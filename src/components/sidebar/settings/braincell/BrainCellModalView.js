@@ -187,12 +187,15 @@ export default class BrainCellModalView extends Component {
   }
 
   renderProduct() {
-    const {allValues} = this.props
+    const {allValues, vendorProducts} = this.props
     const {type} = allValues || {}
     if (type !== 'ProductClassification') return null
     return (
       <div className="margin-md-top">
-        <Field name="productId" component={FormInput} label="Product"/>
+        <Field name="productId" component={FormSelect} floatingLabel="Product"
+               options={vendorProducts.map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 200}}
+        />
       </div>
     )
   }
