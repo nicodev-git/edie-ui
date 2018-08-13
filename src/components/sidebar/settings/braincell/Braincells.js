@@ -156,8 +156,8 @@ export default class Braincells extends React.Component {
           <thead>
           <tr>
             <td>UUID</td>
-            <td>Category</td>
-            <td>Subcategory</td>
+            {type === 'Function' && <td>Category</td>}
+            {type === 'Function' && <td>Subcategory</td>}
             <td>Name</td>
             <td>Action</td>
             <td>Key</td>
@@ -169,8 +169,8 @@ export default class Braincells extends React.Component {
             <tr key={p.id} className={p.id === selected ? 'selected' : ''}
                 onClick={() => this.setState({selected: p.id})}>
               <td>{p.uuid}</td>
-              <td>{p.functionCategory}</td>
-              <td>{p.functionSubcategory}</td>
+              {type === 'Function' && <td>{p.functionCategory}</td>}
+              {type === 'Function' && <td>{p.functionSubcategory}</td>}
               <td>
                 <label data-tip={`${p.functionCategory}/${p.functionSubcategory}`}>{p.name}</label>
               </td>

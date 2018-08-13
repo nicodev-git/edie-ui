@@ -119,7 +119,7 @@ export default class Tags extends React.Component {
     if (vendor) {
       const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
       if (type) {
-        label = `(${type.name} / ${vendor.name})`
+        label = ` (${type.name} / ${vendor.name})`
       }
     }
     return (
