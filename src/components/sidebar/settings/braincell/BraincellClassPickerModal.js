@@ -1,12 +1,15 @@
 import React from 'react'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
+import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
+
 import BrainCellModal from './BrainCellModal'
 
 import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
+import DeleteIcon from "../../../../../node_modules/@material-ui/icons/Delete";
 
 export default class BraincellClassPickerModal extends React.Component {
   constructor(props) {
@@ -102,26 +105,32 @@ export default class BraincellClassPickerModal extends React.Component {
     return (
       <Modal title="Classification" onRequestClose={onClose}>
         <CardPanel title="Classification" tools={<AddIcon className="link" onClick={this.onClickAdd.bind(this)}/>}>
-          <div style={{maxHeight: 600, overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Key</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
+          <div style={{maxHeight: 400, overflow: 'auto'}}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Product</TableCell>
+                  <TableCell>Key</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
                 {cells.map((t, i) =>
-                  <tr key={t.id} className={i === selIndex ? 'selected' : ''}
-                    onClick={() => this.onClickRow(i)}>
-                    <td>{t.name}</td>
-                    <td>{t.key}</td>
-                    <td><EditIcon className="link" onClick={(e) => this.onClickEdit(t, e)}/></td>
-                  </tr>
+                  <TableRow
+                    key={t.id}
+                    selected={i === selIndex}
+                    onClick={() => this.onClickRow(i)}
+                  >
+                    <TableCell  component="th" scope="row">{t.name}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>{t.key}</TableCell>
+                    <TableCell><EditIcon className="link" onClick={(e) => this.onClickEdit(t, e)}/></TableCell>
+                  </TableRow>
                 )}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </CardPanel>
 
