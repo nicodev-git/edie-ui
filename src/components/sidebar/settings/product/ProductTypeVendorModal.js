@@ -122,7 +122,7 @@ export default class ProductTypeVendorModal extends React.Component {
 
   onSelectVendor (vendor) {
     this.setState({
-      selectedVendorId: vendor.id
+      selectedVendorId: vendor ? vendor.id : null
     })
   }
 
@@ -214,7 +214,7 @@ export default class ProductTypeVendorModal extends React.Component {
   getFilteredProducts () {
     const {vendorProducts} = this.props
     const vendor = this.getSelectedVendor()
-    if (!vendor) return []
+    if (!vendor) return vendorProducts
     const ids = vendor.productIds || []
     return vendorProducts.filter(p => ids.includes(p.id))
   }

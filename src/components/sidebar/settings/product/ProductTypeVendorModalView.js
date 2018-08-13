@@ -30,11 +30,8 @@ export default class ProductTypeVendorModalView extends React.Component {
               <TableRow
                 selected={!selectedTypeId}
                 onClick={() => onSelectType(null)}>
-                <TableCell>
-                  All
-                </TableCell>
-                <TableCell>
-                </TableCell>
+                <TableCell>All</TableCell>
+                <TableCell></TableCell>
               </TableRow>
               {productTypes.map(p =>
                 <TableRow
@@ -73,6 +70,12 @@ export default class ProductTypeVendorModalView extends React.Component {
             </TableHead>
 
             <TableBody>
+              <TableRow
+                selected={!selectedVendorId}
+                onClick={() => onSelectVendor(null)}>
+                <TableCell>All</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
               {filteredVendors.map(p =>
                 <TableRow
                   key={p.id}
