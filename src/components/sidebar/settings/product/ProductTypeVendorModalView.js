@@ -7,7 +7,7 @@ import {Modal, CardPanel} from 'components/modal/parts'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 const divStyle = {
-  height: 350,
+  height: 460,
   overflow: 'auto'
 }
 
