@@ -63,7 +63,7 @@ export default class ProductTypeVendorModal extends React.Component {
 
   onSelectType (type) {
     this.setState({
-      selectedTypeId: type.id,
+      selectedTypeId: type ? null : type.id,
       selectedVendorId: null
     })
   }
