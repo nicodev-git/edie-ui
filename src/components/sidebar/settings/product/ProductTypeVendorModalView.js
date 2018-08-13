@@ -31,6 +31,8 @@ export default class ProductTypeVendorModalView extends React.Component {
                 <TableCell>
                   All
                 </TableCell>
+                <TableCell>
+                </TableCell>
               </TableRow>
               {productTypes.map(p =>
                 <TableRow
