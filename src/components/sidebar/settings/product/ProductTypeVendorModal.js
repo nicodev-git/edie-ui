@@ -108,7 +108,7 @@ export default class ProductTypeVendorModal extends React.Component {
   ///////////////////////////////////////////////////////////////////
 
   addNewVendorIdToType(type, vendorId) {
-    const {vendorIds} = type
+    const vendorIds = type.vendorIds || []
     this.props.updateProductType({
       ...type,
       vendorIds: [...vendorIds, vendorId]
