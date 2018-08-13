@@ -27,6 +27,11 @@ export default class ProductTypeVendorModalView extends React.Component {
             </TableHead>
 
             <TableBody>
+              <TableRow>
+                <TableCell>
+                  All
+                </TableCell>
+              </TableRow>
               {productTypes.map(p =>
                 <TableRow
                   key={p.id}
