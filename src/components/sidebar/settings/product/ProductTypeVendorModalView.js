@@ -95,6 +95,7 @@ export default class ProductTypeVendorModalView extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -102,6 +103,10 @@ export default class ProductTypeVendorModalView extends React.Component {
                 <TableRow key={p.id}>
                   <TableCell  component="th" scope="row">
                     {p.name}
+                  </TableCell>
+                  <TableCell className="nowrap">
+                    <EditIcon className="link margin-sm-right" />
+                    <DeleteIcon className="link" />
                   </TableCell>
                 </TableRow>
               )}
