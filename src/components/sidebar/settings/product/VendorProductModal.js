@@ -365,6 +365,9 @@ class VendorProductModal extends React.Component {
 
         vendorProducts={this.props.vendorProducts}
 
+        addBrainCell={this.props.addBrainCell}
+        updateBrainCell={this.props.updateBrainCell}
+
         brainCells={this.props.brainCells}
         editBrainCell={this.props.editBrainCell}
 
