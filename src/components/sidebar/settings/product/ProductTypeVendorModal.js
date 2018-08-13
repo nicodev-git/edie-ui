@@ -91,7 +91,16 @@ export default class ProductTypeVendorModal extends React.Component {
 
   onClickDeleteVendor (editVendor) {
     if (!window.confirm('Click OK to remove')) return
-    this.props.removeProductVendor(editVendor)
+    const type = this.getSelectedType()
+    if (type) {
+      const vendorIds = type.vendorIds || []
+      this.props.updateProductType({
+        ...type,
+        vendorIds: vendorIds.filter(p => p !== editVendor.id)
+      })
+    } else {
+      this.props.removeProductVendor(editVendor)
+    }
   }
 
   onSaveVendor (entity) {
