@@ -112,15 +112,28 @@ export default class Tags extends React.Component {
 
   ///////////////////////////////////////////////////////////////
 
+  renderProductItem (product) {
+    const {productTypes, productVendors} = this.props
+    const vendor = productVendors.filter(p => (p.productIds || []).includes(product.id))[0]
+    let label = ''
+    if (vendor) {
+      const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+      if (type) {
+        label = `(${type.name} / ${vendor.name})`
+      }
+    }
+    return (
+      <MenuItem key={product.id} value={product.id}>{product.name}{label}</MenuItem>
+    )
+  }
+
   renderProductCombo () {
     const {vendorProducts} = this.props
     return (
       <FormControl style={{minWidth: 100}}>
         <InputLabel>Products</InputLabel>
         <Select value={this.state.selectedProductId} onChange={this.onChangeProduct.bind(this)}>
-          {vendorProducts.map(p =>
-            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-          )}
+          {vendorProducts.map(p => this.renderProductItem(p))}
         </Select>
       </FormControl>
     )
