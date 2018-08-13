@@ -1052,10 +1052,17 @@ export function fetchVendorProducts () {
   }
 }
 
-export function addVendorProduct (entity) {
+export function addVendorProduct (entity, cb) {
   return dispatch => {
     axios.post(`${ROOT_URL}/vendorproduct`, entity).then(res => {
-      if (res.data) dispatch({type: ADD_VENDOR_PRODUCT, data: res.data})
+      if (res.data) {
+        dispatch({type: ADD_VENDOR_PRODUCT, data: res.data})
+        cb && cb(res.data)
+      } else {
+        cb && cb()
+      }
+    }).catch(() => {
+      cb && cb()
     })
   }
 }

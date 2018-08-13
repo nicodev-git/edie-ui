@@ -87,7 +87,7 @@ export default class ProductTypeVendorModalView extends React.Component {
     )
   }
   renderProducts () {
-    const {onClickAddProduct} = this.props
+    const {filteredProducts, onClickAddProduct} = this.props
     return (
       <CardPanel title="Product" style={{width: 300, position: 'relative'}}>
         <div style={divStyle}>
@@ -97,8 +97,14 @@ export default class ProductTypeVendorModalView extends React.Component {
                 <TableCell>Name</TableCell>
               </TableRow>
             </TableHead>
-
             <TableBody>
+              {filteredProducts.map(p =>
+                <TableRow key={p.id}>
+                  <TableCell  component="th" scope="row">
+                    {p.name}
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>
