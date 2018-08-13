@@ -82,14 +82,34 @@ export default class ProductTypeVendorModalView extends React.Component {
       </CardPanel>
     )
   }
+  renderProducts () {
+    return (
+      <CardPanel title="Product" style={{width: 200}}>
+        <div style={divStyle}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+            </TableBody>
+          </Table>
+        </div>
+      </CardPanel>
+    )
+  }
   render () {
     const {onClickClose} = this.props
     return (
-      <Modal title="Product" onRequestClose={onClickClose} contentStyle={{width: 1000}}>
+      <Modal title="Product" onRequestClose={onClickClose} contentStyle={{width: 1200}}>
         <div className="flex-horizontal">
           {this.renderTypes()}
           <div style={{width: 12}}></div>
           {this.renderVendors()}
+          <div style={{width: 12}}></div>
+          {this.renderProducts()}
         </div>
         {this.props.children}
       </Modal>
