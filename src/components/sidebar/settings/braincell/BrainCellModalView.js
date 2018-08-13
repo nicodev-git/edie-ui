@@ -378,10 +378,11 @@ export default class BrainCellModalView extends Component {
 
   render() {
     const {
-      onSubmit, onClickClose
+      onSubmit, onClickClose, noModal
     } = this.props
-    return (
-      <Modal title="BrainCell" onRequestClose={onClickClose}>
+
+    const content = (
+      <div>
         <form onSubmit={onSubmit}>
           <CardPanel title="BrainCell">
             <div>
@@ -417,6 +418,14 @@ export default class BrainCellModalView extends Component {
           </div>
         </form>
         {this.props.children}
+      </div>
+    )
+
+    if (noModal) return content
+
+    return (
+      <Modal title="BrainCell" onRequestClose={onClickClose}>
+        {content}
       </Modal>
     )
   }
