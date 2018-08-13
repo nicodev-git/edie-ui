@@ -231,6 +231,10 @@ export default class ProductTypeVendorModal extends React.Component {
         onClickEditType={this.onClickEditType.bind(this)}
         onClickDeleteType={this.onClickDeleteType.bind(this)}
 
+
+        selectedVendorId={this.state.selectedVendorId}
+        onSelectVendor={this.onSelectVendor.bind(this)}
+
         filteredVendors={this.getFilteredProductVendors()}
         onClickAddVendor={this.onClickAddVendor.bind(this)}
         onClickEditVendor={this.onClickEditVendor.bind(this)}
