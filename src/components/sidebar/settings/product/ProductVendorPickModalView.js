@@ -10,16 +10,21 @@ export default class ProductVendorPickModalView extends React.Component {
       <Modal title="Product Vendor" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           <CardPanel>
-            <Field name="addType" component={FormRadioGroup} className="margin-md-top">
-              <FormControlLabel control={<Radio />} value="new" label="New"/>
-              <FormControlLabel control={<Radio />} value="existing" label="Existing"/>
-            </Field>
+            <div className="flex-horizontal">
+              <div>
+                <Field name="addType" component={FormRadioGroup} className="margin-md-top">
+                  <FormControlLabel control={<Radio />} value="new" label="New"/>
+                  <FormControlLabel control={<Radio />} value="existing" label="Existing"/>
+                </Field>
+              </div>
+              <div className="flex-1 padding-sm-top">
+                <Field name="name" component={FormInput} className="margin-md-top" fullWidth/>
 
-            <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
-
-            <Field name="existingId" component={FormSelect} floatingLabel="Existing" className="margin-md-right"
-                   options={productVendors.map(p => ({label: p.name, value: p.id}))}
-                   style={{minWidth: 120}}/>
+                <Field name="existingId" component={FormSelect} className="margin-md-top"
+                       options={productVendors.map(p => ({label: p.name, value: p.id}))}
+                       style={{minWidth: 120}}/>
+              </div>
+            </div>
 
             <SubmitBlock name="Save"/>
           </CardPanel>

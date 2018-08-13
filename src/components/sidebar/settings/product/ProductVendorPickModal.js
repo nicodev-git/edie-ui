@@ -13,13 +13,17 @@ class ProductVendorPickModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    this.props.onAdd(values)
+    if (values.addType === 'new')
+      this.props.onAdd(values)
+    else {
+      const {existingId} = this.props.allValues || {}
+      if (!existingId) return window.alert('Please choose one')
+      this.props.onPick(existingId)
+    }
   }
 
   onChooseExisting () {
-    const {existingId} = this.props.allValues || {}
-    if (!existingId) return window.alert('Please choose one')
-    this.props.onPick(existingId)
+
   }
 
   render () {
@@ -38,7 +42,9 @@ class ProductVendorPickModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: {},
+    initialValues: {
+      addType: 'new'
+    },
     allValues: getFormValues('productVendorPickForm')(state)
   })
 )(reduxForm({form: 'productVendorPickForm'})(ProductVendorPickModal))
