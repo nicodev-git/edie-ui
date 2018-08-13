@@ -194,7 +194,7 @@ import {
   REMOVE_PRODUCT_VENDOR
 } from 'actions/types'
 
-import {concat, difference, findIndex, keys} from 'lodash'
+import {concat, difference, findIndex, keys, sortBy} from 'lodash'
 
 const initialState = {
   envVarAvailable: false,
@@ -763,27 +763,27 @@ export default function (state = initialState, action) {
     case FETCH_VENDOR_PRODUCTS:
       return { ...state, vendorProducts: action.data }
     case ADD_VENDOR_PRODUCT:
-      return { ...state, vendorProducts: [...state.vendorProducts, action.data] }
+      return { ...state, vendorProducts: sortBy([...state.vendorProducts, action.data], p => p.name.toLowerCase()) }
     case UPDATE_VENDOR_PRODUCT:
-      return { ...state, vendorProducts: state.vendorProducts.map(p => p.id === action.data.id ? action.data : p) }
+      return { ...state, vendorProducts: sortBy(state.vendorProducts.map(p => p.id === action.data.id ? action.data : p), p => p.name.toLowerCase()) }
     case REMOVE_VENDOR_PRODUCT:
       return { ...state, vendorProducts: state.vendorProducts.filter(p => p.id !== action.data.id) }
 
     case FETCH_PRODUCT_TYPES:
       return { ...state, productTypes: action.data }
     case ADD_PRODUCT_TYPE:
-      return { ...state, productTypes: [...state.productTypes, action.data] }
+      return { ...state, productTypes: sortBy([...state.productTypes, action.data], p => p.name.toLowerCase()) }
     case UPDATE_PRODUCT_TYPE:
-      return { ...state, productTypes: state.productTypes.map(p => p.id === action.data.id ? action.data : p) }
+      return { ...state, productTypes: sortBy(state.productTypes.map(p => p.id === action.data.id ? action.data : p), p => p.name.toLowerCase()) }
     case REMOVE_PRODUCT_TYPE:
       return { ...state, productTypes: state.productTypes.filter(p => p.id !== action.data.id) }
 
     case FETCH_PRODUCT_VENDORS:
       return { ...state, productVendors: action.data }
     case ADD_PRODUCT_VENDOR:
-      return { ...state, productVendors: [...state.productVendors, action.data] }
+      return { ...state, productVendors: sortBy([...state.productVendors, action.data], p => p.name.toLowerCase()) }
     case UPDATE_PRODUCT_VENDOR:
-      return { ...state, productVendors: state.productVendors.map(p => p.id === action.data.id ? action.data : p) }
+      return { ...state, productVendors: sortBy(state.productVendors.map(p => p.id === action.data.id ? action.data : p), p => p.name.toLowerCase()) }
     case REMOVE_PRODUCT_VENDOR:
       return { ...state, productVendors: state.productVendors.filter(p => p.id !== action.data.id) }
 
