@@ -52,7 +52,6 @@ export default class ProductTypeVendorModalView extends React.Component {
   renderVendors () {
     const {filteredVendors, onClickAddVendor, onClickEditVendor, onClickDeleteVendor,
       selectedVendorId, onSelectVendor} = this.props
-
     return (
       <CardPanel title="Vendor" className="flex-1">
         <div style={divStyle}>
