@@ -1,4 +1,5 @@
 import React from 'react'
+import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import BrainCellModal from './BrainCellModal'
 
@@ -22,7 +23,19 @@ export default class BraincellClassPickerModal extends React.Component {
     this.props.onPick(this.props.cells[selIndex])
   }
 
-  onClickEdit (cell) {
+  onClickAdd () {
+    this.setState({
+      cellModalOpen: false
+    }, () => {
+      this.setState({
+        cellModalOpen: true,
+        editCell: null
+      })
+    })
+  }
+
+  onClickEdit (cell, e) {
+    e.stopPropagation()
     this.setState({
       cellModalOpen: false
     }, () => {
@@ -32,6 +45,7 @@ export default class BraincellClassPickerModal extends React.Component {
         editCell: cell
       })
     })
+    return false
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -40,21 +54,9 @@ export default class BraincellClassPickerModal extends React.Component {
     if (entity.id) {
       this.props.updateBrainCell(entity)
     } else {
-      this.setState({
-        loading: true
-      })
-      this.props.addBrainCell(entity, (cell) => {
-        this.setState({
-          loading: false
-        })
-
-        const {brainCellType} = this.state
-        if (brainCellType === 'Tag') this.onPickTag(cell.name)
-        else if (brainCellType === 'ProductClassification') this.onPickClass(cell)
-        else if (brainCellType === 'Grok') this.onPickGrok(cell)
-        else if (brainCellType === 'Incident') this.onPickIncident(cell)
-      })
+      this.props.addBrainCell(entity)
     }
+    this.onCloseBraincellModal()
   }
 
   onCloseBraincellModal () {
@@ -78,7 +80,7 @@ export default class BraincellClassPickerModal extends React.Component {
         vendorProducts={this.props.vendorProducts}
 
         brainCells={this.props.brainCells}
-        editBrainCell={this.props.editBrainCell}
+        editBrainCell={this.state.editCell}
 
         showScriptModal={this.props.showScriptModal}
         showGrokModal={this.props.showGrokModal}
@@ -97,7 +99,7 @@ export default class BraincellClassPickerModal extends React.Component {
 
     return (
       <Modal title="Classification" onRequestClose={onClose}>
-        <CardPanel title="Classification">
+        <CardPanel title="Classification" tools={<AddIcon className="link" onClick={this.onClickAdd.bind(this)}/>}>
           <div style={{maxHeight: 600, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
@@ -113,7 +115,7 @@ export default class BraincellClassPickerModal extends React.Component {
                     onClick={() => this.onClickRow(i)}>
                     <td>{t.name}</td>
                     <td>{t.key}</td>
-                    <td><EditIcon className="link" onClick={() => this.onClickEdit(t)}/></td>
+                    <td><EditIcon className="link" onClick={(e) => this.onClickEdit(t, e)}/></td>
                   </tr>
                 )}
               </tbody>

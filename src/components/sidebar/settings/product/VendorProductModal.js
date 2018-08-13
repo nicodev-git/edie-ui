@@ -360,6 +360,21 @@ class VendorProductModal extends React.Component {
         cells={cells}
         onPick={this.onPickClass.bind(this)}
         onClose={this.onClosePickClass.bind(this)}
+
+        allTags={this.getAllTags(true)}
+
+        vendorProducts={this.props.vendorProducts}
+
+        brainCells={this.props.brainCells}
+        editBrainCell={this.props.editBrainCell}
+
+        showScriptModal={this.props.showScriptModal}
+        showGrokModal={this.props.showGrokModal}
+        showCellParamModal={this.props.showCellParamModal}
+        scriptModalOpen={this.props.scriptModalOpen}
+        grokModalOpen={this.props.grokModalOpen}
+        editCellParam={this.props.editCellParam}
+        cellParamModalOpen={this.props.cellParamModalOpen}
       />
     )
   }
