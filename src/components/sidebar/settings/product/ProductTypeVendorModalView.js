@@ -50,7 +50,7 @@ export default class ProductTypeVendorModalView extends React.Component {
     )
   }
   renderVendors () {
-    const {productVendors, onClickAddVendor, onClickEditVendor, onClickDeleteVendor} = this.props
+    const {filteredVendors, onClickAddVendor, onClickEditVendor, onClickDeleteVendor} = this.props
 
     return (
       <CardPanel title="Vendor" className="flex-1">
@@ -64,7 +64,7 @@ export default class ProductTypeVendorModalView extends React.Component {
             </TableHead>
 
             <TableBody>
-              {productVendors.map(p =>
+              {filteredVendors.map(p =>
                 <TableRow key={p.id}>
                   <TableCell  component="th" scope="row">
                     {p.name}

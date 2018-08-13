@@ -140,6 +140,16 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
+  getFilteredProductVendors () {
+    const {selectedTypeId} = this.state
+    const {productVendors} = this.props
+    if (!selectedTypeId) return productVendors
+    const type = this.getSelectedType()
+    if (!type) return []
+    const ids = type.vendorIds || []
+    return productVendors.filter(p => ids.includes(p.id))
+  }
+
   ///////////////////////////////////////////////////////////////////
 
   renderTypeModal () {
@@ -189,7 +199,7 @@ export default class ProductTypeVendorModal extends React.Component {
         onClickEditType={this.onClickEditType.bind(this)}
         onClickDeleteType={this.onClickDeleteType.bind(this)}
 
-
+        filteredVendors={this.getFilteredProductVendors()}
         onClickAddVendor={this.onClickAddVendor.bind(this)}
         onClickEditVendor={this.onClickEditVendor.bind(this)}
         onClickDeleteVendor={this.onClickDeleteVendor.bind(this)}
