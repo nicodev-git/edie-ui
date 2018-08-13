@@ -5,6 +5,7 @@ import ProductTypeVendorModalView from './ProductTypeVendorModalView'
 import ProductTypeModal from './ProductTypeModal'
 import ProductVendorModal from './ProductVendorModal'
 import ProductVendorPickModal from './ProductVendorPickModal'
+import ProductEditModal from './ProductEditModal'
 
 export default class ProductTypeVendorModal extends React.Component {
   constructor(props) {
@@ -18,7 +19,10 @@ export default class ProductTypeVendorModal extends React.Component {
       selectedVendorId: null,
       vendorModalOpen: false,
       editVendor: null,
-      vendorPickModalOpen: false
+      vendorPickModalOpen: false,
+
+      editProduct: null,
+      productModalOpen: false
     }
   }
 
@@ -177,7 +181,42 @@ export default class ProductTypeVendorModal extends React.Component {
   ///////////////////////////////////////////////////////////////////
 
   onClickAddProduct () {
+    const {selectedVendorId} = this.state
+    if (!selectedVendorId) return window.alert('Please select vendor')
+    this.setState({
+      productModalOpen: true
+    })
+  }
 
+  onSaveProduct (entity) {
+    const vendor = this.getSelectedVendor()
+    if (!vendor) return null
+    if (entity.id) {
+      this.props.updateVendorProduct(entity)
+    } else {
+      this.props.addVendorProduct(entity, product => {
+        if (product) this.addNewProductIdToVendor(vendor, product.id)
+      })
+    }
+    this.setState({
+      productModalOpen: false
+    })
+  }
+
+  addNewProductIdToVendor(vendor, productId) {
+    const productIds = vendor.productIds || []
+    this.props.updateProductVendor({
+      ...vendor,
+      productIds: [...productIds, productId]
+    })
+  }
+
+  getFilteredProducts () {
+    const {vendorProducts} = this.props
+    const vendor = this.getSelectedVendor()
+    if (!vendor) return []
+    const ids = vendor.productIds || []
+    return vendorProducts.filter(p => ids.includes(p.id))
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -200,6 +239,17 @@ export default class ProductTypeVendorModal extends React.Component {
         editVendor={this.state.editVendor}
         onSave={this.onSaveVendor.bind(this)}
         onClose={() => this.setState({vendorModalOpen: false})}
+      />
+    )
+  }
+
+  renderEditModal () {
+    if (!this.state.productModalOpen) return null
+    return (
+      <ProductEditModal
+        editVendor={this.state.editProduct}
+        onSave={this.onSaveProduct.bind(this)}
+        onClose={() => this.setState({productModalOpen: false})}
       />
     )
   }
@@ -240,11 +290,13 @@ export default class ProductTypeVendorModal extends React.Component {
         onClickEditVendor={this.onClickEditVendor.bind(this)}
         onClickDeleteVendor={this.onClickDeleteVendor.bind(this)}
 
+        filteredProducts={this.getFilteredProducts()}
         onClickAddProduct={this.onClickAddProduct.bind(this)}
       >
         {this.renderTypeModal()}
         {this.renderVendorModal()}
         {this.renderVendorPickModal()}
+        {this.renderEditModal()}
       </ProductTypeVendorModalView>
     )
   }
