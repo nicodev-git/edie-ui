@@ -1,4 +1,6 @@
 import React from 'react'
+import EditIcon from '@material-ui/icons/Edit'
+import BrainCellModal from './BrainCellModal'
 
 import {
   Modal,
@@ -9,13 +11,84 @@ export default class BraincellClassPickerModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selIndex: -1
+      selIndex: -1,
+      cellModalOpen: false,
+      editCell: null
     }
   }
 
   onClickRow (selIndex) {
     this.setState({selIndex})
     this.props.onPick(this.props.cells[selIndex])
+  }
+
+  onClickEdit (cell) {
+    this.setState({
+      cellModalOpen: false
+    }, () => {
+
+      this.setState({
+        cellModalOpen: true,
+        editCell: cell
+      })
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  onSaveBraincell (entity) {
+    if (entity.id) {
+      this.props.updateBrainCell(entity)
+    } else {
+      this.setState({
+        loading: true
+      })
+      this.props.addBrainCell(entity, (cell) => {
+        this.setState({
+          loading: false
+        })
+
+        const {brainCellType} = this.state
+        if (brainCellType === 'Tag') this.onPickTag(cell.name)
+        else if (brainCellType === 'ProductClassification') this.onPickClass(cell)
+        else if (brainCellType === 'Grok') this.onPickGrok(cell)
+        else if (brainCellType === 'Incident') this.onPickIncident(cell)
+      })
+    }
+  }
+
+  onCloseBraincellModal () {
+    this.setState({
+      cellModalOpen: false
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  renderCellModal () {
+    if (!this.state.cellModalOpen) return null
+    return (
+      <BrainCellModal
+        noModal
+        type="ProductClassification"
+        allTags={this.props.allTags}
+        onSave={this.onSaveBraincell.bind(this)}
+        onClose={this.onCloseBraincellModal.bind(this)}
+
+        vendorProducts={this.props.vendorProducts}
+
+        brainCells={this.props.brainCells}
+        editBrainCell={this.props.editBrainCell}
+
+        showScriptModal={this.props.showScriptModal}
+        showGrokModal={this.props.showGrokModal}
+        showCellParamModal={this.props.showCellParamModal}
+        scriptModalOpen={this.props.scriptModalOpen}
+        grokModalOpen={this.props.grokModalOpen}
+        editCellParam={this.props.editCellParam}
+        cellParamModalOpen={this.props.cellParamModalOpen}
+      />
+    )
   }
 
   render() {
@@ -31,6 +104,7 @@ export default class BraincellClassPickerModal extends React.Component {
                 <tr>
                   <th>Name</th>
                   <th>Key</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -39,12 +113,15 @@ export default class BraincellClassPickerModal extends React.Component {
                     onClick={() => this.onClickRow(i)}>
                     <td>{t.name}</td>
                     <td>{t.key}</td>
+                    <td><EditIcon className="link" onClick={() => this.onClickEdit(t)}/></td>
                   </tr>
                 )}
               </tbody>
             </table>
           </div>
         </CardPanel>
+
+        {this.renderCellModal()}
       </Modal>
     )
 
