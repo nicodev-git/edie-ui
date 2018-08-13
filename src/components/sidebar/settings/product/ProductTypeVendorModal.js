@@ -15,6 +15,7 @@ export default class ProductTypeVendorModal extends React.Component {
       typeModalOpen: false,
       editType: null,
 
+      selectedVendorId: null,
       vendorModalOpen: false,
       editVendor: null,
       vendorPickModalOpen: false
@@ -58,7 +59,8 @@ export default class ProductTypeVendorModal extends React.Component {
 
   onSelectType (type) {
     this.setState({
-      selectedTypeId: type.id
+      selectedTypeId: type.id,
+      selectedVendorId: null
     })
   }
 
@@ -114,6 +116,19 @@ export default class ProductTypeVendorModal extends React.Component {
     })
   }
 
+  onSelectVendor (vendor) {
+    this.setState({
+      selectedVendorId: vendor.id
+    })
+  }
+
+  getSelectedVendor() {
+    const {selectedVendorId} = this.state
+    const {productVendors} = this.props
+    if (!selectedVendorId) return null
+    return find(productVendors, {id: selectedVendorId})
+  }
+
   ///////////////////////////////////////////////////////////////////
 
   addNewVendorIdToType(type, vendorId) {
@@ -157,6 +172,12 @@ export default class ProductTypeVendorModal extends React.Component {
     if (!type) return []
     const ids = type.vendorIds || []
     return productVendors.filter(p => ids.includes(p.id))
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  onClickAddProduct () {
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -214,6 +235,8 @@ export default class ProductTypeVendorModal extends React.Component {
         onClickAddVendor={this.onClickAddVendor.bind(this)}
         onClickEditVendor={this.onClickEditVendor.bind(this)}
         onClickDeleteVendor={this.onClickDeleteVendor.bind(this)}
+
+        onClickAddProduct={this.onClickAddProduct.bind(this)}
       >
         {this.renderTypeModal()}
         {this.renderVendorModal()}

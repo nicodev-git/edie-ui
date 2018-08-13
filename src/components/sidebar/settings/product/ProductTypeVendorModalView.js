@@ -83,8 +83,9 @@ export default class ProductTypeVendorModalView extends React.Component {
     )
   }
   renderProducts () {
+    const {onClickAddProduct} = this.props
     return (
-      <CardPanel title="Product" style={{width: 200}}>
+      <CardPanel title="Product" style={{width: 300, position: 'relative'}}>
         <div style={divStyle}>
           <Table>
             <TableHead>
@@ -97,13 +98,14 @@ export default class ProductTypeVendorModalView extends React.Component {
             </TableBody>
           </Table>
         </div>
+        <FloatingMenu menuItems={[]} onClickMain={onClickAddProduct}/>
       </CardPanel>
     )
   }
   render () {
     const {onClickClose} = this.props
     return (
-      <Modal title="Product" onRequestClose={onClickClose} contentStyle={{width: 1200}}>
+      <Modal title="Product" onRequestClose={onClickClose} contentStyle={{width: 1300}}>
         <div className="flex-horizontal">
           {this.renderTypes()}
           <div style={{width: 12}}></div>
