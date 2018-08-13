@@ -440,6 +440,8 @@ class VendorProductModal extends React.Component {
         onSave={this.onSaveBraincell.bind(this)}
         onClose={this.onCloseBraincellModal.bind(this)}
 
+        productTypes={this.props.productTypes}
+        productVendors={this.props.productVendors}
         vendorProducts={this.props.vendorProducts}
 
         brainCells={this.props.brainCells}

@@ -295,7 +295,8 @@ class BrainCellModal extends React.Component {
     }
 
     render () {
-        const { handleSubmit, allValues, noModal, workflows, allTags, brainCells, vendorProducts } = this.props
+        const { handleSubmit, allValues, noModal, workflows, allTags, brainCells,
+          vendorProducts, productTypes, productVendors } = this.props
         return (
             <BrainCellModalView
                 noModal={noModal}
@@ -306,6 +307,8 @@ class BrainCellModal extends React.Component {
                 brainCells={brainCells}
 
                 vendorProducts={vendorProducts}
+                productTypes={productTypes}
+                productVendors={productVendors}
 
                 lines={this.state.lines}
                 selectedLineIndex={this.state.selectedLineIndex}

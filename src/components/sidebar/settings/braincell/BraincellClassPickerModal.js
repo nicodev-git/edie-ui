@@ -78,6 +78,8 @@ export default class BraincellClassPickerModal extends React.Component {
         onClose={this.onCloseBraincellModal.bind(this)}
 
         vendorProducts={this.props.vendorProducts}
+        productTypes={this.props.productTypes}
+        productVendors={this.props.productVendors}
 
         brainCells={this.props.brainCells}
         editBrainCell={this.state.editCell}

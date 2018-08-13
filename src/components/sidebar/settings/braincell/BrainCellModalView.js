@@ -193,16 +193,16 @@ export default class BrainCellModalView extends Component {
     return (
       <div className="margin-md-top">
         <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
-               options={productTypes.map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 200}}
+               options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
         />
         <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
-               options={productVendors.map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 200}}
+               options={(productVendors || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
         />
         <Field name="productId" component={FormSelect} floatingLabel="Product"
-               options={vendorProducts.map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 200}}
+               options={(vendorProducts || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}}
         />
       </div>
     )
