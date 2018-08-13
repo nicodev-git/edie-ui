@@ -185,8 +185,10 @@ export default class ProductTypeVendorModal extends React.Component {
 
   renderVendorPickModal () {
     if (!this.state.vendorPickModalOpen) return null
+    const {productVendors} = this.props
     return (
       <ProductVendorPickModal
+        productVendors={productVendors}
         onAdd={this.onAddNewVendorToType.bind(this)}
         onPick={this.onPickVendorForType.bind(this)}
         onClose={this.onCloseVendorPick.bind(this)}

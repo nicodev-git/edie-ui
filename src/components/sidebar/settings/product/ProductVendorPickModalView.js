@@ -5,7 +5,7 @@ import {Modal, CardPanel, SubmitBlock, FormSelect, FormInput} from 'components/m
 
 export default class ProductVendorPickModalView extends React.Component {
   render () {
-    const {onClose, onSubmit, onChooseExisting} = this.props
+    const {onClose, onSubmit, onChooseExisting, productVendors} = this.props
     return (
       <Modal title="Product Vendor" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
@@ -15,8 +15,9 @@ export default class ProductVendorPickModalView extends React.Component {
           </CardPanel>
 
           <CardPanel title="Existing">
-            <Field name="existingId" component={FormSelect} floatingLabel="Existing" className="margin-md-right" options={[]}
-              style={{minWidth: 120}}/>
+            <Field name="existingId" component={FormSelect} floatingLabel="Existing" className="margin-md-right"
+                   options={productVendors.map(p => ({label: p.name, value: p.id}))}
+                   style={{minWidth: 120}}/>
             <Button variant="raised" onClick={onChooseExisting}>Add</Button>
           </CardPanel>
         </form>

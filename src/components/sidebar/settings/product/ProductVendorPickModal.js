@@ -23,12 +23,13 @@ class ProductVendorPickModal extends React.Component {
   }
 
   render () {
-    const {handleSubmit, onClose} = this.props
+    const {handleSubmit, onClose, productVendors} = this.props
     return (
       <ProductVendorPickModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
 
+        productVendors={productVendors}
         onChooseExisting={this.onChooseExisting.bind(this)}
       />
     )
