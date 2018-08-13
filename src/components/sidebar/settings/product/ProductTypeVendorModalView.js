@@ -28,7 +28,7 @@ export default class ProductTypeVendorModalView extends React.Component {
 
             <TableBody>
               <TableRow
-                selected={!!selectedTypeId}
+                selected={!selectedTypeId}
                 onClick={() => onSelectType(null)}>
                 <TableCell>
                   All
