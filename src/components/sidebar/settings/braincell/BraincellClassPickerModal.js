@@ -1,7 +1,9 @@
 import React from 'react'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
+import {find} from 'lodash'
 
 import BrainCellModal from './BrainCellModal'
 
@@ -9,7 +11,6 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import DeleteIcon from "../../../../../node_modules/@material-ui/icons/Delete";
 
 export default class BraincellClassPickerModal extends React.Component {
   constructor(props) {
@@ -98,6 +99,23 @@ export default class BraincellClassPickerModal extends React.Component {
     )
   }
 
+  renderProductItem (productId) {
+    const {vendorProducts, productTypes, productVendors} = this.props
+    if (!productId) return ''
+    const product = find(vendorProducts, {id: productId})
+    const vendor = productVendors.filter(p => (p.productIds || []).includes(product.id))[0]
+    let label = ''
+    if (vendor) {
+      const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+      if (type) {
+        label = ` (${type.name} / ${vendor.name})`
+      }
+    }
+    return (
+      <span>{product.name}{label}</span>
+    )
+  }
+
   render() {
     const {cells, onClose} = this.props
     const {selIndex} = this.state
@@ -109,10 +127,10 @@ export default class BraincellClassPickerModal extends React.Component {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Product</TableCell>
-                  <TableCell>Key</TableCell>
-                  <TableCell></TableCell>
+                  <TableCell padding="none">Name</TableCell>
+                  <TableCell padding="none">Product</TableCell>
+                  <TableCell padding="none">Key</TableCell>
+                  <TableCell padding="none"></TableCell>
                 </TableRow>
               </TableHead>
 
@@ -123,10 +141,10 @@ export default class BraincellClassPickerModal extends React.Component {
                     selected={i === selIndex}
                     onClick={() => this.onClickRow(i)}
                   >
-                    <TableCell  component="th" scope="row">{t.name}</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>{t.key}</TableCell>
-                    <TableCell><EditIcon className="link" onClick={(e) => this.onClickEdit(t, e)}/></TableCell>
+                    <TableCell padding="none"  component="th" scope="row">{t.name}</TableCell>
+                    <TableCell padding="none">{this.renderProductItem(t.productId)}</TableCell>
+                    <TableCell padding="none">{t.key}</TableCell>
+                    <TableCell padding="none"><EditIcon className="link" onClick={(e) => this.onClickEdit(t, e)}/></TableCell>
                   </TableRow>
                 )}
               </TableBody>
