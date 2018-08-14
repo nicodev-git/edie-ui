@@ -4,6 +4,7 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
+import BrainCellModal from "./BrainCellModal";
 
 export default class BraincellGrokPickerModal extends React.Component {
   constructor(props) {
@@ -17,6 +18,37 @@ export default class BraincellGrokPickerModal extends React.Component {
     this.setState({selIndex})
     this.props.onPick(this.props.cells[selIndex])
   }
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  renderCellModal () {
+    if (!this.state.cellModalOpen) return null
+    return (
+      <BrainCellModal
+        noModal
+        type="Grok"
+        allTags={[]}
+        onSave={this.onSaveBraincell.bind(this)}
+        onClose={this.onCloseBraincellModal.bind(this)}
+
+        vendorProducts={this.props.vendorProducts}
+        productTypes={this.props.productTypes}
+        productVendors={this.props.productVendors}
+
+        brainCells={this.props.brainCells}
+        editBrainCell={this.state.editCell}
+
+        showScriptModal={this.props.showScriptModal}
+        showGrokModal={this.props.showGrokModal}
+        showCellParamModal={this.props.showCellParamModal}
+        scriptModalOpen={this.props.scriptModalOpen}
+        grokModalOpen={this.props.grokModalOpen}
+        editCellParam={this.props.editCellParam}
+        cellParamModalOpen={this.props.cellParamModalOpen}
+      />
+    )
+  }
+
 
   render() {
     const {cells, onClose} = this.props
