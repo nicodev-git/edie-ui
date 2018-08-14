@@ -115,25 +115,36 @@ export default class BraincellGrokPickerModal extends React.Component {
 
     return (
       <Modal title="Grok" onRequestClose={onClose}>
-        <CardPanel title="Grok">
-          <div style={{maxHeight: 600, overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-              <tr>
-                <th>Name</th>
-              </tr>
-              </thead>
-              <tbody>
-              {cells.map((t, i) =>
-                <tr key={t.id} className={i === selIndex ? 'selected' : ''}
-                    onClick={() => this.onClickRow(i)}>
-                  <td>{t.name}</td>
-                </tr>
-              )}
-              </tbody>
-            </table>
+        <CardPanel title="Grok" tools={<AddIcon className="link" onClick={this.onClickAdd.bind(this)}/>}>
+          <div style={{maxHeight: 400, overflow: 'auto'}}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell padding="none">Name</TableCell>
+                  <TableCell padding="none">Action</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {cells.map((t, i) =>
+                  <TableRow
+                    key={t.id}
+                    selected={i === selIndex}
+                    onClick={() => this.onClickRow(i)}
+                  >
+                    <TableCell padding="none"  component="th" scope="row">{t.name}</TableCell>
+                    <TableCell padding="none">
+                      <EditIcon className="link margin-md-right" onClick={(e) => this.onClickEdit(t, e)}/>
+                      <DeleteIcon className="link margin-md-right" onClick={e => this.onClickDelete(t, e)}/>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
           </div>
         </CardPanel>
+
+        {this.renderCellModal()}
       </Modal>
     )
 

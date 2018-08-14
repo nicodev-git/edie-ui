@@ -394,6 +394,27 @@ class VendorProductModal extends React.Component {
         cells={cells}
         onPick={this.onPickGrok.bind(this)}
         onClose={this.onClosePickGrok.bind(this)}
+
+        allTags={[]}
+
+        productTypes={this.props.productTypes}
+        productVendors={this.props.productVendors}
+        vendorProducts={this.props.vendorProducts}
+
+        addBrainCell={this.props.addBrainCell}
+        updateBrainCell={this.props.updateBrainCell}
+        removeBrainCell={this.props.removeBrainCell}
+
+        brainCells={this.props.brainCells}
+        editBrainCell={this.props.editBrainCell}
+
+        showScriptModal={this.props.showScriptModal}
+        showGrokModal={this.props.showGrokModal}
+        showCellParamModal={this.props.showCellParamModal}
+        scriptModalOpen={this.props.scriptModalOpen}
+        grokModalOpen={this.props.grokModalOpen}
+        editCellParam={this.props.editCellParam}
+        cellParamModalOpen={this.props.cellParamModalOpen}
       />
     )
   }

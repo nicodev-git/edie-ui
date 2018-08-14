@@ -135,7 +135,7 @@ export default class BrainCellModalView extends Component {
     const {allValues} = this.props
     const {type} = allValues || {}
 
-    if (type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'Incident' || type === 'Function') return null
+    if (type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok') return null
 
     const index = findIndex(brainCellTypes, {value: type})
     let valueTypes = []
