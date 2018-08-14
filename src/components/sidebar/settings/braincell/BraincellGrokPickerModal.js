@@ -8,7 +8,13 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import BrainCellModal from "./BrainCellModal";
+import BrainCellModal from './BrainCellModal'
+import InlineEdit from 'components/common/ReactEditInline'
+
+const inlineStyle = {
+  width: '100%',
+  display: 'block'
+}
 
 export default class BraincellGrokPickerModal extends React.Component {
   constructor(props) {
@@ -78,6 +84,10 @@ export default class BraincellGrokPickerModal extends React.Component {
     })
   }
 
+  onLineChange () {
+
+  }
+
   ///////////////////////////////////////////////////////////////////////////
 
   renderCellModal () {
@@ -133,7 +143,17 @@ export default class BraincellGrokPickerModal extends React.Component {
                     selected={i === selIndex}
                     onClick={() => this.onClickRow(i)}
                   >
-                    <TableCell padding="none"  component="th" scope="row">{t.name}</TableCell>
+                    <TableCell padding="none"  component="th" scope="row">
+                      {/*<InlineEdit*/}
+                        {/*activeClassName="editing"*/}
+                        {/*text={t.name || '\u00a0'}*/}
+                        {/*paramName="pattern"*/}
+                        {/*change={this.onLineChange.bind(this, t, 'name')}*/}
+                        {/*style={inlineStyle}*/}
+                      {/*/>*/}
+
+
+                    </TableCell>
                     <TableCell padding="none">{t.description}</TableCell>
                     <TableCell padding="none">
                       <EditIcon className="link margin-md-right" onClick={(e) => this.onClickEdit(t, e)}/>
