@@ -189,7 +189,7 @@ export default class BrainCellModalView extends Component {
   renderProduct() {
     const {allValues, productTypes, productVendors, vendorProducts} = this.props
     const {type, productTypeId, productVendorId} = allValues || {}
-    if (type !== 'ProductClassification') return null
+    if (type !== 'ProductClassification' && type !== 'Grok') return null
 
     let vendors = productVendors || []
     if (productTypeId) {
@@ -356,7 +356,7 @@ export default class BrainCellModalView extends Component {
       // tagInputValue, onChangeTagInput, getTagSuggestionValue
     } = this.props
     const {type} = allValues || {}
-    if (type !== 'Classification' && type !== 'Incident' && type !== 'Grok') return null
+    if (type !== 'Classification' && type !== 'Incident') return null
     return (
       <div>
         <CardPanel title="Existing Tags">
