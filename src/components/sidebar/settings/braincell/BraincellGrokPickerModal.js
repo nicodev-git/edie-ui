@@ -19,6 +19,14 @@ export default class BraincellGrokPickerModal extends React.Component {
     this.props.onPick(this.props.cells[selIndex])
   }
 
+  onSaveBraincell () {
+
+  }
+
+  onCloseBraincellModal () {
+
+  }
+
   ///////////////////////////////////////////////////////////////////////////
 
   renderCellModal () {
