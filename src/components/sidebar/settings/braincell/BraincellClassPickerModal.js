@@ -121,7 +121,7 @@ export default class BraincellClassPickerModal extends React.Component {
     const {selIndex} = this.state
 
     return (
-      <Modal title="Classification" onRequestClose={onClose}>
+      <Modal title="Classification" onRequestClose={onClose} contentStyle={{width: 1200}}>
         <CardPanel title="Classification" tools={<AddIcon className="link" onClick={this.onClickAdd.bind(this)}/>}>
           <div style={{maxHeight: 400, overflow: 'auto'}}>
             <Table>
@@ -130,7 +130,7 @@ export default class BraincellClassPickerModal extends React.Component {
                   <TableCell padding="none">Name</TableCell>
                   <TableCell padding="none">Product</TableCell>
                   <TableCell padding="none">Key</TableCell>
-                  <TableCell padding="none"></TableCell>
+                  <TableCell padding="none">Action</TableCell>
                 </TableRow>
               </TableHead>
 
