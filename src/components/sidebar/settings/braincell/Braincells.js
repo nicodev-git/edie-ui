@@ -32,6 +32,9 @@ export default class Braincells extends React.Component {
   componentWillMount() {
     this.props.fetchBrainCells()
     this.props.fetchWorkflows()
+    this.props.fetchVendorProducts()
+    this.props.fetchProductTypes()
+    this.props.fetchProductVendors()
   }
 
   onClickAdd() {
