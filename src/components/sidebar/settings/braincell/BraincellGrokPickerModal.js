@@ -1,4 +1,8 @@
 import React from 'react'
+import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
+import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
 
 import {
   Modal,
@@ -10,7 +14,9 @@ export default class BraincellGrokPickerModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selIndex: -1
+      selIndex: -1,
+      cellModalOpen: false,
+      editCell: null
     }
   }
 
@@ -19,12 +25,57 @@ export default class BraincellGrokPickerModal extends React.Component {
     this.props.onPick(this.props.cells[selIndex])
   }
 
-  onSaveBraincell () {
+  ///////////////////////////////////////////////////////////////////////////
 
+  onClickAdd () {
+    this.setState({
+      cellModalOpen: false
+    }, () => {
+      this.setState({
+        cellModalOpen: true,
+        editCell: null
+      })
+    })
+  }
+
+  onClickEdit (cell, e) {
+    e.stopPropagation()
+    this.setState({
+      cellModalOpen: false
+    }, () => {
+
+      this.setState({
+        cellModalOpen: true,
+        editCell: cell
+      })
+    })
+    return false
+  }
+
+  onClickDelete (cell, e) {
+    e.stopPropagation()
+    if (!window.confirm('Click OK to remove')) return
+    this.props.removeBrainCell(cell)
+    this.setState({
+      cellModalOpen: false
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  onSaveBraincell (entity) {
+    if (entity.id) {
+      this.props.updateBrainCell(entity)
+    } else {
+      this.props.addBrainCell(entity)
+    }
+    this.onCloseBraincellModal()
   }
 
   onCloseBraincellModal () {
-
+    this.setState({
+      cellModalOpen: false
+    })
   }
 
   ///////////////////////////////////////////////////////////////////////////
