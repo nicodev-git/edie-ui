@@ -121,6 +121,7 @@ export default class BraincellGrokPickerModal extends React.Component {
               <TableHead>
                 <TableRow>
                   <TableCell padding="none">Name</TableCell>
+                  <TableCell padding="none">Description</TableCell>
                   <TableCell padding="none">Action</TableCell>
                 </TableRow>
               </TableHead>
@@ -133,6 +134,7 @@ export default class BraincellGrokPickerModal extends React.Component {
                     onClick={() => this.onClickRow(i)}
                   >
                     <TableCell padding="none"  component="th" scope="row">{t.name}</TableCell>
+                    <TableCell padding="none">{t.description}</TableCell>
                     <TableCell padding="none">
                       <EditIcon className="link margin-md-right" onClick={(e) => this.onClickEdit(t, e)}/>
                       <DeleteIcon className="link margin-md-right" onClick={e => this.onClickDelete(t, e)}/>
