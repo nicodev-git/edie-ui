@@ -52,6 +52,15 @@ export default class BraincellClassPickerModal extends React.Component {
     return false
   }
 
+  onClickDelete (cell, e) {
+    e.stopPropagation()
+    if (!window.confirm('Click OK to remove')) return
+    this.props.removeBrainCell(cell)
+    this.setState({
+      cellModalOpen: false
+    })
+  }
+
   ///////////////////////////////////////////////////////////////////
 
   onSaveBraincell (entity) {
@@ -144,7 +153,10 @@ export default class BraincellClassPickerModal extends React.Component {
                     <TableCell padding="none"  component="th" scope="row">{t.name}</TableCell>
                     <TableCell padding="none">{this.renderProductItem(t.productId)}</TableCell>
                     <TableCell padding="none">{t.key}</TableCell>
-                    <TableCell padding="none"><EditIcon className="link" onClick={(e) => this.onClickEdit(t, e)}/></TableCell>
+                    <TableCell padding="none">
+                      <EditIcon className="link margin-md-right" onClick={(e) => this.onClickEdit(t, e)}/>
+                      <DeleteIcon className="link margin-md-right" onClick={e => this.onClickDelete(t, e)}/>
+                    </TableCell>
                   </TableRow>
                 )}
               </TableBody>
