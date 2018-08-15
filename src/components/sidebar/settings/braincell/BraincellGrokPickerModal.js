@@ -144,6 +144,7 @@ export default class BraincellGrokPickerModal extends React.Component {
                     onClick={() => this.onClickRow(i)}
                   >
                     <TableCell padding="none"  component="th" scope="row">
+                      {t.name}
                       {/*<InlineEdit*/}
                         {/*activeClassName="editing"*/}
                         {/*text={t.name || '\u00a0'}*/}
