@@ -6,7 +6,6 @@ import {
   Checkbox, FormControlLabel, Button, Popover,
   Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
-import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Tabs from '@material-ui/core/Tabs'
@@ -164,39 +163,14 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderFilterTab() {
-    const {
-      onClickDeleteTag, tags, allTags,
-      onClickExistingTag
-    } = this.props
+    // const {
+    //   onClickDeleteTag, tags, allTags,
+    //   onClickExistingTag
+    // } = this.props
     return (
       <div>
-        <div classname="hidden">
-          <CardPanel title="Existing Tags">
+        <div className="hidden">
 
-            <div className="margin-md-top">
-              {allTags.filter(p => !tags.includes(p.name)).map((t, i) =>
-                <Chip
-                  key={i}
-                  label={t.name}
-                  className="margin-sm-right"
-                  onClick={() => onClickExistingTag(t.name)}
-                />
-              )}
-            </div>
-          </CardPanel>
-
-          <CardPanel title="Selected Tags">
-            <div>
-              {tags.map((t, i) =>
-                <Chip
-                  key={i}
-                  label={t}
-                  onDelete={() => onClickDeleteTag(i)}
-                  className="margin-md-right"
-                />
-              )}
-            </div>
-          </CardPanel>
         </div>
         {this.renderButtons()}
       </div>
