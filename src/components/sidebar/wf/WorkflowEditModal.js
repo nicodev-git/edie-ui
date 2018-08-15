@@ -12,7 +12,6 @@ import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import BraincellTagPickerModal from 'components/sidebar/settings/braincell/BraincellTagPickerModal'
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -50,9 +49,7 @@ class WorkflowEditModal extends React.Component {
       shapeModalOpen: false,
       wfData,
 
-      tagPickModalOpen: false,
       tags: props.editWf ? (props.editWf.tags || []) : [],
-      tagInputValue: '',
       applyDeviceIds: props.editWf ? (props.editWf.applyDeviceIds || []) : [],
 
       rulePanelExpanded: false,
@@ -394,69 +391,6 @@ class WorkflowEditModal extends React.Component {
   }
 
   ////////////////////////////////////////////////////
-  onChangeTagInput(event, {newValue}) {
-    this.setState({
-      tagInputValue: newValue
-    })
-  }
-
-  onClickAddTag() {
-    const {tags} = this.state
-    const {allTags, allValues} = this.props
-    const {tag} = allValues
-    if (!tag) return
-
-    this.setState({
-      tags: [...tags, tag],
-      tagInputValue: ''
-    })
-
-    this.props.change('tag', '')
-
-    if (allTags.filter(p => p.name.toLowerCase() === tag.toLowerCase()).length) return
-
-    this.props.addBrainCell({
-      type: 'Tag',
-      name: tag,
-      description: '',
-    })
-  }
-
-  onClickDeleteTag(index) {
-    const {tags} = this.state
-    tags.splice(index, 1)
-    this.setState({tags})
-  }
-
-  onClickExistingTag(tag) {
-    if (!tag) return null
-    const {tags} = this.state
-
-    this.setState({
-      tags: [...tags, tag]
-    })
-  }
-
-  onClickTagPick () {
-    this.setState({
-      tagPickModalOpen: true
-    })
-  }
-
-  onPickTag (tag) {
-    const {tags} = this.state
-    if (tags.indexOf(tag) >= 0) return alert('Already exists')
-    this.setState({
-      tags: [...tags, tag]
-    })
-    this.onClosePickTag()
-  }
-
-  onClosePickTag () {
-    this.setState({tagPickModalOpen: false})
-  }
-
-  ////////////////////////////////////////////////////
 
   onExpandRulePanel(e, expanded) {
     this.setState({
@@ -594,19 +528,6 @@ class WorkflowEditModal extends React.Component {
     )
   }
 
-  renderTagPickModal () {
-    if (!this.state.tagPickModalOpen) return null
-    const {brainCells} = this.props
-    const tags = brainCells.filter(p => p.type === 'Tag').map(p => p.name)
-    return (
-      <BraincellTagPickerModal
-        tags={tags}
-        onPick={this.onPickTag.bind(this)}
-        onClose={this.onClosePickTag.bind(this)}
-      />
-    )
-  }
-
   renderLoader () {
     if (!this.state.loading) return null
     return (
@@ -717,15 +638,6 @@ class WorkflowEditModal extends React.Component {
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
 
-        tags={this.state.tags}
-        tagInputValue={this.state.tagInputValue}
-        onChangeTagInput={this.onChangeTagInput.bind(this)}
-        getTagSuggestionValue={t => t.name}
-        onClickTagPick={this.onClickTagPick.bind(this)}
-        onClickAddTag={this.onClickAddTag.bind(this)}
-        onClickDeleteTag={this.onClickDeleteTag.bind(this)}
-        onClickExistingTag={this.onClickExistingTag.bind(this)}
-
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
         shapeModal={this.renderShapeModal()}
@@ -740,7 +652,6 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
-        {this.renderTagPickModal()}
         {this.renderLoader()}
       </ModalView>
     )

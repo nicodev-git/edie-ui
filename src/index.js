@@ -13,6 +13,7 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
 console.log('Version: 2018.1.25')
+console.log('React Version: ' + React.version)
 
 ReactDOM.render(
     <Provider store={store}>

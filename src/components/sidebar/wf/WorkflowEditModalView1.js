@@ -4,7 +4,6 @@ import {
   ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel, Button, Popover
 } from '@material-ui/core'
-import Chip from '@material-ui/core/Chip'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -121,37 +120,6 @@ class WorkflowEditModalView extends React.Component {
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    )
-  }
-
-  renderFilterTab() {
-    const {
-      tags,
-      allTags, onClickExistingTag, onClickDeleteTag
-    } = this.props
-    return (
-      <div>
-        <div>
-          <CardPanel title="Existing Tags">
-
-            <div className="margin-md-top">
-              {allTags.filter(p => !tags.includes(p.name)).map((t, i) =>
-                <Chip
-                  key={i}
-                  label={t.name}
-                  className="margin-sm-right"
-                  onClick={() => onClickExistingTag(t.name)}
-                />
-              )}
-            </div>
-          </CardPanel>
-
-          <CardPanel title="Selected Tags">
-
-          </CardPanel>
-        </div>
-        {this.renderButtons()}
-      </div>
     )
   }
 
@@ -331,30 +299,10 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderContent () {
-    const {
-      onClickDeleteTag, tags, allTags,
-      onClickExistingTag, onClickTagPick
-    } = this.props
-
     return (
       <CardPanel>
         <Field name="name" component={FormInput} floatingLabel="Name"
                className="valign-top margin-md-right" style={{minWidth: 250}}/>
-
-        <h4>Tags</h4>
-        <div className="flex-horizontal" style={{alignItems: 'center'}}>
-          <div className="flex-1 nowrap padding-sm" style={{overflow: 'auto', border: '1px solid gray', height: 46}}>
-            {tags.map((t, i) =>
-              <Chip
-                key={i}
-                label={t}
-                onDelete={() => onClickDeleteTag(i)}
-                className="margin-md-right"
-              />
-            )}
-          </div>
-          <AddIcon className="link" onClick={onClickTagPick}/>
-        </div>
 
         {this.renderWfTab()}
         {this.renderTabActions()}

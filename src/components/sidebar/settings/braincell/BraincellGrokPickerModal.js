@@ -9,12 +9,12 @@ import {
   CardPanel
 } from 'components/modal/parts'
 import BrainCellModal from './BrainCellModal'
-import InlineEdit from 'components/common/ReactEditInline'
+// import InlineEdit from 'components/common/ReactEditInline'
 
-const inlineStyle = {
-  width: '100%',
-  display: 'block'
-}
+// const inlineStyle = {
+//   width: '100%',
+//   display: 'block'
+// }
 
 export default class BraincellGrokPickerModal extends React.Component {
   constructor(props) {
