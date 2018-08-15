@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import FormControl from '@material-ui/core/FormControl'
-import {findIndex} from 'lodash'
+import {find, findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -189,8 +189,20 @@ class Workflows extends React.Component {
   }
 
   renderProductType (wf) {
-    // const {vendorProducts, productTypes} = this.props
-
+    const {vendorProducts, productTypes, productVendors} = this.props
+    const {filterType, productId, productTypeId} = wf
+    if (filterType === 'PRODUCT') {
+      if (productId) {
+        const vendor = productVendors.filter(p => (p.productIds || []).includes(productId))[0]
+        if (vendor) {
+          const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+          if (type) return `${type.name}/${vendor.name}`
+        }
+      }
+    } else {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) return type.name
+    }
     return ''
   }
 
