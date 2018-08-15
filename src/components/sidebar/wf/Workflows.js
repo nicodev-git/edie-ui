@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Select, Menu, MenuItem, Chip} from '@material-ui/core'
+import {Button, Select, Menu, MenuItem} from '@material-ui/core'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import moment from 'moment'
@@ -186,18 +186,8 @@ class Workflows extends React.Component {
     return getSeverityIcon(cell.severity)
   }
 
-  renderTags (wf) {
-    const cell = this.getIncidentCell(wf)
-    if (!cell) return null
-    const {params2} = cell
-    const {tags} = params2 || {}
-    return (tags || []).map((t, i) =>
-      <Chip
-        key={i}
-        label={t}
-        className="margin-md-right"
-      />
-    )
+  renderProduceType (wf) {
+    return ''
   }
 
   renderWorkflows() {
@@ -216,7 +206,7 @@ class Workflows extends React.Component {
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Tags</th>
+            <th>Type</th>
             <th>User</th>
             <th>Type</th>
             <th>Last Updated</th>
@@ -233,7 +223,7 @@ class Workflows extends React.Component {
                 </div>
               </td>
               <td>{m.description}</td>
-              <td>{this.renderTags(m)}</td>
+              <td>{this.renderProduceType(m)}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
