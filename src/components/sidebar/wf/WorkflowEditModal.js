@@ -71,21 +71,21 @@ class WorkflowEditModal extends React.Component {
     this.props.fetchDevices()
     this.props.fetchShapes()
 
-    const {editWf} = this.props
-    if (editWf) {
-      const {productId} = editWf
-      if (productId) {
-        const {productVendors, productTypes} = this.props
-        const vendor = productVendors.filter(p => (p.productIds || []).includes(productId))[0]
-        if (vendor) {
-          this.props.change('productVendorId', vendor.id)
-          const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
-          if (type) {
-            this.props.change('productTypeId', type.id)
-          }
-        }
-      }
-    }
+    // const {editWf} = this.props
+    // if (editWf) {
+    //   const {productId} = editWf
+    //   if (productId) {
+    //     const {productVendors, productTypes} = this.props
+    //     const vendor = productVendors.filter(p => (p.productIds || []).includes(productId))[0]
+    //     if (vendor) {
+    //       this.props.change('productVendorId', vendor.id)
+    //       const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+    //       if (type) {
+    //         this.props.change('productTypeId', type.id)
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   componentDidUpdate(prevProps) {
@@ -676,8 +676,10 @@ class WorkflowEditModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editWf || {
-      type: 'normal'
+    initialValues: {
+      type: 'normal',
+      filterType: 'PRODUCT_TYPE',
+      ...props.editWf
     },
     allValues: getFormValues('wfNameForm')(state)
   })
