@@ -170,7 +170,7 @@ class WorkflowEditModalView extends React.Component {
     } = this.props
     return (
       <div>
-        <div>
+        <div classname="hidden">
           <CardPanel title="Existing Tags">
 
             <div className="margin-md-top">
