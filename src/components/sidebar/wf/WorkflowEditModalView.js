@@ -378,8 +378,41 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderProductCombos() {
+    const {allValues, productTypes, productVendors, vendorProducts} = this.props
+    const {productTypeId, productVendorId} = allValues || {}
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
+
+    return (
+      <div className="margin-md-top">
+        <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
+               options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
+               options={vendors.map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productId" component={FormSelect} floatingLabel="Product"
+               options={(products || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}}
+        />
+      </div>
+    )
+  }
+
   renderProduct() {
-    const {allValues, productTypes, vendorProducts} = this.props
+    const {allValues, productTypes} = this.props
     const {filterType} = allValues || {}
 
     return (
@@ -388,16 +421,13 @@ class WorkflowEditModalView extends React.Component {
                options={productFilterTypes}
                style={{minWidth: 150}} className="margin-sm-right"
         />
-        {filterType === 'PRODUCT' ? (
-          <Field name="productId" component={FormSelect} floatingLabel="Product"
-                 options={(vendorProducts || []).map(p => ({label: p.name, value: p.id}))}
+        {filterType === 'PRODUCT_TYPE' ? (
+          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
+                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
                  style={{minWidth: 150}}
           />
         ) : (
-          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
-                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
-                 style={{minWidth: 150}} className="margin-sm-right"
-          />
+          this.renderProductCombos()
         )}
       </div>
     )

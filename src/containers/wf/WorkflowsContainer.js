@@ -62,6 +62,10 @@ import {
   updateGroup,
   removeGroup,
 
+  fetchVendorProducts,
+  fetchProductTypes,
+  fetchProductVendors,
+
   fetchGlobalVars
 } from 'actions'
 
@@ -110,6 +114,10 @@ export default connect(
 
     brainCells: state.settings.brainCells,
     collectors: state.settings.collectors,
+
+    vendorProducts: state.settings.vendorProducts,
+    productTypes: state.settings.productTypes,
+    productVendors: state.settings.productVendors,
 
     globalVars: state.workflow.globalVars
   }), {
@@ -170,6 +178,10 @@ export default connect(
     addGroup,
     updateGroup,
     removeGroup,
+
+    fetchVendorProducts,
+    fetchProductTypes,
+    fetchProductVendors,
 
     fetchGlobalVars
   }

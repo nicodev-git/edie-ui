@@ -40,6 +40,8 @@ class Workflows extends React.Component {
     this.props.fetchBrainCells()
     this.props.fetchCollectors()
     this.props.fetchSimSamples()
+    this.props.fetchVendorProducts()
+    this.props.fetchProductTypes()
   }
 
   getTags() {
@@ -187,6 +189,8 @@ class Workflows extends React.Component {
   }
 
   renderProductType (wf) {
+    // const {vendorProducts, productTypes} = this.props
+
     return ''
   }
 
