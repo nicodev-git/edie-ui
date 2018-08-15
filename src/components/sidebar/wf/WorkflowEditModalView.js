@@ -22,7 +22,7 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import {severities} from 'shared/Global'
+import {severities, productFilterTypes} from 'shared/Global'
 
 const cardStyle = {
   minHeight: 250,
@@ -379,32 +379,21 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderProduct() {
-    const {allValues, productTypes, productVendors, vendorProducts} = this.props
-    const {productTypeId, productVendorId} = allValues || {}
-
-    let vendors = productVendors || []
-    if (productTypeId) {
-      const type = find(productTypes, {id: productTypeId})
-      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
-    }
-    let products = vendorProducts || []
-    if (productVendorId) {
-      const vendor = find(productVendors, {id: productVendorId})
-      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
-    }
+    const {allValues, productTypes, vendorProducts} = this.props
+    const {filterType} = allValues || {}
 
     return (
       <div>
-        <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
+        <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
+               options={productFilterTypes}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
                options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
                style={{minWidth: 150}} className="margin-sm-right"
         />
-        <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
-               options={vendors.map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 150}} className="margin-sm-right"
-        />
         <Field name="productId" component={FormSelect} floatingLabel="Product"
-               options={(products || []).map(p => ({label: p.name, value: p.id}))}
+               options={(vendorProducts || []).map(p => ({label: p.name, value: p.id}))}
                style={{minWidth: 150}}
         />
       </div>

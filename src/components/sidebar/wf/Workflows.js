@@ -186,7 +186,7 @@ class Workflows extends React.Component {
     return getSeverityIcon(cell.severity)
   }
 
-  renderProduceType (wf) {
+  renderProductType (wf) {
     return ''
   }
 
@@ -223,7 +223,7 @@ class Workflows extends React.Component {
                 </div>
               </td>
               <td>{m.description}</td>
-              <td>{this.renderProduceType(m)}</td>
+              <td>{this.renderProductType(m)}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
