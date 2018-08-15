@@ -2,15 +2,13 @@ import React from 'react'
 import {Field} from 'redux-form'
 import {
   Tab,
-  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails,
   Checkbox, FormControlLabel, Button, Popover,
   Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Tabs from '@material-ui/core/Tabs'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { findIndex } from 'lodash'
+import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
@@ -145,33 +143,12 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
-  renderRuleDetail() {
-    const {tab, shapeModal, rulePanelExpanded, onExpandRulePanel} = this.props
-    if (tab !== 'wf') return null
-    return (
-      <ExpansionPanel expanded={rulePanelExpanded} onChange={onExpandRulePanel}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-          <Typography>Detail</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <div style={{'width': '100%'}}>
-            {shapeModal}
-          </div>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    )
-  }
-
   renderFilterTab() {
-    // const {
-    //   onClickDeleteTag, tags, allTags,
-    //   onClickExistingTag
-    // } = this.props
     return (
       <div>
-        <div className="hidden">
-
-        </div>
+        <CardPanel title="Product">
+          {this.renderProduct()}
+        </CardPanel>
         {this.renderButtons()}
       </div>
     )
@@ -401,6 +378,39 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderProduct() {
+    const {allValues, productTypes, productVendors, vendorProducts} = this.props
+    const {productTypeId, productVendorId} = allValues || {}
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
+
+    return (
+      <div>
+        <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
+               options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
+               options={vendors.map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productId" component={FormSelect} floatingLabel="Product"
+               options={(products || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}}
+        />
+      </div>
+    )
+  }
+
   renderTabContent() {
     const {
       tab
@@ -492,7 +502,6 @@ class WorkflowEditModalView extends React.Component {
           {this.renderTabContent()}
         </form>
         {this.renderEditPopover()}
-        {/*{this.renderRuleDetail()}*/}
         {children}
       </div>
     )
