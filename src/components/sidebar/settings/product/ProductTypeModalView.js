@@ -22,7 +22,8 @@ export default class ProductTypeModalView extends React.Component {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Action</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Regex</TableCell>
                     <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
@@ -30,9 +31,8 @@ export default class ProductTypeModalView extends React.Component {
                 <TableBody>
                   {actions.map((p, i) =>
                     <TableRow key={i}>
-                      <TableCell  component="th" scope="row">
-                        {p}
-                      </TableCell>
+                      <TableCell component="th" scope="row">{p.name}</TableCell>
+                      <TableCell>{p.regex}</TableCell>
                       <TableCell className="nowrap">
                         <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
                         <DeleteIcon className="link" onClick={() => onClickDeleteAction(i)}/>

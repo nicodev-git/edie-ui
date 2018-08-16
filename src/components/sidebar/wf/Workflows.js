@@ -189,7 +189,7 @@ class Workflows extends React.Component {
   }
 
   renderProductType (wf) {
-    const {vendorProducts, productTypes, productVendors} = this.props
+    const {productTypes, productVendors} = this.props
     const {filterType, productId, productTypeId} = wf
     if (filterType === 'PRODUCT') {
       if (productId) {
