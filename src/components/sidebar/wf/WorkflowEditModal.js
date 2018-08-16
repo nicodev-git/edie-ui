@@ -177,14 +177,24 @@ class WorkflowEditModal extends React.Component {
   getMergedShapes() {
     const {productTypes, shapes} = this.props
 
-    const typeShapes = productTypes.map(p => ({
-      id: p.id,
-      group: 'Product Type',
-      form: 'actionForm',
-      img: 'sendim.png',
-      title: p.name,
-      type: p.name
-    }))
+    const typeShapes = []
+    productTypes.forEach(p => {
+      const actions = p.actions || []
+      actions.forEach(action => {
+        typeShapes.push({
+          id: p.id,
+          group: p.name,
+          form: 'actionForm',
+          img: 'sendim.png',
+          title: action.name,
+          type: 'PRODUCT-ACTION'
+        })
+      })
+
+      if (!actions.length) {
+
+      }
+    })
 
     return [
       ...shapes,
