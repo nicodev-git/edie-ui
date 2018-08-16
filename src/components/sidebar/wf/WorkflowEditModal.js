@@ -174,6 +174,12 @@ class WorkflowEditModal extends React.Component {
     return wfDataItems
   }
 
+  getMergedShapes() {
+    const {productTypes, shapes} = this.props
+
+    return []
+  }
+
   onSubmit(values) {
     if (!values) return
     const {onSave, userInfo} = this.props
