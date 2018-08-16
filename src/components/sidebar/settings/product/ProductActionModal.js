@@ -1,65 +1,23 @@
 import React from 'react'
-import ProductTypeModalView from './ProductTypeModalView'
+import ProductActionModalView from './ProductActionModalView'
 import {connect} from "react-redux"
 import {reduxForm} from 'redux-form'
 
 class ProductActionModal extends React.Component {
-  constructor(props) {
-    super(props)
-
-    const {editType} = props
-    this.state = {
-      actions: (editType ? editType.actions : []) || []
-    }
-  }
-
   handleFormSubmit (values) {
-    const {editType} = this.props
-    const {actions} = this.state
+    const {editAction} = this.props
     this.props.onSave({
-      ...editType,
-      ...values,
-      actions
-    })
-  }
-
-  onClickAddAction () {
-    const action = window.prompt('Please type action')
-    if (!action) return
-    const {actions} = this.state
-    this.setState({
-      actions: [...actions, action]
-    })
-  }
-
-  onClickEditAction (index) {
-    const {actions} = this.state
-    const action = window.prompt('Please type action', actions[index])
-    if (!action) return
-    this.setState({
-      actions: actions.map((p, i) => i === index ? action : p)
-    })
-  }
-
-  onClickDeleteAction (index) {
-    const {actions} = this.state
-    if (!window.confirm('Click OK to delete')) return
-    this.setState({
-      actions: actions.filter((p, i) => i !== index)
+      ...editAction,
+      ...values
     })
   }
 
   render () {
     const {handleSubmit, onClose} = this.props
     return (
-      <ProductTypeModalView
+      <ProductActionModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
-
-        actions={this.state.actions}
-        onClickAddAction={this.onClickAddAction.bind(this)}
-        onClickEditAction={this.onClickEditAction.bind(this)}
-        onClickDeleteAction={this.onClickDeleteAction.bind(this)}
       />
     )
   }
