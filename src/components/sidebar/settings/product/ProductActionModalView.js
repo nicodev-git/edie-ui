@@ -11,7 +11,6 @@ export default class ProductActionModalView extends React.Component {
         <form onSubmit={onSubmit}>
           <CardPanel title="Action">
             <Field name="name" component={FormInput} floatingLabel="Name" fullWidth/>
-            <Field name="regex" component={FormInput} floatingLabel="Regex" className="margin-md-top" fullWidth/>
           </CardPanel>
           <SubmitBlock name="Save"/>
         </form>
