@@ -2,14 +2,17 @@ import React from 'react'
 import ProductActionModalView from './ProductActionModalView'
 import {connect} from "react-redux"
 import {reduxForm} from 'redux-form'
+import uuid from 'uuid'
 
 class ProductActionModal extends React.Component {
   handleFormSubmit (values) {
     const {editAction} = this.props
-    this.props.onSave({
+    const entity = {
       ...editAction,
       ...values
-    })
+    }
+    if (!entity.id) entity.id = uuid()
+    this.props.onSave(entity)
   }
 
   render () {

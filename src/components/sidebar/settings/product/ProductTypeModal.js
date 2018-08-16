@@ -2,7 +2,7 @@ import React from 'react'
 import ProductTypeModalView from './ProductTypeModalView'
 import {connect} from "react-redux"
 import {reduxForm} from 'redux-form'
-import ProductActionModal from "./ProductActionModal";
+import ProductActionModal from './ProductActionModal'
 
 class ProductTypeModal extends React.Component {
   constructor(props) {
