@@ -124,7 +124,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderActions () {
-    const {onClickAddAction} = this.props
+    const {onClickAddAction, actions} = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
