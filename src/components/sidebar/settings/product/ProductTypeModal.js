@@ -2,6 +2,7 @@ import React from 'react'
 import ProductTypeModalView from './ProductTypeModalView'
 import {connect} from "react-redux"
 import {reduxForm} from 'redux-form'
+import ProductActionModal from "./ProductActionModal";
 
 class ProductTypeModal extends React.Component {
   constructor(props) {
@@ -9,6 +10,8 @@ class ProductTypeModal extends React.Component {
 
     const {editType} = props
     this.state = {
+      actionModalOpen: false,
+      editAction: null,
       actions: (editType ? editType.actions : []) || []
     }
   }
@@ -24,20 +27,16 @@ class ProductTypeModal extends React.Component {
   }
 
   onClickAddAction () {
-    const action = window.prompt('Please type action')
-    if (!action) return
-    const {actions} = this.state
     this.setState({
-      actions: [...actions, action]
+      actionModalOpen: true,
+      editAction: null
     })
   }
 
   onClickEditAction (index) {
-    const {actions} = this.state
-    const action = window.prompt('Please type action', actions[index])
-    if (!action) return
     this.setState({
-      actions: actions.map((p, i) => i === index ? action : p)
+      actionModalOpen: true,
+      editAction: this.state.actions[index]
     })
   }
 
@@ -47,6 +46,42 @@ class ProductTypeModal extends React.Component {
     this.setState({
       actions: actions.filter((p, i) => i !== index)
     })
+  }
+
+  ////////////////////////////////////////////////////
+
+  onSaveAction (entity) {
+    const {actions, editAction} = this.state
+    if (editAction) {
+      const index = actions.indexOf(editAction)
+      this.setState({
+        actions: actions.map((p, i) => i === index ? entity : p)
+      })
+    } else {
+      this.setState({
+        actions: [...actions, entity]
+      })
+    }
+    this.onCloseActionModal()
+  }
+
+  onCloseActionModal () {
+    this.setState({
+      actionModalOpen: false
+    })
+  }
+
+  ////////////////////////////////////////////////////
+
+  renderActionModal () {
+    if (!this.state.actionModalOpen) return null
+    return (
+      <ProductActionModal
+        editAction={this.state.editAction}
+        onSave={this.onSaveAction.bind(this)}
+        onClose={this.onCloseActionModal.bind(this)}
+      />
+    )
   }
 
   render () {
@@ -59,8 +94,9 @@ class ProductTypeModal extends React.Component {
         actions={this.state.actions}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
-        onClickDeleteAction={this.onClickDeleteAction.bind(this)}
-      />
+        onClickDeleteAction={this.onClickDeleteAction.bind(this)}>
+        {this.renderActionModal()}
+      </ProductTypeModalView>
     )
   }
 }

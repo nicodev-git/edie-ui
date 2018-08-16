@@ -45,6 +45,7 @@ export default class ProductTypeModalView extends React.Component {
           </CardPanel>
           <SubmitBlock name="Save"/>
         </form>
+        {this.props.children}
       </Modal>
     )
   }
