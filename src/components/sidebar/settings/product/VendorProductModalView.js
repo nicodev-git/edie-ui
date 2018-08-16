@@ -169,7 +169,7 @@ class SimulationModalView extends React.Component {
 
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
-              <h3>/
+              <h3>
                 <span className="valign-middle">Workflows</span>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddWf}>Add</Button>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddNewWf}>Create New</Button>
