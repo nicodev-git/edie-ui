@@ -177,7 +177,19 @@ class WorkflowEditModal extends React.Component {
   getMergedShapes() {
     const {productTypes, shapes} = this.props
 
-    return []
+    const typeShapes = productTypes.map(p => ({
+      id: p.id,
+      group: 'Product Type',
+      form: 'actionForm',
+      img: 'sendim.png',
+      title: p.name,
+      type: p.name
+    }))
+
+    return [
+      ...shapes,
+      ...typeShapes
+    ]
   }
 
   onSubmit(values) {
@@ -627,7 +639,7 @@ class WorkflowEditModal extends React.Component {
   }
 
   render() {
-    const {handleSubmit, groups, shapes, newView} = this.props
+    const {handleSubmit, groups, newView} = this.props
     const ModalView = newView ? WorkflowEditModalView1 : WorkflowEditModalView
     return (
       <ModalView
@@ -652,8 +664,8 @@ class WorkflowEditModal extends React.Component {
 
         editShape={this.state.editShape}
         shapeAnchorEl={this.state.shapeAnchorEl}
+        shapes={this.getMergedShapes()}
         wfDataItems={this.getWfDataItems()}
-        shapes={shapes}
         onClickAddShape={this.onClickAddShape.bind(this)}
         onCloseShapeMenu={this.onCloseShapeMenu.bind(this)}
         onClickShape={this.onClickShape.bind(this)}
