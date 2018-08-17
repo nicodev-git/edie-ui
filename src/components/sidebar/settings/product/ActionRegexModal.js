@@ -9,7 +9,8 @@ class ActionRegexModal extends React.Component {
     super(props)
     this.state = {
       realText: '',
-      matchResult: ''
+      matchResult: '',
+      loading: false
     }
   }
   handleFormSubmit (values) {
@@ -33,17 +34,19 @@ class ActionRegexModal extends React.Component {
     const {realText} = this.state
 
     this.setState({
-      matchResult: ''
+      matchResult: '',
+      loading: true
     })
     this.props.testMatchRegex(allValues.regex, realText, res => {
       this.setState({
-        matchResult: res ? 'true' : 'false'
+        matchResult: res ? 'true' : 'false',
+        loading: false
       })
     })
   }
 
   render () {
-    const {realText, matchResult} = this.state
+    const {realText, matchResult, loading} = this.state
     const {handleSubmit, onClose, actions} = this.props
     return (
       <ActionRegexModalView
@@ -55,6 +58,8 @@ class ActionRegexModal extends React.Component {
         matchResult={matchResult}
         onChangeRealText={this.onChangeRealText.bind(this)}
         onClickMatch={this.onClickMatch.bind(this)}
+
+        loading={loading}
       />
     )
   }
