@@ -6,14 +6,23 @@ import {Modal, CardPanel, FormInput, FormSelect} from 'components/modal/parts'
 
 export default class ActionRegexModalView extends React.Component {
   render () {
-    const {onClose, onSubmit, actions, realText, onChangeRealText, onClickMatch} = this.props
+    const {onClose, onSubmit, actions, realText, onChangeRealText, onClickMatch, matchResult} = this.props
     return (
       <Modal title="Action Regex" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Action Regex">
             <Field name="actionId" component={FormSelect} floatingLabel="Action"
                    options={actions.map(p => ({label: p.name, value: p.id}))} fullWidth/>
-            <Field name="regex" component={FormInput} floatingLabel="Regex" className="margin-md-top" fullWidth/>
+
+            <div className="flex-horizontal margin-md-top">
+              <div className="flex-1">
+                <Field name="regex" component={FormInput} floatingLabel="Regex" fullWidth/>
+              </div>
+              <div className={matchResult ? '' : 'hidden'}>
+                {matchResult}
+              </div>
+            </div>
+
 
             <div className="margin-md-top">Sample Text</div>
             <textarea value={realText} onChange={onChangeRealText} style={{height: 80, width: '100%'}}></textarea>

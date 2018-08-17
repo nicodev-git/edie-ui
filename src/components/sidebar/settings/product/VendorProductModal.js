@@ -437,6 +437,7 @@ class VendorProductModal extends React.Component {
         editAction={this.state.editAction}
         onSave={this.onSaveAction.bind(this)}
         onClose={this.onCloseAddAction.bind(this)}
+        testMatchRegex={this.props.testMatchRegex}
       />
     )
   }

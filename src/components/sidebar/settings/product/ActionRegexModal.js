@@ -8,7 +8,8 @@ class ActionRegexModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      realText: ''
+      realText: '',
+      matchResult: ''
     }
   }
   handleFormSubmit (values) {
@@ -28,11 +29,21 @@ class ActionRegexModal extends React.Component {
   }
 
   onClickMatch () {
+    const {allValues} = this.props
+    const {realText} = this.state
 
+    this.setState({
+      matchResult: ''
+    })
+    this.props.testMatchRegex(allValues.regex, realText, res => {
+      this.setState({
+        matchResult: res ? 'true' : 'false'
+      })
+    })
   }
 
   render () {
-    const {realText} = this.state
+    const {realText, matchResult} = this.state
     const {handleSubmit, onClose, actions} = this.props
     return (
       <ActionRegexModalView
@@ -41,6 +52,7 @@ class ActionRegexModal extends React.Component {
         onClose={onClose}
 
         realText={realText}
+        matchResult={matchResult}
         onChangeRealText={this.onChangeRealText.bind(this)}
         onClickMatch={this.onClickMatch.bind(this)}
       />
@@ -50,6 +62,7 @@ class ActionRegexModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editAction
+    initialValues: props.editAction,
+    allValues: getFormValues('prdActionRegexForm')(state)
   })
 )(reduxForm({form: 'prdActionRegexForm'})(ActionRegexModal))
