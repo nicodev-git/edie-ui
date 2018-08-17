@@ -11,8 +11,8 @@ export default class ActionRegexModalView extends React.Component {
         <form onSubmit={onSubmit}>
           <CardPanel title="Action Regex">
             <Field name="actionId" component={FormSelect} floatingLabel="Action"
-                   options={actions.map(p => ({label: p.name, value: p.id}))}/>
-            <Field name="regex" component={FormInput} floatingLabel="Regex"/>
+                   options={actions.map(p => ({label: p.name, value: p.id}))} fullWidth/>
+            <Field name="regex" component={FormInput} floatingLabel="Regex" fullWidth/>
           </CardPanel>
           <SubmitBlock name="Save"/>
         </form>

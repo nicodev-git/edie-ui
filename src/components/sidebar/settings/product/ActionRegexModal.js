@@ -1,8 +1,8 @@
 import React from 'react'
-import ProductActionModalView from './ProductActionModalView'
 import {connect} from "react-redux"
 import {reduxForm} from 'redux-form'
 import uuid from 'uuid'
+import ActionRegexModalView from './ActionRegexModalView'
 
 class ActionRegexModal extends React.Component {
   handleFormSubmit (values) {
@@ -18,7 +18,7 @@ class ActionRegexModal extends React.Component {
   render () {
     const {handleSubmit, onClose, actions} = this.props
     return (
-      <ProductActionModalView
+      <ActionRegexModalView
         actions={actions}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}

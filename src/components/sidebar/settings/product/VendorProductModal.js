@@ -12,6 +12,7 @@ import BraincellIncidentPickerModal from 'components/sidebar/settings/braincell/
 import WorkflowPickerModal from 'components/sidebar/wf/WorkflowPickerModal'
 import WorkflowEditModalContainer from 'containers/wf/WorkflowEditModalContainer'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
+import ActionRegexModal from './ActionRegexModal'
 
 class VendorProductModal extends React.Component {
   constructor(props) {
@@ -34,6 +35,8 @@ class VendorProductModal extends React.Component {
 
       incidents: (editProduct ? editProduct.incidents : []) || [],
       incidentModalOpen: false,
+
+      actionModalOpen: false,
 
       loading: false
     }
@@ -340,6 +343,35 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  onClickAddAction () {
+    this.setState({
+      actionModalOpen: true
+    })
+  }
+
+  onCloseAddAction () {
+    this.setState({
+      actionModalOpen: false
+    })
+  }
+
+  onSaveAction () {
+
+  }
+
+  //////////////////////////////////////////////////////////////
+
+  renderActionModal () {
+    if (!this.state.actionModalOpen) return null
+    return (
+      <ActionRegexModal
+        actions={[]}
+        onSave={this.onSaveAction.bind(this)}
+        onClose={this.onCloseAddAction.bind(this)}
+      />
+    )
+  }
+
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
     return (
@@ -517,6 +549,8 @@ class VendorProductModal extends React.Component {
         productTypes={productTypes}
         productVendors={productVendors}
 
+        onClickAddAction={this.onClickAddAction.bind(this)}
+
         loading={this.state.loading}
       >
         {this.renderTagPickerModal()}
@@ -526,6 +560,7 @@ class VendorProductModal extends React.Component {
         {this.renderIncidentPickerModal()}
         {this.renderWFModal()}
         {this.renderBraincellModal()}
+        {this.renderActionModal()}
       </VendorProductModalView>
     )
   }
