@@ -387,6 +387,13 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickEditAction (editAction) {
+    this.setState({
+      actionModalOpen: true,
+      editAction: editAction
+    })
+  }
+
   onCloseAddAction () {
     this.setState({
       actionModalOpen: false
@@ -394,12 +401,22 @@ class VendorProductModal extends React.Component {
   }
 
   onSaveAction (entity) {
-    const {actions} = this.state
-    const found = find(actions, {actionId: entity.actionId})
-    if (found) return window.alert('Already added')
-    this.setState({
-      actions: [...actions, entity]
-    })
+    const {actions, editAction} = this.state
+
+    if (editAction) {
+      this.setState({
+        actions: actions.map(p => p.actionId === entity.actionId ? entity : p)
+      })
+    } else {
+      const found = find(actions, {actionId: entity.actionId})
+      if (found) return window.alert('Already added')
+
+      this.setState({
+        actions: [...actions, entity]
+      })
+    }
+
+
     this.onCloseAddAction()
   }
 
@@ -597,6 +614,7 @@ class VendorProductModal extends React.Component {
 
         actions={this.getActions(productActions)}
         onClickAddAction={this.onClickAddAction.bind(this)}
+        onClickEditAction={this.onClickEditAction.bind(this)}
 
         loading={this.state.loading}
       >

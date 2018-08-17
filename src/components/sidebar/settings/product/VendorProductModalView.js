@@ -2,6 +2,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
 import {Button, Chip, Tooltip} from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
@@ -124,7 +125,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderActions () {
-    const {actions, onClickAddAction} = this.props
+    const {actions, onClickAddAction, onClickEditAction} = this.props
     return (
       <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
         <div className="panel-heading">
@@ -148,6 +149,7 @@ class SimulationModalView extends React.Component {
                 <tr key={t.actionId}>
                   <td>{t.action}</td>
                   <td>{t.regex}</td>
+                  <td><EditIcon onClick={() => onClickEditAction(t)}></EditIcon></td>
                 </tr>
               )}
               </tbody>
