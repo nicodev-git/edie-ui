@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
-import {find} from 'lodash'
+import {find, keys} from 'lodash'
 import uuid from 'uuid'
 
 import VendorProductModalView from './VendorProductModalView'
@@ -19,6 +19,14 @@ class VendorProductModal extends React.Component {
     super(props)
 
     const {editProduct} = this.props
+
+    let actions = []
+    if (editProduct && editProduct.actionRegex) {
+      actions = keys(editProduct.actionRegex).map(p => ({
+        actionId: p,
+        regex: editProduct.actionRegex[p] || ''
+      }))
+    }
     this.state = {
       tags: (editProduct ? editProduct.tags : []) || [],
       tagModalOpen: false,
@@ -37,17 +45,21 @@ class VendorProductModal extends React.Component {
       incidentModalOpen: false,
 
       actionModalOpen: false,
-      actions: [],
+      actions,
 
       loading: false
     }
   }
 
   handleFormSubmit (values) {
-    const {tags, classifiers, parsers, workflows, incidents} = this.state
+    const {tags, classifiers, parsers, workflows, incidents, actions} = this.state
+    const actionRegex = {}
+    actions.forEach(p => {
+      actionRegex[p.actionId] = p.regex
+    })
     this.props.onSave({
       ...values,
-      tags,classifiers, parsers, workflows, incidents
+      tags,classifiers, parsers, workflows, incidents, actionRegex
     })
   }
 
@@ -356,10 +368,22 @@ class VendorProductModal extends React.Component {
     return type.actions || []
   }
 
+  getActions (productActions) {
+    const {actions} = this.state
+    const list = actions.map(p => {
+      const action = find(productActions, {id: p.actionId})
+      return {
+        ...p,
+        action: action ? action.name : ''
+      }
+    })
+    return list
+  }
 
   onClickAddAction () {
     this.setState({
-      actionModalOpen: true
+      actionModalOpen: true,
+      editAction: null
     })
   }
 
@@ -369,17 +393,24 @@ class VendorProductModal extends React.Component {
     })
   }
 
-  onSaveAction () {
-
+  onSaveAction (entity) {
+    const {actions} = this.state
+    const found = find(actions, {actionId: entity.actionId})
+    if (found) return window.alert('Already added')
+    this.setState({
+      actions: [...actions, entity]
+    })
+    this.onCloseAddAction()
   }
 
   //////////////////////////////////////////////////////////////
 
-  renderActionModal () {
+  renderActionModal (productActions) {
     if (!this.state.actionModalOpen) return null
     return (
       <ActionRegexModal
-        actions={this.getProductTypeActions()}
+        actions={productActions}
+        editAction={this.state.editAction}
         onSave={this.onSaveAction.bind(this)}
         onClose={this.onCloseAddAction.bind(this)}
       />
@@ -530,6 +561,7 @@ class VendorProductModal extends React.Component {
 
   render () {
     const {handleSubmit, onClose, productTypes, productVendors} = this.props
+    const productActions = this.getProductTypeActions()
     return (
       <VendorProductModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
@@ -563,6 +595,7 @@ class VendorProductModal extends React.Component {
         productTypes={productTypes}
         productVendors={productVendors}
 
+        actions={this.getActions(productActions)}
         onClickAddAction={this.onClickAddAction.bind(this)}
 
         loading={this.state.loading}
@@ -574,7 +607,7 @@ class VendorProductModal extends React.Component {
         {this.renderIncidentPickerModal()}
         {this.renderWFModal()}
         {this.renderBraincellModal()}
-        {this.renderActionModal()}
+        {this.renderActionModal(productActions)}
       </VendorProductModalView>
     )
   }
