@@ -394,6 +394,14 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickDeleteAction (action) {
+    const {actions} = this.state
+    if (!window.confirm('Click OK to remove')) return
+    this.setState({
+      actions: actions.filter(p => p.actionId !== action.actionId)
+    })
+  }
+
   onCloseAddAction () {
     this.setState({
       actionModalOpen: false
@@ -415,7 +423,6 @@ class VendorProductModal extends React.Component {
         actions: [...actions, entity]
       })
     }
-
 
     this.onCloseAddAction()
   }
@@ -615,6 +622,7 @@ class VendorProductModal extends React.Component {
         actions={this.getActions(productActions)}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
+        onClickDeleteAction={this.onClickDeleteAction.bind(this)}
 
         loading={this.state.loading}
       >

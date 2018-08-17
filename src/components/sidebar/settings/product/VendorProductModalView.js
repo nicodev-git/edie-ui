@@ -125,7 +125,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderActions () {
-    const {actions, onClickAddAction, onClickEditAction} = this.props
+    const {actions, onClickAddAction, onClickEditAction, onClickDeleteAction} = this.props
     return (
       <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
         <div className="panel-heading">
@@ -149,7 +149,10 @@ class SimulationModalView extends React.Component {
                 <tr key={t.actionId}>
                   <td>{t.action}</td>
                   <td>{t.regex}</td>
-                  <td><EditIcon onClick={() => onClickEditAction(t)}></EditIcon></td>
+                  <td>
+                    <EditIcon onClick={() => onClickEditAction(t)}></EditIcon>
+                    <DeleteIcon onClick={() => onClickDeleteAction(t)}/>
+                  </td>
                 </tr>
               )}
               </tbody>
