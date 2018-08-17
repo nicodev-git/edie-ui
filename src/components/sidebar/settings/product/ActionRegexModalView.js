@@ -16,7 +16,8 @@ export default class ActionRegexModalView extends React.Component {
             <Field name="regex" component={FormInput} floatingLabel="Regex" className="margin-md-top" fullWidth/>
 
 
-            <textarea value={realText} onChange={onChangeRealText} className="margin-md-top" style={{height: 80, width: '100%'}}></textarea>
+            <div className="margin-md-top">Sample Text</div>
+            <textarea value={realText} onChange={onChangeRealText} style={{height: 80, width: '100%'}}></textarea>
           </CardPanel>
           <div className="form-buttons">
             <Button variant="raised" type="submit">Save</Button>
