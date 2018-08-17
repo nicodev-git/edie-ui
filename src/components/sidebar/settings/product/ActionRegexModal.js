@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux"
-import {reduxForm} from 'redux-form'
+import {reduxForm, getFormValues} from 'redux-form'
 import uuid from 'uuid'
 import ActionRegexModalView from './ActionRegexModalView'
 

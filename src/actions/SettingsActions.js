@@ -132,6 +132,8 @@ import {
   UPDATE_PRODUCT_VENDOR,
   REMOVE_PRODUCT_VENDOR,
 
+  UPDATE_TEST_MATCH_STATE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1153,6 +1155,18 @@ export function removeProductVendor(entity) {
     axios.delete(`${ROOT_URL}/productvendor/${entity.id}`).then(res => {
       dispatch({type: REMOVE_PRODUCT_VENDOR, data: entity})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export function testMatchRegex(regex, text, cb) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/testRegex`, {
+      regex, text
+    }).then(res => {
+      cb && cb(res.data.success)
+    }).catch(() => {
+      cb && cb()
+    })
   }
 }
 
