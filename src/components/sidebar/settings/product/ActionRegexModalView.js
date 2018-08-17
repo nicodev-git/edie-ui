@@ -6,7 +6,7 @@ import {Modal, CardPanel, SubmitBlock, FormInput, FormSelect} from 'components/m
 
 export default class ActionRegexModalView extends React.Component {
   render () {
-    const {onClose, onSubmit, actions} = this.props
+    const {onClose, onSubmit, actions, realText, onChangeRealText} = this.props
     return (
       <Modal title="Action Regex" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
@@ -14,6 +14,8 @@ export default class ActionRegexModalView extends React.Component {
             <Field name="actionId" component={FormSelect} floatingLabel="Action"
                    options={actions.map(p => ({label: p.name, value: p.id}))} fullWidth/>
             <Field name="regex" component={FormInput} floatingLabel="Regex" className="margin-md-top" fullWidth/>
+
+            <TextField value={realText} onChange={onChangeRealText} multiline fullWidth className="margin-md-top"/>
           </CardPanel>
           <SubmitBlock name="Save"/>
         </form>

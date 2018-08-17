@@ -5,6 +5,12 @@ import uuid from 'uuid'
 import ActionRegexModalView from './ActionRegexModalView'
 
 class ActionRegexModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      realText: ''
+    }
+  }
   handleFormSubmit (values) {
     const {editAction} = this.props
     const entity = {
@@ -15,13 +21,23 @@ class ActionRegexModal extends React.Component {
     this.props.onSave(entity)
   }
 
+  onChangeRealText (e) {
+    this.setState({
+      realText: e.target.value
+    })
+  }
+
   render () {
+    const {realText} = this.state
     const {handleSubmit, onClose, actions} = this.props
     return (
       <ActionRegexModalView
         actions={actions}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
+
+        realText={realText}
+        onChangeRealText={this.onChangeRealText.bind(this)}
       />
     )
   }
