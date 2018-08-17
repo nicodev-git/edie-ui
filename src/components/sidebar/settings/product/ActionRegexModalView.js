@@ -7,6 +7,14 @@ import CloseIcon from '@material-ui/icons/Close'
 import {Modal, CardPanel, FormInput, FormSelect} from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
+const FormTextArea = ({input, label, meta: {touched, error}, ...custom}) => (
+  <textarea
+    {...input}
+    {...custom}
+    placeholder={label}
+  />
+)
+
 export default class ActionRegexModalView extends React.Component {
   render () {
     const {onClose, onSubmit, actions, realText, onChangeRealText, onClickMatch, matchResult, loading} = this.props
@@ -28,7 +36,7 @@ export default class ActionRegexModalView extends React.Component {
 
 
             <div className="margin-md-top">Sample Text</div>
-            <textarea value={realText} onChange={onChangeRealText} style={{height: 80, width: '100%'}}></textarea>
+            <Field name="sampleText" component={FormTextArea} label="Text" style={{height: 80, width: '100%'}}/>
           </CardPanel>
           <div className="form-buttons">
             <Button variant="raised" type="submit">Save</Button>
