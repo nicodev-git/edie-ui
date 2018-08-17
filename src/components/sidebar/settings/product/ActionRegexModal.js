@@ -27,6 +27,10 @@ class ActionRegexModal extends React.Component {
     })
   }
 
+  onClickMatch () {
+
+  }
+
   render () {
     const {realText} = this.state
     const {handleSubmit, onClose, actions} = this.props
@@ -38,6 +42,7 @@ class ActionRegexModal extends React.Component {
 
         realText={realText}
         onChangeRealText={this.onChangeRealText.bind(this)}
+        onClickMatch={this.onClickMatch.bind(this)}
       />
     )
   }
