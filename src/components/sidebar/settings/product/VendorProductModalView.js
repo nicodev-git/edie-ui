@@ -124,12 +124,30 @@ class SimulationModalView extends React.Component {
   }
 
   renderActions () {
-    const {onClickAddAction, actions} = this.props
+    const {onClickAddAction} = this.props
     return (
-      <div>
-        <div className="group-header padding-md-top padding-md-bottom">
-          <span className="valign-middle">Actions</span>
-          <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddAction}>Add</Button>
+      <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
+        <div className="panel-heading">
+          <h3>
+            <span className="valign-middle">Actions</span>
+            <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddAction}>Add</Button>
+          </h3>
+        </div>
+        <div className="panel-body">
+          <div>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Action</th>
+                <th>Regex</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     )
@@ -166,9 +184,10 @@ class SimulationModalView extends React.Component {
               {this.renderTags()}
               {this.renderClasses()}
               {this.renderGroks()}
-              {this.renderActions()}
             </div>
           </div>
+
+          {this.renderActions()}
 
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
