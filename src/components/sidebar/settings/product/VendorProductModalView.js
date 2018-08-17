@@ -125,7 +125,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderActions () {
-    const {actions, onClickAddAction, onClickEditAction, onClickDeleteAction} = this.props
+    const {detectedActions, onClickAddAction, onClickEditAction, onClickDeleteAction} = this.props
     return (
       <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
         <div className="panel-heading">
@@ -145,7 +145,7 @@ class SimulationModalView extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {actions.map((t, i) =>
+              {detectedActions.map((t, i) =>
                 <tr key={t.actionId}>
                   <td>{t.action}</td>
                   <td>{t.regex}</td>

@@ -8,7 +8,6 @@ class ActionRegexModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      realText: '',
       matchResult: '',
       loading: false
     }
@@ -23,21 +22,14 @@ class ActionRegexModal extends React.Component {
     this.props.onSave(entity)
   }
 
-  onChangeRealText (e) {
-    this.setState({
-      realText: e.target.value
-    })
-  }
-
   onClickMatch () {
     const {allValues} = this.props
-    const {realText} = this.state
 
     this.setState({
       matchResult: '',
       loading: true
     })
-    this.props.testMatchRegex(allValues.regex, realText, res => {
+    this.props.testMatchRegex(allValues.regex, allValues.sampleText, res => {
       this.setState({
         matchResult: res ? 'true' : 'false',
         loading: false
@@ -46,7 +38,7 @@ class ActionRegexModal extends React.Component {
   }
 
   render () {
-    const {realText, matchResult, loading} = this.state
+    const {matchResult, loading} = this.state
     const {handleSubmit, onClose, actions} = this.props
     return (
       <ActionRegexModalView
@@ -54,9 +46,7 @@ class ActionRegexModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
 
-        realText={realText}
         matchResult={matchResult}
-        onChangeRealText={this.onChangeRealText.bind(this)}
         onClickMatch={this.onClickMatch.bind(this)}
 
         loading={loading}

@@ -20,13 +20,6 @@ class VendorProductModal extends React.Component {
 
     const {editProduct} = this.props
 
-    let actions = []
-    if (editProduct && editProduct.actionRegex) {
-      actions = keys(editProduct.actionRegex).map(p => ({
-        actionId: p,
-        regex: editProduct.actionRegex[p] || ''
-      }))
-    }
     this.state = {
       tags: (editProduct ? editProduct.tags : []) || [],
       tagModalOpen: false,
@@ -45,21 +38,17 @@ class VendorProductModal extends React.Component {
       incidentModalOpen: false,
 
       actionModalOpen: false,
-      actions,
+      detectedActions: (editProduct ? editProduct.detectedActions : []) || [],
 
       loading: false
     }
   }
 
   handleFormSubmit (values) {
-    const {tags, classifiers, parsers, workflows, incidents, actions} = this.state
-    const actionRegex = {}
-    actions.forEach(p => {
-      actionRegex[p.actionId] = p.regex
-    })
+    const {tags, classifiers, parsers, workflows, incidents, detectedActions} = this.state
     this.props.onSave({
       ...values,
-      tags,classifiers, parsers, workflows, incidents, actionRegex
+      tags,classifiers, parsers, workflows, incidents, detectedActions
     })
   }
 
@@ -369,8 +358,8 @@ class VendorProductModal extends React.Component {
   }
 
   getActions (productActions) {
-    const {actions} = this.state
-    const list = actions.map(p => {
+    const {detectedActions} = this.state
+    const list = detectedActions.map(p => {
       const action = find(productActions, {id: p.actionId})
       return {
         ...p,
@@ -395,10 +384,10 @@ class VendorProductModal extends React.Component {
   }
 
   onClickDeleteAction (action) {
-    const {actions} = this.state
+    const {detectedActions} = this.state
     if (!window.confirm('Click OK to remove')) return
     this.setState({
-      actions: actions.filter(p => p.actionId !== action.actionId)
+      detectedActions: detectedActions.filter(p => p.actionId !== action.actionId)
     })
   }
 
@@ -409,18 +398,18 @@ class VendorProductModal extends React.Component {
   }
 
   onSaveAction (entity) {
-    const {actions, editAction} = this.state
+    const {detectedActions, editAction} = this.state
 
     if (editAction) {
       this.setState({
-        actions: actions.map(p => p.actionId === entity.actionId ? entity : p)
+        detectedActions: detectedActions.map(p => p.actionId === entity.actionId ? entity : p)
       })
     } else {
-      const found = find(actions, {actionId: entity.actionId})
+      const found = find(detectedActions, {actionId: entity.actionId})
       if (found) return window.alert('Already added')
 
       this.setState({
-        actions: [...actions, entity]
+        detectedActions: [...detectedActions, entity]
       })
     }
 
@@ -620,7 +609,7 @@ class VendorProductModal extends React.Component {
         productTypes={productTypes}
         productVendors={productVendors}
 
-        actions={this.getActions(productActions)}
+        detectedActions={this.getActions(productActions)}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
         onClickDeleteAction={this.onClickDeleteAction.bind(this)}

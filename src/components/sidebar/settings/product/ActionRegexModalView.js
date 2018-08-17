@@ -17,7 +17,7 @@ const FormTextArea = ({input, label, meta: {touched, error}, ...custom}) => (
 
 export default class ActionRegexModalView extends React.Component {
   render () {
-    const {onClose, onSubmit, actions, realText, onChangeRealText, onClickMatch, matchResult, loading} = this.props
+    const {onClose, onSubmit, actions, onClickMatch, matchResult, loading} = this.props
     return (
       <Modal title="Action Regex" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
@@ -36,7 +36,7 @@ export default class ActionRegexModalView extends React.Component {
 
 
             <div className="margin-md-top">Sample Text</div>
-            <Field name="sampleText" component={FormTextArea} label="Text" style={{height: 80, width: '100%'}}/>
+            <Field name="sampleText" component={FormTextArea} style={{height: 80, width: '100%'}}/>
           </CardPanel>
           <div className="form-buttons">
             <Button variant="raised" type="submit">Save</Button>
