@@ -1,17 +1,18 @@
 import React from 'react'
 import {Field} from 'redux-form'
 
-import {Modal, CardPanel, SubmitBlock, FormInput} from 'components/modal/parts'
+import {Modal, CardPanel, SubmitBlock, FormInput, FormSelect} from 'components/modal/parts'
 
 export default class ActionRegexModalView extends React.Component {
   render () {
-    const {onClose, onSubmit} = this.props
+    const {onClose, onSubmit, actions} = this.props
     return (
       <Modal title="Action Regex" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Action Regex">
-            <Field name="action" component={FormInput} floatingLabel="Action" fullWidth/>
-            <Field name="regex" component={FormInput} floatingLabel="Regex" fullWidth/>
+            <Field name="actionId" component={FormSelect} floatingLabel="Action"
+                   options={actions.map(p => ({label: p.name, value: p.id}))}/>
+            <Field name="regex" component={FormInput} floatingLabel="Regex"/>
           </CardPanel>
           <SubmitBlock name="Save"/>
         </form>

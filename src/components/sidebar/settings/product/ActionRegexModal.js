@@ -16,9 +16,10 @@ class ActionRegexModal extends React.Component {
   }
 
   render () {
-    const {handleSubmit, onClose} = this.props
+    const {handleSubmit, onClose, actions} = this.props
     return (
       <ProductActionModalView
+        actions={actions}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
       />
