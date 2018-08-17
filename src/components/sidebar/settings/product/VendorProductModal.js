@@ -37,6 +37,7 @@ class VendorProductModal extends React.Component {
       incidentModalOpen: false,
 
       actionModalOpen: false,
+      actions: [],
 
       loading: false
     }
@@ -343,6 +344,19 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  getProductTypeActions () {
+    const {editProduct, productVendors, productTypes} = this.props
+    if (!editProduct || !editProduct.id) return []
+
+    const vendor = productVendors.filter(p => (p.productIds || []).includes(editProduct.id))[0]
+    if (!vendor) return []
+    const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+
+    if (!type) return []
+    return type.actions || []
+  }
+
+
   onClickAddAction () {
     this.setState({
       actionModalOpen: true
@@ -365,7 +379,7 @@ class VendorProductModal extends React.Component {
     if (!this.state.actionModalOpen) return null
     return (
       <ActionRegexModal
-        actions={[]}
+        actions={this.getProductTypeActions()}
         onSave={this.onSaveAction.bind(this)}
         onClose={this.onCloseAddAction.bind(this)}
       />
