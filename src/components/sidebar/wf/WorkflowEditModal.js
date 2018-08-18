@@ -39,7 +39,8 @@ class WorkflowEditModal extends React.Component {
   constructor(props) {
     super(props)
 
-    const wfData = drawFlows((props.editWf || {}).flowItems || [], this.props.shapes.map(p => extendShape(p)))
+    const wfData = drawFlows((props.editWf || {}).flowItems || [],
+      this.props.shapes.map(p => extendShape(p)))
 
     this.state = {
       permitterUsers: props.editWf ? (props.editWf.permitterUsers || []) : [],
