@@ -187,7 +187,10 @@ class WorkflowEditModal extends React.Component {
           form: 'productActionForm',
           img: 'sendim.png',
           title: action.name,
-          type: 'PRODUCTACTION'
+          type: 'PRODUCTACTION',
+          data: {
+            action: action.name
+          }
         })
       })
 
