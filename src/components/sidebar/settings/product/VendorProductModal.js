@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
-import {find, keys} from 'lodash'
+import {find} from 'lodash'
 import uuid from 'uuid'
 
 import VendorProductModalView from './VendorProductModalView'
