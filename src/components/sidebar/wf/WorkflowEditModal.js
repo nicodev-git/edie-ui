@@ -147,6 +147,11 @@ class WorkflowEditModal extends React.Component {
           itemLabelKey = 'condition'
           break
         }
+        case 'PRODUCTACTION': {
+          itemLabel = 'Match Action'
+          itemValue = `${sentence}`
+          break
+        }
         case 'COUNT':
           itemLabel = type
           itemValue = `${variable} > ${sentence}`
@@ -189,8 +194,9 @@ class WorkflowEditModal extends React.Component {
           title: action.name,
           type: 'PRODUCTACTION',
           initialValues: {
-            field: action.id,
-            varField: p.id
+            field: p.id,
+            varField: action.id,
+            sentence: action.name
           }
         })
       })
@@ -294,13 +300,17 @@ class WorkflowEditModal extends React.Component {
       shapeModalOpen: false,
       shapeAnchorEl: e.target
     }, () => {
-      this.setState({
-        shapeModalOpen: true,
-        rulePanelExpanded: true,
-        editShape: null,
-        keyField: null,
-        shape
-      })
+      if (shape.type === 'PRODUCTACTION') {
+        this.onSaveShape('', shape.initialValues, this.buildObjectConfig(shape))
+      } else {
+        this.setState({
+          shapeModalOpen: true,
+          rulePanelExpanded: true,
+          editShape: null,
+          keyField: null,
+          shape
+        })
+      }
     })
   }
 
@@ -541,6 +551,31 @@ class WorkflowEditModal extends React.Component {
   }
 
   ////////////////////////////////////////////////////
+
+  buildObjectConfig (shape) {
+    const tpl = extendShape(shape)
+    const w = tpl.w || 120
+    const h = tpl.h || 50
+    const objectConfig = {
+      // imgIndex: item.imgIndex,
+
+      x: 0,
+      y: 0,
+      w,
+      h,
+
+      type: DiagramTypes.OBJECT,
+      config: {
+        ...tpl.config
+      },
+      fill: tpl.fill,
+      data: assign({}, tpl.data)
+    }
+
+    return objectConfig
+  }
+
+  ////////////////////////////////////////////////////
   renderUserPickModal() {
     if (!this.props.userPickModalOpen) return null
     // return (
@@ -591,24 +626,7 @@ class WorkflowEditModal extends React.Component {
 
 
     const tpl = extendShape(shape)
-    const w = tpl.w || 120
-    const h = tpl.h || 50
-    const objectConfig = editShape || {
-      // imgIndex: item.imgIndex,
-
-      x: 0,
-      y: 0,
-      w,
-      h,
-
-      // id: this.props.lastId + 1,
-      type: DiagramTypes.OBJECT,
-      config: {
-        ...tpl.config
-      },
-      fill: tpl.fill,
-      data: assign({}, tpl.data)
-    }
+    const objectConfig = editShape || this.buildObjectConfig(shape)
 
     const contents = tpl.form
     const initialValues = editShape ? {
