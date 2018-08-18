@@ -15,6 +15,8 @@ export default class ProductActionForm extends React.Component {
                  className="valign-top margin-md-right"/>
           <Field name="varField" component={FormInput} floatingLabel="Type Id"
                  className="valign-top margin-md-right"/>
+          <Field name="sentence" component={FormInput} floatingLabel="Action Name"
+                 className="valign-top margin-md-right"/>
         </CardPanel>
 
       </div>
