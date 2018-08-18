@@ -334,6 +334,10 @@ const forms = {
     "keyField": true
   }],
   "productActionForm": [{
+    "key": "field",
+    "name": "Action Name",
+    // "hidden": true
+  }, {
     "key": "sentence",
     "name": "Action Value",
   }]

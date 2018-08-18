@@ -189,7 +189,7 @@ class WorkflowEditModal extends React.Component {
           title: action.name,
           type: 'PRODUCTACTION',
           data: {
-            action: action.name
+            field: action.name
           }
         })
       })
