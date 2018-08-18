@@ -179,7 +179,7 @@ export default class BrainCellModalView extends Component {
   renderKey() {
     const {allValues} = this.props
     const {type} = allValues || {}
-    if (type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok') return null
+    if (type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok' || type === 'GrokField') return null
     const label = type === 'Command' ? 'Description' : 'Key'
     return (
       <Field name="key" component={FormInput} floatingLabel={label} className="margin-md-right valign-top"
