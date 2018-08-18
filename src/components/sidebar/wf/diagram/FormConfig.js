@@ -335,7 +335,11 @@ const forms = {
   }],
   "productActionForm": [{
     "key": "field",
-    "name": "Action Name",
+    "name": "Action Id",
+    // "hidden": true
+  }, {
+    "key": "varField",
+    "name": "Product Type Id",
     // "hidden": true
   }, {
     "key": "sentence",

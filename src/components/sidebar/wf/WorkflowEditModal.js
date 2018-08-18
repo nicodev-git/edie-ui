@@ -188,8 +188,9 @@ class WorkflowEditModal extends React.Component {
           img: 'sendim.png',
           title: action.name,
           type: 'PRODUCTACTION',
-          data: {
-            field: action.name
+          initialValues: {
+            field: action.id,
+            varField: p.id
           }
         })
       })
@@ -612,7 +613,7 @@ class WorkflowEditModal extends React.Component {
     const contents = tpl.form
     const initialValues = editShape ? {
       ...editShape.data
-    } : {}
+    } : (shape.initialValues || {})
     if (!editShape) {
       contents.forEach(p => {
         if (!p.default) return
