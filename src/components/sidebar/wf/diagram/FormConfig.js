@@ -332,6 +332,10 @@ const forms = {
     "name": "Minutes",
     "default": "10",
     "keyField": true
+  }],
+  "productActionForm": [{
+    "key": "sentence",
+    "name": "Action Value",
   }]
 }
 export default forms

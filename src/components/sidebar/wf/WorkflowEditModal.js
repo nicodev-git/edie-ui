@@ -184,10 +184,10 @@ class WorkflowEditModal extends React.Component {
         typeShapes.push({
           id: p.id,
           group: p.name,
-          form: 'actionForm',
+          form: 'productActionForm',
           img: 'sendim.png',
           title: action.name,
-          type: 'PRODUCT-ACTION'
+          type: 'PRODUCTACTION'
         })
       })
 
