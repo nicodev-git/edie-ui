@@ -708,6 +708,8 @@ export const brainCellTypes = [/*{
 }, {
   label: 'Grok', value: 'Grok', valueTypes: ['TEXT']
 }, {
+  label: 'Grok Field', value: 'GrokField', valueTypes: ['TEXT']
+}, {
   label: 'Regex', value: 'Regex', valueTypes: ['TEXT']
 }, {
   label: 'Tag', value: 'Tag', valueTypes: ['TEXT']
