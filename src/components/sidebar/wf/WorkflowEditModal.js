@@ -39,8 +39,32 @@ class WorkflowEditModal extends React.Component {
   constructor(props) {
     super(props)
 
-    const wfData = drawFlows((props.editWf || {}).flowItems || [],
-      this.props.shapes.map(p => extendShape(p)))
+
+    const shapes = []
+    this.props.productTypes.forEach(p => {
+      const actions = p.actions || []
+      actions.forEach(action => {
+        shapes.push({
+          id: p.id,
+          group: p.name,
+          form: 'productActionForm',
+          img: 'sendim.png',
+          title: action.name,
+          type: 'PRODUCTACTION',
+          initialValues: {
+            field: p.id,
+            varField: action.id,
+            sentence: action.name
+          }
+        })
+      })
+    })
+
+    this.props.shapes.forEach(p => {
+      shapes.push(extendShape(p))
+    })
+
+    const wfData = drawFlows((props.editWf || {}).flowItems || [], shapes)
 
     this.state = {
       permitterUsers: props.editWf ? (props.editWf.permitterUsers || []) : [],
@@ -121,7 +145,7 @@ class WorkflowEditModal extends React.Component {
 
   getWfDataItems() {
     const wfDataItems = this.state.wfData.objects.map(p => {
-      const {type} = p.config
+      const type = p.config.type || p.data.type
       const {sentence, name, variable, condition, fieldType, field} = p.data
 
       let itemPreLabel = ''
