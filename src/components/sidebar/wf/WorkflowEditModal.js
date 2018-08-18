@@ -136,6 +136,7 @@ class WorkflowEditModal extends React.Component {
         case 'EXCLUDE': {
           itemLabel = 'Match Text'
           if (condition === 'greaterThan') itemLabel = 'Greater Than'
+          if (type === 'EXCLUDE') itemLabel = `Not ${itemLabel}`
           var varname = (fieldType === 'field' ? field :
               fieldType === 'variable' ? variable : 'message') || ''
           const words = varname.split('.')
