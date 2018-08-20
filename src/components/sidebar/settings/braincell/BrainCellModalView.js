@@ -46,7 +46,7 @@ export default class BrainCellModalView extends Component {
   renderValue() {
     const {allValues, workflows, functions} = this.props
     const {type, valueType} = allValues || {}
-    if (type === 'Grok' || type === 'Classification' || type === 'ProductClassification' || type === 'Tag') return null
+    if (type === 'Grok' || type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'GrokField') return null
 
     if (type === 'Incident') {
       return (
