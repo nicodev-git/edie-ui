@@ -7,6 +7,7 @@ import ScriptModal from './ScriptModal'
 import GrokModal from './GrokModal'
 import {getKeyValues} from 'shared/Global'
 import CellParamModal from './CellParamModal'
+import {find} from 'lodash'
 
 class BrainCellModal extends React.Component {
   constructor(props) {
@@ -287,6 +288,30 @@ class BrainCellModal extends React.Component {
 
   ///////////////////////////////////////////////////////////////////
 
+  onClickAddGrokField () {
+    const name = prompt('Please type grok field', '')
+    if (!name) return
+
+    const {grokFields} = this.state
+    this.setState({
+      grokFields: [...grokFields, name]
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  getProductType () {
+    const {allValues, productTypes} = this.props
+    const {productTypeId} = allValues || {}
+
+    if (!productTypeId) return null
+
+    const productType = find(productTypes, {id: productTypeId})
+    return productType
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
   renderScriptModal() {
     if (!this.props.scriptModalOpen) return null
     return (
@@ -365,6 +390,8 @@ class BrainCellModal extends React.Component {
         onClickExistingTag={this.onClickExistingTag.bind(this)}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+
+        onClickAddGrokField={this.onClickAddGrokField.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={this.onClickClose.bind(this)}
