@@ -95,8 +95,12 @@ class ProductTypeModal extends React.Component {
     })
   }
 
-  onClickDeleteGrokField () {
-
+  onClickDeleteGrokField (index) {
+    const {grokFields} = this.state
+    if (!window.confirm('Click OK to delete')) return
+    this.setState({
+      grokFields: grokFields.filter((p, i) => i !== index)
+    })
   }
 
   ////////////////////////////////////////////////////
