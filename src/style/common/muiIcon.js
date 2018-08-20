@@ -16,6 +16,10 @@ export const smallIconStyle = {
   height: 10
 }
 
+export const toolTipStyle = {
+  background: 'red',
+  width: '200px'
+}
 const iconSize = 24
 
 export const thumbup = <img title="Acknowledge" src="/resources/images/common/incident/thumbup.png" alt="" width={iconSize} height={iconSize}/>

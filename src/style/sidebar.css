@@ -66,8 +66,35 @@
 .sidebar-condensed .sidebar-custom hr {
     margin-left: 0px !important;
 }
-
 /* Sidebar tooltip */
+
+.rc-tooltip-inner {
+    padding: 0;
+    position: absolute;
+    width:140px;
+    color: #FFFFFF;
+    background: #000000;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: -1px 0px 0px #800000;
+}
+.rc-tooltip-inner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -8px;
+    width: 0; height: 0;
+    border-right: 8px solid #000000;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+.rc-tooltip-content {
+    margin-top: -9px;
+    margin-left: 7px;
+}
 
 .sidebar-tooltip {
     position: absolute;

@@ -32,7 +32,7 @@ const dworkflow = <DashboardWfIcon nativeColor={sidebarIconsColor}/>
 const dapp = <DashboardAppIcon nativeColor={sidebarIconsColor}/>
 
 export const mainMenu = [
-  {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true, roleMenuId: 'Dashboard'},
+  {id: 'dashboard', title: 'Dashboard',  icon: dashboard, path: '/dashboard', fixed: true, roleMenuId: 'Dashboard'},
   {id: 'home', title: 'Map', icon: map, path: '/', roleMenuId: 'Map'},
   {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers', roleMenuId: 'Servers'},
   {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/workflow', roleMenuId: 'Workflows'},

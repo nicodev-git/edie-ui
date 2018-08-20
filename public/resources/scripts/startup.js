@@ -1,7 +1,7 @@
 /**
  * Created by Cheng on 11/17/16.
  */
-(function(){
+(function() {
   var hostname = document.location.hostname;
   var bundleName = 'bundle.release.js';
   if (hostname === "localhost" || hostname === "127.0.0.1") bundleName = 'bundle.js';

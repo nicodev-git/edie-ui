@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Drawer, IconButton} from '@material-ui/core'
+import Tooltip from 'rc-tooltip'
 import { withStyles } from '@material-ui/core/styles'
 import Badge from '@material-ui/core/Badge'
 import Divider from '@material-ui/core/Divider'
@@ -34,14 +35,18 @@ class SidebarView extends Component {
 
   renderButton (item) {
     return (
-      <IconButton
-        data-tip={item.title}
-        data-place="right"
-        style={iconButtonStyle}
-        >
-          {item.icon}
-      </IconButton>
-    )
+      <Tooltip
+        data-toggle='tooltip'
+        data-placement="right" 
+        trigger={['hover']} 
+        overlay={item.title}>
+          <IconButton
+            style={iconButtonStyle}
+            >
+              {item.icon}
+          </IconButton>
+      </Tooltip>
+    ) 
   }
 
   renderDeviceMenuItem (item, index) {
