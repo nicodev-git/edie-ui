@@ -38,6 +38,7 @@ class SidebarView extends Component {
       <Tooltip
         data-toggle='tooltip'
         data-placement="right" 
+        mouseEnterDelay="0.2"
         trigger={['hover']} 
         overlay={item.title}>
           <IconButton
