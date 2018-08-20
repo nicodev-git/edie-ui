@@ -18,6 +18,7 @@ import WorkflowSettingModal from './WorkflowSettingModal'
 import {getSeverityIcon} from 'shared/Global'
 import FlowGroupsModal from './flowgroups/FlowGroupsModal'
 import GlobalVarsModal from './globalvar/GlobalVarsModal'
+import {Field} from "redux-form";
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -344,6 +345,28 @@ class Workflows extends React.Component {
             )}
           </Select>
         </FormControl>
+      </div>
+    )
+  }
+
+  renderProductFilter2() {
+    const {allValues, productTypes} = this.props
+    const {filterType} = allValues || {}
+
+    return (
+      <div>
+        <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
+               options={productFilterTypes}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        {filterType === 'PRODUCT_TYPE' ? (
+          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
+                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+                 style={{minWidth: 150}}
+          />
+        ) : (
+          this.renderProductCombos()
+        )}
       </div>
     )
   }
