@@ -29,6 +29,7 @@ class Workflows extends React.Component {
       menuAnchor: null,
 
       filterProductTypes: [],
+      filterProductVendors: [],
 
       groupsModalOpen: false,
       globalVarsModalOpen: false
@@ -190,6 +191,12 @@ class Workflows extends React.Component {
     })
   }
 
+  onChangeProductVendorId (e) {
+    this.setState({
+      filterProductVendors: e.target.value
+    })
+  }
+
   ////////////////////////////////////////////////////////////////
 
   renderSeverity (wf) {
@@ -343,7 +350,7 @@ class Workflows extends React.Component {
 
   renderProductFilter() {
     const {productTypes} = this.props
-    const {filterProductTypes} = this.state
+    const {filterProductTypes, filterProductVendors} = this.state
 
     return (
       <div className="inline-block margin-md-left">
@@ -352,6 +359,31 @@ class Workflows extends React.Component {
           <Select
             value={filterProductTypes}
             onChange={this.onChangeProductTypeId.bind(this)}
+            style={{width: 150}}
+            multiple
+            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 50 * 8,
+                }
+              }
+            }}
+          >
+            {productTypes.map(p =>
+              <MenuItem key={p.id} value={p.id}>
+                <Checkbox checked={filterProductTypes.includes(p.id)}/>
+                <label>{p.name}</label>
+              </MenuItem>
+            )}
+          </Select>
+        </FormControl>
+
+        <FormControl>
+          <InputLabel>Product Vendor</InputLabel>
+          <Select
+            value={filterProductVendors}
+            onChange={this.onChangeProductVendorId.bind(this)}
             style={{width: 150}}
             multiple
             renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
