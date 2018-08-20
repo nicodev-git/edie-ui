@@ -298,12 +298,36 @@ class BrainCellModal extends React.Component {
     let grokFields = productType.grokFields || []
     grokFields = [...grokFields, name]
 
-    const entity = {
+    this.props.updateProductType({
       ...productType,
       grokFields
-    }
+    })
+  }
 
-    this.props.updateProductType(entity)
+  onClickEditGrokField (index) {
+    const productType = this.getProductType()
+    if (!productType) return
+
+    const {grokFields} = productType
+    const name = prompt('Please type grok field', grokFields[index])
+    if (!name) return
+
+    this.props.updateProductType({
+      ...productType,
+      grokFields: grokFields.map((p, i) => i === index ? name : p)
+    })
+  }
+
+  onClickDeleteGrokField (index) {
+    const productType = this.getProductType()
+    if (!productType) return
+
+    const {grokFields} = productType
+    if (!window.confirm('Click OK to delete')) return
+    this.props.updateProductType({
+      ...productType,
+      grokFields: grokFields.filter((p, i) => i !== index)
+    })
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -401,6 +425,8 @@ class BrainCellModal extends React.Component {
 
         productType={this.getProductType()}
         onClickAddGrokField={this.onClickAddGrokField.bind(this)}
+        onClickEditGrokField={this.onClickEditGrokField.bind(this)}
+        onClickDeleteGrokField={this.onClickDeleteGrokField.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={this.onClickClose.bind(this)}
