@@ -131,6 +131,34 @@ export default class BrainCellModalView extends Component {
     )
   }
 
+  renderGrokFields () {
+    const {allValues, productTypes} = this.props
+    const {type, productTypeId} = allValues || {}
+    if (type !== 'Grok') return null
+
+    let fields = []
+    if (productTypeId) {
+      const productType = find(productTypes, {id: productTypeId})
+      if (productType) {
+        fields = productType.grokFields || []
+      }
+    }
+
+    return (
+      <CardPanel title="Grok Fields">
+        <table className="table table-p-sm table-hover">
+          <tbody>
+          {fields.map((p, index) =>
+            <tr key={index}>
+              <td>{p}</td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </CardPanel>
+    )
+  }
+
   renderValueType() {
     const {allValues} = this.props
     const {type} = allValues || {}
@@ -433,6 +461,7 @@ export default class BrainCellModalView extends Component {
           {this.renderParams2()}
           {this.renderTags()}
           {this.renderGrokLines()}
+          {this.renderGrokFields()}
 
           <div className="margin-md-top">
             <Button variant="raised" type="submit">OK</Button>
