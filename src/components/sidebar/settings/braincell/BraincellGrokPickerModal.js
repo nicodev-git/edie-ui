@@ -104,6 +104,8 @@ export default class BraincellGrokPickerModal extends React.Component {
         productTypes={this.props.productTypes}
         productVendors={this.props.productVendors}
 
+        updateProductType={this.props.updateProductType}
+
         brainCells={this.props.brainCells}
         editBrainCell={this.state.editCell}
 

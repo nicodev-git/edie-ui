@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Field} from 'redux-form'
 import {Button, Checkbox, IconButton, Tooltip} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Typography from '@material-ui/core/Typography'
 import Chip from '@material-ui/core/Chip'
@@ -23,6 +24,7 @@ import {
 } from 'components/modal/parts'
 
 import {brainCellTypes, brainCellValueTypes, severities} from 'shared/Global'
+
 
 // const dirOptions = [{
 //     label: 'External', value: 'external'
@@ -132,17 +134,12 @@ export default class BrainCellModalView extends Component {
   }
 
   renderGrokFields () {
-    const {allValues, productTypes, onClickAddGrokField} = this.props
-    const {type, productTypeId} = allValues || {}
+    const {allValues, onClickAddGrokField, productType,
+      onClickEditGrokField, onClickDeleteGrokField} = this.props
+    const {type} = allValues || {}
     if (type !== 'Grok') return null
 
-    let fields = []
-    if (productTypeId) {
-      const productType = find(productTypes, {id: productTypeId})
-      if (productType) {
-        fields = productType.grokFields || []
-      }
-    }
+    const fields = productType ? (productType.grokFields || []) : []
 
     return (
       <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={onClickAddGrokField}/>}>
@@ -151,6 +148,10 @@ export default class BrainCellModalView extends Component {
           {fields.map((p, index) =>
             <tr key={index}>
               <td>{p}</td>
+              <td>
+                <EditIcon className="link margin-sm-right" onClick={() => onClickEditGrokField(index)}/>
+                <DeleteIcon className="link" onClick={() => onClickDeleteGrokField(index)}/>
+              </td>
             </tr>
           )}
           </tbody>

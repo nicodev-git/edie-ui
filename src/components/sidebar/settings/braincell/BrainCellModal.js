@@ -7,6 +7,7 @@ import ScriptModal from './ScriptModal'
 import GrokModal from './GrokModal'
 import {getKeyValues} from 'shared/Global'
 import CellParamModal from './CellParamModal'
+import {find} from 'lodash'
 
 class BrainCellModal extends React.Component {
   constructor(props) {
@@ -287,6 +288,62 @@ class BrainCellModal extends React.Component {
 
   ///////////////////////////////////////////////////////////////////
 
+  onClickAddGrokField () {
+    const productType = this.getProductType()
+    if (!productType) return window.alert('Please select product type first.')
+
+    const name = prompt('Please type grok field', '')
+    if (!name) return
+
+    let grokFields = productType.grokFields || []
+    grokFields = [...grokFields, name]
+
+    this.props.updateProductType({
+      ...productType,
+      grokFields
+    })
+  }
+
+  onClickEditGrokField (index) {
+    const productType = this.getProductType()
+    if (!productType) return
+
+    const {grokFields} = productType
+    const name = prompt('Please type grok field', grokFields[index])
+    if (!name) return
+
+    this.props.updateProductType({
+      ...productType,
+      grokFields: grokFields.map((p, i) => i === index ? name : p)
+    })
+  }
+
+  onClickDeleteGrokField (index) {
+    const productType = this.getProductType()
+    if (!productType) return
+
+    const {grokFields} = productType
+    if (!window.confirm('Click OK to delete')) return
+    this.props.updateProductType({
+      ...productType,
+      grokFields: grokFields.filter((p, i) => i !== index)
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  getProductType () {
+    const {allValues, productTypes} = this.props
+    const {productTypeId} = allValues || {}
+
+    if (!productTypeId) return null
+
+    const productType = find(productTypes, {id: productTypeId})
+    return productType
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
   renderScriptModal() {
     if (!this.props.scriptModalOpen) return null
     return (
@@ -365,6 +422,11 @@ class BrainCellModal extends React.Component {
         onClickExistingTag={this.onClickExistingTag.bind(this)}
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+
+        productType={this.getProductType()}
+        onClickAddGrokField={this.onClickAddGrokField.bind(this)}
+        onClickEditGrokField={this.onClickEditGrokField.bind(this)}
+        onClickDeleteGrokField={this.onClickDeleteGrokField.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         onClickClose={this.onClickClose.bind(this)}

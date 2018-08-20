@@ -465,6 +465,8 @@ class VendorProductModal extends React.Component {
         brainCells={this.props.brainCells}
         editBrainCell={this.props.editBrainCell}
 
+        updateProductType={this.props.updateProductType}
+
         showScriptModal={this.props.showScriptModal}
         showGrokModal={this.props.showGrokModal}
         showCellParamModal={this.props.showCellParamModal}
@@ -498,6 +500,8 @@ class VendorProductModal extends React.Component {
 
         brainCells={this.props.brainCells}
         editBrainCell={this.props.editBrainCell}
+
+        updateProductType={this.props.updateProductType}
 
         showScriptModal={this.props.showScriptModal}
         showGrokModal={this.props.showGrokModal}
@@ -558,6 +562,8 @@ class VendorProductModal extends React.Component {
         productTypes={this.props.productTypes}
         productVendors={this.props.productVendors}
         vendorProducts={this.props.vendorProducts}
+
+        updateProductType={this.props.updateProductType}
 
         brainCells={this.props.brainCells}
         editBrainCell={this.props.editBrainCell}
