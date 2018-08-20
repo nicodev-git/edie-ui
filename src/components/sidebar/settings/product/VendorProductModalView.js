@@ -2,10 +2,11 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
 import {Button, Chip, Tooltip} from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
-import { FormInput, FormSelect } from 'components/modal/parts'
+import { FormInput } from 'components/modal/parts'
 
 const panelStyle = {width: 1000, height: 623, overflow: 'auto'}
 
@@ -123,10 +124,48 @@ class SimulationModalView extends React.Component {
     )
   }
 
+  renderActions () {
+    const {detectedActions, onClickAddAction, onClickEditAction, onClickDeleteAction} = this.props
+    return (
+      <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
+        <div className="panel-heading">
+          <h3>
+            <span className="valign-middle">Actions</span>
+            <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddAction}>Add</Button>
+          </h3>
+        </div>
+        <div className="panel-body">
+          <div>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Action</th>
+                <th>Regex</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              {detectedActions.map((t, i) =>
+                <tr key={t.actionId}>
+                  <td>{t.action}</td>
+                  <td>{t.regex}</td>
+                  <td>
+                    <EditIcon onClick={() => onClickEditAction(t)}></EditIcon>
+                    <DeleteIcon onClick={() => onClickDeleteAction(t)}/>
+                  </td>
+                </tr>
+              )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const {onSubmit, onClickAddWf, onClickAddNewWf,
-      onClickAddIncident, onClickNewIncident,
-      productTypes, productVendors
+      onClickAddIncident, onClickNewIncident
     } = this.props
     return (
       <div className="flex-1">
@@ -140,19 +179,10 @@ class SimulationModalView extends React.Component {
                 <div className="col-md-8 col-lg-6">
                   <Field name="name" component={FormInput} floatingLabel="Name" fullWidth/>
                 </div>
-                <div className="col-md-3 col-lg-2">
-                  <Field name="type" component={FormSelect} floatingLabel="Type" fullWidth
-                         options={productTypes.map(p => ({label: p.name, value: p.id}))}/>
-                </div>
               </div>
               <div className="row margin-md-top">
                 <div className="col-md-8 col-lg-6">
                   <Field name="version" component={FormInput} floatingLabel="Version" className="margin-md-right" fullWidth/>
-                </div>
-
-                <div className="col-md-3 col-lg-2">
-                  <Field name="vendor" component={FormSelect} floatingLabel="Vendor" fullWidth
-                         options={productVendors.map(p => ({label: p.name, value: p.id}))}/>
                 </div>
               </div>
               <div className="row margin-md-top">
@@ -167,9 +197,11 @@ class SimulationModalView extends React.Component {
             </div>
           </div>
 
+          {this.renderActions()}
+
           <div className="panel panel-default margin-lg-bottom" style={panelStyle}>
             <div className="panel-heading">
-              <h3>/
+              <h3>
                 <span className="valign-middle">Workflows</span>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddWf}>Add</Button>
                 <Button variant="outlined" size="small" className="valign-middle margin-md-left" onClick={onClickAddNewWf}>Create New</Button>

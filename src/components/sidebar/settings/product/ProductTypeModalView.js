@@ -10,7 +10,9 @@ import {Modal, CardPanel, SubmitBlock, FormInput} from 'components/modal/parts'
 export default class ProductTypeModalView extends React.Component {
   render () {
     const {onClose, onSubmit,
-      actions, onClickAddAction, onClickEditAction, onClickDeleteAction} = this.props
+      actions, onClickAddAction, onClickEditAction, onClickDeleteAction,
+      grokFields, onClickAddGrokField, onClickEditGrokField, onClickDeleteGrokField
+    } = this.props
     return (
       <Modal title="Product Type" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
@@ -22,7 +24,7 @@ export default class ProductTypeModalView extends React.Component {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Action</TableCell>
+                    <TableCell>Name</TableCell>
                     <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
@@ -30,9 +32,7 @@ export default class ProductTypeModalView extends React.Component {
                 <TableBody>
                   {actions.map((p, i) =>
                     <TableRow key={i}>
-                      <TableCell  component="th" scope="row">
-                        {p}
-                      </TableCell>
+                      <TableCell component="th" scope="row">{p.name}</TableCell>
                       <TableCell className="nowrap">
                         <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
                         <DeleteIcon className="link" onClick={() => onClickDeleteAction(i)}/>
@@ -43,8 +43,35 @@ export default class ProductTypeModalView extends React.Component {
               </Table>
             </div>
           </CardPanel>
+
+          <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={onClickAddGrokField}/>}>
+            <div style={{maxHeight: 500, overflow: 'auto'}}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {grokFields.map((p, i) =>
+                    <TableRow key={i}>
+                      <TableCell component="th" scope="row">{p}</TableCell>
+                      <TableCell className="nowrap">
+                        <EditIcon className="link margin-sm-right" onClick={() => onClickEditGrokField(i)}/>
+                        <DeleteIcon className="link" onClick={() => onClickDeleteGrokField(i)}/>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </CardPanel>
+
           <SubmitBlock name="Save"/>
         </form>
+        {this.props.children}
       </Modal>
     )
   }

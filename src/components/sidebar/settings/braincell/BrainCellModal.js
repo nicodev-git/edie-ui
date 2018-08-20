@@ -91,7 +91,10 @@ class BrainCellModal extends React.Component {
       params,
       external: values.externalstatus === 'external'
     }
-    if (entity.type === 'Grok') entity.value = lines.filter(p => !!p)
+    if (entity.type === 'Grok') {
+      entity.value = lines.filter(p => !!p)
+      entity.key = ''
+    }
     if (!entity.params2) entity.params2 = {}
     params2Fields.forEach(p => {
       if (!p.key) return

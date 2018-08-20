@@ -332,6 +332,18 @@ const forms = {
     "name": "Minutes",
     "default": "10",
     "keyField": true
+  }],
+  "productActionForm": [{
+    "key": "field",
+    "name": "Action Id",
+    // "hidden": true
+  }, {
+    "key": "varField",
+    "name": "Product Type Id",
+    // "hidden": true
+  }, {
+    "key": "sentence",
+    "name": "Action Value",
   }]
 }
 export default forms

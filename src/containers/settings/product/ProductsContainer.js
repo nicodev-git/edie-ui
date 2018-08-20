@@ -30,7 +30,9 @@ import {
   fetchProductVendors,
   addProductVendor,
   updateProductVendor,
-  removeProductVendor
+  removeProductVendor,
+
+  testMatchRegex
 } from 'actions'
 
 class ProductsContainer extends React.Component {
@@ -82,6 +84,8 @@ export default connect(
     fetchProductVendors,
     addProductVendor,
     updateProductVendor,
-    removeProductVendor
+    removeProductVendor,
+
+    testMatchRegex
   }
 )(withRouter(ProductsContainer))

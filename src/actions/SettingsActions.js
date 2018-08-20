@@ -1156,3 +1156,15 @@ export function removeProductVendor(entity) {
   }
 }
 
+export function testMatchRegex(regex, text, cb) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/testRegex`, {
+      regex, text
+    }).then(res => {
+      cb && cb(res.data.success)
+    }).catch(() => {
+      cb && cb()
+    })
+  }
+}
+

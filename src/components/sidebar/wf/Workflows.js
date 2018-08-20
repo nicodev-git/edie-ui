@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Select, Menu, MenuItem, Chip} from '@material-ui/core'
+import {Button, Select, Menu, MenuItem} from '@material-ui/core'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import moment from 'moment'
@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import FormControl from '@material-ui/core/FormControl'
-import {findIndex} from 'lodash'
+import {find, findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -28,6 +28,9 @@ class Workflows extends React.Component {
       filterTags: [],
       menuAnchor: null,
 
+      filterProductTypes: [],
+      filterProductVendors: [],
+
       groupsModalOpen: false,
       globalVarsModalOpen: false
     }
@@ -40,6 +43,8 @@ class Workflows extends React.Component {
     this.props.fetchBrainCells()
     this.props.fetchCollectors()
     this.props.fetchSimSamples()
+    this.props.fetchVendorProducts()
+    this.props.fetchProductTypes()
   }
 
   getTags() {
@@ -180,24 +185,42 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
+  onChangeProductTypeId (e) {
+    this.setState({
+      filterProductTypes: e.target.value
+    })
+  }
+
+  onChangeProductVendorId (e) {
+    this.setState({
+      filterProductVendors: e.target.value
+    })
+  }
+
+  ////////////////////////////////////////////////////////////////
+
   renderSeverity (wf) {
     const cell = this.getIncidentCell(wf)
     if (!cell) return null
     return getSeverityIcon(cell.severity)
   }
 
-  renderTags (wf) {
-    const cell = this.getIncidentCell(wf)
-    if (!cell) return null
-    const {params2} = cell
-    const {tags} = params2 || {}
-    return (tags || []).map((t, i) =>
-      <Chip
-        key={i}
-        label={t}
-        className="margin-md-right"
-      />
-    )
+  renderProductType (wf) {
+    const {productTypes, productVendors} = this.props
+    const {filterType, productId, productTypeId} = wf
+    if (filterType === 'PRODUCT') {
+      if (productId) {
+        const vendor = productVendors.filter(p => (p.productIds || []).includes(productId))[0]
+        if (vendor) {
+          const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+          if (type) return `${type.name}/${vendor.name}`
+        }
+      }
+    } else {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) return type.name
+    }
+    return ''
   }
 
   renderWorkflows() {
@@ -216,7 +239,7 @@ class Workflows extends React.Component {
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Tags</th>
+            <th>Type</th>
             <th>User</th>
             <th>Type</th>
             <th>Last Updated</th>
@@ -233,7 +256,7 @@ class Workflows extends React.Component {
                 </div>
               </td>
               <td>{m.description}</td>
-              <td>{this.renderTags(m)}</td>
+              <td>{this.renderProductType(m)}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
@@ -325,6 +348,65 @@ class Workflows extends React.Component {
     )
   }
 
+  renderProductFilter() {
+    const {productTypes} = this.props
+    const {filterProductTypes, filterProductVendors} = this.state
+
+    return (
+      <div className="inline-block margin-md-left">
+        <FormControl>
+          <InputLabel>Product Type</InputLabel>
+          <Select
+            value={filterProductTypes}
+            onChange={this.onChangeProductTypeId.bind(this)}
+            style={{width: 150}}
+            multiple
+            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 50 * 8,
+                }
+              }
+            }}
+          >
+            {productTypes.map(p =>
+              <MenuItem key={p.id} value={p.id}>
+                <Checkbox checked={filterProductTypes.includes(p.id)}/>
+                <label>{p.name}</label>
+              </MenuItem>
+            )}
+          </Select>
+        </FormControl>
+
+        <FormControl>
+          <InputLabel>Product Vendor</InputLabel>
+          <Select
+            value={filterProductVendors}
+            onChange={this.onChangeProductVendorId.bind(this)}
+            style={{width: 150}}
+            multiple
+            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 50 * 8,
+                }
+              }
+            }}
+          >
+            {productTypes.map(p =>
+              <MenuItem key={p.id} value={p.id}>
+                <Checkbox checked={filterProductTypes.includes(p.id)}/>
+                <label>{p.name}</label>
+              </MenuItem>
+            )}
+          </Select>
+        </FormControl>
+      </div>
+    )
+  }
+
   renderMenu () {
     const {menuAnchor} = this.state
     if (!menuAnchor) return null
@@ -368,7 +450,7 @@ class Workflows extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
               {this.renderGroups()}
-              {this.renderFilterTags()}
+              {/*{this.renderProductFilter()}*/}
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;

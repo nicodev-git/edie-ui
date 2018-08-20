@@ -22,6 +22,7 @@ const headerStyle = {
 }
 
 const buildField = elem => {
+  const cls = `valign-top margin-lg-right ${elem.hidden ? 'hidden' : ''}`
   switch (elem.type || '') {
     case 'select':
       return (<Field
@@ -30,7 +31,7 @@ const buildField = elem => {
         component={FormSelect}
         floatingLabel={elem.name}
         options={elem.options}
-        className="valign-top margin-lg-right"
+        className={cls}
         fullWidth={elem.fullWidth}
       />)
     case 'password':
@@ -40,7 +41,7 @@ const buildField = elem => {
         type="password"
         component={FormInput}
         floatingLabel={elem.name}
-        className="valign-top margin-lg-right"
+        className={cls}
         fullWidth={elem.fullWidth}
       />)
     case 'checkbox':
@@ -49,7 +50,7 @@ const buildField = elem => {
         name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
         component={FormCheckbox}
         label={elem.name}
-        className="valign-top margin-lg-right"
+        className={cls}
       />)
     default:
       return (<Field
@@ -57,7 +58,7 @@ const buildField = elem => {
         name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
         component={FormInput}
         floatingLabel={elem.name}
-        className="valign-top margin-lg-right"
+        className={cls}
         fullWidth={elem.fullWidth}
       />)
   }

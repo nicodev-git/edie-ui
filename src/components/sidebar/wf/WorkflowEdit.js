@@ -18,6 +18,9 @@ export default class WorkflowEdit extends React.Component {
     this.props.fetchGroups()
     this.props.fetchShapes()
     this.props.fetchBrainCells()
+    this.props.fetchProductTypes()
+    this.props.fetchVendorProducts()
+    this.props.fetchProductVendors()
 
     const {match} = this.props
     const {name} = match.params

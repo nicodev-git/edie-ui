@@ -12,12 +12,14 @@ import BraincellIncidentPickerModal from 'components/sidebar/settings/braincell/
 import WorkflowPickerModal from 'components/sidebar/wf/WorkflowPickerModal'
 import WorkflowEditModalContainer from 'containers/wf/WorkflowEditModalContainer'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
+import ActionRegexModal from './ActionRegexModal'
 
 class VendorProductModal extends React.Component {
   constructor(props) {
     super(props)
 
     const {editProduct} = this.props
+
     this.state = {
       tags: (editProduct ? editProduct.tags : []) || [],
       tagModalOpen: false,
@@ -35,15 +37,18 @@ class VendorProductModal extends React.Component {
       incidents: (editProduct ? editProduct.incidents : []) || [],
       incidentModalOpen: false,
 
+      actionModalOpen: false,
+      detectedActions: (editProduct ? editProduct.detectedActions : []) || [],
+
       loading: false
     }
   }
 
   handleFormSubmit (values) {
-    const {tags, classifiers, parsers, workflows, incidents} = this.state
+    const {tags, classifiers, parsers, workflows, incidents, detectedActions} = this.state
     this.props.onSave({
       ...values,
-      tags,classifiers, parsers, workflows, incidents
+      tags,classifiers, parsers, workflows, incidents, detectedActions
     })
   }
 
@@ -340,6 +345,92 @@ class VendorProductModal extends React.Component {
 
   //////////////////////////////////////////////////////////////
 
+  getProductTypeActions () {
+    const {editProduct, productVendors, productTypes} = this.props
+    if (!editProduct || !editProduct.id) return []
+
+    const vendor = productVendors.filter(p => (p.productIds || []).includes(editProduct.id))[0]
+    if (!vendor) return []
+    const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+
+    if (!type) return []
+    return type.actions || []
+  }
+
+  getActions (productActions) {
+    const {detectedActions} = this.state
+    const list = detectedActions.map(p => {
+      const action = find(productActions, {id: p.actionId})
+      return {
+        ...p,
+        action: action ? action.name : ''
+      }
+    })
+    return list
+  }
+
+  onClickAddAction () {
+    this.setState({
+      actionModalOpen: true,
+      editAction: null
+    })
+  }
+
+  onClickEditAction (editAction) {
+    this.setState({
+      actionModalOpen: true,
+      editAction: editAction
+    })
+  }
+
+  onClickDeleteAction (action) {
+    const {detectedActions} = this.state
+    if (!window.confirm('Click OK to remove')) return
+    this.setState({
+      detectedActions: detectedActions.filter(p => p.actionId !== action.actionId)
+    })
+  }
+
+  onCloseAddAction () {
+    this.setState({
+      actionModalOpen: false
+    })
+  }
+
+  onSaveAction (entity) {
+    const {detectedActions, editAction} = this.state
+
+    if (editAction) {
+      this.setState({
+        detectedActions: detectedActions.map(p => p.actionId === entity.actionId ? entity : p)
+      })
+    } else {
+      const found = find(detectedActions, {actionId: entity.actionId})
+      if (found) return window.alert('Already added')
+
+      this.setState({
+        detectedActions: [...detectedActions, entity]
+      })
+    }
+
+    this.onCloseAddAction()
+  }
+
+  //////////////////////////////////////////////////////////////
+
+  renderActionModal (productActions) {
+    if (!this.state.actionModalOpen) return null
+    return (
+      <ActionRegexModal
+        actions={productActions}
+        editAction={this.state.editAction}
+        onSave={this.onSaveAction.bind(this)}
+        onClose={this.onCloseAddAction.bind(this)}
+        testMatchRegex={this.props.testMatchRegex}
+      />
+    )
+  }
+
   renderTagPickerModal () {
     if (!this.state.tagModalOpen) return null
     return (
@@ -484,6 +575,7 @@ class VendorProductModal extends React.Component {
 
   render () {
     const {handleSubmit, onClose, productTypes, productVendors} = this.props
+    const productActions = this.getProductTypeActions()
     return (
       <VendorProductModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
@@ -517,6 +609,11 @@ class VendorProductModal extends React.Component {
         productTypes={productTypes}
         productVendors={productVendors}
 
+        detectedActions={this.getActions(productActions)}
+        onClickAddAction={this.onClickAddAction.bind(this)}
+        onClickEditAction={this.onClickEditAction.bind(this)}
+        onClickDeleteAction={this.onClickDeleteAction.bind(this)}
+
         loading={this.state.loading}
       >
         {this.renderTagPickerModal()}
@@ -526,6 +623,7 @@ class VendorProductModal extends React.Component {
         {this.renderIncidentPickerModal()}
         {this.renderWFModal()}
         {this.renderBraincellModal()}
+        {this.renderActionModal(productActions)}
       </VendorProductModalView>
     )
   }

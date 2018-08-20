@@ -768,3 +768,9 @@ export const simulationTypes = [{
 }, {
   label: 'Rest/Syslog', value: 'syslog'
 }]
+
+export const productFilterTypes = [{
+  label: 'Product', value: 'PRODUCT'
+}, {
+  label: 'Product Type', value: 'PRODUCT_TYPE'
+}]

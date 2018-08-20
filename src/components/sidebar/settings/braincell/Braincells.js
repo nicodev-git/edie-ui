@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Select, MenuItem, Chip} from '@material-ui/core'
+import {Button, Select, MenuItem} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ReactTooltip from 'react-tooltip'
@@ -129,12 +129,6 @@ export default class Braincells extends React.Component {
   }
 
   renderKey(p) {
-    if (p.type === 'Grok') {
-      const tags = (p.params2 || {}).tags || []
-      return tags.map((tag, i) =>
-        <Chip key={i} label={tag}/>
-      )
-    }
     return p.key
   }
 

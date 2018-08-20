@@ -39,7 +39,32 @@ class WorkflowEditModal extends React.Component {
   constructor(props) {
     super(props)
 
-    const wfData = drawFlows((props.editWf || {}).flowItems || [], this.props.shapes.map(p => extendShape(p)))
+
+    const shapes = []
+    this.props.productTypes.forEach(p => {
+      const actions = p.actions || []
+      actions.forEach(action => {
+        shapes.push({
+          id: p.id,
+          group: p.name,
+          form: 'productActionForm',
+          img: 'sendim.png',
+          title: action.name,
+          type: 'PRODUCTACTION',
+          initialValues: {
+            field: p.id,
+            varField: action.id,
+            sentence: action.name
+          }
+        })
+      })
+    })
+
+    this.props.shapes.forEach(p => {
+      shapes.push(extendShape(p))
+    })
+
+    const wfData = drawFlows((props.editWf || {}).flowItems || [], shapes)
 
     this.state = {
       permitterUsers: props.editWf ? (props.editWf.permitterUsers || []) : [],
@@ -70,6 +95,22 @@ class WorkflowEditModal extends React.Component {
   componentWillMount() {
     this.props.fetchDevices()
     this.props.fetchShapes()
+
+    const {editWf} = this.props
+    if (editWf && editWf.filterType === 'PRODUCT') {
+      const {productId} = editWf
+      if (productId) {
+        const {productVendors, productTypes} = this.props
+        const vendor = productVendors.filter(p => (p.productIds || []).includes(productId))[0]
+        if (vendor) {
+          this.props.change('productVendorId', vendor.id)
+          const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+          if (type) {
+            this.props.change('productTypeId', type.id)
+          }
+        }
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -104,8 +145,8 @@ class WorkflowEditModal extends React.Component {
 
   getWfDataItems() {
     const wfDataItems = this.state.wfData.objects.map(p => {
-      const {type} = p.config
-      const {sentence, name, variable, condition, fieldType, field} = p.data
+      const {sentence, name, variable, condition, fieldType, field, uiprops} = p.data
+      const type = p.config.type || uiprops.type
 
       let itemPreLabel = ''
       let itemLabel = ''
@@ -120,6 +161,7 @@ class WorkflowEditModal extends React.Component {
         case 'EXCLUDE': {
           itemLabel = 'Match Text'
           if (condition === 'greaterThan') itemLabel = 'Greater Than'
+          if (type === 'EXCLUDE') itemLabel = `Not ${itemLabel}`
           var varname = (fieldType === 'field' ? field :
               fieldType === 'variable' ? variable : 'message') || ''
           const words = varname.split('.')
@@ -129,6 +171,11 @@ class WorkflowEditModal extends React.Component {
 
           itemPreLabelKey = fieldType === 'message' ? '' : fieldType
           itemLabelKey = 'condition'
+          break
+        }
+        case 'PRODUCTACTION': {
+          itemLabel = 'Match Action'
+          itemValue = `${sentence}`
           break
         }
         case 'COUNT':
@@ -156,6 +203,38 @@ class WorkflowEditModal extends React.Component {
       }
     })
     return wfDataItems
+  }
+
+  getMergedShapes() {
+    const {productTypes, shapes} = this.props
+
+    const typeShapes = []
+    productTypes.forEach(p => {
+      const actions = p.actions || []
+      actions.forEach(action => {
+        typeShapes.push({
+          id: p.id,
+          group: p.name,
+          form: 'productActionForm',
+          img: 'sendim.png',
+          title: action.name,
+          type: 'PRODUCTACTION',
+          initialValues: {
+            field: p.id,
+            varField: action.id,
+            sentence: action.name
+          }
+        })
+      })
+
+      if (!actions.length) {
+      }
+    })
+
+    return [
+      ...shapes,
+      ...typeShapes
+    ]
   }
 
   onSubmit(values) {
@@ -247,13 +326,17 @@ class WorkflowEditModal extends React.Component {
       shapeModalOpen: false,
       shapeAnchorEl: e.target
     }, () => {
-      this.setState({
-        shapeModalOpen: true,
-        rulePanelExpanded: true,
-        editShape: null,
-        keyField: null,
-        shape
-      })
+      if (shape.type === 'PRODUCTACTION') {
+        this.onSaveShape('', shape.initialValues, this.buildObjectConfig(shape))
+      } else {
+        this.setState({
+          shapeModalOpen: true,
+          rulePanelExpanded: true,
+          editShape: null,
+          keyField: null,
+          shape
+        })
+      }
     })
   }
 
@@ -494,6 +577,31 @@ class WorkflowEditModal extends React.Component {
   }
 
   ////////////////////////////////////////////////////
+
+  buildObjectConfig (shape) {
+    const tpl = extendShape(shape)
+    const w = tpl.w || 120
+    const h = tpl.h || 50
+    const objectConfig = {
+      // imgIndex: item.imgIndex,
+
+      x: 0,
+      y: 0,
+      w,
+      h,
+
+      type: DiagramTypes.OBJECT,
+      config: {
+        ...tpl.config
+      },
+      fill: tpl.fill,
+      data: assign({}, tpl.data)
+    }
+
+    return objectConfig
+  }
+
+  ////////////////////////////////////////////////////
   renderUserPickModal() {
     if (!this.props.userPickModalOpen) return null
     // return (
@@ -544,29 +652,12 @@ class WorkflowEditModal extends React.Component {
 
 
     const tpl = extendShape(shape)
-    const w = tpl.w || 120
-    const h = tpl.h || 50
-    const objectConfig = editShape || {
-      // imgIndex: item.imgIndex,
-
-      x: 0,
-      y: 0,
-      w,
-      h,
-
-      // id: this.props.lastId + 1,
-      type: DiagramTypes.OBJECT,
-      config: {
-        ...tpl.config
-      },
-      fill: tpl.fill,
-      data: assign({}, tpl.data)
-    }
+    const objectConfig = editShape || this.buildObjectConfig(shape)
 
     const contents = tpl.form
     const initialValues = editShape ? {
       ...editShape.data
-    } : {}
+    } : (shape.initialValues || {})
     if (!editShape) {
       contents.forEach(p => {
         if (!p.default) return
@@ -605,7 +696,7 @@ class WorkflowEditModal extends React.Component {
   }
 
   render() {
-    const {handleSubmit, groups, shapes, newView} = this.props
+    const {handleSubmit, groups, newView} = this.props
     const ModalView = newView ? WorkflowEditModalView1 : WorkflowEditModalView
     return (
       <ModalView
@@ -630,8 +721,8 @@ class WorkflowEditModal extends React.Component {
 
         editShape={this.state.editShape}
         shapeAnchorEl={this.state.shapeAnchorEl}
+        shapes={this.getMergedShapes()}
         wfDataItems={this.getWfDataItems()}
-        shapes={shapes}
         onClickAddShape={this.onClickAddShape.bind(this)}
         onCloseShapeMenu={this.onCloseShapeMenu.bind(this)}
         onClickShape={this.onClickShape.bind(this)}
@@ -660,8 +751,10 @@ class WorkflowEditModal extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editWf || {
-      type: 'normal'
+    initialValues: {
+      type: 'normal',
+      filterType: 'PRODUCT_TYPE',
+      ...props.editWf
     },
     allValues: getFormValues('wfNameForm')(state)
   })

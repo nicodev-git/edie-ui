@@ -22,7 +22,7 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import {severities} from 'shared/Global'
+import {severities, productFilterTypes} from 'shared/Global'
 
 const cardStyle = {
   minHeight: 250,
@@ -378,7 +378,7 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
-  renderProduct() {
+  renderProductCombos() {
     const {allValues, productTypes, productVendors, vendorProducts} = this.props
     const {productTypeId, productVendorId} = allValues || {}
 
@@ -394,7 +394,7 @@ class WorkflowEditModalView extends React.Component {
     }
 
     return (
-      <div>
+      <div className="margin-md-top">
         <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
                options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
                style={{minWidth: 150}} className="margin-sm-right"
@@ -407,6 +407,28 @@ class WorkflowEditModalView extends React.Component {
                options={(products || []).map(p => ({label: p.name, value: p.id}))}
                style={{minWidth: 150}}
         />
+      </div>
+    )
+  }
+
+  renderProduct() {
+    const {allValues, productTypes} = this.props
+    const {filterType} = allValues || {}
+
+    return (
+      <div>
+        <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
+               options={productFilterTypes}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        {filterType === 'PRODUCT_TYPE' ? (
+          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
+                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+                 style={{minWidth: 150}}
+          />
+        ) : (
+          this.renderProductCombos()
+        )}
       </div>
     )
   }

@@ -46,7 +46,7 @@ export default class BrainCellModalView extends Component {
   renderValue() {
     const {allValues, workflows, functions} = this.props
     const {type, valueType} = allValues || {}
-    if (type === 'Grok' || type === 'Classification' || type === 'ProductClassification' || type === 'Tag') return null
+    if (type === 'Grok' || type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'GrokField') return null
 
     if (type === 'Incident') {
       return (
@@ -131,11 +131,40 @@ export default class BrainCellModalView extends Component {
     )
   }
 
+  renderGrokFields () {
+    const {allValues, productTypes, onClickAddGrokField} = this.props
+    const {type, productTypeId} = allValues || {}
+    if (type !== 'Grok') return null
+
+    let fields = []
+    if (productTypeId) {
+      const productType = find(productTypes, {id: productTypeId})
+      if (productType) {
+        fields = productType.grokFields || []
+      }
+    }
+
+    return (
+      <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={onClickAddGrokField}/>}>
+        <table className="table table-p-sm table-hover">
+          <tbody>
+          {fields.map((p, index) =>
+            <tr key={index}>
+              <td>{p}</td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </CardPanel>
+    )
+  }
+
   renderValueType() {
     const {allValues} = this.props
     const {type} = allValues || {}
 
-    if (type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok') return null
+    if (type === 'Classification' || type === 'ProductClassification' || type === 'Tag' || type === 'Incident' ||
+      type === 'Function' || type === 'Grok' || type === 'GrokField') return null
 
     const index = findIndex(brainCellTypes, {value: type})
     let valueTypes = []
@@ -178,7 +207,7 @@ export default class BrainCellModalView extends Component {
   renderKey() {
     const {allValues} = this.props
     const {type} = allValues || {}
-    if (type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok') return null
+    if (type === 'Tag' || type === 'Incident' || type === 'Function' || type === 'Grok' || type === 'GrokField') return null
     const label = type === 'Command' ? 'Description' : 'Key'
     return (
       <Field name="key" component={FormInput} floatingLabel={label} className="margin-md-right valign-top"
@@ -432,6 +461,7 @@ export default class BrainCellModalView extends Component {
           {this.renderParams2()}
           {this.renderTags()}
           {this.renderGrokLines()}
+          {this.renderGrokFields()}
 
           <div className="margin-md-top">
             <Button variant="raised" type="submit">OK</Button>
