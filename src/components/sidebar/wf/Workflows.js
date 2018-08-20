@@ -28,6 +28,8 @@ class Workflows extends React.Component {
       filterTags: [],
       menuAnchor: null,
 
+      filterProductTypes: [],
+
       groupsModalOpen: false,
       globalVarsModalOpen: false
     }
@@ -178,6 +180,12 @@ class Workflows extends React.Component {
     this.setState({
       menuAnchor: null
     })
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  onChangeProductTypeId () {
+
   }
 
   ////////////////////////////////////////////////////////////////
@@ -333,7 +341,36 @@ class Workflows extends React.Component {
 
   renderProductFilter() {
     const {productTypes} = this.props
+    const {filterProductTypes} = this.state
 
+    return (
+      <div className="inline-block margin-md-left">
+        <FormControl>
+          <InputLabel>Tag</InputLabel>
+          <Select
+            value={filterProductTypes}
+            onChange={this.onChangeProductTypeId.bind(this)}
+            style={{width: 150}}
+            multiple
+            renderValue={selected => selected.join(', ')}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 50 * 8,
+                }
+              }
+            }}
+          >
+            {productTypes.map(p =>
+              <MenuItem key={p.id} value={p.id}>
+                <Checkbox checked={filterProductTypes.includes(p.id)}/>
+                <label>{p.name}</label>
+              </MenuItem>
+            )}
+          </Select>
+        </FormControl>
+      </div>
+    )
   }
 
   renderMenu () {
