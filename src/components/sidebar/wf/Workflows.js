@@ -331,6 +331,11 @@ class Workflows extends React.Component {
     )
   }
 
+  renderProductFilter() {
+    const {productTypes} = this.props
+
+  }
+
   renderMenu () {
     const {menuAnchor} = this.state
     if (!menuAnchor) return null
