@@ -450,7 +450,7 @@ class Workflows extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
               {this.renderGroups()}
-              {this.renderProductFilter()}
+              {/*{this.renderProductFilter()}*/}
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
