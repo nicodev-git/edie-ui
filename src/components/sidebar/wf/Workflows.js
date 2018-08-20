@@ -9,6 +9,7 @@ import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import FormControl from '@material-ui/core/FormControl'
 import {find, findIndex} from 'lodash'
+import {Field} from 'redux-form'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -18,7 +19,7 @@ import WorkflowSettingModal from './WorkflowSettingModal'
 import {getSeverityIcon} from 'shared/Global'
 import FlowGroupsModal from './flowgroups/FlowGroupsModal'
 import GlobalVarsModal from './globalvar/GlobalVarsModal'
-import {Field} from "redux-form";
+import {FormSelect} from 'components/modal/parts'
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -350,7 +351,7 @@ class Workflows extends React.Component {
   }
 
   renderProductFilter2() {
-    const {allValues, productTypes} = this.props
+    const {allValues, productTypes, productFilterTypes} = this.props
     const {filterType} = allValues || {}
 
     return (
@@ -369,6 +370,22 @@ class Workflows extends React.Component {
         )}
       </div>
     )
+  }
+
+  renderProductCombos() {
+    const {allValues, productTypes, productVendors, vendorProducts} = this.props
+    const {productTypeId, productVendorId} = allValues || {}
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
   }
 
   renderProductFilter() {
