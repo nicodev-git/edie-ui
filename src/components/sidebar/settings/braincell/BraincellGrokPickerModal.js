@@ -147,15 +147,6 @@ export default class BraincellGrokPickerModal extends React.Component {
                   >
                     <TableCell padding="none"  component="th" scope="row">
                       {t.name}
-                      {/*<InlineEdit*/}
-                        {/*activeClassName="editing"*/}
-                        {/*text={t.name || '\u00a0'}*/}
-                        {/*paramName="pattern"*/}
-                        {/*change={this.onLineChange.bind(this, t, 'name')}*/}
-                        {/*style={inlineStyle}*/}
-                      {/*/>*/}
-
-
                     </TableCell>
                     <TableCell padding="none">{t.description}</TableCell>
                     <TableCell padding="none">
