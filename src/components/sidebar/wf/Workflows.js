@@ -184,8 +184,10 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
-  onChangeProductTypeId () {
-
+  onChangeProductTypeId (e) {
+    this.setState({
+      filterProductTypes: e.target.value
+    })
   }
 
   ////////////////////////////////////////////////////////////////
@@ -346,13 +348,13 @@ class Workflows extends React.Component {
     return (
       <div className="inline-block margin-md-left">
         <FormControl>
-          <InputLabel>Tag</InputLabel>
+          <InputLabel>Product Type</InputLabel>
           <Select
             value={filterProductTypes}
             onChange={this.onChangeProductTypeId.bind(this)}
             style={{width: 150}}
             multiple
-            renderValue={selected => selected.join(', ')}
+            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
             MenuProps={{
               PaperProps: {
                 style: {
@@ -416,7 +418,7 @@ class Workflows extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
               {this.renderGroups()}
-              {this.renderFilterTags()}
+              {this.renderProductFilter()}
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
