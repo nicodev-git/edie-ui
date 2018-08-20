@@ -17,7 +17,10 @@ import {
 
   fetchVendorProducts,
   fetchProductTypes,
-  fetchProductVendors
+  addProductType,
+  updateProductType,
+  removeProductType,
+  fetchProductVendors,
 } from 'actions'
 
 class BraincellsContainer extends React.Component {
@@ -57,6 +60,9 @@ export default connect(
 
     fetchVendorProducts,
     fetchProductTypes,
+    addProductType,
+    updateProductType,
+    removeProductType,
     fetchProductVendors
   }
 )(withRouter(BraincellsContainer))

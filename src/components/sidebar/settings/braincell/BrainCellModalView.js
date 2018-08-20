@@ -132,17 +132,11 @@ export default class BrainCellModalView extends Component {
   }
 
   renderGrokFields () {
-    const {allValues, productTypes, onClickAddGrokField} = this.props
-    const {type, productTypeId} = allValues || {}
+    const {allValues, onClickAddGrokField, productType} = this.props
+    const {type} = allValues || {}
     if (type !== 'Grok') return null
 
-    let fields = []
-    if (productTypeId) {
-      const productType = find(productTypes, {id: productTypeId})
-      if (productType) {
-        fields = productType.grokFields || []
-      }
-    }
+    const fields = productType ? (productType.grokFields || []) : []
 
     return (
       <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={onClickAddGrokField}/>}>

@@ -289,13 +289,21 @@ class BrainCellModal extends React.Component {
   ///////////////////////////////////////////////////////////////////
 
   onClickAddGrokField () {
+    const productType = this.getProductType()
+    if (!productType) return
+
     const name = prompt('Please type grok field', '')
     if (!name) return
 
-    const {grokFields} = this.state
-    this.setState({
-      grokFields: [...grokFields, name]
-    })
+    let grokFields = productType.grokFields || []
+    grokFields = [...grokFields, name]
+
+    const entity = {
+      ...productType,
+      grokFields
+    }
+
+    this.props.updateProductType(entity)
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -391,6 +399,7 @@ class BrainCellModal extends React.Component {
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
 
+        productType={this.getProductType()}
         onClickAddGrokField={this.onClickAddGrokField.bind(this)}
 
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
