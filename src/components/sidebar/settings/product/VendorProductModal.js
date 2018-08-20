@@ -499,6 +499,8 @@ class VendorProductModal extends React.Component {
         brainCells={this.props.brainCells}
         editBrainCell={this.props.editBrainCell}
 
+        updateProductType={this.props.updateProductType}
+
         showScriptModal={this.props.showScriptModal}
         showGrokModal={this.props.showGrokModal}
         showCellParamModal={this.props.showCellParamModal}
@@ -547,7 +549,6 @@ class VendorProductModal extends React.Component {
   }
 
   renderBraincellModal () {
-    const {updateProductType} = this.props
     if (!this.props.brainCellModalOpen) return null
     return (
       <BrainCellModal
@@ -560,7 +561,7 @@ class VendorProductModal extends React.Component {
         productVendors={this.props.productVendors}
         vendorProducts={this.props.vendorProducts}
 
-        updateProductType={updateProductType}
+        updateProductType={this.props.updateProductType}
 
         brainCells={this.props.brainCells}
         editBrainCell={this.props.editBrainCell}
