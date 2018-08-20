@@ -132,7 +132,7 @@ export default class BrainCellModalView extends Component {
   }
 
   renderGrokFields () {
-    const {allValues, productTypes} = this.props
+    const {allValues, productTypes, onClickAddGrokField} = this.props
     const {type, productTypeId} = allValues || {}
     if (type !== 'Grok') return null
 
@@ -145,7 +145,7 @@ export default class BrainCellModalView extends Component {
     }
 
     return (
-      <CardPanel title="Grok Fields">
+      <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={onClickAddGrokField}/>}>
         <table className="table table-p-sm table-hover">
           <tbody>
           {fields.map((p, index) =>
