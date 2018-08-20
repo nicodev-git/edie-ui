@@ -57,7 +57,7 @@ export default class ProductTypeModalView extends React.Component {
                 <TableBody>
                   {grokFields.map((p, i) =>
                     <TableRow key={i}>
-                      <TableCell component="th" scope="row">{p.name}</TableCell>
+                      <TableCell component="th" scope="row">{p}</TableCell>
                       <TableCell className="nowrap">
                         <EditIcon className="link margin-sm-right" onClick={() => onClickEditGrokField(i)}/>
                         <DeleteIcon className="link" onClick={() => onClickDeleteGrokField(i)}/>

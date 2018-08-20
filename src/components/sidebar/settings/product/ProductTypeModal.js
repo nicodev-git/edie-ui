@@ -85,8 +85,14 @@ class ProductTypeModal extends React.Component {
     })
   }
 
-  onClickEditGrokField () {
+  onClickEditGrokField (index) {
+    const {grokFields} = this.state
+    const name = prompt('Please type grok field', grokFields[index])
+    if (!name) return
 
+    this.setState({
+      grokFields: grokFields.map((p, i) => i === index ? name : p)
+    })
   }
 
   onClickDeleteGrokField () {
