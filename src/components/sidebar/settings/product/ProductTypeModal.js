@@ -12,17 +12,19 @@ class ProductTypeModal extends React.Component {
     this.state = {
       actionModalOpen: false,
       editAction: null,
-      actions: (editType ? editType.actions : []) || []
+      actions: (editType ? editType.actions : []) || [],
+      grokFields: (editType ? editType.grokFields : []) || [],
     }
   }
 
   handleFormSubmit (values) {
     const {editType} = this.props
-    const {actions} = this.state
+    const {actions, grokFields} = this.state
     this.props.onSave({
       ...editType,
       ...values,
-      actions
+      actions,
+      grokFields
     })
   }
 
@@ -73,6 +75,26 @@ class ProductTypeModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
+  onClickAddGrokField () {
+    const name = prompt('Please type grok field', '')
+    if (!name) return
+
+    const {grokFields} = this.state
+    this.setState({
+      grokFields: [...grokFields, name]
+    })
+  }
+
+  onClickEditGrokField () {
+
+  }
+
+  onClickDeleteGrokField () {
+
+  }
+
+  ////////////////////////////////////////////////////
+
   renderActionModal () {
     if (!this.state.actionModalOpen) return null
     return (
@@ -94,7 +116,13 @@ class ProductTypeModal extends React.Component {
         actions={this.state.actions}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
-        onClickDeleteAction={this.onClickDeleteAction.bind(this)}>
+        onClickDeleteAction={this.onClickDeleteAction.bind(this)}
+
+        grokFields={this.state.grokFields}
+        onClickAddGrokField={this.onClickAddGrokField.bind(this)}
+        onClickEditGrokField={this.onClickEditGrokField.bind(this)}
+        onClickDeleteGrokField={this.onClickDeleteGrokField.bind(this)}
+      >
         {this.renderActionModal()}
       </ProductTypeModalView>
     )
