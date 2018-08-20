@@ -23,8 +23,10 @@ class Modal extends React.Component {
           <span style={dialogTitleFontStyle}>{title}</span>
         </DialogTitle>
         {onRequestClose && <CloseIconButton onClick={onRequestClose} color="white"/>}
-        <div style={{width: 750, ...dialogBodyStyle, ...contentStyle}}>
-          {this.props.children}
+        <div style={dialogBodyStyle}>
+          <div style={{width: 750, ...contentStyle}}>
+            {this.props.children}
+          </div>
         </div>
       </Dialog>
     )

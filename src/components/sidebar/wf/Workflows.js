@@ -9,6 +9,7 @@ import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import FormControl from '@material-ui/core/FormControl'
 import {find, findIndex} from 'lodash'
+import {Field} from 'redux-form'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -18,6 +19,7 @@ import WorkflowSettingModal from './WorkflowSettingModal'
 import {getSeverityIcon} from 'shared/Global'
 import FlowGroupsModal from './flowgroups/FlowGroupsModal'
 import GlobalVarsModal from './globalvar/GlobalVarsModal'
+import {FormSelect} from 'components/modal/parts'
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -348,8 +350,46 @@ class Workflows extends React.Component {
     )
   }
 
+  renderProductFilter2() {
+    const {allValues, productTypes, productFilterTypes} = this.props
+    const {filterType} = allValues || {}
+
+    return (
+      <div>
+        <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
+               options={productFilterTypes}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        {filterType === 'PRODUCT_TYPE' ? (
+          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
+                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+                 style={{minWidth: 150}}
+          />
+        ) : (
+          this.renderProductCombos()
+        )}
+      </div>
+    )
+  }
+
+  renderProductCombos() {
+    const {allValues, productTypes, productVendors, vendorProducts} = this.props
+    const {productTypeId, productVendorId} = allValues || {}
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
+  }
+
   renderProductFilter() {
-    const {productTypes} = this.props
+    const {productTypes, productVendors} = this.props
     const {filterProductTypes, filterProductVendors} = this.state
 
     return (
@@ -386,7 +426,7 @@ class Workflows extends React.Component {
             onChange={this.onChangeProductVendorId.bind(this)}
             style={{width: 150}}
             multiple
-            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
+            renderValue={selected => selected.map(p => find(productVendors, {id: p}).name).join(', ')}
             MenuProps={{
               PaperProps: {
                 style: {
@@ -397,7 +437,7 @@ class Workflows extends React.Component {
           >
             {productTypes.map(p =>
               <MenuItem key={p.id} value={p.id}>
-                <Checkbox checked={filterProductTypes.includes(p.id)}/>
+                <Checkbox checked={filterProductVendors.includes(p.id)}/>
                 <label>{p.name}</label>
               </MenuItem>
             )}
