@@ -349,7 +349,7 @@ class Workflows extends React.Component {
   }
 
   renderProductFilter() {
-    const {productTypes} = this.props
+    const {productTypes, productVendors} = this.props
     const {filterProductTypes, filterProductVendors} = this.state
 
     return (
@@ -386,7 +386,7 @@ class Workflows extends React.Component {
             onChange={this.onChangeProductVendorId.bind(this)}
             style={{width: 150}}
             multiple
-            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
+            renderValue={selected => selected.map(p => find(productVendors, {id: p}).name).join(', ')}
             MenuProps={{
               PaperProps: {
                 style: {
@@ -397,7 +397,7 @@ class Workflows extends React.Component {
           >
             {productTypes.map(p =>
               <MenuItem key={p.id} value={p.id}>
-                <Checkbox checked={filterProductTypes.includes(p.id)}/>
+                <Checkbox checked={filterProductVendors.includes(p.id)}/>
                 <label>{p.name}</label>
               </MenuItem>
             )}
