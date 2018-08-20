@@ -290,7 +290,7 @@ class BrainCellModal extends React.Component {
 
   onClickAddGrokField () {
     const productType = this.getProductType()
-    if (!productType) return
+    if (!productType) return window.alert('Please select product type first.')
 
     const name = prompt('Please type grok field', '')
     if (!name) return
