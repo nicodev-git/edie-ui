@@ -33,6 +33,11 @@ class Workflows extends React.Component {
       filterProductTypes: [],
       filterProductVendors: [],
 
+      filterType: 'type',
+      productTypeId: '',
+      productVendorId: '',
+      productId: '',
+
       groupsModalOpen: false,
       globalVarsModalOpen: false
     }
@@ -386,6 +391,23 @@ class Workflows extends React.Component {
       const vendor = find(productVendors, {id: productVendorId})
       if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
     }
+
+    return (
+      <div className="margin-md-top">
+        <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
+               options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
+               options={vendors.map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productId" component={FormSelect} floatingLabel="Product"
+               options={(products || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}}
+        />
+      </div>
+    )
   }
 
   renderProductFilter() {
@@ -490,7 +512,8 @@ class Workflows extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
               {this.renderGroups()}
-              {/*{this.renderProductFilter()}*/}
+              {/*{this.renderProductFilter
+              ()}*/}
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
