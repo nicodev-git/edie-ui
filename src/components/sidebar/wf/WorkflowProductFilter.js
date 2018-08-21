@@ -1,11 +1,10 @@
 import React from 'react'
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import {MenuItem, Select, Checkbox} from '@material-ui/core'
+import {MenuItem, Select} from '@material-ui/core'
 import {find} from 'lodash'
 
 import {productFilterTypes} from 'shared/Global'
-import {Field} from "redux-form";
 
 const menuProps = {
   PaperProps: {
@@ -20,7 +19,6 @@ export default class WorkflowProductFilter extends React.Component {
     const {
       vendorProducts, productTypes, productVendors,
 
-      filterType, onChangeFilterType,
       productTypeId, onChangeProductType,
       productVendorId, onChangeProductVendor,
       productId, onChangeProduct
@@ -83,12 +81,10 @@ export default class WorkflowProductFilter extends React.Component {
 
   render () {
     const {
-      vendorProducts, productTypes, productVendors,
+      productTypes,
 
       filterType, onChangeFilterType,
       productTypeId, onChangeProductType,
-      productVendorId, onChangeProductVendor,
-      productId, onChangeProduct
     } = this.props
 
     return (
@@ -104,7 +100,6 @@ export default class WorkflowProductFilter extends React.Component {
             {productFilterTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
           </Select>
         </FormControl>
-
 
         {filterType === 'PRODUCT' ? (
           this.renderProductCombos()
