@@ -54,11 +54,19 @@ export default class ProductTypeModalView extends React.Component {
       this.setState({
         newAction: ''
       })
+      // this.setState({
+      //   addedAction: []
+      // })
 
     }
     // tools={<AddIcon className="link" onClick={this.onClickAddEmptyAction}/>}
     console.log(event.key)
   }
+
+  test = (e) => () => {
+    console.log(e)
+  }
+
   render () {
     const {
       onClose,
@@ -81,6 +89,23 @@ export default class ProductTypeModalView extends React.Component {
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
+                  <TableRow>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {actions.map((p, i) =>
+                        <TableRow key={i}>
+                          <TableCell
+                            onClick={this.test(i)}
+                            component="th" scope="row">{p.name}
+                          </TableCell>
+                          <TableCell className="nowrap">
+                            <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
+                            <DeleteIcon className="link" onClick={() => onClickDeleteAction(i)}/>
+                          </TableCell>
+                        </TableRow>
+                      )}
                   {this.state.addedAction.map((p, i) =>
                     <TableRow key={i}>
                       <TableCell>
@@ -91,18 +116,6 @@ export default class ProductTypeModalView extends React.Component {
                             onKeyPress={this.onAddAction()}
                             label="Name"/>
                         </TableCell>
-                    </TableRow>
-                  )}
-                </TableHead>
-
-                <TableBody>
-                  {actions.map((p, i) =>
-                    <TableRow key={i}>
-                      <TableCell component="th" scope="row">{p.name}</TableCell>
-                      <TableCell className="nowrap">
-                        <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
-                        <DeleteIcon className="link" onClick={() => onClickDeleteAction(i)}/>
-                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>
