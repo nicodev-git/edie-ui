@@ -64,7 +64,7 @@ export default class ProductTypeModalView extends React.Component {
   }
 
   test = (e) => () => {
-    console.log(e)
+    this.state.editableActionIndex = e
   }
 
   render () {
@@ -102,6 +102,10 @@ export default class ProductTypeModalView extends React.Component {
                             scope="row">
                               {p.name}
                               {/* <input value={p.name} disabled={this.state.editableActionIndex === i ? true : false}/> */}
+                              {/* <TextField
+                                fullWidth
+                                disabled={this.state.editableActionIndex === i ? true : false}
+                                value={p.name} /> */}
                           </TableCell>
                           <TableCell className="nowrap">
                             <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
@@ -113,6 +117,7 @@ export default class ProductTypeModalView extends React.Component {
                     <TableRow key={i}>
                       <TableCell>
                           <TextField
+                            autoFocus
                             fullWidth
                             value={this.state.newAction} 
                             onChange={this.handleChange('newAction')}
