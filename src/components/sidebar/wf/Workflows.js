@@ -50,6 +50,7 @@ class Workflows extends React.Component {
     this.props.fetchSimSamples()
     this.props.fetchVendorProducts()
     this.props.fetchProductTypes()
+    this.props.fetchProductVendors()
   }
 
   getTags() {
@@ -219,12 +220,36 @@ class Workflows extends React.Component {
     let {workflows} = this.props
 
     if (filterType === 'PRODUCT_TYPE') {
+      if (!productTypeId) return workflows
 
+      workflows = workflows.filter(wf => {
+        const productInfo = this.getWfProductInfo(wf)
+        const wfProductType = productInfo[0]
+        return (wfProductType && wfProductType.id === productTypeId)
+      })
     } else {
 
     }
 
     return workflows
+  }
+
+  getWfProductInfo (wf) {
+    const {productTypes, productVendors} = this.props
+    const {filterType, productId, productTypeId} = wf
+    if (filterType === 'PRODUCT') {
+      if (productId) {
+        const vendor = productVendors.filter(p => (p.productIds || []).includes(productId))[0]
+        if (vendor) {
+          const type = productTypes.filter(p => (p.vendorIds || []).includes(vendor.id))[0]
+          return [type, vendor]
+        }
+      }
+    } else {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) return [type, null]
+    }
+    return []
   }
 
   ////////////////////////////////////////////////////////////////
@@ -235,7 +260,7 @@ class Workflows extends React.Component {
     return getSeverityIcon(cell.severity)
   }
 
-  getWfProductType (wf) {
+  renderWfProductType (wf) {
     const {productTypes, productVendors} = this.props
     const {filterType, productId, productTypeId} = wf
     if (filterType === 'PRODUCT') {
@@ -254,14 +279,8 @@ class Workflows extends React.Component {
   }
 
   renderWorkflows() {
-    const {groupId, filterTags} = this.state
-    let {workflows} = this.props
-    if (groupId !== '0') {
-      workflows = workflows.filter(p => p.groupId === groupId)
-    }
-    if (filterTags.length) {
-      workflows = workflows.filter(p => (p.tags || []).filter(t => filterTags.includes(t)).length > 0)
-    }
+    const workflows = this.getFilteredWorkflows(this.props.workflows)
+
     return (
       <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
         <table className="table table-hover">
@@ -286,7 +305,7 @@ class Workflows extends React.Component {
                 </div>
               </td>
               <td>{m.description}</td>
-              <td>{this.getWfProductType(m)}</td>
+              <td>{this.renderWfProductType(m)}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
