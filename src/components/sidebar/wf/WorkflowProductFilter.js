@@ -40,14 +40,37 @@ export default class WorkflowProductFilter extends React.Component {
 
 
         {filterType === 'PRODUCT' ? (
-          <div>
+          <div className="inline-block">
+            <FormControl>
+              <InputLabel>Product Type</InputLabel>
+              <Select
+                value={productTypeId}
+                onChange={onChangeProductType}
+                style={{width: 150}}
+                MenuProps={menuProps}
+              >
+                {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <InputLabel>Product Vendor</InputLabel>
+              <Select
+                value={productTypeId}
+                onChange={onChangeProductType}
+                style={{width: 150}}
+                MenuProps={menuProps}
+              >
+                {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+              </Select>
+            </FormControl>
           </div>
         ) : (
           <FormControl>
             <InputLabel>Product Type</InputLabel>
             <Select
               value={productTypeId}
-              onChange={onChangeFilterType}
+              onChange={onChangeProductType}
               style={{width: 150}}
               MenuProps={menuProps}
             >

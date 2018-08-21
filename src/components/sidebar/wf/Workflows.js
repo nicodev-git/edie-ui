@@ -190,15 +190,21 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
-  onChangeProductTypeId (e) {
+  onChangeProductType (e) {
     this.setState({
-      filterProductTypes: e.target.value
+      productTypeId: e.target.value
     })
   }
 
-  onChangeProductVendorId (e) {
+  onChangeProductVendor (e) {
     this.setState({
-      filterProductVendors: e.target.value
+      productVendorId: e.target.value
+    })
+  }
+
+  onChangeProduct (e) {
+    this.setState({
+      productId: e.target.value
     })
   }
 
@@ -359,28 +365,6 @@ class Workflows extends React.Component {
     )
   }
 
-  renderProductFilter2() {
-    const {allValues, productTypes, productFilterTypes} = this.props
-    const {filterType} = allValues || {}
-
-    return (
-      <div>
-        <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
-               options={productFilterTypes}
-               style={{minWidth: 150}} className="margin-sm-right"
-        />
-        {filterType === 'PRODUCT_TYPE' ? (
-          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
-                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
-                 style={{minWidth: 150}}
-          />
-        ) : (
-          this.renderProductCombos()
-        )}
-      </div>
-    )
-  }
-
   renderProductCombos() {
     const {allValues, productTypes, productVendors, vendorProducts} = this.props
     const {productTypeId, productVendorId} = allValues || {}
@@ -429,8 +413,11 @@ class Workflows extends React.Component {
         onChangeFilterType={this.onChangeFilterType.bind(this)}
 
         productId={productId}
+        onChangeProduct={this.onChangeProduct.bind(this)}
         productTypeId={productTypeId}
+        onChangeProductType={this.onChangeProductType.bind(this)}
         productVendorId={productVendorId}
+        onChangeProductVendor={this.onChangeProductVendor.bind(this)}
       />
     )
   }
