@@ -1,13 +1,41 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
+import {Table, TableBody, TableCell, TableHead, TableRow, TextField, Button} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import uuid from 'uuid'
 
 import {Modal, CardPanel, SubmitBlock, FormInput} from 'components/modal/parts'
 
 export default class ProductTypeModalView extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      newAction: ''
+    }
+  }
+
+  handleChange = key => event => {
+    this.setState({
+      [key]: event.target.value
+    })
+  }
+
+  onNewActionAdd = () => (event) => {
+    event.preventDefault()
+
+    this.props.onSave({
+      name: this.state.newAction,
+      id: uuid()
+    })
+
+    this.setState({
+      newAction: ''
+    })
+  }
+
   render () {
     const {onClose, onSubmit,
       actions, onClickAddAction, onClickEditAction, onClickDeleteAction,
@@ -23,6 +51,15 @@ export default class ProductTypeModalView extends React.Component {
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
+                  <TableHead>
+                    <TextField 
+                      value={this.state.newAction} 
+                      onChange={this.handleChange('newAction')}
+                      label="Name"/>
+                    <Button
+                      variant="contained" color="primary" 
+                      onClick={this.onNewActionAdd()}>Add</Button>
+                  </TableHead>
                   <TableRow>
                     <TableCell>Name</TableCell>
                     <TableCell></TableCell>

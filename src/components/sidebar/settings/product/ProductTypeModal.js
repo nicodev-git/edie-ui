@@ -121,6 +121,7 @@ class ProductTypeModal extends React.Component {
     return (
       <ProductTypeModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onSave={this.onSaveAction.bind(this)}
         onClose={onClose}
 
         actions={this.state.actions}
