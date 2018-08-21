@@ -1,12 +1,10 @@
 import React from 'react'
-
-
-import WorkflowSettingModalView from './WorkflowSettingModalView'
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import {MenuItem, Select} from "@material-ui/core";
-import {find} from "lodash";
-import Checkbox from "@material-ui/core/Checkbox";
+import {MenuItem, Select, Checkbox} from '@material-ui/core'
+import {find} from 'lodash'
+
+import {productFilterTypes} from 'shared/Global'
 
 const menuProps = {
   PaperProps: {
@@ -17,46 +15,32 @@ const menuProps = {
 }
 
 export default class WorkflowProductFilter extends React.Component {
-  onSubmit (values) {
-    const entity = {
-      ...values,
-    }
-
-    this.props.onSave(entity)
-    this.onClickClose()
-  }
-  onClickClose () {
-    this.props.onClose()
-  }
-
   render () {
-    const { handleSubmit } = this.props
+    const {filterType, onChangeFilterType} = this.props
+
     return (
       <div className="inline-block margin-md-left">
         <FormControl>
-          <InputLabel>Product Type</InputLabel>
+          <InputLabel>Filter Type</InputLabel>
           <Select
-            value={filterProductTypes}
-            onChange={this.onChangeProductTypeId.bind(this)}
+            value={filterType}
+            onChange={onChangeFilterType}
             style={{width: 150}}
-            multiple
-            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
-            MenuProps={{
-              PaperProps: {
-                style: {
-                  maxHeight: 50 * 8,
-                }
-              }
-            }}
+            MenuProps={menuProps}
           >
-            {productTypes.map(p =>
-              <MenuItem key={p.id} value={p.id}>
-                <Checkbox checked={filterProductTypes.includes(p.id)}/>
-                <label>{p.name}</label>
-              </MenuItem>
-            )}
+            {productFilterTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
           </Select>
         </FormControl>
+
+
+        {filterType === 'PRODUCT' ? (
+          <div>
+          </div>
+        ) : (
+          <div>
+          </div>
+        )}
+
       </div>
     )
   }
