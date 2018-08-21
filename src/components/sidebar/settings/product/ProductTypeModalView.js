@@ -63,7 +63,7 @@ export default class ProductTypeModalView extends React.Component {
       } else {
         if (this.state.newGrok.trim()) {
           
-          this.props.onClickAddGrokField(this.state.newGrok.trim())
+          this.props.onSaveGrokField(this.state.newGrok.trim())
           this.setState({
             newGrok: '',
             addedGrok: []
@@ -76,7 +76,7 @@ export default class ProductTypeModalView extends React.Component {
   }
 
   test = (e) => () => {
-    this.state.editableActionIndex = e
+    // this.state.editableActionIndex = e
   }
 
   render () {
@@ -87,7 +87,7 @@ export default class ProductTypeModalView extends React.Component {
       onClickEditAction,
       onClickDeleteAction,
       grokFields,
-      onClickAddGrokField,
+      // onClickAddGrokField,
       onClickEditGrokField,
       onClickDeleteGrokField
     } = this.props

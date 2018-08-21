@@ -78,7 +78,7 @@ class ProductTypeModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
-  onClickAddGrokField (name) {
+  onSaveGrokField (name) {
     const {grokFields} = this.state
     this.setState({
       grokFields: [...grokFields, name]
@@ -129,7 +129,7 @@ class ProductTypeModal extends React.Component {
         onClickDeleteAction={this.onClickDeleteAction.bind(this)}
         editType={this.props.editType}
         grokFields={this.state.grokFields}
-        onClickAddGrokField={this.onClickAddGrokField.bind(this)}
+        onSaveGrokField={this.onSaveGrokField.bind(this)}
         onClickEditGrokField={this.onClickEditGrokField.bind(this)}
         onClickDeleteGrokField={this.onClickDeleteGrokField.bind(this)}
       >
