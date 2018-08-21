@@ -20,6 +20,7 @@ import {getSeverityIcon} from 'shared/Global'
 import FlowGroupsModal from './flowgroups/FlowGroupsModal'
 import GlobalVarsModal from './globalvar/GlobalVarsModal'
 import {FormSelect} from 'components/modal/parts'
+import WorkflowProductFilter from './WorkflowProductFilter'
 
 class Workflows extends React.Component {
   constructor(props) {
@@ -30,10 +31,7 @@ class Workflows extends React.Component {
       filterTags: [],
       menuAnchor: null,
 
-      filterProductTypes: [],
-      filterProductVendors: [],
-
-      filterType: 'type',
+      filterType: 'PRODUCT_TYPE',
       productTypeId: '',
       productVendorId: '',
       productId: '',
@@ -201,6 +199,12 @@ class Workflows extends React.Component {
   onChangeProductVendorId (e) {
     this.setState({
       filterProductVendors: e.target.value
+    })
+  }
+
+  onChangeFilterType (e) {
+    this.setState({
+      filterType: e.target.value
     })
   }
 
@@ -411,61 +415,23 @@ class Workflows extends React.Component {
   }
 
   renderProductFilter() {
-    const {productTypes, productVendors} = this.props
-    const {filterProductTypes, filterProductVendors} = this.state
+    const {productTypes, productVendors, vendorProducts} = this.props
+    const {productId, productTypeId, productVendorId,
+      filterType} = this.state
 
     return (
-      <div className="inline-block margin-md-left">
-        <FormControl>
-          <InputLabel>Product Type</InputLabel>
-          <Select
-            value={filterProductTypes}
-            onChange={this.onChangeProductTypeId.bind(this)}
-            style={{width: 150}}
-            multiple
-            renderValue={selected => selected.map(p => find(productTypes, {id: p}).name).join(', ')}
-            MenuProps={{
-              PaperProps: {
-                style: {
-                  maxHeight: 50 * 8,
-                }
-              }
-            }}
-          >
-            {productTypes.map(p =>
-              <MenuItem key={p.id} value={p.id}>
-                <Checkbox checked={filterProductTypes.includes(p.id)}/>
-                <label>{p.name}</label>
-              </MenuItem>
-            )}
-          </Select>
-        </FormControl>
+      <WorkflowProductFilter
+        productTypes={productTypes}
+        productVendors={productVendors}
+        vendorProducts={vendorProducts}
 
-        <FormControl>
-          <InputLabel>Product Vendor</InputLabel>
-          <Select
-            value={filterProductVendors}
-            onChange={this.onChangeProductVendorId.bind(this)}
-            style={{width: 150}}
-            multiple
-            renderValue={selected => selected.map(p => find(productVendors, {id: p}).name).join(', ')}
-            MenuProps={{
-              PaperProps: {
-                style: {
-                  maxHeight: 50 * 8,
-                }
-              }
-            }}
-          >
-            {productTypes.map(p =>
-              <MenuItem key={p.id} value={p.id}>
-                <Checkbox checked={filterProductVendors.includes(p.id)}/>
-                <label>{p.name}</label>
-              </MenuItem>
-            )}
-          </Select>
-        </FormControl>
-      </div>
+        filterType={filterType}
+        onChangeFilterType={this.onChangeFilterType.bind(this)}
+
+        productId={productId}
+        productTypeId={productTypeId}
+        productVendorId={productVendorId}
+      />
     )
   }
 
@@ -512,8 +478,7 @@ class Workflows extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
               {this.renderGroups()}
-              {/*{this.renderProductFilter
-              ()}*/}
+              {this.renderProductFilter()}
             </div>
             <div className="pull-right">
               <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;

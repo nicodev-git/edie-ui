@@ -26,7 +26,7 @@ export default class WorkflowProductFilter extends React.Component {
 
     return (
       <div className="inline-block margin-md-left">
-        <FormControl>
+        <FormControl className="margin-md-right">
           <InputLabel>Filter Type</InputLabel>
           <Select
             value={filterType}
