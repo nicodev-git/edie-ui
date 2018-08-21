@@ -228,7 +228,23 @@ class Workflows extends React.Component {
         return (wfProductType && wfProductType.id === productTypeId)
       })
     } else {
-
+      if (productId) {
+        return workflows.filter(wf => wf.filterType === 'PRODUCT' && wf.productId === productId)
+      }
+      if (productVendorId) {
+        return workflows.filter(wf => {
+          const productInfo = this.getWfProductInfo(wf)
+          const wfProductVendor = productInfo[1]
+          return wfProductVendor && wfProductVendor.id === productVendorId
+        })
+      }
+      if (productTypeId) {
+        return workflows.filter(wf => {
+          const productInfo = this.getWfProductInfo(wf)
+          const wfProductType = productInfo[0]
+          return (wfProductType && wfProductType.id === productTypeId)
+        })
+      }
     }
 
     return workflows
