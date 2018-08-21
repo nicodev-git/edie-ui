@@ -47,23 +47,26 @@ export default class ProductTypeModalView extends React.Component {
           <CardPanel title="Product Type">
             <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
           </CardPanel>
-          <CardPanel title="Actions" tools={<AddIcon className="link" onClick={onClickAddAction}/>}>
+          <CardPanel title="Actions">
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
-                  <TableHead>
-                    <TextField 
-                      value={this.state.newAction} 
-                      onChange={this.handleChange('newAction')}
-                      label="Name"/>
-                    <Button
-                      variant="contained" color="primary" 
-                      onClick={this.onNewActionAdd()}>Add</Button>
-                  </TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
+                    <TableRow>
+                      <TableCell>
+                        <TextField
+                            style={{width: 400}}
+                            value={this.state.newAction} 
+                            onChange={this.handleChange('newAction')}
+                            label="Name"/>
+                        <Button
+                          style={{marginLeft: 20}}
+                          variant="contained" 
+                          color="primary" 
+                          onClick={this.onNewActionAdd()}>
+                            Add
+                        </Button>
+                      </TableCell>
+                    </TableRow>
                 </TableHead>
 
                 <TableBody>
