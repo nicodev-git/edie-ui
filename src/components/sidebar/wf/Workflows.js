@@ -355,22 +355,22 @@ class Workflows extends React.Component {
     )
   }
 
-  renderGroups() {
-    const {groups} = this.props
-    return (
-      <Select
-        value={this.state.groupId}
-        onChange={this.onChangeGroup.bind(this)}
-        style={{width: 150}}
-        native={false}
-      >
-        <MenuItem value="0">[All]</MenuItem>
-        {groups.map(p =>
-          <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-        )}
-      </Select>
-    )
-  }
+  // renderGroups() {
+  //   const {groups} = this.props
+  //   return (
+  //     <Select
+  //       value={this.state.groupId}
+  //       onChange={this.onChangeGroup.bind(this)}
+  //       style={{width: 150}}
+  //       native={false}
+  //     >
+  //       <MenuItem value="0">[All]</MenuItem>
+  //       {groups.map(p =>
+  //         <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+  //       )}
+  //     </Select>
+  //   )
+  // }
 
   renderSettingModal() {
     if (!this.props.wfSettingModalOpen) return
@@ -515,7 +515,6 @@ class Workflows extends React.Component {
         <TabPageHeader title="Workflows">
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
-              {this.renderGroups()}
               {this.renderProductFilter()}
             </div>
             <div className="pull-right">
