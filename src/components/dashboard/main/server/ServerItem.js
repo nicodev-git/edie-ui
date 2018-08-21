@@ -22,6 +22,8 @@ export default class ServerItem extends React.Component {
 
     const device = this.props.server
     checkAgentUp(device.id, (up, info, resCode) => {
+      const time = device.lastSeen || (device.agent || {}).lastSeen
+      const timestr = ''
       this.setState({
         up,
         info: up ? '' : (info || 'ping is ok (last 1m ago) credential problem')
