@@ -25,7 +25,7 @@ export default class ServerItem extends React.Component {
     checkAgentUp(device.id, (up, info, resCode) => {
       const time = device.lastSeen || (device.agent || {}).lastSeen
       let msg = ''
-      if (time) msg = `Ping is ok (last ${moment(time).fromNow()} ago) credential problem`
+      if (time) msg = `Ping is ok (last ${moment(time).fromNow()} ago) connection problem`
       else msg = 'Connection problem'
       this.setState({
         up,
