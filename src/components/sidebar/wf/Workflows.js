@@ -193,13 +193,16 @@ class Workflows extends React.Component {
 
   onChangeProductType (e) {
     this.setState({
-      productTypeId: e.target.value
+      productTypeId: e.target.value,
+      productVendorId: '',
+      productId: ''
     })
   }
 
   onChangeProductVendor (e) {
     this.setState({
-      productVendorId: e.target.value
+      productVendorId: e.target.value,
+      productId: ''
     })
   }
 
