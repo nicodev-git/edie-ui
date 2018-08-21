@@ -13,7 +13,8 @@ export default class ProductTypeModalView extends React.Component {
     super(props)
     this.state = {
       newAction: '',
-      addedAction: [1]
+      addedAction: [],
+      editableActionIndex: 0
     }
   }
 
@@ -37,30 +38,29 @@ export default class ProductTypeModalView extends React.Component {
   }
 
   onClickAddEmptyAction = () => {
-    this.state.addedAction.push('')
     this.setState({
-      addedAction: this.state.addedAction
+      addedAction: [1]
     })
-    console.log(this.state)
   }
   onAddAction = () => (event) => {
     if (event.key === 'Enter') {
       event.preventDefault()
-      this.props.onSave({
-        name: this.state.newAction,
-        id: uuid()
-      })
+      if (this.state.newAction.trim()) {
+        this.props.onSave({
+          name: this.state.newAction,
+          id: uuid()
+        })
+      }
   
       this.setState({
         newAction: ''
       })
-      // this.setState({
-      //   addedAction: []
-      // })
+      this.setState({
+        addedAction: []
+      })
 
     }
     // tools={<AddIcon className="link" onClick={this.onClickAddEmptyAction}/>}
-    console.log(event.key)
   }
 
   test = (e) => () => {
@@ -85,7 +85,7 @@ export default class ProductTypeModalView extends React.Component {
           <CardPanel title="Product Type">
             <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
           </CardPanel>
-          <CardPanel title="Actions"> 
+          <CardPanel title="Actions" tools={<AddIcon className="link" onClick={this.onClickAddEmptyAction}/>}> 
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
@@ -98,7 +98,10 @@ export default class ProductTypeModalView extends React.Component {
                         <TableRow key={i}>
                           <TableCell
                             onClick={this.test(i)}
-                            component="th" scope="row">{p.name}
+                            component="th" 
+                            scope="row">
+                              {p.name}
+                              {/* <input value={p.name} disabled={this.state.editableActionIndex === i ? true : false}/> */}
                           </TableCell>
                           <TableCell className="nowrap">
                             <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
