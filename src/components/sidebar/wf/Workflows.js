@@ -214,6 +214,19 @@ class Workflows extends React.Component {
     })
   }
 
+  getFilteredWorkflows () {
+    const {filterType, productTypeId, productVendorId, productId} = this.state
+    let {workflows} = this.props
+
+    if (filterType === 'PRODUCT_TYPE') {
+
+    } else {
+
+    }
+
+    return workflows
+  }
+
   ////////////////////////////////////////////////////////////////
 
   renderSeverity (wf) {
@@ -222,7 +235,7 @@ class Workflows extends React.Component {
     return getSeverityIcon(cell.severity)
   }
 
-  renderProductType (wf) {
+  getWfProductType (wf) {
     const {productTypes, productVendors} = this.props
     const {filterType, productId, productTypeId} = wf
     if (filterType === 'PRODUCT') {
@@ -273,7 +286,7 @@ class Workflows extends React.Component {
                 </div>
               </td>
               <td>{m.description}</td>
-              <td>{this.renderProductType(m)}</td>
+              <td>{this.getWfProductType(m)}</td>
               <td>{m.ownerUser}</td>
               <td>{m.type || 'normal'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>

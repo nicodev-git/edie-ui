@@ -47,7 +47,6 @@ export default class WorkflowProductFilter extends React.Component {
             style={{width: 150}}
             MenuProps={menuProps}
           >
-            <MenuItem value="">[All]</MenuItem>
             {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
@@ -60,7 +59,6 @@ export default class WorkflowProductFilter extends React.Component {
             style={{width: 150}}
             MenuProps={menuProps}
           >
-            <MenuItem value="">[All]</MenuItem>
             {vendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
@@ -73,7 +71,6 @@ export default class WorkflowProductFilter extends React.Component {
             style={{width: 150}}
             MenuProps={menuProps}
           >
-            <MenuItem value="">[All]</MenuItem>
             {products.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
@@ -101,7 +98,6 @@ export default class WorkflowProductFilter extends React.Component {
             style={{width: 150}}
             MenuProps={menuProps}
           >
-            <MenuItem value="">[All]</MenuItem>
             {productFilterTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
           </Select>
         </FormControl>
