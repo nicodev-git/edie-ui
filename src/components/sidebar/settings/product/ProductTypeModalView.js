@@ -1,6 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Table, TableBody, TableCell, TableHead, TableRow, TextField, Button} from '@material-ui/core'
+import {Table, TableBody, TableCell, TableHead, TableRow, TextField} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -11,9 +11,9 @@ import {Modal, CardPanel, SubmitBlock, FormInput} from 'components/modal/parts'
 export default class ProductTypeModalView extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
-      newAction: ''
+      newAction: '',
+      addedAction: [1]
     }
   }
 
@@ -36,6 +36,29 @@ export default class ProductTypeModalView extends React.Component {
     })
   }
 
+  onClickAddEmptyAction = () => {
+    this.state.addedAction.push('')
+    this.setState({
+      addedAction: this.state.addedAction
+    })
+    console.log(this.state)
+  }
+  onAddAction = () => (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.props.onSave({
+        name: this.state.newAction,
+        id: uuid()
+      })
+  
+      this.setState({
+        newAction: ''
+      })
+
+    }
+    // tools={<AddIcon className="link" onClick={this.onClickAddEmptyAction}/>}
+    console.log(event.key)
+  }
   render () {
     const {
       onClose,
@@ -50,30 +73,26 @@ export default class ProductTypeModalView extends React.Component {
     } = this.props
     return (
       <Modal title="Product Type" onRequestClose={onClose}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} >
           <CardPanel title="Product Type">
             <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
           </CardPanel>
-          <CardPanel title="Actions">
+          <CardPanel title="Actions"> 
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
-                    <TableRow>
+                  {this.state.addedAction.map((p, i) =>
+                    <TableRow key={i}>
                       <TableCell>
-                        <TextField
-                            style={{width: 400}}
+                          <TextField
+                            fullWidth
                             value={this.state.newAction} 
                             onChange={this.handleChange('newAction')}
+                            onKeyPress={this.onAddAction()}
                             label="Name"/>
-                        <Button
-                          style={{marginLeft: 20}}
-                          variant="contained" 
-                          color="primary" 
-                          onClick={this.onNewActionAdd()}>
-                            Add
-                        </Button>
-                      </TableCell>
+                        </TableCell>
                     </TableRow>
+                  )}
                 </TableHead>
 
                 <TableBody>

@@ -1092,7 +1092,6 @@ export function fetchProductTypes () {
 }
 
 export function addProductType(entity) {
-  console.log(entity)
   return dispatch => {
     axios.post(`${ROOT_URL}/producttype`, entity).then(res => {
       if (res.data) dispatch({type: ADD_PRODUCT_TYPE, data: res.data})

@@ -10,6 +10,7 @@ class ProductTypeModal extends React.Component {
 
     const {editType} = props
     this.state = {
+      addedAuction: [],
       actionModalOpen: false,
       editAction: null,
       actions: (editType ? editType.actions : []) || [],
@@ -34,7 +35,9 @@ class ProductTypeModal extends React.Component {
       editAction: null
     })
   }
+  // onClickEmptyAddAction () {
 
+  // }
   onClickEditAction (index) {
     this.setState({
       actionModalOpen: true,
@@ -123,7 +126,7 @@ class ProductTypeModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onSave={this.onSaveAction.bind(this)}
         onClose={onClose}
-
+        addedAuctions={this.state.addedAuction}
         actions={this.state.actions}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
