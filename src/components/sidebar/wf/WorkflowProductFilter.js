@@ -1,6 +1,6 @@
 import React from 'react'
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
 import {MenuItem, Select} from '@material-ui/core'
 import {find} from 'lodash'
 
