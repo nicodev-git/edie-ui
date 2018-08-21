@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
+import moment from 'moment'
 
 import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors, trimOSName, checkAgentUp } from 'shared/Global'
@@ -22,9 +23,13 @@ export default class ServerItem extends React.Component {
 
     const device = this.props.server
     checkAgentUp(device.id, (up, info, resCode) => {
+      const time = device.lastSeen || (device.agent || {}).lastSeen
+      let msg = ''
+      if (time) msg = `Ping is ok (last ${moment(time).fromNow()} ago) connection problem`
+      else msg = 'Connection problem'
       this.setState({
         up,
-        info: up ? '' : (info || 'ping is ok (last 1m ago) credential problem')
+        info: up ? '' : (info || msg)
       })
       setTimeout(ReactTooltip.rebuild, 100)
     })
