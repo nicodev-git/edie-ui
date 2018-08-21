@@ -11,9 +11,12 @@ import {Modal, CardPanel, SubmitBlock, FormInput} from 'components/modal/parts'
 export default class ProductTypeModalView extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       newAction: '',
+      newGrok: '',
       addedAction: [],
+      addedGrok: [],
       editableActionIndex: 0
     }
   }
@@ -37,27 +40,36 @@ export default class ProductTypeModalView extends React.Component {
     })
   }
 
-  onClickAddEmptyAction = () => {
+  onClickAddEmptyField = key => event => {
     this.setState({
-      addedAction: [1]
+      [key]: [1]
     })
   }
-  onAddAction = () => (event) => {
+  onAddField = key => event => {
     if (event.key === 'Enter') {
       event.preventDefault()
-      if (this.state.newAction.trim()) {
-        this.props.onSave({
-          name: this.state.newAction,
-          id: uuid()
+      if (key === 'action') {
+        if (this.state.newAction.trim()) {
+          this.props.onSave({
+            name: this.state.newAction,
+            id: uuid()
+          })
+        }
+        
+        this.setState({
+          newAction: '',
+          addedAction: []
         })
+      } else {
+        if (this.state.newGrok.trim()) {
+          
+          this.props.onClickAddGrokField(this.state.newGrok.trim())
+          this.setState({
+            newGrok: '',
+            addedGrok: []
+          })
+        }
       }
-  
-      this.setState({
-        newAction: ''
-      })
-      this.setState({
-        addedAction: []
-      })
 
     }
     // tools={<AddIcon className="link" onClick={this.onClickAddEmptyAction}/>}
@@ -85,11 +97,13 @@ export default class ProductTypeModalView extends React.Component {
           <CardPanel title="Product Type">
             <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right" fullWidth/>
           </CardPanel>
-          <CardPanel title="Actions" tools={<AddIcon className="link" onClick={this.onClickAddEmptyAction}/>}> 
+          <CardPanel title="Actions" tools={<AddIcon className="link" onClick={this.onClickAddEmptyField('addedAction')}/>}> 
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
                   <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
 
@@ -121,7 +135,7 @@ export default class ProductTypeModalView extends React.Component {
                             fullWidth
                             value={this.state.newAction} 
                             onChange={this.handleChange('newAction')}
-                            onKeyPress={this.onAddAction()}
+                            onKeyPress={this.onAddField('action')}
                             label="Name"/>
                         </TableCell>
                     </TableRow>
@@ -131,7 +145,7 @@ export default class ProductTypeModalView extends React.Component {
             </div>
           </CardPanel>
 
-          <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={onClickAddGrokField}/>}>
+          <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={this.onClickAddEmptyField('addedGrok')}/>}>
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
@@ -149,6 +163,19 @@ export default class ProductTypeModalView extends React.Component {
                         <EditIcon className="link margin-sm-right" onClick={() => onClickEditGrokField(i)}/>
                         <DeleteIcon className="link" onClick={() => onClickDeleteGrokField(i)}/>
                       </TableCell>
+                    </TableRow>
+                  )}
+                  {this.state.addedGrok.map((p, i) =>
+                    <TableRow key={i}>
+                      <TableCell>
+                          <TextField
+                            autoFocus
+                            fullWidth
+                            value={this.state.newGrok} 
+                            onChange={this.handleChange('newGrok')}
+                            onKeyPress={this.onAddField('grok')}
+                            label="Name"/>
+                        </TableCell>
                     </TableRow>
                   )}
                 </TableBody>

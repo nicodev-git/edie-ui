@@ -78,10 +78,7 @@ class ProductTypeModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
-  onClickAddGrokField () {
-    const name = prompt('Please type grok field', '')
-    if (!name) return
-
+  onClickAddGrokField (name) {
     const {grokFields} = this.state
     this.setState({
       grokFields: [...grokFields, name]
@@ -130,7 +127,7 @@ class ProductTypeModal extends React.Component {
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
         onClickDeleteAction={this.onClickDeleteAction.bind(this)}
-
+        editType={this.props.editType}
         grokFields={this.state.grokFields}
         onClickAddGrokField={this.onClickAddGrokField.bind(this)}
         onClickEditGrokField={this.onClickEditGrokField.bind(this)}
