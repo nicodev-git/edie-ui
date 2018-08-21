@@ -1047,7 +1047,7 @@ export function showCellParamModal (visible, data) {
 export function fetchVendorProducts () {
   return dispatch => {
     axios.get(`${ROOT_URL}/vendorproduct?size=1000`).then(res => {
-      dispatch({type: FETCH_VENDOR_PRODUCTS, data: sortBy(res.data._embedded.vendorProducts, p => (p.name || '').toLowerCase())})
+      dispatch({type: FETCH_VENDOR_PRODUCTS, data: sortBy(res.data._embedded.vendorProducts, p => p.name ? p.name.toLowerCase() : '')})
     })
   }
 }
@@ -1086,12 +1086,13 @@ export function removeVendorProduct (entity) {
 export function fetchProductTypes () {
   return dispatch => {
     axios.get(`${ROOT_URL}/producttype?size=1000`).then(res => {
-      dispatch({type: FETCH_PRODUCT_TYPES, data: sortBy(res.data._embedded.productTypes, p => (p.name || '').toLowerCase())})
+      dispatch({type: FETCH_PRODUCT_TYPES, data: sortBy(res.data._embedded.productTypes, p => p.name ? p.name.toLowerCase() : '')})
     })
   }
 }
 
 export function addProductType(entity) {
+  console.log(entity)
   return dispatch => {
     axios.post(`${ROOT_URL}/producttype`, entity).then(res => {
       if (res.data) dispatch({type: ADD_PRODUCT_TYPE, data: res.data})
@@ -1120,7 +1121,7 @@ export function removeProductType (entity) {
 export function fetchProductVendors() {
   return dispatch => {
     axios.get(`${ROOT_URL}/productvendor?size=1000`).then(res => {
-      dispatch({type: FETCH_PRODUCT_VENDORS, data: sortBy(res.data._embedded.productVendors, p => p.name.toLowerCase())})
+      dispatch({type: FETCH_PRODUCT_VENDORS, data: sortBy(res.data._embedded.productVendors, p => p.name ? p.name.toLowerCase() : '')})
     })
   }
 }

@@ -37,9 +37,16 @@ export default class ProductTypeModalView extends React.Component {
   }
 
   render () {
-    const {onClose, onSubmit,
-      actions, onClickAddAction, onClickEditAction, onClickDeleteAction,
-      grokFields, onClickAddGrokField, onClickEditGrokField, onClickDeleteGrokField
+    const {
+      onClose,
+      onSubmit,
+      actions,
+      onClickEditAction,
+      onClickDeleteAction,
+      grokFields,
+      onClickAddGrokField,
+      onClickEditGrokField,
+      onClickDeleteGrokField
     } = this.props
     return (
       <Modal title="Product Type" onRequestClose={onClose}>
