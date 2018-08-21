@@ -5,6 +5,7 @@ import {MenuItem, Select, Checkbox} from '@material-ui/core'
 import {find} from 'lodash'
 
 import {productFilterTypes} from 'shared/Global'
+import {Field} from "redux-form";
 
 const menuProps = {
   PaperProps: {
@@ -16,7 +17,12 @@ const menuProps = {
 
 export default class WorkflowProductFilter extends React.Component {
   render () {
-    const {filterType, onChangeFilterType} = this.props
+    const {
+      vendorProducts, productTypes, productVendors,
+
+      filterType, onChangeFilterType,
+      productTypeId, onChangeProductType
+    } = this.props
 
     return (
       <div className="inline-block margin-md-left">
@@ -37,10 +43,18 @@ export default class WorkflowProductFilter extends React.Component {
           <div>
           </div>
         ) : (
-          <div>
-          </div>
+          <FormControl>
+            <InputLabel>Product Type</InputLabel>
+            <Select
+              value={productTypeId}
+              onChange={onChangeFilterType}
+              style={{width: 150}}
+              MenuProps={menuProps}
+            >
+              {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            </Select>
+          </FormControl>
         )}
-
       </div>
     )
   }
