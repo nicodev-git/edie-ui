@@ -126,7 +126,6 @@ class ProductTypeModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onSave={this.onSaveAction.bind(this)}
         onClose={onClose}
-        addedAuctions={this.state.addedAuction}
         actions={this.state.actions}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
