@@ -16,12 +16,76 @@ const menuProps = {
 }
 
 export default class WorkflowProductFilter extends React.Component {
+  renderProductCombos () {
+    const {
+      vendorProducts, productTypes, productVendors,
+
+      filterType, onChangeFilterType,
+      productTypeId, onChangeProductType,
+      productVendorId, onChangeProductVendor,
+      productId, onChangeProduct
+    } = this.props
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
+
+    return (
+      <div className="inline-block">
+        <FormControl>
+          <InputLabel>Product Type</InputLabel>
+          <Select
+            value={productTypeId}
+            onChange={onChangeProductType}
+            style={{width: 150}}
+            MenuProps={menuProps}
+          >
+            {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+          </Select>
+        </FormControl>
+
+        <FormControl>
+          <InputLabel>Product Vendor</InputLabel>
+          <Select
+            value={productVendorId}
+            onChange={onChangeProductVendor}
+            style={{width: 150}}
+            MenuProps={menuProps}
+          >
+            {vendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+          </Select>
+        </FormControl>
+
+        <FormControl>
+          <InputLabel>Product</InputLabel>
+          <Select
+            value={productId}
+            onChange={onChangeProduct}
+            style={{width: 150}}
+            MenuProps={menuProps}
+          >
+            {products.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+          </Select>
+        </FormControl>
+      </div>
+    )
+  }
+
   render () {
     const {
       vendorProducts, productTypes, productVendors,
 
       filterType, onChangeFilterType,
-      productTypeId, onChangeProductType
+      productTypeId, onChangeProductType,
+      productVendorId, onChangeProductVendor,
+      productId, onChangeProduct
     } = this.props
 
     return (
@@ -40,31 +104,7 @@ export default class WorkflowProductFilter extends React.Component {
 
 
         {filterType === 'PRODUCT' ? (
-          <div className="inline-block">
-            <FormControl>
-              <InputLabel>Product Type</InputLabel>
-              <Select
-                value={productTypeId}
-                onChange={onChangeProductType}
-                style={{width: 150}}
-                MenuProps={menuProps}
-              >
-                {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
-              </Select>
-            </FormControl>
-
-            <FormControl>
-              <InputLabel>Product Vendor</InputLabel>
-              <Select
-                value={productTypeId}
-                onChange={onChangeProductType}
-                style={{width: 150}}
-                MenuProps={menuProps}
-              >
-                {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
-              </Select>
-            </FormControl>
-          </div>
+          this.renderProductCombos()
         ) : (
           <FormControl>
             <InputLabel>Product Type</InputLabel>
