@@ -140,7 +140,7 @@ class WorkflowEditModalView extends React.Component {
                   {/*</div>*/}
                   {p.extraFields.map((extra, j) =>
                     <div key={j} className="inline-block">
-                      {j % 2 === 0 ? <img src="/images/amp.png" width={28} className="margin-sm-left margin-sm-right"/> : null}
+                      <img src="/images/amp.png" width={16} className="margin-sm"/>
                       <div className="wf-item">
                         {extra.name}
                       </div>
