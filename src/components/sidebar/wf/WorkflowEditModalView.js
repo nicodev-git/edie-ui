@@ -112,7 +112,7 @@ class WorkflowEditModalView extends React.Component {
           <div className="diagram">
             {this.renderSidebar()}
           </div>
-          <div>
+          <div className="flex-1">
             {wfDataItems.map((p, i) =>
               <div key={i} className="text-center">
                 <div>
@@ -120,20 +120,20 @@ class WorkflowEditModalView extends React.Component {
                     <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
                   ) : null}
                 </div>
-                <div>
+                <div className="relative">
                   <div className="row">
 
                   </div>
                   {p.prelabel ? (
-                    <div className="pull-left" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
+                    <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
                       <div className="position-vm text-center">{p.prelabel}</div>
                     </div>
                   ) : null}
-                  <div className="pull-left" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
+                  <div className="wf-item" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
                     <div className="position-vm text-center">{p.label}</div>
                   </div>
 
-                  <div className="pull-left" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
+                  <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
                     <div className="position-vm text-center">{p.value}</div>
                   </div>
 

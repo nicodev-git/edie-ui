@@ -483,6 +483,20 @@ input:-webkit-autofill {
     font-size: 11px;
 }
 
+.wf-item {
+    background: #4472c4;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    min-width: 100px;
+    height: 32px;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    color: white;
+}
+
 .wf-item-main {
     background: #4472c4;
     border-radius: 4px;
