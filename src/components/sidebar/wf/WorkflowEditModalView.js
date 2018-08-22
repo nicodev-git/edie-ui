@@ -140,6 +140,9 @@ class WorkflowEditModalView extends React.Component {
                     {/*<div className="wf-item-delete">*/}
                       {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
                     {/*</div>*/}
+                    {p.extraFields.length ? (
+                      <AddIcon className="link"/>
+                    ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block">
                         <div className="wf-item">
