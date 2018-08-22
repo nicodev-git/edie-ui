@@ -177,7 +177,7 @@ class WorkflowEditModal extends React.Component {
           break
         }
         case 'PRODUCTACTION': {
-          itemPreLabelKey = 'Detected Action'
+          itemPreLabel = 'Detected Action'
           itemLabel = 'Match Action'
           itemValue = `${sentence}`
 
