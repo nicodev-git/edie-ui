@@ -488,7 +488,7 @@ input:-webkit-autofill {
     border-radius: 4px;
     cursor: pointer;
     text-align: left;
-    width: 120px;
+    min-width: 120px;
     padding: 6px 4px;
     position: relative;
     display: inline-block;
@@ -496,6 +496,7 @@ input:-webkit-autofill {
     overflow: hidden;
     color: white;
     text-align: center;
+    vertical-align: middle;
 }
 
 .wf-item-orange {
