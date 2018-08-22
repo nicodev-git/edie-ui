@@ -1,10 +1,13 @@
 import React from 'react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
+import {TextField} from '@material-ui/core'
 import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
+import { SubmitBlock, FormInput } from 'components/modal/parts'
+import { Field } from 'redux-form'
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -281,8 +284,15 @@ class InfiniteTable extends React.Component {
                      </tr>
                    )
                  })
-               }</tbody>
+               }
+               </tbody>
              </table>
+              <form onSubmit={this.props.onSubmit}>
+                <Field name="name" component={FormInput} floatingLabel="Name"/>
+                <Field name="description" component={FormInput} floatingLabel="Description"/>
+                <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
+                <SubmitBlock name="Save"/>
+              </form>
            </div>
          </div>
       </div>

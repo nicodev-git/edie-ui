@@ -188,6 +188,7 @@ class WorkflowEditModal extends React.Component {
                 name: grokField,
                 value: ''
               })
+              return true
             })
           }
 

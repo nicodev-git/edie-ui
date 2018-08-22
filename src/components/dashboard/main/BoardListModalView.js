@@ -50,7 +50,7 @@ export default class BoardListModalView extends React.Component {
 
   renderTools () {
     const {
-      onClickAdd,
+      // onClickAdd,
       onClickAddSystem,
       onClickSetDefault
     } = this.props
