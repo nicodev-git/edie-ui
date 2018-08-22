@@ -115,7 +115,7 @@ class WorkflowEditModalView extends React.Component {
           </div>
           <div className="flex-1">
             {wfDataItems.map((p, i) =>
-              <div key={i} className="text-center">
+              <div key={i} className="padding-md-left">
                 <div>
                   {i ? (
                     <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
@@ -123,28 +123,30 @@ class WorkflowEditModalView extends React.Component {
                 </div>
                 <div className="relative">
                   <div>
-                    {p.prelabel ? (
-                      <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
-                        <div className="text-center">{p.prelabel}</div>
+                    <div className="inline-block margin-sm-bottom">
+                      {p.prelabel ? (
+                        <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
+                          <div className="text-center">{p.prelabel}</div>
+                        </div>
+                      ) : null}
+                      <div className="wf-item wf-item-orange" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
+                        <div className="text-center">{p.label}</div>
                       </div>
-                    ) : null}
-                    <div className="wf-item wf-item-orange" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
-                      <div className="text-center">{p.label}</div>
-                    </div>
 
-                    <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
-                      <div className="text-center">{p.value}</div>
+                      <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
+                        <div className="text-center">{p.value}</div>
+                      </div>
+                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/>
                     </div>
-                    <img src="/images/amp.png" width={16} className="margin-sm"/>
 
                     {/*<div className="wf-item-delete">*/}
                       {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
                     {/*</div>*/}
                     {p.extraFields.length ? (
-                      <AddIcon className="link"/>
+                      <AddIcon className="link valign-middle"/>
                     ) : null}
                     {p.extraFields.map((extra, j) =>
-                      <div key={j} className="inline-block">
+                      <div key={j} className="inline-block margin-sm-bottom">
                         <div className="wf-item">
                           {extra.name}
                         </div>
@@ -154,7 +156,7 @@ class WorkflowEditModalView extends React.Component {
                         <div className="wf-item">
                           Any
                         </div>
-                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm"/> : null}
+                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/> : null}
                       </div>
                     )}
                   </div>
