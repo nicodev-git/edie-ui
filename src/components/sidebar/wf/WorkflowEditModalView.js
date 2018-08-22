@@ -112,7 +112,7 @@ class WorkflowEditModalView extends React.Component {
           <div className="diagram">
             {this.renderSidebar()}
           </div>
-          <div className="flex-1">
+          <div>
             {wfDataItems.map((p, i) =>
               <div key={i} className="text-center">
                 <div>
