@@ -38,7 +38,13 @@ export default class BoardListModal extends React.Component {
       })
     })
   }
-
+  onSaveSystem (name, isSystem) {
+    if (!name) return
+      this.props.addGaugeBoard({
+      name,
+      type: isSystem ? 'system' : 'normal'
+    })
+  }
   onClickEdit (item) {
     showPrompt('Please type name.', item.name, name => {
       if (!name) return
@@ -75,6 +81,7 @@ export default class BoardListModal extends React.Component {
         selected={this.state.selected}
         onHide={this.onHide.bind(this)}
         gaugeBoards={gaugeBoards}
+        onSaveSystem={this.onSaveSystem.bind(this)}
         onSelect={this.onSelect.bind(this)}
         onClickAdd={() => this.onClickAdd()}
         onClickAddSystem={() => this.onClickAdd(true)}

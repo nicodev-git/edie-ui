@@ -141,20 +141,6 @@ class ConnectorModal extends Component {
         })
     }
 
-    // onClickTest () {
-    //     const entity = {
-    //         ...this.props.allValues
-    //     }
-    //
-    //     if (entity.addrType === 'host') {
-    //         entity.host = entity.address
-    //     } else {
-    //         entity.ip = entity.address
-    //     }
-    //
-    //     this.props.testConnector(entity)
-    // }
-
     /////////////////////////////////////////////////////////////
 
     onAddConfig () {

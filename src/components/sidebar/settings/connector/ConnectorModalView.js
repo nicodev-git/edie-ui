@@ -143,16 +143,29 @@ export default class ConnectorModalView extends Component {
 
                                 <div className="row">
                                     <div className="col-md-3 valign-bottom">
-                                        <Field name="addrType" component={FormSelect} options={addressTypes}
-                                               floatingLabel="Address Type" className="valign-bottom" fullWidth/>
+                                        <Field 
+                                            name="addrType"
+                                            component={FormSelect}
+                                            options={addressTypes}
+                                            floatingLabel="Address Type"
+                                            className="valign-bottom"
+                                            fullWidth/>
                                     </div>
                                     <div className="col-md-3 valign-bottom">
-                                        <Field name="address" component={FormInput} className="valign-bottom"
-                                               floatingLabel="Address" fullWidth/>
+                                        <Field 
+                                            name="address"
+                                            component={FormInput}
+                                            className="valign-bottom"
+                                            floatingLabel="Address"
+                                            fullWidth/>
                                     </div>
                                     <div className="col-md-3 valign-bottom">
-                                        <Field name="port" component={FormInput} className="valign-bottom"
-                                               floatingLabel="Port" fullWidth/>
+                                        <Field 
+                                            name="port"
+                                            component={FormInput}
+                                            className="valign-bottom"
+                                            floatingLabel="Port"
+                                            fullWidth/>
                                     </div>
                                 </div>
                             </CardPanel>
@@ -181,7 +194,7 @@ export default class ConnectorModalView extends Component {
                                                         value={this.state.newIp} 
                                                         onChange={this.handleChange('newIp')}
                                                         onKeyPress={this.onAddField('ip')}
-                                                        label="Name"/>
+                                                        label="IP"/>
                                                 </td>
                                             </tr>
                                         )}
