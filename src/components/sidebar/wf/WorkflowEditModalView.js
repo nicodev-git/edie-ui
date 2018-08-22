@@ -120,22 +120,29 @@ class WorkflowEditModalView extends React.Component {
                     <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
                   ) : null}
                 </div>
-                <div className="inline-block wf-item-main">
+                <div>
+                  <div className="row">
+
+                  </div>
                   {p.prelabel ? (
-                    <div className="wf-item-prelabel" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
+                    <div className="pull-left" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
                       <div className="position-vm text-center">{p.prelabel}</div>
                     </div>
                   ) : null}
-                  <div className="inline-block wf-item-label" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
-                    <div className="position-vm">{p.label}</div>
+                  <div className="pull-left" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
+                    <div className="position-vm text-center">{p.label}</div>
                   </div>
-                  <label className="wf-item-value" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>{p.value}</label>
-                  <div className="wf-item-delete">
-                    <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+
+                  <div className="pull-left" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
+                    <div className="position-vm text-center">{p.value}</div>
                   </div>
-                  {p.extraFields.map((extra, j) =>
-                    <label key={j} className="wf-item-value">{extra.name}</label>
-                  )}
+
+                  {/*<div className="wf-item-delete">*/}
+                    {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
+                  {/*</div>*/}
+                  {/*{p.extraFields.map((extra, j) =>*/}
+                    {/*<label key={j} className="wf-item-value">{extra.name}</label>*/}
+                  {/*)}*/}
                 </div>
               </div>
             )}
