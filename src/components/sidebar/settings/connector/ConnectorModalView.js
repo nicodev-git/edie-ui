@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Field} from 'redux-form'
-import {Button} from '@material-ui/core'
+import {Button, TextField} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Create'
@@ -31,11 +31,80 @@ const modeOptions = [{
 }]
 
 export default class ConnectorModalView extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+          newIp: '',
+          addedIp: []
+        }
+    }
+
+    handleChange = key => event => {
+        this.setState({
+          [key]: event.target.value
+        })
+    }
+
+    onNewIpAdd = () => (event) => {
+        event.preventDefault()
+    
+        // this.props.onSave({
+        //   name: this.state.newAction,
+        //   id: uuid()
+        // })
+    
+        // this.setState({
+        //   newAction: ''
+        // })
+    }
+
+    onClickAddEmptyField = key => event => {
+        this.setState({
+          [key]: [1]
+        })
+    }
+
+    onAddField = key => event => {
+        if (event.key === 'Enter') {
+          event.preventDefault()
+          if (key === 'ip') {
+            if (this.state.newIp.trim()) {
+              this.props.onSaveIP(this.state.newIp)
+            }
+            
+            this.setState({
+              newIp: '',
+              addedIp: []
+            })
+          } else {
+            // if (this.state.newAgent.trim()) {
+              
+            //   this.props.onSaveGrokField(this.state.newGrok.trim())
+            //   this.setState({
+            //     newGrok: '',
+            //     addedGrok: []
+            //   })
+            // }
+          }
+        }
+      }
     render () {
-        const {onSubmit, onClickClose, relatedIPs, onAddIP, onDeleteIP,
-            onAddConfig, modals, userConnectors,
-            onEditUserConnector, onDeleteUserConnector,
-            agents, onAddAgent, onEditAgent, onDeleteAgent, getRestUrl
+        const {
+            onSubmit, 
+            onClickClose, 
+            relatedIPs,
+            onDeleteIP,
+            onAddConfig,
+            modals,
+            userConnectors,
+            onEditUserConnector,
+            onDeleteUserConnector,
+            agents,
+            onAddAgent,
+            onEditAgent,
+            onDeleteAgent,
+            getRestUrl
         } = this.props
         return (
             <Modal title="Connector" onRequestClose={onClickClose} contentStyle={{width: 1200, maxWidth: 'initial1'}}>
@@ -53,12 +122,22 @@ export default class ConnectorModalView extends Component {
                                     </div>
 
                                     <div className="col-md-3">
-                                        <Field name="ostype" component={FormSelect} floatingLabel="OS" options={osTypes}
-                                               className="valign-bottom" fullWidth/>
+                                        <Field 
+                                            name="ostype" 
+                                            component={FormSelect} 
+                                            floatingLabel="OS" 
+                                            options={osTypes}
+                                            className="valign-bottom" 
+                                            fullWidth/>
                                     </div>
                                     <div className="col-md-3">
-                                        <Field name="mode" component={FormSelect} options={modeOptions}
-                                               floatingLabel="Mode" className="valign-bottom" fullWidth/>
+                                        <Field 
+                                            name="mode" 
+                                            component={FormSelect} 
+                                            options={modeOptions}
+                                            floatingLabel="Mode"
+                                            className="valign-bottom"
+                                            fullWidth/>
                                     </div>
                                 </div>
 
@@ -81,7 +160,7 @@ export default class ConnectorModalView extends Component {
 
                         <div className="col-md-6">
 
-                            <CardPanel title="IP List" tools={<AddIcon onClick={onAddIP} className="link"/>}>
+                            <CardPanel title="IP List" tools={<AddIcon onClick={this.onClickAddEmptyField('addedIp')} className="link"/>}>
                                 <div style={{height: 180, overflow: 'auto'}}>
                                     <table className="table mb-none">
                                         <tbody>
@@ -90,6 +169,19 @@ export default class ConnectorModalView extends Component {
                                                 <td>{ip}</td>
                                                 <td>
                                                     <DeleteIcon onClick={() => onDeleteIP(i)} className="link"/>
+                                                </td>
+                                            </tr>
+                                        )}
+                                        {this.state.addedIp.map((p, i) =>
+                                            <tr key={i}>
+                                                <td>
+                                                    <TextField
+                                                        autoFocus
+                                                        fullWidth
+                                                        value={this.state.newIp} 
+                                                        onChange={this.handleChange('newIp')}
+                                                        onKeyPress={this.onAddField('ip')}
+                                                        label="Name"/>
                                                 </td>
                                             </tr>
                                         )}
