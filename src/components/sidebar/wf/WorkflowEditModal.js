@@ -191,7 +191,6 @@ class WorkflowEditModal extends React.Component {
               })
             })
           }
-
           break
         }
         case 'COUNT':
