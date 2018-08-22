@@ -192,8 +192,6 @@ class WorkflowEditModal extends React.Component {
             })
           }
 
-          console.log(extraFields)
-
           break
         }
         case 'COUNT':
