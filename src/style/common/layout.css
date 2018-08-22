@@ -488,17 +488,19 @@ input:-webkit-autofill {
     border-radius: 4px;
     cursor: pointer;
     text-align: left;
-    min-width: 100px;
+    width: 120px;
     padding: 6px 4px;
     position: relative;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     color: white;
+    text-align: center;
 }
 
 .wf-item-orange {
     background: #fec001;
+    color: black;
 }
 
 .wf-item-main {

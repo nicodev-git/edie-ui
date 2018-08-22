@@ -177,6 +177,7 @@ class WorkflowEditModal extends React.Component {
           break
         }
         case 'PRODUCTACTION': {
+          itemPreLabel = 'Detected Action'
           itemLabel = 'Match Action'
           itemValue = `${sentence}`
 
@@ -191,9 +192,6 @@ class WorkflowEditModal extends React.Component {
               return true
             })
           }
-
-          console.log(extraFields)
-
           break
         }
         case 'COUNT':

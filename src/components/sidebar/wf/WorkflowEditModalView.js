@@ -122,28 +122,42 @@ class WorkflowEditModalView extends React.Component {
                   ) : null}
                 </div>
                 <div className="relative">
-                  <div className="row">
-
-                  </div>
-                  {p.prelabel ? (
-                    <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
-                      <div className="text-center">{p.prelabel}</div>
+                  <div>
+                    {p.prelabel ? (
+                      <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
+                        <div className="text-center">{p.prelabel}</div>
+                      </div>
+                    ) : null}
+                    <div className="wf-item wf-item-orange" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
+                      <div className="text-center">{p.label}</div>
                     </div>
-                  ) : null}
-                  <div className="wf-item wf-item-orange" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
-                    <div className="text-center">{p.label}</div>
-                  </div>
 
-                  <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
-                    <div className="text-center">{p.value}</div>
-                  </div>
+                    <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
+                      <div className="text-center">{p.value}</div>
+                    </div>
+                    <img src="/images/amp.png" width={16} className="margin-sm"/>
 
-                  {/*<div className="wf-item-delete">*/}
-                    {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
-                  {/*</div>*/}
-                  {p.extraFields.map((extra, j) =>
-                    <label key={j} className="wf-item-value">{extra.name}</label>
-                  )}
+                    {/*<div className="wf-item-delete">*/}
+                      {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
+                    {/*</div>*/}
+                    {p.extraFields.length ? (
+                      <AddIcon className="link"/>
+                    ) : null}
+                    {p.extraFields.map((extra, j) =>
+                      <div key={j} className="inline-block">
+                        <div className="wf-item">
+                          {extra.name}
+                        </div>
+                        <div className="wf-item wf-item-orange">
+                          Match
+                        </div>
+                        <div className="wf-item">
+                          Any
+                        </div>
+                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm"/> : null}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
