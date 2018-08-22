@@ -489,12 +489,16 @@ input:-webkit-autofill {
     cursor: pointer;
     text-align: left;
     min-width: 100px;
-    height: 32px;
+    padding: 6px 4px;
     position: relative;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     color: white;
+}
+
+.wf-item-orange {
+    background: #fec001;
 }
 
 .wf-item-main {
