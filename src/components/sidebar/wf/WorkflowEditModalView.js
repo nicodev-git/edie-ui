@@ -133,6 +133,9 @@ class WorkflowEditModalView extends React.Component {
                   <div className="wf-item-delete">
                     <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
                   </div>
+                  {p.extraFields.map((extra, j) =>
+                    <label key={j} className="wf-item-value">{extra.name}</label>
+                  )}
                 </div>
               </div>
             )}
