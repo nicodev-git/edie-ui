@@ -12,13 +12,12 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import {hasPermission} from 'shared/Permission'
+import { reduxForm } from 'redux-form'
 
-export default class Maps extends React.Component {
+class Maps extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-
-    }
+    this.state = {}
 
     this.cells = [{
       'displayName': 'Name',
@@ -42,15 +41,22 @@ export default class Maps extends React.Component {
     this.props.fetchSettingMaps()
   }
 
+  handleFormSubmit (values) {
+    this.props.addSettingMap({...values })
+    this.props.reset()
+  }
+
   renderContent (canEdit) {
+    const { handleSubmit } = this.props
     return (
       <InfiniteTable
         cells={this.cells}
+        newMap={this.newMap}
         ref="maps"
         rowMetadata={{'key': 'id'}}
         selectable
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onRowDblClick={canEdit ? this.onMapEdit.bind(this) : null}
-
         useExternal={false}
         data={this.props.maps}
       />
@@ -123,7 +129,13 @@ export default class Maps extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={2} tclass="small-table" history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody 
+          tabs={SettingTabs} 
+          tab={2} 
+          tclass="small-table" 
+          history={this.props.history} 
+          location={this.props.location} 
+          transparent>
           {this.renderContent(canEdit)}
           {this.renderMapModal()}
           {this.renderMapUsersModal()}
@@ -132,3 +144,7 @@ export default class Maps extends React.Component {
     )
   }
 }
+
+export default reduxForm({
+  form: 'mapsForm'
+})(Maps)
