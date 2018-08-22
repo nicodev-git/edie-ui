@@ -141,20 +141,6 @@ class ConnectorModal extends Component {
         })
     }
 
-    // onClickTest () {
-    //     const entity = {
-    //         ...this.props.allValues
-    //     }
-    //
-    //     if (entity.addrType === 'host') {
-    //         entity.host = entity.address
-    //     } else {
-    //         entity.ip = entity.address
-    //     }
-    //
-    //     this.props.testConnector(entity)
-    // }
-
     /////////////////////////////////////////////////////////////
 
     onAddConfig () {
@@ -202,7 +188,7 @@ class ConnectorModal extends Component {
     /////////////////////////////////////////////////////////////
 
     onAddAgent () {
-        this.props.showAgentModal(true, '')
+        this.props.showAgentModal(true)
     }
 
     onEditAgent (agent) {

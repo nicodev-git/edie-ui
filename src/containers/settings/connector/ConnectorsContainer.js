@@ -9,7 +9,8 @@ import {
     addCollector,
     updateCollector,
     removeCollector,
-    showUserConnectorModal
+    showUserConnectorModal,
+    showAgentModal
 } from 'actions'
 
 class ConnectorsContainer extends React.Component {
@@ -30,6 +31,7 @@ export default connect(
     }), {
         fetchCollectors,
         showCollectorModal,
+        showAgentModal,
         addCollector,
         updateCollector,
         removeCollector,

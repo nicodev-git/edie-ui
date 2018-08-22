@@ -12,7 +12,6 @@ export default class BoardListModalView extends React.Component {
   constructor(props) {
     super(props)
 
-    const {editType} = props
     this.state = {
       newBoard: '',
       addedBoard: [],

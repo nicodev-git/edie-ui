@@ -103,7 +103,8 @@ class WorkflowEditModalView extends React.Component {
   renderWfTab() {
     const {
       wfDataItems,
-      onClickDeleteShape, onClickEditShape
+      // onClickDeleteShape,
+      onClickEditShape
     } = this.props
     return (
       <div>
