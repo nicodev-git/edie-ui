@@ -1,6 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Table, TableBody, TableCell, TableHead, TableRow, TextField} from '@material-ui/core'
+import {Table,TableBody, TableCell, TableHead, TableRow, TextField} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -17,7 +17,8 @@ export default class ProductTypeModalView extends React.Component {
       newGrok: '',
       addedAction: [],
       addedGrok: [],
-      editableActionIndex: 0
+      editableActionIndex: 0,
+      test: false
     }
   }
 
@@ -42,6 +43,7 @@ export default class ProductTypeModalView extends React.Component {
 
   onClickAddEmptyField = key => event => {
     this.setState({
+      test: true,
       [key]: [1]
     })
   }
@@ -58,7 +60,8 @@ export default class ProductTypeModalView extends React.Component {
         
         this.setState({
           newAction: '',
-          addedAction: []
+          addedAction: [],
+          test: false
         })
       } else {
         if (this.state.newGrok.trim()) {
@@ -109,29 +112,29 @@ export default class ProductTypeModalView extends React.Component {
 
                 <TableBody>
                   {actions.map((p, i) =>
-                        <TableRow key={i}>
-                          <TableCell
-                            onClick={this.test(i)}
-                            component="th" 
-                            scope="row">
-                              {p.name}
-                              {/* <input value={p.name} disabled={this.state.editableActionIndex === i ? true : false}/> */}
-                              {/* <TextField
-                                fullWidth
-                                disabled={this.state.editableActionIndex === i ? true : false}
-                                value={p.name} /> */}
-                          </TableCell>
-                          <TableCell className="nowrap">
-                            <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
-                            <DeleteIcon className="link" onClick={() => onClickDeleteAction(i)}/>
-                          </TableCell>
-                        </TableRow>
-                      )}
+                    <TableRow key={i}>
+                      <TableCell
+                        onClick={this.test(i)}
+                        component="th" 
+                        scope="row">
+                          {p.name}
+                          {/* <input value={p.name} disabled={this.state.editableActionIndex === i ? true : false}/> */}
+                          {/* <TextField
+                            fullWidth
+                            disabled={this.state.editableActionIndex === i ? true : false}
+                            value={p.name} /> */}
+                      </TableCell>
+                      <TableCell className="nowrap">
+                        <EditIcon className="link margin-sm-right" onClick={() => onClickEditAction(i)}/>
+                        <DeleteIcon className="link" onClick={() => onClickDeleteAction(i)}/>
+                      </TableCell>
+                    </TableRow>
+                    )}
                   {this.state.addedAction.map((p, i) =>
                     <TableRow key={i}>
                       <TableCell>
                           <TextField
-                            autoFocus
+                            autoFocus={this.state.test}
                             fullWidth
                             value={this.state.newAction} 
                             onChange={this.handleChange('newAction')}
@@ -140,6 +143,17 @@ export default class ProductTypeModalView extends React.Component {
                         </TableCell>
                     </TableRow>
                   )}
+                  {/* <TableRow className={this.state.test ? '' : 'hidden'}>
+                      <TableCell>
+                          <TextField
+                            autoFocus={this.state.test}
+                            fullWidth
+                            value={this.state.newAction} 
+                            onChange={this.handleChange('newAction')}
+                            onKeyPress={this.onAddField('action')}
+                            label="Name"/>
+                        </TableCell>
+                    </TableRow> */}
                 </TableBody>
               </Table>
             </div>

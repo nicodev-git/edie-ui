@@ -115,6 +115,12 @@ class ConnectorModal extends Component {
         relatedIPs.push(ip)
         this.setState({relatedIPs})
     }
+    onSaveIP (ip) {
+        if (!ip) return
+        const {relatedIPs} = this.state
+        relatedIPs.push(ip)
+        this.setState({relatedIPs})
+    }
     onDeleteIP (index) {
         const {relatedIPs} = this.state
         relatedIPs.splice(index, 1)
@@ -268,6 +274,7 @@ class ConnectorModal extends Component {
                 onClickClose={this.onHide.bind(this)}
                 relatedIPs={this.state.relatedIPs}
                 onAddIP={this.onAddIP.bind(this)}
+                onSaveIP={this.onSaveIP.bind(this)}
                 onDeleteIP={this.onDeleteIP.bind(this)}
 
                 getRestUrl={this.getRestUrl.bind(this)}
