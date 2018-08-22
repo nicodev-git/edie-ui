@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm, getFormValues} from 'redux-form'
 import uuid from 'uuid'
-import {assign, merge, findIndex, keys} from 'lodash'
+import {assign, merge, findIndex, keys, find} from 'lodash'
 
 import WorkflowEditModalView from './WorkflowEditModalView'
 import WorkflowEditModalView1 from './WorkflowEditModalView1'
@@ -144,6 +144,7 @@ class WorkflowEditModal extends React.Component {
   }
 
   getWfDataItems() {
+    const {productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
       const {sentence, name, variable, condition, fieldType, field, uiprops} = p.data
       const type = p.config.type || uiprops.type
@@ -155,6 +156,8 @@ class WorkflowEditModal extends React.Component {
       let itemPreLabelKey = ''
       let itemLabelKey = ''
       let itemValueKey = 'sentence'
+
+      const extraFields = []
 
       switch (type) {
         case 'DECISION':
@@ -176,6 +179,20 @@ class WorkflowEditModal extends React.Component {
         case 'PRODUCTACTION': {
           itemLabel = 'Match Action'
           itemValue = `${sentence}`
+
+          const productType = find(productTypes, {id: field})
+
+          if (productType && productType.grokFields) {
+            productType.grokFields.map(grokField => {
+              extraFields.push({
+                name: grokField,
+                value: ''
+              })
+            })
+          }
+
+          console.log(extraFields)
+
           break
         }
         case 'COUNT':
@@ -199,7 +216,8 @@ class WorkflowEditModal extends React.Component {
         label: itemLabel,
         labelKey: itemLabelKey,
         value: itemValue,
-        valueKey: itemValueKey
+        valueKey: itemValueKey,
+        extraFields
       }
     })
     return wfDataItems

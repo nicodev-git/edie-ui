@@ -483,6 +483,24 @@ input:-webkit-autofill {
     font-size: 11px;
 }
 
+.wf-item {
+    background: #4472c4;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    min-width: 100px;
+    padding: 6px 4px;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    color: white;
+}
+
+.wf-item-orange {
+    background: #fec001;
+}
+
 .wf-item-main {
     background: #4472c4;
     border-radius: 4px;
