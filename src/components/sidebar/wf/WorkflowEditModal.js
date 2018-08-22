@@ -156,6 +156,8 @@ class WorkflowEditModal extends React.Component {
       let itemLabelKey = ''
       let itemValueKey = 'sentence'
 
+      const extraFields = []
+
       switch (type) {
         case 'DECISION':
         case 'EXCLUDE': {
@@ -176,6 +178,9 @@ class WorkflowEditModal extends React.Component {
         case 'PRODUCTACTION': {
           itemLabel = 'Match Action'
           itemValue = `${sentence}`
+
+          console.log(p)
+
           break
         }
         case 'COUNT':
