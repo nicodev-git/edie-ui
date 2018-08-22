@@ -181,7 +181,7 @@ export default class ConnectorModalView extends Component {
                                                         value={this.state.newIp} 
                                                         onChange={this.handleChange('newIp')}
                                                         onKeyPress={this.onAddField('ip')}
-                                                        label="Name"/>
+                                                        label="IP"/>
                                                 </td>
                                             </tr>
                                         )}

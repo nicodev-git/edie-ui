@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, Chip} from '@material-ui/core'
+import {IconButton, Chip, TextField} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/ModeEdit'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
@@ -9,14 +9,58 @@ import NoteAddIcon from '@material-ui/icons/NoteAdd'
 import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class BoardListModalView extends React.Component {
+  constructor(props) {
+    super(props)
+
+    const {editType} = props
+    this.state = {
+      newBoard: '',
+      addedBoard: [],
+      test: false
+    }
+  }
+
+  handleChange = key => event => {
+    this.setState({
+      [key]: event.target.value
+    })
+  }
+
+  onClickAddEmptyField = key => event => {
+    this.setState({
+      [key]: [1],
+      test: true
+    })
+  }
+
+  onAddField = key => event => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      if (key === 'board') {
+        if (this.state.newBoard.trim()) {
+          this.props.onSaveSystem(this.state.newBoard.trim())
+        }
+        
+        this.setState({
+          newBoard: '',
+          addedBoard: []
+        })
+      }
+    }
+  }
+
   renderTools () {
-    const {onClickAdd, onClickAddSystem, onClickSetDefault} = this.props
+    const {
+      onClickAdd,
+      onClickAddSystem,
+      onClickSetDefault
+    } = this.props
     return (
       <div>
         <IconButton onClick={onClickSetDefault} tooltip="Set Default">
           <SetDefIcon size={32}/>
         </IconButton>
-        <IconButton onClick={onClickAdd} tooltip="Add New Dashboard">
+        <IconButton onClick={this.onClickAddEmptyField('addedBoard')} tooltip="Add New Dashboard">
           <AddCircleIcon size={32}/>
         </IconButton>
         <IconButton onClick={onClickAddSystem} tooltip="Add New System Dashboard" className="hidden">
@@ -26,7 +70,15 @@ export default class BoardListModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, gaugeBoards, selected, onClickEdit, onClickDelete, onSelect, defaultBoardId} = this.props
+    const {
+      onHide,
+      gaugeBoards,
+      selected,
+      onClickEdit,
+      onClickDelete,
+      onSelect,
+      defaultBoardId
+    } = this.props
     return (
       <Modal title="Dashboards" onRequestClose={onHide}>
         <CardPanel title="Dashboards" tools={this.renderTools()}>
@@ -66,6 +118,36 @@ export default class BoardListModalView extends React.Component {
                   )}
                 </tr>
               )}
+              { this.state.addedBoard.map((p,i) => 
+                <tr key={i}>
+                  <td>
+                    <TextField
+                      autoFocus
+                      fullWidth
+                      value={this.state.newBoard} 
+                      onChange={this.handleChange('newBoard')}
+                      onKeyPress={this.onAddField('board')}
+                      label="Name"/>
+                  </td>
+                </tr>
+              )}
+              {/* { this.state.test ? (
+                <tr>
+                  <td>
+                    <TextField
+                      autoFocus
+                      fullWidth
+                      value={this.state.newBoard} 
+                      onChange={this.handleChange('newBoard')}
+                      onKeyPress={this.onAddField('board')}
+                      label="Name"/>
+                  </td>
+                </tr>
+              ) : (
+                <tr>
+                  <td></td>
+                </tr>
+              )} */}
               </tbody>
             </table>
           </div>

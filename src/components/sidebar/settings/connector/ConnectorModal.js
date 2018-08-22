@@ -202,7 +202,7 @@ class ConnectorModal extends Component {
     /////////////////////////////////////////////////////////////
 
     onAddAgent () {
-        this.props.showAgentModal(true)
+        this.props.showAgentModal(true, '')
     }
 
     onEditAgent (agent) {
