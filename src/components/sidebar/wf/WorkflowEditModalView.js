@@ -122,9 +122,6 @@ class WorkflowEditModalView extends React.Component {
                   ) : null}
                 </div>
                 <div className="relative">
-                  <div className="row">
-
-                  </div>
                   {p.prelabel ? (
                     <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
                       <div className="text-center">{p.prelabel}</div>
@@ -144,13 +141,13 @@ class WorkflowEditModalView extends React.Component {
                   {p.extraFields.map((extra, j) =>
                     <div key={j} className="inline-block">
                       <div className="wf-item">
-                        <label className="text-center">{extra.name}</label>
+                        {extra.name}
                       </div>
                       <div className="wf-item wf-item-orange">
                         Match
                       </div>
                       <div className="wf-item">
-                        Value
+                        Any
                       </div>
                     </div>
                   )}
