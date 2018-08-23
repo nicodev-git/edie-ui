@@ -484,6 +484,12 @@ class WorkflowEditModal extends React.Component {
     console.log(current)
   }
 
+  onCloseGrokFieldModal () {
+    this.setState({
+      grokFieldModalOpen: false
+    })
+  }
+
   ////////////////////////////////////////////////////
 
   onExpandRulePanel(e, expanded) {
@@ -747,8 +753,11 @@ class WorkflowEditModal extends React.Component {
         onClickShape={this.onClickShape.bind(this)}
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
+
         onClickAddExtra={this.onClickAddExtra.bind(this)}
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
+        grokFieldModal={this.renderGrokFieldModal()}
+        onCloseGrokFieldModal={this.onCloseGrokFieldModal.bind(this)}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
@@ -764,7 +773,6 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
-        {this.renderGrokFieldModal()}
         {this.renderLoader()}
       </ModalView>
     )
