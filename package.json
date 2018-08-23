@@ -11,7 +11,6 @@
     "chart.js": "^2.6.0",
     "country-data": "0.0.31",
     "d3": "^3.5.17",
-    "element-react": "^1.4.20",
     "eslint": "^4.19.1",
     "jquery": "^3.2.1",
     "json-beautify": "^1.0.1",

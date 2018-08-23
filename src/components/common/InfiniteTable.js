@@ -1,6 +1,5 @@
 import React from 'react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
-import {TextField} from '@material-ui/core'
 import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 
 import $ from 'jquery'
