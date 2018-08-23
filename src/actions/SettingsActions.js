@@ -184,7 +184,6 @@ export const addSettingMap = (props) => {
   }
   return (dispatch) => {
     if (props) {
-      console.log(props)
       axios.post(`${ROOT_URL}/map`, props)
       .then(response => addSettingMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
