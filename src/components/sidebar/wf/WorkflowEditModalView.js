@@ -143,9 +143,6 @@ class WorkflowEditModalView extends React.Component {
                         <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
                         ) : null}
                     </div>
-                    {p.extraFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
-                    ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block margin-sm-bottom">
                         <div className="wf-item">
@@ -160,6 +157,9 @@ class WorkflowEditModalView extends React.Component {
                         {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
+                    {p.extraFields.length ? (
+                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
+                    ) : null}
                     <div className="wf-item-delete">
                       <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
                     </div>
@@ -545,11 +545,9 @@ class WorkflowEditModalView extends React.Component {
         open anchorEl={shapeAnchorEl} anchorOrigin={{horizontal: "right", vertical: "top"}}
         onClose={onCloseGrokFieldMenu}
       >
-        <MenuList style={{maxHeight: 400, overflow: 'auto'}}>
+        <MenuList style={{maxHeight: 300, overflow: 'auto'}}>
           {editGrokFields.map((p, i) =>
-            <MenuItem key={i}>
-              <FormControlLabel control={<Checkbox/>} label={p}/>
-            </MenuItem>
+            <MenuItem key={i}>{p}</MenuItem>
           )}
         </MenuList>
       </Popover>

@@ -139,7 +139,8 @@ class WorkflowEditModal extends React.Component {
   getWfDataItems() {
     const {productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
-      const {sentence, name, variable, condition, fieldType, field, uiprops, grokFieldValues} = p.data
+      const {sentence, name, variable, condition, fieldType, field, uiprops,
+        grokFieldValues, visibleGrokFields} = p.data
       const type = p.config.type || uiprops.type
 
       let itemPreLabel = ''
@@ -176,12 +177,12 @@ class WorkflowEditModal extends React.Component {
 
           const productType = find(productTypes, {id: field})
           if (productType && productType.grokFields) {
-            productType.grokFields.map(grokField => {
+            productType.grokFields.forEach(grokField => {
+              if (!visibleGrokFields || !visibleGrokFields.includes(grokField)) return
               extraFields.push({
                 name: grokField,
                 value: (grokFieldValues || {})[grokField] || ''
               })
-              return true
             })
           }
           break
