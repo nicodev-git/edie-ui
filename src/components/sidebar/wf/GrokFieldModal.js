@@ -11,9 +11,10 @@ class GrokFieldModal extends Component {
   }
 
   render () {
-    const {handleSubmit} = this.props
+    const {handleSubmit, editGrokField} = this.props
     return (
       <GrokFieldModalView
+        editGrokField={editGrokField}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )

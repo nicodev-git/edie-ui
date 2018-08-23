@@ -491,6 +491,7 @@ class WorkflowEditModal extends React.Component {
 
     const grokFieldValues = editShape.data.grokFieldValues || {}
     const editGrokField = {
+      name,
       value: grokFieldValues[name]
     }
 
@@ -645,7 +646,7 @@ class WorkflowEditModal extends React.Component {
     const {editGrokField} = this.state
     return (
       <GrokFieldModal
-        initialValues={editGrokField}
+        editGrokField={editGrokField}
         onSave={this.onSaveGrokField.bind(this)}
       />
     )

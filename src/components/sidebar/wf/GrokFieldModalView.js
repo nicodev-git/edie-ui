@@ -13,13 +13,13 @@ export default class GrokFieldModalView extends Component {
 
   render() {
     const {
-      onSubmit
+      onSubmit, editGrokField
     } = this.props
 
     return (
-      <div className="padding-md">
+      <div className="padding-sm">
         <form onSubmit={onSubmit}>
-          <Field name="value" component={FormInput}/>
+          <Field name="value" component={FormInput} floatingLabel={editGrokField.name}/>
           <SubmitBlock name="Save"/>
         </form>
       </div>
