@@ -275,14 +275,6 @@ class WorkflowEditModal extends React.Component {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
     }
 
-    // if (entity.openIncident && !entity.incidentTemplateId) {
-    //   this.setState({
-    //     editValues: entity
-    //   })
-    //   this.props.showBrainCellModal(true, null)
-    //   return
-    // }
-
     onSave && onSave(entity)
     this.onClickClose()
   }
@@ -419,8 +411,6 @@ class WorkflowEditModal extends React.Component {
           objects: [...objects, object]
         }
       })
-
-
     }
 
     console.log(object)
