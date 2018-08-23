@@ -461,7 +461,7 @@ class WorkflowEditModal extends React.Component {
       type: current.config.type
     })
 
-    if (shapeIndex < 0) return alert('Shape not found')
+    if (shapeIndex < 0) return //alert('Shape not found')
 
     this.setState({
       shapeModalOpen: false,
@@ -476,6 +476,20 @@ class WorkflowEditModal extends React.Component {
       })
     })
     this.props.resetForm('simpleModalForm')
+  }
+
+  ////////////////////////////////////////////////////
+
+  onClickAddExtra (shape) {
+    console.log(shape)
+  }
+
+  onClickEditShapeExtra (shapeIndex, extraIndex, e) {
+    const {wfData} = this.state
+    const {objects} = wfData
+    const current = objects[shapeIndex]
+
+    console.log(current)
   }
 
   ////////////////////////////////////////////////////
@@ -733,6 +747,8 @@ class WorkflowEditModal extends React.Component {
         onClickShape={this.onClickShape.bind(this)}
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
+        onClickAddExtra={this.onClickAddExtra.bind(this)}
+        onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}

@@ -278,11 +278,11 @@ const fetchMapId = (dispatch) => {
 }
 
 const fetchDevicesByMapid = (response) => {
-  return response.data._embedded.devices
+  return (response.data._embedded || {}).devices || []
 }
 
 const fetchLinesByMapid = (response) => {
-  return response.data._embedded.devices
+  return (response.data._embedded || {}).devices || []
 }
 
 const fetchGroupsByMapid = (response) => {

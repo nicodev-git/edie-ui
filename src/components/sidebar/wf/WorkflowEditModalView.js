@@ -103,7 +103,9 @@ class WorkflowEditModalView extends React.Component {
   renderWfTab() {
     const {
       wfDataItems,
-      // onClickDeleteShape,
+      onClickDeleteShape,
+      onClickAddExtra,
+      onClickEditShapeExtra,
       onClickEditShape
     } = this.props
     return (
@@ -136,14 +138,12 @@ class WorkflowEditModalView extends React.Component {
                       <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
                         <div className="text-center">{p.value}</div>
                       </div>
-                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/>
+                      {p.extraFields.length ? (
+                        <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
+                        ) : null}
                     </div>
-
-                    {/*<div className="wf-item-delete">*/}
-                      {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
-                    {/*</div>*/}
                     {p.extraFields.length ? (
-                      <AddIcon className="link valign-middle"/>
+                      <AddIcon className="link valign-middle" onClick={() => onClickAddExtra(p)}/>
                     ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block margin-sm-bottom">
@@ -153,12 +153,15 @@ class WorkflowEditModalView extends React.Component {
                         <div className="wf-item wf-item-orange">
                           Match
                         </div>
-                        <div className="wf-item">
+                        <div className="wf-item" onClick={e => onClickEditShapeExtra(i, j, e)}>
                           Any
                         </div>
-                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/> : null}
+                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
+                    <div className="wf-item-delete">
+                      <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+                    </div>
                   </div>
                 </div>
               </div>
