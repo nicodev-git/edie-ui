@@ -648,6 +648,7 @@ class WorkflowEditModal extends React.Component {
       <GrokFieldModal
         editGrokField={editGrokField}
         onSave={this.onSaveGrokField.bind(this)}
+        onClose={this.onCloseGrokFieldModal.bind(this)}
       />
     )
 
