@@ -143,7 +143,7 @@ class WorkflowEditModalView extends React.Component {
                         ) : null}
                     </div>
                     {p.extraFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(p, e)}/>
+                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
                     ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block margin-sm-bottom">
@@ -537,7 +537,7 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderGrokFieldMenu () {
-    const {grokFieldMenuOpen, shapeAnchorEl} = this.props
+    const {grokFieldMenuOpen, shapeAnchorEl, editGrokFields} = this.props
     if (!grokFieldMenuOpen) return null
     return (
       <Popover
@@ -545,6 +545,15 @@ class WorkflowEditModalView extends React.Component {
         anchorEl={shapeAnchorEl}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
+        {editGrokFields.map((p, i) =>
+          <FormControlLabel
+            key={i}
+            control={
+              <Checkbox/>
+            }
+            label={p}
+          />
+        )}
       </Popover>
     )
   }
