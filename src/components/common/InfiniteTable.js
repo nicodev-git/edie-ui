@@ -286,12 +286,16 @@ class InfiniteTable extends React.Component {
                }
                </tbody>
              </table>
-              <form onSubmit={this.props.onSubmit}>
-                <Field name="name" component={FormInput} floatingLabel="Name"/>
-                <Field name="description" component={FormInput} floatingLabel="Description"/>
-                <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
-                <SubmitBlock name="Save"/>
-              </form>
+              {this.props.showForm ? (
+                <form onSubmit={this.props.onSubmit}>
+                  <Field name="name" component={FormInput} floatingLabel="Name"/>
+                  <Field name="description" component={FormInput} floatingLabel="Description"/>
+                  <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
+                    <SubmitBlock name="Save"/> 
+                </form> ) : (
+               <span></span>
+              )
+            }
            </div>
          </div>
       </div>
