@@ -183,9 +183,13 @@ export const addSettingMap = (props) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/map`, props)
+    if (props) {
+      axios.post(`${ROOT_URL}/map`, props)
       .then(response => addSettingMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
+    } else {
+      addSettingMapSuccess(dispatch, {data: []})
+    }
   }
 }
 
