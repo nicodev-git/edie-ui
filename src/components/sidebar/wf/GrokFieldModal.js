@@ -22,7 +22,7 @@ class GrokFieldModal extends Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: {}
+    initialValues: props.editGrokField
   }), {})(reduxForm({
   form: 'grokFieldValueForm'
 })(GrokFieldModal))

@@ -12,6 +12,7 @@ import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
+import GrokFieldModal from "./GrokFieldModal";
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -83,6 +84,7 @@ class WorkflowEditModal extends React.Component {
       editShape: null,
       keyField: null,
 
+      editGrokField: null,
       grokFieldModalOpen: null,
 
       active: 1,
@@ -477,17 +479,35 @@ class WorkflowEditModal extends React.Component {
   }
 
   onClickEditShapeExtra (shapeIndex, extraIndex, e) {
+    const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
-    const current = objects[shapeIndex]
+    const editShape = objects[shapeIndex]
 
-    console.log(current)
+    console.log(editShape)
+
+    const productType = find(productTypes, {id: editShape.data.field})
+    const name = productType.grokFields[extraIndex]
+
+    const grokFieldValues = editShape.data.grokFieldValues || {}
+    const editGrokField = {
+      value: grokFieldValues[name]
+    }
+
+    this.setState({
+      editGrokField,
+      grokFieldModalOpen: true,
+    })
   }
 
   onCloseGrokFieldModal () {
     this.setState({
       grokFieldModalOpen: false
     })
+  }
+
+  onSaveGrokField (values) {
+    console.log(values)
   }
 
   ////////////////////////////////////////////////////
@@ -621,8 +641,12 @@ class WorkflowEditModal extends React.Component {
   ////////////////////////////////////////////////////
   renderGrokFieldModal () {
     if (!this.state.grokFieldModalOpen) return null
+    const {editGrokField} = this.state
     return (
-      null
+      <GrokFieldModal
+        initialValues={editGrokField}
+        onSave={this.onSaveGrokField.bind(this)}
+      />
     )
 
   }
