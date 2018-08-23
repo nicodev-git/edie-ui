@@ -234,9 +234,6 @@ class WorkflowEditModal extends React.Component {
           }
         })
       })
-
-      if (!actions.length) {
-      }
     })
 
     return [
