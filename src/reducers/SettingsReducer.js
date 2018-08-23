@@ -362,6 +362,8 @@ export default function (state = initialState, action) {
     }
 
     case ADD_SETTING_MAP: {
+      console.log('action-data', action.data)
+      console.log('state.maps', state.maps)
       const maps = concat(state.maps || [], action.data)
       return { ...state, maps }
     }
