@@ -104,6 +104,7 @@ class WorkflowEditModalView extends React.Component {
     const {
       wfDataItems,
       // onClickDeleteShape,
+      onClickAddExtra,
       onClickEditShape
     } = this.props
     return (
@@ -143,7 +144,7 @@ class WorkflowEditModalView extends React.Component {
                       {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
                     {/*</div>*/}
                     {p.extraFields.length ? (
-                      <AddIcon className="link valign-middle"/>
+                      <AddIcon className="link valign-middle" onClick={() => onClickAddExtra(p)}/>
                     ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block margin-sm-bottom">

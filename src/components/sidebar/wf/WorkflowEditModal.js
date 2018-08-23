@@ -492,6 +492,12 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
+  onClickAddExtra (shape) {
+    console.log(shape)
+  }
+
+  ////////////////////////////////////////////////////
+
   onExpandRulePanel(e, expanded) {
     this.setState({
       rulePanelExpanded: expanded
@@ -745,6 +751,7 @@ class WorkflowEditModal extends React.Component {
         onClickShape={this.onClickShape.bind(this)}
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
+        onClickAddExtra={this.onClickAddExtra.bind(this)}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
