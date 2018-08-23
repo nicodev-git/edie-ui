@@ -5,11 +5,11 @@ import {findStepPoints, getHandlePoints} from 'shared/LineUtil'
 function addLine2 (data, startObj, endObj, startPoint, endPoint, items) {
     const leftTpl = items[startObj.imgIndex]
     const rightTpl = items[endObj.imgIndex]
-    const startPos = leftTpl.getConnectionPoint(startObj, startPoint)
-    const endPos = rightTpl.getConnectionPoint(endObj, endPoint)
+    const startPos = leftTpl && leftTpl.getConnectionPoint ? leftTpl.getConnectionPoint(startObj, startPoint) : {x: 0, y: 0}
+    const endPos = rightTpl && rightTpl.getConnectionPoint ? rightTpl.getConnectionPoint(endObj, endPoint) : {x: 0, y: 0}
 
-    const stepPoints = findStepPoints(leftTpl, startPos, startPoint, rightTpl, endPos, endPoint)
-    const handlePoints = getHandlePoints(startPos, stepPoints, endPos)
+    const stepPoints = leftTpl && leftTpl.getConnectionPoint ? findStepPoints(leftTpl, startPos, startPoint, rightTpl, endPos, endPoint) : [{x: 0, y: 0}]
+    const handlePoints = rightTpl && rightTpl.getConnectionPoint ? getHandlePoints(startPos, stepPoints, endPos) : [{x: 0, y: 0}]
 
     data.lines.push({
         id: data.lastId++,
