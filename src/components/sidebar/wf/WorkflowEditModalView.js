@@ -103,7 +103,7 @@ class WorkflowEditModalView extends React.Component {
   renderWfTab() {
     const {
       wfDataItems,
-      // onClickDeleteShape,
+      onClickDeleteShape,
       onClickAddExtra,
       onClickEditShapeExtra,
       onClickEditShape
@@ -141,11 +141,11 @@ class WorkflowEditModalView extends React.Component {
                       {p.extraFields.length ? (
                         <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
                         ) : null}
-                    </div>
 
-                    {/*<div className="wf-item-delete">*/}
-                      {/*<DeleteIcon onClick={() => onClickDeleteShape(i)}/>*/}
-                    {/*</div>*/}
+                      <div className="wf-item-delete">
+                        <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+                      </div>
+                    </div>
                     {p.extraFields.length ? (
                       <AddIcon className="link valign-middle" onClick={() => onClickAddExtra(p)}/>
                     ) : null}
