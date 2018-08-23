@@ -141,10 +141,6 @@ class WorkflowEditModalView extends React.Component {
                       {p.extraFields.length ? (
                         <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
                         ) : null}
-
-                      <div className="wf-item-delete">
-                        <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
-                      </div>
                     </div>
                     {p.extraFields.length ? (
                       <AddIcon className="link valign-middle" onClick={() => onClickAddExtra(p)}/>
@@ -163,6 +159,9 @@ class WorkflowEditModalView extends React.Component {
                         {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
+                    <div className="wf-item-delete">
+                      <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
+                    </div>
                   </div>
                 </div>
               </div>
