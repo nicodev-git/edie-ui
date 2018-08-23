@@ -179,13 +179,15 @@ class WorkflowEditModal extends React.Component {
           const productType = find(productTypes, {id: field})
           if (productType && productType.grokFields) {
             grokFields = productType.grokFields
-            grokFields.forEach(grokField => {
-              if (!visibleGrokFields || !visibleGrokFields.includes(grokField)) return
-              extraFields.push({
-                name: grokField,
-                value: (grokFieldValues || {})[grokField] || ''
+
+            if (visibleGrokFields) {
+              visibleGrokFields.forEach(visibleField => {
+                extraFields.push({
+                  name: visibleField,
+                  value: (grokFieldValues || {})[visibleField] || ''
+                })
               })
-            })
+            }
           }
           break
         }
@@ -487,6 +489,7 @@ class WorkflowEditModal extends React.Component {
 
     this.setState({
       grokFieldMenuOpen: true,
+      editShape,
       shapeAnchorEl: e.target,
       editGrokFields: productType.grokFields || []
     })
@@ -530,7 +533,6 @@ class WorkflowEditModal extends React.Component {
   }
 
   onSaveGrokField (values) {
-    console.log(values)
     const {editShape, editGrokField, wfData} = this.state
     const {objects} = wfData
     const object = {...editShape}
@@ -539,6 +541,22 @@ class WorkflowEditModal extends React.Component {
     if (object.data.uuid) {
       object.data.grokFieldValues = object.data.grokFieldValues || {}
       object.data.grokFieldValues[editGrokField.name] = values.value || ''
+      this.setState({
+        wfData: {
+          ...wfData,
+          objects: objects.map(p => p.data.uuid === object.data.uuid ? object : p)
+        }
+      })
+    }
+  }
+
+  onClickShowGrokField (visibleField) {
+    const {editShape, wfData} = this.state
+    const {objects} = wfData
+    const object = {...editShape}
+    object.data.visibleGrokFields = object.data.visibleGrokFields || []
+    if (!object.data.visibleGrokFields.includes(visibleField)) {
+      object.data.visibleGrokFields.push(visibleField)
       this.setState({
         wfData: {
           ...wfData,
@@ -821,9 +839,11 @@ class WorkflowEditModal extends React.Component {
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
         grokFieldModal={this.renderGrokFieldModal()}
         onCloseGrokFieldModal={this.onCloseGrokFieldModal.bind(this)}
+
         editGrokFields={this.state.editGrokFields}
         grokFieldMenuOpen={this.state.grokFieldMenuOpen}
         onCloseGrokFieldMenu={this.onCloseGrokFieldMenu.bind(this)}
+        onClickShowGrokField={this.onClickShowGrokField.bind(this)}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
