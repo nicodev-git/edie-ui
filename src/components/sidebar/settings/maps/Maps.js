@@ -18,7 +18,7 @@ class Maps extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
-
+    this.showForm = false
     this.cells = [{
       'displayName': 'Name',
       'columnName': 'name'
@@ -42,10 +42,15 @@ class Maps extends React.Component {
   }
 
   handleFormSubmit (values) {
+    console.log(values)
     this.props.addSettingMap({...values })
     this.props.reset()
+    this.showForm = false
   }
-
+  showMapForm () {
+    this.showForm = true
+    this.props.addSettingMap({})
+  }
   renderContent (canEdit) {
     const { handleSubmit } = this.props
     return (
@@ -55,6 +60,7 @@ class Maps extends React.Component {
         ref="maps"
         rowMetadata={{'key': 'id'}}
         selectable
+        showForm={this.showForm}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onRowDblClick={canEdit ? this.onMapEdit.bind(this) : null}
         useExternal={false}
@@ -121,7 +127,7 @@ class Maps extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <Button variant="raised" onClick={this.onMapAdd.bind(this)} className={canAdd ? '' : 'hidden'}>Add Map</Button>&nbsp;
+              <Button variant="raised" onClick={this.showMapForm.bind(this)} className={canAdd ? '' : 'hidden'}>Add Map</Button>&nbsp;
               <Button variant="raised" onClick={this.onMapEdit.bind(this)} className={canEdit ? '' : 'hidden'}>Edit Map</Button>&nbsp;
               <Button variant="raised" onClick={this.onMapDelete.bind(this)} className={canEdit ? '' : 'hidden'}>Delete Map</Button>&nbsp;
               <Button variant="raised" onClick={this.onMapUsers.bind(this)} className="hidden">Edit Map Users</Button>&nbsp;
