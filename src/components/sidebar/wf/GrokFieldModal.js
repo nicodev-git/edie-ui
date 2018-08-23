@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
-import {reduxForm, getFormValues} from 'redux-form'
+import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
+
+import GrokFieldModalView from './GrokFieldModalView'
 
 class GrokFieldModal extends Component {
   handleFormSubmit (props) {
@@ -9,10 +11,9 @@ class GrokFieldModal extends Component {
   }
 
   render () {
-    const {handleSubmit, onClose} = this.props
+    const {handleSubmit} = this.props
     return (
-      <SimpleModalForm
-        onHide={onClose}
+      <GrokFieldModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
