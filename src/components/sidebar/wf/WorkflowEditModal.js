@@ -516,8 +516,8 @@ class WorkflowEditModal extends React.Component {
 
 
     if (object.data.uuid) {
-      object.grokFieldValues = object.grokFieldValues || {}
-      object.grokFieldValues[editGrokField.name] = values.value || ''
+      object.data.grokFieldValues = object.data.grokFieldValues || {}
+      object.data.grokFieldValues[editGrokField.name] = values.value || ''
       this.setState({
         wfData: {
           ...wfData,
