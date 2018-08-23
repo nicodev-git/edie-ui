@@ -105,6 +105,7 @@ class WorkflowEditModalView extends React.Component {
       wfDataItems,
       // onClickDeleteShape,
       onClickAddExtra,
+      onClickEditShapeExtra,
       onClickEditShape
     } = this.props
     return (
@@ -154,7 +155,7 @@ class WorkflowEditModalView extends React.Component {
                         <div className="wf-item wf-item-orange">
                           Match
                         </div>
-                        <div className="wf-item">
+                        <div className="wf-item" onClick={e => onClickEditShapeExtra(j, extra)}>
                           Any
                         </div>
                         {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/> : null}

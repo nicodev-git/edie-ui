@@ -473,7 +473,7 @@ class WorkflowEditModal extends React.Component {
       type: current.config.type
     })
 
-    if (shapeIndex < 0) return alert('Shape not found')
+    if (shapeIndex < 0) return //alert('Shape not found')
 
     this.setState({
       shapeModalOpen: false,
@@ -494,6 +494,10 @@ class WorkflowEditModal extends React.Component {
 
   onClickAddExtra (shape) {
     console.log(shape)
+  }
+
+  onClickEditShapeExtra (index) {
+
   }
 
   ////////////////////////////////////////////////////
