@@ -174,7 +174,6 @@ class WorkflowEditModal extends React.Component {
           itemValue = `${sentence}`
 
           const productType = find(productTypes, {id: field})
-
           if (productType && productType.grokFields) {
             productType.grokFields.map(grokField => {
               extraFields.push({
