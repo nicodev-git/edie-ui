@@ -282,7 +282,7 @@ const fetchDevicesByMapid = (response) => {
 }
 
 const fetchLinesByMapid = (response) => {
-  return response.data._embedded.devices
+  return (response.data._embedded || {}).devices || []
 }
 
 const fetchGroupsByMapid = (response) => {
