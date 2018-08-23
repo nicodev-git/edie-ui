@@ -143,7 +143,7 @@ class WorkflowEditModalView extends React.Component {
                         ) : null}
                     </div>
                     {p.extraFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={() => onClickAddExtra(p)}/>
+                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(p, e)}/>
                     ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block margin-sm-bottom">

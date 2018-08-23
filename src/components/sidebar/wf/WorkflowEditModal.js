@@ -85,7 +85,8 @@ class WorkflowEditModal extends React.Component {
       keyField: null,
 
       editGrokField: null,
-      grokFieldModalOpen: null,
+      grokFieldModalOpen: false,
+      grokFieldMenuOpen: false,
 
       active: 1,
 
@@ -470,8 +471,13 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
-  onClickAddExtra (shape) {
+  onClickAddExtra (shape, e) {
+
     console.log(shape)
+    this.setState({
+      grokFieldMenuOpen: true,
+      shapeAnchorEl: e.target.value
+    })
   }
 
   onClickEditShapeExtra (shapeIndex, extraIndex, e) {
