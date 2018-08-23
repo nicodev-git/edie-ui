@@ -538,10 +538,13 @@ class WorkflowEditModalView extends React.Component {
   }
 
   renderGrokFieldMenu () {
-    const {grokFieldMenuOpen, shapeAnchorEl, editGrokFields} = this.props
+    const {grokFieldMenuOpen, shapeAnchorEl, editGrokFields, onCloseGrokFieldMenu} = this.props
     if (!grokFieldMenuOpen) return null
     return (
-      <Popover open anchorEl={shapeAnchorEl} anchorOrigin={{horizontal: "right", vertical: "top"}}>
+      <Popover
+        open anchorEl={shapeAnchorEl} anchorOrigin={{horizontal: "right", vertical: "top"}}
+        onClose={onCloseGrokFieldMenu}
+      >
         <MenuList style={{maxHeight: 400, overflow: 'auto'}}>
           {editGrokFields.map((p, i) =>
             <MenuItem key={i}>

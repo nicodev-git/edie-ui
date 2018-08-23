@@ -488,6 +488,12 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
+  onCloseGrokFieldMenu () {
+    this.setState({
+      grokFieldMenuOpen: false
+    })
+  }
+
   onClickEditShapeExtra (shapeIndex, extraIndex, e) {
     const {productTypes} = this.props
     const {wfData} = this.state
@@ -813,6 +819,7 @@ class WorkflowEditModal extends React.Component {
         onCloseGrokFieldModal={this.onCloseGrokFieldModal.bind(this)}
         editGrokFields={this.state.editGrokFields}
         grokFieldMenuOpen={this.state.grokFieldMenuOpen}
+        onCloseGrokFieldMenu={this.onCloseGrokFieldMenu.bind(this)}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
