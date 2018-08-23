@@ -83,6 +83,8 @@ class WorkflowEditModal extends React.Component {
       editShape: null,
       keyField: null,
 
+      grokFieldModalOpen: null,
+
       active: 1,
 
       loading: false,
@@ -613,6 +615,9 @@ class WorkflowEditModal extends React.Component {
   ////////////////////////////////////////////////////
   renderGrokFieldModal () {
     if (!this.state.grokFieldModalOpen) return null
+    return (
+      null
+    )
 
   }
 
