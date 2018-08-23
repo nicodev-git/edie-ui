@@ -536,6 +536,19 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderGrokFieldMenu () {
+    const {grokFieldMenuOpen, shapeAnchorEl} = this.props
+    if (!grokFieldMenuOpen) return null
+    return (
+      <Popover
+        open
+        anchorEl={shapeAnchorEl}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+      </Popover>
+    )
+  }
+
   renderButtons() {
     const {onClickClose, noModal} = this.props
     return (
@@ -566,6 +579,7 @@ class WorkflowEditModalView extends React.Component {
         </form>
         {this.renderEditPopover()}
         {this.renderGrokFieldPopover()}
+        {this.renderGrokFieldMenu()}
         {children}
       </div>
     )

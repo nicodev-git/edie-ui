@@ -803,6 +803,7 @@ class WorkflowEditModal extends React.Component {
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
         grokFieldModal={this.renderGrokFieldModal()}
         onCloseGrokFieldModal={this.onCloseGrokFieldModal.bind(this)}
+        grokFieldMenuOpen={this.state.grokFieldMenuOpen}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
