@@ -152,6 +152,7 @@ class WorkflowEditModal extends React.Component {
       let itemValueKey = 'sentence'
 
       const extraFields = []
+      let grokFields = []
 
       switch (type) {
         case 'DECISION':
@@ -177,7 +178,8 @@ class WorkflowEditModal extends React.Component {
 
           const productType = find(productTypes, {id: field})
           if (productType && productType.grokFields) {
-            productType.grokFields.forEach(grokField => {
+            grokFields = productType.grokFields
+            grokFields.forEach(grokField => {
               if (!visibleGrokFields || !visibleGrokFields.includes(grokField)) return
               extraFields.push({
                 name: grokField,
@@ -209,7 +211,8 @@ class WorkflowEditModal extends React.Component {
         labelKey: itemLabelKey,
         value: itemValue,
         valueKey: itemValueKey,
-        extraFields
+        extraFields,
+        grokFields
       }
     })
     return wfDataItems

@@ -157,7 +157,7 @@ class WorkflowEditModalView extends React.Component {
                         {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
-                    {p.extraFields.length ? (
+                    {p.grokFields.length ? (
                       <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
                     ) : null}
                     <div className="wf-item-delete">
