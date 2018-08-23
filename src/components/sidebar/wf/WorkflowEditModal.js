@@ -611,6 +611,11 @@ class WorkflowEditModal extends React.Component {
   }
 
   ////////////////////////////////////////////////////
+  renderGrokFieldModal () {
+    if (!this.state.grokFieldModalOpen) return null
+
+  }
+
   renderUserPickModal() {
     if (!this.props.userPickModalOpen) return null
     // return (
@@ -754,6 +759,7 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
+        {this.renderGrokFieldModal()}
         {this.renderLoader()}
       </ModalView>
     )
