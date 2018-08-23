@@ -497,6 +497,7 @@ class WorkflowEditModal extends React.Component {
     this.setState({
       editGrokField,
       grokFieldModalOpen: true,
+      shapeAnchorEl: e.target
     })
   }
 

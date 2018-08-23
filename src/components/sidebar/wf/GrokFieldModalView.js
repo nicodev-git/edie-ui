@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {Field} from 'redux-form'
 import {
-  FormInput
-} from './parts'
+  FormInput,
+  SubmitBlock
+} from 'components/modal/parts'
 
 export default class GrokFieldModalView extends Component {
   handleFormSubmit (props) {
@@ -16,9 +17,12 @@ export default class GrokFieldModalView extends Component {
     } = this.props
 
     return (
-      <form onSubmit={onSubmit}>
-        <Field name="value" component={FormInput}/>
-      </form>
+      <div className="padding-md">
+        <form onSubmit={onSubmit}>
+          <Field name="value" component={FormInput}/>
+          <SubmitBlock name="Save"/>
+        </form>
+      </div>
     )
   }
 }
