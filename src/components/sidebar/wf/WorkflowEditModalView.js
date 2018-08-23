@@ -138,7 +138,9 @@ class WorkflowEditModalView extends React.Component {
                       <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
                         <div className="text-center">{p.value}</div>
                       </div>
-                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
+                      {p.extraFields.length ? (
+                        <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
+                        ) : null}
                     </div>
 
                     {/*<div className="wf-item-delete">*/}

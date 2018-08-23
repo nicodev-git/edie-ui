@@ -760,6 +760,7 @@ class WorkflowEditModal extends React.Component {
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
         onClickAddExtra={this.onClickAddExtra.bind(this)}
+        onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
 
         active={this.state.active}
         onClickSidebarGroup={i => this.setState({active: i})}
