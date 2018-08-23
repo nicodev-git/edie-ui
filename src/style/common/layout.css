@@ -489,6 +489,7 @@ input:-webkit-autofill {
     cursor: pointer;
     text-align: left;
     min-width: 120px;
+    min-height: 30px;
     padding: 6px 4px;
     position: relative;
     display: inline-block;

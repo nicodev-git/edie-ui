@@ -138,7 +138,7 @@ class WorkflowEditModal extends React.Component {
   getWfDataItems() {
     const {productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
-      const {sentence, name, variable, condition, fieldType, field, uiprops} = p.data
+      const {sentence, name, variable, condition, fieldType, field, uiprops, grokFieldValues} = p.data
       const type = p.config.type || uiprops.type
 
       let itemPreLabel = ''
@@ -179,7 +179,7 @@ class WorkflowEditModal extends React.Component {
             productType.grokFields.map(grokField => {
               extraFields.push({
                 name: grokField,
-                value: ''
+                value: (grokFieldValues || {})[grokField] || ''
               })
               return true
             })
@@ -497,6 +497,7 @@ class WorkflowEditModal extends React.Component {
 
     this.setState({
       editGrokField,
+      editShape,
       grokFieldModalOpen: true,
       shapeAnchorEl: e.target
     })
@@ -510,6 +511,21 @@ class WorkflowEditModal extends React.Component {
 
   onSaveGrokField (values) {
     console.log(values)
+    const {editShape, editGrokField, wfData} = this.state
+    const {objects} = wfData
+    const object = {...editShape}
+
+
+    if (object.data.uuid) {
+      object.grokFieldValues = object.grokFieldValues || {}
+      object.grokFieldValues[editGrokField.name] = values.value || ''
+      this.setState({
+        wfData: {
+          ...wfData,
+          objects: objects.map(p => p.data.uuid === object.data.uuid ? object : p)
+        }
+      })
+    }
   }
 
   ////////////////////////////////////////////////////
