@@ -479,9 +479,11 @@ class WorkflowEditModal extends React.Component {
     console.log(editShape)
     const productType = find(productTypes, {id: editShape.data.field})
 
+    e.stopPropagation()
+
     this.setState({
       grokFieldMenuOpen: true,
-      shapeAnchorEl: e.target.value,
+      shapeAnchorEl: e.target,
       editGrokFields: productType.grokFields || []
     })
   }

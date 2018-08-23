@@ -3,6 +3,7 @@ import {Field} from 'redux-form'
 import {
   Tab,
   Checkbox, FormControlLabel, Button, Popover,
+  MenuItem, MenuList,
   Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
@@ -540,20 +541,14 @@ class WorkflowEditModalView extends React.Component {
     const {grokFieldMenuOpen, shapeAnchorEl, editGrokFields} = this.props
     if (!grokFieldMenuOpen) return null
     return (
-      <Popover
-        open
-        anchorEl={shapeAnchorEl}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        {editGrokFields.map((p, i) =>
-          <FormControlLabel
-            key={i}
-            control={
-              <Checkbox/>
-            }
-            label={p}
-          />
-        )}
+      <Popover open anchorEl={shapeAnchorEl} anchorOrigin={{horizontal: "right", vertical: "top"}}>
+        <MenuList style={{maxHeight: 400, overflow: 'auto'}}>
+          {editGrokFields.map((p, i) =>
+            <MenuItem key={i}>
+              <FormControlLabel control={<Checkbox/>} label={p}/>
+            </MenuItem>
+          )}
+        </MenuList>
       </Popover>
     )
   }
