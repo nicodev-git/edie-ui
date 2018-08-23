@@ -520,6 +520,22 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderGrokFieldPopover () {
+    const {grokFieldModal, shapeAnchorEl, onCloseGrokFieldModal} = this.props
+    if (!grokFieldModal) return null
+
+    return (
+      <Popover
+        open
+        anchorEl={shapeAnchorEl}
+        onClose={onCloseGrokFieldModal}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        {grokFieldModal}
+      </Popover>
+    )
+  }
+
   renderButtons() {
     const {onClickClose, noModal} = this.props
     return (
@@ -532,11 +548,6 @@ class WorkflowEditModalView extends React.Component {
       onSubmit, children,
       tab, onChangeTab, noModal
     } = this.props
-
-    // const mainStyle = tab === 'wf' ? {
-    //   height: panelHeight + 100,
-    //   overflow: 'auto'
-    // } : null
 
     const content = (
       <div>
@@ -554,6 +565,7 @@ class WorkflowEditModalView extends React.Component {
           {this.renderTabContent()}
         </form>
         {this.renderEditPopover()}
+        {this.renderGrokFieldPopover()}
         {children}
       </div>
     )
