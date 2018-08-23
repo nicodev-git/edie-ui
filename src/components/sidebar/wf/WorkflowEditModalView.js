@@ -138,7 +138,7 @@ class WorkflowEditModalView extends React.Component {
                       <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
                         <div className="text-center">{p.value}</div>
                       </div>
-                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/>
+                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
                     </div>
 
                     {/*<div className="wf-item-delete">*/}
@@ -155,10 +155,10 @@ class WorkflowEditModalView extends React.Component {
                         <div className="wf-item wf-item-orange">
                           Match
                         </div>
-                        <div className="wf-item" onClick={e => onClickEditShapeExtra(j, extra)}>
+                        <div className="wf-item" onClick={e => onClickEditShapeExtra(i, j, e)}>
                           Any
                         </div>
-                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle"/> : null}
+                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
                   </div>

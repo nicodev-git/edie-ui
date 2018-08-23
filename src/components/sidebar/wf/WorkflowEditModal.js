@@ -496,8 +496,12 @@ class WorkflowEditModal extends React.Component {
     console.log(shape)
   }
 
-  onClickEditShapeExtra (index) {
+  onClickEditShapeExtra (shapeIndex, extraIndex, e) {
+    const {wfData} = this.state
+    const {objects} = wfData
+    const current = objects[shapeIndex]
 
+    console.log(current)
   }
 
   ////////////////////////////////////////////////////
