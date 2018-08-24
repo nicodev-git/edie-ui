@@ -77,7 +77,6 @@ class InfiniteTable extends React.Component {
       if (clear) {
         if (this.state.results.length) this.setState({results: []})
       }
-      // console.log('Already loading.')
       if (!force) return
     }
 
@@ -250,6 +249,7 @@ class InfiniteTable extends React.Component {
                </thead>
                <tbody>{
                  this.getCurrentData().map((row, i) => {
+                   if(row.id) {
                    const cls = this.getBodyCssClassName(row) || 'standard-row'
 
                    const tds = cells.map((cell, j) => {
@@ -269,9 +269,9 @@ class InfiniteTable extends React.Component {
                        })
                      }
                      return (
-                       <td key={j} className={cssClassName}>
-                         {content}
-                       </td>
+                        <td key={j} className={cssClassName}>
+                          {content}
+                        </td>
                      )
                    })
                    return (
@@ -283,6 +283,7 @@ class InfiniteTable extends React.Component {
                        {tds}
                      </tr>
                    )
+                  }
                  })
                }
                {this.props.showForm ? (

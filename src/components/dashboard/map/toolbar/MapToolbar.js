@@ -46,16 +46,6 @@ export default class Toolbar extends Component {
     )
   }
 
-    // ///////////////////////////////////////
-
-  /* onClickAdd () {
-    console.log('on click add')
-    this.setState({
-      displayDevices: !this.state.displayDevices
-    }, () => {
-      this.props.onClickAdd(this.state.displayDevices)
-    })
-  } */
 
   hideDeviceMenu () {
     this.setState({

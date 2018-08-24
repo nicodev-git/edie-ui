@@ -48,7 +48,8 @@ class Maps extends React.Component {
   }
   showMapForm () {
     this.showForm = true
-    this.props.addSettingMap(null)
+    // this.renderContent(true)
+    this.props.addSettingMap()
   }
   renderContent (canEdit) {
     const { handleSubmit } = this.props
@@ -120,7 +121,6 @@ class Maps extends React.Component {
     const canSetting = hasPermission(userInfo, 'EditSettings')
     const canAdd = canSetting && hasPermission(userInfo, 'AddMap')
     const canEdit = canSetting && hasPermission(userInfo, 'EditMap')
-    console.log(canEdit)
 
     return (
       <TabPage>
