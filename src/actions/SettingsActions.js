@@ -188,7 +188,8 @@ export const addSettingMap = (props) => {
       .then(response => addSettingMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
     } else {
-      addSettingMapSuccess(dispatch, {data: []})
+      console.log(69)
+      addSettingMapSuccess(dispatch, {data: [{}]})
     }
   }
 }

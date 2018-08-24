@@ -11,6 +11,7 @@ import { Field } from 'redux-form'
 class InfiniteTable extends React.Component {
   constructor (props) {
     super(props)
+    console.log(this.props)
     this.state = {
       currentPage: -1,
       isLoading: false,
@@ -250,6 +251,7 @@ class InfiniteTable extends React.Component {
                </thead>
                <tbody>{
                  this.getCurrentData().map((row, i) => {
+                   if(row.id) {
                    const cls = this.getBodyCssClassName(row) || 'standard-row'
 
                    const tds = cells.map((cell, j) => {
@@ -269,9 +271,9 @@ class InfiniteTable extends React.Component {
                        })
                      }
                      return (
-                       <td key={j} className={cssClassName}>
-                         {content}
-                       </td>
+                        <td key={j} className={cssClassName}>
+                          {content}
+                        </td>
                      )
                    })
                    return (
@@ -283,6 +285,7 @@ class InfiniteTable extends React.Component {
                        {tds}
                      </tr>
                    )
+                  }
                  })
                }
                {this.props.showForm ? (
