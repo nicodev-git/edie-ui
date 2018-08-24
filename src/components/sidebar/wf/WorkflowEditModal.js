@@ -140,7 +140,7 @@ class WorkflowEditModal extends React.Component {
     const {productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
       const {sentence, name, variable, condition, fieldType, field, uiprops,
-        grokFieldValues, visibleGrokFields} = p.data
+        grokFieldRules, visibleGrokFields} = p.data
       const type = p.config.type || uiprops.type
 
       let itemPreLabel = ''
@@ -182,9 +182,10 @@ class WorkflowEditModal extends React.Component {
 
             if (visibleGrokFields) {
               visibleGrokFields.forEach(visibleField => {
+                const rule = (grokFieldRules || {})[visibleField]
                 extraFields.push({
                   name: visibleField,
-                  value: (grokFieldValues || {})[visibleField] || ''
+                  ...rule
                 })
               })
             }
@@ -508,19 +509,19 @@ class WorkflowEditModal extends React.Component {
   }
 
   onClickEditShapeExtra (shapeIndex, name, e) {
-    const {productTypes} = this.props
+    // const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
     const editShape = objects[shapeIndex]
 
     console.log(editShape)
 
-    const productType = find(productTypes, {id: editShape.data.field})
+    // const productType = find(productTypes, {id: editShape.data.field})
 
-    const grokFieldValues = editShape.data.grokFieldValues || {}
+    const grokFieldRules = editShape.data.grokFieldRules || {}
     const editGrokField = {
       name,
-      value: grokFieldValues[name]
+      ...grokFieldRules[name]
     }
 
     this.setState({
@@ -544,8 +545,13 @@ class WorkflowEditModal extends React.Component {
 
 
     if (object.data.uuid) {
-      object.data.grokFieldValues = object.data.grokFieldValues || {}
-      object.data.grokFieldValues[editGrokField.name] = values.value || ''
+      const grokFieldRules = object.data.grokFieldRules || {}
+      grokFieldRules[editGrokField.name] = {
+        ...grokFieldRules[editGrokField.name],
+        value: values.value || ''
+      }
+      object.data.grokFieldRules = grokFieldRules
+
       this.setState({
         wfData: {
           ...wfData,
