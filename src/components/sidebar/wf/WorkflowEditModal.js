@@ -487,11 +487,15 @@ class WorkflowEditModal extends React.Component {
 
     e.stopPropagation()
 
+    const editGrokFields = productType.grokFields || []
+
     this.setState({
       grokFieldMenuOpen: true,
       editShape,
       shapeAnchorEl: e.target,
-      editGrokFields: productType.grokFields || []
+      editGrokFields/*: editGrokFields.filter(p =>
+        !(editShape.data.visibleGrokFields || []).includes(p)
+      )*/
     })
   }
 
