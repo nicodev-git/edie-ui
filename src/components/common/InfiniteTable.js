@@ -248,59 +248,72 @@ class InfiniteTable extends React.Component {
                </tr>
                </thead>
                <tbody>{
-                 this.getCurrentData().map((row, i) => {
+                  this.getCurrentData().map((row, i) => {
                    if(row.id) {
-                   const cls = this.getBodyCssClassName(row) || 'standard-row'
+                    const cls = this.getBodyCssClassName(row) || 'standard-row'
 
-                   const tds = cells.map((cell, j) => {
-                     const {customComponent, cssClassName, columnName} = cell
-                     let content = ''
-                     if (columnName) {
-                       const columnNameSegments = columnName.split('.')
-                       content = row
-                       columnNameSegments.forEach(seg => {
-                         if (content) content = content[seg]
-                       })
-                     }
-                     if (customComponent) {
-                       content = customComponent({
-                         data: content,
-                         rowData: row
-                       })
-                     }
-                     return (
-                        <td key={j} className={cssClassName}>
-                          {content}
-                        </td>
-                     )
-                   })
-                   return (
-                     <tr
-                       key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
-                       onClick={this.onRowClick.bind(this, row)}
-                       onDoubleClick={this.onRowDblClick.bind(this, row)}
-                     >
-                       {tds}
-                     </tr>
-                   )
+                    const tds = cells.map((cell, j) => {
+                      const {customComponent, cssClassName, columnName} = cell
+                      let content = ''
+                      if (columnName) {
+                        const columnNameSegments = columnName.split('.')
+                        content = row
+                        columnNameSegments.forEach(seg => {
+                          if (content) content = content[seg]
+                        })
+                      }
+                      if (customComponent) {
+                        content = customComponent({
+                          data: content,
+                          rowData: row
+                        })
+                      }
+                      return (
+                          <td key={j} className={cssClassName}>
+                            {content}
+                          </td>
+                      )
+                    })
+                    return (
+                      <tr
+                        key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
+                        onClick={this.onRowClick.bind(this, row)}
+                        onDoubleClick={this.onRowDblClick.bind(this, row)}
+                      >
+                        {tds}
+                      </tr>
+                    )
                   }
-                 })
+                  })
                }
                {this.props.showForm ? (
-                  <tr>
+                  <tr className='standard-row border-bottom-gray'>
                     <td>
-                      <Field name="name" component={FormInput} floatingLabel="Name"/>
+                      <Field
+                        className='reset-input'
+                        name="name"
+                        component={FormInput}
+                        floatingLabel="Name"/>
                     </td>
                     <td>
-                      <Field name="description" component={FormInput} floatingLabel="Description"/>
+                      <Field
+                        className='reset-input'
+                        name="description"
+                        component={FormInput}
+                        floatingLabel="Description"/>
                     </td>
                     <td>
-                    <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
+                    <Field
+                      className='reset-input'
+                      name="mapgroup"
+                      component={FormInput}
+                      floatingLabel="Group"/>
 
                     </td>
                     <td>
-                      <SubmitBlock name="Save"/> 
+                      <SubmitBlock className='reset-button' name="Save"/> 
                     </td>
+
                   </tr>
                 ) : (
                   <tr>

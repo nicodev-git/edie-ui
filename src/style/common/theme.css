@@ -909,6 +909,41 @@ th {
     width: 100%;
     margin-bottom: 18px;
 }
+.reset-input {
+   padding: 0!important;
+    /* background: red; */
+}
+.reset-input input {
+    padding: 0!important;
+    border: 0!important;
+}
+.reset-input label {
+    margin-top: -24px;
+}
+.reset-input div {
+    margin: 0!important
+}
+.reset-input .MuiInputLabel-shrink-137 {
+    display: none
+}
+.reset-input .MuiInput-underline-150:before , .reset-input .MuiInput-underline-150:after{
+    border: 0!important
+}
+.reset-button {
+    border: 0!important;
+    padding: 0!important;
+    margin: 0!important;
+}
+.reset-button button {
+    padding: 0;
+    min-height: 20px!important;
+}
+.reset-button .MuiTouchRipple-root-65 {
+    display: none;
+}
+.border-bottom-gray {
+    border-bottom: 1px solid #e0e2e4;
+}
 
 .table > thead > tr > th,
 .table > thead > tr > td,
