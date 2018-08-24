@@ -160,6 +160,7 @@ class WorkflowEditModalView extends React.Component {
                         <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
                           {extra.value|| 'Any'}
                         </div>
+
                         {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
@@ -276,6 +277,11 @@ class WorkflowEditModalView extends React.Component {
               <Field name="incidentSeverity" component={FormSelect}
                      options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
               <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
+            </div>
+
+            <div>
+              <Field name="sendChat" component={FormCheckbox} label="Send Chat"/>
+              <Field name="chatChannel" component={FormInput} label="Channel"/>
             </div>
 
             <div className="margin-md-top hidden">

@@ -490,7 +490,7 @@ input:-webkit-autofill {
     text-align: left;
     min-width: 120px;
     min-height: 30px;
-    padding: 6px 4px;
+    padding: 6px 10px;
     position: relative;
     display: inline-block;
     white-space: nowrap;
