@@ -3,10 +3,12 @@ import {Field} from 'redux-form'
 import {
   Tab,
   Checkbox, FormControlLabel, Button, Popover,
+  MenuItem, MenuList,
   Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
+import CloseIcon from '@material-ui/icons/Close'
 import Tabs from '@material-ui/core/Tabs'
 import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
@@ -138,30 +140,32 @@ class WorkflowEditModalView extends React.Component {
                       <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
                         <div className="text-center">{p.value}</div>
                       </div>
+                      <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
+                        <CloseIcon/>
+                      </div>
                       {p.extraFields.length ? (
                         <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
                         ) : null}
                     </div>
-                    {p.extraFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={() => onClickAddExtra(p)}/>
-                    ) : null}
                     {p.extraFields.map((extra, j) =>
                       <div key={j} className="inline-block margin-sm-bottom">
                         <div className="wf-item">
-                          {extra.name}
+                          {extra.name }
                         </div>
+
                         <div className="wf-item wf-item-orange">
-                          Match
+                          {extra.rule === 'match' ? 'Match' : 'Not Match'}
                         </div>
-                        <div className="wf-item" onClick={e => onClickEditShapeExtra(i, j, e)}>
-                          Any
+
+                        <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, e)}>
+                          {extra.value|| 'Any'}
                         </div>
                         {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
                       </div>
                     )}
-                    <div className="wf-item-delete">
-                      <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
-                    </div>
+                    {p.grokFields.length ? (
+                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -536,6 +540,23 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderGrokFieldMenu () {
+    const {grokFieldMenuOpen, shapeAnchorEl, editGrokFields, onCloseGrokFieldMenu, onClickShowGrokField} = this.props
+    if (!grokFieldMenuOpen) return null
+    return (
+      <Popover
+        open anchorEl={shapeAnchorEl} anchorOrigin={{horizontal: "right", vertical: "top"}}
+        onClose={onCloseGrokFieldMenu}
+      >
+        <MenuList style={{maxHeight: 300, overflow: 'auto'}}>
+          {editGrokFields.map((p, i) =>
+            <MenuItem key={i} onClick={() => onClickShowGrokField(p)}>{p}</MenuItem>
+          )}
+        </MenuList>
+      </Popover>
+    )
+  }
+
   renderButtons() {
     const {onClickClose, noModal} = this.props
     return (
@@ -566,6 +587,7 @@ class WorkflowEditModalView extends React.Component {
         </form>
         {this.renderEditPopover()}
         {this.renderGrokFieldPopover()}
+        {this.renderGrokFieldMenu()}
         {children}
       </div>
     )

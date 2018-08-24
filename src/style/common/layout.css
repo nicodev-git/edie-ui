@@ -489,6 +489,7 @@ input:-webkit-autofill {
     cursor: pointer;
     text-align: left;
     min-width: 120px;
+    min-height: 30px;
     padding: 6px 4px;
     position: relative;
     display: inline-block;
@@ -538,9 +539,11 @@ input:-webkit-autofill {
 
 .wf-item-delete {
     position: absolute;
-    right: -24px;
-    top: 0;
+    right: 14px;
+    top: -15px;
     opacity: 0;
+    height: 42px;
+    cursor: pointer;
 }
 
 .wf-item-prelabel {
