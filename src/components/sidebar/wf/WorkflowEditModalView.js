@@ -279,6 +279,11 @@ class WorkflowEditModalView extends React.Component {
               <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
             </div>
 
+            <div>
+              <Field name="sendChat" component={FormCheckbox} label="Send Chat"/>
+              <Field name="chatChannel" component={FormInput} label="Channel"/>
+            </div>
+
             <div className="margin-md-top hidden">
               <Field name="blockIP" component={FormCheckbox} label="Block IP"/>
             </div>
