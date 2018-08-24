@@ -5,8 +5,6 @@ import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
-import { SubmitBlock, FormInput } from 'components/modal/parts'
-import { Field } from 'redux-form'
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -77,6 +75,7 @@ class InfiniteTable extends React.Component {
       if (clear) {
         if (this.state.results.length) this.setState({results: []})
       }
+      // console.log('Already loading.')
       if (!force) return
     }
 
@@ -223,99 +222,69 @@ class InfiniteTable extends React.Component {
 
     return (
       <div key="0" className="griddle">
-         <div className="griddle-container">
-           <div className="griddle-body">
-            <form onSubmit={this.props.onSubmit}>
-             <table className={`table table-hover ${tableClassName || 'table-panel'}`}>
-               <thead>
-               <tr>
-                 {cells.map((cell, i) =>{
-                   const {customHeaderComponent} = cell
-                   let content = cell.displayName
-                   if (customHeaderComponent) {
-                     const data = {
-                       columnId: cell.columnName,
-                       title: cell.displayName
-                     }
-                     content = customHeaderComponent(data)
-                   }
-                   return (
-                     <th key={i} className={cell.cssClassName}>
-                       {content}
-                     </th>
-                   )
-                 })}
-               </tr>
-               </thead>
-               <tbody>{
-                 this.getCurrentData().map((row, i) => {
-                   if(row.id) {
-                   const cls = this.getBodyCssClassName(row) || 'standard-row'
-
-                   const tds = cells.map((cell, j) => {
-                     const {customComponent, cssClassName, columnName} = cell
-                     let content = ''
-                     if (columnName) {
-                       const columnNameSegments = columnName.split('.')
-                       content = row
-                       columnNameSegments.forEach(seg => {
-                         if (content) content = content[seg]
-                       })
-                     }
-                     if (customComponent) {
-                       content = customComponent({
-                         data: content,
-                         rowData: row
-                       })
-                     }
-                     return (
-                        <td key={j} className={cssClassName}>
-                          {content}
-                        </td>
-                     )
-                   })
-                   return (
-                     <tr
-                       key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
-                       onClick={this.onRowClick.bind(this, row)}
-                       onDoubleClick={this.onRowDblClick.bind(this, row)}
-                     >
-                       {tds}
-                     </tr>
-                   )
+        <div className="griddle-container">
+          <div className="griddle-body">
+            <table className={`table table-hover ${tableClassName || 'table-panel'}`}>
+              <thead>
+              <tr>
+                {cells.map((cell, i) =>{
+                  const {customHeaderComponent} = cell
+                  let content = cell.displayName
+                  if (customHeaderComponent) {
+                    const data = {
+                      columnId: cell.columnName,
+                      title: cell.displayName
+                    }
+                    content = customHeaderComponent(data)
                   }
-                 })
-               }
-               {this.props.showForm ? (
-                  <tr>
-                    <td>
-                      <Field name="name" component={FormInput} floatingLabel="Name"/>
-                    </td>
-                    <td>
-                      <Field name="description" component={FormInput} floatingLabel="Description"/>
-                    </td>
-                    <td>
-                    <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
+                  return (
+                    <th key={i} className={cell.cssClassName}>
+                      {content}
+                    </th>
+                  )
+                })}
+              </tr>
+              </thead>
+              <tbody>{
+                this.getCurrentData().map((row, i) => {
+                  const cls = this.getBodyCssClassName(row) || 'standard-row'
 
-                    </td>
-                    <td>
-                      <SubmitBlock name="Save"/> 
-                    </td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <td/>
-                    <td/>
-                    <td/>
-                    <td/>
-                  </tr>
-                )
-              }
-               </tbody>
-             </table>
-              </form> 
-           </div>
-         </div>
+                  const tds = cells.map((cell, j) => {
+                    const {customComponent, cssClassName, columnName} = cell
+                    let content = ''
+                    if (columnName) {
+                      const columnNameSegments = columnName.split('.')
+                      content = row
+                      columnNameSegments.forEach(seg => {
+                        if (content) content = content[seg]
+                      })
+                    }
+                    if (customComponent) {
+                      content = customComponent({
+                        data: content,
+                        rowData: row
+                      })
+                    }
+                    return (
+                      <td key={j} className={cssClassName}>
+                        {content}
+                      </td>
+                    )
+                  })
+                  return (
+                    <tr
+                      key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
+                      onClick={this.onRowClick.bind(this, row)}
+                      onDoubleClick={this.onRowDblClick.bind(this, row)}
+                    >
+                      {tds}
+                    </tr>
+                  )
+                })
+              }</tbody>
+            </table>
+          </div>
+        </div>
       </div>
     )
   }
