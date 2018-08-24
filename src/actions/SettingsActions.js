@@ -192,7 +192,7 @@ export const addSettingMap = (props) => {
     }
   }
 }
-// test
+
 const addSettingMapSuccess = (dispatch, response) => {
   dispatch({
     type: ADD_SETTING_MAP,

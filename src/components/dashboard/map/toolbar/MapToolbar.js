@@ -85,6 +85,11 @@ export default class Toolbar extends Component {
     this.props.onChangeLineType(type, imgUrl)
   }
 
+  onClickToggleMapHeader () {
+    // TODO
+    // this.setState({ headerCollapsed: !this.state.headerCollapsed })
+  }
+
   onClickMapEdit () {
     console.log('edit map')
     this.props.onClickEdit()

@@ -79,6 +79,7 @@ export const signup = ({ email, password }) => {
 }
 
 const signupSuccess = (dispatch, response) => {
+  console.log(response)
   dispatch({
     type: AUTH_USER
   })
