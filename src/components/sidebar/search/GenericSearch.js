@@ -936,7 +936,7 @@ class GenericSearch extends React.Component {
       q: qs.join(' AND '),
       from,
       to,
-      types
+      types,
     }
   }
 
