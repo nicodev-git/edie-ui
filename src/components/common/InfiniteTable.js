@@ -1,6 +1,9 @@
 import React from 'react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
+import { Field } from 'redux-form'
+import { SubmitBlock, FormInput } from 'components/modal/parts'
+
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
@@ -222,69 +225,112 @@ class InfiniteTable extends React.Component {
 
     return (
       <div key="0" className="griddle">
-        <div className="griddle-container">
-          <div className="griddle-body">
-            <table className={`table table-hover ${tableClassName || 'table-panel'}`}>
-              <thead>
-              <tr>
-                {cells.map((cell, i) =>{
-                  const {customHeaderComponent} = cell
-                  let content = cell.displayName
-                  if (customHeaderComponent) {
-                    const data = {
-                      columnId: cell.columnName,
-                      title: cell.displayName
-                    }
-                    content = customHeaderComponent(data)
-                  }
-                  return (
-                    <th key={i} className={cell.cssClassName}>
-                      {content}
-                    </th>
-                  )
-                })}
-              </tr>
-              </thead>
-              <tbody>{
-                this.getCurrentData().map((row, i) => {
-                  const cls = this.getBodyCssClassName(row) || 'standard-row'
+         <div className="griddle-container">
+           <div className="griddle-body">
+            <form onSubmit={this.props.onSubmit}>
+             <table className={`table table-hover ${tableClassName || 'table-panel'}`}>
+               <thead>
+               <tr>
+                 {cells.map((cell, i) =>{
+                   const {customHeaderComponent} = cell
+                   let content = cell.displayName
+                   if (customHeaderComponent) {
+                     const data = {
+                       columnId: cell.columnName,
+                       title: cell.displayName
+                     }
+                     content = customHeaderComponent(data)
+                   }
+                   return (
+                     <th key={i} className={cell.cssClassName}>
+                       {content}
+                     </th>
+                   )
+                 })}
+               </tr>
+               </thead>
+               <tbody>{
+                  this.getCurrentData().map((row, i) => {
+                   if(row.id) {
+                    const cls = this.getBodyCssClassName(row) || 'standard-row'
 
-                  const tds = cells.map((cell, j) => {
-                    const {customComponent, cssClassName, columnName} = cell
-                    let content = ''
-                    if (columnName) {
-                      const columnNameSegments = columnName.split('.')
-                      content = row
-                      columnNameSegments.forEach(seg => {
-                        if (content) content = content[seg]
-                      })
-                    }
-                    if (customComponent) {
-                      content = customComponent({
-                        data: content,
-                        rowData: row
-                      })
-                    }
+                    const tds = cells.map((cell, j) => {
+                      const {customComponent, cssClassName, columnName} = cell
+                      let content = ''
+                      if (columnName) {
+                        const columnNameSegments = columnName.split('.')
+                        content = row
+                        columnNameSegments.forEach(seg => {
+                          if (content) content = content[seg]
+                        })
+                      }
+                      if (customComponent) {
+                        content = customComponent({
+                          data: content,
+                          rowData: row
+                        })
+                      }
+                      return (
+                          <td key={j} className={cssClassName}>
+                            {content}
+                          </td>
+                      )
+                    })
                     return (
-                      <td key={j} className={cssClassName}>
-                        {content}
-                      </td>
+                      <tr
+                        key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
+                        onClick={this.onRowClick.bind(this, row)}
+                        onDoubleClick={this.onRowDblClick.bind(this, row)}
+                      >
+                        {tds}
+                      </tr>
                     )
+                  }
                   })
-                  return (
-                    <tr
-                      key={rowMetadata.key ? (row[rowMetadata.key] || i) : i} className={cls}
-                      onClick={this.onRowClick.bind(this, row)}
-                      onDoubleClick={this.onRowDblClick.bind(this, row)}
-                    >
-                      {tds}
-                    </tr>
-                  )
-                })
-              }</tbody>
-            </table>
-          </div>
-        </div>
+               }
+               {this.props.showForm ? (
+                  <tr className='standard-row border-bottom-gray'>
+                    <td>
+                      <Field
+                        className='reset-input'
+                        name="name"
+                        component={FormInput}
+                        floatingLabel="Name"/>
+                    </td>
+                    <td>
+                      <Field
+                        className='reset-input'
+                        name="description"
+                        component={FormInput}
+                        floatingLabel="Description"/>
+                    </td>
+                    <td>
+                    <Field
+                      className='reset-input'
+                      name="mapgroup"
+                      component={FormInput}
+                      floatingLabel="Group"/>
+
+                    </td>
+                    <td>
+                      <SubmitBlock className='reset-button' name="Save"/> 
+                    </td>
+
+                  </tr>
+                ) : (
+                  <tr>
+                    <td/>
+                    <td/>
+                    <td/>
+                    <td/>
+                  </tr>
+                )
+              }
+               </tbody>
+             </table>
+              </form> 
+           </div>
+         </div>
       </div>
     )
   }
