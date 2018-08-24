@@ -226,6 +226,7 @@ class InfiniteTable extends React.Component {
       <div key="0" className="griddle">
          <div className="griddle-container">
            <div className="griddle-body">
+            <form onSubmit={this.props.onSubmit}>
              <table className={`table table-hover ${tableClassName || 'table-panel'}`}>
                <thead>
                <tr>
@@ -284,18 +285,31 @@ class InfiniteTable extends React.Component {
                    )
                  })
                }
+               {this.props.showForm ? (
+                  <tr>
+                    <td>
+                      <Field name="name" component={FormInput} floatingLabel="Name"/>
+                    </td>
+                    <td>
+                      <Field name="description" component={FormInput} floatingLabel="Description"/>
+                    </td>
+                    <td>
+                    <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
+
+                    </td>
+                    <td>
+                      <SubmitBlock name="Save"/> 
+                    </td>
+                  </tr>
+                ) : (
+                  <td>
+                    <tr></tr>
+                  </td>
+                )
+              }
                </tbody>
              </table>
-              {this.props.showForm ? (
-                <form onSubmit={this.props.onSubmit}>
-                  <Field name="name" component={FormInput} floatingLabel="Name"/>
-                  <Field name="description" component={FormInput} floatingLabel="Description"/>
-                  <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
-                    <SubmitBlock name="Save"/> 
-                </form> ) : (
-               <span></span>
-              )
-            }
+              </form> 
            </div>
          </div>
       </div>
