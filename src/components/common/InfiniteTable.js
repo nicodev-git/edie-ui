@@ -11,7 +11,6 @@ import { Field } from 'redux-form'
 class InfiniteTable extends React.Component {
   constructor (props) {
     super(props)
-    console.log(this.props)
     this.state = {
       currentPage: -1,
       isLoading: false,
@@ -78,7 +77,6 @@ class InfiniteTable extends React.Component {
       if (clear) {
         if (this.state.results.length) this.setState({results: []})
       }
-      // console.log('Already loading.')
       if (!force) return
     }
 
