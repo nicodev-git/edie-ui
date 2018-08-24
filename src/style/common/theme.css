@@ -923,10 +923,10 @@ th {
 .reset-input div {
     margin: 0!important
 }
-.reset-input .MuiInputLabel-shrink-137 {
+.reset-input label[class*="MuiInputLabel-shrink"] {
     display: none
 }
-.reset-input .MuiInput-underline-150:before , .reset-input .MuiInput-underline-150:after{
+.reset-input div:before , .reset-input div:after{
     border: 0!important
 }
 .reset-button {
