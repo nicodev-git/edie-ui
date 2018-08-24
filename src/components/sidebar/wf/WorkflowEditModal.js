@@ -417,6 +417,8 @@ class WorkflowEditModal extends React.Component {
     const {wfData} = this.state
     const {objects} = wfData
 
+    if (!window.confirm('Click OK to remove rule')) return
+
     const current = objects[index]
 
     if (index < objects.length - 1) {

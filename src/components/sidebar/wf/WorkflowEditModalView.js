@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
+import CloseIcon from '@material-ui/icons/Close'
 import Tabs from '@material-ui/core/Tabs'
 import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
@@ -139,6 +140,9 @@ class WorkflowEditModalView extends React.Component {
                       <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
                         <div className="text-center">{p.value}</div>
                       </div>
+                      <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
+                        <CloseIcon/>
+                      </div>
                       {p.extraFields.length ? (
                         <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
                         ) : null}
@@ -160,9 +164,6 @@ class WorkflowEditModalView extends React.Component {
                     {p.grokFields.length ? (
                       <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
                     ) : null}
-                    <div className="wf-item-delete">
-                      <DeleteIcon onClick={() => onClickDeleteShape(i)}/>
-                    </div>
                   </div>
                 </div>
               </div>
