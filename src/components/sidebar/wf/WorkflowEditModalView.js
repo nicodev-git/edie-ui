@@ -108,7 +108,8 @@ class WorkflowEditModalView extends React.Component {
       onClickDeleteShape,
       onClickAddExtra,
       onClickEditShapeExtra,
-      onClickEditShape
+      onClickEditShape,
+      onClickDeleteShapeExtra
     } = this.props
     return (
       <div>
@@ -161,7 +162,7 @@ class WorkflowEditModalView extends React.Component {
                           {extra.value|| 'Any'}
                         </div>
 
-                        <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
+                        <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
                           <CloseIcon/>
                         </div>
 

@@ -531,6 +531,26 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
+  onClickDeleteShapeExtra (shapeIndex, name) {
+    const {wfData} = this.state
+    const {objects} = wfData
+    const editShape = objects[shapeIndex]
+    const object = {...editShape}
+
+    object.data.visibleGrokFields = object.data.visibleGrokFields || []
+    const index = object.data.visibleGrokFields.indexOf(name)
+    if (index >= 0) {
+      object.data.visibleGrokFields.splice(index, 1)
+    }
+
+    this.setState({
+      wfData: {
+        ...wfData,
+        objects: objects.map(p => p.data.uuid === object.data.uuid ? object : p)
+      }
+    })
+  }
+
   onCloseGrokFieldModal () {
     this.setState({
       grokFieldModalOpen: false
@@ -858,6 +878,7 @@ class WorkflowEditModal extends React.Component {
 
         onClickAddExtra={this.onClickAddExtra.bind(this)}
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
+        onClickDeleteShapeExtra={this.onClickDeleteShapeExtra.bind(this)}
         grokFieldModal={this.renderGrokFieldModal()}
         onCloseGrokFieldModal={this.onCloseGrokFieldModal.bind(this)}
 
