@@ -507,7 +507,7 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
-  onClickEditShapeExtra (shapeIndex, extraIndex, e) {
+  onClickEditShapeExtra (shapeIndex, name, e) {
     const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
@@ -516,7 +516,6 @@ class WorkflowEditModal extends React.Component {
     console.log(editShape)
 
     const productType = find(productTypes, {id: editShape.data.field})
-    const name = productType.grokFields[extraIndex]
 
     const grokFieldValues = editShape.data.grokFieldValues || {}
     const editGrokField = {
