@@ -558,16 +558,21 @@ class WorkflowEditModal extends React.Component {
     const {editShape, wfData} = this.state
     const {objects} = wfData
     const object = {...editShape}
+
     object.data.visibleGrokFields = object.data.visibleGrokFields || []
-    if (!object.data.visibleGrokFields.includes(visibleField)) {
+    const index = object.data.visibleGrokFields.indexOf(visibleField)
+    if (index < 0) {
       object.data.visibleGrokFields.push(visibleField)
-      this.setState({
-        wfData: {
-          ...wfData,
-          objects: objects.map(p => p.data.uuid === object.data.uuid ? object : p)
-        }
-      })
+    } else {
+      object.data.visibleGrokFields.splice(index, 1)
     }
+
+    this.setState({
+      wfData: {
+        ...wfData,
+        objects: objects.map(p => p.data.uuid === object.data.uuid ? object : p)
+      }
+    })
   }
 
   ////////////////////////////////////////////////////
