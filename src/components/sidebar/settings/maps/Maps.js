@@ -120,6 +120,7 @@ class Maps extends React.Component {
     const canSetting = hasPermission(userInfo, 'EditSettings')
     const canAdd = canSetting && hasPermission(userInfo, 'AddMap')
     const canEdit = canSetting && hasPermission(userInfo, 'EditMap')
+    console.log(canEdit)
 
     return (
       <TabPage>
