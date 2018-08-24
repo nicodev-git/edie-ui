@@ -154,7 +154,7 @@ class WorkflowEditModalView extends React.Component {
                         </div>
 
                         <div className="wf-item wf-item-orange">
-                          Match
+                          {extra.rule === 'match' ? 'Match' : 'Not Match'}
                         </div>
 
                         <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, e)}>
