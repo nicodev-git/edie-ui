@@ -496,9 +496,7 @@ class WorkflowEditModal extends React.Component {
       grokFieldMenuOpen: true,
       editShape,
       shapeAnchorEl: e.target,
-      editGrokFields/*: editGrokFields.filter(p =>
-        !(editShape.data.visibleGrokFields || []).includes(p)
-      )*/
+      editGrokFields
     })
   }
 
@@ -508,7 +506,7 @@ class WorkflowEditModal extends React.Component {
     })
   }
 
-  onClickEditShapeExtra (shapeIndex, name, e) {
+  onClickEditShapeExtra (shapeIndex, name, keyField, e) {
     // const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
@@ -525,6 +523,7 @@ class WorkflowEditModal extends React.Component {
     }
 
     this.setState({
+      editGrokFieldKey: keyField,
       editGrokField,
       editShape,
       grokFieldModalOpen: true,
@@ -548,7 +547,7 @@ class WorkflowEditModal extends React.Component {
       const grokFieldRules = object.data.grokFieldRules || {}
       grokFieldRules[editGrokField.name] = {
         ...grokFieldRules[editGrokField.name],
-        value: values.value || ''
+        ...values
       }
       object.data.grokFieldRules = grokFieldRules
 
@@ -570,6 +569,11 @@ class WorkflowEditModal extends React.Component {
     const index = object.data.visibleGrokFields.indexOf(visibleField)
     if (index < 0) {
       object.data.visibleGrokFields.push(visibleField)
+      object.data.grokFieldRules = object.data.grokFieldRules || {}
+      object.data.grokFieldRules[visibleField] = {
+        rule: 'match',
+        value: ''
+      }
     } else {
       object.data.visibleGrokFields.splice(index, 1)
     }
@@ -713,9 +717,10 @@ class WorkflowEditModal extends React.Component {
   ////////////////////////////////////////////////////
   renderGrokFieldModal () {
     if (!this.state.grokFieldModalOpen) return null
-    const {editGrokField} = this.state
+    const {editGrokField, editGrokFieldKey} = this.state
     return (
       <GrokFieldModal
+        keyField={editGrokFieldKey}
         editGrokField={editGrokField}
         onSave={this.onSaveGrokField.bind(this)}
         onClose={this.onCloseGrokFieldModal.bind(this)}
