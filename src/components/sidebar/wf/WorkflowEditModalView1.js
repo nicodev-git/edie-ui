@@ -166,6 +166,11 @@ class WorkflowEditModalView extends React.Component {
         <Field name="incidentSeverity" component={FormSelect}
                options={severities.map(p => ({label: p, value: p}))} className="hidden"/>
         <Field name="incidentDesc" floatingLabel="Format" component={FormInput} fullWidth className="hidden"/>
+
+        <div>
+          <Field name="sendChat" component={FormCheckbox} label="Send Chat"/>
+          <Field name="chatChannel" component={FormInput} label="Channel"/>
+        </div>
       </div>
     )
   }
