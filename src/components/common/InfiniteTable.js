@@ -1,12 +1,13 @@
 import React from 'react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
+import { Field } from 'redux-form'
+import { SubmitBlock, FormInput } from 'components/modal/parts'
+
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
-import { SubmitBlock, FormInput } from 'components/modal/parts'
-import { Field } from 'redux-form'
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -77,6 +78,7 @@ class InfiniteTable extends React.Component {
       if (clear) {
         if (this.state.results.length) this.setState({results: []})
       }
+      // console.log('Already loading.')
       if (!force) return
     }
 
