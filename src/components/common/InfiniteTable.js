@@ -302,9 +302,12 @@ class InfiniteTable extends React.Component {
                     </td>
                   </tr>
                 ) : (
-                  <td>
-                    <tr></tr>
-                  </td>
+                  <tr>
+                    <td/>
+                    <td/>
+                    <td/>
+                    <td/>
+                  </tr>
                 )
               }
                </tbody>
