@@ -106,7 +106,8 @@ const forms = {
     "name": "Name"
   }, {
     "key": "sentence",
-    "name": "Detected Action"
+    "name": "Detected Action",
+    "keyField": true
   }, {
     "key": "condition",
     "name": "User"

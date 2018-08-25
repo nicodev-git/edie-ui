@@ -192,6 +192,10 @@ class WorkflowEditModal extends React.Component {
           }
           break
         }
+        case 'IMQUERY': {
+          itemValue = `${sentence}`
+          break
+        }
         case 'COUNT':
           itemLabel = type
           itemValue = `${variable} > ${sentence}`
