@@ -31,7 +31,7 @@ class Workflows extends React.Component {
       filterTags: [],
       menuAnchor: null,
 
-      filterType: 'PRODUCT_TYPE',
+      filterType: 'product-type',
       productTypeId: '',
       productVendorId: '',
       productId: '',
@@ -193,16 +193,13 @@ class Workflows extends React.Component {
 
   onChangeProductType (e) {
     this.setState({
-      productTypeId: e.target.value,
-      productVendorId: '',
-      productId: ''
+      productTypeId: e.target.value
     })
   }
 
   onChangeProductVendor (e) {
     this.setState({
       productVendorId: e.target.value,
-      productId: ''
     })
   }
 
@@ -214,7 +211,10 @@ class Workflows extends React.Component {
 
   onChangeFilterType (e) {
     this.setState({
-      filterType: e.target.value
+      filterType: e.target.value,
+      productTypeId: '',
+      productVendorId: '',
+      productId: ''
     })
   }
 
@@ -222,32 +222,25 @@ class Workflows extends React.Component {
     const {filterType, productTypeId, productVendorId, productId} = this.state
     let {workflows} = this.props
 
-    if (filterType === 'PRODUCT_TYPE') {
+    if (filterType === 'product-type') {
       if (!productTypeId) return workflows
 
-      workflows = workflows.filter(wf => {
+      return workflows.filter(wf => {
         const productInfo = this.getWfProductInfo(wf)
         const wfProductType = productInfo[0]
         return (wfProductType && wfProductType.id === productTypeId)
       })
+    } if (filterType === 'product-vendor') {
+      if (!productVendorId) return workflows
+
+      return workflows.filter(wf => {
+        const productInfo = this.getWfProductInfo(wf)
+        const wfProductVendor = productInfo[1]
+        return wfProductVendor && wfProductVendor.id === productVendorId
+      })
     } else {
-      if (productId) {
-        return workflows.filter(wf => wf.filterType === 'PRODUCT' && wf.productId === productId)
-      }
-      if (productVendorId) {
-        return workflows.filter(wf => {
-          const productInfo = this.getWfProductInfo(wf)
-          const wfProductVendor = productInfo[1]
-          return wfProductVendor && wfProductVendor.id === productVendorId
-        })
-      }
-      if (productTypeId) {
-        return workflows.filter(wf => {
-          const productInfo = this.getWfProductInfo(wf)
-          const wfProductType = productInfo[0]
-          return (wfProductType && wfProductType.id === productTypeId)
-        })
-      }
+      if (!productId) return workflows
+      return workflows.filter(wf => wf.filterType === 'PRODUCT' && wf.productId === productId)
     }
 
     return workflows
