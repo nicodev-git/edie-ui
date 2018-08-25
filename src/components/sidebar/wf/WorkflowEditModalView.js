@@ -318,6 +318,10 @@ class WorkflowEditModalView extends React.Component {
                      style={{width: 120}}
               />
             </div>
+
+            <div>
+              Time Range
+            </div>
           </div>
         </CardPanel>
 
