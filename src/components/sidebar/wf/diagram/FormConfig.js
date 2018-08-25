@@ -87,22 +87,21 @@ const forms = {
   "remotePingForm": [{
     "form": "RemotePing"
   }],
+  // "imQueryForm": [{
+  //   "form": "IMQuery",
+  //   "default": {
+  //     params: [
+  //       {name: 'page', value: '0'},
+  //       {name: 'size', value: '1'},
+  //       {name: 'types', value: 'event'},
+  //       {name: 'from', value: '0'}
+  //     ],
+  //     resVars: [
+  //       {name: 'count', value: '/page/totalElements'}
+  //     ]
+  //   }
+  // }],
   "imQueryForm": [{
-    "form": "IMQuery",
-    "default": {
-      params: [
-        {name: 'page', value: '0'},
-        {name: 'size', value: '1'},
-        {name: 'types', value: 'event'},
-        {name: 'from', value: '0'}
-      ],
-      resVars: [
-        {name: 'count', value: '/page/totalElements'}
-      ]
-    }
-  }],
-
-  "imQueryForm2": [{
     "key": "name",
     "name": "Name"
   }, {
