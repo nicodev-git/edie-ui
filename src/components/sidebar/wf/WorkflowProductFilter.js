@@ -2,7 +2,6 @@ import React from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import {MenuItem, Select} from '@material-ui/core'
-import {find} from 'lodash'
 
 const menuProps = {
   PaperProps: {
@@ -13,9 +12,9 @@ const menuProps = {
 }
 
 const productFilterTypes = [{
-  label: 'Product Vendor', value: 'vendor'
+  label: 'Product Type', value: 'product-type'
 }, {
-  label: 'Product Type', value: 'type'
+  label: 'Product Vendor', value: 'product-vendor'
 }, {
   label: 'Product', value: 'product'
 }]
@@ -23,6 +22,7 @@ const productFilterTypes = [{
 export default class WorkflowProductFilter extends React.Component {
   renderProductCombos () {
     const {
+      filterType,
       vendorProducts, productTypes, productVendors,
 
       productTypeId, onChangeProductType,
@@ -30,20 +30,20 @@ export default class WorkflowProductFilter extends React.Component {
       productId, onChangeProduct
     } = this.props
 
-    let vendors = productVendors || []
-    if (productTypeId) {
-      const type = find(productTypes, {id: productTypeId})
-      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
-    }
-    let products = vendorProducts || []
-    if (productVendorId) {
-      const vendor = find(productVendors, {id: productVendorId})
-      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
-    }
+    // let vendors = productVendors || []
+    // if (productTypeId) {
+    //   const type = find(productTypes, {id: productTypeId})
+    //   if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    // }
+    // let products = vendorProducts || []
+    // if (productVendorId) {
+    //   const vendor = find(productVendors, {id: productVendorId})
+    //   if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    // }
 
     return (
       <div className="inline-block">
-        <FormControl>
+        <FormControl className={filterType === 'product-type' ? '' : 'hidden'}>
           <InputLabel>Product Type</InputLabel>
           <Select
             value={productTypeId}
@@ -56,8 +56,8 @@ export default class WorkflowProductFilter extends React.Component {
           </Select>
         </FormControl>
 
-        <FormControl>
-          <InputLabel>Product Vendor</InputLabel>
+        <FormControl className={filterType === 'product-vendor' ? '' : 'hidden'}>
+        <InputLabel>Product Vendor</InputLabel>
           <Select
             value={productVendorId}
             onChange={onChangeProductVendor}
@@ -65,11 +65,11 @@ export default class WorkflowProductFilter extends React.Component {
             MenuProps={menuProps}
           >
             <MenuItem value="">[All]</MenuItem>
-            {vendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            {productVendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
 
-        <FormControl>
+        <FormControl className={filterType === 'product' ? '' : 'hidden'}>
           <InputLabel>Product</InputLabel>
           <Select
             value={productId}
@@ -78,7 +78,7 @@ export default class WorkflowProductFilter extends React.Component {
             MenuProps={menuProps}
           >
             <MenuItem value="">[All]</MenuItem>
-            {products.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            {vendorProducts.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
       </div>
@@ -87,10 +87,7 @@ export default class WorkflowProductFilter extends React.Component {
 
   render () {
     const {
-      productTypes,
-
-      filterType, onChangeFilterType,
-      productTypeId, onChangeProductType,
+      filterType, onChangeFilterType
     } = this.props
 
     return (
@@ -107,22 +104,7 @@ export default class WorkflowProductFilter extends React.Component {
           </Select>
         </FormControl>
 
-        {filterType === 'PRODUCT' ? (
-          this.renderProductCombos()
-        ) : (
-          <FormControl>
-            <InputLabel>Product Type</InputLabel>
-            <Select
-              value={productTypeId}
-              onChange={onChangeProductType}
-              style={{width: 150}}
-              MenuProps={menuProps}
-            >
-              <MenuItem value="">[All]</MenuItem>
-              {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
-            </Select>
-          </FormControl>
-        )}
+        {this.renderProductCombos()}
       </div>
     )
   }
