@@ -77,7 +77,7 @@ export default class WorkflowEdit extends React.Component {
 
     return (
       <TabPage>
-        <TabPageHeader title="Workflow Edit">
+        <TabPageHeader title={`Workflow Edit - ${editWf.name}`}>
         </TabPageHeader>
 
         <TabPageBody transparent>
