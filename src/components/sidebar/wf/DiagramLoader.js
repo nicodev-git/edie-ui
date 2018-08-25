@@ -28,8 +28,6 @@ export function drawFlows (flows, items) {
         objects: [],
         lines: [],
         lastId: 0,
-
-        // connections: []
     }
 
     const objMap = {}
@@ -58,8 +56,6 @@ export function drawFlows (flows, items) {
             fill: f.uiprops.fill,
             data: f
         }
-
-        // x += w + 20
 
         objMap[f.step] = obj
         return obj
