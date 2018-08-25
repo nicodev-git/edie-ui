@@ -106,9 +106,15 @@ const forms = {
     "key": "name",
     "name": "Name"
   }, {
-    "key": "variable",
+    "key": "sentence",
     "name": "Detected Action"
-  }, ],
+  }, {
+    "key": "condition",
+    "name": "User"
+  }, {
+    "key": "field",
+    "name": "Last Time >"
+  }],
   "actionDetailForm": [{
     "key": "name",
     "name": "Name"
