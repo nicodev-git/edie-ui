@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
-import CloseIcon from '@material-ui/icons/Close'
 import Tabs from '@material-ui/core/Tabs'
 import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
@@ -128,7 +127,7 @@ class WorkflowEditModalView extends React.Component {
                 </div>
                 <div className="relative">
                   <div>
-                    <div className="inline-block margin-sm-bottom">
+                    <div className="inline-block margin-sm-bottom wf-item-container">
                       {p.prelabel ? (
                         <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
                           <div className="text-center">{p.prelabel}</div>
@@ -142,32 +141,33 @@ class WorkflowEditModalView extends React.Component {
                         <div className="text-center">{p.value}</div>
                       </div>
                       <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
-                        <CloseIcon/>
+                        <DeleteIcon/>
                       </div>
-                      {p.extraFields.length ? (
-                        <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
-                        ) : null}
                     </div>
+                    {p.extraFields.length ? (
+                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
+                    ) : null}
                     {p.extraFields.map((extra, j) =>
-                      <div key={j} className="inline-block margin-sm-bottom">
-                        <div className="wf-item">
-                          {extra.name }
-                        </div>
+                      [
+                        <div key={j} className="inline-block margin-sm-bottom wf-item-container">
+                          <div className="wf-item">
+                            {extra.name }
+                          </div>
 
-                        <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
-                          {extra.rule === 'match' ? 'Match' : 'Not Match'}
-                        </div>
+                          <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
+                            {extra.rule === 'match' ? 'Match' : 'Not Match'}
+                          </div>
 
-                        <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
-                          {extra.value|| 'Any'}
-                        </div>
+                          <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
+                            {extra.value|| 'Any'}
+                          </div>
 
-                        <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
-                          <CloseIcon/>
-                        </div>
-
-                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
-                      </div>
+                          <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
+                            <DeleteIcon/>
+                          </div>
+                        </div>,
+                        j !== (p.extraFields.length - 1) ? <img key={`img-${j}`} src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null
+                      ]
                     )}
                     {p.grokFields.length ? (
                       <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
