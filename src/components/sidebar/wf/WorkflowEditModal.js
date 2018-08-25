@@ -197,18 +197,19 @@ class WorkflowEditModal extends React.Component {
 
           if (visibleGrokFields) {
             if (visibleGrokFields.includes('User')) {
+              const rule = (grokFieldRules || {})['User']
               extraFields.push({
-                name: 'User',
-                rule: 'match',
-                value:  (grokFieldRules || {})['User']
+                ...rule,
+                name: 'User'
               })
             }
 
             if (visibleGrokFields.includes('Last Time')) {
+              const rule = (grokFieldRules || {})['Last Time']
               extraFields.push({
-                name: 'Last Time ',
-                rule: ' > ',
-                value:  (grokFieldRules || {})['Last Time']
+                ...rule,
+                name: 'Last Time',
+                rule: ' > '
               })
             }
           }
