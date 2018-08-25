@@ -1,15 +1,11 @@
 import React from 'react'
-import {Button, Select, Menu, MenuItem} from '@material-ui/core'
-import InputLabel from '@material-ui/core/InputLabel'
-import Checkbox from '@material-ui/core/Checkbox'
+import {Button, Menu, MenuItem} from '@material-ui/core'
 import moment from 'moment'
 import uuid from 'uuid'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import FormControl from '@material-ui/core/FormControl'
 import {find, findIndex} from 'lodash'
-import {Field} from 'redux-form'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -242,8 +238,6 @@ class Workflows extends React.Component {
       if (!productId) return workflows
       return workflows.filter(wf => wf.filterType === 'PRODUCT' && wf.productId === productId)
     }
-
-    return workflows
   }
 
   getWfProductInfo (wf) {
