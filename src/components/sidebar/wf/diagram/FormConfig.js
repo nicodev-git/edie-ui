@@ -108,14 +108,6 @@ const forms = {
     "key": "sentence",
     "name": "Detected Action",
     "keyField": true
-  }, {
-    "key": "condition",
-    "name": "User",
-    "extraField": true
-  }, {
-    "key": "field",
-    "name": "Last Time",
-    "extraField": true
   }],
   "actionDetailForm": [{
     "key": "name",

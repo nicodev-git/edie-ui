@@ -200,7 +200,7 @@ class WorkflowEditModal extends React.Component {
               extraFields.push({
                 name: 'User',
                 rule: 'match',
-                value: p.data.condition
+                value:  (grokFieldRules || {})['User']
               })
             }
 
@@ -208,7 +208,7 @@ class WorkflowEditModal extends React.Component {
               extraFields.push({
                 name: 'Last Time ',
                 rule: ' > ',
-                value: p.data.field
+                value:  (grokFieldRules || {})['Last Time']
               })
             }
           }
