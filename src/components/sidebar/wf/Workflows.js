@@ -355,23 +355,6 @@ class Workflows extends React.Component {
     )
   }
 
-  // renderGroups() {
-  //   const {groups} = this.props
-  //   return (
-  //     <Select
-  //       value={this.state.groupId}
-  //       onChange={this.onChangeGroup.bind(this)}
-  //       style={{width: 150}}
-  //       native={false}
-  //     >
-  //       <MenuItem value="0">[All]</MenuItem>
-  //       {groups.map(p =>
-  //         <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-  //       )}
-  //     </Select>
-  //   )
-  // }
-
   renderSettingModal() {
     if (!this.props.wfSettingModalOpen) return
     return (
@@ -412,39 +395,6 @@ class Workflows extends React.Component {
             )}
           </Select>
         </FormControl>
-      </div>
-    )
-  }
-
-  renderProductCombos() {
-    const {allValues, productTypes, productVendors, vendorProducts} = this.props
-    const {productTypeId, productVendorId} = allValues || {}
-
-    let vendors = productVendors || []
-    if (productTypeId) {
-      const type = find(productTypes, {id: productTypeId})
-      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
-    }
-    let products = vendorProducts || []
-    if (productVendorId) {
-      const vendor = find(productVendors, {id: productVendorId})
-      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
-    }
-
-    return (
-      <div className="margin-md-top">
-        <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
-               options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 150}} className="margin-sm-right"
-        />
-        <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
-               options={vendors.map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 150}} className="margin-sm-right"
-        />
-        <Field name="productId" component={FormSelect} floatingLabel="Product"
-               options={(products || []).map(p => ({label: p.name, value: p.id}))}
-               style={{minWidth: 150}}
-        />
       </div>
     )
   }
