@@ -4,8 +4,6 @@ import InputLabel from '@material-ui/core/InputLabel'
 import {MenuItem, Select} from '@material-ui/core'
 import {find} from 'lodash'
 
-import {productFilterTypes} from 'shared/Global'
-
 const menuProps = {
   PaperProps: {
     style: {
@@ -13,6 +11,14 @@ const menuProps = {
     }
   }
 }
+
+const productFilterTypes = [{
+  label: 'Product Vendor', value: 'vendor'
+}, {
+  label: 'Product Type', value: 'type'
+}, {
+  label: 'Product', value: 'product'
+}]
 
 export default class WorkflowProductFilter extends React.Component {
   renderProductCombos () {

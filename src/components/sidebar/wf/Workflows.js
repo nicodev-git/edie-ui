@@ -365,40 +365,6 @@ class Workflows extends React.Component {
     )
   }
 
-  renderFilterTags() {
-    const {filterTags} = this.state
-    const allTags = this.getTags()
-
-    return (
-      <div className="inline-block margin-md-left">
-        <FormControl>
-          <InputLabel>Tag</InputLabel>
-          <Select
-            value={filterTags}
-            onChange={this.onAddFilterTag.bind(this)}
-            style={{width: 150}}
-            multiple
-            renderValue={selected => selected.join(', ')}
-            MenuProps={{
-              PaperProps: {
-                style: {
-                  maxHeight: 50 * 8,
-                }
-              }
-            }}
-          >
-            {allTags.map(p =>
-              <MenuItem key={p.id} value={p.name}>
-                <Checkbox checked={filterTags.includes(p.name)}/>
-                <label>{p.name}</label>
-              </MenuItem>
-            )}
-          </Select>
-        </FormControl>
-      </div>
-    )
-  }
-
   renderProductFilter() {
     const {productTypes, productVendors, vendorProducts} = this.props
     const {productId, productTypeId, productVendorId,
