@@ -176,7 +176,7 @@ class WorkflowEditModalView extends React.Component {
                       ]
                     )}
                     {p.grokFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
+                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, p.grokFields, e)}/>
                     ) : null}
                   </div>
                 </div>

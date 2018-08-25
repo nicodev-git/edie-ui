@@ -131,9 +131,7 @@ class WorkflowEditModal extends React.Component {
           this.props.showBrainCellModal(true, null)
         }, 1)
       }
-      
     }
-
   }
 
   getWfDataItems() {
@@ -197,21 +195,22 @@ class WorkflowEditModal extends React.Component {
           itemLabel = 'Match Action'
           itemValue = `${sentence}`
 
-          if (visibleGrokFields.includes('User')) {
-            extraFields.push({
-              name: 'User',
-              rule: 'match',
-              value: p.data.condition
-            })
-          }
+          if (visibleGrokFields) {
+            if (visibleGrokFields.includes('User')) {
+              extraFields.push({
+                name: 'User',
+                rule: 'match',
+                value: p.data.condition
+              })
+            }
 
-          if (visibleGrokFields.includes('Last Time')) {
-
-            extraFields.push({
-              name: 'Last Time ',
-              rule: ' > ',
-              value: p.data.field
-            })
+            if (visibleGrokFields.includes('Last Time')) {
+              extraFields.push({
+                name: 'Last Time ',
+                rule: ' > ',
+                value: p.data.field
+              })
+            }
           }
 
           grokFields = ['User', 'Last Time']
@@ -503,17 +502,17 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
-  onClickAddExtra (shapeIndex, e) {
+  onClickAddExtra (shapeIndex, editGrokFields, e) {
     const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
     const editShape = objects[shapeIndex]
     console.log(editShape)
-    const productType = find(productTypes, {id: editShape.data.field})
+    // const productType = find(productTypes, {id: editShape.data.field})
 
     e.stopPropagation()
 
-    const editGrokFields = productType.grokFields || []
+    // const editGrokFields = productType.grokFields || []
 
     this.setState({
       grokFieldMenuOpen: true,
