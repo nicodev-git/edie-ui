@@ -36,6 +36,10 @@ const itemStyle = {
   height: '24px'
 }
 
+const hourOptions = Array(24).fill(0).map((p, i) => ({
+  label: `${i === 12 ? 12 : (i % 12)} ${i < 12 ? 'AM' : 'PM'}`,
+  value: i
+}))
 
 const toolbarStyles = theme => ({
   root: {
@@ -319,8 +323,19 @@ class WorkflowEditModalView extends React.Component {
               />
             </div>
 
-            <div>
-              Time Range
+            <div className="margin-md-top">
+              <Field name="timeRange" component={FormCheckbox}
+                     label="Time Range" className="valign-top"/>
+
+              <Field name="startHour" component={FormSelect} floatingLabel="From"
+                     className="valign-top" options={hourOptions}
+                     style={{width: 120}}
+              />
+              <Field name="endHour" component={FormSelect} floatingLabel="To"
+                     className="valign-top" options={hourOptions}
+                     style={{width: 120}}
+              />
+
             </div>
           </div>
         </CardPanel>
