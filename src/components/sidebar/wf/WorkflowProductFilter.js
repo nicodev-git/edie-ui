@@ -30,17 +30,6 @@ export default class WorkflowProductFilter extends React.Component {
       productId, onChangeProduct
     } = this.props
 
-    // let vendors = productVendors || []
-    // if (productTypeId) {
-    //   const type = find(productTypes, {id: productTypeId})
-    //   if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
-    // }
-    // let products = vendorProducts || []
-    // if (productVendorId) {
-    //   const vendor = find(productVendors, {id: productVendorId})
-    //   if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
-    // }
-
     return (
       <div className="inline-block">
         <FormControl className={filterType === 'product-type' ? '' : 'hidden'}>
