@@ -110,10 +110,12 @@ const forms = {
     "keyField": true
   }, {
     "key": "condition",
-    "name": "User"
+    "name": "User",
+    "extraField": true
   }, {
     "key": "field",
-    "name": "Last Time >"
+    "name": "Last Time",
+    "extraField": true
   }],
   "actionDetailForm": [{
     "key": "name",

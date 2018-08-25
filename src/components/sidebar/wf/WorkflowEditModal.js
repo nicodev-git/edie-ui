@@ -12,7 +12,7 @@ import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import GrokFieldModal from "./GrokFieldModal";
+import GrokFieldModal from './GrokFieldModal'
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -197,17 +197,24 @@ class WorkflowEditModal extends React.Component {
           itemLabel = 'Match Action'
           itemValue = `${sentence}`
 
-          extraFields.push({
-            name: 'User',
-            rule: 'match',
-            value: p.data.condition
-          })
+          if (visibleGrokFields.includes('User')) {
+            extraFields.push({
+              name: 'User',
+              rule: 'match',
+              value: p.data.condition
+            })
+          }
 
-          extraFields.push({
-            name: 'Last Time ',
-            rule: ' > ',
-            value: p.data.field
-          })
+          if (visibleGrokFields.includes('Last Time')) {
+
+            extraFields.push({
+              name: 'Last Time ',
+              rule: ' > ',
+              value: p.data.field
+            })
+          }
+
+          grokFields = ['User', 'Last Time']
           break
         }
         case 'COUNT':
