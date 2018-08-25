@@ -101,6 +101,14 @@ const forms = {
       ]
     }
   }],
+
+  "imQueryForm2": [{
+    "key": "name",
+    "name": "Name"
+  }, {
+    "key": "variable",
+    "name": "Detected Action"
+  }, ],
   "actionDetailForm": [{
     "key": "name",
     "name": "Name"
