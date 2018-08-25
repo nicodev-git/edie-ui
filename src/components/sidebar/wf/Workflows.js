@@ -138,11 +138,6 @@ class Workflows extends React.Component {
   ////////////////////////////////////////////////////////////////
 
   onAddFilterTag(e) {
-    // const tag = e.target.value
-    // const {filterTags} = this.state
-    // if (!tag || tag === ' ') return
-    // if (filterTags.includes(tag)) return
-
     this.setState({
       filterTags: e.target.value
     })
