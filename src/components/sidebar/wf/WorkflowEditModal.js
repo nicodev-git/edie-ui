@@ -192,8 +192,22 @@ class WorkflowEditModal extends React.Component {
           }
           break
         }
-        case 'IMQUERY': {
+        case 'IMQuery': {
+          itemPreLabel = 'Detected Action'
+          itemLabel = 'Match Action'
           itemValue = `${sentence}`
+
+          extraFields.push({
+            name: 'User',
+            rule: 'match',
+            value: p.data.condition
+          })
+
+          extraFields.push({
+            name: 'Last Time ',
+            rule: ' > ',
+            value: p.data.field
+          })
           break
         }
         case 'COUNT':
