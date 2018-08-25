@@ -371,7 +371,6 @@ class WorkflowEditModal extends React.Component {
     object.name = values.name || object.name
 
     if (object.data.uuid) {
-      // this.props.updateFlowItem('', flow, object)
       this.setState({
         wfData: {
           ...wfData,
@@ -399,7 +398,6 @@ class WorkflowEditModal extends React.Component {
 
       object.data.uiprops.x = x
       object.data.uiprops.y = y
-      // this.props.addFlowItem('', flow, object)
 
       this.setState({
         wfData: {
