@@ -286,6 +286,7 @@ class InfiniteTable extends React.Component {
                       </tr>
                     )
                   }
+                  return null
                   })
                }
                {this.props.showForm ? (

@@ -15,7 +15,6 @@ import WorkflowSettingModal from './WorkflowSettingModal'
 import {getSeverityIcon} from 'shared/Global'
 import FlowGroupsModal from './flowgroups/FlowGroupsModal'
 import GlobalVarsModal from './globalvar/GlobalVarsModal'
-import {FormSelect} from 'components/modal/parts'
 import WorkflowProductFilter from './WorkflowProductFilter'
 
 class Workflows extends React.Component {
