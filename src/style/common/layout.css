@@ -539,11 +539,17 @@ input:-webkit-autofill {
 
 .wf-item-delete {
     position: absolute;
-    right: 14px;
-    top: -15px;
+    right: 0;
+    top: -28px;
     opacity: 0;
-    height: 42px;
     cursor: pointer;
+}
+
+.wf-item-container:hover .wf-item-delete,
+.wf-item-main:hover .wf-item-delete,
+.wf-item-delete:hover {
+    display: inline-block;
+    opacity: 1;
 }
 
 .wf-item-prelabel {
@@ -559,12 +565,6 @@ input:-webkit-autofill {
     border-radius: 4px;
     min-width: 100px;
     height: 100%;
-}
-
-.wf-item-main:hover .wf-item-delete,
-.wf-item-delete:hover {
-    display: inline-block;
-    opacity: 1;
 }
 
 .Popover-body {

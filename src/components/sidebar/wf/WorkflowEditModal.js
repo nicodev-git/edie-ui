@@ -537,6 +537,8 @@ class WorkflowEditModal extends React.Component {
     const editShape = objects[shapeIndex]
     const object = {...editShape}
 
+    if (!window.confirm('Click OK to remove')) return
+
     object.data.visibleGrokFields = object.data.visibleGrokFields || []
     const index = object.data.visibleGrokFields.indexOf(name)
     if (index >= 0) {
