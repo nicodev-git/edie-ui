@@ -209,29 +209,28 @@ class Workflows extends React.Component {
   }
 
   getFilteredWorkflows () {
-    const {filterType, productTypeId, productVendorId, productId} = this.state
+    const {productTypeId, productVendorId, productId} = this.state
     let {workflows} = this.props
 
-    if (filterType === 'product-type') {
-      if (!productTypeId) return workflows
-
-      return workflows.filter(wf => {
-        const productInfo = this.getWfProductInfo(wf)
-        const wfProductType = productInfo[0]
-        return (wfProductType && wfProductType.id === productTypeId)
-      })
-    } if (filterType === 'product-vendor') {
-      if (!productVendorId) return workflows
-
+    if (productId) {
+      return workflows.filter(wf => wf.filterType === 'PRODUCT' && wf.productId === productId)
+    }
+    if (productVendorId) {
       return workflows.filter(wf => {
         const productInfo = this.getWfProductInfo(wf)
         const wfProductVendor = productInfo[1]
         return wfProductVendor && wfProductVendor.id === productVendorId
       })
-    } else {
-      if (!productId) return workflows
-      return workflows.filter(wf => wf.filterType === 'PRODUCT' && wf.productId === productId)
     }
+    if (productTypeId) {
+      return workflows.filter(wf => {
+        const productInfo = this.getWfProductInfo(wf)
+        const wfProductType = productInfo[0]
+        return (wfProductType && wfProductType.id === productTypeId)
+      })
+    }
+
+    return workflows
   }
 
   getWfProductInfo (wf) {
