@@ -2,6 +2,7 @@ import React from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import {MenuItem, Select} from '@material-ui/core'
+import {find} from 'lodash'
 
 const menuProps = {
   PaperProps: {
@@ -10,14 +11,6 @@ const menuProps = {
     }
   }
 }
-
-const productFilterTypes = [{
-  label: 'Product Type', value: 'product-type'
-}, {
-  label: 'Product Vendor', value: 'product-vendor'
-}, {
-  label: 'Product', value: 'product'
-}]
 
 export default class WorkflowProductFilter extends React.Component {
   renderProductCombos () {
@@ -29,6 +22,17 @@ export default class WorkflowProductFilter extends React.Component {
       productVendorId, onChangeProductVendor,
       productId, onChangeProduct
     } = this.props
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
 
     return (
       <div className="inline-block">
@@ -78,24 +82,8 @@ export default class WorkflowProductFilter extends React.Component {
   }
 
   render () {
-    const {
-      filterType, onChangeFilterType
-    } = this.props
-
     return (
       <div className="inline-block margin-md-left">
-        <FormControl className="margin-md-right">
-          <InputLabel>Filter Type</InputLabel>
-          <Select
-            value={filterType}
-            onChange={onChangeFilterType}
-            style={{width: 150}}
-            MenuProps={menuProps}
-          >
-            {productFilterTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
-          </Select>
-        </FormControl>
-
         {this.renderProductCombos()}
       </div>
     )
