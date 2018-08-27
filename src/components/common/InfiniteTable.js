@@ -201,6 +201,13 @@ class InfiniteTable extends React.Component {
     return found
   }
 
+  onAddField = () => event => {
+    if (event.key === 'Enter') {
+      console.log('454')
+      this.props.onSubmit
+    }
+  }
+
   refresh () {
     if (this.props.useExternal) {
       this.setState({
@@ -314,7 +321,7 @@ class InfiniteTable extends React.Component {
 
                     </td>
                     <td>
-                      <SubmitBlock className='reset-button' name="Save"/> 
+                      <SubmitBlock className='reset-button hidden' name="Save"/> 
                     </td>
 
                   </tr>
