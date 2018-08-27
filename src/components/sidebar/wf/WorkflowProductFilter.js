@@ -45,13 +45,13 @@ export default class WorkflowProductFilter extends React.Component {
             MenuProps={menuProps}
             displayEmpty
           >
-            <MenuItem value="">[All]</MenuItem>
+            <MenuItem value="">[Any]</MenuItem>
             {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
 
-        <FormControl className={filterType === 'product-vendor' ? '' : 'hidden'}>
-        <InputLabel shrink>Product Vendor</InputLabel>
+        <FormControl className="margin-sm-left">
+          <InputLabel shrink>Product Vendor</InputLabel>
           <Select
             value={productVendorId}
             onChange={onChangeProductVendor}
@@ -59,12 +59,12 @@ export default class WorkflowProductFilter extends React.Component {
             MenuProps={menuProps}
             displayEmpty
           >
-            <MenuItem value="">[All]</MenuItem>
-            {productVendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            <MenuItem value="">[Any]</MenuItem>
+            {vendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
 
-        <FormControl className={filterType === 'product' ? '' : 'hidden'}>
+        <FormControl className="margin-sm-left">
           <InputLabel shrink>Product</InputLabel>
           <Select
             value={productId}
@@ -73,8 +73,8 @@ export default class WorkflowProductFilter extends React.Component {
             MenuProps={menuProps}
             displayEmpty
           >
-            <MenuItem value="">[All]</MenuItem>
-            {vendorProducts.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
+            <MenuItem value="">[Any]</MenuItem>
+            {products.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
       </div>
