@@ -218,10 +218,11 @@ class WorkflowEditModal extends React.Component {
           break
         }
         case 'COUNT':
-          itemLabel = type
-          itemValue = `${variable} > ${sentence}`
+          itemPreLabel = 'CountWFTriggered'
+          itemLabel = ' > '
+          itemValue = sentence
 
-          itemLabelKey = 'variable'
+          itemValueKey = 'variable'
           break
         case 'TIMELAST':
           itemLabel = type
