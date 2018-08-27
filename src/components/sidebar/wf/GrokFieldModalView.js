@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import AddIcon from '@material-ui/icons/AddCircle'
+
 import {Field} from 'redux-form'
 import {
   FormInput,
@@ -13,13 +15,13 @@ export default class GrokFieldModalView extends Component {
   }
 
   renderList () {
-    const {values} = this.props
+    const {values, onClickAddVal} = this.props
     return (
       <div>
         <table className="table table-hover">
           <thead>
           <tr>
-            <td></td>
+            <td><AddIcon className="link" onClick={onClickAddVal}/></td>
           </tr>
           </thead>
           <tbody>
@@ -34,15 +36,24 @@ export default class GrokFieldModalView extends Component {
     )
   }
 
+  renderValue () {
+    const {editGrokField} = this.props
+    const {rule} = editGrokField
+    if (rule === 'notMatchAll' || rule === 'matchAny') return this.renderList()
+    return (
+      <Field name="value" component={FormInput} floatingLabel={editGrokField.name}/>
+    )
+  }
+
   render() {
     const {
-      onSubmit, editGrokField, ruleOptions, keyField
+      onSubmit, ruleOptions, keyField
     } = this.props
 
     return (
       <div className="padding-sm">
         <form onSubmit={onSubmit}>
-          {keyField === 'value' ? <Field name="value" component={FormInput} floatingLabel={editGrokField.name}/> : null}
+          {keyField === 'value' ? this.renderValue() : null}
           {keyField === 'rule' ? <Field name="rule" component={FormSelect} floatingLabel="Rule" options={ruleOptions}/> : null}
           <SubmitBlock name="Save"/>
         </form>

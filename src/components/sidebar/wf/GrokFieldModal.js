@@ -7,9 +7,19 @@ import GrokFieldModalView from './GrokFieldModalView'
 import {fieldMatchRules} from 'shared/Global'
 
 class GrokFieldModal extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      values: []
+    }
+  }
   handleFormSubmit (props) {
     this.props.onSave(props)
     this.props.onClose()
+  }
+
+  onClickAddVal () {
+
   }
 
   render () {
@@ -20,6 +30,9 @@ class GrokFieldModal extends Component {
         editGrokField={editGrokField}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         ruleOptions={fieldMatchRules}
+
+        values={this.state.values}
+        onClickAddVal={this.onClickAddVal.bind(this)}
       />
     )
   }
