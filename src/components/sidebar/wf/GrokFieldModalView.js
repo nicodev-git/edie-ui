@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import AddIcon from '@material-ui/icons/AddCircle'
-
+import DeleteIcon from '@material-ui/icons/Delete'
 import {Field} from 'redux-form'
 import {
   FormInput,
@@ -15,19 +15,21 @@ export default class GrokFieldModalView extends Component {
   }
 
   renderList () {
-    const {values, onClickAddVal} = this.props
+    const {values, onClickAddVal, onClickDeleteVal} = this.props
     return (
       <div>
         <table className="table table-hover">
           <thead>
           <tr>
             <td><AddIcon className="link" onClick={onClickAddVal}/></td>
+            <td></td>
           </tr>
           </thead>
           <tbody>
           {values.map((p, i) =>
             <tr key={i}>
               <td>{p}</td>
+              <td><DeleteIcon className="link" onClick={() => onClickDeleteVal(i)}/></td>
             </tr>
           )}
           </tbody>
