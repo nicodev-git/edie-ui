@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import {reduce, isNull, isUndefined, isArray, assign, keys, findIndex} from 'lodash'
+import {reduce, isNull, isUndefined, isArray, assign, keys, findIndex, find} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
@@ -774,3 +774,19 @@ export const productFilterTypes = [{
 }, {
   label: 'Product Type', value: 'PRODUCT_TYPE'
 }]
+
+export const fieldMatchRules = [{
+  label: 'Match', value: 'match'
+}, {
+  label: 'Not Match', value: 'notMatch'
+}, {
+  label: 'Match Any', value: 'matchAny'
+}, {
+  label: 'Not Match All', value: 'notMatchAll'
+}]
+
+export const findFieldMatchRule = value => {
+  const rule = find(fieldMatchRules, {value})
+  if (rule) return rule.label
+  return null
+}

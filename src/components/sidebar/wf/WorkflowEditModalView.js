@@ -23,7 +23,7 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import {severities, productFilterTypes} from 'shared/Global'
+import {severities, productFilterTypes, findFieldMatchRule} from 'shared/Global'
 
 const cardStyle = {
   minHeight: 250,
@@ -159,9 +159,7 @@ class WorkflowEditModalView extends React.Component {
                           </div>
 
                           <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
-                            {extra.rule === 'match' ? 'Match' : (
-                              extra.rule === 'notMatch' ? 'Not Match' : extra.rule)
-                            }
+                            {findFieldMatchRule(extra.rule) || extra.rule}
                           </div>
 
                           <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
