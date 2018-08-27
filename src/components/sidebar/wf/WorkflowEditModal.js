@@ -504,7 +504,7 @@ class WorkflowEditModal extends React.Component {
   ////////////////////////////////////////////////////
 
   onClickAddExtra (shapeIndex, editGrokFields, e) {
-    const {productTypes} = this.props
+    // const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
     const editShape = objects[shapeIndex]

@@ -28,6 +28,7 @@ export default class WorkflowProductFilter extends React.Component {
       const type = find(productTypes, {id: productTypeId})
       if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
     }
+    
     let products = vendorProducts || []
     if (productVendorId) {
       const vendor = find(productVendors, {id: productVendorId})
