@@ -19,7 +19,7 @@ export default class GrokFieldModalView extends Component {
     return (
       <div>
         <AddIcon className="link" onClick={onClickAddVal}/>
-        <div style={{height: 350, overflow: 'auto'}}>
+        <div style={{height: 180, overflow: 'auto'}}>
           <table className="table table-hover">
             <tbody>
             {values.map((p, i) =>
