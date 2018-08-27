@@ -19,7 +19,7 @@ class GrokFieldModal extends Component {
       ...props,
       values
     }
-    this.props.onSave(props)
+    this.props.onSave(entity)
     this.props.onClose()
   }
 
