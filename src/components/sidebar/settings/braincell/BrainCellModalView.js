@@ -53,7 +53,7 @@ export default class BrainCellModalView extends Component {
     if (type === 'Incident') {
       return (
         <div>
-          <Field name="value" component={FormInput} floatingLabel="Format" className="margin-md-right valign-top"
+          <Field name="value" component={FormInput} floatingLabel="Format" className="margin-md-right valign-top" multiline
                  fullWidth/>
           <Field name="severity" component={FormSelect} className="margin-md-right valign-top" floatingLabel="Severity"
                  options={severities}/>

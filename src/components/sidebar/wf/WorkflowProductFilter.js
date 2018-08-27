@@ -4,8 +4,6 @@ import InputLabel from '@material-ui/core/InputLabel'
 import {MenuItem, Select} from '@material-ui/core'
 import {find} from 'lodash'
 
-import {productFilterTypes} from 'shared/Global'
-
 const menuProps = {
   PaperProps: {
     style: {
@@ -17,6 +15,7 @@ const menuProps = {
 export default class WorkflowProductFilter extends React.Component {
   renderProductCombos () {
     const {
+      filterType,
       vendorProducts, productTypes, productVendors,
 
       productTypeId, onChangeProductType,
@@ -29,6 +28,7 @@ export default class WorkflowProductFilter extends React.Component {
       const type = find(productTypes, {id: productTypeId})
       if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
     }
+    
     let products = vendorProducts || []
     if (productVendorId) {
       const vendor = find(productVendors, {id: productVendorId})
@@ -37,41 +37,44 @@ export default class WorkflowProductFilter extends React.Component {
 
     return (
       <div className="inline-block">
-        <FormControl>
-          <InputLabel>Product Type</InputLabel>
+        <FormControl className={filterType === 'product-type' ? '' : 'hidden'}>
+          <InputLabel shrink>Product Type</InputLabel>
           <Select
             value={productTypeId}
             onChange={onChangeProductType}
             style={{width: 150}}
             MenuProps={menuProps}
+            displayEmpty
           >
-            <MenuItem value="">[All]</MenuItem>
+            <MenuItem value="">[Any]</MenuItem>
             {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
 
-        <FormControl>
-          <InputLabel>Product Vendor</InputLabel>
+        <FormControl className="margin-sm-left">
+          <InputLabel shrink>Product Vendor</InputLabel>
           <Select
             value={productVendorId}
             onChange={onChangeProductVendor}
             style={{width: 150}}
             MenuProps={menuProps}
+            displayEmpty
           >
-            <MenuItem value="">[All]</MenuItem>
+            <MenuItem value="">[Any]</MenuItem>
             {vendors.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
 
-        <FormControl>
-          <InputLabel>Product</InputLabel>
+        <FormControl className="margin-sm-left">
+          <InputLabel shrink>Product</InputLabel>
           <Select
             value={productId}
             onChange={onChangeProduct}
             style={{width: 150}}
             MenuProps={menuProps}
+            displayEmpty
           >
-            <MenuItem value="">[All]</MenuItem>
+            <MenuItem value="">[Any]</MenuItem>
             {products.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
           </Select>
         </FormControl>
@@ -80,43 +83,9 @@ export default class WorkflowProductFilter extends React.Component {
   }
 
   render () {
-    const {
-      productTypes,
-
-      filterType, onChangeFilterType,
-      productTypeId, onChangeProductType,
-    } = this.props
-
     return (
       <div className="inline-block margin-md-left">
-        <FormControl className="margin-md-right">
-          <InputLabel>Filter Type</InputLabel>
-          <Select
-            value={filterType}
-            onChange={onChangeFilterType}
-            style={{width: 150}}
-            MenuProps={menuProps}
-          >
-            {productFilterTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
-          </Select>
-        </FormControl>
-
-        {filterType === 'PRODUCT' ? (
-          this.renderProductCombos()
-        ) : (
-          <FormControl>
-            <InputLabel>Product Type</InputLabel>
-            <Select
-              value={productTypeId}
-              onChange={onChangeProductType}
-              style={{width: 150}}
-              MenuProps={menuProps}
-            >
-              <MenuItem value="">[All]</MenuItem>
-              {productTypes.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
-            </Select>
-          </FormControl>
-        )}
+        {this.renderProductCombos()}
       </div>
     )
   }

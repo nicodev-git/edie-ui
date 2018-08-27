@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
-import CloseIcon from '@material-ui/icons/Close'
 import Tabs from '@material-ui/core/Tabs'
 import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
@@ -37,6 +36,10 @@ const itemStyle = {
   height: '24px'
 }
 
+const hourOptions = Array(24).fill(0).map((p, i) => ({
+  label: `${i === 12 ? 12 : (i % 12)} ${i < 12 ? 'AM' : 'PM'}`,
+  value: i
+}))
 
 const toolbarStyles = theme => ({
   root: {
@@ -108,7 +111,8 @@ class WorkflowEditModalView extends React.Component {
       onClickDeleteShape,
       onClickAddExtra,
       onClickEditShapeExtra,
-      onClickEditShape
+      onClickEditShape,
+      onClickDeleteShapeExtra
     } = this.props
     return (
       <div>
@@ -127,7 +131,7 @@ class WorkflowEditModalView extends React.Component {
                 </div>
                 <div className="relative">
                   <div>
-                    <div className="inline-block margin-sm-bottom">
+                    <div className="inline-block margin-sm-bottom wf-item-container">
                       {p.prelabel ? (
                         <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
                           <div className="text-center">{p.prelabel}</div>
@@ -141,31 +145,38 @@ class WorkflowEditModalView extends React.Component {
                         <div className="text-center">{p.value}</div>
                       </div>
                       <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
-                        <CloseIcon/>
+                        <DeleteIcon/>
                       </div>
-                      {p.extraFields.length ? (
-                        <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
-                        ) : null}
                     </div>
+                    {p.extraFields.length ? (
+                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
+                    ) : null}
                     {p.extraFields.map((extra, j) =>
-                      <div key={j} className="inline-block margin-sm-bottom">
-                        <div className="wf-item">
-                          {extra.name }
-                        </div>
+                      [
+                        <div key={j} className="inline-block margin-sm-bottom wf-item-container">
+                          <div className="wf-item">
+                            {extra.name }
+                          </div>
 
-                        <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
-                          {extra.rule === 'match' ? 'Match' : 'Not Match'}
-                        </div>
+                          <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
+                            {extra.rule === 'match' ? 'Match' : (
+                              extra.rule === 'notMatch' ? 'Not Match' : extra.rule)
+                            }
+                          </div>
 
-                        <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
-                          {extra.value|| 'Any'}
-                        </div>
+                          <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
+                            {extra.value|| 'Any'}
+                          </div>
 
-                        {j !== (p.extraFields.length - 1) ? <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null}
-                      </div>
+                          <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
+                            <DeleteIcon/>
+                          </div>
+                        </div>,
+                        j !== (p.extraFields.length - 1) ? <img key={`img-${j}`} src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null
+                      ]
                     )}
                     {p.grokFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, e)}/>
+                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, p.grokFields, e)}/>
                     ) : null}
                   </div>
                 </div>
@@ -312,6 +323,21 @@ class WorkflowEditModalView extends React.Component {
                      className="valign-top" options={timeOptions}
                      style={{width: 120}}
               />
+            </div>
+
+            <div className="margin-md-top">
+              <Field name="timeRange" component={FormCheckbox}
+                     label="Time Range" className="valign-top"/>
+
+              <Field name="startHour" component={FormSelect} floatingLabel="From"
+                     className="valign-top" options={hourOptions}
+                     style={{width: 120}}
+              />
+              <Field name="endHour" component={FormSelect} floatingLabel="To"
+                     className="valign-top" options={hourOptions}
+                     style={{width: 120}}
+              />
+
             </div>
           </div>
         </CardPanel>
@@ -495,20 +521,6 @@ class WorkflowEditModalView extends React.Component {
         return this.renderAppliedTo()
       default:
         return null
-    }
-  }
-
-  cumulativeOffset(element) {
-    var top = 0, left = 0;
-    do {
-      top += element.offsetTop  || 0;
-      left += element.offsetLeft || 0;
-      element = element.offsetParent
-    } while(element)
-
-    return {
-      top: top,
-      left: left
     }
   }
 

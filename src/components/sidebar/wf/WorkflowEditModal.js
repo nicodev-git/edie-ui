@@ -12,7 +12,7 @@ import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import GrokFieldModal from "./GrokFieldModal";
+import GrokFieldModal from './GrokFieldModal'
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -131,9 +131,7 @@ class WorkflowEditModal extends React.Component {
           this.props.showBrainCellModal(true, null)
         }, 1)
       }
-      
     }
-
   }
 
   getWfDataItems() {
@@ -192,11 +190,39 @@ class WorkflowEditModal extends React.Component {
           }
           break
         }
-        case 'COUNT':
-          itemLabel = type
-          itemValue = `${variable} > ${sentence}`
+        case 'IMQuery': {
+          itemPreLabel = 'Detected Action'
+          itemLabel = 'Match Action'
+          itemValue = `${sentence}`
 
-          itemLabelKey = 'variable'
+          if (visibleGrokFields) {
+            if (visibleGrokFields.includes('User')) {
+              const rule = (grokFieldRules || {})['User']
+              extraFields.push({
+                ...rule,
+                name: 'User'
+              })
+            }
+
+            if (visibleGrokFields.includes('Last Time')) {
+              const rule = (grokFieldRules || {})['Last Time']
+              extraFields.push({
+                ...rule,
+                name: 'Last Time',
+                rule: ' > '
+              })
+            }
+          }
+
+          grokFields = ['User', 'Last Time']
+          break
+        }
+        case 'COUNT':
+          itemPreLabel = 'CountWFTriggered'
+          itemLabel = ' > '
+          itemValue = sentence
+
+          itemValueKey = 'variable'
           break
         case 'TIMELAST':
           itemLabel = type
@@ -371,7 +397,6 @@ class WorkflowEditModal extends React.Component {
     object.name = values.name || object.name
 
     if (object.data.uuid) {
-      // this.props.updateFlowItem('', flow, object)
       this.setState({
         wfData: {
           ...wfData,
@@ -399,7 +424,6 @@ class WorkflowEditModal extends React.Component {
 
       object.data.uiprops.x = x
       object.data.uiprops.y = y
-      // this.props.addFlowItem('', flow, object)
 
       this.setState({
         wfData: {
@@ -480,17 +504,17 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
-  onClickAddExtra (shapeIndex, e) {
-    const {productTypes} = this.props
+  onClickAddExtra (shapeIndex, editGrokFields, e) {
+    // const {productTypes} = this.props
     const {wfData} = this.state
     const {objects} = wfData
     const editShape = objects[shapeIndex]
     console.log(editShape)
-    const productType = find(productTypes, {id: editShape.data.field})
+    // const productType = find(productTypes, {id: editShape.data.field})
 
     e.stopPropagation()
 
-    const editGrokFields = productType.grokFields || []
+    // const editGrokFields = productType.grokFields || []
 
     this.setState({
       grokFieldMenuOpen: true,
@@ -528,6 +552,28 @@ class WorkflowEditModal extends React.Component {
       editShape,
       grokFieldModalOpen: true,
       shapeAnchorEl: e.target
+    })
+  }
+
+  onClickDeleteShapeExtra (shapeIndex, name) {
+    const {wfData} = this.state
+    const {objects} = wfData
+    const editShape = objects[shapeIndex]
+    const object = {...editShape}
+
+    if (!window.confirm('Click OK to remove')) return
+
+    object.data.visibleGrokFields = object.data.visibleGrokFields || []
+    const index = object.data.visibleGrokFields.indexOf(name)
+    if (index >= 0) {
+      object.data.visibleGrokFields.splice(index, 1)
+    }
+
+    this.setState({
+      wfData: {
+        ...wfData,
+        objects: objects.map(p => p.data.uuid === object.data.uuid ? object : p)
+      }
     })
   }
 
@@ -858,6 +904,7 @@ class WorkflowEditModal extends React.Component {
 
         onClickAddExtra={this.onClickAddExtra.bind(this)}
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
+        onClickDeleteShapeExtra={this.onClickDeleteShapeExtra.bind(this)}
         grokFieldModal={this.renderGrokFieldModal()}
         onCloseGrokFieldModal={this.onCloseGrokFieldModal.bind(this)}
 
