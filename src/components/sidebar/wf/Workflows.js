@@ -68,10 +68,6 @@ class Workflows extends React.Component {
 
   onClickRename(wf) {
     this.props.history.push(`/workflow/${encodeURIComponent(wf.name)}/edit`)
-    // this.setState({
-    //     editWf: wf
-    // })
-    // this.props.showWfNameModal(true)
   }
 
   onSaveName(values) {
