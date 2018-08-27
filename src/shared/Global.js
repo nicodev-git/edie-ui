@@ -774,3 +774,13 @@ export const productFilterTypes = [{
 }, {
   label: 'Product Type', value: 'PRODUCT_TYPE'
 }]
+
+export const fieldMatchRules = [{
+  label: 'Match', value: 'match'
+}, {
+  label: 'Not Match', value: 'notMatch'
+}, {
+  label: 'Match Any', value: 'matchAny'
+}, {
+  label: 'Not Match All', value: 'notMatchAll'
+}]
