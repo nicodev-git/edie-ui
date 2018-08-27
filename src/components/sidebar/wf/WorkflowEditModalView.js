@@ -105,6 +105,15 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderGrokFieldValue(extra) {
+    if (extra.rule === 'notMatchAll' || extra.rule === 'matchAny') {
+      const values = extra.values || []
+      if (values.length) return `${values[0]} ...`
+      return 'Any'
+    }
+    return extra.value || 'Any'
+  }
+
   renderWfTab() {
     const {
       wfDataItems,
@@ -163,7 +172,7 @@ class WorkflowEditModalView extends React.Component {
                           </div>
 
                           <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
-                            {extra.value|| 'Any'}
+                            {extra.value || 'Any'}
                           </div>
 
                           <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>

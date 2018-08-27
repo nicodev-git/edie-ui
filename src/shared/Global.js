@@ -760,7 +760,6 @@ export function getMonitorResult(device, monitortype) {
 export function getBasicMonitorInfo(device) {
   return getMonitorResult(device, 'basic')
 }
-
 export const basicMonitorTypes = 'cpu disk memory network'.split(' ')
 
 export const simulationTypes = [{
