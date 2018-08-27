@@ -4,11 +4,7 @@ import {connect} from 'react-redux'
 
 import GrokFieldModalView from './GrokFieldModalView'
 
-const ruleOptions = [{
-  label: 'Match', value: 'match'
-}, {
-  label: 'Not Match', value: 'notMatch'
-}]
+import {fieldMatchRules} from 'shared/Global'
 
 class GrokFieldModal extends Component {
   handleFormSubmit (props) {
@@ -23,7 +19,7 @@ class GrokFieldModal extends Component {
         keyField={keyField}
         editGrokField={editGrokField}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-        ruleOptions={ruleOptions}
+        ruleOptions={fieldMatchRules}
       />
     )
   }
