@@ -12,6 +12,28 @@ export default class GrokFieldModalView extends Component {
     this.props.onClose()
   }
 
+  renderList () {
+    const {values} = this.props
+    return (
+      <div>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+          {values.map((p, i) =>
+            <tr key={i}>
+              <td>{p}</td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
   render() {
     const {
       onSubmit, editGrokField, ruleOptions, keyField
