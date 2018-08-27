@@ -42,7 +42,9 @@ class Maps extends React.Component {
   }
 
   handleFormSubmit (values) {
-    this.props.addSettingMap({...values })
+    if (Object.keys(values).length) {
+      this.props.addSettingMap({...values })
+    }
     this.props.reset()
     this.showForm = false
   }
