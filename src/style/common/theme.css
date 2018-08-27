@@ -924,7 +924,7 @@ th {
     margin: 0!important
 }
 .reset-input label[data-shrink*="true"] {
-    display: none
+    display: none;
 }
 .reset-input div:before , .reset-input div:after{
     border: 0!important
