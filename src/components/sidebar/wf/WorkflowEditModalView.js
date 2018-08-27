@@ -172,7 +172,7 @@ class WorkflowEditModalView extends React.Component {
                           </div>
 
                           <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
-                            {extra.value || 'Any'}
+                            {this.renderGrokFieldValue(extra)}
                           </div>
 
                           <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
