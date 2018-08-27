@@ -923,8 +923,8 @@ th {
 .reset-input div {
     margin: 0!important
 }
-.reset-input label[class*="MuiInputLabel-shrink"] {
-    display: none
+.reset-input label[data-shrink*="true"] {
+    display: none;
 }
 .reset-input div:before , .reset-input div:after{
     border: 0!important
