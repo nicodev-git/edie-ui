@@ -139,7 +139,7 @@ import {
 
 import { apiError } from './Errors'
 
-import { ROOT_URL } from './config'
+import { ROOT_URL, SRA_URL } from './config'
 import { encodeUrlParams } from 'shared/Global'
 
 import {fetchEnvVars} from './EnvActions'
@@ -1176,6 +1176,8 @@ export function testMatchRegex(regex, text, cb) {
 
 export function fetchTimezone() {
   return dispatch => {
+    axios.get(`${SRA_URL}/api/getTimezone`, getAuthConfig()).then(res => {
 
+    })
   }
 }
