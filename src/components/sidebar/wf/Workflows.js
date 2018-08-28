@@ -305,7 +305,7 @@ class Workflows extends React.Component {
               <td>{m.description}</td>
               <td>{this.renderWfProductType(m)}</td>
               <td>{m.ownerUser}</td>
-              <td>{m.type || 'normal'}</td>
+              <td>{m.type === 'system' ? 'Builtin' : 'Customer'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
               <td className="text-right padding-lg-right">
                 <EditIcon className="link margin-md-right" onClick={this.onClickRename.bind(this, m)}/>
