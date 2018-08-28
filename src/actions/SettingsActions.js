@@ -1176,8 +1176,10 @@ export function testMatchRegex(regex, text, cb) {
 
 export function fetchTimezone() {
   return dispatch => {
+    dispatch({type: FETCH_TIMEZONE, data: 0})
     axios.get(`${SRA_URL}/api/getTimezone`, getAuthConfig()).then(res => {
-
+      if (res.data.success)
+        dispatch({type: FETCH_TIMEZONE, data: res.data.object})
     })
   }
 }

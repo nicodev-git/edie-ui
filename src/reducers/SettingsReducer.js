@@ -191,7 +191,9 @@ import {
   FETCH_PRODUCT_VENDORS,
   ADD_PRODUCT_VENDOR,
   UPDATE_PRODUCT_VENDOR,
-  REMOVE_PRODUCT_VENDOR
+  REMOVE_PRODUCT_VENDOR,
+
+  FETCH_TIMEZONE
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys, sortBy} from 'lodash'
@@ -251,7 +253,9 @@ const initialState = {
   productTypes: [],
   productVendors: [],
 
-  workflowDraw: 1
+  workflowDraw: 1,
+
+  timezoneOffset: 0
 }
 
 export default function (state = initialState, action) {
@@ -787,6 +791,8 @@ export default function (state = initialState, action) {
     case REMOVE_PRODUCT_VENDOR:
       return { ...state, productVendors: state.productVendors.filter(p => p.id !== action.data.id) }
 
+    case FETCH_TIMEZONE:
+      return { ...state, timezoneOffset: action.data }
     default:
       return state
   }

@@ -18,7 +18,9 @@ import {
   showImportSyncModal,
   importSyncData,
   showSimulationModal,
-  postIncidentSimulation
+  postIncidentSimulation,
+
+  fetchTimezone
 } from 'actions'
 
 class GeneralContainer extends React.Component {
@@ -32,6 +34,7 @@ export default connect(
   state => ({
     envVars: state.settings.envVars,
     userInfo: state.dashboard.userInfo,
+    timezoneOffset: state.settings.timezoneOffset,
 
     roles: state.settings.roles,
 
@@ -55,7 +58,9 @@ export default connect(
       showImportSyncModal,
       importSyncData,
       showSimulationModal,
-      postIncidentSimulation
+      postIncidentSimulation,
+
+      fetchTimezone
     }, dispatch)
   })
 )(GeneralContainer)
