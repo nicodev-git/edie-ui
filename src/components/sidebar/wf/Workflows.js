@@ -286,7 +286,7 @@ class Workflows extends React.Component {
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Type</th>
+            <th>Product Type</th>
             <th>User</th>
             <th>Type</th>
             <th>Last Updated</th>
