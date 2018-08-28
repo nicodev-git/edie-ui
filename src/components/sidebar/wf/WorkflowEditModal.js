@@ -296,6 +296,12 @@ class WorkflowEditModal extends React.Component {
     } else {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
     }
+
+    if (entity.id && entity.uuid) {
+      //if cloned changed
+
+    }
+
     onSave && onSave(entity)
     this.onClickClose()
   }
