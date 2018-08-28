@@ -88,6 +88,12 @@ export default class MainSettings extends Component {
     this.updateOption('SEND_LOGS_LEVEL', e.target.value)
   }
 
+  onChangeTimezone (e) {
+    this.props.saveTimezone(e.target.value)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
+
   renderImportModal () {
     if (!this.props.importSyncModalOpen) return null
     return (
@@ -105,7 +111,7 @@ export default class MainSettings extends Component {
   }
 
   render () {
-    const {canEdit} = this.props
+    const {canEdit, timezoneOffset} = this.props
     return (
       <div>
         <div style={rowStyle}>
@@ -113,7 +119,8 @@ export default class MainSettings extends Component {
             <FormControl style={{minWidth: 120}}>
               <InputLabel>Time Zone</InputLabel>
               <Select
-                value=""
+                value={timezoneOffset}
+                onChange={this.onChangeTimezone.bind(this)}
               >
                 {timezoneOptions.map((p, i) =>
                   <MenuItem key={i} value={p.value}>{p.label}</MenuItem>

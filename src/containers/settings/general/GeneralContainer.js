@@ -20,7 +20,8 @@ import {
   showSimulationModal,
   postIncidentSimulation,
 
-  fetchTimezone
+  fetchTimezone,
+  saveTimezone
 } from 'actions'
 
 class GeneralContainer extends React.Component {
@@ -60,7 +61,8 @@ export default connect(
       showSimulationModal,
       postIncidentSimulation,
 
-      fetchTimezone
+      fetchTimezone,
+      saveTimezone
     }, dispatch)
   })
 )(GeneralContainer)
