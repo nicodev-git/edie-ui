@@ -143,7 +143,7 @@ import { ROOT_URL, SRA_URL } from './config'
 import { encodeUrlParams } from 'shared/Global'
 
 import {fetchEnvVars} from './EnvActions'
-import { getAuthConfig } from './util'
+import { getAuthConfig, getParamsConfig } from './util'
 
 export const fetchSettingMaps = () => {
   if (!window.localStorage.getItem('token')) {
@@ -1183,3 +1183,16 @@ export function fetchTimezone() {
     })
   }
 }
+
+export function saveTimezone(offset) {
+  return dispatch => {
+    axios.get(`${SRA_URL}/api/saveTimezone`, getParamsConfig({
+      offset
+    })).then(res => {
+      if (res.data.success) {
+        dispatch({type: FETCH_TIMEZONE, data: offset})
+      }
+    })
+  }
+}
+
