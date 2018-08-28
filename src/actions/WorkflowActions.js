@@ -74,9 +74,6 @@ import {
   updateDiagramLine
 } from './DiagramActions'
 
-import uuid from 'uuid'
-
-
 export const openDeviceWfDiagramModal = (stateId, diagram, flow) => {
   return (dispatch) => {
     dispatch({type: OPEN_DEVICE_WF_DIAGRAM_MODAL, flow})
