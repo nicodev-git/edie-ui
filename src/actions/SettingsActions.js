@@ -132,6 +132,8 @@ import {
   UPDATE_PRODUCT_VENDOR,
   REMOVE_PRODUCT_VENDOR,
 
+  FETCH_TIMEZONE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1172,3 +1174,8 @@ export function testMatchRegex(regex, text, cb) {
   }
 }
 
+export function fetchTimezone() {
+  return dispatch => {
+
+  }
+}
