@@ -317,22 +317,6 @@ export default class General extends React.Component {
           </div>
 
           <div style={rowStyle}>
-            <div className="inline-block width-200">
-              <FormControlLabel
-                control={
-                  <Select
-                    value={this.getUserOptionValue('defaultPage', 'dashboard')}
-                    onChange={this.onChangeShowPage.bind(this)}>
-                    <MenuItem value="main">Map</MenuItem>
-                    <MenuItem value="dashboard">Dashboard</MenuItem>
-                  </Select>
-                }
-                label="Time Zone"
-              />
-            </div>
-          </div>
-
-          <div style={rowStyle}>
             <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
             <InlineEdit
               text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}

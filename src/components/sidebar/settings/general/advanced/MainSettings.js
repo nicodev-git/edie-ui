@@ -102,6 +102,20 @@ export default class MainSettings extends Component {
     const {canEdit} = this.props
     return (
       <div>
+        <div style={rowStyle}>
+          <div>
+            <FormControl style={{minWidth: 120}}>
+              <InputLabel>Time Zone</InputLabel>
+              <Select
+                value=""
+              >
+                <MenuItem value="0">UTC+0</MenuItem>
+                <MenuItem value="1">UTC+1</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
         <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div>
             <FormControlLabel
