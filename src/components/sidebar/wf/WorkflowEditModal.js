@@ -296,7 +296,6 @@ class WorkflowEditModal extends React.Component {
     } else {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
     }
-
     onSave && onSave(entity)
     this.onClickClose()
   }
