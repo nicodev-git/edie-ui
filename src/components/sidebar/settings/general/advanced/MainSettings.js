@@ -21,6 +21,12 @@ const logLevels = [{
 }, {
   label: 'ERROR', value: 'ERROR'
 }]
+
+const timezoneOptions = Array(27).fill(0).map((p, i) => ({
+  label: `UTC${i < 12 ? '' : '+'}${i - 12}`,
+  value: i - 12
+}))
+
 export default class MainSettings extends Component {
   getOption (key) {
     const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
@@ -109,8 +115,9 @@ export default class MainSettings extends Component {
               <Select
                 value=""
               >
-                <MenuItem value="0">UTC+0</MenuItem>
-                <MenuItem value="1">UTC+1</MenuItem>
+                {timezoneOptions.map((p, i) =>
+                  <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
+                )}
               </Select>
             </FormControl>
           </div>
