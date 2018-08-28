@@ -95,16 +95,16 @@ export default function (state = initialState, action) {
       return {...state, workflows: [...state.workflows, action.data]}
     case UPDATE_WORKFLOW: {
       let {selectedWorkflow} = state
-      if (action.data.uuid === selectedWorkflow.uuid) selectedWorkflow = action.data
+      if (action.data.id === selectedWorkflow.id) selectedWorkflow = action.data
       return {
         ...state,
-        workflows: state.workflows.map(p => p.uuid === action.data.uuid ? action.data : p),
+        workflows: state.workflows.map(p => p.id === action.data.id ? action.data : p),
         selectedWorkflow
       }
     }
 
     case REMOVE_WORKFLOW:
-      return {...state, workflows: state.workflows.filter(p => p.uuid !== action.data.uuid)}
+      return {...state, workflows: state.workflows.filter(p => p.id !== action.data.id)}
 
     case UPDATE_WORKFLOW_SAVE_STATE:
       return {...state, workflowSaving: action.data}

@@ -168,7 +168,7 @@ const orderSteps = (flow) => {
     ids.forEach(id => {
       if (!targets.includes(id)) targets.push(id)
     })
-    flowIds.push(item.uuid)
+    flowIds.push(item.id)
   })
 
   if (targets.length >= flowIds.length) return flow
@@ -292,7 +292,6 @@ export const showWfTaskModal = (visible, parentStateId, parentFlow, stateId, obj
         const flow = {
           name: 'sub',
           description: '',
-          uuid: uuid.v4(),
           flowItems: []
         }
 
@@ -303,7 +302,7 @@ export const showWfTaskModal = (visible, parentStateId, parentFlow, stateId, obj
               // dispatch(openDiagramModal(stateId, JSON.stringify(data), flow))
               // dispatch({type: SHOW_WF_TASK_MODAL, visible})
               dispatch(closeDeviceWfDiagramModal())
-              history.push(`/workflow/${flow.uuid}/edit`)
+              history.push(`/workflow/${flow.id}/edit`)
             }))
           } else {
             console.log('Flow add failed.')

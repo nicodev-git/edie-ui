@@ -1,7 +1,6 @@
 import React from 'react'
 import {Button, Menu, MenuItem} from '@material-ui/core'
 import moment from 'moment'
-import uuid from 'uuid'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
@@ -80,7 +79,6 @@ class Workflows extends React.Component {
     } else {
       const flow = {
         ...values,
-        uuid: uuid.v4(),
         flowItems: []
       }
       this.props.addWorkflow(flow)
@@ -295,7 +293,7 @@ class Workflows extends React.Component {
           </thead>
           <tbody>
           {workflows.map(m =>
-            <tr key={m.uuid || 'z'}>
+            <tr key={m.id}>
               <td>
                 <div className="link text-info" onClick={this.onClickRename.bind(this, m)}>
                   <span>{this.renderSeverity(m)}</span>&nbsp;
