@@ -23,7 +23,7 @@ export default class WorkflowEdit extends React.Component {
     this.props.fetchProductVendors()
 
     const {match} = this.props
-    const {name} = match.params
+    const {name} = match.paramsidroiiiii
     this.openWorkflow(decodeURIComponent(name))
   }
 
