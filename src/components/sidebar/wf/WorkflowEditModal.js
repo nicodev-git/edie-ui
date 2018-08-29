@@ -228,6 +228,7 @@ class WorkflowEditModal extends React.Component {
           itemLabel = type
           itemValue = `${sentence}min`
           break
+        case 'TIMEIN':
         default:
           itemLabel = type
           itemValue = sentence || name
