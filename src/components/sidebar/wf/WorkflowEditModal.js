@@ -298,8 +298,7 @@ class WorkflowEditModal extends React.Component {
     }
 
     if (entity.id && entity.uuid) {
-      //if cloned changed
-
+      entity.type = 'normal'
     }
 
     onSave && onSave(entity)
