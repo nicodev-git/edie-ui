@@ -766,6 +766,18 @@ class WorkflowEditModal extends React.Component {
   }
 
   ////////////////////////////////////////////////////
+
+  getResetVisible () {
+    const {editWf} = this.props
+    return !!editWf.id && !!editWf.uuid
+  }
+
+  onClickReset () {
+
+  }
+
+  ////////////////////////////////////////////////////
+
   renderGrokFieldModal () {
     if (!this.state.grokFieldModalOpen) return null
     const {editGrokField, editGrokFieldKey} = this.state
@@ -929,6 +941,9 @@ class WorkflowEditModal extends React.Component {
         applyDeviceIds={this.state.applyDeviceIds}
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
         onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
+
+        resetVisible={this.getResetVisible()}
+        onClickReset={this.onClickReset.bind(this)}
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}

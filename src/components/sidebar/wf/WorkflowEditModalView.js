@@ -209,7 +209,8 @@ class WorkflowEditModalView extends React.Component {
 
   renderGeneralTab() {
     const {
-      groupOptions, typeOptions, conditionOptions
+      groupOptions, typeOptions, conditionOptions,
+      resetVisible, onClickReset
     } = this.props
     return (
       <div>
@@ -240,7 +241,7 @@ class WorkflowEditModalView extends React.Component {
               <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
               <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
             </div>
-            <Button variant="raised">Reset</Button>
+            {resetVisible && <div className="padding-md"><Button variant="raised" onClick={onClickReset}>Reset</Button></div>}
           </div>
         </CardPanel>
         {this.renderButtons()}
