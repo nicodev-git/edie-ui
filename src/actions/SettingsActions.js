@@ -1180,8 +1180,6 @@ export function fetchTimezone() {
     axios.get(`${SRA_URL}/api/getTimezone`, getAuthConfig()).then(res => {
       if (res.data.success)
         dispatch({type: FETCH_TIMEZONE, data: res.data.object})
-    }).catch(() => {
-
     })
   }
 }
@@ -1194,8 +1192,6 @@ export function saveTimezone(offset) {
       if (res.data.success) {
         dispatch({type: FETCH_TIMEZONE, data: offset})
       }
-    }).catch(() => {
-
     })
   }
 }
