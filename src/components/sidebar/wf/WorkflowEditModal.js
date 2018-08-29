@@ -769,7 +769,7 @@ class WorkflowEditModal extends React.Component {
 
   getResetVisible () {
     const {editWf} = this.props
-    return !!editWf.id && !!editWf.uuid
+    return editWf && !!editWf.id && !!editWf.uuid
   }
 
   onClickReset () {
