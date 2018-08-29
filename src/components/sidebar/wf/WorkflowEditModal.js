@@ -773,7 +773,10 @@ class WorkflowEditModal extends React.Component {
   }
 
   onClickReset () {
-
+    const {editWf} = this.props
+    if (!window.confirm('Click OK to reset')) return
+    this.props.resetCustomerFlow(editWf)
+    this.onClickClose()
   }
 
   ////////////////////////////////////////////////////
