@@ -240,6 +240,7 @@ class WorkflowEditModalView extends React.Component {
               <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
               <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
             </div>
+            <Button variant="raised">Reset</Button>
           </div>
         </CardPanel>
         {this.renderButtons()}
