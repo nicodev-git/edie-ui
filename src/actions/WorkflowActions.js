@@ -999,6 +999,7 @@ export const resetCustomerFlow = (data) => {
       if (res.data) {
         dispatch({type: UPDATE_WORKFLOW, data: res.data})
       }
+    }).catch(() => {
     })
   }
 }
