@@ -992,3 +992,13 @@ export const fetchTestIncidents = () => {
     })
   }
 }
+
+export const resetCustomerFlow = (data) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/resetCustomerFlow`, data).then(res => {
+      if (res.data) {
+        dispatch({type: UPDATE_WORKFLOW, data: res.data})
+      }
+    })
+  }
+}

@@ -50,6 +50,8 @@ import {
   fetchProductTypes,
   fetchProductVendors,
 
+  resetCustomerFlow,
+
   resetForm
 } from 'actions'
 
@@ -143,6 +145,8 @@ export default connect(
     fetchVendorProducts,
     fetchProductTypes,
     fetchProductVendors,
+
+    resetCustomerFlow,
 
     resetForm
   }
