@@ -366,8 +366,7 @@ const forms = {
     }, {
       "label": 'Not Exist',
       "value": 'notExist'
-    }],
-    "keyField": true
+    }]
   }, {
     "key": "sentence",
     "name": "Process Name",
