@@ -46,6 +46,10 @@ import {
   showGrokModal,
   showCellParamModal,
 
+  fetchVendorProducts,
+  fetchProductTypes,
+  fetchProductVendors,
+
   resetForm
 } from 'actions'
 
@@ -135,6 +139,10 @@ export default connect(
     showScriptModal,
     showGrokModal,
     showCellParamModal,
+
+    fetchVendorProducts,
+    fetchProductTypes,
+    fetchProductVendors,
 
     resetForm
   }
