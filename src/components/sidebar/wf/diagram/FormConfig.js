@@ -360,6 +360,7 @@ const forms = {
     "key": "condition",
     "name": "Condition",
     "type": "select",
+
     "options": [{
       "label": 'Exists',
       "value": 'exist'
