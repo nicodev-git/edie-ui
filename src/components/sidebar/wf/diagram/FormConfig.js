@@ -353,12 +353,21 @@ const forms = {
     "key": "sentence",
     "name": "Action Value",
   }],
-  "checkProcessExistForm": [{
+  "checkProcExistForm": [{
     "key": "name",
     "name": "Name"
   }, {
     "key": "condition",
-    "name": 'Condition'
+    "name": "Condition",
+    "type": "select",
+    "options": [{
+      "label": 'Exists',
+      "value": 'exist'
+    }, {
+      "label": 'Not Exist',
+      "value": 'notExist'
+    }],
+    "keyField": true
   }, {
     "key": "sentence",
     "name": "Process Name",

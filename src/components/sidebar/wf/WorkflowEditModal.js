@@ -224,6 +224,14 @@ class WorkflowEditModal extends React.Component {
 
           itemValueKey = 'variable'
           break
+        case 'CHECKPROCEXIST':
+          itemPreLabel = 'CheckIfProcessExists'
+          itemLabel = condition === 'exist' ? 'Exists' : 'Not Exist'
+          itemValue = sentence
+
+          itemLabelKey = 'condition'
+          itemValueKey = 'sentence'
+          break
         case 'TIMELAST':
           itemLabel = type
           itemValue = `${sentence}min`
