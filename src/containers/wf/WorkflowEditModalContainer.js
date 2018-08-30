@@ -90,6 +90,10 @@ export default connect(
     grokModalOpen: state.settings.grokModalOpen,
     editCellParam: state.settings.editCellParam,
     cellParamModalOpen: state.settings.cellParamModalOpen,
+
+    vendorProducts: state.settings.vendorProducts,
+    productTypes: state.settings.productTypes,
+    productVendors: state.settings.productVendors
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,
