@@ -7,6 +7,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Tabs from '@material-ui/core/Tabs'
 import {find, findIndex} from 'lodash'
@@ -117,6 +118,7 @@ class WorkflowEditModalView extends React.Component {
   renderWfTab() {
     const {
       wfDataItems,
+      onClickAddNewShape,
       onClickDeleteShape,
       onClickAddExtra,
       onClickEditShapeExtra,
@@ -125,9 +127,9 @@ class WorkflowEditModalView extends React.Component {
     } = this.props
     return (
       <div>
-        <div className="margin-lg-top margin-sm-bottom">
-          <span>Workflow</span>
-          <AddIcon className="link"/>
+        <div className="margin-sm-top margin-sm-bottom">
+          <span className="valign-middle">Workflow</span>
+          <EditIcon className="link valign-middle" onClick={onClickAddNewShape} style={{marginLeft: 170}}/>
         </div>
         <div style={{width: '100%'}} className="flex-horizontal">
           <div className="diagram">

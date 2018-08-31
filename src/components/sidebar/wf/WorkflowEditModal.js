@@ -789,6 +789,12 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
+  onClickAddNewShape () {
+
+  }
+
+  ////////////////////////////////////////////////////
+
   renderGrokFieldModal () {
     if (!this.state.grokFieldModalOpen) return null
     const {editGrokField, editGrokFieldKey} = this.state
@@ -929,6 +935,8 @@ class WorkflowEditModal extends React.Component {
         onClickShape={this.onClickShape.bind(this)}
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
+
+        onClickAddNewShape={this.onClickAddNewShape.bind(this)}
 
         onClickAddExtra={this.onClickAddExtra.bind(this)}
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
