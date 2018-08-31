@@ -38,7 +38,7 @@ export default class ShapeListModal extends Component {
     return (
       <ShapeListModalView
         {...this.props}
-        shapes={this.getFilteredShapes.bind(this)}
+        shapes={this.getFilteredShapes()}
         selectedGroup={this.state.selectedGroup}
         groups={this.getGroups()}
         onChangeGroup={this.onChangeGroup.bind(this)}
