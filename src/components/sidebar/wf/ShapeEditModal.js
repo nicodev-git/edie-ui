@@ -26,6 +26,6 @@ class ShapeEditModal extends Component {
 
 export default connect(
   state => ({
-    initialValues: state.workflow.editGroup
+    initialValues: state.workflow.editShape
   })
 )(reduxForm({form: 'shapeEditForm'})(ShapeEditModal))

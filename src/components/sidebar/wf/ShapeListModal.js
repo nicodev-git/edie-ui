@@ -34,6 +34,14 @@ export default class ShapeListModal extends Component {
     })
   }
 
+  onClickItem () {
+
+  }
+
+  onClickEditItem () {
+
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
 
   renderEditModal () {
@@ -48,6 +56,8 @@ export default class ShapeListModal extends Component {
         selectedGroup={this.state.selectedGroup}
         groups={this.getGroups()}
         onChangeGroup={this.onChangeGroup.bind(this)}
+        onClickItem={this.onClickItem.bind(this)}
+        onClickEditItem={this.onClickEditItem.bind(this)}
       >
         {this.renderEditModal()}
       </ShapeListModalView>

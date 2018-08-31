@@ -17,7 +17,7 @@ export default class ShapeListModalView extends Component {
   }
 
   renderList () {
-    const { shapes, onClickItem } = this.props
+    const { shapes, onClickItem, onClickEditItem } = this.props
     return (
       <ul className="web-applet-cards">
         {shapes.map((p, i) =>
@@ -28,6 +28,7 @@ export default class ShapeListModalView extends Component {
             desc={p.title}
             img={`/images/${p.img}`}
             onClick={onClickItem}
+            onClickEdit={onClickEditItem}
           />
         )}
       </ul>
