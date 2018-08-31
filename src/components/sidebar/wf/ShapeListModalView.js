@@ -58,6 +58,7 @@ export default class ShapeListModalView extends Component {
           <CardPanel title={this.renderTitle()}>
             {this.renderList()}
           </CardPanel>
+        {this.props.children}
       </Modal>
     )
   }

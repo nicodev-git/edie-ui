@@ -2,12 +2,16 @@ import React, {Component} from 'react'
 import {uniq, sort} from 'lodash'
 
 import ShapeListModalView from './ShapeListModalView'
+import ShapeEditModal from "./ShapeEditModal";
 
 export default class ShapeListModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedGroup: ''
+      selectedGroup: '',
+
+      editModalOpen: false,
+      editShape: null
     }
   }
 
@@ -39,13 +43,35 @@ export default class ShapeListModal extends Component {
   }
 
   onClickEditItem () {
+    this.setState({
+      editModalOpen: true,
+      editShape: null
+    })
+  }
 
+  ////////////////////////////////////////////////////////////////////////////////
+
+  onSaveShape () {
+
+  }
+
+  onCloseShape () {
+    this.setState({
+      editModalOpen: false
+    })
   }
 
   ////////////////////////////////////////////////////////////////////////////////
 
   renderEditModal () {
-
+    if (!this.state.editModalOpen) return false
+    return (
+      <ShapeEditModal
+        editShape={this.state.editShape}
+        onSave={this.onSaveShape.bind(this)}
+        onClose={this.onCloseShape.bind(this)}
+      />
+    )
   }
 
   render () {
