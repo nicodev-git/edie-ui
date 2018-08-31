@@ -12,10 +12,9 @@ export default class ShapeListModal extends Component {
   }
 
   render () {
-    const {onClose} = this.props
     return (
       <ShapeListModalView
-        onClose={onClose}
+        {...this.props}
       />
     )
   }
