@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Select, MenuItem} from '@material-ui/icons'
+import {Select, MenuItem} from '@material-ui/core'
 import {
   FormInput,
   FormSelect,
@@ -37,9 +37,11 @@ export default class ShapeListModalView extends Component {
   renderTitle () {
     const {selectedGroup, groups, onChangeGroup} = this.props
     return (
-      <Select value={group} onChange={onChangeGroup}>
-        {groups.map(p =>
-          <MenuItem key={p} value={p.value}>{p.label}</MenuItem>
+      <Select
+        value={selectedGroup} onChange={onChangeGroup}
+        displayEmpty>
+        {groups.map((p, i) =>
+          <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
         )}
       </Select>
     )
@@ -52,7 +54,7 @@ export default class ShapeListModalView extends Component {
 
     return (
       <Modal title="Shape" onRequestClose={onClose} contentStyle={{width: 1000}}>
-          <CardPanel title="Shape">
+          <CardPanel title={this.renderTitle()}>
             {this.renderList()}
           </CardPanel>
       </Modal>
