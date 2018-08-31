@@ -1,12 +1,11 @@
 import React, {Component} from 'react'
-import AddIcon from '@material-ui/icons/AddCircle'
-import DeleteIcon from '@material-ui/icons/Delete'
 import {Field} from 'redux-form'
 import {
   FormInput,
   FormSelect,
   SubmitBlock,
-  Modal
+  Modal,
+  CardPanel
 } from 'components/modal/parts'
 
 export default class ShapeModalView extends Component {
@@ -15,45 +14,18 @@ export default class ShapeModalView extends Component {
     this.props.onClose()
   }
 
-  renderList () {
-    const {values, onClickAddVal, onClickDeleteVal} = this.props
-    return (
-      <div>
-        <AddIcon className="link" onClick={onClickAddVal}/>
-        <div style={{height: 180, overflow: 'auto'}}>
-          <table className="table table-hover">
-            <tbody>
-            {values.map((p, i) =>
-              <tr key={i}>
-                <td>{p}</td>
-                <td><DeleteIcon className="link" onClick={() => onClickDeleteVal(i)}/></td>
-              </tr>
-            )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
-
-  renderValue () {
-    const {editGrokField} = this.props
-    const {rule} = editGrokField
-    if (rule === 'notMatchAll' || rule === 'matchAny') return this.renderList()
-    return (
-      <Field name="value" component={FormInput} floatingLabel={editGrokField.name}/>
-    )
-  }
-
   render() {
     const {
-      onSubmit, onClose, ruleOptions, keyField
+      onSubmit, onClose
     } = this.props
 
     return (
-      <Modal title="Shape" onRequestClose={onClose}>
+      <Modal title="Shape" onRequestClose={onClose} contentStyle={{width: 1000}}>
         <form onSubmit={onSubmit}>
-          <Field name="name" component={FormSelect} floatingLabel="Name" options={ruleOptions}/>
+          <CardPanel title="Shape">
+            <Field name="name" component={FormInput} floatingLabel="Name"/>
+          </CardPanel>
+
           <SubmitBlock name="Save"/>
         </form>
       </Modal>

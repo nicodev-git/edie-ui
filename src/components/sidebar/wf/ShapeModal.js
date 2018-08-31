@@ -18,10 +18,11 @@ class ShapeModal extends Component {
     this.props.onClose()
   }
   render () {
-    const {handleSubmit, editGrokField, keyField} = this.props
+    const {handleSubmit, onClose} = this.props
     return (
       <ShapeModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onClose={onClose}
       />
     )
   }

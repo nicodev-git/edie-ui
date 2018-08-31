@@ -13,6 +13,7 @@ import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import GrokFieldModal from './GrokFieldModal'
+import ShapeModal from "./ShapeModal";
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -93,7 +94,9 @@ class WorkflowEditModal extends React.Component {
       loading: false,
       editValues: null,
 
-      advancedModalOpen: false
+      advancedModalOpen: false,
+
+      newShapeModal: false
     }
   }
 
@@ -790,7 +793,19 @@ class WorkflowEditModal extends React.Component {
   ////////////////////////////////////////////////////
 
   onClickAddNewShape () {
+    this.setState({
+      newShapeModal: true
+    })
+  }
 
+  onSaveNewShape () {
+
+  }
+
+  onCloseNewShape () {
+    this.setState({
+      newShapeModal: false
+    })
   }
 
   ////////////////////////////////////////////////////
@@ -839,6 +854,16 @@ class WorkflowEditModal extends React.Component {
         grokModalOpen={this.props.grokModalOpen}
         editCellParam={this.props.editCellParam}
         cellParamModalOpen={this.props.cellParamModalOpen}
+      />
+    )
+  }
+
+  renderNewShapeModal () {
+    if (!this.state.newShapeModal) return null
+    return (
+      <ShapeModal
+        onSave={this.onSaveNewShape.bind(this)}
+        onClose={this.onCloseNewShape.bind(this)}
       />
     )
   }
@@ -966,6 +991,7 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
+        {this.renderNewShapeModal()}
         {this.renderLoader()}
       </ModalView>
     )
