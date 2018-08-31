@@ -13,7 +13,7 @@ import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import GrokFieldModal from './GrokFieldModal'
-import ShapeModal from "./ShapeModal";
+import ShapeListModal from './ShapeListModal'
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -96,7 +96,7 @@ class WorkflowEditModal extends React.Component {
 
       advancedModalOpen: false,
 
-      newShapeModal: false
+      shapListModal: false
     }
   }
 
@@ -794,7 +794,7 @@ class WorkflowEditModal extends React.Component {
 
   onClickAddNewShape () {
     this.setState({
-      newShapeModal: true
+      shapListModal: true
     })
   }
 
@@ -804,7 +804,7 @@ class WorkflowEditModal extends React.Component {
 
   onCloseNewShape () {
     this.setState({
-      newShapeModal: false
+      shapListModal: false
     })
   }
 
@@ -858,10 +858,11 @@ class WorkflowEditModal extends React.Component {
     )
   }
 
-  renderNewShapeModal () {
-    if (!this.state.newShapeModal) return null
+  renderShapeListModal (shapes) {
+    if (!this.state.shapListModal) return null
     return (
-      <ShapeModal
+      <ShapeListModal
+        shapes={shapes}
         onSave={this.onSaveNewShape.bind(this)}
         onClose={this.onCloseNewShape.bind(this)}
       />
@@ -930,6 +931,7 @@ class WorkflowEditModal extends React.Component {
   render() {
     const {handleSubmit, groups, newView} = this.props
     const ModalView = newView ? WorkflowEditModalView1 : WorkflowEditModalView
+    const shapes = this.getMergedShapes()
     return (
       <ModalView
         {...this.props}
@@ -953,7 +955,7 @@ class WorkflowEditModal extends React.Component {
 
         editShape={this.state.editShape}
         shapeAnchorEl={this.state.shapeAnchorEl}
-        shapes={this.getMergedShapes()}
+        shapes={shapes}
         wfDataItems={this.getWfDataItems()}
         onClickAddShape={this.onClickAddShape.bind(this)}
         onCloseShapeMenu={this.onCloseShapeMenu.bind(this)}
@@ -991,7 +993,7 @@ class WorkflowEditModal extends React.Component {
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
-        {this.renderNewShapeModal()}
+        {this.renderShapeListModal(shapes)}
         {this.renderLoader()}
       </ModalView>
     )
