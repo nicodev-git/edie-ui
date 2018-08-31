@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Select, MenuItem} from '@material-ui/icons'
 import {
   FormInput,
   FormSelect,
@@ -30,6 +31,17 @@ export default class ShapeListModalView extends Component {
           />
         )}
       </ul>
+    )
+  }
+
+  renderTitle () {
+    const {selectedGroup, groups, onChangeGroup} = this.props
+    return (
+      <Select value={group} onChange={onChangeGroup}>
+        {groups.map(p =>
+          <MenuItem key={p} value={p.value}>{p.label}</MenuItem>
+        )}
+      </Select>
     )
   }
 
