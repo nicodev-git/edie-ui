@@ -21,7 +21,7 @@ export default class ShapeEditModalView extends Component {
                    className="margin-sm-top"/>
 
             <div className="margin-sm-top" style={{color: 'rgba(0, 0, 0, 0.54)'}}>Script</div>
-            <Field name="script" component={FormTextArea} style={{width: '100%', height: 300}}/>
+            <Field name="script" component={FormTextArea} style={{width: '100%', height: 300, fontSize: '14px'}}/>
           </CardPanel>
           <SubmitBlock name="Save" onCancel={onClickClose}/>
         </form>
