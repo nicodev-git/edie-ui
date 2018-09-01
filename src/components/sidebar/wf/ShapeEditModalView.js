@@ -16,9 +16,11 @@ export default class ShapeEditModalView extends Component {
         <form onSubmit={onSubmit}>
           <CardPanel title="Shape">
             <Field name="title" component={FormInput} floatingLabel="Name" className="margin-md-right"/>
-            <Field name="description" component={FormInput} floatingLabel="Description" fullWidth/>
+            <Field name="description" component={FormInput} floatingLabel="Description" fullWidth
+                   className="margin-sm-top"/>
 
-            <Field name="script" component={FormInput} floatingLabel="Script" fullWidth multiline style={{maxHeight: 200}}/>
+            <Field name="script" component={FormInput} floatingLabel="Script" fullWidth multiline
+                   rowsMax={10} className="margin-sm-top"/>
           </CardPanel>
           <SubmitBlock name="Save" onCancel={onClickClose}/>
         </form>
