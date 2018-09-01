@@ -18,12 +18,20 @@ class ShapeEditModal extends Component {
     this.props.onClose()
   }
 
+  onClickAddField () {
+    const name = window.prompt('Please type name')
+    if (!name) return
+
+  }
+
   render () {
     const {handleSubmit} = this.props
     return (
       <ShapeEditModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClickClose={this.onHide.bind(this)}
+
+        onClickAddField={this.onClickAddField.bind(this)}
       />
     )
   }
