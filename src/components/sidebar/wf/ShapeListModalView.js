@@ -18,20 +18,22 @@ export default class ShapeListModalView extends Component {
   renderList () {
     const { shapes, onClickItem, onClickEditItem, onClickDeleteItem } = this.props
     return (
-      <ul className="web-applet-cards">
-        {shapes.map((p, i) =>
-          <AppletCard
-            key={i}
-            color={colors[i % colors.length]}
-            name={p.title}
-            desc={p.description || p.title}
-            img={`/images/${p.img}`}
-            onClick={() => onClickItem(p)}
-            onClickEdit={() => onClickEditItem(p)}
-            onClickDelete={() => onClickDeleteItem(p)}
-          />
-        )}
-      </ul>
+      <div style={{height: 640, overflow: 'auto'}}>
+        <ul className="web-applet-cards">
+          {shapes.map((p, i) =>
+            <AppletCard
+              key={i}
+              color={colors[i % colors.length]}
+              name={p.title}
+              desc={p.description || p.title}
+              img={`/images/${p.img}`}
+              onClick={() => onClickItem(p)}
+              onClickEdit={() => onClickEditItem(p)}
+              onClickDelete={() => onClickDeleteItem(p)}
+            />
+          )}
+        </ul>
+      </div>
     )
   }
 
