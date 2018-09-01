@@ -10,6 +10,7 @@ class ShapeEditModal extends Component {
     super(props)
     this.state = {
       fields: [],
+      editField: null,
       fieldModalOpen: false
     }
   }
@@ -31,16 +32,16 @@ class ShapeEditModal extends Component {
 
   onClickAddField () {
     this.setState({
-      fieldModalOpen: true
+      fieldModalOpen: true,
+      editField: null
     })
   }
 
   onClickEditField (index) {
     const {fields} = this.state
-    const name = window.prompt('Please type name', fields[index])
-    if (!name) return
     this.setState({
-      fields: fields.map((p, i) => i === index ? name : p)
+      editField: fields[index],
+      fieldModalOpen: true
     })
   }
 
@@ -53,7 +54,14 @@ class ShapeEditModal extends Component {
   }
 
   onClickSaveField (values) {
+    const {editField, fields} = this.state
+    if (editField) {
 
+    } else {
+      this.setState({
+        fields: [...fields, values]
+      })
+    }
   }
 
   closeFieldModal () {

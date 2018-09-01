@@ -45,8 +45,8 @@ export default class ShapeEditModalView extends Component {
               <tbody>
               {fields.map((p, i) =>
                 <tr key={i}>
-                  <td>{p}</td>
-                  <td></td>
+                  <td>{p.name}</td>
+                  <td>{p.value}</td>
                   <td>
                     <EditIcon className="link" onClick={() => onClickEditField(i)}/>
                     <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
