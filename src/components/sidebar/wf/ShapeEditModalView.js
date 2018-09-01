@@ -56,6 +56,15 @@ export default class ShapeEditModalView extends Component {
               </tbody>
             </table>
           </CardPanel>
+
+          <CardPanel title="Result">
+            <table className="table table-hover">
+              <thead>
+                <tr></tr>
+              </thead>
+            </table>
+          </CardPanel>
+
           <div className="form-buttons">
             <Button variant="raised" type="submit" color="primary">Save</Button>
             <Button variant="raised" className="margin-md-left" onClick={onClickTest}>Test</Button>
