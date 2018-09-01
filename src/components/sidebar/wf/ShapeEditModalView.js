@@ -11,15 +11,17 @@ import {
   FormTextArea,
   CardPanel
 } from 'components/modal/parts'
+import {Button} from "@material-ui/core";
 
 export default class ShapeEditModalView extends Component {
   render () {
     const {onSubmit, onClickClose,
       onClickAddField, onClickEditField, onClickDeleteField,
-      fields
+      fields,
+      onClickTest
     } = this.props
     return (
-      <Modal title="Shape" contentStyle={{width: 1000}}>
+      <Modal title="Shape" contentStyle={{width: 1000}} onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Shape">
             <Field name="title" component={FormInput} floatingLabel="Name" className="margin-md-right"/>
@@ -51,7 +53,10 @@ export default class ShapeEditModalView extends Component {
               </tbody>
             </table>
           </CardPanel>
-          <SubmitBlock name="Save" onCancel={onClickClose}/>
+          <div className="form-buttons">
+            <Button variant="raised" type="submit" color="primary">Save</Button>
+            <Button variant="raised" className="margin-md-left" onClick={onClickTest}>Test</Button>
+          </div>
         </form>
       </Modal>
     )

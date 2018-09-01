@@ -17,6 +17,9 @@ class ShapeEditModal extends Component {
       ...editShape,
       ...values
     }
+
+    if (!entity.name) return alert('Please input name')
+
     this.props.onSave(entity)
   }
 
@@ -52,6 +55,12 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  onClickTest () {
+
+  }
+
+  //////////////////////////////////////////////////////////////
+
   render () {
     const {handleSubmit} = this.props
     return (
@@ -64,6 +73,8 @@ class ShapeEditModal extends Component {
         onClickAddField={this.onClickAddField.bind(this)}
         onClickEditField={this.onClickEditField.bind(this)}
         onClickDeleteField={this.onClickDeleteField.bind(this)}
+
+        onClickTest={this.onClickTest.bind(this)}
       />
     )
   }
@@ -71,6 +82,10 @@ class ShapeEditModal extends Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: props.editShape
+    initialValues: props.editShape || {
+      baseName: '',
+      type: 'CUSTOMSHAPE',
+      img: 'param.png'
+    }
   })
 )(reduxForm({form: 'shapeEditForm'})(ShapeEditModal))
