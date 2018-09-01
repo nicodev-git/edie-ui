@@ -42,7 +42,8 @@ export default class ShapeListModal extends Component {
 
   }
 
-  onClickEditItem () {
+  onClickEditItem (editShape) {
+    console.log(editShape)
     this.setState({
       editModalOpen: true,
       editShape: null
