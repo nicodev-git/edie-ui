@@ -128,11 +128,11 @@ class WorkflowEditModalView extends React.Component {
     } = this.props
     return (
       <div>
-        <div className="margin-sm-top margin-sm-bottom">
+        <div className="margin-sm-top margin-sm-bottom hidden">
           <span className="valign-middle">Workflow</span>
           <EditIcon className="link valign-middle" onClick={onClickAddNewShape} style={{marginLeft: 170}}/>
         </div>
-        <div style={{width: '100%'}} className="flex-horizontal">
+        <div style={{width: '100%'}} className="flex-horizontal margin-lg-top">
           {/*<div className="diagram">*/}
             {/*{this.renderSidebar()}*/}
           {/*</div>*/}
