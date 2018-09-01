@@ -18,7 +18,7 @@ export default class ShapeEditModalView extends Component {
     const {onSubmit, onClickClose,
       onClickAddField, onClickEditField, onClickDeleteField,
       fields,
-      onClickTest
+      onClickTest, children
     } = this.props
     return (
       <Modal title="Shape" contentStyle={{width: 1000}} onRequestClose={onClickClose}>
@@ -61,6 +61,7 @@ export default class ShapeEditModalView extends Component {
             <Button variant="raised" className="margin-md-left" onClick={onClickTest}>Test</Button>
           </div>
         </form>
+        {children}
       </Modal>
     )
   }

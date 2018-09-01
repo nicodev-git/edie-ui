@@ -9,7 +9,8 @@ class ShapeEditModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fields: []
+      fields: [],
+      fieldModalOpen: false
     }
   }
   handleFormSubmit (values) {
@@ -29,11 +30,8 @@ class ShapeEditModal extends Component {
   }
 
   onClickAddField () {
-    const name = window.prompt('Please type name')
-    if (!name) return
-    const {fields} = this.state
     this.setState({
-      fields: [...fields, name]
+      fieldModalOpen: true
     })
   }
 
@@ -54,6 +52,16 @@ class ShapeEditModal extends Component {
     })
   }
 
+  onClickSaveField (values) {
+
+  }
+
+  closeFieldModal () {
+    this.setState({
+      fieldModalOpen: false
+    })
+  }
+
   //////////////////////////////////////////////////////////////
 
   onClickTest () {
@@ -63,6 +71,8 @@ class ShapeEditModal extends Component {
   //////////////////////////////////////////////////////////////
 
   renderFieldModal () {
+    const {fieldModalOpen} = this.state
+    if (!fieldModalOpen) return null
     const content = [
       {name: 'Name', key: 'name'},
       {name: 'Test Value', key: 'value'}
@@ -71,10 +81,9 @@ class ShapeEditModal extends Component {
       <SimpleModalContainer
         header="Field"
         content={content}
-        doAction={this.onClickSave}
-        onClose={this.closeModal}
-        validate={validate}
-        buttonText={buttonText}
+        doAction={this.onClickSaveField.bind(this)}
+        onClose={this.closeFieldModal.bind(this)}
+        buttonText="OK"
       />
     )
   }
@@ -93,7 +102,9 @@ class ShapeEditModal extends Component {
         onClickDeleteField={this.onClickDeleteField.bind(this)}
 
         onClickTest={this.onClickTest.bind(this)}
-      />
+      >
+        {this.renderFieldModal()}
+      </ShapeEditModalView>
     )
   }
 }
