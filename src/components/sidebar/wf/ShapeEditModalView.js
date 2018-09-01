@@ -5,6 +5,7 @@ import {
   FormInput,
   SubmitBlock,
   Modal,
+  FormTextArea,
   CardPanel
 } from 'components/modal/parts'
 
@@ -19,8 +20,8 @@ export default class ShapeEditModalView extends Component {
             <Field name="description" component={FormInput} floatingLabel="Description" fullWidth
                    className="margin-sm-top"/>
 
-            <Field name="script" component={FormInput} floatingLabel="Script" fullWidth multiline
-                   rowsMax={10} className="margin-sm-top"/>
+            <Field name="script" component={FormTextArea} floatingLabel="Script" fullWidth
+                   className="margin-sm-top"/>
           </CardPanel>
           <SubmitBlock name="Save" onCancel={onClickClose}/>
         </form>
