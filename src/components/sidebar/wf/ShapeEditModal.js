@@ -33,14 +33,37 @@ class ShapeEditModal extends Component {
     })
   }
 
+  onClickEditField (index) {
+    const {fields} = this.state
+    const name = window.prompt('Please type name', fields[index])
+    if (!name) return
+    this.setState({
+      fields: fields.map((p, i) => i === index ? name : p)
+    })
+  }
+
+  onClickDeleteField (index) {
+    if (!window.confirm('Click OK to remove')) return
+    const {fields} = this.state
+    this.setState({
+      fields: fields.filter((p, i) => i !== index)
+    })
+  }
+
+  //////////////////////////////////////////////////////////////
+
   render () {
     const {handleSubmit} = this.props
     return (
       <ShapeEditModalView
+        fields={this.state.fields}
+
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClickClose={this.onHide.bind(this)}
 
         onClickAddField={this.onClickAddField.bind(this)}
+        onClickEditField={this.onClickEditField.bind(this)}
+        onClickDeleteField={this.onClickDeleteField.bind(this)}
       />
     )
   }

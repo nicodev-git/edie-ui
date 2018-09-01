@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import {
   FormInput,
@@ -12,7 +14,10 @@ import {
 
 export default class ShapeEditModalView extends Component {
   render () {
-    const {onSubmit, onClickClose, onClickAddField} = this.props
+    const {onSubmit, onClickClose,
+      onClickAddField, onClickEditField, onClickDeleteField,
+      fields
+    } = this.props
     return (
       <Modal title="Shape" contentStyle={{width: 1000}}>
         <form onSubmit={onSubmit}>
@@ -30,10 +35,19 @@ export default class ShapeEditModalView extends Component {
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-
+              {fields.map((p, i) =>
+                <tr key={i}>
+                  <td>{p}</td>
+                  <td>
+                    <EditIcon className="link" onClick={() => onClickEditField(i)}/>
+                    <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
+                  </td>
+                </tr>
+              )}
               </tbody>
             </table>
           </CardPanel>
