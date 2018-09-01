@@ -60,7 +60,10 @@ export default class ShapeEditModalView extends Component {
           <CardPanel title="Result">
             <table className="table table-hover">
               <thead>
-                <tr></tr>
+                <tr>
+                  <th>Device</th>
+                  <th>Result</th>
+                </tr>
               </thead>
             </table>
           </CardPanel>
