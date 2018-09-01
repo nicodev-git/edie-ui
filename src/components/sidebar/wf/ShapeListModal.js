@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {uniq} from 'lodash'
 
 import ShapeListModalView from './ShapeListModalView'
-import ShapeEditModal from "./ShapeEditModal";
+import ShapeEditModal from './ShapeEditModal'
 
 export default class ShapeListModal extends Component {
   constructor(props) {
