@@ -29,14 +29,16 @@ export default class ShapeEditModalView extends Component {
                    className="margin-sm-top"/>
 
             <div className="margin-sm-top" style={{color: 'rgba(0, 0, 0, 0.54)'}}>Script</div>
-            <Field name="script" component={FormTextArea} style={{width: '100%', height: 300, fontSize: '14px'}}/>
           </CardPanel>
 
-          <CardPanel title="Fields" tools={<AddIcon className="link" onClick={onClickAddField}/>}>
+          <CardPanel title="Script" tools={<AddIcon className="link" onClick={onClickAddField}/>}>
+            <Field name="script" component={FormTextArea} style={{width: '100%', height: 300, fontSize: '14px'}}/>
+
             <table className="table table-hover">
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Testing Value</th>
                   <th></th>
                 </tr>
               </thead>
@@ -44,6 +46,7 @@ export default class ShapeEditModalView extends Component {
               {fields.map((p, i) =>
                 <tr key={i}>
                   <td>{p}</td>
+                  <td></td>
                   <td>
                     <EditIcon className="link" onClick={() => onClickEditField(i)}/>
                     <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
