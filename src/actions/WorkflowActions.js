@@ -38,6 +38,8 @@ import {
 
   FETCH_GLOBAL_VARS,
   FETCH_SHAPES,
+  ADD_SHAPE,
+  UPDATE_SHAPE,
 
   SHOW_USER_PICK_MODAL,
   SHOW_WF_SETTING_MODAL,
@@ -816,6 +818,22 @@ export function fetchShapes() {
   return dispatch => {
     axios.get(`${ROOT_URL}/shape/getAll`).then(res => {
       dispatch({type: FETCH_SHAPES, data: res.data || []})
+    })
+  }
+}
+
+export function addShape (entity) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/shape`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_SHAPE, data: res.data})
+    })
+  }
+}
+
+export function updateShape (entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/shape/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_SHAPE, data: res.data})
     })
   }
 }
