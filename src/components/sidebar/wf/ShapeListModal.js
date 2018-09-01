@@ -52,6 +52,14 @@ export default class ShapeListModal extends Component {
     })
   }
 
+  onClickDeleteItem (editShape) {
+    if (editShape.type === 'PRODUCTACTION') return
+    if (!window.confirm('Click OK to remove')) return
+    this.setState({
+
+    })
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
 
   onSaveShape (entity) {
@@ -91,6 +99,7 @@ export default class ShapeListModal extends Component {
         onChangeGroup={this.onChangeGroup.bind(this)}
         onClickItem={this.onClickItem.bind(this)}
         onClickEditItem={this.onClickEditItem.bind(this)}
+        onClickDeleteItem={this.onClickDeleteItem.bind(this)}
       >
         {this.renderEditModal()}
       </ShapeListModalView>
