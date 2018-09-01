@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {uniq, sort} from 'lodash'
+import {uniq} from 'lodash'
 
 import ShapeListModalView from './ShapeListModalView'
 import ShapeEditModal from "./ShapeEditModal";
@@ -57,6 +57,8 @@ export default class ShapeListModal extends Component {
     if (entity.id) {
       this.props.updateShape(entity)
     }
+
+    this.onCloseShape()
   }
 
   onCloseShape () {

@@ -33,6 +33,7 @@ import {
   showUserPickModal,
 
   fetchShapes,
+  updateShape,
 
   showWfSettingModal,
   fetchWfSetting,
@@ -129,6 +130,7 @@ export default connect(
     showUserPickModal,
 
     fetchShapes,
+    updateShape,
 
     showWfSettingModal,
     fetchWfSetting,

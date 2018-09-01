@@ -860,11 +860,14 @@ class WorkflowEditModal extends React.Component {
 
   renderShapeListModal (shapes) {
     if (!this.state.shapListModal) return null
+    const {updateShape} = this.props
     return (
       <ShapeListModal
         shapes={shapes}
         onSave={this.onSaveNewShape.bind(this)}
         onClose={this.onCloseNewShape.bind(this)}
+
+        updateShape={updateShape}
       />
     )
   }
