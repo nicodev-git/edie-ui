@@ -5,6 +5,12 @@ import {connect} from 'react-redux'
 import ShapeEditModalView from './ShapeEditModalView'
 
 class ShapeEditModal extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fields: []
+    }
+  }
   handleFormSubmit (values) {
     const {editShape} = this.props
     const entity = {
@@ -21,7 +27,10 @@ class ShapeEditModal extends Component {
   onClickAddField () {
     const name = window.prompt('Please type name')
     if (!name) return
-
+    const {fields} = this.state
+    this.setState({
+      fields: [...fields, name]
+    })
   }
 
   render () {
