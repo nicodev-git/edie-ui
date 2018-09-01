@@ -38,8 +38,9 @@ export default class ShapeListModal extends Component {
     })
   }
 
-  onClickItem () {
-
+  onClickItem (shape) {
+    this.props.onClickShape(shape)
+    this.props.onClose()
   }
 
   onClickEditItem (editShape) {

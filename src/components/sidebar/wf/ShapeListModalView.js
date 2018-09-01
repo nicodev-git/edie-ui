@@ -24,7 +24,7 @@ export default class ShapeListModalView extends Component {
             name={p.title}
             desc={p.description || p.title}
             img={`/images/${p.img}`}
-            onClick={onClickItem}
+            onClick={() => onClickItem(p)}
             onClickEdit={() => onClickEditItem(p)}
           />
         )}

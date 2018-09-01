@@ -371,7 +371,7 @@ class WorkflowEditModal extends React.Component {
 
     this.setState({
       shapeModalOpen: false,
-      shapeAnchorEl: e.target
+      // shapeAnchorEl: e.target
     }, () => {
       if (shape.type === 'PRODUCTACTION') {
         this.onSaveShape('', shape.initialValues, this.buildObjectConfig(shape))
@@ -866,6 +866,7 @@ class WorkflowEditModal extends React.Component {
         shapes={shapes}
         onSave={this.onSaveNewShape.bind(this)}
         onClose={this.onCloseNewShape.bind(this)}
+        onClickShape={this.onClickShape.bind(this)}
 
         updateShape={updateShape}
       />
@@ -924,8 +925,6 @@ class WorkflowEditModal extends React.Component {
         onSaveDiagramObject={this.onSaveShape.bind(this)}
 
         commands={[]}
-        noModal
-        embedded
         keyFieldMode={keyField}
       />
     )
