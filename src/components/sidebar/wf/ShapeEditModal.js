@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 import ShapeEditModalView from './ShapeEditModalView'
 
@@ -60,6 +61,23 @@ class ShapeEditModal extends Component {
   }
 
   //////////////////////////////////////////////////////////////
+
+  renderFieldModal () {
+    const content = [
+      {name: 'Name', key: 'name'},
+      {name: 'Test Value', key: 'value'}
+    ]
+    return (
+      <SimpleModalContainer
+        header="Field"
+        content={content}
+        doAction={this.onClickSave}
+        onClose={this.closeModal}
+        validate={validate}
+        buttonText={buttonText}
+      />
+    )
+  }
 
   render () {
     const {handleSubmit} = this.props
