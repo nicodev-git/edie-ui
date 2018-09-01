@@ -132,9 +132,9 @@ class WorkflowEditModalView extends React.Component {
           <EditIcon className="link valign-middle" onClick={onClickAddNewShape} style={{marginLeft: 170}}/>
         </div>
         <div style={{width: '100%'}} className="flex-horizontal">
-          <div className="diagram">
-            {this.renderSidebar()}
-          </div>
+          {/*<div className="diagram">*/}
+            {/*{this.renderSidebar()}*/}
+          {/*</div>*/}
           <div className="flex-1">
             {wfDataItems.map((p, i) =>
               <div key={i} className="padding-md-left">
