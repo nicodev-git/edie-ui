@@ -43,6 +43,13 @@ export default class ShapeListModal extends Component {
     this.props.onClose()
   }
 
+  onClickAdd () {
+    this.setState({
+      editModalOpen: true,
+      editShape: null
+    })
+  }
+
   onClickEditItem (editShape) {
     console.log(editShape)
     if (editShape.type === 'PRODUCTACTION') return
@@ -92,6 +99,8 @@ export default class ShapeListModal extends Component {
       <ShapeListModalView
         {...this.props}
         shapes={this.getFilteredShapes()}
+        onClickAdd={this.onClickAdd.bind(this)}
+
         selectedGroup={this.state.selectedGroup}
         groups={this.getGroups()}
         onChangeGroup={this.onChangeGroup.bind(this)}

@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Select, MenuItem} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/AddCircle'
+
 import {
   Modal,
   CardPanel
@@ -48,12 +50,12 @@ export default class ShapeListModalView extends Component {
 
   render() {
     const {
-      onClose
+      onClose, onClickAdd
     } = this.props
 
     return (
       <Modal title="Shape" onRequestClose={onClose} contentStyle={{width: 1000}}>
-          <CardPanel title={this.renderTitle()}>
+          <CardPanel title={this.renderTitle()} tools={<div><AddIcon className="link" onClick={onClickAdd}/></div>}>
             {this.renderList()}
           </CardPanel>
         {this.props.children}
