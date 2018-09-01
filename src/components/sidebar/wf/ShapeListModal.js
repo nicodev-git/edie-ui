@@ -55,9 +55,7 @@ export default class ShapeListModal extends Component {
   onClickDeleteItem (editShape) {
     if (editShape.type === 'PRODUCTACTION') return
     if (!window.confirm('Click OK to remove')) return
-    this.setState({
-
-    })
+    this.props.removeShape(editShape)
   }
 
   ////////////////////////////////////////////////////////////////////////////////

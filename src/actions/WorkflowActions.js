@@ -838,6 +838,10 @@ export function updateShape (entity) {
   }
 }
 
+export function removeShape(entity) {
+
+}
+
 export function showWfSettingModal(visible, data)  {
   return dispatch => {
     dispatch({type: SHOW_WF_SETTING_MODAL, visible, data})
