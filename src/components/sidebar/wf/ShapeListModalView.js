@@ -21,8 +21,8 @@ export default class ShapeListModalView extends Component {
           <AppletCard
             key={i}
             color={colors[i % colors.length]}
-            name={p.group || 'General'}
-            desc={p.title}
+            name={p.title}
+            desc={p.description || p.title}
             img={`/images/${p.img}`}
             onClick={onClickItem}
             onClickEdit={() => onClickEditItem(p)}
