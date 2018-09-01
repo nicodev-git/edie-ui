@@ -14,6 +14,7 @@ import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 import {
   FormInput,
@@ -599,7 +600,8 @@ class WorkflowEditModalView extends React.Component {
   render() {
     const {
       onSubmit, children,
-      tab, onChangeTab, noModal
+      tab, onChangeTab, noModal,
+      onClickAddNewShape
     } = this.props
 
     const content = (
@@ -616,6 +618,8 @@ class WorkflowEditModalView extends React.Component {
           </Tabs>
 
           {this.renderTabContent()}
+
+          <FloatingMenu onClickMain={onClickAddNewShape}/>
         </form>
         {this.renderEditPopover()}
         {this.renderGrokFieldPopover()}

@@ -753,6 +753,14 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
+  getMainMenuItems () {
+    return [{
+
+    }]
+  }
+
+  ////////////////////////////////////////////////////
+
   buildObjectConfig (shape) {
     const tpl = extendShape(shape)
     const w = tpl.w || 120
@@ -992,6 +1000,8 @@ class WorkflowEditModal extends React.Component {
 
         resetVisible={this.getResetVisible()}
         onClickReset={this.onClickReset.bind(this)}
+
+        mainMenuItems={this.getMainMenuItems()}
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
