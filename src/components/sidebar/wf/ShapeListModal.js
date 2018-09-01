@@ -44,9 +44,10 @@ export default class ShapeListModal extends Component {
 
   onClickEditItem (editShape) {
     console.log(editShape)
+    if (editShape.type === 'PRODUCTACTION') return
     this.setState({
       editModalOpen: true,
-      editShape: null
+      editShape
     })
   }
 
