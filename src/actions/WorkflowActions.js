@@ -62,7 +62,7 @@ import {
   UPDATE_TEST_CASE,
   REMOVE_TEST_CASE,
 
-  FETCH_TEST_INCIDENTS
+  FETCH_TEST_INCIDENTS, REMOVE_SHAPE
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -839,7 +839,11 @@ export function updateShape (entity) {
 }
 
 export function removeShape(entity) {
-
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/shape/${entity.id}`).then(res => {
+      if (res.data) dispatch({type: REMOVE_SHAPE, data: res.data})
+    })
+  }
 }
 
 export function showWfSettingModal(visible, data)  {
