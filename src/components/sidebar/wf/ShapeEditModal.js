@@ -56,7 +56,10 @@ class ShapeEditModal extends Component {
   onClickSaveField (values) {
     const {editField, fields} = this.state
     if (editField) {
-
+      const index = fields.indexOf(editField)
+      this.setState({
+        fields: fields.map((p, i) => i === index ? values : p)
+      })
     } else {
       this.setState({
         fields: [...fields, values]
