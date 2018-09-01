@@ -53,8 +53,10 @@ export default class ShapeListModal extends Component {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  onSaveShape () {
-
+  onSaveShape (entity) {
+    if (entity.id) {
+      this.props.updateShape(entity)
+    }
   }
 
   onCloseShape () {

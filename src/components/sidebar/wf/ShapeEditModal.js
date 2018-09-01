@@ -5,8 +5,13 @@ import {connect} from 'react-redux'
 import ShapeEditModalView from './ShapeEditModalView'
 
 class ShapeEditModal extends Component {
-  handleFormSubmit (props) {
-    this.props.onSave(props)
+  handleFormSubmit (values) {
+    const {editShape} = this.props
+    const entity = {
+      ...editShape,
+      ...values
+    }
+    this.props.onSave(entity)
   }
 
   onHide () {
@@ -25,7 +30,7 @@ class ShapeEditModal extends Component {
 }
 
 export default connect(
-  state => ({
-    initialValues: state.workflow.editShape
+  (state, props) => ({
+    initialValues: props.editShape
   })
 )(reduxForm({form: 'shapeEditForm'})(ShapeEditModal))
