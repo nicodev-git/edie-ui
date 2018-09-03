@@ -29,7 +29,7 @@ export default class ShapeListModal extends Component {
   getFilteredShapes () {
     const {shapes} = this.props
     const {selectedGroup} = this.state
-    return shapes.filter(p => p.group === selectedGroup)
+    return shapes.filter(p => (p.group || '') === selectedGroup)
   }
 
   onChangeGroup (e) {

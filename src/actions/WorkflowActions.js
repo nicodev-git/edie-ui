@@ -841,7 +841,7 @@ export function updateShape (entity) {
 export function removeShape(entity) {
   return dispatch => {
     axios.delete(`${ROOT_URL}/shape/${entity.id}`).then(res => {
-      if (res.data) dispatch({type: REMOVE_SHAPE, data: res.data})
+      if (res.data) dispatch({type: REMOVE_SHAPE, data: entity})
     })
   }
 }
