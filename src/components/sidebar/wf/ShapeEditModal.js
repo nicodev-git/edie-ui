@@ -125,7 +125,8 @@ export default connect(
     initialValues: props.editShape || {
       baseName: '',
       type: 'CUSTOMSHAPE',
-      img: 'param.png'
+      img: 'param.png',
+      group: props.group
     }
   })
 )(reduxForm({form: 'shapeEditForm'})(ShapeEditModal))

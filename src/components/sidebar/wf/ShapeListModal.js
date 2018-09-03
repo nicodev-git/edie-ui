@@ -89,6 +89,7 @@ export default class ShapeListModal extends Component {
     if (!this.state.editModalOpen) return false
     return (
       <ShapeEditModal
+        group={this.state.selectedGroup}
         editShape={this.state.editShape}
         onSave={this.onSaveShape.bind(this)}
         onClose={this.onCloseShape.bind(this)}
