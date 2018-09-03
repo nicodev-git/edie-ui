@@ -26,8 +26,6 @@ export default class ShapeEditModalView extends Component {
             <Field name="title" component={FormInput} floatingLabel="Name" className="margin-md-right"/>
             <Field name="description" component={FormInput} floatingLabel="Description" fullWidth
                    className="margin-sm-top"/>
-
-            <div className="margin-sm-top" style={{color: 'rgba(0, 0, 0, 0.54)'}}>Script</div>
           </CardPanel>
 
           <CardPanel title="Script" tools={<AddIcon className="link" onClick={onClickAddField}/>}>

@@ -9,16 +9,18 @@ class ShapeEditModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fields: [],
+      fields: (props.editShape ? props.editShape.fields : []) || [],
       editField: null,
       fieldModalOpen: false
     }
   }
   handleFormSubmit (values) {
     const {editShape} = this.props
+    const {fields} = this.state
     const entity = {
       ...editShape,
-      ...values
+      ...values,
+      fields
     }
 
     if (!entity.title) return alert('Please input name')
