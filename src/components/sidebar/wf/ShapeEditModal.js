@@ -21,7 +21,7 @@ class ShapeEditModal extends Component {
       ...values
     }
 
-    if (!entity.name) return alert('Please input name')
+    if (!entity.title) return alert('Please input name')
 
     this.props.onSave(entity)
   }
