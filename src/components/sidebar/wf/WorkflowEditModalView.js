@@ -198,6 +198,8 @@ class WorkflowEditModalView extends React.Component {
             {this.renderButtons()}
           </div>
         </div>
+
+        <FloatingMenu onClickMain={onClickAddNewShape}/>
       </div>
     )
   }
@@ -618,8 +620,6 @@ class WorkflowEditModalView extends React.Component {
           </Tabs>
 
           {this.renderTabContent()}
-
-          <FloatingMenu onClickMain={onClickAddNewShape}/>
         </form>
         {this.renderEditPopover()}
         {this.renderGrokFieldPopover()}
