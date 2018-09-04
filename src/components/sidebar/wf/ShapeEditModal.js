@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 import ShapeEditModalView from './ShapeEditModalView'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 class ShapeEditModal extends Component {
   constructor(props) {
@@ -81,10 +82,11 @@ class ShapeEditModal extends Component {
   //////////////////////////////////////////////////////////////
 
   onClickTest () {
-    const {allValues} = this.props
+    const {allValues, applyDeviceIds} = this.props
     const {fields} = this.state
+    if (!applyDeviceIds.length) return alert('Please choose applied devices first.')
     this.props.testShapeScript({
-      deviceIds: this.props.applyDeviceIds.join(','),
+      deviceIds: applyDeviceIds.join(','),
       shape: {
         ...allValues,
         fields
@@ -114,7 +116,7 @@ class ShapeEditModal extends Component {
   }
 
   render () {
-    const {handleSubmit, shapeScriptResult} = this.props
+    const {handleSubmit, shapeScriptResult, shapeScriptStatus} = this.props
     return (
       <ShapeEditModalView
         fields={this.state.fields}
@@ -130,6 +132,7 @@ class ShapeEditModal extends Component {
         onClickTest={this.onClickTest.bind(this)}
       >
         {this.renderFieldModal()}
+        {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
       </ShapeEditModalView>
     )
   }
