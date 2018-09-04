@@ -11,8 +11,9 @@ class ShapeEditModal extends Component {
     super(props)
     this.state = {
       fields: (props.editShape ? props.editShape.fields : []) || [],
+      applyDeviceIds: (props.editShape ? props.editShape.applyDeviceIds : []) || [],
       editField: null,
-      fieldModalOpen: false
+      fieldModalOpen: false,
     }
   }
   componentWillMount () {
@@ -83,7 +84,7 @@ class ShapeEditModal extends Component {
 
   getServers () {
     const {devices} = this.props
-
+    return devices.filter(p => !!p.monitors)
   }
 
   //////////////////////////////////////////////////////////////
@@ -138,7 +139,7 @@ class ShapeEditModal extends Component {
 
         onClickTest={this.onClickTest.bind(this)}
 
-        servers={servers}
+        servers={this.getServers()}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
