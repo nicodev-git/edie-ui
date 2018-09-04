@@ -13,6 +13,14 @@ import {
 } from 'components/modal/parts'
 
 export default class ShapeEditModalView extends Component {
+  renderDevices () {
+    return (
+      <CardPanel title="Applied Devices">
+
+      </CardPanel>
+    )
+  }
+
   render () {
     const {onSubmit, onClickClose,
       onClickAddField, onClickEditField, onClickDeleteField,
