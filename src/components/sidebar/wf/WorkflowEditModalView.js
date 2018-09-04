@@ -602,8 +602,7 @@ class WorkflowEditModalView extends React.Component {
   render() {
     const {
       onSubmit, children,
-      tab, onChangeTab, noModal,
-      onClickAddNewShape
+      tab, onChangeTab, noModal
     } = this.props
 
     const content = (

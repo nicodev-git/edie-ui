@@ -903,7 +903,7 @@ class WorkflowEditModal extends React.Component {
     const tpl = extendShape(shape)
     const objectConfig = editShape || this.buildObjectConfig(shape)
 
-    const contents = tpl.form
+    const contents = tpl.form || []
     const initialValues = editShape ? {
       ...editShape.data
     } : (shape.initialValues || {})

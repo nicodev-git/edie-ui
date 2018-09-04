@@ -92,7 +92,7 @@ class ShapeEditModal extends Component {
   //////////////////////////////////////////////////////////////
 
   renderFieldModal () {
-    const {fieldModalOpen} = this.state
+    const {fieldModalOpen, editField} = this.state
     if (!fieldModalOpen) return null
     const content = [
       {name: 'Name', key: 'name'},
@@ -102,6 +102,7 @@ class ShapeEditModal extends Component {
       <SimpleModalContainer
         header="Field"
         content={content}
+        initialValues={editField}
         doAction={this.onClickSaveField.bind(this)}
         onClose={this.closeFieldModal.bind(this)}
         buttonText="OK"
