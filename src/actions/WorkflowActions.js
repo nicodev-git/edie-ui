@@ -64,7 +64,8 @@ import {
 
   FETCH_TEST_INCIDENTS,
   REMOVE_SHAPE,
-  UPDATE_SHAPE_SCRIPT_RESULT
+  UPDATE_SHAPE_SCRIPT_RESULT,
+  UPDATE_SHAPE_SCRIPT_STATUS
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -1035,8 +1036,11 @@ export const resetCustomerFlow = (data) => {
 export const testShapeScript = (data) => {
   return dispatch => {
     dispatch(updateShapeScriptResult([]))
+    dispatch({type: UPDATE_SHAPE_SCRIPT_STATUS, data: 'loading'})
     axios.post(`${ROOT_URL}/shape/testScript`, data).then(res => {
       dispatch(updateShapeScriptResult(res.data.object || []))
+    }).finally(() => {
+      dispatch({type: UPDATE_SHAPE_SCRIPT_STATUS, data: ''})
     })
   }
 }

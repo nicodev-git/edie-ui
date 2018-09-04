@@ -90,6 +90,8 @@ export default connect(
     userInfo: state.dashboard.userInfo,
 
     shapes: state.workflow.shapes,
+    shapeScriptResult: state.workflow.shapeScriptResult,
+    shapeScriptStatus: state.workflow.shapeScriptStatus,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
@@ -104,9 +106,7 @@ export default connect(
 
     vendorProducts: state.settings.vendorProducts,
     productTypes: state.settings.productTypes,
-    productVendors: state.settings.productVendors,
-
-    shapeScriptResult: state.workflow.shapeScriptResult
+    productVendors: state.settings.productVendors
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,
