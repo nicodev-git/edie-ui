@@ -14,6 +14,9 @@ class ShapeEditModal extends Component {
       fieldModalOpen: false
     }
   }
+  componentWillMount () {
+    this.props.updateShapeScriptResult([])
+  }
   handleFormSubmit (values) {
     const {editShape} = this.props
     const {fields} = this.state
@@ -111,10 +114,11 @@ class ShapeEditModal extends Component {
   }
 
   render () {
-    const {handleSubmit} = this.props
+    const {handleSubmit, shapeScriptResult} = this.props
     return (
       <ShapeEditModalView
         fields={this.state.fields}
+        shapeScriptResult={shapeScriptResult}
 
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClickClose={this.onHide.bind(this)}

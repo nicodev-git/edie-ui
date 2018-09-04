@@ -74,7 +74,9 @@ const initialState = {
 
   testGroups: [],
   testCases: [],
-  testIncidents: []
+  testIncidents: [],
+
+  shapeScriptResult: []
 }
 export default function (state = initialState, action) {
   switch (action.type) {

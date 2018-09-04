@@ -104,7 +104,9 @@ export default connect(
 
     vendorProducts: state.settings.vendorProducts,
     productTypes: state.settings.productTypes,
-    productVendors: state.settings.productVendors
+    productVendors: state.settings.productVendors,
+
+    shapeScriptResult: state.workflow.shapeScriptResult
   }), {
     openDeviceWfDiagramModal,
     closeDeviceWfDiagramModal,
