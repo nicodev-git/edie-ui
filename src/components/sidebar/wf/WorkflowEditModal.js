@@ -930,6 +930,7 @@ class WorkflowEditModal extends React.Component {
         }
       })
       initialValues.shapeId = shape.id
+      initialValues.title = shape.title
     }
 
     return (
