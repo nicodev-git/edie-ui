@@ -53,6 +53,7 @@ import {
   ADD_SHAPE,
   UPDATE_SHAPE,
   REMOVE_SHAPE,
+  UPDATE_SHAPE_SCRIPT_RESULT,
 
   FETCH_TEST_INCIDENTS
 } from 'actions/types'
@@ -149,6 +150,8 @@ export default function (state = initialState, action) {
       return { ...state, shapes: state.shapes.map(p => p.id === action.data.id ? action.data : p)}
     case REMOVE_SHAPE:
       return { ...state, shapes: state.shapes.filter(p => p.id !== action.data.id)}
+    case UPDATE_SHAPE_SCRIPT_RESULT:
+      return { ...state, shapeScriptResult: action.data }
 
     case SHOW_WF_SETTING_MODAL:
       return {...state, wfSettingModalOpen: action.visible, editWfSetting: action.data}
