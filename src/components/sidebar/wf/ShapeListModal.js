@@ -93,6 +93,9 @@ export default class ShapeListModal extends Component {
         editShape={this.state.editShape}
         onSave={this.onSaveShape.bind(this)}
         onClose={this.onCloseShape.bind(this)}
+
+        applyDeviceIds={this.props.applyDeviceIds}
+        testShapeScript={this.props.testShapeScript}
       />
     )
   }

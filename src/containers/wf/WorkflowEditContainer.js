@@ -36,6 +36,7 @@ import {
   addShape,
   updateShape,
   removeShape,
+  testShapeScript,
 
   showWfSettingModal,
   fetchWfSetting,
@@ -135,6 +136,7 @@ export default connect(
     addShape,
     updateShape,
     removeShape,
+    testShapeScript,
 
     showWfSettingModal,
     fetchWfSetting,
