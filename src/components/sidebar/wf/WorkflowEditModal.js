@@ -929,9 +929,9 @@ class WorkflowEditModal extends React.Component {
           initialValues[p.key] = p.default
         }
       })
-      initialValues.shapeId = shape.id
       initialValues.title = shape.title
     }
+    initialValues.shapeId = shape.id
 
     return (
       <DiagramObjectModal
