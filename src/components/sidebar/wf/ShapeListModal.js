@@ -96,6 +96,9 @@ export default class ShapeListModal extends Component {
 
         applyDeviceIds={this.props.applyDeviceIds}
         testShapeScript={this.props.testShapeScript}
+
+        updateShapeScriptResult={this.props.updateShapeScriptResult}
+        shapeScriptResult={this.props.shapeScriptResult}
       />
     )
   }
