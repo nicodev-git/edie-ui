@@ -570,6 +570,8 @@ export function updateFlowItemForm (values) {
       const id = key.replace('from', '')
       const value = values.mapping[`to${id}`]
       mapping[values.mapping[key]] = value
+    } else {
+      mapping[key] = values.mapping[key]
     }
   })
 

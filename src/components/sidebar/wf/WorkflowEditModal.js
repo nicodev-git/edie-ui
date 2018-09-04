@@ -900,7 +900,6 @@ class WorkflowEditModal extends React.Component {
   renderShapeModal() {
     if (!this.state.shapeModalOpen) return null
 
-    // if (objectConfig.data.uuid) return null
     const {shape, editShape, wfData, keyField} = this.state
     const {objects} = wfData
 
@@ -909,6 +908,14 @@ class WorkflowEditModal extends React.Component {
     const objectConfig = editShape || this.buildObjectConfig(shape)
 
     const contents = tpl.form || []
+    if (shape.type === 'CUSTOMSHAPE') {
+      shape.fields.forEach(field => {
+        contents.push({
+          key: `mapping.${field.name}`,
+          name: field.name
+        })
+      })
+    }
     const initialValues = editShape ? {
       ...editShape.data
     } : (shape.initialValues || {})
