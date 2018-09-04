@@ -1036,7 +1036,7 @@ export const testShapeScript = (data) => {
   return dispatch => {
     dispatch(updateShapeScriptResult([]))
     axios.post(`${ROOT_URL}/shape/testScript`, data).then(res => {
-      dispatch(updateShapeScriptResult(res.data || []))
+      dispatch(updateShapeScriptResult(res.data.object || []))
     })
   }
 }

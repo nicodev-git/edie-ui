@@ -17,7 +17,8 @@ export default class ShapeEditModalView extends Component {
     const {onSubmit, onClickClose,
       onClickAddField, onClickEditField, onClickDeleteField,
       fields,
-      onClickTest, children
+      onClickTest, shapeScriptResult,
+      children
     } = this.props
     return (
       <Modal title="Shape" contentStyle={{width: 1000}} onRequestClose={onClickClose}>
@@ -62,6 +63,14 @@ export default class ShapeEditModalView extends Component {
                   <th>Result</th>
                 </tr>
               </thead>
+              <tbody>
+              {shapeScriptResult.map((s, i) =>
+                <tr key={i}>
+                  <td>{s.name}</td>
+                  <td>{s.output}</td>
+                </tr>
+              )}
+              </tbody>
             </table>
           </CardPanel>
 

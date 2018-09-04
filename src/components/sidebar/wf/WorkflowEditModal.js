@@ -868,7 +868,8 @@ class WorkflowEditModal extends React.Component {
 
   renderShapeListModal (shapes) {
     if (!this.state.shapListModal) return null
-    const {addShape, updateShape, removeShape, testShapeScript} = this.props
+    const {addShape, updateShape, removeShape, testShapeScript,
+      shapeScriptResult, updateShapeScriptResult} = this.props
     return (
       <ShapeListModal
         shapes={shapes}
@@ -881,6 +882,9 @@ class WorkflowEditModal extends React.Component {
         removeShape={removeShape}
         testShapeScript={testShapeScript}
         applyDeviceIds={this.state.applyDeviceIds}
+
+        shapeScriptResult={shapeScriptResult}
+        updateShapeScriptResult={updateShapeScriptResult}
       />
     )
   }
