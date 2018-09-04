@@ -228,7 +228,7 @@ class WorkflowEditModal extends React.Component {
           itemValueKey = 'variable'
           break
         case 'CUSTOMSHAPE':
-          itemPreLabel = name
+          itemLabel = p.name || p.title
           itemValue = sentence
 
           itemValueKey = 'sentence'

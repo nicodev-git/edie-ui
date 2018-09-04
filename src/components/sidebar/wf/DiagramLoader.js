@@ -42,6 +42,7 @@ export function drawFlows (flows, items) {
         const typeConfig = items[itemIndex] || {}
         const obj = {
             name: f.name || '[]',
+            title: f.title,
             imgIndex: itemIndex,
             greyImg: parseInt(f.disabled || 0, 10) === 1,
 
