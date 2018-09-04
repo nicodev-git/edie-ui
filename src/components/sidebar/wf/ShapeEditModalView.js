@@ -3,7 +3,21 @@ import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import {Button} from '@material-ui/core'
+import {
+  Button,
+  Checkbox, FormControlLabel,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Toolbar,
+  Typography
+} from '@material-ui/core'
+
+import { withStyles } from '@material-ui/core/styles'
+import { lighten } from '@material-ui/core/styles/colorManipulator'
+import classNames from 'classnames'
 
 import {
   FormInput,
@@ -12,11 +26,93 @@ import {
   CardPanel
 } from 'components/modal/parts'
 
-export default class ShapeEditModalView extends Component {
+const toolbarStyles = theme => ({
+  root: {
+    paddingRight: theme.spacing.unit,
+  },
+  highlight:
+    theme.palette.type === 'light'
+      ? {
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
+      : {
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
+  spacer: {
+    flex: '1 1 100%',
+  },
+  actions: {
+    color: theme.palette.text.secondary,
+  },
+  title: {
+    flex: '0 0 auto',
+  },
+})
+
+class ShapeEditModalView extends Component {
   renderDevices () {
+    const {allValues, servers, onCheckAppliedDevice, applyDeviceIds, classes, onChangeApplyAllDevices} = this.props
+    const {applyAllDevices} = allValues || {}
+
     return (
       <CardPanel title="Applied Devices">
-
+        <div>
+          <Toolbar className={classNames(classes.root, {
+            [classes.highlight]: applyDeviceIds.length > 0,
+          })}>
+            <div className={classes.title}>
+              {applyAllDevices || applyDeviceIds.length > 0 ? (
+                <Typography color="inherit" variant="subheading">
+                  {applyAllDevices ? 'All' : applyDeviceIds.length} selected
+                </Typography>
+              ) : (
+                <Typography variant="title">
+                  Applied Devices
+                </Typography>
+              )}
+            </div>
+          </Toolbar>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell padding="default" style={{width: 50}}>
+                  {/*<Field*/}
+                    {/*name="applyAllDevices"*/}
+                    {/*component={FormCheckbox} label=""*/}
+                    {/*onChange={onChangeApplyAllDevices}*/}
+                    {/*indeterminate={applyDeviceIds.length > 0 && applyDeviceIds.length < servers.length}*/}
+                  {/*/>*/}
+                </TableCell>
+                <TableCell padding="none"><b>All Devices</b></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {servers.map(p => {
+                const isSelected = applyDeviceIds.includes(p.id)
+                return (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    aria-checked={isSelected}
+                    tabIndex={-1}
+                    key={p.id}
+                    selected={isSelected}
+                  >
+                    <TableCell padding="checkbox" style={{width: 50}}>
+                      <Checkbox checked={applyAllDevices || isSelected} onChange={onCheckAppliedDevice}
+                                value={p.id}/>
+                    </TableCell>
+                    <TableCell component="th" scope="row" padding="none">
+                      {p.name}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
       </CardPanel>
     )
   }
@@ -63,6 +159,8 @@ export default class ShapeEditModalView extends Component {
             </table>
           </CardPanel>
 
+          {this.renderDevices()}
+
           <CardPanel title="Result">
             <table className="table table-hover">
               <thead>
@@ -92,3 +190,4 @@ export default class ShapeEditModalView extends Component {
     )
   }
 }
+export default withStyles(toolbarStyles)(ShapeEditModalView)
