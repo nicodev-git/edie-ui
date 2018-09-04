@@ -81,6 +81,13 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  getServers () {
+    const {devices} = this.props
+
+  }
+
+  //////////////////////////////////////////////////////////////
+
   onClickTest () {
     const {allValues, applyDeviceIds} = this.props
     const {fields} = this.state
@@ -116,7 +123,7 @@ class ShapeEditModal extends Component {
   }
 
   render () {
-    const {handleSubmit, shapeScriptResult, shapeScriptStatus} = this.props
+    const {handleSubmit, shapeScriptResult, shapeScriptStatus, servers} = this.props
     return (
       <ShapeEditModalView
         fields={this.state.fields}
@@ -130,6 +137,8 @@ class ShapeEditModal extends Component {
         onClickDeleteField={this.onClickDeleteField.bind(this)}
 
         onClickTest={this.onClickTest.bind(this)}
+
+        servers={servers}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
