@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {reduxForm} from 'redux-form'
+import {getFormValues, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
@@ -78,7 +78,15 @@ class ShapeEditModal extends Component {
   //////////////////////////////////////////////////////////////
 
   onClickTest () {
-
+    const {allValues} = this.props
+    const {fields} = this.state
+    this.props.testShapeScript({
+      deviceIds: this.props.applyDeviceIds.join(','),
+      shape: {
+        ...allValues,
+        fields
+      }
+    })
   }
 
   //////////////////////////////////////////////////////////////
@@ -129,6 +137,7 @@ export default connect(
       type: 'CUSTOMSHAPE',
       img: 'param.png',
       group: props.group
-    }
+    },
+    allValues: getFormValues('shapeEditForm')(state)
   })
 )(reduxForm({form: 'shapeEditForm'})(ShapeEditModal))

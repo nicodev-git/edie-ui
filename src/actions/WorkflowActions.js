@@ -1032,7 +1032,7 @@ export const resetCustomerFlow = (data) => {
 
 export const testShapeScript = (data) => {
   return dispatch => {
-    axios.psot(`${ROOT_URL}/shape/testScript`, data).then(res => {
+    axios.post(`${ROOT_URL}/shape/testScript`, data).then(res => {
       console.log(res.data)
     })
   }
