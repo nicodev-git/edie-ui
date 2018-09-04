@@ -922,9 +922,9 @@ class WorkflowEditModal extends React.Component {
           })
         } else {
           initialValues[p.key] = p.default
-
         }
       })
+      initialValues.shapeId = shape.id
     }
 
     return (
