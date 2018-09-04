@@ -138,6 +138,10 @@ class WorkflowEditModal extends React.Component {
   }
 
   getWfDataItems() {
+    return this.state.wfData.objects
+  }
+
+  getWfDataItems2() {
     const {productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
       const {sentence, name, variable, condition, fieldType, field, uiprops,
