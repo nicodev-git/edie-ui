@@ -1,13 +1,38 @@
 import React from 'react'
+import {Button} from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import {Button} from "@material-ui/core";
 
 export default class OutputObjects extends React.Component {
   onClickAdd () {
 
+  }
+
+  renderTable () {
+    const objects = []
+
+    return (
+      <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th/>
+          </tr>
+          </thead>
+          <tbody>
+          {objects.map(m =>
+            <tr key={m.id}>
+              <td>{m.name}</td>
+              <td></td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+    )
   }
 
   render() {
@@ -22,7 +47,7 @@ export default class OutputObjects extends React.Component {
         </TabPageHeader>
 
         <TabPageBody history={this.props.history} location={this.props.location}>
-
+          {this.renderTable()}
         </TabPageBody>
       </TabPage>
     )
