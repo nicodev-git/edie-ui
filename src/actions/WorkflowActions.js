@@ -65,7 +65,12 @@ import {
   FETCH_TEST_INCIDENTS,
   REMOVE_SHAPE,
   UPDATE_SHAPE_SCRIPT_RESULT,
-  UPDATE_SHAPE_SCRIPT_STATUS
+  UPDATE_SHAPE_SCRIPT_STATUS,
+
+  FETCH_OUTPUT_OBJECTS,
+  ADD_OUTPUT_OBJECT,
+  UPDATE_OUTPUT_OBJECT,
+  REMOVE_OUTPUT_OBJECT, FETCH_BRAIN_CELLS
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -1048,5 +1053,21 @@ export const testShapeScript = (data) => {
 export const updateShapeScriptResult = (data) => {
   return dispatch => {
     dispatch({type: UPDATE_SHAPE_SCRIPT_RESULT, data})
+  }
+}
+
+export const fetchOutputObjects = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/outputobject`).then(res => {
+      dispatch({type: FETCH_OUTPUT_OBJECTS, data: res.data})
+    })
+  }
+}
+
+export const addOutputObject = (entity) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/outputobject`).then(res => {
+      dispatch({type: ADD_OUTPUT_OBJECT})
+    })
   }
 }
