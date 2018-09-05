@@ -4,6 +4,7 @@ import {Button} from '@material-ui/core'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 export default class OutputObjects extends React.Component {
   onClickAdd () {
@@ -41,13 +42,13 @@ export default class OutputObjects extends React.Component {
         <TabPageHeader title="Output Objects">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>&nbsp;
             </div>
           </div>
         </TabPageHeader>
 
         <TabPageBody history={this.props.history} location={this.props.location}>
           {this.renderTable()}
+          <FloatingMenu onClickMain={this.onClickAdd.bind(this)}/>
         </TabPageBody>
       </TabPage>
     )
