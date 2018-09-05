@@ -8,7 +8,7 @@ import WorkflowEditModalView from './WorkflowEditModalView'
 import WorkflowEditModalView1 from './WorkflowEditModalView1'
 import DiagramObjectModal from 'components/sidebar/wf/diagram/DiagramObjectModal'
 import {drawFlows} from "components/sidebar/wf/DiagramLoader"
-import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
+import {extendShape, productAction2Shape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -46,19 +46,7 @@ class WorkflowEditModal extends React.Component {
     this.props.productTypes.forEach(p => {
       const actions = p.actions || []
       actions.forEach(action => {
-        shapes.push({
-          id: p.id,
-          group: p.name,
-          form: 'productActionForm',
-          img: 'sendim.png',
-          title: action.name,
-          type: 'PRODUCTACTION',
-          initialValues: {
-            field: p.id,
-            varField: action.id,
-            sentence: action.name
-          }
-        })
+        shapes.push(productAction2Shape(action, p))
       })
     })
 
@@ -139,8 +127,9 @@ class WorkflowEditModal extends React.Component {
   }
 
   getWfDataItems() {
-    const {shapes} = this.props
+    const {shapes, productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
+      const {productTypeId, actionId} = p.config
       const {uiprops, shapeId} = p.data
       const {type} = uiprops
       if (type === 'CUSTOMSHAPE') {
@@ -150,7 +139,13 @@ class WorkflowEditModal extends React.Component {
           data: p
         }
       } else if (type === 'PRODUCTACTION') {
-
+        const productType = find(productTypes, {id: productTypeId})
+        const productAction = find(productType.actions, {id: actionId})
+        const shape = productAction2Shape(productAction, productType)
+        return {
+          shape,
+          data: p
+        }
       } else {
         const shape = find(shapes, {type})
         return {
@@ -290,19 +285,7 @@ class WorkflowEditModal extends React.Component {
     productTypes.forEach(p => {
       const actions = p.actions || []
       actions.forEach(action => {
-        typeShapes.push({
-          id: p.id,
-          group: p.name,
-          form: 'productActionForm',
-          img: 'sendim.png',
-          title: action.name,
-          type: 'PRODUCTACTION',
-          initialValues: {
-            field: p.id,
-            varField: action.id,
-            sentence: action.name
-          }
-        })
+        typeShapes.push(productAction2Shape(action, p))
       })
     })
 
