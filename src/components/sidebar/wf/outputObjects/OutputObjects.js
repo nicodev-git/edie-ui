@@ -8,7 +8,8 @@ import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 export default class OutputObjects extends React.Component {
   onClickAdd () {
-
+    const name = prompt('Please type name')
+    if (!name) return
   }
 
   renderTable () {
