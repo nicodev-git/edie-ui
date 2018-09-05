@@ -121,6 +121,10 @@ class ShapeEditModalView extends Component {
     )
   }
 
+  renderOutput () {
+
+  }
+
   render () {
     const {onSubmit, onClickClose,
       onClickAddField, onClickEditField, onClickDeleteField,
