@@ -35,7 +35,6 @@ export default class OutputObjects extends React.Component {
 
   renderTable () {
     const objects = this.props.outputObjects
-
     return (
       <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
         <table className="table table-hover">
@@ -70,7 +69,6 @@ export default class OutputObjects extends React.Component {
             </div>
           </div>
         </TabPageHeader>
-
         <TabPageBody history={this.props.history} location={this.props.location}>
           {this.renderTable()}
           <FloatingMenu onClickMain={this.onClickAdd.bind(this)}/>
