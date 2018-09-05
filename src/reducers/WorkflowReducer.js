@@ -56,7 +56,12 @@ import {
   UPDATE_SHAPE_SCRIPT_RESULT,
   UPDATE_SHAPE_SCRIPT_STATUS,
 
-  FETCH_TEST_INCIDENTS
+  FETCH_TEST_INCIDENTS,
+
+  FETCH_OUTPUT_OBJECTS,
+  ADD_OUTPUT_OBJECT,
+  UPDATE_OUTPUT_OBJECT,
+  REMOVE_OUTPUT_OBJECT
 } from 'actions/types'
 
 const initialState = {
@@ -77,7 +82,9 @@ const initialState = {
   testCases: [],
   testIncidents: [],
 
-  shapeScriptResult: []
+  shapeScriptResult: [],
+
+  outputObjects: []
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -194,6 +201,15 @@ export default function (state = initialState, action) {
       return { ...state, testCases: state.testCases.filter(p => p.id !== action.data.id) }
     case FETCH_TEST_INCIDENTS:
       return { ...state, testIncidents: action.data }
+
+    case FETCH_OUTPUT_OBJECTS:
+      return { ...state, outputObjects: action.data }
+    case ADD_OUTPUT_OBJECT:
+      return { ...state, outputObjects: [...state.outputObjects, action.data] }
+    case UPDATE_OUTPUT_OBJECT:
+      return { ...state, outputObjects: state.outputObjects.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_OUTPUT_OBJECT:
+      return { ...state, outputObjects: state.outputObjects.filter(p => p.id !== action.data.id) }
 
     default:
       return state

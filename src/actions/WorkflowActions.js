@@ -70,7 +70,7 @@ import {
   FETCH_OUTPUT_OBJECTS,
   ADD_OUTPUT_OBJECT,
   UPDATE_OUTPUT_OBJECT,
-  REMOVE_OUTPUT_OBJECT, FETCH_BRAIN_CELLS
+  REMOVE_OUTPUT_OBJECT
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -83,6 +83,7 @@ import {
   updateDiagramWorkflow,
   updateDiagramLine
 } from './DiagramActions'
+import {apiError} from "./Errors";
 
 export const openDeviceWfDiagramModal = (stateId, diagram, flow) => {
   return (dispatch) => {
@@ -1067,7 +1068,23 @@ export const fetchOutputObjects = () => {
 export const addOutputObject = (entity) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/outputobject`).then(res => {
-      dispatch({type: ADD_OUTPUT_OBJECT})
+      if (res.data) dispatch({type: ADD_OUTPUT_OBJECT, data: res.data})
     })
+  }
+}
+
+export function updateOutputObject (entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/outputobject/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_OUTPUT_OBJECT, data: res.data})
+    })
+  }
+}
+
+export function removeOutputObject (entity) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/outputobject/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: REMOVE_OUTPUT_OBJECT, data: entity})
+    }).catch(error => apiError(dispatch, error))
   }
 }
