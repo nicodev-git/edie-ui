@@ -56,12 +56,12 @@ export default class ShapeListModalView extends Component {
     } = this.props
 
     return (
-      <div title="Shape">
-          <CardPanel title={this.renderTitle()} tools={<div><AddIcon className="link" onClick={onClickAdd}/></div>}>
-            {this.renderList()}
-          </CardPanel>
+      <Modal title="Shape" onRequestClose={onClose} contentStyle={{width: 1000}}>
+        <CardPanel title={this.renderTitle()} tools={<div><AddIcon className="link" onClick={onClickAdd}/></div>}>
+          {this.renderList()}
+        </CardPanel>
         {this.props.children}
-      </div>
+      </Modal>
     )
   }
 }
