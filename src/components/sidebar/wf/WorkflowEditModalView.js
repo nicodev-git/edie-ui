@@ -15,6 +15,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
+import AppletCard from 'components/common/AppletCard'
 
 import {
   FormInput,
@@ -25,7 +26,9 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import {severities, productFilterTypes, findFieldMatchRule} from 'shared/Global'
+import {
+  severities, productFilterTypes, findFieldMatchRule,
+  appletColors as colors} from 'shared/Global'
 
 const cardStyle = {
   minHeight: 250,
@@ -134,20 +137,17 @@ class WorkflowEditModalView extends React.Component {
         </div>
         <div style={{width: '100%'}} className="flex-horizontal margin-lg-top">
           <div className="flex-1">
-            {/*<ul className="web-applet-cards">*/}
-              {/*{wfDataItems.map((p, i) =>*/}
-                {/*<AppletCard*/}
-                  {/*key={i}*/}
-                  {/*color={colors[i % colors.length]}*/}
-                  {/*name={p.title}*/}
-                  {/*desc={p.description || p.title}*/}
-                  {/*img={`/images/${p.img}`}*/}
-                  {/*onClick={() => onClickItem(p)}*/}
-                  {/*onClickEdit={() => onClickEditItem(p)}*/}
-                  {/*onClickDelete={() => onClickDeleteItem(p)}*/}
-                {/*/>*/}
-              {/*)}*/}
-            {/*</ul>*/}
+            <ul className="web-applet-cards">
+              {wfDataItems.map((p, i) =>
+                <AppletCard
+                  key={i}
+                  color={colors[i % colors.length]}
+                  name={p.shape.title}
+                  desc={p.shape.description || p.shape.title}
+                  img={`/images/${p.shape.img}`}
+                />
+              )}
+            </ul>
             {this.renderButtons()}
           </div>
         </div>

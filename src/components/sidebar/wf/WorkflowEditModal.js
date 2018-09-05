@@ -146,7 +146,7 @@ class WorkflowEditModal extends React.Component {
       if (type === 'CUSTOMSHAPE') {
         const shape = find(shapes, {id: shapeId})
         return {
-          template: shape,
+          shape,
           data: p
         }
       } else if (type === 'PRODUCTACTION') {
@@ -154,7 +154,7 @@ class WorkflowEditModal extends React.Component {
       } else {
         const shape = find(shapes, {type})
         return {
-          template: shape,
+          shape,
           data: p
         }
       }

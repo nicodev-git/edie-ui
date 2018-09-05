@@ -504,3 +504,7 @@ export function extendShape(shape) {
         form: FormConfig[shape.form]
     }
 }
+
+export function productAction2Shape(action) {
+
+}
