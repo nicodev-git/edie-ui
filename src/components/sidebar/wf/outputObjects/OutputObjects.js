@@ -28,8 +28,9 @@ export default class OutputObjects extends React.Component {
     })
   }
 
-  onClickDelete () {
-
+  onClickDelete (object) {
+    if (!window.confirm('Click OK to remove')) return
+    this.props.removeOutputObject(object)
   }
 
   renderTable () {
@@ -50,7 +51,7 @@ export default class OutputObjects extends React.Component {
               <td>{m.name}</td>
               <td>
                 <EditIcon onClick={this.onClickEdit.bind(this, m)}/>
-                <DeleteIcon onClick={this.onClickDelete.bind(this)}/>
+                <DeleteIcon onClick={this.onClickDelete.bind(this, m)}/>
               </td>
             </tr>
           )}
