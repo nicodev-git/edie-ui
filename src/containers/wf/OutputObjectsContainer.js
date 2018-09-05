@@ -5,11 +5,10 @@ import { withRouter } from 'react-router'
 import OutputObjects from 'components/sidebar/wf/outputObjects/OutputObjects'
 
 import {
-  fetchGroups,
-  showGroupModal,
-  addGroup,
-  updateGroup,
-  removeGroup
+  fetchOutputObjects,
+  addOutputObject,
+  updateOutputObject,
+  removeOutputObject
 } from 'actions'
 
 class OutputObjectsContainer extends React.Component {
@@ -21,14 +20,11 @@ class OutputObjectsContainer extends React.Component {
 }
 export default connect(
   state => ({
-    groups: state.workflow.groups,
-    groupModalOpen: state.workflow.groupModalOpen,
-    editGroup: state.workflow.editGroup
+    outputObjects: state.workflow.outputObjects
   }), {
-    fetchGroups,
-    showGroupModal,
-    addGroup,
-    updateGroup,
-    removeGroup
+    fetchOutputObjects,
+    addOutputObject,
+    updateOutputObject,
+    removeOutputObject
   }
 )(withRouter(OutputObjectsContainer))

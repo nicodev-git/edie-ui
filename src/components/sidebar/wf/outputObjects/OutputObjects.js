@@ -7,9 +7,15 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 export default class OutputObjects extends React.Component {
+  componentWillMount () {
+    this.props.fetchOutputObjects()
+  }
   onClickAdd () {
     const name = prompt('Please type name')
     if (!name) return
+    this.props.addOutputObject({
+      name
+    })
   }
 
   renderTable () {
