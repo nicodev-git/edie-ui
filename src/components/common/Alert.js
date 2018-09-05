@@ -13,7 +13,7 @@ export default class Alert extends Component {
     super(props)
     this.state = {
       open: true,
-      input: props.default || ''
+      input: ''
     }
   }
   onKeyUp (e) {
@@ -52,6 +52,7 @@ export default class Alert extends Component {
     return (
       <Modal title={this.props.title} contentStyle={{width: 450}} onRequestClose={this.onClickClose.bind(this)}>
         <SubHeader name={this.props.message}/>
+        <form>
         <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
           <TextField
             name="input"
@@ -68,6 +69,7 @@ export default class Alert extends Component {
           </Button>
 
         </div>
+        </form>
       </Modal>
     )
   }

@@ -6,16 +6,18 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
+import {showPrompt} from 'components/common/Alert'
 
 export default class OutputObjects extends React.Component {
   componentWillMount () {
     this.props.fetchOutputObjects()
   }
   onClickAdd () {
-    const name = prompt('Please type name')
-    if (!name) return
-    this.props.addOutputObject({
-      name
+    showPrompt('Please type name', '', name => {
+      if (!name) return
+      this.props.addOutputObject({
+        name
+      })
     })
   }
 
@@ -41,7 +43,7 @@ export default class OutputObjects extends React.Component {
           <thead>
           <tr>
             <th>Name</th>
-            <th/>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
