@@ -145,6 +145,7 @@ class WorkflowEditModalView extends React.Component {
                   name={p.shape.title}
                   desc={p.shape.description || p.shape.title}
                   img={`/images/${p.shape.img}`}
+                  onClickEdit={e => onClickEditShape(i, false, e)}
                 />
               )}
             </ul>

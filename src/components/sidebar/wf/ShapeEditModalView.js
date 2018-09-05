@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {
   Button,
-  Checkbox, FormControlLabel,
+  Checkbox,
   Table,
   TableBody,
   TableCell,
