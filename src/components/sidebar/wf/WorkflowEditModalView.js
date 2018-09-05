@@ -125,7 +125,7 @@ class WorkflowEditModalView extends React.Component {
     } = this.props
     return (
       <div>
-        <div className="margin-lg-top margin-sm-bottom">Workflow</div>
+        <div className="margin-lg-top margin-sm-bottom">Workflow``</div>
         <div style={{width: '100%'}} className="flex-horizontal">
           <div className="diagram">
             {this.renderSidebar()}
