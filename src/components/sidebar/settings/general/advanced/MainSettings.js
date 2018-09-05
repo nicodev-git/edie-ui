@@ -21,6 +21,12 @@ const logLevels = [{
 }, {
   label: 'ERROR', value: 'ERROR'
 }]
+
+const timezoneOptions = Array(27).fill(0).map((p, i) => ({
+  label: `UTC${i < 12 ? '' : '+'}${i - 12}`,
+  value: i - 12
+}))
+
 export default class MainSettings extends Component {
   getOption (key) {
     const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
@@ -82,6 +88,12 @@ export default class MainSettings extends Component {
     this.updateOption('SEND_LOGS_LEVEL', e.target.value)
   }
 
+  onChangeTimezone (e) {
+    this.props.saveTimezone(e.target.value)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
+
   renderImportModal () {
     if (!this.props.importSyncModalOpen) return null
     return (
@@ -99,9 +111,25 @@ export default class MainSettings extends Component {
   }
 
   render () {
-    const {canEdit} = this.props
+    const {canEdit, timezoneOffset} = this.props
     return (
       <div>
+        <div style={rowStyle}>
+          <div>
+            <FormControl style={{minWidth: 120}}>
+              <InputLabel>Time Zone</InputLabel>
+              <Select
+                value={timezoneOffset}
+                onChange={this.onChangeTimezone.bind(this)}
+              >
+                {timezoneOptions.map((p, i) =>
+                  <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
+                )}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
         <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div>
             <FormControlLabel

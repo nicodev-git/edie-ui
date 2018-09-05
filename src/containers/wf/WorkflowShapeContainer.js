@@ -1,8 +1,8 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import WorkflowEditModal from 'components/sidebar/wf/WorkflowEditModal'
+import WorkflowShape from 'components/sidebar/wf/ShapeList'
 
 import {
   openDeviceWfDiagramModal,
@@ -33,6 +33,11 @@ import {
   showUserPickModal,
 
   fetchShapes,
+  addShape,
+  updateShape,
+  removeShape,
+  testShapeScript,
+  updateShapeScriptResult,
 
   showWfSettingModal,
   fetchWfSetting,
@@ -53,14 +58,13 @@ import {
   resetForm
 } from 'actions'
 
-class WorkflowEditContainer extends React.Component {
-  render() {
+class WorkflowShapeContainer extends React.Component {
+  render () {
     return (
-      <WorkflowEditModal{...this.props}/>
+      <WorkflowShape {...this.props}/>
     )
   }
 }
-
 export default connect(
   state => ({
     devices: state.devices.devices,
@@ -83,6 +87,8 @@ export default connect(
     userInfo: state.dashboard.userInfo,
 
     shapes: state.workflow.shapes,
+    shapeScriptResult: state.workflow.shapeScriptResult,
+    shapeScriptStatus: state.workflow.shapeScriptStatus,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
@@ -127,6 +133,11 @@ export default connect(
     showUserPickModal,
 
     fetchShapes,
+    addShape,
+    updateShape,
+    removeShape,
+    testShapeScript,
+    updateShapeScriptResult,
 
     showWfSettingModal,
     fetchWfSetting,
@@ -146,4 +157,4 @@ export default connect(
 
     resetForm
   }
-)(withRouter(WorkflowEditContainer))
+)(withRouter(WorkflowShapeContainer))

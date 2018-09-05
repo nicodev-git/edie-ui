@@ -1,7 +1,6 @@
 import React from 'react'
 import {Button, Menu, MenuItem} from '@material-ui/core'
 import moment from 'moment'
-import uuid from 'uuid'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Create'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
@@ -80,7 +79,6 @@ class Workflows extends React.Component {
     } else {
       const flow = {
         ...values,
-        uuid: uuid.v4(),
         flowItems: []
       }
       this.props.addWorkflow(flow)
@@ -286,7 +284,7 @@ class Workflows extends React.Component {
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Type</th>
+            <th>Product Type</th>
             <th>User</th>
             <th>Type</th>
             <th>Last Updated</th>
@@ -295,7 +293,7 @@ class Workflows extends React.Component {
           </thead>
           <tbody>
           {workflows.map(m =>
-            <tr key={m.uuid || 'z'}>
+            <tr key={m.id}>
               <td>
                 <div className="link text-info" onClick={this.onClickRename.bind(this, m)}>
                   <span>{this.renderSeverity(m)}</span>&nbsp;
@@ -305,7 +303,7 @@ class Workflows extends React.Component {
               <td>{m.description}</td>
               <td>{this.renderWfProductType(m)}</td>
               <td>{m.ownerUser}</td>
-              <td>{m.type || 'normal'}</td>
+              <td>{m.type === 'system' ? 'Builtin' : 'Customer'}</td>
               <td>{m.updated ? moment(m.updated).fromNow() : ''}</td>
               <td className="text-right padding-lg-right">
                 <EditIcon className="link margin-md-right" onClick={this.onClickRename.bind(this, m)}/>

@@ -504,3 +504,23 @@ export function extendShape(shape) {
         form: FormConfig[shape.form]
     }
 }
+
+export function productAction2Shape(action, productType) {
+    return {
+      id: action.id,
+      group: productType.name,
+      form: 'productActionForm',
+      img: 'sendim.png',
+      title: action.name,
+      type: 'PRODUCTACTION',
+      initialValues: {
+        field: productType.id,
+        varField: action.id,
+        sentence: action.name
+      },
+      config: {
+          productTypeId: productType.id,
+            actionId: action.id
+      }
+    }
+}

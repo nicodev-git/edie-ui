@@ -33,6 +33,11 @@ import {
   showUserPickModal,
 
   fetchShapes,
+  addShape,
+  updateShape,
+  removeShape,
+  testShapeScript,
+  updateShapeScriptResult,
 
   showWfSettingModal,
   fetchWfSetting,
@@ -82,6 +87,8 @@ export default connect(
     userInfo: state.dashboard.userInfo,
 
     shapes: state.workflow.shapes,
+    shapeScriptResult: state.workflow.shapeScriptResult,
+    shapeScriptStatus: state.workflow.shapeScriptStatus,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
@@ -126,6 +133,11 @@ export default connect(
     showUserPickModal,
 
     fetchShapes,
+    addShape,
+    updateShape,
+    removeShape,
+    testShapeScript,
+    updateShapeScriptResult,
 
     showWfSettingModal,
     fetchWfSetting,

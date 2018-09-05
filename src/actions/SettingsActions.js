@@ -132,16 +132,18 @@ import {
   UPDATE_PRODUCT_VENDOR,
   REMOVE_PRODUCT_VENDOR,
 
+  FETCH_TIMEZONE,
+
   NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
 
-import { ROOT_URL } from './config'
+import { ROOT_URL, SRA_URL } from './config'
 import { encodeUrlParams } from 'shared/Global'
 
 import {fetchEnvVars} from './EnvActions'
-import { getAuthConfig } from './util'
+import { getAuthConfig, getParamsConfig } from './util'
 
 export const fetchSettingMaps = () => {
   if (!window.localStorage.getItem('token')) {
@@ -1168,6 +1170,28 @@ export function testMatchRegex(regex, text, cb) {
       cb && cb(res.data.success)
     }).catch(() => {
       cb && cb()
+    })
+  }
+}
+
+export function fetchTimezone() {
+  return dispatch => {
+    dispatch({type: FETCH_TIMEZONE, data: 0})
+    axios.get(`${SRA_URL}/api/getTimezone`, getAuthConfig()).then(res => {
+      if (res.data.success)
+        dispatch({type: FETCH_TIMEZONE, data: res.data.object})
+    })
+  }
+}
+
+export function saveTimezone(offset) {
+  return dispatch => {
+    axios.get(`${SRA_URL}/api/saveTimezone`, getParamsConfig({
+      offset
+    })).then(res => {
+      if (res.data.success) {
+        dispatch({type: FETCH_TIMEZONE, data: offset})
+      }
     })
   }
 }

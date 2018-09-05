@@ -1,5 +1,4 @@
 import React from 'react'
-import uuid from 'uuid'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -26,10 +25,13 @@ export default class WorkflowAdd extends React.Component {
 
   onSaveName (values) {
     const flow = {
-      ...values,
-      uuid: uuid.v4()
+      ...values
     }
     this.props.addWorkflow(flow)
+    this.onClose()
+  }
+
+  onClose () {
     this.props.history.push('/workflow')
   }
 
@@ -51,6 +53,7 @@ export default class WorkflowAdd extends React.Component {
             allTags={this.getTags()}
             editWf={null}
             onSave={this.onSaveName.bind(this)}
+            onClose={this.onClose.bind(this)}
           />
         </TabPageBody>
       </TabPage>

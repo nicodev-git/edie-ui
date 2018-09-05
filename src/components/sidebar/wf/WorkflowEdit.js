@@ -62,8 +62,12 @@ export default class WorkflowEdit extends React.Component {
       this.props.addWorkflow(flow)
     }
 
-    this.props.history.push('/workflow')
+    this.onClose()
 
+  }
+
+  onClose () {
+    this.props.history.push('/workflow')
   }
 
   getTags () {
@@ -87,6 +91,7 @@ export default class WorkflowEdit extends React.Component {
             allTags={this.getTags()}
             editWf={editWf}
             onSave={this.onSaveName.bind(this)}
+            onClose={this.onClose.bind(this)}
           />
         </TabPageBody>
       </TabPage>

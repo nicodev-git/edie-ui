@@ -6,7 +6,7 @@ import ViewIcon from '@material-ui/icons/Pageview'
 const editButtonStyle = {
   position: 'absolute',
   right: 15,
-  bottom: 8
+  bottom: 4
 }
 
 export default class AppletCard extends React.Component {
@@ -59,7 +59,7 @@ export default class AppletCard extends React.Component {
 
   render () {
     const {
-      name, desc, desc2, desc3, img, color, className,
+      name, descTitle, desc, desc2, desc3, img, color, className,
       rightIcons, verified,
       onClickDelete, onClickEdit, onClickView,
       titleLimit
@@ -79,6 +79,7 @@ export default class AppletCard extends React.Component {
               </div>
             </div>
             <span className={`title ${(desc || '').length > (titleLimit || 45) ? 'title-sm' : ''}`}>
+              {descTitle}{descTitle ? <br/> : ''}
               {desc}&nbsp;
             </span>
             <p className="author">
@@ -91,8 +92,8 @@ export default class AppletCard extends React.Component {
             {name}&nbsp;
             <div style={editButtonStyle}>
               {rightIcons}
-              {onClickView && <ViewIcon size={32} color="white" onClick={this.onClickView.bind(this)}/>}
-              {onClickEdit && <EditIcon size={32} color="white" onClick={this.onClickEdit.bind(this)}/>}
+              {onClickView && <ViewIcon size={32} nativeColor="white" onClick={this.onClickView.bind(this)}/>}
+              {onClickEdit && <EditIcon size={32} nativeColor="white" onClick={this.onClickEdit.bind(this)}/>}
             </div>
           </div>
         </div>

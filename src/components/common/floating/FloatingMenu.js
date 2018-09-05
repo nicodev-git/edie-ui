@@ -34,7 +34,7 @@ export default class FloatingMenu extends React.Component {
 
     renderMenu () {
         const {menuItems} = this.props
-
+        if (!menuItems) return null
         return menuItems.map((item, i) =>
             <FloatingChildButton key={i} item={item} visible={this.state.open}/>
         )

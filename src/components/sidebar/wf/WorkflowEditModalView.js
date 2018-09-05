@@ -7,12 +7,15 @@ import {
   Table, TableBody, TableCell, TableHead, TableRow, Toolbar, Typography
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddCircle'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Tabs from '@material-ui/core/Tabs'
 import {find, findIndex} from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
+import AppletCard from 'components/common/AppletCard'
 
 import {
   FormInput,
@@ -23,7 +26,9 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import {severities, productFilterTypes, findFieldMatchRule} from 'shared/Global'
+import {
+  severities, productFilterTypes, findFieldMatchRule,
+  appletColors as colors} from 'shared/Global'
 
 const cardStyle = {
   minHeight: 250,
@@ -117,6 +122,7 @@ class WorkflowEditModalView extends React.Component {
   renderWfTab() {
     const {
       wfDataItems,
+      onClickAddNewShape,
       onClickDeleteShape,
       onClickAddExtra,
       onClickEditShapeExtra,
@@ -125,76 +131,120 @@ class WorkflowEditModalView extends React.Component {
     } = this.props
     return (
       <div>
-        <div className="margin-lg-top margin-sm-bottom">Workflow``</div>
-        <div style={{width: '100%'}} className="flex-horizontal">
-          <div className="diagram">
-            {this.renderSidebar()}
-          </div>
+        <div className="margin-sm-top margin-sm-bottom hidden">
+          <span className="valign-middle">Workflow</span>
+          <EditIcon className="link valign-middle" onClick={onClickAddNewShape} style={{marginLeft: 170}}/>
+        </div>
+        <div style={{width: '100%'}} className="flex-horizontal margin-lg-top">
           <div className="flex-1">
-            {wfDataItems.map((p, i) =>
-              <div key={i} className="padding-md-left">
-                <div>
-                  {i ? (
-                    <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
-                  ) : null}
-                </div>
-                <div className="relative">
-                  <div>
-                    <div className="inline-block margin-sm-bottom wf-item-container">
-                      {p.prelabel ? (
-                        <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
-                          <div className="text-center">{p.prelabel}</div>
-                        </div>
-                      ) : null}
-                      <div className="wf-item wf-item-orange" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
-                        <div className="text-center">{p.label}</div>
-                      </div>
-
-                      <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
-                        <div className="text-center">{p.value}</div>
-                      </div>
-                      <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
-                        <DeleteIcon/>
-                      </div>
-                    </div>
-                    {p.extraFields.length ? (
-                      <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
-                    ) : null}
-                    {p.extraFields.map((extra, j) =>
-                      [
-                        <div key={j} className="inline-block margin-sm-bottom wf-item-container">
-                          <div className="wf-item">
-                            {extra.name }
-                          </div>
-
-                          <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
-                            {findFieldMatchRule(extra.rule) || extra.rule}
-                          </div>
-
-                          <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
-                            {extra.value || 'Any'}
-                          </div>
-
-                          <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
-                            <DeleteIcon/>
-                          </div>
-                        </div>,
-                        j !== (p.extraFields.length - 1) ? <img key={`img-${j}`} src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null
-                      ]
-                    )}
-                    {p.grokFields.length ? (
-                      <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, p.grokFields, e)}/>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-            )}
+            <ul className="web-applet-cards">
+              {wfDataItems.map((p, i) =>
+                <AppletCard
+                  key={i}
+                  color={colors[i % colors.length]}
+                  name={p.shape.title}
+                  desc={p.shape.description || p.shape.title}
+                  img={`/images/${p.shape.img}`}
+                  onClickEdit={e => onClickEditShape(i, false, e)}
+                />
+              )}
+            </ul>
             {this.renderButtons()}
           </div>
         </div>
+
+        <FloatingMenu onClickMain={onClickAddNewShape}/>
       </div>
     )
   }
+
+  // renderWfTab2() {
+  //   const {
+  //     wfDataItems,
+  //     onClickAddNewShape,
+  //     onClickDeleteShape,
+  //     onClickAddExtra,
+  //     onClickEditShapeExtra,
+  //     onClickEditShape,
+  //     onClickDeleteShapeExtra
+  //   } = this.props
+  //   return (
+  //     <div>
+  //       <div className="margin-sm-top margin-sm-bottom hidden">
+  //         <span className="valign-middle">Workflow</span>
+  //         <EditIcon className="link valign-middle" onClick={onClickAddNewShape} style={{marginLeft: 170}}/>
+  //       </div>
+  //       <div style={{width: '100%'}} className="flex-horizontal margin-lg-top">
+  //         {/*<div className="diagram">*/}
+  //         {/*{this.renderSidebar()}*/}
+  //         {/*</div>*/}
+  //         <div className="flex-1">
+  //           {wfDataItems.map((p, i) =>
+  //             <div key={i} className="padding-md-left">
+  //               <div>
+  //                 {i ? (
+  //                   <img src="/images/arrow-down.png" style={{marginTop: 7}} alt=""/>
+  //                 ) : null}
+  //               </div>
+  //               <div className="relative">
+  //                 <div>
+  //                   <div className="inline-block margin-sm-bottom wf-item-container">
+  //                     {p.prelabel ? (
+  //                       <div className="wf-item" onClick={(e) => onClickEditShape(i, p.prelabelKey, e)}>
+  //                         <div className="text-center">{p.prelabel}</div>
+  //                       </div>
+  //                     ) : null}
+  //                     <div className="wf-item wf-item-orange" onClick={(e) => onClickEditShape(i, p.labelKey, e)}>
+  //                       <div className="text-center">{p.label}</div>
+  //                     </div>
+  //
+  //                     <div className="wf-item" onClick={(e) => onClickEditShape(i, p.valueKey, e)}>
+  //                       <div className="text-center">{p.value}</div>
+  //                     </div>
+  //                     <div className="wf-item-delete" onClick={() => onClickDeleteShape(i)}>
+  //                       <DeleteIcon/>
+  //                     </div>
+  //                   </div>
+  //                   {p.extraFields.length ? (
+  //                     <img src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/>
+  //                   ) : null}
+  //                   {p.extraFields.map((extra, j) =>
+  //                     [
+  //                       <div key={j} className="inline-block margin-sm-bottom wf-item-container">
+  //                         <div className="wf-item">
+  //                           {extra.name }
+  //                         </div>
+  //
+  //                         <div className="wf-item wf-item-orange" onClick={e => onClickEditShapeExtra(i, extra.name, 'rule', e)}>
+  //                           {findFieldMatchRule(extra.rule) || extra.rule}
+  //                         </div>
+  //
+  //                         <div className="wf-item" onClick={e => onClickEditShapeExtra(i, extra.name, 'value', e)}>
+  //                           {this.renderGrokFieldValue(extra)}
+  //                         </div>
+  //
+  //                         <div className="wf-item-delete" onClick={() => onClickDeleteShapeExtra(i, extra.name)}>
+  //                           <DeleteIcon/>
+  //                         </div>
+  //                       </div>,
+  //                       j !== (p.extraFields.length - 1) ? <img key={`img-${j}`} src="/images/amp.png" width={16} className="margin-sm valign-middle" alt=""/> : null
+  //                     ]
+  //                   )}
+  //                   {p.grokFields.length ? (
+  //                     <AddIcon className="link valign-middle" onClick={(e) => onClickAddExtra(i, p.grokFields, e)}/>
+  //                   ) : null}
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           )}
+  //           {this.renderButtons()}
+  //         </div>
+  //       </div>
+  //
+  //       <FloatingMenu onClickMain={onClickAddNewShape}/>
+  //     </div>
+  //   )
+  // }
 
   renderFilterTab() {
     return (
@@ -209,7 +259,8 @@ class WorkflowEditModalView extends React.Component {
 
   renderGeneralTab() {
     const {
-      groupOptions, typeOptions, conditionOptions
+      groupOptions, typeOptions, conditionOptions,
+      resetVisible, onClickReset
     } = this.props
     return (
       <div>
@@ -240,6 +291,7 @@ class WorkflowEditModalView extends React.Component {
               <Field name="useCorrelation" component={FormCheckbox} label="Use correlation by"/>
               <Field name="correlations" component={FormMultiSelect} options={conditionOptions} placeholder="None"/>
             </div>
+            {resetVisible && <div className="padding-md"><Button variant="raised" onClick={onClickReset}>Reset</Button></div>}
           </div>
         </CardPanel>
         {this.renderButtons()}

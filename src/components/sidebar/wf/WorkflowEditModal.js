@@ -8,11 +8,12 @@ import WorkflowEditModalView from './WorkflowEditModalView'
 import WorkflowEditModalView1 from './WorkflowEditModalView1'
 import DiagramObjectModal from 'components/sidebar/wf/diagram/DiagramObjectModal'
 import {drawFlows} from "components/sidebar/wf/DiagramLoader"
-import {extendShape} from 'components/sidebar/wf/diagram/DiagramItems'
+import {extendShape, productAction2Shape} from 'components/sidebar/wf/diagram/DiagramItems'
 import {DiagramTypes} from 'shared/Global'
 import BrainCellModal from 'components/sidebar/settings/braincell/BrainCellModal'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import GrokFieldModal from './GrokFieldModal'
+import ShapeListModal from './ShapeListModal'
 
 const typeOptions = [{
   label: 'Customer', value: 'normal'
@@ -45,19 +46,7 @@ class WorkflowEditModal extends React.Component {
     this.props.productTypes.forEach(p => {
       const actions = p.actions || []
       actions.forEach(action => {
-        shapes.push({
-          id: p.id,
-          group: p.name,
-          form: 'productActionForm',
-          img: 'sendim.png',
-          title: action.name,
-          type: 'PRODUCTACTION',
-          initialValues: {
-            field: p.id,
-            varField: action.id,
-            sentence: action.name
-          }
-        })
+        shapes.push(productAction2Shape(action, p))
       })
     })
 
@@ -67,6 +56,7 @@ class WorkflowEditModal extends React.Component {
 
     const wfData = drawFlows((props.editWf || {}).flowItems || [], shapes)
 
+    console.log(wfData)
     this.state = {
       permitterUsers: props.editWf ? (props.editWf.permitterUsers || []) : [],
       tab: 'general',
@@ -93,7 +83,9 @@ class WorkflowEditModal extends React.Component {
       loading: false,
       editValues: null,
 
-      advancedModalOpen: false
+      advancedModalOpen: false,
+
+      shapListModal: false
     }
   }
 
@@ -120,9 +112,9 @@ class WorkflowEditModal extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {allValues} = this.props
-    if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
-      this.props.change('calledDirect', true)
-    }
+    // if (prevProps.allValues && prevProps.allValues.type !== 'system' && this.props.allValues.type === 'system') {
+    //   this.props.change('calledDirect', true)
+    // }
 
     if (allValues) {
       if (allValues.openIncident && !allValues.incidentTemplateId &&
@@ -135,6 +127,38 @@ class WorkflowEditModal extends React.Component {
   }
 
   getWfDataItems() {
+    const {shapes, productTypes} = this.props
+    const wfDataItems = this.state.wfData.objects.map(p => {
+      const {productTypeId, actionId} = p.config
+      const {uiprops, shapeId} = p.data
+      const {type} = uiprops
+      if (type === 'CUSTOMSHAPE') {
+        const shape = find(shapes, {id: shapeId})
+        return {
+          shape,
+          data: p
+        }
+      } else if (type === 'PRODUCTACTION') {
+        const productType = find(productTypes, {id: productTypeId})
+        const productAction = find(productType.actions, {id: actionId})
+        const shape = productAction2Shape(productAction, productType)
+        return {
+          shape,
+          data: p
+        }
+      } else {
+        const shape = find(shapes, {type})
+        return {
+          shape,
+          data: p
+        }
+      }
+      return p
+    })
+    return wfDataItems
+  }
+
+  getWfDataItems2() {
     const {productTypes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
       const {sentence, name, variable, condition, fieldType, field, uiprops,
@@ -224,10 +248,17 @@ class WorkflowEditModal extends React.Component {
 
           itemValueKey = 'variable'
           break
+        case 'CUSTOMSHAPE':
+          itemLabel = p.title || p.name
+          itemValue = sentence
+
+          itemValueKey = 'sentence'
+          break
         case 'TIMELAST':
           itemLabel = type
           itemValue = `${sentence}min`
           break
+        case 'TIMEIN':
         default:
           itemLabel = type
           itemValue = sentence || name
@@ -254,19 +285,7 @@ class WorkflowEditModal extends React.Component {
     productTypes.forEach(p => {
       const actions = p.actions || []
       actions.forEach(action => {
-        typeShapes.push({
-          id: p.id,
-          group: p.name,
-          form: 'productActionForm',
-          img: 'sendim.png',
-          title: action.name,
-          type: 'PRODUCTACTION',
-          initialValues: {
-            field: p.id,
-            varField: action.id,
-            sentence: action.name
-          }
-        })
+        typeShapes.push(productAction2Shape(action, p))
       })
     })
 
@@ -295,6 +314,10 @@ class WorkflowEditModal extends React.Component {
       if (tagIndex < 0) entity.tags.push(SCHEDULED)
     } else {
       if (tagIndex >= 0) entity.tags.splice(tagIndex, 1)
+    }
+
+    if (entity.id && entity.uuid) {
+      entity.type = 'normal'
     }
 
     onSave && onSave(entity)
@@ -355,7 +378,7 @@ class WorkflowEditModal extends React.Component {
 
     this.setState({
       shapeModalOpen: false,
-      shapeAnchorEl: e.target
+      // shapeAnchorEl: e.target
     }, () => {
       if (shape.type === 'PRODUCTACTION') {
         this.onSaveShape('', shape.initialValues, this.buildObjectConfig(shape))
@@ -737,6 +760,14 @@ class WorkflowEditModal extends React.Component {
 
   ////////////////////////////////////////////////////
 
+  getMainMenuItems () {
+    return [{
+
+    }]
+  }
+
+  ////////////////////////////////////////////////////
+
   buildObjectConfig (shape) {
     const tpl = extendShape(shape)
     const w = tpl.w || 120
@@ -761,6 +792,39 @@ class WorkflowEditModal extends React.Component {
   }
 
   ////////////////////////////////////////////////////
+
+  getResetVisible () {
+    const {editWf} = this.props
+    return editWf && !!editWf.id && !!editWf.uuid
+  }
+
+  onClickReset () {
+    const {editWf} = this.props
+    if (!window.confirm('Click OK to reset')) return
+    this.props.resetCustomerFlow(editWf)
+    this.onClickClose()
+  }
+
+  ////////////////////////////////////////////////////
+
+  onClickAddNewShape () {
+    this.setState({
+      shapListModal: true
+    })
+  }
+
+  onSaveNewShape () {
+
+  }
+
+  onCloseNewShape () {
+    this.setState({
+      shapListModal: false
+    })
+  }
+
+  ////////////////////////////////////////////////////
+
   renderGrokFieldModal () {
     if (!this.state.grokFieldModalOpen) return null
     const {editGrokField, editGrokFieldKey} = this.state
@@ -809,6 +873,33 @@ class WorkflowEditModal extends React.Component {
     )
   }
 
+  renderShapeListModal (shapes) {
+    if (!this.state.shapListModal) return null
+    const {addShape, updateShape, removeShape, testShapeScript,
+      shapeScriptResult, updateShapeScriptResult, shapeScriptStatus,
+      devices} = this.props
+    return (
+      <ShapeListModal
+        shapes={shapes}
+        onSave={this.onSaveNewShape.bind(this)}
+        onClose={this.onCloseNewShape.bind(this)}
+        onClickShape={this.onClickShape.bind(this)}
+
+        addShape={addShape}
+        updateShape={updateShape}
+        removeShape={removeShape}
+        testShapeScript={testShapeScript}
+        applyDeviceIds={this.state.applyDeviceIds}
+
+        shapeScriptResult={shapeScriptResult}
+        updateShapeScriptResult={updateShapeScriptResult}
+        shapeScriptStatus={shapeScriptStatus}
+
+        devices={devices}
+      />
+    )
+  }
+
   renderLoader () {
     if (!this.state.loading) return null
     return (
@@ -819,7 +910,6 @@ class WorkflowEditModal extends React.Component {
   renderShapeModal() {
     if (!this.state.shapeModalOpen) return null
 
-    // if (objectConfig.data.uuid) return null
     const {shape, editShape, wfData, keyField} = this.state
     const {objects} = wfData
 
@@ -827,7 +917,15 @@ class WorkflowEditModal extends React.Component {
     const tpl = extendShape(shape)
     const objectConfig = editShape || this.buildObjectConfig(shape)
 
-    const contents = tpl.form
+    const contents = tpl.form || []
+    if (shape.type === 'CUSTOMSHAPE') {
+      shape.fields.forEach(field => {
+        contents.push({
+          key: `mapping.${field.name}`,
+          name: field.name
+        })
+      })
+    }
     const initialValues = editShape ? {
       ...editShape.data
     } : (shape.initialValues || {})
@@ -841,10 +939,11 @@ class WorkflowEditModal extends React.Component {
           })
         } else {
           initialValues[p.key] = p.default
-
         }
       })
+      initialValues.title = shape.title
     }
+    initialValues.shapeId = shape.id
 
     return (
       <DiagramObjectModal
@@ -861,8 +960,6 @@ class WorkflowEditModal extends React.Component {
         onSaveDiagramObject={this.onSaveShape.bind(this)}
 
         commands={[]}
-        noModal
-        embedded
         keyFieldMode={keyField}
       />
     )
@@ -871,6 +968,7 @@ class WorkflowEditModal extends React.Component {
   render() {
     const {handleSubmit, groups, newView} = this.props
     const ModalView = newView ? WorkflowEditModalView1 : WorkflowEditModalView
+    const shapes = this.getMergedShapes()
     return (
       <ModalView
         {...this.props}
@@ -894,13 +992,15 @@ class WorkflowEditModal extends React.Component {
 
         editShape={this.state.editShape}
         shapeAnchorEl={this.state.shapeAnchorEl}
-        shapes={this.getMergedShapes()}
+        shapes={shapes}
         wfDataItems={this.getWfDataItems()}
         onClickAddShape={this.onClickAddShape.bind(this)}
         onCloseShapeMenu={this.onCloseShapeMenu.bind(this)}
         onClickShape={this.onClickShape.bind(this)}
         onClickDeleteShape={this.onClickDeleteShape.bind(this)}
         onClickEditShape={this.onClickEditShape.bind(this)}
+
+        onClickAddNewShape={this.onClickAddNewShape.bind(this)}
 
         onClickAddExtra={this.onClickAddExtra.bind(this)}
         onClickEditShapeExtra={this.onClickEditShapeExtra.bind(this)}
@@ -924,9 +1024,15 @@ class WorkflowEditModal extends React.Component {
         applyDeviceIds={this.state.applyDeviceIds}
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
         onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
+
+        resetVisible={this.getResetVisible()}
+        onClickReset={this.onClickReset.bind(this)}
+
+        mainMenuItems={this.getMainMenuItems()}
       >
         {this.renderUserPickModal()}
         {this.renderBraincellModal()}
+        {this.renderShapeListModal(shapes)}
         {this.renderLoader()}
       </ModalView>
     )

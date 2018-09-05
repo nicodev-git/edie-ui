@@ -50,6 +50,12 @@ import {
   UPDATE_TEST_CASE,
   REMOVE_TEST_CASE,
 
+  ADD_SHAPE,
+  UPDATE_SHAPE,
+  REMOVE_SHAPE,
+  UPDATE_SHAPE_SCRIPT_RESULT,
+  UPDATE_SHAPE_SCRIPT_STATUS,
+
   FETCH_TEST_INCIDENTS
 } from 'actions/types'
 
@@ -69,7 +75,9 @@ const initialState = {
 
   testGroups: [],
   testCases: [],
-  testIncidents: []
+  testIncidents: [],
+
+  shapeScriptResult: []
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -95,16 +103,16 @@ export default function (state = initialState, action) {
       return {...state, workflows: [...state.workflows, action.data]}
     case UPDATE_WORKFLOW: {
       let {selectedWorkflow} = state
-      if (action.data.uuid === selectedWorkflow.uuid) selectedWorkflow = action.data
+      if (action.data.id === selectedWorkflow.id) selectedWorkflow = action.data
       return {
         ...state,
-        workflows: state.workflows.map(p => p.uuid === action.data.uuid ? action.data : p),
+        workflows: state.workflows.map(p => p.id === action.data.id ? action.data : p),
         selectedWorkflow
       }
     }
 
     case REMOVE_WORKFLOW:
-      return {...state, workflows: state.workflows.filter(p => p.uuid !== action.data.uuid)}
+      return {...state, workflows: state.workflows.filter(p => p.id !== action.data.id)}
 
     case UPDATE_WORKFLOW_SAVE_STATE:
       return {...state, workflowSaving: action.data}
@@ -138,6 +146,17 @@ export default function (state = initialState, action) {
 
     case FETCH_SHAPES:
       return {...state, shapes: action.data}
+
+    case ADD_SHAPE:
+      return { ...state, shapes: [...state.shapes, action.data] }
+    case UPDATE_SHAPE:
+      return { ...state, shapes: state.shapes.map(p => p.id === action.data.id ? action.data : p)}
+    case REMOVE_SHAPE:
+      return { ...state, shapes: state.shapes.filter(p => p.id !== action.data.id)}
+    case UPDATE_SHAPE_SCRIPT_RESULT:
+      return { ...state, shapeScriptResult: action.data }
+    case UPDATE_SHAPE_SCRIPT_STATUS:
+      return { ...state, shapeScriptStatus: action.data }
 
     case SHOW_WF_SETTING_MODAL:
       return {...state, wfSettingModalOpen: action.visible, editWfSetting: action.data}
@@ -175,6 +194,7 @@ export default function (state = initialState, action) {
       return { ...state, testCases: state.testCases.filter(p => p.id !== action.data.id) }
     case FETCH_TEST_INCIDENTS:
       return { ...state, testIncidents: action.data }
+
     default:
       return state
   }

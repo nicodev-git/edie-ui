@@ -47,6 +47,7 @@ export default class General extends React.Component {
   componentWillMount () {
     this.props.fetchEnvVars()
     this.props.fetchRoles()
+    this.props.fetchTimezone()
   }
 
   onClickSync () {

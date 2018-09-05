@@ -38,6 +38,8 @@ import {
 
   FETCH_GLOBAL_VARS,
   FETCH_SHAPES,
+  ADD_SHAPE,
+  UPDATE_SHAPE,
 
   SHOW_USER_PICK_MODAL,
   SHOW_WF_SETTING_MODAL,
@@ -60,7 +62,10 @@ import {
   UPDATE_TEST_CASE,
   REMOVE_TEST_CASE,
 
-  FETCH_TEST_INCIDENTS
+  FETCH_TEST_INCIDENTS,
+  REMOVE_SHAPE,
+  UPDATE_SHAPE_SCRIPT_RESULT,
+  UPDATE_SHAPE_SCRIPT_STATUS
 } from './types'
 import { sortArray, DiagramTypes } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -73,9 +78,6 @@ import {
   updateDiagramWorkflow,
   updateDiagramLine
 } from './DiagramActions'
-
-import uuid from 'uuid'
-
 
 export const openDeviceWfDiagramModal = (stateId, diagram, flow) => {
   return (dispatch) => {
@@ -168,7 +170,7 @@ const orderSteps = (flow) => {
     ids.forEach(id => {
       if (!targets.includes(id)) targets.push(id)
     })
-    flowIds.push(item.uuid)
+    flowIds.push(item.id)
   })
 
   if (targets.length >= flowIds.length) return flow
@@ -292,7 +294,6 @@ export const showWfTaskModal = (visible, parentStateId, parentFlow, stateId, obj
         const flow = {
           name: 'sub',
           description: '',
-          uuid: uuid.v4(),
           flowItems: []
         }
 
@@ -303,7 +304,7 @@ export const showWfTaskModal = (visible, parentStateId, parentFlow, stateId, obj
               // dispatch(openDiagramModal(stateId, JSON.stringify(data), flow))
               // dispatch({type: SHOW_WF_TASK_MODAL, visible})
               dispatch(closeDeviceWfDiagramModal())
-              history.push(`/workflow/${flow.uuid}/edit`)
+              history.push(`/workflow/${flow.id}/edit`)
             }))
           } else {
             console.log('Flow add failed.')
@@ -818,8 +819,32 @@ export function showUserPickModal(visible) {
 
 export function fetchShapes() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getAllShapes`).then(res => {
+    axios.get(`${ROOT_URL}/shape/getAll`).then(res => {
       dispatch({type: FETCH_SHAPES, data: res.data || []})
+    })
+  }
+}
+
+export function addShape (entity) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/shape`, entity).then(res => {
+      if (res.data) dispatch({type: ADD_SHAPE, data: res.data})
+    })
+  }
+}
+
+export function updateShape (entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/shape/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_SHAPE, data: res.data})
+    })
+  }
+}
+
+export function removeShape(entity) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/shape/${entity.id}`).then(res => {
+      if (res.data) dispatch({type: REMOVE_SHAPE, data: entity})
     })
   }
 }
@@ -994,5 +1019,34 @@ export const fetchTestIncidents = () => {
     axios.get(`${ROOT_URL}/getTestQueueList`).then(res => {
       dispatch({type: FETCH_TEST_INCIDENTS, data: res.data})
     })
+  }
+}
+
+export const resetCustomerFlow = (data) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/resetCustomerFlow`, data).then(res => {
+      if (res.data) {
+        dispatch({type: UPDATE_WORKFLOW, data: res.data})
+      }
+    }).catch(() => {
+    })
+  }
+}
+
+export const testShapeScript = (data) => {
+  return dispatch => {
+    dispatch(updateShapeScriptResult([]))
+    dispatch({type: UPDATE_SHAPE_SCRIPT_STATUS, data: 'loading'})
+    axios.post(`${ROOT_URL}/shape/testScript`, data).then(res => {
+      dispatch(updateShapeScriptResult(res.data.object || []))
+    }).finally(() => {
+      dispatch({type: UPDATE_SHAPE_SCRIPT_STATUS, data: ''})
+    })
+  }
+}
+
+export const updateShapeScriptResult = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SHAPE_SCRIPT_RESULT, data})
   }
 }

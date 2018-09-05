@@ -18,22 +18,19 @@ export default class GrokFieldModalView extends Component {
     const {values, onClickAddVal, onClickDeleteVal} = this.props
     return (
       <div>
-        <table className="table table-hover">
-          <thead>
-          <tr>
-            <td><AddIcon className="link" onClick={onClickAddVal}/></td>
-            <td></td>
-          </tr>
-          </thead>
-          <tbody>
-          {values.map((p, i) =>
-            <tr key={i}>
-              <td>{p}</td>
-              <td><DeleteIcon className="link" onClick={() => onClickDeleteVal(i)}/></td>
-            </tr>
-          )}
-          </tbody>
-        </table>
+        <AddIcon className="link" onClick={onClickAddVal}/>
+        <div style={{height: 180, overflow: 'auto'}}>
+          <table className="table table-hover">
+            <tbody>
+            {values.map((p, i) =>
+              <tr key={i}>
+                <td>{p}</td>
+                <td><DeleteIcon className="link" onClick={() => onClickDeleteVal(i)}/></td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
