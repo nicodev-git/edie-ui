@@ -68,6 +68,7 @@ class WorkflowEditModal extends React.Component {
 
     const wfData = drawFlows((props.editWf || {}).flowItems || [], shapes)
 
+    console.log(wfData)
     this.state = {
       permitterUsers: props.editWf ? (props.editWf.permitterUsers || []) : [],
       tab: 'general',
@@ -139,9 +140,17 @@ class WorkflowEditModal extends React.Component {
 
   getWfDataItems() {
     const wfDataItems = this.state.wfData.objects.map(p => {
+      const {uiprops} = p.data
+      const {type} = uiprops
+      if (type === 'CUSTOMSHAPE') {
 
+      } else if (type === 'PRODUCTACTION') {
+
+      } else {
+
+      }
+      return p
     })
-
     return wfDataItems
   }
 
