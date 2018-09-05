@@ -1,5 +1,6 @@
 import React from 'react'
-import {Button} from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -18,8 +19,21 @@ export default class OutputObjects extends React.Component {
     })
   }
 
+  onClickEdit (object) {
+    const name = prompt('Please type name', object.name)
+    if (!name) return
+    this.props.updateOutputObject({
+      ...object,
+      name
+    })
+  }
+
+  onClickDelete () {
+
+  }
+
   renderTable () {
-    const objects = []
+    const objects = this.props.outputObjects
 
     return (
       <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
@@ -34,7 +48,10 @@ export default class OutputObjects extends React.Component {
           {objects.map(m =>
             <tr key={m.id}>
               <td>{m.name}</td>
-              <td></td>
+              <td>
+                <EditIcon onClick={this.onClickEdit.bind(this, m)}/>
+                <DeleteIcon onClick={this.onClickDelete.bind(this)}/>
+              </td>
             </tr>
           )}
           </tbody>

@@ -1067,7 +1067,7 @@ export const fetchOutputObjects = () => {
 
 export const addOutputObject = (entity) => {
   return dispatch => {
-    axios.post(`${ROOT_URL}/outputobject`).then(res => {
+    axios.post(`${ROOT_URL}/outputobject`, entity).then(res => {
       if (res.data) dispatch({type: ADD_OUTPUT_OBJECT, data: res.data})
     })
   }
@@ -1083,7 +1083,7 @@ export function updateOutputObject (entity) {
 
 export function removeOutputObject (entity) {
   return dispatch => {
-    axios.delete(`${ROOT_URL}/outputobject/${entity.id}`, entity).then(res => {
+    axios.delete(`${ROOT_URL}/outputobject/${entity.id}`).then(res => {
       if (res.data) dispatch({type: REMOVE_OUTPUT_OBJECT, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
