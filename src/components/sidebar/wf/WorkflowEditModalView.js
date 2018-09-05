@@ -72,9 +72,6 @@ const toolbarStyles = theme => ({
 })
 
 class WorkflowEditModalView extends React.Component {
-  onClickChangeRoute () {
-    window.location.pathname = 'shapes'
-  }
   renderSidebar () {
     const { active, shapes, onClickSidebarGroup, onClickShape } = this.props
     let groups = []
@@ -156,7 +153,7 @@ class WorkflowEditModalView extends React.Component {
           </div>
         </div>
 
-        <FloatingMenu onClickMain={this.onClickChangeRoute}/>
+        <FloatingMenu onClickMain={onClickAddNewShape}/>
       </div>
     )
   }
