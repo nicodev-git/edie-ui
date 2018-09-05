@@ -1,12 +1,12 @@
 import React from 'react'
-import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
-import {showPrompt} from 'components/common/Alert'
+import {showPrompt, showConfirm} from 'components/common/Alert'
+import InlineEdit from 'components/common/ReactEditInline'
 
 export default class OutputObjects extends React.Component {
   componentWillMount () {
@@ -21,18 +21,19 @@ export default class OutputObjects extends React.Component {
     })
   }
 
-  onClickEdit (object) {
-    const name = prompt('Please type name', object.name)
-    if (!name) return
-    this.props.updateOutputObject({
-      ...object,
-      name
+  onClickDelete (object) {
+    showConfirm('Click OK to remove', btn => {
+      if (btn != 'ok') return
+      this.props.removeOutputObject(object)
     })
   }
 
-  onClickDelete (object) {
-    if (!window.confirm('Click OK to remove')) return
-    this.props.removeOutputObject(object)
+  onChangeName (object, values) {
+    if (object.name === values.name) return
+    this.props.updateOutputObject({
+      ...object,
+      ...values
+    })
   }
 
   renderTable () {
@@ -49,9 +50,19 @@ export default class OutputObjects extends React.Component {
           <tbody>
           {objects.map(m =>
             <tr key={m.id}>
-              <td>{m.name}</td>
               <td>
-                <EditIcon onClick={this.onClickEdit.bind(this, m)}/>
+                <InlineEdit
+                  activeClassName="editing"
+                  text={m.name || '\u00a0'}
+                  paramName="name"
+                  change={this.onChangeName.bind(this, m)}
+                  style={{
+                    width: '100%',
+                    display: 'block'
+                  }}
+                />
+              </td>
+              <td>
                 <DeleteIcon onClick={this.onClickDelete.bind(this, m)}/>
               </td>
             </tr>

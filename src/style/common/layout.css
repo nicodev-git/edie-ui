@@ -600,3 +600,7 @@ input:-webkit-autofill {
     font-size: 16px;
     color: #737373;
 }
+
+input.editing {
+    font-size: 14px;
+}
