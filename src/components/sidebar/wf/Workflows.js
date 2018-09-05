@@ -250,6 +250,12 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
+  onClickOutputObjects () {
+    this.props.history.push('/workflow/outputs')
+  }
+
+  ////////////////////////////////////////////////////////////////
+
   renderSeverity (wf) {
     const cell = this.getIncidentCell(wf)
     if (!cell) return null
@@ -378,6 +384,7 @@ class Workflows extends React.Component {
         <MenuItem onClick={this.onClickFlowGroup.bind(this)}>Flow Group</MenuItem>
         <MenuItem onClick={this.onClickGlobalVars.bind(this)}>Global Variables</MenuItem>
         <MenuItem onClick={this.onClickSettings.bind(this)}>Settings</MenuItem>
+        <MenuItem onClick={this.onClickOutputObjects.bind(this)}>Output Objects</MenuItem>
       </Menu>
     )
   }
