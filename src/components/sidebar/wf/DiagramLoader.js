@@ -46,11 +46,13 @@ export function drawFlows(flows, items) {
   data.objects = flows.map((f, i) => {
     const {type} = f.uiprops
 
-    const config = {type}
+    const filter = {type}
     if (type === 'PRODUCTACTION') {
-
+      filter.config = {
+        actionId: f.varField
+      }
     }
-    let itemIndex = findIndex(items, {config})
+    let itemIndex = findIndex(items, filter)
     if (itemIndex < 0) itemIndex = 0
 
     const typeConfig = items[itemIndex] || {}
