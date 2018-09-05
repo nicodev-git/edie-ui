@@ -139,15 +139,24 @@ class WorkflowEditModal extends React.Component {
   }
 
   getWfDataItems() {
+    const {shapes} = this.props
     const wfDataItems = this.state.wfData.objects.map(p => {
-      const {uiprops} = p.data
+      const {uiprops, shapeId} = p.data
       const {type} = uiprops
       if (type === 'CUSTOMSHAPE') {
-
+        const shape = find(shapes, {id: shapeId})
+        return {
+          template: shape,
+          data: p
+        }
       } else if (type === 'PRODUCTACTION') {
 
       } else {
-
+        const shape = find(shapes, {type})
+        return {
+          template: shape,
+          data: p
+        }
       }
       return p
     })
