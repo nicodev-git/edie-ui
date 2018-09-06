@@ -135,18 +135,21 @@ class WorkflowEditModalView extends React.Component {
         </div>
         <div style={{width: '100%'}} className="flex-horizontal margin-lg-top">
           <div className="flex-1">
-            <ul className="web-applet-cards">
+            <div className="web-applet-cards">
               {wfDataItems.map((p, i) =>
-                <AppletCard
-                  key={i}
-                  color={colors[i % colors.length]}
-                  name={p.shape.title}
-                  desc={p.shape.description || p.shape.title}
-                  img={`/images/${p.shape.img}`}
-                  onClickEdit={e => onClickEditShape(i, false, e)}
-                />
+                [
+                  <AppletCard
+                    key={i}
+                    color={colors[i % colors.length]}
+                    name={p.shape.title}
+                    desc={p.shape.description || p.shape.title}
+                    img={`/images/${p.shape.img}`}
+                    onClickEdit={e => onClickEditShape(i, false, e)}
+                  />,
+                  i < (wfDataItems.length - 1) ? <img key={`img-${i}`} src="/images/right-arrow.png"/> : null
+                ]
               )}
-            </ul>
+            </div>
             {this.renderButtons()}
           </div>
         </div>
