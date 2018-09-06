@@ -159,7 +159,7 @@ export default class ProductTypeModalView extends React.Component {
             </div>
           </CardPanel>
 
-          <CardPanel title="Grok Fields" tools={<AddIcon className="link" onClick={this.onClickAddEmptyField('addedGrok')}/>}>
+          <CardPanel title="Fields" tools={<AddIcon className="link" onClick={this.onClickAddEmptyField('addedGrok')}/>}>
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <Table>
                 <TableHead>
