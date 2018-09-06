@@ -82,6 +82,7 @@ class WorkflowEditModal extends React.Component {
 
       loading: false,
       editValues: null,
+      brainCellModalOpen: false,
 
       advancedModalOpen: false,
 
@@ -121,7 +122,11 @@ class WorkflowEditModal extends React.Component {
       if (allValues.openIncident && !allValues.incidentTemplateId &&
         (prevProps.allValues && !prevProps.allValues.openIncident)) {
         setTimeout(() => {
-          this.props.showBrainCellModal(true, null)
+          this.setState({
+            brainCellModalOpen: true,
+            editBrainCell: null
+          })
+          // this.props.showBrainCellModal(true, null)
         }, 1)
       }
     }
@@ -711,7 +716,11 @@ class WorkflowEditModal extends React.Component {
     if (!incidentTemplateId) return null
     const entity = brainCells.filter(p => p.id === incidentTemplateId)[0]
     if (!entity) return
-    this.props.showBrainCellModal(true, entity)
+    // this.props.showBrainCellModal(true, entity)
+    this.setState({
+      brainCellModalOpen: true,
+      editBrainCell: entity
+    })
   }
 
   getTags () {
@@ -742,7 +751,10 @@ class WorkflowEditModal extends React.Component {
   }
 
   onCloseBraincellModal () {
-    this.props.showBrainCellModal(false)
+    // this.props.showBrainCellModal(false)
+    this.setState({
+      brainCellModalOpen: false
+    })
   }
 
   ////////////////////////////////////////////////////
@@ -852,7 +864,7 @@ class WorkflowEditModal extends React.Component {
   }
 
   renderBraincellModal () {
-    if (!this.props.brainCellModalOpen) return null
+    if (!this.state.brainCellModalOpen) return null
     return (
       <BrainCellModal
         type={this.state.brainCellType}
@@ -861,7 +873,7 @@ class WorkflowEditModal extends React.Component {
         onClose={this.onCloseBraincellModal.bind(this)}
 
         brainCells={this.props.brainCells}
-        editBrainCell={this.props.editBrainCell}
+        editBrainCell={this.state.editBrainCell}
 
         showScriptModal={this.props.showScriptModal}
         showGrokModal={this.props.showGrokModal}
