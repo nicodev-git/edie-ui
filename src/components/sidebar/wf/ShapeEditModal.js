@@ -5,7 +5,7 @@ import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 import ShapeEditModalView from './ShapeEditModalView'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import {showPrompt} from 'components/common/Alert'
+import {showPrompt, showConfirm} from 'components/common/Alert'
 
 class ShapeEditModal extends Component {
   constructor(props) {
@@ -23,11 +23,12 @@ class ShapeEditModal extends Component {
   }
   handleFormSubmit (values) {
     const {editShape} = this.props
-    const {fields} = this.state
+    const {fields, outputVars} = this.state
     const entity = {
       ...editShape,
       ...values,
-      fields
+      fields,
+      outputVars
     }
 
     if (!entity.title) return alert('Please input name')
@@ -107,11 +108,21 @@ class ShapeEditModal extends Component {
   //////////////////////////////////////////////////////////////
 
   onClickAddVar () {
-    const {outputVars} = this.props
+    const {outputVars} = this.state
     showPrompt('Please type variable name', '', name => {
       if (!name) return
       this.setState({
         outputVars: [...outputVars, name]
+      })
+    })
+  }
+
+  onClickDeleteVar (index) {
+    const {outputVars} = this.state
+    showConfirm('Click OK to remove', btn => {
+      if (btn !== 'ok') return
+      this.setState({
+        outputVars: outputVars.filter((p, i) => i !== index)
       })
     })
   }
@@ -140,7 +151,7 @@ class ShapeEditModal extends Component {
   render () {
     const {
       handleSubmit, shapeScriptResult, shapeScriptStatus, servers,
-      outputObjects, outputVars
+      outputObjects
     } = this.props
     return (
       <ShapeEditModalView
@@ -159,8 +170,9 @@ class ShapeEditModal extends Component {
         servers={this.getServers()}
 
         outputObjects={outputObjects}
-        outputVars={outputVars}
+        outputVars={this.state.outputVars}
         onClickAddVar={this.onClickAddVar.bind(this)}
+        onClickDeleteVar={this.onClickDeleteVar.bind(this)}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}

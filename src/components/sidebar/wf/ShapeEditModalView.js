@@ -123,7 +123,7 @@ class ShapeEditModalView extends Component {
   }
 
   renderOutput () {
-    const {outputObjects, outputVars, onClickAddVar} = this.props
+    const {outputObjects, outputVars, onClickAddVar, onClickDeleteVar} = this.props
     return (
       <CardPanel title="Output" tools={<AddIcon className="link" onClick={onClickAddVar}/>}>
         <Field
@@ -135,7 +135,7 @@ class ShapeEditModalView extends Component {
           <table className="table table-hover">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Var</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -143,7 +143,7 @@ class ShapeEditModalView extends Component {
             {outputVars.map((p, i) =>
               <tr key={i}>
                 <td>{p}</td>
-                <td></td>
+                <td><DeleteIcon className="link" onClick={() => onClickDeleteVar(i)}/></td>
               </tr>
             )}
             </tbody>
