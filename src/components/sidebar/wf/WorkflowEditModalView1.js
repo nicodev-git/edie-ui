@@ -102,7 +102,7 @@ class WorkflowEditModalView extends React.Component {
     const {filterType} = allValues || {}
 
     return (
-      <div>
+      <div className="margin-md-top">
         <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
                options={productFilterTypes}
                style={{minWidth: 150}} className="margin-sm-right"
