@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/AddCircle'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
-import {findIndex} from 'lodash'
+import {find, findIndex} from 'lodash'
 
 import {
   FormInput,
@@ -18,7 +18,7 @@ import {
   Modal,
   CardPanel
 } from 'components/modal/parts'
-import {severities} from 'shared/Global'
+import {severities, productFilterTypes} from 'shared/Global'
 
 const itemStyle = {
   width: '24px',
@@ -64,6 +64,38 @@ class WorkflowEditModalView extends React.Component {
     )
   }
 
+  renderProductCombos() {
+    const {allValues, productTypes, productVendors, vendorProducts} = this.props
+    const {productTypeId, productVendorId} = allValues || {}
+
+    let vendors = productVendors || []
+    if (productTypeId) {
+      const type = find(productTypes, {id: productTypeId})
+      if (type) vendors = vendors.filter(p => (type.vendorIds || []).includes(p.id))
+    }
+    let products = vendorProducts || []
+    if (productVendorId) {
+      const vendor = find(productVendors, {id: productVendorId})
+      if (vendor) products = products.filter(p => (vendor.productIds || []).includes(p.id))
+    }
+
+    return (
+      <div className="margin-md-top">
+        <Field name="productTypeId" component={FormSelect} floatingLabel="Type"
+               options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productVendorId" component={FormSelect} floatingLabel="Vendor"
+               options={vendors.map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        <Field name="productId" component={FormSelect} floatingLabel="Product"
+               options={(products || []).map(p => ({label: p.name, value: p.id}))}
+               style={{minWidth: 150}}
+        />
+      </div>
+    )
+  }
   renderWfTab() {
     const {
       wfDataItems,
