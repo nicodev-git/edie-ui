@@ -124,7 +124,10 @@ class ShapeEditModal extends Component {
   }
 
   render () {
-    const {handleSubmit, shapeScriptResult, shapeScriptStatus, servers} = this.props
+    const {
+      handleSubmit, shapeScriptResult, shapeScriptStatus, servers,
+      outputObjects
+    } = this.props
     return (
       <ShapeEditModalView
         fields={this.state.fields}
@@ -140,6 +143,7 @@ class ShapeEditModal extends Component {
         onClickTest={this.onClickTest.bind(this)}
 
         servers={this.getServers()}
+        outputObjects={outputObjects}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}

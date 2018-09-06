@@ -21,6 +21,7 @@ import classNames from 'classnames'
 
 import {
   FormInput,
+  FormSelect,
   Modal,
   FormTextArea,
   CardPanel
@@ -122,10 +123,19 @@ class ShapeEditModalView extends Component {
   }
 
   renderOutput () {
+    const {outputObjects} = this.props
     return (
       <CardPanel title="Output">
-        <Field name="outputName" component={FormInput} floatingLabel="Output Object" className="margin-md-right"/>
+        <Field
+          name="outputName" component={FormSelect} floatingLabel="Output Object"
+          style={{minWidth: 150}} className="margin-md-right"
+          options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
 
+        <div style={{maxHeight: 350, overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead></thead>
+          </table>
+        </div>
       </CardPanel>
     )
   }
@@ -173,6 +183,7 @@ class ShapeEditModalView extends Component {
           </CardPanel>
 
           {/*{this.renderDevices()}*/}
+          {this.renderOutput()}
 
           <CardPanel title="Test Result">
             <table className="table table-hover">
