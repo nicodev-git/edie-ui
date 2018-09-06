@@ -6,7 +6,7 @@ import ViewIcon from '@material-ui/icons/Pageview'
 const editButtonStyle = {
   position: 'absolute',
   right: 15,
-  bottom: 4
+  bottom: 8
 }
 
 export default class AppletCard extends React.Component {

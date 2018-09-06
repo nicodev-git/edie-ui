@@ -23,7 +23,7 @@ export default class OutputObjects extends React.Component {
 
   onClickDelete (object) {
     showConfirm('Click OK to remove', btn => {
-      if (btn != 'ok') return
+      if (btn !== 'ok') return
       this.props.removeOutputObject(object)
     })
   }
