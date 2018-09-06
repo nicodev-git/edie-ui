@@ -554,6 +554,7 @@ class VendorProductModal extends React.Component {
     if (!this.props.brainCellModalOpen) return null
     return (
       <BrainCellModal
+        title={this.state.brainCellType}
         type={this.state.brainCellType}
         allTags={this.getAllTags(true)}
         onSave={this.onSaveBraincell.bind(this)}

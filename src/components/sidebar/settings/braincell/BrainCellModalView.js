@@ -475,7 +475,7 @@ export default class BrainCellModalView extends Component {
     if (noModal) return content
 
     return (
-      <Modal title="BrainCell" onRequestClose={onClickClose}>
+      <Modal title={title || 'BrainCell'} onRequestClose={onClickClose}>
         {content}
       </Modal>
     )
