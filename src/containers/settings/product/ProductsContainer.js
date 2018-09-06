@@ -32,6 +32,8 @@ import {
   updateProductVendor,
   removeProductVendor,
 
+  fetchOutputObjects,
+
   testMatchRegex
 } from 'actions'
 
@@ -57,6 +59,8 @@ export default connect(
     cellParamModalOpen: state.settings.cellParamModalOpen,
 
     workflows: state.workflow.workflows,
+
+    outputObjects: state.workflow.outputObjects
   }), {
     fetchVendorProducts,
     addVendorProduct,
@@ -85,6 +89,8 @@ export default connect(
     addProductVendor,
     updateProductVendor,
     removeProductVendor,
+
+    fetchOutputObjects,
 
     testMatchRegex
   }

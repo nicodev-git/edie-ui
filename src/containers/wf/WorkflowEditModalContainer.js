@@ -50,6 +50,8 @@ import {
   fetchProductTypes,
   fetchProductVendors,
 
+  fetchOutputObjects,
+
   resetForm
 } from 'actions'
 
@@ -83,6 +85,7 @@ export default connect(
     userInfo: state.dashboard.userInfo,
 
     shapes: state.workflow.shapes,
+    outputObjects: state.workflow.outputObjects,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
@@ -144,6 +147,7 @@ export default connect(
     fetchProductTypes,
     fetchProductVendors,
 
+    fetchOutputObjects,
     resetForm
   }
 )(withRouter(WorkflowEditContainer))
