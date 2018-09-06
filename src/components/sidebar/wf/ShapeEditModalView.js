@@ -24,7 +24,8 @@ import {
   FormSelect,
   Modal,
   FormTextArea,
-  CardPanel
+  CardPanel,
+  FormCheckbox
 } from 'components/modal/parts'
 
 const toolbarStyles = theme => ({
@@ -49,6 +50,7 @@ const toolbarStyles = theme => ({
   },
   title: {
     flex: '0 0 auto',
+    fontSize: '16px'
   },
 })
 
@@ -84,12 +86,12 @@ class ShapeEditModalView extends Component {
             <TableHead>
               <TableRow>
                 <TableCell padding="default" style={{width: 50}}>
-                  {/*<Field*/}
-                    {/*name="applyAllDevices"*/}
-                    {/*component={FormCheckbox} label=""*/}
-                    {/*onChange={onChangeApplyAllDevices}*/}
-                    {/*indeterminate={applyDeviceIds.length > 0 && applyDeviceIds.length < servers.length}*/}
-                  {/*/>*/}
+                  <Field
+                    name="applyAllDevices"
+                    component={FormCheckbox} label=""
+                    onChange={onChangeApplyAllDevices}
+                    indeterminate={applyDeviceIds.length > 0 && applyDeviceIds.length < servers.length}
+                  />
                 </TableCell>
                 <TableCell padding="none"><b>All Devices</b></TableCell>
               </TableRow>
@@ -196,7 +198,7 @@ class ShapeEditModalView extends Component {
             </table>
           </CardPanel>
 
-          {/*{this.renderDevices()}*/}
+          {this.renderDevices()}
           {this.renderOutput()}
 
           <CardPanel title="Test Result">

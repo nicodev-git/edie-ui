@@ -129,6 +129,44 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  onCheckAppliedDevice (e) {
+    let {applyDeviceIds} = this.state
+    const {devices} = this.props
+    const {applyAllDevices} = this.props.allValues || {}
+
+    const id = e.target.value
+    if (e.target.checked) {
+      applyDeviceIds = [...applyDeviceIds, id]
+      if (applyDeviceIds.length === devices.filter(p => !!p.monitors).length) {
+        this.props.change('applyAllDevices', true)
+      }
+    } else {
+      applyDeviceIds = applyDeviceIds.filter(p => p !== id)
+      if (applyAllDevices) {
+        this.props.change('applyAllDevices', false)
+      }
+    }
+
+    this.setState({
+      applyDeviceIds
+    })
+  }
+
+  onChangeApplyAllDevices (e) {
+    const {devices} = this.props
+    if (e.target.checked) {
+      this.setState({
+        applyDeviceIds: devices.filter(p => !!p.monitors).map(p => p.id)
+      })
+    } else {
+      this.setState({
+        applyDeviceIds: []
+      })
+    }
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderFieldModal () {
     const {fieldModalOpen, editField} = this.state
     if (!fieldModalOpen) return null
@@ -174,6 +212,10 @@ class ShapeEditModal extends Component {
         outputVars={this.state.outputVars}
         onClickAddVar={this.onClickAddVar.bind(this)}
         onClickDeleteVar={this.onClickDeleteVar.bind(this)}
+
+        applyDeviceIds={this.state.applyDeviceIds}
+        onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
+        onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
