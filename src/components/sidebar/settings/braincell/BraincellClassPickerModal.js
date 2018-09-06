@@ -84,6 +84,7 @@ export default class BraincellClassPickerModal extends React.Component {
     if (!this.state.cellModalOpen) return null
     return (
       <BrainCellModal
+        title="Classification"
         noModal
         type="ProductClassification"
         allTags={this.props.allTags}

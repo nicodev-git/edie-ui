@@ -428,13 +428,13 @@ export default class BrainCellModalView extends Component {
 
   render() {
     const {
-      onSubmit, onClickClose, noModal
+      onSubmit, onClickClose, noModal, title
     } = this.props
 
     const content = (
       <div>
         <form onSubmit={onSubmit}>
-          <CardPanel title="BrainCell">
+          <CardPanel title={title || 'BrainCell'}>
             <div>
               <Field name="name" component={FormInput} floatingLabel="Name" className="margin-md-right valign-top"
                      fullWidth/>
