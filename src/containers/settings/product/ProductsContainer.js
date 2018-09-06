@@ -32,8 +32,6 @@ import {
   updateProductVendor,
   removeProductVendor,
 
-  fetchOutputObjects,
-
   testMatchRegex
 } from 'actions'
 
@@ -89,8 +87,6 @@ export default connect(
     addProductVendor,
     updateProductVendor,
     removeProductVendor,
-
-    fetchOutputObjects,
 
     testMatchRegex
   }
