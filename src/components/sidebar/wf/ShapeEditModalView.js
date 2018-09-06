@@ -55,11 +55,12 @@ const toolbarStyles = theme => ({
 class ShapeEditModalView extends Component {
   renderDevices () {
     const {
-      servers,
-      applyAllDevices, applyDeviceIds,
+      servers, applyDeviceIds,
       onCheckAppliedDevice, onChangeApplyAllDevices,
-      classes
+      classes, allValues
     } = this.props
+
+    const {applyAllDevices} = allValues || {}
 
     return (
       <CardPanel title="Applied Devices">
