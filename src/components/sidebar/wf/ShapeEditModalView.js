@@ -123,7 +123,7 @@ class ShapeEditModalView extends Component {
   }
 
   renderOutput () {
-    const {outputObjects} = this.props
+    const {outputObjects, outputVars} = this.props
     return (
       <CardPanel title="Output">
         <Field
@@ -133,7 +133,20 @@ class ShapeEditModalView extends Component {
 
         <div style={{maxHeight: 350, overflow: 'auto'}}>
           <table className="table table-hover">
-            <thead></thead>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {outputVars.map((p, i) =>
+              <tr key={i}>
+                <td>{p}</td>
+                <td></td>
+              </tr>
+            )}
+            </tbody>
           </table>
         </div>
       </CardPanel>
