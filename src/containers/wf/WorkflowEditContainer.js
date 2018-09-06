@@ -92,6 +92,7 @@ export default connect(
     shapes: state.workflow.shapes,
     shapeScriptResult: state.workflow.shapeScriptResult,
     shapeScriptStatus: state.workflow.shapeScriptStatus,
+    outputObjects: state.workflow.outputObjects,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,

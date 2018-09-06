@@ -102,6 +102,7 @@ export default class ShapeListModal extends Component {
         shapeScriptStatus={this.props.shapeScriptStatus}
 
         devices={this.props.devices}
+        outputObjects={this.props.outputObjects}
       />
     )
   }
