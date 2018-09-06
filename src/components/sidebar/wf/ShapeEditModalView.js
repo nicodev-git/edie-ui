@@ -126,7 +126,10 @@ class ShapeEditModalView extends Component {
   }
 
   renderOutput () {
-    const {outputObjects, outputVars, onClickAddVar, onClickDeleteVar} = this.props
+    const {
+      outputObjects, outputVars,
+      onClickAddVar, onClickDeleteVar
+    } = this.props
     return (
       <CardPanel title="Output" tools={<AddIcon className="link" onClick={onClickAddVar}/>}>
         <Field
