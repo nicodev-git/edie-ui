@@ -96,6 +96,29 @@ class WorkflowEditModalView extends React.Component {
       </div>
     )
   }
+
+  renderProduct() {
+    const {allValues, productTypes} = this.props
+    const {filterType} = allValues || {}
+
+    return (
+      <div>
+        <Field name="filterType" component={FormSelect} floatingLabel="Filter Type"
+               options={productFilterTypes}
+               style={{minWidth: 150}} className="margin-sm-right"
+        />
+        {filterType === 'PRODUCT_TYPE' ? (
+          <Field name="productTypeId" component={FormSelect} floatingLabel="Product Type"
+                 options={(productTypes || []).map(p => ({label: p.name, value: p.id}))}
+                 style={{minWidth: 150}}
+          />
+        ) : (
+          this.renderProductCombos()
+        )}
+      </div>
+    )
+  }
+
   renderWfTab() {
     const {
       wfDataItems,
