@@ -58,7 +58,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderGroks () {
-    const {grokCells, onClickAddGrok, onClickDeleteGrok, onClickNewGrok} = this.props
+    const {grokCells, onClickAddGrok, onClickDeleteGrok, onClickNewGrok, onclickEditGrok} = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
@@ -68,7 +68,7 @@ class SimulationModalView extends React.Component {
         </div>
         <div>
           {grokCells.map((t, i) =>
-            <Chip key={t.id} label={t.name} className="margin-sm" onDelete={() => onClickDeleteGrok(t.id)}/>
+            <Chip key={t.id} label={t.name} className="margin-sm" onClick={() => onclickEditGrok(t)} onDelete={() => onClickDeleteGrok(t.id)}/>
           )}
         </div>
       </div>
