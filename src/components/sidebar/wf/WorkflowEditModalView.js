@@ -27,7 +27,7 @@ import {
   CardPanel
 } from 'components/modal/parts'
 import {
-  severities, productFilterTypes, findFieldMatchRule,
+  severities, productFilterTypes,
   appletColors as colors} from 'shared/Global'
 
 const cardStyle = {
@@ -125,9 +125,7 @@ class WorkflowEditModalView extends React.Component {
       onClickAddNewShape,
       onClickDeleteShape,
       onClickAddExtra,
-      onClickEditShapeExtra,
-      onClickEditShape,
-      onClickDeleteShapeExtra
+      onClickEditShape
     } = this.props
     return (
       <div>

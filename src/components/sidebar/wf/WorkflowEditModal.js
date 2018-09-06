@@ -92,6 +92,7 @@ class WorkflowEditModal extends React.Component {
   componentWillMount() {
     this.props.fetchDevices()
     this.props.fetchShapes()
+    this.props.fetchOutputObjects()
 
     const {editWf} = this.props
     if (editWf && editWf.filterType === 'PRODUCT') {
