@@ -53,7 +53,7 @@ export default class TestCaseModalView extends React.Component {
               <tr key={i}>
                 <td>{
                   (() => {
-                    const valueKeys = keys(p.values)
+                    const valueKeys = keys(p.values).filter(k => k !== 'connectorId')
                     return valueKeys.map((k, ki) =>
                       [
                         <span key={k} className="field-key">
