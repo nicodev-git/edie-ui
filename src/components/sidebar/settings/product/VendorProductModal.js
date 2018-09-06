@@ -102,6 +102,14 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickEditClass () {
+    this.setState({
+      brainCellType: 'ProductClassification'
+    }, () => {
+      this.props.showBrainCellModal(true)
+    })
+  }
+
   onPickClass (cell) {
     const {classifiers} = this.state
     if (classifiers.indexOf(cell.id) >= 0) return alert('Already exists')
@@ -595,6 +603,7 @@ class VendorProductModal extends React.Component {
 
         classifierCells={this.getClassifierCells()}
         onClickAddClass={this.onClickAddClass.bind(this)}
+        onClickEditClass={this.onClickEditClass.bind(this)}
         onClickDeleteClass={this.onClickDeleteClass.bind(this)}
         onClickNewClass={this.onClickNewClass.bind(this)}
 

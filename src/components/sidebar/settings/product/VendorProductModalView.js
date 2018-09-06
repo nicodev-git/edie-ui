@@ -32,7 +32,7 @@ class SimulationModalView extends React.Component {
   }
 
   renderClasses () {
-    const {classifierCells, onClickAddClass, onClickNewClass, onClickDeleteClass} = this.props
+    const {classifierCells, onClickAddClass, onClickEditClass, onClickNewClass, onClickDeleteClass} = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
@@ -46,7 +46,10 @@ class SimulationModalView extends React.Component {
         <div>
           {classifierCells.map((t, i) =>
             <Tooltip key={t.id} title={t.key}>
-              <Chip label={t.name} className="margin-sm" onDelete={() => onClickDeleteClass(t.id)}/>
+              <Chip
+                label={t.name} className="margin-sm"
+                onClick={() => onClickEditClass(t)}
+                onDelete={() => onClickDeleteClass(t.id)}/>
             </Tooltip>
           )}
         </div>
