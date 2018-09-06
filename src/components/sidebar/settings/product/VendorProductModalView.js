@@ -58,7 +58,10 @@ class SimulationModalView extends React.Component {
   }
 
   renderGroks () {
-    const {grokCells, onClickAddGrok, onClickDeleteGrok, onClickNewGrok, onClickEditGrok} = this.props
+    const {
+      grokCells, onClickAddGrok, onClickDeleteGrok, onClickNewGrok,
+      onClickEditGrok
+    } = this.props
     return (
       <div>
         <div className="group-header padding-md-top padding-md-bottom">
