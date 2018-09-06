@@ -39,6 +39,9 @@ class VendorProductModal extends React.Component {
 
       actionModalOpen: false,
       detectedActions: (editProduct ? editProduct.detectedActions : []) || [],
+      
+      brainCellModalOpen: false,
+      editBrainCell: null,
 
       loading: false
     }
@@ -49,6 +52,13 @@ class VendorProductModal extends React.Component {
     this.props.onSave({
       ...values,
       tags,classifiers, parsers, workflows, incidents, detectedActions
+    })
+  }
+
+  showBrainCellModal (brainCellModalOpen, editBrainCell) {
+    this.setState({
+      brainCellModalOpen,
+      editBrainCell
     })
   }
 
@@ -90,7 +100,7 @@ class VendorProductModal extends React.Component {
     this.setState({
       brainCellType: 'Tag'
     }, () => {
-      this.props.showBrainCellModal(true)
+      this.showBrainCellModal(true)
     })
   }
 
@@ -102,11 +112,11 @@ class VendorProductModal extends React.Component {
     })
   }
 
-  onClickEditClass () {
+  onClickEditClass (t) {
     this.setState({
       brainCellType: 'ProductClassification'
     }, () => {
-      this.props.showBrainCellModal(true)
+      this.showBrainCellModal(true, t)
     })
   }
 
@@ -148,7 +158,7 @@ class VendorProductModal extends React.Component {
     this.setState({
       brainCellType: 'ProductClassification'
     }, () => {
-      this.props.showBrainCellModal(true)
+      this.showBrainCellModal(true)
     })
   }
 
@@ -198,7 +208,7 @@ class VendorProductModal extends React.Component {
     this.setState({
       brainCellType: 'Grok'
     }, () => {
-      this.props.showBrainCellModal(true)
+      this.showBrainCellModal(true)
     })
   }
 
@@ -320,7 +330,7 @@ class VendorProductModal extends React.Component {
     this.setState({
       brainCellType: 'Incident'
     }, () => {
-      this.props.showBrainCellModal(true)
+      this.showBrainCellModal(true)
     })
   }
 
@@ -348,7 +358,7 @@ class VendorProductModal extends React.Component {
   }
 
   onCloseBraincellModal () {
-    this.props.showBrainCellModal(false)
+    this.showBrainCellModal(false)
   }
 
   //////////////////////////////////////////////////////////////
@@ -559,7 +569,7 @@ class VendorProductModal extends React.Component {
   }
 
   renderBraincellModal () {
-    if (!this.props.brainCellModalOpen) return null
+    if (!this.state.brainCellModalOpen) return null
     return (
       <BrainCellModal
         title={this.state.brainCellType}
@@ -575,7 +585,7 @@ class VendorProductModal extends React.Component {
         updateProductType={this.props.updateProductType}
 
         brainCells={this.props.brainCells}
-        editBrainCell={this.props.editBrainCell}
+        editBrainCell={this.state.editBrainCell}
 
         showScriptModal={this.props.showScriptModal}
         showGrokModal={this.props.showGrokModal}
