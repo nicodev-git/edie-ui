@@ -123,9 +123,9 @@ class ShapeEditModalView extends Component {
   }
 
   renderOutput () {
-    const {outputObjects, outputVars} = this.props
+    const {outputObjects, outputVars, onClickAddVar} = this.props
     return (
-      <CardPanel title="Output">
+      <CardPanel title="Output" tools={<AddIcon className="link" onClick={onClickAddVar}/>}>
         <Field
           name="outputName" component={FormSelect} floatingLabel="Output Object"
           style={{minWidth: 150}} className="margin-md-right"

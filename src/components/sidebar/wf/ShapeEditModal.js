@@ -5,6 +5,7 @@ import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 import ShapeEditModalView from './ShapeEditModalView'
 import RefreshOverlay from 'components/common/RefreshOverlay'
+import {showPrompt} from 'components/common/Alert'
 
 class ShapeEditModal extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ShapeEditModal extends Component {
     this.state = {
       fields: (props.editShape ? props.editShape.fields : []) || [],
       applyDeviceIds: (props.editShape ? props.editShape.applyDeviceIds : []) || [],
+      outputVars: (props.editShape ? props.editShape.outputVars : []) || [],
       editField: null,
       fieldModalOpen: false,
     }
@@ -104,6 +106,18 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  onClickAddVar () {
+    const {outputVars} = this.props
+    showPrompt('Please type variable name', '', name => {
+      if (!name) return
+      this.setState({
+        outputVars: [...outputVars, name]
+      })
+    })
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderFieldModal () {
     const {fieldModalOpen, editField} = this.state
     if (!fieldModalOpen) return null
@@ -126,7 +140,7 @@ class ShapeEditModal extends Component {
   render () {
     const {
       handleSubmit, shapeScriptResult, shapeScriptStatus, servers,
-      outputObjects
+      outputObjects, outputVars
     } = this.props
     return (
       <ShapeEditModalView
@@ -143,7 +157,10 @@ class ShapeEditModal extends Component {
         onClickTest={this.onClickTest.bind(this)}
 
         servers={this.getServers()}
+
         outputObjects={outputObjects}
+        outputVars={outputVars}
+        onClickAddVar={this.onClickAddVar.bind(this)}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
