@@ -213,6 +213,7 @@ class WorkflowEditModalView extends React.Component {
     const incidentCells = brainCells.filter(p => p.type === 'Incident');
     return (
       <div>
+        {this.renderProduct()}
         <Field name="openIncident" component={FormCheckbox} label="Open Incident"/>
         <Field name="incidentTemplateId" component={FormSelect}
                options={incidentCells.map(p => ({label: p.name, value: p.id}))}/>
