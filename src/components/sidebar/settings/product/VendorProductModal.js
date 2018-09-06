@@ -196,6 +196,14 @@ class VendorProductModal extends React.Component {
     })
   }
 
+  onClickEditGrok (g) {
+    this.setState({
+      brainCellType: 'Grok'
+    }, () => {
+      this.showBrainCellModal(true, g)
+    })
+  }
+
   onClickDeleteGrok (id) {
     if (!window.confirm('Click OK to remove')) return
     const {parsers} = this.state
@@ -619,6 +627,7 @@ class VendorProductModal extends React.Component {
 
         grokCells={this.getGrokCells()}
         onClickAddGrok={this.onClickAddGrok.bind(this)}
+        onClickEditGrok={this.onClickEditGrok.bind(this)}
         onClickDeleteGrok={this.onClickDeleteGrok.bind(this)}
         onClickNewGrok={this.onClickNewGrok.bind(this)}
 
