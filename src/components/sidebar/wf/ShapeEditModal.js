@@ -12,7 +12,7 @@ class ShapeEditModal extends Component {
     super(props)
     this.state = {
       fields: (props.editShape ? props.editShape.fields : []) || [],
-      applyDeviceIds: (props.editShape ? props.editShape.applyDeviceIds : []) || [],
+      applyDeviceIds: props.applyDeviceIds || [],
       outputVars: (props.editShape ? props.editShape.outputVars : []) || [],
       editField: null,
       fieldModalOpen: false,
@@ -93,8 +93,8 @@ class ShapeEditModal extends Component {
   //////////////////////////////////////////////////////////////
 
   onClickTest () {
-    const {allValues, applyDeviceIds} = this.props
-    const {fields} = this.state
+    const {allValues} = this.props
+    const {fields, applyDeviceIds} = this.state
     if (!applyDeviceIds.length) return alert('Please choose applied devices first.')
     this.props.testShapeScript({
       deviceIds: applyDeviceIds.join(','),
