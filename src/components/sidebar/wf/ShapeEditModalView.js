@@ -122,7 +122,12 @@ class ShapeEditModalView extends Component {
   }
 
   renderOutput () {
+    return (
+      <CardPanel title="Output">
+        <Field name="outputName" component={FormInput} floatingLabel="Output Object" className="margin-md-right"/>
 
+      </CardPanel>
+    )
   }
 
   render () {
@@ -169,7 +174,7 @@ class ShapeEditModalView extends Component {
 
           {/*{this.renderDevices()}*/}
 
-          <CardPanel title="Result">
+          <CardPanel title="Test Result">
             <table className="table table-hover">
               <thead>
                 <tr>
