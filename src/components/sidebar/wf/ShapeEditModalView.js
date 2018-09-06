@@ -149,7 +149,9 @@ class ShapeEditModalView extends Component {
             {outputVars.map((p, i) =>
               <tr key={i}>
                 <td>{p}</td>
-                <td><DeleteIcon className="link" onClick={() => onClickDeleteVar(i)}/></td>
+                <td>
+                  <DeleteIcon className="link" onClick={(e) => onClickDeleteVar(i, e)}/>
+                </td>
               </tr>
             )}
             </tbody>
