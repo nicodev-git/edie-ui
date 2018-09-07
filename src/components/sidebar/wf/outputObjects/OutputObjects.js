@@ -44,6 +44,7 @@ export default class OutputObjects extends React.Component {
           <thead>
           <tr>
             <th>Name</th>
+            <th>Vars</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -61,6 +62,9 @@ export default class OutputObjects extends React.Component {
                     display: 'block'
                   }}
                 />
+              </td>
+              <td>
+                {(m.vars || []).join(', ')}
               </td>
               <td>
                 <DeleteIcon onClick={this.onClickDelete.bind(this, m)}/>
