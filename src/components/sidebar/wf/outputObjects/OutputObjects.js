@@ -57,6 +57,16 @@ export default class OutputObjects extends React.Component {
     })
   }
 
+  onChangeVars (object, values) {
+    const vars = values.name.split(',').filter(p => !!p).map(p => p.trim())
+    if ((object.vars || []).join(',') === vars.join(',')) return
+
+    this.props.updateOutputObject({
+      ...object,
+      vars
+    })
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   onSaveObject (entity) {
@@ -103,10 +113,19 @@ export default class OutputObjects extends React.Component {
                 />
               </td>
               <td>
-                {(m.vars || []).join(', ')}
+                <InlineEdit
+                  activeClassName="editing"
+                  text={(m.vars || []).join(', ') || '\u00a0'}
+                  paramName="name"
+                  change={this.onChangeVars.bind(this, m)}
+                  style={{
+                    width: '100%',
+                    display: 'block'
+                  }}
+                />
               </td>
               <td>
-                <EditIcon onClick={this.onClickEdit.bind(this, m)}/>
+                <EditIcon onClick={this.onClickEdit.bind(this, m)} className="hidden"/>
                 <DeleteIcon onClick={this.onClickDelete.bind(this, m)}/>
               </td>
             </tr>
