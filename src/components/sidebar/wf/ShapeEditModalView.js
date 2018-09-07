@@ -153,16 +153,12 @@ class ShapeEditModalView extends Component {
             <thead>
             <tr>
               <th>Var</th>
-              <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {inputVars.map((p, i) =>
               <tr key={i}>
                 <td>{p}</td>
-                <td>
-                  <DeleteIcon className="link" onClick={(e) => onClickDeleteVar(i, e)}/>
-                </td>
               </tr>
             )}
             </tbody>
@@ -218,16 +214,12 @@ class ShapeEditModalView extends Component {
             <thead>
               <tr>
                 <th>Var</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
             {outputVars.map((p, i) =>
               <tr key={i}>
                 <td>{p}</td>
-                <td>
-                  <DeleteIcon className="link" onClick={(e) => onClickDeleteVar(i, e)}/>
-                </td>
               </tr>
             )}
             </tbody>
