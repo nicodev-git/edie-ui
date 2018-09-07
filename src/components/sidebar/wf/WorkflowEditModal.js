@@ -509,13 +509,13 @@ class WorkflowEditModal extends React.Component {
     const {objects} = wfData
     const current = objects[index]
 
-    if (!keyField) return
+    console.log(current)
+    
+    if (current.config.type === 'PRODUCTACTION') return
     const shapeIndex = findIndex(this.props.shapes, {
       type: current.config.type
     })
-    if (current.config.type === 'CUSTOMSHAPE') {
 
-    }
 
     if (shapeIndex < 0) return //alert('Shape not found')
 
