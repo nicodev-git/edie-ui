@@ -128,7 +128,7 @@ class WorkflowEditModalView extends React.Component {
       wfDataItems,
       onClickAddNewShape,
       onClickDeleteShape,
-      onClickAddExtra,
+      // onClickAddExtra,
       onClickEditShape
     } = this.props
     return (
@@ -153,7 +153,7 @@ class WorkflowEditModalView extends React.Component {
                   />,
                   i < (wfDataItems.length - 1) ? (
                     <div key={`img-${i}`} className="inline-block valign-middle" style={arrowStyle}>
-                      <img src="/images/right-arrow.png"/>
+                      <img src="/images/right-arrow.png" alt=""/>
                     </div>
                   ) : null
                 ]

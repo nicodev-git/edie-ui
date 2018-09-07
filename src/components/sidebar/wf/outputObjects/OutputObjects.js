@@ -1,11 +1,12 @@
 import React from 'react'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
-import {showPrompt, showConfirm} from 'components/common/Alert'
+import {showConfirm} from 'components/common/Alert'
 import InlineEdit from 'components/common/ReactEditInline'
 
 import OutputObjectModal from './OutputObjectModal'
@@ -14,7 +15,8 @@ export default class OutputObjects extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      objectModalOpen: false
+      objectModalOpen: false,
+      editObject: null
     }
   }
   componentWillMount () {
@@ -22,7 +24,8 @@ export default class OutputObjects extends React.Component {
   }
   onClickAdd () {
     this.setState({
-      objectModalOpen: true
+      objectModalOpen: true,
+      editObject: null
     })
     // showPrompt('Please type name', '', name => {
     //   if (!name) return
@@ -30,6 +33,13 @@ export default class OutputObjects extends React.Component {
     //     name
     //   })
     // })
+  }
+
+  onClickEdit (object) {
+    this.setState({
+      objectModalOpen: true,
+      editObject: object
+    })
   }
 
   onClickDelete (object) {
@@ -51,9 +61,9 @@ export default class OutputObjects extends React.Component {
 
   onSaveObject (entity) {
     if (entity.id) {
-      this.props.addOutputObject(entity)
-    } else {
       this.props.updateOutputObject(entity)
+    } else {
+      this.props.addOutputObject(entity)
     }
   }
 
@@ -96,6 +106,7 @@ export default class OutputObjects extends React.Component {
                 {(m.vars || []).join(', ')}
               </td>
               <td>
+                <EditIcon onClick={this.onClickEdit.bind(this, m)}/>
                 <DeleteIcon onClick={this.onClickDelete.bind(this, m)}/>
               </td>
             </tr>
@@ -108,8 +119,11 @@ export default class OutputObjects extends React.Component {
 
   renderOutputObjectModal () {
     if (!this.state.objectModalOpen) return null
+    const {editObject} = this.state
+
     return (
       <OutputObjectModal
+        editObject={editObject}
         onSave={this.onSaveObject.bind(this)}
         onClose={this.onCloseObjectModal.bind(this)}
       />

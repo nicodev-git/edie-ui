@@ -185,7 +185,7 @@ class ShapeEditModalView extends Component {
             <AppletCard
               color={colors[0]}
               name={title}
-              desc={description}
+              desc={description || title}
               img={`/images/${img || ''}`}
             />
             <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle} alt=""/>
