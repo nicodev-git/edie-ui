@@ -6,26 +6,31 @@ import {
   FormInput,
   FormSelect,
   SubmitBlock,
-  CardPanel
+  CardPanel,
+  Modal
 } from 'components/modal/parts'
 
 export default class OutputObjectModalView extends React.Component {
   render() {
     const {
-      onSubmit
+      onSubmit, onClose, vars, onClickAddVar
     } = this.props
 
     return (
-      <Modal title="Output Object" onRequestClose={onClickClose}>
+      <Modal title="Output Object" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Output Object">
             <Field name="name" component={FormInput} floatingLabel="Name"/>
           </CardPanel>
 
-          <CardPanel title="Vars">
+          <CardPanel title="Vars" tools={<AddIcon className="link" onClick={onClickAddVar}/>}>
             <table className="table table-hover">
               <tbody>
-
+              {vars.map((p, i) =>
+                <tr key={i}>
+                  <td>{p}</td>
+                </tr>
+              )}
               </tbody>
             </table>
           </CardPanel>

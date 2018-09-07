@@ -8,17 +8,28 @@ import FloatingMenu from 'components/common/floating/FloatingMenu'
 import {showPrompt, showConfirm} from 'components/common/Alert'
 import InlineEdit from 'components/common/ReactEditInline'
 
+import OutputObjectModal from './OutputObjectModal'
+
 export default class OutputObjects extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      objectModalOpen: false
+    }
+  }
   componentWillMount () {
     this.props.fetchOutputObjects()
   }
   onClickAdd () {
-    showPrompt('Please type name', '', name => {
-      if (!name) return
-      this.props.addOutputObject({
-        name
-      })
+    this.setState({
+      objectModalOpen: true
     })
+    // showPrompt('Please type name', '', name => {
+    //   if (!name) return
+    //   this.props.addOutputObject({
+    //     name
+    //   })
+    // })
   }
 
   onClickDelete (object) {
@@ -35,6 +46,24 @@ export default class OutputObjects extends React.Component {
       ...values
     })
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
+  onSaveObject (entity) {
+    if (entity.id) {
+      this.props.addOutputObject(entity)
+    } else {
+      this.props.updateOutputObject(entity)
+    }
+  }
+
+  onCloseObjectModal () {
+    this.setState({
+      objectModalOpen: false
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
 
   renderTable () {
     const objects = this.props.outputObjects
@@ -77,6 +106,16 @@ export default class OutputObjects extends React.Component {
     )
   }
 
+  renderOutputObjectModal () {
+    if (!this.state.objectModalOpen) return null
+    return (
+      <OutputObjectModal
+        onSave={this.onSaveObject.bind(this)}
+        onClose={this.onCloseObjectModal.bind(this)}
+      />
+    )
+  }
+
   render() {
     return (
       <TabPage>
@@ -88,6 +127,7 @@ export default class OutputObjects extends React.Component {
         </TabPageHeader>
         <TabPageBody history={this.props.history} location={this.props.location}>
           {this.renderTable()}
+          {this.renderOutputObjectModal()}
           <FloatingMenu onClickMain={this.onClickAdd.bind(this)}/>
         </TabPageBody>
       </TabPage>
