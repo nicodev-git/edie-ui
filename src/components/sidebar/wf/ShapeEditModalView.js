@@ -56,6 +56,10 @@ const toolbarStyles = theme => ({
   },
 })
 
+const arrowStyle = {
+  marginTop: 70
+}
+
 class ShapeEditModalView extends Component {
   renderDevices () {
     const {
@@ -134,11 +138,12 @@ class ShapeEditModalView extends Component {
     } = this.props
     return (
       <div className="flex-1">
-        <Field
-          name="inputName" component={FormSelect} floatingLabel="Input"
-          style={{minWidth: 150}} className="margin-md-right"
-          options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
-
+        <div className="text-right" style={arrowStyle}>
+          <Field
+            name="inputName" component={FormSelect} floatingLabel="Input"
+            style={{minWidth: 150}} className="margin-md-right"
+            options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
+        </div>
         <div style={{maxHeight: 350, overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
@@ -172,12 +177,15 @@ class ShapeEditModalView extends Component {
           {this.renderInput()}
 
           <div>
+            <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle}/>
             <AppletCard
               color={colors[0]}
               name={title}
               desc={description}
               img={`/images/${img || ''}`}
             />
+            <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle}/>
+
           </div>
 
           {this.renderOutput()}
@@ -193,11 +201,12 @@ class ShapeEditModalView extends Component {
     } = this.props
     return (
       <div className="flex-1">
-        <Field
-          name="outputName" component={FormSelect} floatingLabel="Output"
-          style={{minWidth: 150}} className="margin-md-right"
-          options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
-
+        <div style={arrowStyle}>
+          <Field
+            name="outputName" component={FormSelect} floatingLabel="Output"
+            style={{minWidth: 150}} className="margin-md-right"
+            options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
+        </div>
         <div style={{maxHeight: 350, overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
