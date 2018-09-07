@@ -60,6 +60,10 @@ const arrowStyle = {
   marginTop: 70
 }
 
+const inputOutputWidth = {
+  width: 220
+}
+
 class ShapeEditModalView extends Component {
   renderDevices () {
     const {
@@ -137,7 +141,7 @@ class ShapeEditModalView extends Component {
       inputVars, onClickDeleteVar
     } = this.props
     return (
-      <div className="margin-md-right">
+      <div className="margin-md-right" style={inputOutputWidth}>
         <div className="text-right" style={arrowStyle}>
           <Field
             name="inputName" component={FormSelect} floatingLabel="Input"
@@ -174,6 +178,7 @@ class ShapeEditModalView extends Component {
     return (
       <CardPanel title="Input/Output">
         <div className="flex-horizontal">
+          <div className="flex-1"></div>
           {this.renderInput()}
 
           <div>
@@ -189,6 +194,7 @@ class ShapeEditModalView extends Component {
           </div>
 
           {this.renderOutput()}
+          <div className="flex-1"></div>
         </div>
       </CardPanel>
     )
@@ -200,7 +206,7 @@ class ShapeEditModalView extends Component {
       onClickAddVar, onClickDeleteVar
     } = this.props
     return (
-      <div className="flex-1 margin-md-left">
+      <div className="margin-md-left" style={inputOutputWidth}>
         <div style={arrowStyle}>
           <Field
             name="outputName" component={FormSelect} floatingLabel="Output"
