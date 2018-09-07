@@ -125,10 +125,32 @@ class ShapeEditModalView extends Component {
     )
   }
 
+  renderInput () {
+    const {
+      outputObjects
+    } = this.props
+    return (
+      <div className="flex-1">
+        <Field
+          name="inputName" component={FormSelect} floatingLabel="Input"
+          style={{minWidth: 150}} className="margin-md-right"
+          options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
+      </div>
+    )
+  }
+
   renderInputOutput () {
     return (
       <CardPanel title="Input/Output">
+        <div className="flex-horizontal">
+          {this.renderInput()}
 
+          <div>
+
+          </div>
+
+          {this.renderOutput()}
+        </div>
       </CardPanel>
     )
   }
@@ -139,9 +161,9 @@ class ShapeEditModalView extends Component {
       onClickAddVar, onClickDeleteVar
     } = this.props
     return (
-      <CardPanel title="Output" tools={<AddIcon className="link" onClick={onClickAddVar}/>}>
+      <div className="flex-1">
         <Field
-          name="outputName" component={FormSelect} floatingLabel="Output Object"
+          name="outputName" component={FormSelect} floatingLabel="Output"
           style={{minWidth: 150}} className="margin-md-right"
           options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
 
@@ -165,7 +187,7 @@ class ShapeEditModalView extends Component {
             </tbody>
           </table>
         </div>
-      </CardPanel>
+      </div>
     )
   }
 
@@ -184,6 +206,8 @@ class ShapeEditModalView extends Component {
             <Field name="description" component={FormInput} floatingLabel="Description" fullWidth
                    className="margin-sm-top"/>
           </CardPanel>
+
+          {this.renderInputOutput()}
 
           <CardPanel title="Script" tools={<AddIcon className="link" onClick={onClickAddField}/>}>
             <Field name="script" component={FormTextArea} style={{width: '100%', height: 300, fontSize: '14px'}}/>
@@ -212,7 +236,6 @@ class ShapeEditModalView extends Component {
           </CardPanel>
 
           {this.renderDevices()}
-          {this.renderOutput()}
 
           <CardPanel title="Test Result">
             <table className="table table-hover">

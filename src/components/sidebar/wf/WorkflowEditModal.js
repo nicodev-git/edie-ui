@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm, getFormValues} from 'redux-form'
 import uuid from 'uuid'
-import {assign, merge, findIndex, keys, find} from 'lodash'
+import {assign, merge, keys, find} from 'lodash'
 
 import WorkflowEditModalView from './WorkflowEditModalView'
 import WorkflowEditModalView1 from './WorkflowEditModalView1'
@@ -159,7 +159,6 @@ class WorkflowEditModal extends React.Component {
           data: p
         }
       }
-      return p
     })
     return wfDataItems
   }
