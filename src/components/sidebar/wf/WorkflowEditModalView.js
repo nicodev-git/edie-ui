@@ -46,6 +46,10 @@ const hourOptions = Array(24).fill(0).map((p, i) => ({
   value: i
 }))
 
+const arrowStyle = {
+  marginTop: 70
+}
+
 const toolbarStyles = theme => ({
   root: {
     paddingRight: theme.spacing.unit,
@@ -147,8 +151,11 @@ class WorkflowEditModalView extends React.Component {
                     onClickEdit={e => onClickEditShape(i, false, e)}
                     onClickDelete={() => onClickDeleteShape(i)}
                   />,
-                  i < (wfDataItems.length - 1) ?
-                    <img key={`img-${i}`} src="/images/right-arrow.png" className="valign-middle margin-md-top"/> : null
+                  i < (wfDataItems.length - 1) ? (
+                    <div key={`img-${i}`} className="inline-block valign-middle" style={arrowStyle}>
+                      <img src="/images/right-arrow.png"/>
+                    </div>
+                  ) : null
                 ]
               )}
             </div>
