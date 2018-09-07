@@ -27,6 +27,8 @@ import {
   CardPanel,
   FormCheckbox
 } from 'components/modal/parts'
+import { appletColors as colors } from 'shared/Global'
+import AppletCard from 'components/common/AppletCard'
 
 const toolbarStyles = theme => ({
   root: {
@@ -127,7 +129,8 @@ class ShapeEditModalView extends Component {
 
   renderInput () {
     const {
-      outputObjects
+      outputObjects,
+      inputVars, onClickDeleteVar
     } = this.props
     return (
       <div className="flex-1">
@@ -135,18 +138,46 @@ class ShapeEditModalView extends Component {
           name="inputName" component={FormSelect} floatingLabel="Input"
           style={{minWidth: 150}} className="margin-md-right"
           options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
+
+        <div style={{maxHeight: 350, overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Var</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {inputVars.map((p, i) =>
+              <tr key={i}>
+                <td>{p}</td>
+                <td>
+                  <DeleteIcon className="link" onClick={(e) => onClickDeleteVar(i, e)}/>
+                </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
 
   renderInputOutput () {
+    const {allValues} = this.props
+    const {title, description, img} = allValues || {}
     return (
       <CardPanel title="Input/Output">
         <div className="flex-horizontal">
           {this.renderInput()}
 
           <div>
-
+            <AppletCard
+              color={colors[0]}
+              name={title}
+              desc={description}
+              img={`/images/${img || ''}`}
+            />
           </div>
 
           {this.renderOutput()}
