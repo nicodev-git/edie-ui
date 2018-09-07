@@ -4,7 +4,6 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import {Field} from 'redux-form'
 import {
   FormInput,
-  FormSelect,
   SubmitBlock,
   CardPanel,
   Modal
@@ -13,7 +12,7 @@ import {
 export default class OutputObjectModalView extends React.Component {
   render() {
     const {
-      onSubmit, onClose, vars, onClickAddVar
+      onSubmit, onClose, vars, onClickAddVar, onClickDeleteVar
     } = this.props
 
     return (
@@ -29,6 +28,7 @@ export default class OutputObjectModalView extends React.Component {
               {vars.map((p, i) =>
                 <tr key={i}>
                   <td>{p}</td>
+                  <td><DeleteIcon className="link" onClick={() => onClickDeleteVar(i)}/></td>
                 </tr>
               )}
               </tbody>

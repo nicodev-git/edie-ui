@@ -35,6 +35,17 @@ class OutputObjectModal extends React.Component {
     })
   }
 
+  onClickDeleteVar (index) {
+    const {vars} = this.state
+    showConfirm('Click OK to remove', btn => {
+      if (btn !== 'ok') return
+      this.setState({
+        vars: vars.filter((p, i) => i !== index)
+      })
+    })
+
+  }
+
   render() {
     const {handleSubmit, onClose} = this.props
     const {vars} = this.state
@@ -45,13 +56,13 @@ class OutputObjectModal extends React.Component {
 
         vars={vars}
         onClickAddVar={this.onClickAddVar.bind(this)}
+        onClickDeleteVar={this.onClickDeleteVar.bind(this)}
       />
     )
   }
 }
 
 export default connect(
-  (state, props) => ({
-    initialValues: props.editObject
-  }))
-(reduxForm({form: 'outputObjectForm'})(OutputObjectModal))
+(state, props) => ({
+  initialValues: props.editObject
+}))(reduxForm({form: 'outputObjectForm'})(OutputObjectModal))
