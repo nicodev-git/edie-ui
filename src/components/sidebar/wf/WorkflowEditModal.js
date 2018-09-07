@@ -510,14 +510,19 @@ class WorkflowEditModal extends React.Component {
     const current = objects[index]
 
     console.log(current)
-    
+
     if (current.config.type === 'PRODUCTACTION') return
-    const shapeIndex = findIndex(this.props.shapes, {
-      type: current.config.type
-    })
+
+    const filter = {}
+    if (current.data.shapeId) {
+      filter.id = current.data.shapeId
+    } else {
+      filter.type = current.config.type
+    }
+    const shape = find(this.props.shapes, filter)
 
 
-    if (shapeIndex < 0) return //alert('Shape not found')
+    if (!shape) return //alert('Shape not found')
 
     this.setState({
       shapeModalOpen: false,
@@ -527,8 +532,8 @@ class WorkflowEditModal extends React.Component {
         shapeModalOpen: true,
         rulePanelExpanded: true,
         editShape: current,
-        keyField,
-        shape: this.props.shapes[shapeIndex]
+        // keyField,
+        shape
       })
     })
     this.props.resetForm('simpleModalForm')

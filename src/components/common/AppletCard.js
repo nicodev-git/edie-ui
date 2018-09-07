@@ -52,7 +52,7 @@ export default class AppletCard extends React.Component {
 
   onClickEdit (e) {
     const {onClickEdit} = this.props
-    onClickEdit && onClickEdit()
+    onClickEdit && onClickEdit(e)
 
     e.stopPropagation()
   }
