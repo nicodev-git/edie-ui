@@ -145,6 +145,7 @@ class WorkflowEditModalView extends React.Component {
                     desc={p.shape.description || p.shape.title}
                     img={`/images/${p.shape.img}`}
                     onClickEdit={e => onClickEditShape(i, false, e)}
+                    onClickDelete={() => onClickDeleteShape(i)}
                   />,
                   i < (wfDataItems.length - 1) ?
                     <img key={`img-${i}`} src="/images/right-arrow.png" className="valign-middle"/> : null
