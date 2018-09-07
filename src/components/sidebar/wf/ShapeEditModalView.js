@@ -3,6 +3,8 @@ import {Field} from 'redux-form'
 import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import {find} from 'lodash'
+
 import {
   Button,
   Checkbox,
@@ -137,9 +139,10 @@ class ShapeEditModalView extends Component {
 
   renderInput () {
     const {
-      outputObjects,
-      inputVars, onClickDeleteVar
+      outputObjects, allValues
     } = this.props
+    const {inputName} = allValues || {}
+    const inputObj = find(outputObjects, {name: inputName}) || {}
     return (
       <div className="margin-md-right" style={inputOutputWidth}>
         <div className="text-right" style={arrowStyle}>
@@ -156,7 +159,7 @@ class ShapeEditModalView extends Component {
             </tr>
             </thead>
             <tbody>
-            {inputVars.map((p, i) =>
+            {(inputObj.vars || []).map((p, i) =>
               <tr key={i}>
                 <td>{p}</td>
               </tr>
@@ -178,14 +181,14 @@ class ShapeEditModalView extends Component {
           {this.renderInput()}
 
           <div>
-            <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle}/>
+            <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle} alt=""/>
             <AppletCard
               color={colors[0]}
               name={title}
               desc={description}
               img={`/images/${img || ''}`}
             />
-            <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle}/>
+            <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle} alt=""/>
 
           </div>
 
@@ -198,9 +201,11 @@ class ShapeEditModalView extends Component {
 
   renderOutput () {
     const {
-      outputObjects, outputVars,
-      onClickAddVar, onClickDeleteVar
+      outputObjects, allValues
     } = this.props
+    const {outputName} = allValues || {}
+    const outputObj = find(outputObjects, {name: outputName}) || {}
+
     return (
       <div className="margin-md-left" style={inputOutputWidth}>
         <div style={arrowStyle}>
@@ -217,7 +222,7 @@ class ShapeEditModalView extends Component {
               </tr>
             </thead>
             <tbody>
-            {outputVars.map((p, i) =>
+            {(outputObj.vars || []).map((p, i) =>
               <tr key={i}>
                 <td>{p}</td>
               </tr>
