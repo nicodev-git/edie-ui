@@ -137,11 +137,11 @@ class ShapeEditModalView extends Component {
       inputVars, onClickDeleteVar
     } = this.props
     return (
-      <div className="flex-1">
+      <div className="margin-md-right">
         <div className="text-right" style={arrowStyle}>
           <Field
             name="inputName" component={FormSelect} floatingLabel="Input"
-            style={{minWidth: 150}} className="margin-md-right"
+            fullWidth className="text-left"
             options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
         </div>
         <div style={{maxHeight: 350, overflow: 'auto'}}>
@@ -200,11 +200,11 @@ class ShapeEditModalView extends Component {
       onClickAddVar, onClickDeleteVar
     } = this.props
     return (
-      <div className="flex-1">
+      <div className="flex-1 margin-md-left">
         <div style={arrowStyle}>
           <Field
             name="outputName" component={FormSelect} floatingLabel="Output"
-            style={{minWidth: 150}} className="margin-md-right"
+            className="margin-md-right" fullWidth
             options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
         </div>
         <div style={{maxHeight: 350, overflow: 'auto'}}>
