@@ -412,6 +412,8 @@ class WorkflowEditModal extends React.Component {
     const {objects} = wfData
     const object = {...objectConfig}
 
+    console.log(values)
+
     object.data = merge({}, values, {
       uiprops: {
         type: (objectConfig.config || {}).type,
