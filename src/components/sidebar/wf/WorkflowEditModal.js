@@ -859,18 +859,10 @@ class WorkflowEditModal extends React.Component {
         onClose={this.onCloseGrokFieldModal.bind(this)}
       />
     )
-
   }
 
   renderUserPickModal() {
     if (!this.props.userPickModalOpen) return null
-    // return (
-    //     <UserPickModal
-    //         fetchUsers={this.props.fetchUsers}
-    //         users={this.props.users}
-    //         onClose={this.onCloseAddUser.bind(this)}
-    //     />
-    // )
   }
 
   renderBraincellModal () {
