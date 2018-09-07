@@ -125,6 +125,14 @@ class ShapeEditModalView extends Component {
     )
   }
 
+  renderInputOutput () {
+    return (
+      <CardPanel title="Input/Output">
+
+      </CardPanel>
+    )
+  }
+
   renderOutput () {
     const {
       outputObjects, outputVars,
