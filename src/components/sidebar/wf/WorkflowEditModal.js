@@ -513,6 +513,9 @@ class WorkflowEditModal extends React.Component {
     const shapeIndex = findIndex(this.props.shapes, {
       type: current.config.type
     })
+    if (current.config.type === 'CUSTOMSHAPE') {
+
+    }
 
     if (shapeIndex < 0) return //alert('Shape not found')
 
