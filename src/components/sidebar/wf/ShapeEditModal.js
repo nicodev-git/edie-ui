@@ -233,7 +233,9 @@ export default connect(
       baseName: '',
       type: 'CUSTOMSHAPE',
       img: 'param.png',
-      group: props.group
+      group: props.group,
+      inputName: (props.outputObjects[0] || {}).name,
+      outputName: (props.outputObjects[0] || {}).name,
     },
     allValues: getFormValues('shapeEditForm')(state)
   })
