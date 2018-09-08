@@ -128,7 +128,6 @@ class WorkflowEditModalView extends React.Component {
       wfDataItems,
       onClickAddNewShape,
       onClickDeleteShape,
-      // onClickAddExtra,
       onClickEditShape
     } = this.props
     return (
