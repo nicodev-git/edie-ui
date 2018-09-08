@@ -202,7 +202,7 @@ class ShapeEditModalView extends Component {
 
   renderOutput () {
     const {
-      outputObjects, allValues
+      outputObjects, allValues, outputFields, onCheckOutputField
     } = this.props
     const {outputName} = allValues || {}
     const outputObj = find(outputObjects, {name: outputName}) || {}
@@ -227,10 +227,13 @@ class ShapeEditModalView extends Component {
               <tr key={i}>
                 <td>
                   <FormControlLabel
+                    className="margin-sm-left"
                     control={
-                      <Checkbox checked/>
+                      <Checkbox
+                        checked={outputFields.includes(p.name)}
+                        onChange={onCheckOutputField}/>
                     }
-                    label={label}
+                    label={p.name}
                   />
                   {p}
                 </td>

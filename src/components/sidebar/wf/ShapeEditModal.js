@@ -14,9 +14,9 @@ class ShapeEditModal extends Component {
       fields: (props.editShape ? props.editShape.fields : []) || [],
       applyDeviceIds: props.applyDeviceIds || [],
 
-
       editField: null,
       fieldModalOpen: false,
+      outputFields: (props.editShape ? props.editShape.outputFields : []) || []
     }
   }
   componentWillMount () {
@@ -216,6 +216,8 @@ class ShapeEditModal extends Component {
         applyDeviceIds={this.state.applyDeviceIds}
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
         onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
+
+        outputFields={this.state.outputFields}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
