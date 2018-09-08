@@ -85,7 +85,7 @@ export default connect(
     userInfo: state.dashboard.userInfo,
 
     shapes: state.workflow.shapes,
-    outputObjects: state.workflow.outputObjects,
+    playbookObjects: state.workflow.playbookObjects,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,

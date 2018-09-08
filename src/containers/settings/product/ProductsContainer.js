@@ -58,7 +58,7 @@ export default connect(
 
     workflows: state.workflow.workflows,
 
-    outputObjects: state.workflow.outputObjects
+    playbookObjects: state.workflow.playbookObjects
   }), {
     fetchVendorProducts,
     addVendorProduct,

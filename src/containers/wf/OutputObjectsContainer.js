@@ -20,7 +20,7 @@ class OutputObjectsContainer extends React.Component {
 }
 export default connect(
   state => ({
-    outputObjects: state.workflow.outputObjects
+    playbookObjects: state.workflow.playbookObjects
   }), {
     fetchOutputObjects,
     addOutputObject,
