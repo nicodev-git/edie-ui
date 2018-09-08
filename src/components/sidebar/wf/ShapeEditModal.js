@@ -16,6 +16,7 @@ class ShapeEditModal extends Component {
 
       editField: null,
       fieldModalOpen: false,
+      inputFields: (props.editShape ? props.editShape.inputFields : []) || [],
       outputFields: (props.editShape ? props.editShape.outputFields : []) || []
     }
   }
@@ -168,6 +169,19 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  onCheckInputField (field, checked) {
+    const {inputFields} = this.state
+    if (checked) {
+      this.setState({
+        inputFields: [...inputFields, field]
+      })
+    } else {
+      this.setState({
+        inputFields: inputFields.filter(p => p !== field)
+      })
+    }
+  }
+
   onCheckOutputField (field, checked) {
     const {outputFields} = this.state
     if (checked) {
@@ -233,8 +247,10 @@ class ShapeEditModal extends Component {
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
         onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
 
+        inputFields={this.state.inputFields}
         outputFields={this.state.outputFields}
         onCheckOutputField={this.onCheckOutputField.bind(this)}
+        onCheckInputField={this.onCheckInputField.bind(this)}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
