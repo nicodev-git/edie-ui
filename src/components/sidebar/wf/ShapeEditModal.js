@@ -24,11 +24,12 @@ class ShapeEditModal extends Component {
   }
   handleFormSubmit (values) {
     const {editShape} = this.props
-    const {fields} = this.state
+    const {fields, outputFields} = this.state
     const entity = {
       ...editShape,
       ...values,
-      fields
+      fields,
+      outputFields
     }
 
     if (!entity.title) return alert('Please input name')
