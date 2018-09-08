@@ -14,7 +14,8 @@ import {
   TableHead,
   TableRow,
   Toolbar,
-  Typography
+  Typography,
+  FormControlLabel
 } from '@material-ui/core'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -224,7 +225,15 @@ class ShapeEditModalView extends Component {
             <tbody>
             {(outputObj.vars || []).map((p, i) =>
               <tr key={i}>
-                <td>{p}</td>
+                <td>
+                  <FormControlLabel
+                    control={
+                      <Checkbox checked/>
+                    }
+                    label={label}
+                  />
+                  {p}
+                </td>
               </tr>
             )}
             </tbody>

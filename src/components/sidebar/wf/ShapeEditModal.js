@@ -14,8 +14,7 @@ class ShapeEditModal extends Component {
       fields: (props.editShape ? props.editShape.fields : []) || [],
       applyDeviceIds: props.applyDeviceIds || [],
 
-      inputVars: (props.editShape ? props.editShape.inputVars : []) || [],
-      outputVars: (props.editShape ? props.editShape.outputVars : []) || [],
+
       editField: null,
       fieldModalOpen: false,
     }
@@ -25,12 +24,11 @@ class ShapeEditModal extends Component {
   }
   handleFormSubmit (values) {
     const {editShape} = this.props
-    const {fields, outputVars} = this.state
+    const {fields} = this.state
     const entity = {
       ...editShape,
       ...values,
-      fields,
-      outputVars
+      fields
     }
 
     if (!entity.title) return alert('Please input name')
@@ -211,8 +209,7 @@ class ShapeEditModal extends Component {
         servers={this.getServers()}
 
         outputObjects={outputObjects}
-        inputVars={this.state.inputVars}
-        outputVars={this.state.outputVars}
+
         onClickAddVar={this.onClickAddVar.bind(this)}
         onClickDeleteVar={this.onClickDeleteVar.bind(this)}
 
