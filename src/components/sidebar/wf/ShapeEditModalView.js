@@ -230,12 +230,11 @@ class ShapeEditModalView extends Component {
                     className="margin-sm-left"
                     control={
                       <Checkbox
-                        checked={outputFields.includes(p.name)}
-                        onChange={onCheckOutputField}/>
+                        checked={outputFields.includes(p)}
+                        onChange={(e) => onCheckOutputField(p, e.target.checked)}/>
                     }
-                    label={p.name}
+                    label={p}
                   />
-                  {p}
                 </td>
               </tr>
             )}

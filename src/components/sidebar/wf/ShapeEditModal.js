@@ -167,6 +167,21 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  onCheckOutputField (field, checked) {
+    const {outputFields} = this.state
+    if (checked) {
+      this.setState({
+        outputFields: [...outputFields, field]
+      })
+    } else {
+      this.setState({
+        outputFields: outputFields.filter(p => p !== field)
+      })
+    }
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderFieldModal () {
     const {fieldModalOpen, editField} = this.state
     if (!fieldModalOpen) return null
@@ -218,6 +233,7 @@ class ShapeEditModal extends Component {
         onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
 
         outputFields={this.state.outputFields}
+        onCheckOutputField={this.onCheckOutputField.bind(this)}
       >
         {this.renderFieldModal()}
         {shapeScriptStatus === 'loading' ? <RefreshOverlay/> : ''}
