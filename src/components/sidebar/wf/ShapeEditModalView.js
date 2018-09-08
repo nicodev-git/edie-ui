@@ -140,7 +140,7 @@ class ShapeEditModalView extends Component {
 
   renderInput () {
     const {
-      outputObjects, allValues
+      outputObjects, allValues, inputFields, onCheckInputField
     } = this.props
     const {inputName} = allValues || {}
     const inputObj = find(outputObjects, {name: inputName}) || {}
@@ -162,7 +162,17 @@ class ShapeEditModalView extends Component {
             <tbody>
             {(inputObj.vars || []).map((p, i) =>
               <tr key={i}>
-                <td>{p}</td>
+                <td>
+                  <FormControlLabel
+                    className="margin-sm-left"
+                    control={
+                      <Checkbox
+                        checked={inputFields.includes(p)}
+                        onChange={(e) => onCheckInputField(p, e.target.checked)}/>
+                    }
+                    label={p}
+                  />
+                </td>
               </tr>
             )}
             </tbody>

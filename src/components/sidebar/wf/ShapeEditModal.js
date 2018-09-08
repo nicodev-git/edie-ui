@@ -25,11 +25,12 @@ class ShapeEditModal extends Component {
   }
   handleFormSubmit (values) {
     const {editShape} = this.props
-    const {fields, outputFields} = this.state
+    const {fields, outputFields, inputFields} = this.state
     const entity = {
       ...editShape,
       ...values,
       fields,
+      inputFields,
       outputFields
     }
 
