@@ -1059,7 +1059,7 @@ export const updateShapeScriptResult = (data) => {
 
 export const fetchOutputObjects = () => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/outputobject`).then(res => {
+    axios.get(`${ROOT_URL}/playbookobject`).then(res => {
       dispatch({type: FETCH_OUTPUT_OBJECTS, data: res.data})
     })
   }
@@ -1067,7 +1067,7 @@ export const fetchOutputObjects = () => {
 
 export const addOutputObject = (entity) => {
   return dispatch => {
-    axios.post(`${ROOT_URL}/outputobject`, entity).then(res => {
+    axios.post(`${ROOT_URL}/playbookobject`, entity).then(res => {
       if (res.data) dispatch({type: ADD_OUTPUT_OBJECT, data: res.data})
     })
   }
@@ -1075,7 +1075,7 @@ export const addOutputObject = (entity) => {
 
 export function updateOutputObject (entity) {
   return dispatch => {
-    axios.put(`${ROOT_URL}/outputobject/${entity.id}`, entity).then(res => {
+    axios.put(`${ROOT_URL}/playbookobject/${entity.id}`, entity).then(res => {
       if (res.data) dispatch({type: UPDATE_OUTPUT_OBJECT, data: res.data})
     })
   }
@@ -1083,7 +1083,7 @@ export function updateOutputObject (entity) {
 
 export function removeOutputObject (entity) {
   return dispatch => {
-    axios.delete(`${ROOT_URL}/outputobject/${entity.id}`).then(res => {
+    axios.delete(`${ROOT_URL}/playbookobject/${entity.id}`).then(res => {
       if (res.data) dispatch({type: REMOVE_OUTPUT_OBJECT, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
