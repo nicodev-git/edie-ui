@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import WorkflowShape from 'components/sidebar/wf/ShapeList'
+import Shapes from 'components/sidebar/wf/shape/Shapes'
 
 import {
   openDeviceWfDiagramModal,
@@ -39,6 +39,8 @@ import {
   testShapeScript,
   updateShapeScriptResult,
 
+  fetchOutputObjects,
+
   showWfSettingModal,
   fetchWfSetting,
   saveWfSetting,
@@ -55,13 +57,15 @@ import {
   fetchProductTypes,
   fetchProductVendors,
 
+  resetCustomerFlow,
+
   resetForm
 } from 'actions'
 
-class WorkflowShapeContainer extends React.Component {
+class ShapesContainer extends React.Component {
   render () {
     return (
-      <WorkflowShape {...this.props}/>
+      <Shapes {...this.props}/>
     )
   }
 }
@@ -89,6 +93,7 @@ export default connect(
     shapes: state.workflow.shapes,
     shapeScriptResult: state.workflow.shapeScriptResult,
     shapeScriptStatus: state.workflow.shapeScriptStatus,
+    playbookObjects: state.workflow.playbookObjects,
 
     wfSettingModalOpen: state.workflow.wfSettingModalOpen,
     editWfSetting: state.workflow.editWfSetting,
@@ -139,6 +144,8 @@ export default connect(
     testShapeScript,
     updateShapeScriptResult,
 
+    fetchOutputObjects,
+
     showWfSettingModal,
     fetchWfSetting,
     saveWfSetting,
@@ -155,6 +162,8 @@ export default connect(
     fetchProductTypes,
     fetchProductVendors,
 
+    resetCustomerFlow,
+
     resetForm
   }
-)(withRouter(WorkflowShapeContainer))
+)(withRouter(ShapesContainer))

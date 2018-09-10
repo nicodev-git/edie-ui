@@ -29,7 +29,7 @@ import WorkflowsContainer from 'containers/wf/WorkflowsContainer'
 import WorkflowEditDiagramContainer from 'containers/wf/WorkflowEditDiagramContainer'
 import WorkflowEditContainer from 'containers/wf/WorkflowEditContainer'
 import WorkflowAddContainer from 'containers/wf/WorkflowAddContainer'
-import WorkflowShapeContainer from 'containers/wf/WorkflowShapeContainer'
+import ShapesContainer from 'containers/wf/ShapesContainer'
 import WorkflowTestContainer from 'containers/wf/WfTestContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
@@ -235,7 +235,7 @@ class MainpageContainer extends Component {
         <Route path="/:device/editwf/:id" component={EditWfContainer} exact/>
         <Route path="/:device/editwf/diagram/:id" component={EditWfDiagramContainer}/>
         <Route path="/workflow/add" component={WorkflowAddContainer} exact/>
-        <Route path="/workflow/shapes" component={WorkflowShapeContainer} exact/>
+        <Route path="/workflow/shapes" component={ShapesContainer} exact/>
         <Route path="/workflow/playbookObjects" component={OutputObjectsContainer} exact/>
         <Route path="/workflow/simulation" component={WorkflowTestContainer} exact/>
         <Route path="/workflow/:name/diagram" component={WorkflowEditDiagramContainer} exact/>
