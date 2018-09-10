@@ -8,7 +8,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import AppletCard from 'components/common/AppletCard'
 import { appletColors as colors } from 'shared/Global'
-import ShapeListModalView from "../ShapeListModalView";
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 export default class Shapes extends React.Component {
   constructor(props) {
@@ -55,13 +55,6 @@ export default class Shapes extends React.Component {
     this.props.onClose()
   }
 
-  onClickAdd () {
-    this.setState({
-      editModalOpen: true,
-      editShape: null
-    })
-  }
-
   onClickEditItem (editShape) {
     console.log(editShape)
     // if (editShape.type === 'PRODUCTACTION') return
@@ -75,6 +68,10 @@ export default class Shapes extends React.Component {
     if (editShape.type === 'PRODUCTACTION') return
     if (!window.confirm('Click OK to remove')) return
     this.props.removeShape(editShape)
+  }
+
+  onClickAddNewShape () {
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -121,6 +118,8 @@ export default class Shapes extends React.Component {
               />
             )}
           </ul>
+
+          <FloatingMenu onClickMain={this.onClickAddNewShape.bind(this)}/>
         </TabPageBody>
       </TabPage>
     )

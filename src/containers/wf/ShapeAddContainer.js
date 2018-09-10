@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import Shapes from 'components/sidebar/wf/shape/Shapes'
+import ShapeAdd from 'components/sidebar/wf/shape/ShapeAdd'
 
 import {
   fetchShapes,
@@ -18,7 +18,7 @@ import {
 class ShapesContainer extends React.Component {
   render () {
     return (
-      <Shapes {...this.props}/>
+      <ShapeAdd {...this.props}/>
     )
   }
 }
