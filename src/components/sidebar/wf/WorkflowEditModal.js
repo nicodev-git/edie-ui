@@ -314,8 +314,10 @@ class WorkflowEditModal extends React.Component {
     }
     if (!entity.ownerUser) entity.ownerUser = userInfo.username
 
-    if (!entity.productTypeId) {
-
+    if (entity.filterType === 'PRODUCT_TYPE') {
+      if (!entity.productTypeId) return alert('Please choose product type')
+    } else {
+      if (!entity.productId) return alert('Please choose product')
     }
 
     const tagIndex = entity.tags.indexOf(SCHEDULED)
