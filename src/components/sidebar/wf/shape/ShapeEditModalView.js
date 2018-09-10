@@ -285,10 +285,10 @@ class ShapeEditModalView extends Component {
   render () {
     const {onSubmit, onClickClose,
       onClickTest, shapeScriptResult,
-      children
+      children, noModal
     } = this.props
-    return (
-      <Modal title="Shape" contentStyle={{width: 1000}} onRequestClose={onClickClose}>
+    const content = (
+      <div>
         <form onSubmit={onSubmit}>
           <CardPanel title="Shape">
             <Field name="title" component={FormInput} floatingLabel="Name" className="margin-md-right"/>
@@ -305,10 +305,10 @@ class ShapeEditModalView extends Component {
           <CardPanel title="Test Result">
             <table className="table table-hover">
               <thead>
-                <tr>
-                  <th>Device</th>
-                  <th>Result</th>
-                </tr>
+              <tr>
+                <th>Device</th>
+                <th>Result</th>
+              </tr>
               </thead>
               <tbody>
               {shapeScriptResult.map((s, i) =>
@@ -327,6 +327,12 @@ class ShapeEditModalView extends Component {
           </div>
         </form>
         {children}
+      </div>
+    )
+    if (noModal) return content
+    return (
+      <Modal title="Shape" contentStyle={{width: 1000}} onRequestClose={onClickClose}>
+        {content}
       </Modal>
     )
   }

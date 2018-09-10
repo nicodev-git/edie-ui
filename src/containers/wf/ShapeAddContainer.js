@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'
 import ShapeAdd from 'components/sidebar/wf/shape/ShapeAdd'
 
 import {
+  fetchDevices,
+
   fetchShapes,
   addShape,
   updateShape,
@@ -31,6 +33,8 @@ export default connect(
     shapeScriptStatus: state.workflow.shapeScriptStatus,
     playbookObjects: state.workflow.playbookObjects
   }), {
+    fetchDevices,
+
     fetchShapes,
     addShape,
     updateShape,
