@@ -271,10 +271,10 @@ class ShapeEditModalView extends Component {
           <tbody>
           {(inputObj ? (inputObj.vars || []) : []).map((p, i) =>
             <tr key={i}>
-              <td>{p.name}</td>
-              <td>{fields[p.name] || ''}</td>
+              <td>{p}</td>
+              <td>{fields[p] || ''}</td>
               <td>
-                <EditIcon className="link" onClick={() => onClickEditField(i, p.name)}/>
+                <EditIcon className="link" onClick={() => onClickEditField(i, p)}/>
               </td>
             </tr>
           )}

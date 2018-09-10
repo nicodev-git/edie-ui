@@ -940,10 +940,10 @@ class WorkflowEditModal extends React.Component {
 
     const contents = tpl.form || []
     if (shape.type === 'CUSTOMSHAPE') {
-      shape.fields.forEach(field => {
+      (shape.inputFields || []).forEach(field => {
         contents.push({
-          key: `mapping.${field.name}`,
-          name: field.name
+          key: `mapping.${field}`,
+          name: field
         })
       })
     }

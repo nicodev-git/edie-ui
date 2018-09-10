@@ -46,7 +46,7 @@ class ShapeEditModal extends Component {
   onClickEditField (index, name) {
     const {fields} = this.state
 
-    showPrompt('Please type testing value', value => {
+    showPrompt('Please type testing value', fields[name] || '',  value => {
       if (!value) return
 
       this.setState({
@@ -93,10 +93,8 @@ class ShapeEditModal extends Component {
     if (!applyDeviceIds.length) return alert('Please choose applied devices first.')
     this.props.testShapeScript({
       deviceIds: applyDeviceIds.join(','),
-      shape: {
-        ...allValues,
-        fields
-      }
+      shape: allValues,
+      fields
     })
   }
 
