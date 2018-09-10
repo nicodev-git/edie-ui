@@ -196,9 +196,7 @@ class ShapeEditModalView extends Component {
               img={`/images/${img || ''}`}
             />
             <img src="/images/right-arrow.png" className="valign-middle" style={arrowStyle} alt=""/>
-
           </div>
-
           {this.renderOutput()}
           <div className="flex-1"></div>
         </div>

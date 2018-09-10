@@ -16,7 +16,7 @@ export default class ShapeListModalView extends Component {
   }
 
   renderList () {
-    const { shapes, onClickItem, onClickEditItem, onClickDeleteItem } = this.props
+    const { shapes, onClickItem} = this.props
     return (
       <div style={{height: 640, overflow: 'auto'}}>
         <ul className="web-applet-cards">
@@ -28,8 +28,6 @@ export default class ShapeListModalView extends Component {
               desc={p.description || p.title}
               img={`/images/${p.img}`}
               onClick={() => onClickItem(p)}
-              onClickEdit={() => onClickEditItem(p)}
-              onClickDelete={() => onClickDeleteItem(p)}
             />
           )}
         </ul>
@@ -57,7 +55,7 @@ export default class ShapeListModalView extends Component {
 
     return (
       <Modal title="Shape" onRequestClose={onClose} contentStyle={{width: 1000}}>
-        <CardPanel title={this.renderTitle()} tools={<div><AddIcon className="link" onClick={onClickAdd}/></div>}>
+        <CardPanel title={this.renderTitle()}>
           {this.renderList()}
         </CardPanel>
         {this.props.children}
