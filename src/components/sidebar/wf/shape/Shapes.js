@@ -1,6 +1,6 @@
 import React from 'react'
 import {uniq} from 'lodash'
-import {Button, MenuItem, Select} from '@material-ui/core'
+import {MenuItem, Select} from '@material-ui/core'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -8,6 +8,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import AppletCard from 'components/common/AppletCard'
 import { appletColors as colors } from 'shared/Global'
+import ShapeListModalView from "../ShapeListModalView";
 
 export default class Shapes extends React.Component {
   constructor(props) {
@@ -19,6 +20,12 @@ export default class Shapes extends React.Component {
       editShape: null
     }
   }
+
+  componentWillMount() {
+    this.props.fetchShapes()
+    this.props.fetchOutputObjects()
+  }
+
 
   getGroups() {
     const {shapes} = this.props
@@ -57,11 +64,11 @@ export default class Shapes extends React.Component {
 
   onClickEditItem (editShape) {
     console.log(editShape)
-    if (editShape.type === 'PRODUCTACTION') return
-    this.setState({
-      editModalOpen: true,
-      editShape
-    })
+    // if (editShape.type === 'PRODUCTACTION') return
+    // this.setState({
+    //   editModalOpen: true,
+    //   editShape
+    // })
   }
 
   onClickDeleteItem (editShape) {
@@ -73,10 +80,11 @@ export default class Shapes extends React.Component {
   ///////////////////////////////////////////////////////////////////
 
   renderTitle () {
-    const {selectedGroup, groups, onChangeGroup} = this.props
+    const {selectedGroup} = this.state
+    const groups = this.getGroups()
     return (
       <Select
-        value={selectedGroup} onChange={onChangeGroup}
+        value={selectedGroup} onChange={this.onChangeGroup.bind(this)}
         displayEmpty>
         {groups.map((p, i) =>
           <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
@@ -86,7 +94,8 @@ export default class Shapes extends React.Component {
   }
 
   render () {
-    const { shapes, onClickItem} = this.props
+    const { onClickItem} = this.props
+    const shapes = this.getFilteredShapes()
     return (
       <TabPage>
         <TabPageHeader title="Shapes">
@@ -107,6 +116,8 @@ export default class Shapes extends React.Component {
                 desc={p.description || p.title}
                 img={`/images/${p.img}`}
                 onClick={() => onClickItem(p)}
+                onClickEdit={this.onClickEditItem.bind(this, p)}
+                onClickDelete={this.onClickDeleteItem.bind(this, p)}
               />
             )}
           </ul>
@@ -114,23 +125,4 @@ export default class Shapes extends React.Component {
       </TabPage>
     )
   }
-
-  // render () {
-  //   return (
-  //     <ShapeListModalView
-  //       {...this.props}
-  //       shapes={this.getFilteredShapes()}
-  //       onClickAdd={this.onClickAdd.bind(this)}
-  //
-  //       selectedGroup={this.state.selectedGroup}
-  //       groups={this.getGroups()}
-  //       onChangeGroup={this.onChangeGroup.bind(this)}
-  //       onClickItem={this.onClickItem.bind(this)}
-  //       onClickEditItem={this.onClickEditItem.bind(this)}
-  //       onClickDeleteItem={this.onClickDeleteItem.bind(this)}
-  //     >
-  //       {this.renderEditModal()}
-  //     </ShapeListModalView>
-  //   )
-  // }
 }

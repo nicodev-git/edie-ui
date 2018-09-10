@@ -256,6 +256,12 @@ class Workflows extends React.Component {
 
   ////////////////////////////////////////////////////////////////
 
+  onClickShapes () {
+    this.props.history.push('/workflow/shapes')
+  }
+
+  ////////////////////////////////////////////////////////////////
+
   renderSeverity (wf) {
     const cell = this.getIncidentCell(wf)
     if (!cell) return null
@@ -385,6 +391,7 @@ class Workflows extends React.Component {
         <MenuItem onClick={this.onClickGlobalVars.bind(this)}>Global Variables</MenuItem>
         <MenuItem onClick={this.onClickSettings.bind(this)}>Settings</MenuItem>
         <MenuItem onClick={this.onClickOutputObjects.bind(this)}>Playbook Objects</MenuItem>
+        <MenuItem onClick={this.onClickShapes.bind(this)}>Shapes</MenuItem>
       </Menu>
     )
   }
