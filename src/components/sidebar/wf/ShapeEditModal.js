@@ -220,7 +220,7 @@ class ShapeEditModal extends Component {
   render () {
     const {
       handleSubmit, shapeScriptResult, shapeScriptStatus, servers,
-      outputObjects, allValues
+      playbookObjects, allValues
     } = this.props
     return (
       <ShapeEditModalView
@@ -239,7 +239,7 @@ class ShapeEditModal extends Component {
 
         servers={this.getServers()}
 
-        outputObjects={outputObjects}
+        playbookObjects={playbookObjects}
 
         onClickAddVar={this.onClickAddVar.bind(this)}
         onClickDeleteVar={this.onClickDeleteVar.bind(this)}
@@ -267,8 +267,8 @@ export default connect(
       type: 'CUSTOMSHAPE',
       img: 'param.png',
       group: props.group,
-      inputName: (props.outputObjects[0] || {}).name,
-      outputName: (props.outputObjects[0] || {}).name,
+      inputName: (props.playbookObjects[0] || {}).name,
+      outputName: (props.playbookObjects[0] || {}).name,
     },
     allValues: getFormValues('shapeEditForm')(state)
   })
