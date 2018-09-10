@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import OutputObjects from 'components/sidebar/wf/playbookObjects/OutputObjects'
+import PlaybookObjects from 'components/sidebar/wf/playbookObjects/OutputObjects'
 
 import {
   fetchOutputObjects,
@@ -14,7 +14,7 @@ import {
 class OutputObjectsContainer extends React.Component {
   render () {
     return (
-      <OutputObjects {...this.props}/>
+      <PlaybookObjects {...this.props}/>
     )
   }
 }
