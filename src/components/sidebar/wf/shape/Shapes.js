@@ -71,7 +71,7 @@ export default class Shapes extends React.Component {
   }
 
   onClickAddNewShape () {
-
+    this.props.history.push('/workflow/shapes/add')
   }
 
   ///////////////////////////////////////////////////////////////////
