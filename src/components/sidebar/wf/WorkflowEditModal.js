@@ -314,6 +314,10 @@ class WorkflowEditModal extends React.Component {
     }
     if (!entity.ownerUser) entity.ownerUser = userInfo.username
 
+    if (!entity.productTypeId) {
+
+    }
+
     const tagIndex = entity.tags.indexOf(SCHEDULED)
     if (entity.scheduled) {
       if (tagIndex < 0) entity.tags.push(SCHEDULED)
