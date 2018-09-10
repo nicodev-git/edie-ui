@@ -50,7 +50,7 @@ export default class ShapeListModalView extends Component {
 
   render() {
     const {
-      onClose, onClickAdd
+      onClose
     } = this.props
 
     return (
