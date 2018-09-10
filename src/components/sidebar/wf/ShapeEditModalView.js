@@ -140,17 +140,17 @@ class ShapeEditModalView extends Component {
 
   renderInput () {
     const {
-      outputObjects, allValues, inputFields, onCheckInputField
+      playbookObjects, allValues, inputFields, onCheckInputField
     } = this.props
     const {inputName} = allValues || {}
-    const inputObj = find(outputObjects, {name: inputName}) || {}
+    const inputObj = find(playbookObjects, {name: inputName}) || {}
     return (
       <div className="margin-md-right" style={inputOutputWidth}>
         <div className="text-right" style={arrowStyle}>
           <Field
             name="inputName" component={FormSelect} floatingLabel="Input"
             fullWidth className="text-left"
-            options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
+            options={playbookObjects.map(p => ({label: p.name, value: p.name}))}/>
         </div>
         <div style={{maxHeight: 350, overflow: 'auto'}}>
           <table className="table table-hover">
@@ -212,10 +212,10 @@ class ShapeEditModalView extends Component {
 
   renderOutput () {
     const {
-      outputObjects, allValues, outputFields, onCheckOutputField
+      playbookObjects, allValues, outputFields, onCheckOutputField
     } = this.props
     const {outputName} = allValues || {}
-    const outputObj = find(outputObjects, {name: outputName}) || {}
+    const outputObj = find(playbookObjects, {name: outputName}) || {}
 
     return (
       <div className="margin-md-left" style={inputOutputWidth}>
@@ -223,7 +223,7 @@ class ShapeEditModalView extends Component {
           <Field
             name="outputName" component={FormSelect} floatingLabel="Output"
             className="margin-md-right" fullWidth
-            options={outputObjects.map(p => ({label: p.name, value: p.name}))}/>
+            options={playbookObjects.map(p => ({label: p.name, value: p.name}))}/>
         </div>
         <div style={{maxHeight: 350, overflow: 'auto'}}>
           <table className="table table-hover">
