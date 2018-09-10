@@ -276,7 +276,7 @@ class ShapeEditModalView extends Component {
               <td>{p.name}</td>
               <td>{fields[p.name] || ''}</td>
               <td>
-                <EditIcon className="link" onClick={() => onClickEditField(i)}/>
+                <EditIcon className="link" onClick={() => onClickEditField(i, p,name)}/>
                 <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
               </td>
             </tr>

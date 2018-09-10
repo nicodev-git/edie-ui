@@ -44,7 +44,6 @@ class ShapeEditModal extends Component {
   }
 
   onClickEditField (index) {
-    const {fields} = this.state
     this.setState({
       editField: fields[index],
       fieldModalOpen: true
