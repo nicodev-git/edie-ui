@@ -86,7 +86,7 @@ export default class OutputObjects extends React.Component {
   ///////////////////////////////////////////////////////////////////////////////////
 
   renderTable () {
-    const objects = this.props.outputObjects
+    const objects = this.props.playbookObjects
     return (
       <div className="flex-1" style={{overflow: 'auto', padding: 10}}>
         <table className="table table-hover">
