@@ -27,12 +27,6 @@ export default class OutputObjects extends React.Component {
       objectModalOpen: true,
       editObject: null
     })
-    // showPrompt('Please type name', '', name => {
-    //   if (!name) return
-    //   this.props.addOutputObject({
-    //     name
-    //   })
-    // })
   }
 
   onClickEdit (object) {
