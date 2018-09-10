@@ -221,10 +221,11 @@ class ShapeEditModal extends Component {
   render () {
     const {
       handleSubmit, shapeScriptResult, shapeScriptStatus, servers,
-      playbookObjects, allValues
+      playbookObjects, allValues, noModal
     } = this.props
     return (
       <ShapeEditModalView
+        noModal={noModal}
         allValues={allValues}
         fields={this.state.fields}
         shapeScriptResult={shapeScriptResult}
