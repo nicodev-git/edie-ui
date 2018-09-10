@@ -84,7 +84,7 @@ const initialState = {
 
   shapeScriptResult: [],
 
-  outputObjects: []
+  playbookObjects: []
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -203,13 +203,13 @@ export default function (state = initialState, action) {
       return { ...state, testIncidents: action.data }
 
     case FETCH_OUTPUT_OBJECTS:
-      return { ...state, outputObjects: action.data }
+      return { ...state, playbookObjects: action.data }
     case ADD_OUTPUT_OBJECT:
-      return { ...state, outputObjects: [...state.outputObjects, action.data] }
+      return { ...state, playbookObjects: [...state.playbookObjects, action.data] }
     case UPDATE_OUTPUT_OBJECT:
-      return { ...state, outputObjects: state.outputObjects.map(p => p.id === action.data.id ? action.data : p) }
+      return { ...state, playbookObjects: state.playbookObjects.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_OUTPUT_OBJECT:
-      return { ...state, outputObjects: state.outputObjects.filter(p => p.id !== action.data.id) }
+      return { ...state, playbookObjects: state.playbookObjects.filter(p => p.id !== action.data.id) }
 
     default:
       return state
