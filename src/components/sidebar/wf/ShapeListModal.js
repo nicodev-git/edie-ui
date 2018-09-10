@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {uniq} from 'lodash'
 
 import ShapeListModalView from './ShapeListModalView'
-import ShapeEditModal from './ShapeEditModal'
 
 export default class ShapeListModal extends Component {
   constructor(props) {
@@ -85,27 +84,27 @@ export default class ShapeListModal extends Component {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  renderEditModal () {
-    if (!this.state.editModalOpen) return false
-    return (
-      <ShapeEditModal
-        group={this.state.selectedGroup}
-        editShape={this.state.editShape}
-        onSave={this.onSaveShape.bind(this)}
-        onClose={this.onCloseShape.bind(this)}
-
-        applyDeviceIds={this.props.applyDeviceIds}
-        testShapeScript={this.props.testShapeScript}
-
-        updateShapeScriptResult={this.props.updateShapeScriptResult}
-        shapeScriptResult={this.props.shapeScriptResult}
-        shapeScriptStatus={this.props.shapeScriptStatus}
-
-        devices={this.props.devices}
-        playbookObjects={this.props.playbookObjects}
-      />
-    )
-  }
+  // renderEditModal () {
+  //   if (!this.state.editModalOpen) return false
+  //   return (
+  //     <ShapeEditModal
+  //       group={this.state.selectedGroup}
+  //       editShape={this.state.editShape}
+  //       onSave={this.onSaveShape.bind(this)}
+  //       onClose={this.onCloseShape.bind(this)}
+  //
+  //       applyDeviceIds={this.props.applyDeviceIds}
+  //       testShapeScript={this.props.testShapeScript}
+  //
+  //       updateShapeScriptResult={this.props.updateShapeScriptResult}
+  //       shapeScriptResult={this.props.shapeScriptResult}
+  //       shapeScriptStatus={this.props.shapeScriptStatus}
+  //
+  //       devices={this.props.devices}
+  //       playbookObjects={this.props.playbookObjects}
+  //     />
+  //   )
+  // }
 
   render () {
     return (
@@ -121,7 +120,6 @@ export default class ShapeListModal extends Component {
         onClickEditItem={this.onClickEditItem.bind(this)}
         onClickDeleteItem={this.onClickDeleteItem.bind(this)}
       >
-        {this.renderEditModal()}
       </ShapeListModalView>
     )
   }

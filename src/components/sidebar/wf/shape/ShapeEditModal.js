@@ -6,7 +6,7 @@ import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import ShapeEditModalView from './ShapeEditModalView'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {showPrompt, showConfirm} from 'components/common/Alert'
-import {find} from "lodash";
+import {find} from 'lodash'
 
 class ShapeEditModal extends Component {
   constructor(props) {
