@@ -236,7 +236,7 @@ class MainpageContainer extends Component {
         <Route path="/:device/editwf/diagram/:id" component={EditWfDiagramContainer}/>
         <Route path="/workflow/add" component={WorkflowAddContainer} exact/>
         <Route path="/workflow/shapes" component={WorkflowShapeContainer} exact/>
-        <Route path="/workflow/outputs" component={OutputObjectsContainer} exact/>
+        <Route path="/workflow/playbookObjects" component={OutputObjectsContainer} exact/>
         <Route path="/workflow/simulation" component={WorkflowTestContainer} exact/>
         <Route path="/workflow/:name/diagram" component={WorkflowEditDiagramContainer} exact/>
         <Route path="/workflow/:name/edit" component={WorkflowEditContainer} exact/>

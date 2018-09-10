@@ -251,7 +251,7 @@ class Workflows extends React.Component {
   ////////////////////////////////////////////////////////////////
 
   onClickOutputObjects () {
-    this.props.history.push('/workflow/outputs')
+    this.props.history.push('/workflow/playbookObjects')
   }
 
   ////////////////////////////////////////////////////////////////
@@ -384,7 +384,7 @@ class Workflows extends React.Component {
         <MenuItem onClick={this.onClickFlowGroup.bind(this)}>Flow Group</MenuItem>
         <MenuItem onClick={this.onClickGlobalVars.bind(this)}>Global Variables</MenuItem>
         <MenuItem onClick={this.onClickSettings.bind(this)}>Settings</MenuItem>
-        <MenuItem onClick={this.onClickOutputObjects.bind(this)}>Output Objects</MenuItem>
+        <MenuItem onClick={this.onClickOutputObjects.bind(this)}>Playbook Objects</MenuItem>
       </Menu>
     )
   }

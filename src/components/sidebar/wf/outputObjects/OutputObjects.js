@@ -152,7 +152,7 @@ export default class OutputObjects extends React.Component {
   render() {
     return (
       <TabPage>
-        <TabPageHeader title="Output Objects">
+        <TabPageHeader title="Playbook Objects">
           <div className="text-center margin-md-top">
             <div className="pull-right">
             </div>
