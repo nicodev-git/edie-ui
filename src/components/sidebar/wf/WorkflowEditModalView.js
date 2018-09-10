@@ -59,8 +59,7 @@ const toolbarStyles = theme => ({
       ? {
         color: theme.palette.secondary.main,
         backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      }
-      : {
+      } : {
         color: theme.palette.text.primary,
         backgroundColor: theme.palette.secondary.dark,
       },
@@ -105,7 +104,7 @@ class WorkflowEditModalView extends React.Component {
                    alt="" className="link valign-middle" width="16"/>
               <span className="valign-middle">{g.key}</span>
             </div>
-            <div className={active === i ? 'padding-sm-left' : 'hidden'}>
+            <div className={(active === i) ? 'padding-sm-left' : 'hidden'}>
               {g.items}
             </div>
           </div>
