@@ -140,10 +140,8 @@ class ShapeEditModalView extends Component {
 
   renderInput () {
     const {
-      playbookObjects, allValues, inputFields, onCheckInputField
+      playbookObjects, inputFields, onCheckInputField, inputObj
     } = this.props
-    const {inputName} = allValues || {}
-    const inputObj = find(playbookObjects, {name: inputName}) || {}
     return (
       <div className="margin-md-right" style={inputOutputWidth}>
         <div className="text-right" style={arrowStyle}>
@@ -160,7 +158,7 @@ class ShapeEditModalView extends Component {
             </tr>
             </thead>
             <tbody>
-            {(inputObj.vars || []).map((p, i) =>
+            {(inputObj ? (inputObj.vars || []) : []).map((p, i) =>
               <tr key={i}>
                 <td>
                   <FormControlLabel
@@ -255,10 +253,42 @@ class ShapeEditModalView extends Component {
     )
   }
 
+  renderScript () {
+    const {
+      onClickEditField, onClickDeleteField,
+      fields,inputFields, inputObj
+    } = this.props
+    return (
+      <CardPanel title="Script">
+        <Field name="script" component={FormTextArea} style={{width: '100%', height: 300, fontSize: '14px'}}/>
+
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Testing Value</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          {(inputObj ? (inputObj.vars || []) : []).map((p, i) =>
+            <tr key={i}>
+              <td>{p.name}</td>
+              <td>{fields[p.name] || ''}</td>
+              <td>
+                <EditIcon className="link" onClick={() => onClickEditField(i)}/>
+                <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+      </CardPanel>
+    )
+  }
+
   render () {
     const {onSubmit, onClickClose,
-      onClickAddField, onClickEditField, onClickDeleteField,
-      fields,
       onClickTest, shapeScriptResult,
       children
     } = this.props
@@ -273,31 +303,7 @@ class ShapeEditModalView extends Component {
 
           {this.renderInputOutput()}
 
-          <CardPanel title="Script" tools={<AddIcon className="link" onClick={onClickAddField}/>}>
-            <Field name="script" component={FormTextArea} style={{width: '100%', height: 300, fontSize: '14px'}}/>
-
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Testing Value</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              {fields.map((p, i) =>
-                <tr key={i}>
-                  <td>{p.name}</td>
-                  <td>{p.value}</td>
-                  <td>
-                    <EditIcon className="link" onClick={() => onClickEditField(i)}/>
-                    <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
-                  </td>
-                </tr>
-              )}
-              </tbody>
-            </table>
-          </CardPanel>
+          {this.renderScript()}
 
           {this.renderDevices()}
 

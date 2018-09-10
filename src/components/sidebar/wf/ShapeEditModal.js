@@ -6,12 +6,13 @@ import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import ShapeEditModalView from './ShapeEditModalView'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {showPrompt, showConfirm} from 'components/common/Alert'
+import {find} from "lodash";
 
 class ShapeEditModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fields: (props.editShape ? props.editShape.fields : []) || [],
+      fields: {},
       applyDeviceIds: props.applyDeviceIds || [],
 
       editField: null,
@@ -25,11 +26,10 @@ class ShapeEditModal extends Component {
   }
   handleFormSubmit (values) {
     const {editShape} = this.props
-    const {fields, outputFields, inputFields} = this.state
+    const {outputFields, inputFields} = this.state
     const entity = {
       ...editShape,
       ...values,
-      fields,
       inputFields,
       outputFields
     }
@@ -41,13 +41,6 @@ class ShapeEditModal extends Component {
 
   onHide () {
     this.props.onClose()
-  }
-
-  onClickAddField () {
-    this.setState({
-      fieldModalOpen: true,
-      editField: null
-    })
   }
 
   onClickEditField (index) {
@@ -198,6 +191,17 @@ class ShapeEditModal extends Component {
 
   //////////////////////////////////////////////////////////////
 
+  getInputObj () {
+    const {
+      playbookObjects, allValues
+    } = this.props
+    const {inputName} = allValues || {}
+    const inputObj = find(playbookObjects, {name: inputName}) || {}
+    return inputObj
+  }
+
+  //////////////////////////////////////////////////////////////
+
   renderFieldModal () {
     const {fieldModalOpen, editField} = this.state
     if (!fieldModalOpen) return null
@@ -231,7 +235,6 @@ class ShapeEditModal extends Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClickClose={this.onHide.bind(this)}
 
-        onClickAddField={this.onClickAddField.bind(this)}
         onClickEditField={this.onClickEditField.bind(this)}
         onClickDeleteField={this.onClickDeleteField.bind(this)}
 
@@ -248,6 +251,7 @@ class ShapeEditModal extends Component {
         onCheckAppliedDevice={this.onCheckAppliedDevice.bind(this)}
         onChangeApplyAllDevices={this.onChangeApplyAllDevices.bind(this)}
 
+        inputObj={this.getInputObj()}
         inputFields={this.state.inputFields}
         outputFields={this.state.outputFields}
         onCheckOutputField={this.onCheckOutputField.bind(this)}
