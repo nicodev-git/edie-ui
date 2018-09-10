@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {Field} from 'redux-form'
-import AddIcon from '@material-ui/icons/AddCircle'
 import EditIcon from '@material-ui/icons/Edit'
-import DeleteIcon from '@material-ui/icons/Delete'
 import {find} from 'lodash'
 
 import {
@@ -276,8 +274,7 @@ class ShapeEditModalView extends Component {
               <td>{p.name}</td>
               <td>{fields[p.name] || ''}</td>
               <td>
-                <EditIcon className="link" onClick={() => onClickEditField(i, p,name)}/>
-                <DeleteIcon className="link" onClick={() => onClickDeleteField(i)}/>
+                <EditIcon className="link" onClick={() => onClickEditField(i, p.name)}/>
               </td>
             </tr>
           )}

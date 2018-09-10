@@ -43,18 +43,18 @@ class ShapeEditModal extends Component {
     this.props.onClose()
   }
 
-  onClickEditField (index) {
-    this.setState({
-      editField: fields[index],
-      fieldModalOpen: true
-    })
-  }
-
-  onClickDeleteField (index) {
-    if (!window.confirm('Click OK to remove')) return
+  onClickEditField (index, name) {
     const {fields} = this.state
-    this.setState({
-      fields: fields.filter((p, i) => i !== index)
+
+    showPrompt('Please type testing value', value => {
+      if (!value) return
+
+      this.setState({
+        fields: {
+          ...fields,
+          [name]: value
+        }
+      })
     })
   }
 
@@ -235,7 +235,6 @@ class ShapeEditModal extends Component {
         onClickClose={this.onHide.bind(this)}
 
         onClickEditField={this.onClickEditField.bind(this)}
-        onClickDeleteField={this.onClickDeleteField.bind(this)}
 
         onClickTest={this.onClickTest.bind(this)}
 
