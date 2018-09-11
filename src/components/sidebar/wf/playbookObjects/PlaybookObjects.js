@@ -9,7 +9,7 @@ import FloatingMenu from 'components/common/floating/FloatingMenu'
 import {showConfirm} from 'components/common/Alert'
 import InlineEdit from 'components/common/ReactEditInline'
 
-import OutputObjectModal from './OutputObjectModal'
+import PlaybookObjectModal from './PlaybookObjectModal'
 
 const inlineStyle = {
   width: '100%',
@@ -137,7 +137,7 @@ export default class PlaybookObjects extends React.Component {
     const {editObject} = this.state
 
     return (
-      <OutputObjectModal
+      <PlaybookObjectModal
         editObject={editObject}
         onSave={this.onSaveObject.bind(this)}
         onClose={this.onCloseObjectModal.bind(this)}

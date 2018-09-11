@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import OutputObjectModalView from './OutputObjectModalView'
 import {showPrompt, showConfirm} from 'components/common/Alert'
 
-class OutputObjectModal extends React.Component {
+class PlaybookObjectModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -65,4 +65,4 @@ class OutputObjectModal extends React.Component {
 export default connect(
 (state, props) => ({
   initialValues: props.editObject
-}))(reduxForm({form: 'outputObjectForm'})(OutputObjectModal))
+}))(reduxForm({form: 'outputObjectForm'})(PlaybookObjectModal))
