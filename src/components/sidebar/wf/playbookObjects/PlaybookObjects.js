@@ -16,7 +16,7 @@ const inlineStyle = {
   display: 'block'
 }
 
-export default class OutputObjects extends React.Component {
+export default class PlaybookObjects extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
