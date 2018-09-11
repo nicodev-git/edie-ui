@@ -297,9 +297,7 @@ class ShapeEditModalView extends Component {
           </CardPanel>
 
           {this.renderInputOutput()}
-
           {this.renderScript()}
-
           {this.renderDevices()}
 
           <CardPanel title="Test Result">
