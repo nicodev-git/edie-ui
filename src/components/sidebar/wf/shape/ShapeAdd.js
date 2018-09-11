@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Button} from '@material-ui/core'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
@@ -10,6 +10,10 @@ export default class ShapeAdd extends React.Component {
   componentWillMount() {
     this.props.fetchOutputObjects()
     this.props.fetchDevices()
+  }
+
+  onClickShapes () {
+    this.props.history.push('/workflow/shapes')
   }
 
   onSaveShape () {
@@ -24,7 +28,7 @@ export default class ShapeAdd extends React.Component {
             <div className="pull-left text-left">
             </div>
             <div className="pull-right">
-
+              <Button variant="raised" onClick={this.onClickShapes.bind(this)}>Shapes</Button>
             </div>
           </div>
         </TabPageHeader>
