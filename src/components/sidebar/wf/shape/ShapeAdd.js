@@ -16,8 +16,13 @@ export default class ShapeAdd extends React.Component {
     this.props.history.push('/workflow/shapes')
   }
 
-  onSaveShape () {
+  onSaveShape (entity) {
+    this.props.addShape(entity)
+    this.onClickShapes()
+  }
 
+  getGroup() {
+    return 'General'
   }
 
   render() {
@@ -36,7 +41,10 @@ export default class ShapeAdd extends React.Component {
         <TabPageBody history={this.props.history} location={this.props.location} transparent>
           <ShapeEditModal
             noModal
+            showGroupSelect
             onSave={this.onSaveShape.bind(this)}
+
+            group={this.getGroup()}
 
             applyDeviceIds={[]}
             testShapeScript={this.props.testShapeScript}
