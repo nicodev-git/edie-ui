@@ -13,6 +13,10 @@ export default class ShapeEdit extends React.Component {
     this.props.fetchDevices()
   }
 
+  getShapeId () {
+    return this.props.match.params.id
+  }
+
   onClickShapes () {
     this.props.history.push('/workflow/shapes')
   }

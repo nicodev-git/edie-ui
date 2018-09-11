@@ -831,6 +831,16 @@ export function fetchShapes() {
   }
 }
 
+export function fetchShape(id, cb) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/shape/id`).then(res => {
+      cb && cb(res.data)
+    }).catch(() => {
+      cb && cb()
+    })
+  }
+}
+
 export function addShape (entity) {
   return dispatch => {
     axios.post(`${ROOT_URL}/shape`, entity).then(res => {
