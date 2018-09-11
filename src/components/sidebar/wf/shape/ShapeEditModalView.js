@@ -292,7 +292,7 @@ class ShapeEditModalView extends Component {
         <form onSubmit={onSubmit}>
           <CardPanel title="Shape">
             <Field name="title" component={FormInput} floatingLabel="Name" className="margin-md-right"/>
-            <Field name="description" component={FormInput} floatingLabel="Description" style={{width: 250}}
+            <Field name="description" component={FormInput} floatingLabel="Description" style={{width: 350}}
                    className="margin-sm-top"/>
           </CardPanel>
 
