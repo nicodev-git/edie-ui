@@ -831,12 +831,12 @@ export function fetchShapes() {
   }
 }
 
-export function fetchShape(id, cb) {
+export function fetchShape (id, cb) {
   return dispatch => {
     axios.get(`${ROOT_URL}/shape/${id}`).then(res => {
       cb && cb(res.data)
     }).catch(() => {
-      cb && cb()
+      cb && cb(null)
     })
   }
 }
