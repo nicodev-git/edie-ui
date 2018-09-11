@@ -71,7 +71,9 @@ export default class ShapeEdit extends React.Component {
               devices={this.props.devices}
               playbookObjects={this.props.playbookObjects}
             />
-          ) : <div>Loading...</div>}
+          ) : (
+            <div>Loading...</div>
+          )}
 
         </TabPageBody>
       </TabPage>
