@@ -9,7 +9,7 @@ import {
   Modal
 } from 'components/modal/parts'
 
-export default class OutputObjectModalView extends React.Component {
+export default class PlaybookObjectModalView extends React.Component {
   render() {
     const {
       onSubmit, onClose, vars, onClickAddVar, onClickDeleteVar

@@ -2,7 +2,7 @@ import React from 'react'
 import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
-import OutputObjectModalView from './OutputObjectModalView'
+import PlaybookObjectModalView from './PlaybookObjectModalView'
 import {showPrompt, showConfirm} from 'components/common/Alert'
 
 class PlaybookObjectModal extends React.Component {
@@ -50,7 +50,7 @@ class PlaybookObjectModal extends React.Component {
     const {handleSubmit, onClose} = this.props
     const {vars} = this.state
     return (
-      <OutputObjectModalView
+      <PlaybookObjectModalView
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
 
