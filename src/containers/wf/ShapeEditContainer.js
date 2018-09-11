@@ -13,6 +13,7 @@ import {
   removeShape,
   testShapeScript,
   updateShapeScriptResult,
+  fetchShape,
 
   fetchOutputObjects
 } from 'actions'
@@ -41,6 +42,7 @@ export default connect(
     removeShape,
     testShapeScript,
     updateShapeScriptResult,
+    fetchShape,
 
     fetchOutputObjects
   }
