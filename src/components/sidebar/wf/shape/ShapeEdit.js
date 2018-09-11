@@ -8,9 +8,23 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import ShapeEditModal from './ShapeEditModal'
 
 export default class ShapeEdit extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editShape: null
+    }
+  }
   componentWillMount() {
     this.props.fetchOutputObjects()
     this.props.fetchDevices()
+  }
+
+  componentDidMount() {
+    this.props.fetchShape(this.getShapeId(), editShape => {
+      this.setState({
+        editShape
+      })
+    })
   }
 
   getShapeId () {
@@ -27,6 +41,7 @@ export default class ShapeEdit extends React.Component {
   }
 
   render() {
+    const {editShape} = this.state
     return (
       <TabPage>
         <TabPageHeader title="Add Shape">
@@ -40,20 +55,24 @@ export default class ShapeEdit extends React.Component {
         </TabPageHeader>
 
         <TabPageBody history={this.props.history} location={this.props.location} transparent>
-          <ShapeEditModal
-            noModal
-            onSave={this.onSaveShape.bind(this)}
+          {editShape ? (
+            <ShapeEditModal
+              noModal
+              onSave={this.onSaveShape.bind(this)}
+              editShape={editShape}
 
-            applyDeviceIds={[]}
-            testShapeScript={this.props.testShapeScript}
+              applyDeviceIds={[]}
+              testShapeScript={this.props.testShapeScript}
 
-            updateShapeScriptResult={this.props.updateShapeScriptResult}
-            shapeScriptResult={this.props.shapeScriptResult}
-            shapeScriptStatus={this.props.shapeScriptStatus}
+              updateShapeScriptResult={this.props.updateShapeScriptResult}
+              shapeScriptResult={this.props.shapeScriptResult}
+              shapeScriptStatus={this.props.shapeScriptStatus}
 
-            devices={this.props.devices}
-            playbookObjects={this.props.playbookObjects}
-          />
+              devices={this.props.devices}
+              playbookObjects={this.props.playbookObjects}
+            />
+          ) : <div>Loading...</div>}
+
         </TabPageBody>
       </TabPage>
     )
