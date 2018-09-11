@@ -39,11 +39,11 @@ class PlaybookObjectModal extends React.Component {
     const {vars} = this.state
     showConfirm('Click OK to remove', btn => {
       if (btn !== 'ok') return
+
       this.setState({
         vars: vars.filter((p, i) => i !== index)
       })
     })
-
   }
 
   render() {
