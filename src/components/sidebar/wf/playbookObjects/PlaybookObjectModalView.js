@@ -27,8 +27,12 @@ export default class PlaybookObjectModalView extends React.Component {
               <tbody>
               {vars.map((p, i) =>
                 <tr key={i}>
-                  <td>{p}</td>
-                  <td><DeleteIcon className="link" onClick={() => onClickDeleteVar(i)}/></td>
+                  <td>
+                    {p}
+                  </td>
+                  <td>
+                    <DeleteIcon className="link" onClick={() => onClickDeleteVar(i)}/>
+                  </td>
                 </tr>
               )}
               </tbody>
