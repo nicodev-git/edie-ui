@@ -22,7 +22,8 @@ export default class ShapeAdd extends React.Component {
   }
 
   getGroup() {
-    return 'General'
+    const {group} = this.props.match.params
+    return group || 'General'
   }
 
   render() {
