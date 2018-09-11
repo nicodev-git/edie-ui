@@ -11,6 +11,11 @@ import InlineEdit from 'components/common/ReactEditInline'
 
 import OutputObjectModal from './OutputObjectModal'
 
+const inlineStyle = {
+  width: '100%',
+  display: 'block'
+}
+
 export default class OutputObjects extends React.Component {
   constructor(props) {
     super(props)
@@ -112,10 +117,7 @@ export default class OutputObjects extends React.Component {
                   text={(m.vars || []).join(', ') || '\u00a0'}
                   paramName="name"
                   change={this.onChangeVars.bind(this, m)}
-                  style={{
-                    width: '100%',
-                    display: 'block'
-                  }}
+                  style={inlineStyle}
                 />
               </td>
               <td>
