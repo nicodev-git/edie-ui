@@ -50,18 +50,9 @@ export default class Shapes extends React.Component {
     })
   }
 
-  onClickItem (shape) {
-    this.props.onClickShape(shape)
-    this.props.onClose()
-  }
-
   onClickEditItem (editShape) {
-    console.log(editShape)
-    // if (editShape.type === 'PRODUCTACTION') return
-    // this.setState({
-    //   editModalOpen: true,
-    //   editShape
-    // })
+    if (editShape.type === 'PRODUCTACTION') return
+    this.props.history.push(`/workflow/shapes/edit/${editShape.id}`)
   }
 
   onClickDeleteItem (editShape) {
@@ -93,7 +84,6 @@ export default class Shapes extends React.Component {
   }
 
   render () {
-    const { onClickItem} = this.props
     const shapes = this.getFilteredShapes()
     return (
       <TabPage>
@@ -114,7 +104,6 @@ export default class Shapes extends React.Component {
                 name={p.title}
                 desc={p.description || p.title}
                 img={`/images/${p.img}`}
-                onClick={() => onClickItem(p)}
                 onClickEdit={this.onClickEditItem.bind(this, p)}
                 onClickDelete={this.onClickDeleteItem.bind(this, p)}
               />

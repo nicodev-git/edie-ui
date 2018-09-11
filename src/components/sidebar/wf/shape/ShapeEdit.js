@@ -36,7 +36,7 @@ export default class ShapeEdit extends React.Component {
   }
 
   onSaveShape (entity) {
-    this.props.addShape(entity)
+    this.props.updateShape(entity)
     this.onClickShapes()
   }
 
@@ -44,7 +44,7 @@ export default class ShapeEdit extends React.Component {
     const {editShape} = this.state
     return (
       <TabPage>
-        <TabPageHeader title="Add Shape">
+        <TabPageHeader title="Shape">
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
             </div>
