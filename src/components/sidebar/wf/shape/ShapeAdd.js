@@ -42,7 +42,6 @@ export default class ShapeAdd extends React.Component {
         <TabPageBody history={this.props.history} location={this.props.location} transparent>
           <ShapeEditModal
             noModal
-            showGroupSelect
             onSave={this.onSaveShape.bind(this)}
 
             group={this.getGroup()}
