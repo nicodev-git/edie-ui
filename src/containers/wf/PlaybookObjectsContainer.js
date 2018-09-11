@@ -11,7 +11,7 @@ import {
   removeOutputObject
 } from 'actions'
 
-class OutputObjectsContainer extends React.Component {
+class PlaybookObjectsContainer extends React.Component {
   render () {
     return (
       <PlaybookObjects {...this.props}/>
@@ -27,4 +27,4 @@ export default connect(
     updateOutputObject,
     removeOutputObject
   }
-)(withRouter(OutputObjectsContainer))
+)(withRouter(PlaybookObjectsContainer))

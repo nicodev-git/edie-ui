@@ -35,7 +35,7 @@ import ShapeEditContainer from 'containers/wf/ShapeEditContainer'
 import WorkflowTestContainer from 'containers/wf/WfTestContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
 import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
-import OutputObjectsContainer from 'containers/wf/OutputObjectsContainer'
+import PlaybookObjectsContainer from 'containers/wf/PlaybookObjectsContainer'
 
 import {
   closeDevice,
@@ -240,7 +240,7 @@ class MainpageContainer extends Component {
         <Route path="/workflow/shapes/add/:group" component={ShapeAddContainer} exact/>
         <Route path="/workflow/shapes/edit/:id" component={ShapeEditContainer} exact/>
         <Route path="/workflow/shapes" component={ShapesContainer} exact/>
-        <Route path="/workflow/playbookObjects" component={OutputObjectsContainer} exact/>
+        <Route path="/workflow/playbookObjects" component={PlaybookObjectsContainer} exact/>
         <Route path="/workflow/simulation" component={WorkflowTestContainer} exact/>
         <Route path="/workflow/:name/diagram" component={WorkflowEditDiagramContainer} exact/>
         <Route path="/workflow/:name/edit" component={WorkflowEditContainer} exact/>
