@@ -6,28 +6,27 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
 
-// import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
-// import GridLayout from './GridLayout'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 export default class DeviceProductsTable extends Component {
-  // getGauges () {
-  //   return [{
-  //     id: 'basic0',
-  //     name: 'Applications',
-  //     templateName: 'Installed App',
-  //     deviceId: this.props.device.id,
-  //     gaugeSize: 'custom',
-  //     layout: {
-  //       i: 'basic0',
-  //       x: 0, y: 0,
-  //       w: 12 * layoutWidthZoom, h: 5 * layoutHeightZoom
-  //     }
-  //   }]
-  // }
+  componentWillMount() {
+    this.props.fetchVendorProducts()
+  }
+
+
+  onClickAdd () {
+
+  }
+
+  getProducts() {
+    const {device} = this.props
+    if (!device || !device.productIds) return []
+
+  }
 
   renderBody () {
     return (
-      <div>
+      <div className="bg-white" style={{height: '100%', overflow: 'auto'}}>
         Device Products
       </div>
     )
@@ -41,6 +40,7 @@ export default class DeviceProductsTable extends Component {
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.slug, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}
+          <FloatingMenu onClickMain={this.onClickAdd.bind(this)}/>
         </TabPageBody>
       </TabPage>
     )

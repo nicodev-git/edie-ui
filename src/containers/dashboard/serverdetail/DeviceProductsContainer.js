@@ -10,7 +10,9 @@ import {
   clearMonitors,
 
   showDeviceEditModal,
-  updateMapDevice
+  updateMapDevice,
+
+  fetchVendorProducts
 } from 'actions'
 
 class DeviceProductsContainer extends React.Component {
@@ -27,6 +29,10 @@ export default connect(
     deviceEditModalOpen: state.devices.deviceEditModalOpen,
     editDevice: state.devices.editDevice,
 
+    vendorProducts: state.settings.vendorProducts,
+    productTypes: state.settings.productTypes,
+    productVendors: state.settings.productVendors,
+
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
@@ -38,6 +44,8 @@ export default connect(
     clearMonitors,
 
     showDeviceEditModal,
-    updateMapDevice
+    updateMapDevice,
+
+    fetchVendorProducts
   }
 )(withRouter(DeviceProductsContainer))
