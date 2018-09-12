@@ -14,6 +14,7 @@ export default class DeviceMenu extends React.Component {
         items: []
       }, {
         title: 'Map Items',
+
         items: [{
           title: 'Device',
           img: 'build.png',
