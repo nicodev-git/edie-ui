@@ -80,6 +80,9 @@ import {
   showRangeAddModal,
   scanRange,
 
+  fetchMapItemsByMap,
+  addMapItem,
+  updateMapItem
 
 } from 'actions'
 
@@ -227,6 +230,10 @@ export default connect(
     updateServerSearchParams,
     showServerCmdModal,
     showRangeAddModal,
-    scanRange
+    scanRange,
+
+    fetchMapItemsByMap,
+    addMapItem,
+    updateMapItem
   }
 )(withRouter(MainDashboardContainer))
