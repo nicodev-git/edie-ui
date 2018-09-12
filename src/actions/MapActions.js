@@ -249,37 +249,39 @@ const removeMapUserSuccess = (dispatch, user) => {
   })
 }
 
-export const fetchMapDevicesAndLines = (mapid) => {
+export const fetchMapDevicesAndLines = (mapids) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    if (!mapid) {
-      fetchMapId(dispatch)
+    if (!mapids) {
+      dispatch({
+        type: FETCH_MAP_DEVICES_LINES,
+        maps: [],
+        lines: []
+      })
       return
     }
 
-    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapids`, {params: {mapids: mapid}})
-      .then(response => fetchDevicesByMapid(response))
+    axios.get(`${ROOT_URL}/mapitem/search/findByMapids`, {params: {mapids}}).then(res => {
+      const items = res.data._embedded.mapItems || []
 
-    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapids`, {params: {mapids: mapid}})
-      .then(response => fetchLinesByMapid(response))
+      //dispatch({type: FETCH_MAP_ITEMS, data: items})
+    })
 
-    const req3 = axios.get(`${ROOT_URL}/group/search/findByMapid`, {params: {mapid}})
-      .then(response => fetchGroupsByMapid(response))
-
-    axios.all([req1, req2, req3])
-      .then(response => fetchMapDevicesAndLinesSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
+    // const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapids`, {params: {mapids: mapid}})
+    //   .then(response => fetchDevicesByMapid(response))
+    //
+    // const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapids`, {params: {mapids: mapid}})
+    //   .then(response => fetchLinesByMapid(response))
+    //
+    // const req3 = axios.get(`${ROOT_URL}/group/search/findByMapid`, {params: {mapid}})
+    //   .then(response => fetchGroupsByMapid(response))
+    //
+    // axios.all([req1, req2, req3])
+    //   .then(response => fetchMapDevicesAndLinesSuccess(dispatch, response))
+    //   .catch(error => apiError(dispatch, error))
   }
-}
-
-const fetchMapId = (dispatch) => {
-  dispatch({
-    type: FETCH_MAP_DEVICES_LINES,
-    maps: [],
-    lines: []
-  })
 }
 
 const fetchDevicesByMapid = (response) => {
@@ -294,13 +296,13 @@ const fetchGroupsByMapid = (response) => {
   return response.data._embedded.groups
 }
 
-const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
-  dispatch({
-    type: FETCH_MAP_DEVICES_LINES,
-    maps: concat([], response[0], response[2]),
-    lines: response[1]
-  })
-}
+// const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
+//   dispatch({
+//     type: FETCH_MAP_DEVICES_LINES,
+//     maps: concat([], response[0], response[2]),
+//     lines: response[1]
+//   })
+// }
 
 const fetchWorkflowIds = (uuids, cb) => {
   if (!uuids || !uuids.length) {
