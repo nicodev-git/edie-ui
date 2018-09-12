@@ -294,17 +294,17 @@ export const fetchMapDevicesAndLines = (mapids) => {
   }
 }
 
-const fetchDevicesByMapid = (response) => {
-  return (response.data._embedded || {}).devices || []
-}
-
-const fetchLinesByMapid = (response) => {
-  return (response.data._embedded || {}).devices || []
-}
-
-const fetchGroupsByMapid = (response) => {
-  return response.data._embedded.groups
-}
+// const fetchDevicesByMapid = (response) => {
+//   return (response.data._embedded || {}).devices || []
+// }
+//
+// const fetchLinesByMapid = (response) => {
+//   return (response.data._embedded || {}).devices || []
+// }
+//
+// const fetchGroupsByMapid = (response) => {
+//   return response.data._embedded.groups
+// }
 
 // const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
 //   dispatch({
