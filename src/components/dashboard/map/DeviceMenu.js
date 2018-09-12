@@ -12,6 +12,9 @@ export default class DeviceMenu extends React.Component {
       deviceTypes: [{
         title: 'Add Existing Devices',
         items: []
+      }, {
+        title: 'Map Items',
+        items: []
       }],
 
       activePanel: 0
@@ -76,7 +79,7 @@ export default class DeviceMenu extends React.Component {
     deviceTypes.forEach((section, sectionIndex) => {
       let items = false
 
-      if (sectionIndex === 0) {
+      if (sectionIndex === 0 || sectionIndex === 1) {
 
       } else {
         section.items.forEach((item, typeIndex) => {
@@ -111,6 +114,8 @@ export default class DeviceMenu extends React.Component {
             </li>
           )
         })
+      } else if (sectionIndex === 1) {
+
       } else {
         section.items.forEach((item, typeIndex) => {
           const selected = this.props.selectedItem.title === item.title
