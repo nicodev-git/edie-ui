@@ -156,6 +156,7 @@ export default connect(
 
     rangeAddModalOpen: state.dashboard.rangeAddModalOpen,
     rangeScanResults: state.dashboard.rangeScanResults
+
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
