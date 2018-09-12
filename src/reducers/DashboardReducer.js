@@ -100,6 +100,9 @@ import {
   FETCH_DEVICES,
 
   FETCH_MAP_ITEMS,
+  ADD_MAP_ITEM,
+  UPDATE_MAP_ITEM,
+  REMOVE_MAP_ITEM,
 
   API_ERROR
 } from 'actions/types'
@@ -453,6 +456,12 @@ export default function (state = initialState, action) {
 
     case FETCH_MAP_ITEMS:
       return { ...state, mapItems: action.data }
+    case ADD_MAP_ITEM:
+      return { ...state, mapItems: [...state.mapItems, action.data] }
+    case UPDATE_MAP_ITEM:
+      return { ...state, mapItems: state.mapItems.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_MAP_ITEM:
+      return { ...state, mapItems: state.mapItems.filter(p => p.id !== action.data.id) }
 
     default:
       return state
