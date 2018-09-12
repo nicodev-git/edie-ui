@@ -41,7 +41,16 @@ export default class DeviceProductsTable extends Component {
   }
 
   onPickProduct (product) {
-    console.log(product)
+    const {device} = this.props
+    let {productIds} = device
+    productIds = productIds || []
+    if (productIds.includes(product.id)) return
+    productIds = [...productIds, product.id]
+    this.props.updateMapDevice({
+      ...device,
+      productIds
+    })
+
     this.onCloseProductPick()
   }
 
@@ -61,7 +70,8 @@ export default class DeviceProductsTable extends Component {
   renderBody () {
     const products = this.getProducts()
     return (
-      <div className="bg-white" style={{height: '100%', overflow: 'auto'}}>
+      <div className="bg-white padding-md" style={{height: '100%', overflow: 'auto'}}>
+
         <table className="table table-hover">
           <thead>
           <tr>
