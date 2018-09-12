@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import DeleteIcon from '@material-ui/icons/Delete'
+
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
@@ -25,6 +27,17 @@ export default class DeviceProductsTable extends Component {
       productPickOpen: true
     })
   }
+
+  onClickDelete (id) {
+    const {device} = this.props
+    let {productIds} = device
+    productIds = productIds.filter(p => p !== id)
+    this.props.updateMapDevice({
+      ...device,
+      productIds
+    })
+  }
+
 
   getProducts() {
     const {device, vendorProducts} = this.props
@@ -83,7 +96,9 @@ export default class DeviceProductsTable extends Component {
           {products.map(p =>
             <tr key={p.id}>
               <td>{p.name}</td>
-              <td></td>
+              <td>
+                <DeleteIcon className="link" onClick={this.onClickDelete.bind(this, p.id)}/>
+              </td>
             </tr>
           )}
           </tbody>
