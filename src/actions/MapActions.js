@@ -257,7 +257,7 @@ export const fetchMapDevicesAndLines = (mapids) => {
     if (!mapids) {
       dispatch({
         type: FETCH_MAP_DEVICES_LINES,
-        maps: [],
+        devices: [],
         lines: []
       })
       return
@@ -265,7 +265,18 @@ export const fetchMapDevicesAndLines = (mapids) => {
 
     axios.get(`${ROOT_URL}/mapitem/search/findByMapids`, {params: {mapids}}).then(res => {
       const items = res.data._embedded.mapItems || []
+      const devices = []
+      const lines = []
+      items.forEach(item => {
+        if (item.line) lines.push(item)
+        else devices.push(item)
+      })
 
+      dispatch({
+        type: FETCH_MAP_DEVICES_LINES,
+        devices,
+        lines
+      })
       //dispatch({type: FETCH_MAP_ITEMS, data: items})
     })
 

@@ -264,7 +264,7 @@ export default function (state = initialState, action) {
       return { ...state, selectedDevice: null }
 
     case FETCH_MAP_DEVICES_LINES:
-      return { ...state, mapDevices: action.maps, mapLines: action.lines }
+      return { ...state, mapDevices: action.devices, mapLines: action.lines }
 
     case FETCH_DASHBOARD_INCIDENTS:
       return { ...state, incidents: action.data }
