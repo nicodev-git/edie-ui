@@ -6,6 +6,9 @@ export default (deviceId, templateName) => {
     title: 'Monitors',
     path: `/dashboard/servers/${deviceId}/detail/monitors`
   }, {
+    title: 'Products',
+    path: `/dashboard/servers/${deviceId}/detail/products`
+  }, {
     title: 'Event Logs',
     path: `/dashboard/servers/${deviceId}/detail/eventlog`,
     exclude: ['Linux Server']
