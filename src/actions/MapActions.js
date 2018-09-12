@@ -277,7 +277,6 @@ export const fetchMapDevicesAndLines = (mapids) => {
         devices,
         lines
       })
-      //dispatch({type: FETCH_MAP_ITEMS, data: items})
     })
 
     // const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapids`, {params: {mapids: mapid}})
