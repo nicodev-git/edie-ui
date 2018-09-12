@@ -12,6 +12,7 @@ import Services from 'containers/dashboard/serverdetail/ServiceContainer'
 import Users from 'containers/dashboard/serverdetail/UsersContainer'
 import Firewall from 'containers/dashboard/serverdetail/FirewallContainer'
 import Network from 'containers/dashboard/serverdetail/NetworkContainer'
+import DeviceProducts from 'containers/dashboard/serverdetail/DeviceProductsContainer'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
@@ -53,6 +54,7 @@ export default class ServerDetail extends React.Component {
       <Switch>
         <Route path="/dashboard/servers/:name/detail" exact component={MainControl}/>
         <Route path="/dashboard/servers/:name/detail/monitors" exact component={Monitors}/>
+        <Route path="/dashboard/servers/:name/detail/products" exact component={DeviceProducts}/>
         <Route path="/dashboard/servers/:name/detail/eventlog" component={EventLogs}/>
         <Route path="/dashboard/servers/:name/detail/app" component={Apps}/>
         <Route path="/dashboard/servers/:name/detail/process" component={Processes}/>

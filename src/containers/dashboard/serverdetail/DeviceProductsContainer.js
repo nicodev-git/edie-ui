@@ -1,5 +1,5 @@
 import React from 'react'
-import Command from 'components/dashboard/serverdetail/CommandTable'
+import DeviceProductsTable from 'components/dashboard/serverdetail/DeviceProductsTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {
@@ -13,10 +13,10 @@ import {
   updateMapDevice
 } from 'actions'
 
-class CommandContainer extends React.Component {
+class DeviceProductsContainer extends React.Component {
   render () {
     return (
-      <Command {...this.props}/>
+      <DeviceProductsTable {...this.props}/>
     )
   }
 }
@@ -40,4 +40,4 @@ export default connect(
     showDeviceEditModal,
     updateMapDevice
   }
-)(withRouter(CommandContainer))
+)(withRouter(DeviceProductsContainer))
