@@ -318,8 +318,6 @@ class Map extends React.Component {
   }
 
   onDrop (item, offset) {
-    console.log(item)
-
     let doc = document.documentElement
     let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
     let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
