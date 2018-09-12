@@ -99,6 +99,8 @@ import {
 
   FETCH_DEVICES,
 
+  FETCH_MAP_ITEMS,
+
   API_ERROR
 } from 'actions/types'
 
@@ -141,6 +143,8 @@ const initialState = {
   sidebarMessageMenuOpen: false,
 
   sidebarSearchActive: false,
+
+  mapItems: [],
 
   apiErrorModalOpen: false,
   apiError: ''
@@ -446,6 +450,10 @@ export default function (state = initialState, action) {
       return { ...state, rangeScanResults: action.data }
     case UPDATE_SCAN_STATUS:
       return { ...state, scanStatus: action.status }
+
+    case FETCH_MAP_ITEMS:
+      return { ...state, mapItems: action.data }
+
     default:
       return state
   }
