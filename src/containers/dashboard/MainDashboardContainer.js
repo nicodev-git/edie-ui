@@ -82,7 +82,8 @@ import {
 
   fetchMapItemsByMap,
   addMapItem,
-  updateMapItem
+  updateMapItem,
+  removeMapItem
 
 } from 'actions'
 
@@ -234,6 +235,7 @@ export default connect(
 
     fetchMapItemsByMap,
     addMapItem,
-    updateMapItem
+    updateMapItem,
+    removeMapItem
   }
 )(withRouter(MainDashboardContainer))
