@@ -10,7 +10,7 @@ import StatusImg from './StatusImg'
 
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 import ProductPickModal from 'components/sidebar/settings/product/ProductPickModal'
-import {showConfirm} from "../../common/Alert";
+import {showConfirm} from 'components/common/Alert'
 
 export default class DeviceProductsTable extends Component {
   constructor(props) {
