@@ -10,6 +10,7 @@ import StatusImg from './StatusImg'
 
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 import ProductPickModal from 'components/sidebar/settings/product/ProductPickModal'
+import {showConfirm} from "../../common/Alert";
 
 export default class DeviceProductsTable extends Component {
   constructor(props) {
@@ -30,11 +31,15 @@ export default class DeviceProductsTable extends Component {
 
   onClickDelete (id) {
     const {device} = this.props
-    let {productIds} = device
-    productIds = productIds.filter(p => p !== id)
-    this.props.updateMapDevice({
-      ...device,
-      productIds
+
+    showConfirm('Click OK to remove', btn => {
+      if (btn !== 'ok') return
+      let {productIds} = device
+      productIds = productIds.filter(p => p !== id)
+      this.props.updateMapDevice({
+        ...device,
+        productIds
+      })
     })
   }
 
