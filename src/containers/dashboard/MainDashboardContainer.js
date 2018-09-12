@@ -154,6 +154,8 @@ export default connect(
 
     serverCmdModalOpen: state.dashboard.serverCmdModalOpen,
 
+    mapItems: state.dashboard.mapItems,
+
     rangeAddModalOpen: state.dashboard.rangeAddModalOpen,
     rangeScanResults: state.dashboard.rangeScanResults
   }), {
