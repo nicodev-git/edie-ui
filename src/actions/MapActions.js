@@ -25,6 +25,8 @@ import {
   UPDATE_MAP_LINE,
   DELETE_MAP_LINE,
 
+  FETCH_MAP_ITEMS,
+
   FETCH_MAP_DEVICES_LINES,
 
   RELOAD_DEVICE,
@@ -447,5 +449,12 @@ export function reloadDevice (device) {
 export function showMapExportModal (visible) {
   return dispatch => {
     dispatch({type: SHOW_MAP_EXPORT_MODAL, visible})
+  }
+}
+
+/////////////////////////////////////////////////////////////////
+
+export function fetchMapItems () {
+  return dispatch => {
   }
 }

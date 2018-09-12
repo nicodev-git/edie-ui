@@ -175,6 +175,13 @@ export const ADD_GROUP_LINE = 'ADD_GROUP_LINE'
 export const UPDATE_GROUP_LINE = 'UPDATE_GROUP_LINE'
 export const REMOVE_GROUP_LINE = 'REMOVE_GROUP_LINE'
 
+export const FETCH_MAP_ITEMS = 'FETCH_MAP_ITEMS'
+export const ADD_MAP_ITEM = 'ADD_MAP_ITEM'
+export const UPDATE_MAP_ITEM = 'UPDATE_MAP_ITEM'
+export const REMOVE_MAP_ITEM = 'REMOVE_MAP_ITEM'
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const SIDEBAR_ITEM_CLICKED = 'SIDEBAR_ITEM_CLICKED'
 export const SHOW_SIDEBAR_MESSAGE_MENU = 'SHOW_SIDEBAR_MESSAGE_MENU'
 
