@@ -220,7 +220,7 @@ class ShapeEditModal extends Component {
 
   render () {
     const {
-      handleSubmit, shapeScriptResult, shapeScriptStatus, servers,
+      handleSubmit, shapeScriptResult, shapeScriptStatus,
       playbookObjects, allValues, noModal
     } = this.props
     return (

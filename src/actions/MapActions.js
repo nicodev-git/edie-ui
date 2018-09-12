@@ -26,6 +26,9 @@ import {
   DELETE_MAP_LINE,
 
   FETCH_MAP_ITEMS,
+  ADD_MAP_ITEM,
+  UPDATE_MAP_ITEM,
+  REMOVE_MAP_ITEM,
 
   FETCH_MAP_DEVICES_LINES,
 
@@ -459,5 +462,32 @@ export function fetchMapItemsByMap (mapids) {
     axios.get(`${ROOT_URL}/mapitem/search/findByMapids`, {params: {mapids}}).then(res => {
       dispatch({type: FETCH_MAP_ITEMS, data: res.data._embedded.mapItems})
     })
+  }
+}
+
+
+export function addMapItem (entity) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/mapitem`, entity).then(res => {
+      if (res.data) {
+        dispatch({type: ADD_MAP_ITEM, data: res.data})
+      }
+    })
+  }
+}
+
+export function updateMapItem (entity) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/mapitem/${entity.id}`, entity).then(res => {
+      if (res.data) dispatch({type: UPDATE_MAP_ITEM, data: res.data})
+    })
+  }
+}
+
+export function removeMapItem (entity) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/mapitem/${entity.id}`).then(res => {
+      dispatch({type: REMOVE_MAP_ITEM, data: entity})
+    }).catch(error => apiError(dispatch, error))
   }
 }

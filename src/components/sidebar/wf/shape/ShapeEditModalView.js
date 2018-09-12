@@ -251,8 +251,8 @@ class ShapeEditModalView extends Component {
 
   renderScript () {
     const {
-      onClickEditField, onClickDeleteField,
-      fields,inputFields, inputObj
+      onClickEditField,
+      fields, inputObj
     } = this.props
     return (
       <CardPanel title="Script">
