@@ -1,10 +1,10 @@
 import React from 'react'
 import {reduxForm} from 'redux-form'
-import connect from 'react-redux'
+import {connect} from 'react-redux'
 
 import MapItemModalView from './MapItemModalView'
 
-export default class MapItemModal extends React.Component {
+class MapItemModal extends React.Component {
   handleFormSubmit (values) {
     this.props.onSave(values)
   }

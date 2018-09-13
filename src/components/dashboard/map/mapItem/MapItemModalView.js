@@ -7,7 +7,7 @@ import {
   FormSelect,
   FormInput
 } from 'components/modal/parts'
-import {Button} from "@material-ui/core";
+import {Button} from '@material-ui/core'
 
 const mapItemTypes = [{
   label: 'Device', value: 'DEVICE'
@@ -25,8 +25,7 @@ export default class MapItemModalView extends React.Component {
       <Modal title="Map Item" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           <CardPanel title="Detail">
-            <FormSelect name="type" component={FormSelect} options={mapItemTypes}/>
-
+            <Field name="type" component={FormSelect} options={mapItemTypes}/>
           </CardPanel>
 
           <div className="padding-md">
