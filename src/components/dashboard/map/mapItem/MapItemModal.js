@@ -5,6 +5,10 @@ import {connect} from 'react-redux'
 import MapItemModalView from './MapItemModalView'
 
 class MapItemModal extends React.Component {
+  componentWillMount() {
+    this.props.fetchDevices()
+  }
+
   handleFormSubmit (values) {
     this.props.onSave(values)
   }

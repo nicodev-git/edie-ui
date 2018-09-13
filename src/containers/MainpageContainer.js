@@ -109,6 +109,7 @@ import {
   updateViewLogParams,
   showDetailLogModal,
 
+  fetchDevices,
   fetchDevicesGroups,
 
   removeWorkflow,
@@ -396,6 +397,7 @@ dispatch => bindActionCreators({
   updateViewLogParams,
   showDetailLogModal,
 
+  fetchDevices,
   fetchDevicesGroups,
 
   removeWorkflow,
