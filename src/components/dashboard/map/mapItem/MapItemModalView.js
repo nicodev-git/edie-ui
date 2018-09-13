@@ -21,18 +21,22 @@ export default class MapItemModalView extends React.Component {
   renderDeviceList () {
     return (
       <CardPanel title="Servers">
+
       </CardPanel>
     )
   }
 
+  renderContent () {
+    const {type} = this.props
+  }
+
+
   render() {
-    const {onSubmit, onClose} = this.props
+    const {onSubmit, onClose, type} = this.props
     return (
       <Modal title="Map Item" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
-          <CardPanel title="Detail">
-            <Field name="type" component={FormSelect} options={mapItemTypes}/>
-          </CardPanel>
+          {this.renderContent()}
 
           <div className="padding-md">
             <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
