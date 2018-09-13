@@ -15,6 +15,7 @@ import { ZoomOptions, ToolbarToggle } from './toolbar'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import { showAlert, showConfirm } from 'components/common/Alert'
+import MapItemModal from './mapItem/MapItemModal'
 
 import { fullScreen } from 'util/Fullscreen'
 import { isGroup } from 'shared/Global'
@@ -44,7 +45,10 @@ class Map extends React.Component {
 
       deviceWizardConfig: {},
       deviceWizardVisible: false,
-      cmap: null
+      cmap: null,
+
+      mapItemModalOpen: false,
+      editMapItem: null
     }
 
     // /////////////////////////////////////////////
@@ -355,7 +359,7 @@ class Map extends React.Component {
 
       })
     } else if (item.template === 'mapItem') {
-      const options = {
+      const editMapItem = {
         title: item.title,
         imgName: item.img,
         imageUrl: `/externalpictures?name=${item.img}`,
@@ -365,7 +369,15 @@ class Map extends React.Component {
         height: 50
       }
 
-      console.log(options)
+      console.log(editMapItem)
+
+      this.setState({
+        mapItemModalOpen: true,
+        editMapItem,
+
+        dropItem: null,
+        selectedItem: {}
+      })
     } else {
       let options = {
         title: item.title,
@@ -428,18 +440,6 @@ class Map extends React.Component {
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  /* onClickAdd (displayMenu) {
-    if (displayMenu) {
-      if (!this.state.editable) this.onClickEdit()
-    } else {
-      if (this.state.editable) this.onClickEdit()
-    }
-
-    this.setState({
-      selectedItem: {}
-    })
-  } */
 
   onClickEdit () {
     console.log('edit button clicked')
@@ -703,6 +703,29 @@ class Map extends React.Component {
     window.dispatchEvent(new window.Event('resize')) // eslint-disable-line no-undef
   }
 
+  //////////////////////////////////////////////////////////////
+
+  onSaveMapItem (entity) {
+    console.log(entity)
+  }
+
+  onCloseMapItem () {
+
+  }
+
+  //////////////////////////////////////////////////////////////
+
+  renderMapItemModal () {
+    if (!this.state.mapItemModalOpen) return null
+    return (
+      <MapItemModal
+        editMapItem={this.state.editMapItem}
+        onSave={this.onSaveMapItem.bind(this)}
+        onClose={this.onCloseMapItem.bind(this)}
+      />
+    )
+  }
+
   render () {
     let events = this.mapEvents
     const { selectedItem, dropItem, dropItemPos, editable, mapHeight } = this.state
@@ -752,7 +775,9 @@ class Map extends React.Component {
           </div>
         </div>
 
+        {this.renderMapItemModal()}
         {this.renderDeviceWizard()}
+
       </div>
     )
   }
