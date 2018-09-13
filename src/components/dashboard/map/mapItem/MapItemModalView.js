@@ -9,9 +9,13 @@ import {
 } from 'components/modal/parts'
 import {Button} from "@material-ui/core";
 
-const mapItemTypes = [
-
-]
+const mapItemTypes = [{
+  label: 'Device', value: 'DEVICE'
+}, {
+  label: 'Monitor', value: 'MONITOR'
+}, {
+  label: 'Product', value: 'PRODUCT'
+}]
 
 export default class MapItemModalView extends React.Component {
   render() {
