@@ -354,6 +354,18 @@ class Map extends React.Component {
       refMap.addMapItem(cmap, device, () => {
 
       })
+    } else if (item.template === 'mapItem') {
+      const options = {
+        title: item.title,
+        imgName: item.img,
+        imageUrl: `/externalpictures?name=${item.img}`,
+        x: x,
+        y: y,
+        width: 50,
+        height: 50
+      }
+
+      console.log(options)
     } else {
       let options = {
         title: item.title,
