@@ -26,6 +26,10 @@ export default class MapItemModalView extends React.Component {
     )
   }
 
+  renderMonitors (){
+
+  }
+
   renderContent () {
     const {type} = this.props
   }
