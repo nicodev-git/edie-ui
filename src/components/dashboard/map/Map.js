@@ -360,6 +360,7 @@ class Map extends React.Component {
       })
     } else if (item.template === 'mapItem') {
       const editMapItem = {
+        type: item.type,
         title: item.title,
         imgName: item.img,
         imageUrl: `/externalpictures?name=${item.img}`,

@@ -19,17 +19,17 @@ export default class DeviceMenu extends React.Component {
           title: 'Device',
           img: 'build.png',
           template: 'mapItem',
-          type: 'Device'
+          type: 'DEVICE'
         }, {
           title: 'Monitor',
           img: 'build.png',
           template: 'mapItem',
-          type: 'Monitor'
+          type: 'MONITOR'
         }, {
           title: 'Product',
           img: 'build.png',
           template: 'mapItem',
-          type: 'Product'
+          type: 'PRODUCT'
         }]
       }],
 

@@ -10,9 +10,10 @@ class MapItemModal extends React.Component {
   }
 
   render() {
-    const {handleSubmit, onClose} = this.props
+    const {handleSubmit, onClose, type, editMapItem} = this.props
     return (
       <MapItemModalView
+        type={editMapItem.type}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onClose={onClose}
       />
