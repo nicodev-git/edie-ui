@@ -18,9 +18,15 @@ const mapItemTypes = [{
 }]
 
 export default class MapItemModalView extends React.Component {
+  renderDeviceList () {
+    return (
+      <CardPanel title="Servers">
+      </CardPanel>
+    )
+  }
+
   render() {
     const {onSubmit, onClose} = this.props
-
     return (
       <Modal title="Map Item" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
