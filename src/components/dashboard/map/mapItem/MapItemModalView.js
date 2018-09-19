@@ -76,6 +76,28 @@ export default class MapItemModalView extends React.Component {
 
     renderProducts () {
         const {vendorProducts} = this.props
+        return (
+            <CardPanel title="Products">
+                <div style={{maxHeight: 300, overflow: 'auto'}}>
+                    <table className="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            vendorProducts.map(p =>
+                                <tr key={p.id}>
+                                    <td>{p.name}</td>
+                                </tr>
+                            )
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </CardPanel>
+        )
     }
 
     renderContent() {
