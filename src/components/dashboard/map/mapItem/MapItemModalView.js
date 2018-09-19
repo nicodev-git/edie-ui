@@ -19,7 +19,7 @@ const mapItemTypes = [{
 
 export default class MapItemModalView extends React.Component {
     renderDeviceList() {
-        const {devices} = this.props
+        const {devices, selIndex, onClickRow} = this.props
         return (
             <CardPanel title="Servers">
                 <table className="table table-hover">
@@ -29,8 +29,11 @@ export default class MapItemModalView extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {devices.map(device =>
-                        <tr key={device.id}>
+                    {devices.map((device, i) =>
+                        <tr key={device.id}
+                            className={i === selIndex ? 'selected' : ''}
+                            onClick={() => onClickRow(i)}
+                        >
                             <td>{device.name}</td>
                         </tr>
                     )}

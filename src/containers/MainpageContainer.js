@@ -264,6 +264,7 @@ class MainpageContainer extends Component {
 export default connect((state) => {
   return {
     device: state.dashboard.selectedDevice,
+    devices: state.devices.devices,
     allDevices: state.devices.deviceAndGroups,
     apiErrorModalOpen: state.dashboard.apiErrorModalOpen,
     apiError: state.dashboard.apiError,
