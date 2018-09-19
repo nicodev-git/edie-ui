@@ -8,7 +8,7 @@ class MapItemModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selIndex: -1
+            selIndex: null
         }
     }
 

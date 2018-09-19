@@ -22,29 +22,56 @@ export default class MapItemModalView extends React.Component {
         const {devices, selIndex, onClickRow} = this.props
         return (
             <CardPanel title="Servers">
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {devices.map((device, i) =>
-                        <tr key={device.id}
-                            className={i === selIndex ? 'selected' : ''}
-                            onClick={() => onClickRow(i)}
-                        >
-                            <td>{device.name}</td>
-                        </tr>
-                    )}
-                    </tbody>
-                </table>
+                <div style={{maxHeight: 300, overflow: 'auto'}}>
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {devices.map((device, i) =>
+                            <tr key={device.id}
+                                className={device.id === selIndex ? 'selected' : ''}
+                                onClick={() => onClickRow(device.id)}
+                            >
+                                <td>{device.name}</td>
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </div>
             </CardPanel>
         )
     }
 
     renderMonitors() {
-
+        const {devices, selIndex, onClickRow} = this.props
+        return (
+            <CardPanel title="Monitors">
+                <div style={{maxHeight: 300, overflow: 'auto'}}>
+                    <table className="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Device</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {devices.map((device, i) => (device.monitors || []).map(monitor =>
+                            <tr key={`${monitor.uid}`}
+                                className={monitor.uid === selIndex ? 'selected' : ''}
+                                onClick={() => onClickRow(monitor.uid)}
+                            >
+                                <td>{monitor.name}</td>
+                                <td>{device.name}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </CardPanel>
+        )
     }
 
     renderContent() {
@@ -52,6 +79,8 @@ export default class MapItemModalView extends React.Component {
         switch (type) {
             case 'DEVICE':
                 return this.renderDeviceList()
+            case 'MONITOR':
+                return this.renderMonitors()
 
         }
     }
@@ -65,7 +94,7 @@ export default class MapItemModalView extends React.Component {
                     {this.renderContent()}
 
                     <div className="padding-md">
-                        <Button variant="raised" type="submit" className="margin-md-top">Save</Button>
+                        <Button variant="raised" type="submit" className="margin-md-top">OK</Button>
                     </div>
                 </form>
             </Modal>
