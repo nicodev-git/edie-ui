@@ -14,6 +14,7 @@ class MapItemModal extends React.Component {
 
     componentWillMount() {
         this.props.fetchDevices()
+        this.props.fetchVendorProducts()
     }
 
     handleFormSubmit(values) {
@@ -31,11 +32,13 @@ class MapItemModal extends React.Component {
     }
 
     render() {
-        const {handleSubmit, onClose, type, editMapItem} = this.props
+        const {handleSubmit, onClose, editMapItem, vendorProducts} = this.props
         return (
             <MapItemModalView
                 selIndex={this.state.selIndex}
                 onClickRow={this.onClickRow.bind(this)}
+
+                vendorProducts={vendorProducts}
 
                 type={editMapItem.type}
                 devices={this.getServers()}
