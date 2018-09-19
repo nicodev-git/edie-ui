@@ -40,6 +40,8 @@ class MapItemModal extends React.Component {
             case 'PRODUCT':
                 item = find(vendorProducts, {id: selIndex})
                 break
+            default:
+                item = null
         }
         if (!item) return
         this.props.onSave(item)

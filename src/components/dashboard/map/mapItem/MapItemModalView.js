@@ -112,12 +112,14 @@ export default class MapItemModalView extends React.Component {
                 return this.renderMonitors()
             case 'PRODUCT':
                 return this.renderProducts()
+            default:
+                return null
         }
     }
 
 
     render() {
-        const {onSubmit, onClose, type} = this.props
+        const {onSubmit, onClose} = this.props
         return (
             <Modal title="Map Item" onRequestClose={onClose}>
                 <form onSubmit={onSubmit}>
