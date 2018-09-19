@@ -74,6 +74,10 @@ export default class MapItemModalView extends React.Component {
         )
     }
 
+    renderProducts () {
+        const {vendorProducts} = this.props
+    }
+
     renderContent() {
         const {type} = this.props
         switch (type) {
