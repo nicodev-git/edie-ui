@@ -41,7 +41,8 @@ class MapItemModal extends React.Component {
                 item = find(vendorProducts, {id: selIndex})
                 break
         }
-        // this.props.onSave(values)
+        if (!item) return
+        this.props.onSave(item)
     }
 
     getServers() {
