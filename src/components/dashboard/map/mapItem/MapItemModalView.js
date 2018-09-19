@@ -75,7 +75,7 @@ export default class MapItemModalView extends React.Component {
     }
 
     renderProducts () {
-        const {vendorProducts} = this.props
+        const {vendorProducts, onClickRow, selIndex} = this.props
         return (
             <CardPanel title="Products">
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
@@ -88,7 +88,10 @@ export default class MapItemModalView extends React.Component {
                         <tbody>
                         {
                             vendorProducts.map(p =>
-                                <tr key={p.id}>
+                                <tr key={p.id}
+                                    className={p.id === selIndex ? 'selected' : ''}
+                                    onClick={() => onClickRow(p.id)}
+                                >
                                     <td>{p.name}</td>
                                 </tr>
                             )
@@ -107,7 +110,8 @@ export default class MapItemModalView extends React.Component {
                 return this.renderDeviceList()
             case 'MONITOR':
                 return this.renderMonitors()
-
+            case 'PRODUCT':
+                return this.renderProducts()
         }
     }
 

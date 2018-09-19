@@ -114,7 +114,9 @@ import {
 
   removeWorkflow,
 
-  fetchRoles
+  fetchRoles,
+
+    fetchVendorProducts
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -323,7 +325,9 @@ export default connect((state) => {
     attackerModalOpen: state.dashboard.attackerModalOpen,
     workflowDraw: state.settings.workflowDraw,
 
-    roles: state.settings.roles
+    roles: state.settings.roles,
+
+      vendorProducts: state.settings.vendorProducts
   }
 },
 dispatch => bindActionCreators({
@@ -403,5 +407,7 @@ dispatch => bindActionCreators({
 
   removeWorkflow,
 
-  fetchRoles
+  fetchRoles,
+
+    fetchVendorProducts
 }, dispatch))(withRouter(MainpageContainer))

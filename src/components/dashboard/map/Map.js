@@ -720,12 +720,14 @@ class Map extends React.Component {
 
   renderMapItemModal () {
     if (!this.state.mapItemModalOpen) return null
-    const {devices, fetchDevices} = this.props
+    const {devices, fetchDevices, vendorProducts, fetchVendorProducts} = this.props
     return (
       <MapItemModal
         devices={devices}
         fetchDevices={fetchDevices}
         editMapItem={this.state.editMapItem}
+        vendorProducts={vendorProducts}
+        fetchVendorProducts={fetchVendorProducts}
         onSave={this.onSaveMapItem.bind(this)}
         onClose={this.onCloseMapItem.bind(this)}
       />
