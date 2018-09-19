@@ -1,6 +1,7 @@
 import React from 'react'
 import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
+import {find} from 'lodash'
 
 import MapItemModalView from './MapItemModalView'
 
@@ -18,7 +19,29 @@ class MapItemModal extends React.Component {
     }
 
     handleFormSubmit(values) {
-        this.props.onSave(values)
+        const {vendorProducts, editMapItem} = this.props
+        const {type} = editMapItem
+        const {selIndex} = this.state
+        let item = null
+
+        if (!selIndex) return
+
+        const servers = this.getServers()
+        switch (type) {
+            case 'DEVICE':
+                item = find(servers, {id: selIndex})
+                break
+            case 'MONITOR':
+                servers.forEach(server => {
+                    const found = find(server.monitors, {uid: selIndex})
+                    if (found) item = found
+                })
+                break
+            case 'PRODUCT':
+                item = find(vendorProducts, {id: selIndex})
+                break
+        }
+        // this.props.onSave(values)
     }
 
     getServers() {
