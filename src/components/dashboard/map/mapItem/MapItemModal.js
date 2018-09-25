@@ -44,7 +44,10 @@ class MapItemModal extends React.Component {
                 item = null
         }
         if (!item) return
-        this.props.onSave(item)
+        this.props.onSave({
+            type,
+            item
+        })
     }
 
     getServers() {
