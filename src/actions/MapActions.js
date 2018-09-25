@@ -473,6 +473,8 @@ export function fetchMapItemsByMap (mapids) {
   return dispatch => {
     axios.get(`${ROOT_URL}/mapitem/search/findByMapids`, {params: {mapids}}).then(res => {
       dispatch({type: FETCH_MAP_ITEMS, data: res.data._embedded.mapItems})
+        // axios.post(`${ROOT_URL}/device/getDevicesByIds`, {params: {}})
+
     })
   }
 }
