@@ -472,9 +472,23 @@ export function showMapExportModal (visible) {
 export function fetchMapItemsByMap (mapids) {
   return dispatch => {
     axios.get(`${ROOT_URL}/mapitem/search/findByMapids`, {params: {mapids}}).then(res => {
-      dispatch({type: FETCH_MAP_ITEMS, data: res.data._embedded.mapItems})
-        // axios.post(`${ROOT_URL}/device/getDevicesByIds`, {params: {}})
+        const data  = res.data._embedded.mapItems
 
+        const deviceIds = []
+        const productIds = []
+        const monitorIds = []
+        data.forEach(p => {
+            let id = p.item['PRODUCT']
+            if (id) return productIds.push(id)
+
+            id = p.item['DEVICE']
+            if (id) return deviceIds.push(id)
+
+            id = p.item['MONITOR']
+            if (id) return monitorIds.push(id)
+        })
+
+        dispatch({type: FETCH_MAP_ITEMS, data})
     })
   }
 }
