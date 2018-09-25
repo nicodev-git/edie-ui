@@ -706,13 +706,20 @@ class Map extends React.Component {
 
     //////////////////////////////////////////////////////////////
 
-    onSaveMapItem(entity) {
-        const {editMapItem} = this.state
-        console.log(entity)
+    onSaveMapItem(mapItem) {
+        const {editMapItem, mapId} = this.state
+        console.log(mapItem)
 
-        if (editMapItem.type === '') {
-
+        const entity = {
+            ...editMapItem,
+            mapids: [mapId],
+            item: {
+                [mapItem.type]: mapItem.item.id || mapItem.item.uid
+            }
         }
+
+        this.props.addMapItem(entity)
+        this.onCloseMapItem()
     }
 
     onCloseMapItem() {
