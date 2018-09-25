@@ -488,6 +488,18 @@ export function fetchMapItemsByMap (mapids) {
             if (id) return monitorIds.push(id)
         })
 
+        if (deviceIds.length) {
+
+        }
+
+        if (productIds.length) {
+
+        }
+
+        if (monitorIds.length) {
+
+        }
+
         dispatch({type: FETCH_MAP_ITEMS, data})
     })
   }
