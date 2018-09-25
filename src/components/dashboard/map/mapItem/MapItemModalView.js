@@ -1,21 +1,10 @@
 import React from 'react'
-import {Field} from 'redux-form'
 
 import {
     Modal,
-    CardPanel,
-    FormSelect,
-    FormInput
+    CardPanel
 } from 'components/modal/parts'
 import {Button} from '@material-ui/core'
-
-const mapItemTypes = [{
-    label: 'Device', value: 'DEVICE'
-}, {
-    label: 'Monitor', value: 'MONITOR'
-}, {
-    label: 'Product', value: 'PRODUCT'
-}]
 
 export default class MapItemModalView extends React.Component {
     renderDeviceList() {
