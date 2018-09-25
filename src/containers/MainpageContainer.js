@@ -116,7 +116,8 @@ import {
 
   fetchRoles,
 
-    fetchVendorProducts
+    fetchVendorProducts,
+    addMapItem
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -409,5 +410,6 @@ dispatch => bindActionCreators({
 
   fetchRoles,
 
-    fetchVendorProducts
+    fetchVendorProducts,
+    addMapItem
 }, dispatch))(withRouter(MainpageContainer))
