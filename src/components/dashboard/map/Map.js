@@ -18,7 +18,7 @@ import {showAlert, showConfirm} from 'components/common/Alert'
 import MapItemModal from './mapItem/MapItemModal'
 
 import {fullScreen} from 'util/Fullscreen'
-import {isGroup} from 'shared/Global'
+// import {isGroup} from 'shared/Global'
 
 class Map extends React.Component {
     constructor(props) {
@@ -122,6 +122,7 @@ class Map extends React.Component {
         }, 10)
 
         this.props.fetchDeviceTemplates()
+        this.props.fetchMonitorTemplates()
     }
 
     componentWillUnmount() {
@@ -212,15 +213,15 @@ class Map extends React.Component {
 
     onMapMouseDown(map, obj) {
         console.log(obj.data)
-        this.props.openDevice(obj.data)
-
-        if (isGroup(obj.data)) {
-            this.props.history.push(`/device/${obj.data.id}/dashboard`)
-        } else {
-            // this.props.history.push(`/device/${obj.data.id}/main`)
-            this.props.history.push(`/device/${obj.data.id}/dashboard`)
-        }
-        ReactTooltip.hide()
+        // this.props.openDevice(obj.data)
+        //
+        // if (isGroup(obj.data)) {
+        //     this.props.history.push(`/device/${obj.data.id}/dashboard`)
+        // } else {
+        //     // this.props.history.push(`/device/${obj.data.id}/main`)
+        //     this.props.history.push(`/device/${obj.data.id}/dashboard`)
+        // }
+        // ReactTooltip.hide()
     }
 
     onMapObjectMoving() {
@@ -235,17 +236,21 @@ class Map extends React.Component {
     onMapLineUpdate(lineObj, callback) {
         let lineId = lineObj.id
 
+        if (lineObj.startObj.id === lineObj.endObj.id) {
+            showAlert('Can not add line to the same object.')
+            return
+        }
+
         if (!lineId) {
             let props = {
+                type: 'LINE',
                 mapid: this.props.selectedMap.id,
                 mapids: [this.props.selectedMap.id],
-                line: {
-                    from: lineObj.startObj.id,
-                    fromPoint: lineObj.startPoint,
-                    to: lineObj.endObj.id,
-                    toPoint: lineObj.endPoint,
-                    type: 'normal'
-                }
+                from: lineObj.startObj.id,
+                fromPoint: lineObj.startPoint,
+                to: lineObj.endObj.id,
+                toPoint: lineObj.endPoint,
+                lineType: 'normal'
             }
 
             this.props.addMapLine(props, (res) => {
@@ -255,12 +260,10 @@ class Map extends React.Component {
             let con = this.findMapLine(lineId)
             if (con) {
                 const props = extend({}, con, {
-                    line: assign(con.line, {
-                        from: lineObj.startObj.id,
-                        fromPoint: lineObj.startPoint,
-                        to: lineObj.endObj.id,
-                        toPoint: lineObj.endPoint
-                    })
+                    from: lineObj.startObj.id,
+                    fromPoint: lineObj.startPoint,
+                    to: lineObj.endObj.id,
+                    toPoint: lineObj.endPoint
                 })
 
                 this.props.updateMapLine(props)
@@ -276,17 +279,15 @@ class Map extends React.Component {
         if (!obj) return
 
         const props = assign({}, obj, {
-            line: assign(obj.line, {
-                width: style.width,
-                color: style.color
-            })
+            lineWidth: style.width,
+            color: style.color
         })
 
         this.props.updateMapLine(props)
     }
 
     onMapTextChanged(map, props, isLabel) {
-        this.props.updateMapDevice(props)
+        this.props.updateMapItem(props)
     }
 
     onMapMouseOver(map, obj) {
@@ -351,7 +352,7 @@ class Map extends React.Component {
                 width: 50,
                 height: 50
             }
-            this.props.updateMapDevice(device)
+            this.props.updateMapItem(device)
 
             const refMap = this.getDivMap()
             let cmap = this.getCanvasMap()
@@ -397,6 +398,7 @@ class Map extends React.Component {
             }
 
             if (options.type === 'longhub') {
+                options.type = 'LONGHUB'
                 options.width = 400
                 options.height = 3
             } else if (options.type === 'bi-pie') {
@@ -555,7 +557,7 @@ class Map extends React.Component {
     moveMapItem(map, params, type) {
         if (!params) return true
         if (params.groupid) params.mapid = null
-        this.props.updateMapDevice(params)
+        this.props.updateMapItem(params)
     }
 
     addMapUploading(map, id) {
@@ -590,28 +592,26 @@ class Map extends React.Component {
             if (btn !== 'ok') return
 
             if (data) {
-                if (!name) { // eslint-disable-line no-undef
+                if (!name) {
                     this.props.deleteMapLine(data)
                 } else {
-                    // this.props.deleteMapDevice(data)
-                    this.props.updateMapDevice({
-                        ...data,
-                        mapid: this.props.selectedMap.id === data.mapid ? null : data.mapid,
-                        mapids: data.mapids.filter(p => p !== this.props.selectedMap.id)
-                    })
+                    this.props.removeMapItem(data)
+                    // this.props.updateMapItem({
+                    //     ...data,
+                    //     mapid: this.props.selectedMap.id === data.mapid ? null : data.mapid,
+                    //     mapids: data.mapids.filter(p => p !== this.props.selectedMap.id)
+                    // })
                 }
             }
             cmap.removeMapItem(object, true)
         })
     }
 
-    changeLineType(lineId, type) {
+    changeLineType(lineId, lineType) {
         let con = this.findMapLine(lineId)
         if (con) {
             const props = extend({}, con, {
-                line: assign(con.line, {
-                    type
-                })
+                lineType
             })
 
             this.props.updateMapLine(props)
@@ -627,8 +627,9 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     showAddWizard(options, callback, closeCallback) {
-        if (options.type === 'longhub') {
+        if (options.type === 'longhub' || options.type === 'LONGHUB') {
             const params = {
+                type: 'LONGHUB',
                 name: 'longhub',
                 angle: 0,
                 x: options.x,
@@ -641,7 +642,7 @@ class Map extends React.Component {
             }
 
             this.onClickEdit()
-            this.props.addMapDevice(params)
+            this.props.addMapItem(params)
 
             closeCallback && closeCallback()
             if (this.state.editable) this.onClickEdit()
@@ -707,16 +708,20 @@ class Map extends React.Component {
     //////////////////////////////////////////////////////////////
 
     onSaveMapItem(mapItem) {
-        const {editMapItem, mapId} = this.state
+        const {editMapItem} = this.state
         console.log(mapItem)
-
         const entity = {
             ...editMapItem,
-            mapids: [mapId],
-            item: {
-                [mapItem.type]: mapItem.item.id || mapItem.item.uid
+            mapids: [this.props.selectedMap.id],
+            type: mapItem.type,
+            itemId: mapItem.item.id || mapItem.item.uid,
+            entity: {
+                ...mapItem.item,
+                parentName: mapItem.parent ? mapItem.parent.name : ''
             }
         }
+
+        console.log(entity)
 
         this.props.addMapItem(entity)
         this.onCloseMapItem()
@@ -779,7 +784,8 @@ class Map extends React.Component {
                             dropItem={dropItem}
                             dropItemPos={dropItemPos}
                             hidden={this.props.hidden}
-                            mapDevices={this.props.mapDevices}
+                            mapDevices={this.props.mapItems}
+                            monitorTemplates={this.props.monitorTemplates}
                             mapLines={this.props.mapLines}
                             showTraffic={this.props.showTraffic}
                             ref="map"/>

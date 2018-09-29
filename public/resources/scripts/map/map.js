@@ -1656,6 +1656,8 @@ var mapObject = {
       if(index >= 0) me.connectors.splice(index, 1);
     }
 
+    me.canvas.fire('selection:cleared');
+    me.canvas.deactivateAll()
     object.remove();
     if (redraw) me.canvas.renderAll();
   },
@@ -1708,15 +1710,16 @@ var mapObject = {
     [1, 0]],
   hubPoints: (function(){
     var pts = [];
-    for(var i = 0;i <= 60; i++) {
+    const ptCount = 60
+    for(var i = 0;i <= ptCount; i++) {
       pts.push([i, 0]);
     }
-    pts.push(60, 1);
+    pts.push([ptCount, 1]);
 
-    for(var i = 0;i <= 60; i++) {
-      pts.push([60 - i, 2]);
+    for(var i = 0;i <= ptCount; i++) {
+      pts.push([ptCount - i, 2]);
     }
-    pts.push(0, 1)
+    pts.push([0, 1])
     return pts;
   })(),
   getConnectionPoint: function(obj, point, group, hub) {

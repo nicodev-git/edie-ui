@@ -7,6 +7,7 @@ import {
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import { extImageBaseUrl, DragTypes, lineTypes } from 'shared/Global'
+import { getItemImage } from 'util/MapItemUtil'
 
 function collect (connect) {
   return {
@@ -115,7 +116,10 @@ class MapCanvas extends React.Component {
     //exclude non-position props
     return JSON.stringify(mapDevices.map(d => ({
       ...d,
-      monitors: ''
+      entity: {
+          ...d.entity,
+          monitors: null
+      }
     })))
   }
 
@@ -172,21 +176,21 @@ class MapCanvas extends React.Component {
     const width = 48
 
     return (
-            <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
-              onClick={this.onDragMouseDown.bind(this)}>
-                <img
-                  src={`${extImageBaseUrl}${dragItem.img}`}
-                  width={width}
-                  height={width}
-                  alt=""
-                  style={{
-                    position: 'absolute',
-                    left: cursorPos.x - width / 2,
-                    top: cursorPos.y - width / 2,
-                    cursor: `url("/resources/images/dashboard/map/cursor_drag_hand.png") 15 15, auto`
-                  }}
-                />
-            </div>
+        <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
+          onClick={this.onDragMouseDown.bind(this)}>
+            <img
+              src={`${extImageBaseUrl}${dragItem.img}`}
+              width={width}
+              height={width}
+              alt=""
+              style={{
+                position: 'absolute',
+                left: cursorPos.x - width / 2,
+                top: cursorPos.y - width / 2,
+                cursor: `url("/resources/images/dashboard/map/cursor_drag_hand.png") 15 15, auto`
+              }}
+            />
+        </div>
     )
   }
 
@@ -200,13 +204,13 @@ class MapCanvas extends React.Component {
     if (!rt) return null
 
     return (
-            <img src={`${extImageBaseUrl}${dropItem.img}`} width={width} height={width} alt=""
-              style={{
-                position: 'absolute',
-                left: dropItemPos.x - rt.left - width / 2,
-                top: dropItemPos.y - rt.top - width / 2
-              }}
-            />
+        <img src={`${extImageBaseUrl}${dropItem.img}`} width={width} height={width} alt=""
+          style={{
+            position: 'absolute',
+            left: dropItemPos.x - rt.left - width / 2,
+            top: dropItemPos.y - rt.top - width / 2
+          }}
+        />
     )
   }
 
@@ -388,8 +392,8 @@ class MapCanvas extends React.Component {
       connections.push(item)
     })
 
-    lineData.forEach(item => {
-      const {id, line} = item
+    lineData.forEach(line => {
+      const {id} = line
       let existingLine = cmap.findConnector(0,
                 line.from, line.fromPoint,
                 line.to, line.toPoint)
@@ -414,10 +418,12 @@ class MapCanvas extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   addMapItem (cmap, device, callback) {
+    const deviceEntity = device.entity || {}
+    const type = device.type
     let deviceid = device.id
-    let devicetype = getDeviceType(device.templateName)
-    let devname = device.name
-    let devicestatus = device.status || 'unknown'
+    let devicetype = getDeviceType(deviceEntity.templateName)
+    let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    let devicestatus = deviceEntity.status || 'unknown'
 
     let x = device.x || 0
     let y = device.y || 0
@@ -429,9 +435,8 @@ class MapCanvas extends React.Component {
     let textSize = device.textSize || 13
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
-    let propsEntity = JSON.parse(device.json || '[]') || []
 
-    if (devicetype === 'longhub') {
+    if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,
         data: device,
@@ -474,116 +479,10 @@ class MapCanvas extends React.Component {
         text: percent,
         imageUrl: '/resources/images/dashboard/map/sqlgauge.png'
       })
-    } else if (devicetype === 'SQLBI') {
-      let charttype = ''
-      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
-        if (i === 'chartType') {
-          charttype = item
-          return false
-        }
-      })
-
-      let orgdata = null
-      if (charttype) {
-        try {
-          let str = device.devicestatustext || ''
-          str = str.replace(/'/g, '"')
-          orgdata = JSON.parse(str)
-        } catch (e) {
-
-        }
-      }
-
-      if (charttype === 'pie' || charttype === 'piw') {
-        let graphdata = [ {
-          label: 'Internet Explorer',
-          data: 25
-        }, {
-          label: 'Chrome',
-          data: 37
-        }, {
-          label: 'Firefox',
-          data: 21
-        }, {
-          label: 'Safari',
-          data: 20
-        } ]
-
-        if (orgdata) {
-          graphdata = []
-          $.each(orgdata, function (i, item) { // eslint-disable-line no-undef
-            graphdata.push({
-              label: item.type,
-              data: item.count
-            })
-          })
-        }
-
-        cmap.addBiPieChart({
-          id: deviceid,
-
-          left: x,
-          top: y,
-          width: width,
-          height: height,
-
-          graphdata: graphdata
-        })
-      } else if (charttype === 'bar') {
-        const graphdata = [[0, 2], [1, 10], [2, 8]]
-
-        cmap.addBiBarChart({
-          id: deviceid,
-
-          left: x,
-          top: y,
-          width: width,
-          height: height,
-
-          graphdata: graphdata
-        })
-      } else if (charttype === 'line') {
-        const graphdata = [{
-          label: 'New1',
-          values: [
-                        [0, 10],
-                        [1, 12],
-                        [2, 13],
-                        [3, 14],
-                        [4, 13],
-                        [5, 16],
-                        [6, 20],
-                        [7, 22]
-          ]
-        }, {
-          label: 'New2',
-          values: [
-                        [0, 6],
-                        [1, 7],
-                        [2, 10],
-                        [3, 11],
-                        [4, 9],
-                        [5, 8],
-                        [6, 12],
-                        [7, 15]
-          ]
-        }]
-
-        cmap.addBiLineChart({
-          id: deviceid,
-
-          left: x,
-          top: y,
-          width: width,
-          height: height,
-
-          graphdata: graphdata
-        })
-      }
     } else {
             // Image
       let imageUrl = ''
-      let picture = device.image || ''
+      let picture = getItemImage(device, this.props.monitorTemplates) || ''
 
       if (!picture) imageUrl = '/resources/images/dashboard/map/windows.png'
       else if (picture.startsWith('/')) imageUrl = picture
@@ -599,11 +498,11 @@ class MapCanvas extends React.Component {
 
       // IP
       let tooltip = ''
-      if (device['wanip'] || device['lanip']) {
-        if (device['wanip']) tooltip = `WAN: ${device['wanip']}`
-        if (device['lanip']) {
+      if (deviceEntity['wanip'] || deviceEntity['lanip']) {
+        if (deviceEntity['wanip']) tooltip = `WAN: ${deviceEntity['wanip']}`
+        if (deviceEntity['lanip']) {
           if (tooltip) tooltip = `${tooltip}<br/>`
-          tooltip = `${tooltip}LAN: ${device['lanip']}`
+          tooltip = `${tooltip}LAN: ${deviceEntity['lanip']}`
         }
       }
 
@@ -647,10 +546,12 @@ class MapCanvas extends React.Component {
   }
 
   updateMapItem (cmap, device) {
+    const deviceEntity = device.entity || {}
+    const type = device.type
     let deviceid = device.id
-    let devicetype = getDeviceType(device.templateName)
-    let devname = device.name
-    let devicestatus = device.status || 'UNKNOWN'
+    let devicetype = getDeviceType(deviceEntity.templateName)
+    let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    let devicestatus = deviceEntity.status || 'UNKNOWN'
 
     let x = device.x || 0
     let y = device.y || 0
@@ -673,9 +574,7 @@ class MapCanvas extends React.Component {
       return
     }*/
 
-    let propsEntity = JSON.parse(device.json || '[]') || []
-
-    if (devicetype === 'longhub') {
+    if (type === 'LONGHUB') {
       mapObject.update({
         left: x,
         top: y,
@@ -708,38 +607,10 @@ class MapCanvas extends React.Component {
 
         text: percent
       })
-    } else if (devicetype === 'SQLBI') {
-      let charttype = ''
-      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
-        if (i === 'chartType') {
-          charttype = item
-          return false
-        }
-      })
-      let graphdata = []
-
-      if (charttype === 'pie' || charttype === 'piw') {
-        mapObject.update({
-          left: x,
-          top: y
-        })
-      } else if (charttype === 'bar') {
-        mapObject.update({
-          left: x,
-          top: y,
-          graphdata: graphdata
-        })
-      } else if (charttype === 'line') {
-        mapObject.update({
-          left: x,
-          top: y,
-          graphdata: graphdata
-        })
-      }
     } else {
             // Image
       let imageUrl = ''
-      let picture = device.image || ''
+      let picture = getItemImage(device, this.props.monitorTemplates) || ''
 
       if (!picture) imageUrl = '/resources/images/dashboard/map/windows.png'
       else if (picture.startsWith('/')) imageUrl = picture
@@ -752,11 +623,11 @@ class MapCanvas extends React.Component {
 
       // IP
       let tooltip = ''
-      if (device['wanip'] || device['lanip']) {
-        if (device['wanip']) tooltip = `WAN: ${device['wanip']}`
-        if (device['lanip']) {
+      if (deviceEntity['wanip'] || deviceEntity['lanip']) {
+        if (deviceEntity['wanip']) tooltip = `WAN: ${deviceEntity['wanip']}`
+        if (deviceEntity['lanip']) {
           if (tooltip) tooltip = `${tooltip}<br/>`
-          tooltip = `${tooltip}LAN: ${device['lanip']}`
+          tooltip = `${tooltip}LAN: ${deviceEntity['lanip']}`
         }
       }
 
@@ -815,15 +686,15 @@ class MapCanvas extends React.Component {
       startPoint: line.fromPoint,
       endObj: line.to,
       endPoint: line.toPoint,
-      strokeWidth: line.width,
+      strokeWidth: line.lineWidth,
       strokeColor: line.color,
-      lineType: line.type
+      lineType: line.lineType
     }
 
-    if (this.isNormalLine(line.type)) {
+    if (this.isNormalLine(line.lineType)) {
       cmap.addShapeLine(config)
     } else {
-      const typeIndex = findIndex(lineTypes, { type: line.type })
+      const typeIndex = findIndex(lineTypes, { type: line.lineType })
       if (typeIndex < 0) return
 
       config.imageUrl = lineTypes[typeIndex].image
@@ -834,9 +705,9 @@ class MapCanvas extends React.Component {
   updateConnection (cmap, id, line) {
     let config = {
       id: id,
-      strokeWidth: line.width,
+      strokeWidth: line.lineWidth,
       strokeColor: line.color,
-      lineType: line.type
+      lineType: line.lineType
     }
 
     let object = cmap.findConnector(0, line.from, line.fromPoint,
@@ -844,8 +715,8 @@ class MapCanvas extends React.Component {
 
     if (!object) return
 
-    if (!this.isNormalLine(line.type)) {
-      const typeIndex = findIndex(lineTypes, { typename: line.type })
+    if (!this.isNormalLine(line.lineType)) {
+      const typeIndex = findIndex(lineTypes, { typename: line.lineType })
       if (typeIndex < 0) return
 
       config.imageUrl = lineTypes[typeIndex].image

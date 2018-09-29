@@ -455,7 +455,7 @@ export default function (state = initialState, action) {
       return { ...state, scanStatus: action.status }
 
     case FETCH_MAP_ITEMS:
-      return { ...state, mapItems: action.data }
+      return { ...state, mapItems: action.data, mapLines: action.lines }
     case ADD_MAP_ITEM:
       return { ...state, mapItems: [...state.mapItems, action.data] }
     case UPDATE_MAP_ITEM:

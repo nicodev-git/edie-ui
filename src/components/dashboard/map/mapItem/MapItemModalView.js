@@ -14,9 +14,9 @@ export default class MapItemModalView extends React.Component {
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
                     <table className="table table-hover">
                         <thead>
-                            <tr>
-                                <th>Name</th>
-                            </tr>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
                         </thead>
                         <tbody>
                         {devices.map((device, i) =>
@@ -50,7 +50,7 @@ export default class MapItemModalView extends React.Component {
                         {devices.map((device, i) => (device.monitors || []).map(monitor =>
                             <tr key={`${monitor.uid}`}
                                 className={monitor.uid === selIndex ? 'selected' : ''}
-                                onClick={() => onClickRow(monitor.uid)}
+                                onClick={() => onClickRow(monitor.uid, device)}
                             >
                                 <td>{monitor.name}</td>
                                 <td>{device.name}</td>
@@ -63,6 +63,19 @@ export default class MapItemModalView extends React.Component {
         )
     }
 
+    // renderProductDevices (product) {
+    //     const {devices} = this.props
+    //     const deviceNames = devices.filter(device => (device.productIds || [])
+    //         .includes(product.id)).map(p => p.name)
+    //     return deviceNames.join(', ')
+    // }
+
+    getProductDevices (product) {
+        const {devices} = this.props
+        return devices.filter(device => (device.productIds || [])
+            .includes(product.id))
+    }
+
     renderProducts () {
         const {vendorProducts, onClickRow, selIndex} = this.props
         return (
@@ -72,18 +85,24 @@ export default class MapItemModalView extends React.Component {
                         <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Device</th>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            vendorProducts.map(p =>
-                                <tr key={p.id}
-                                    className={p.id === selIndex ? 'selected' : ''}
-                                    onClick={() => onClickRow(p.id)}
-                                >
-                                    <td>{p.name}</td>
-                                </tr>
-                            )
+                            vendorProducts.map(p => {
+                                const prodDevices = this.getProductDevices(p)
+                                const deviceNames = prodDevices.map(p => p.name)
+                                return (
+                                    <tr key={p.id}
+                                        className={p.id === selIndex ? 'selected' : ''}
+                                        onClick={() => onClickRow(p.id, prodDevices[0])}
+                                    >
+                                        <td>{p.name}</td>
+                                        <td>{deviceNames.join(', ')}</td>
+                                    </tr>
+                                )
+                            })
                         }
                         </tbody>
                     </table>
