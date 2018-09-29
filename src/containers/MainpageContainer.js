@@ -65,6 +65,7 @@ import {
 
   fetchDeviceCategories,
   fetchDeviceTemplates,
+  fetchMonitorTemplates,
 
   openDevice,
   addMapDevice,
@@ -117,7 +118,9 @@ import {
   fetchRoles,
 
     fetchVendorProducts,
-    addMapItem
+    addMapItem,
+    updateMapItem,
+    removeMapItem
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -293,6 +296,8 @@ export default connect((state) => {
 
     deviceCategories: state.settings.deviceCategories,
     deviceTemplates: state.settings.deviceTemplates,
+    monitorTemplates: state.settings.monitorTemplates,
+
 
     mapDevices: state.dashboard.mapDevices,
     mapLines: state.dashboard.mapLines,
@@ -328,7 +333,8 @@ export default connect((state) => {
 
     roles: state.settings.roles,
 
-      vendorProducts: state.settings.vendorProducts
+      vendorProducts: state.settings.vendorProducts,
+      mapItems: state.dashboard.mapItems
   }
 },
 dispatch => bindActionCreators({
@@ -359,6 +365,7 @@ dispatch => bindActionCreators({
 
   fetchDeviceCategories,
   fetchDeviceTemplates,
+  fetchMonitorTemplates,
 
   openDevice,
   addMapDevice,
@@ -411,5 +418,7 @@ dispatch => bindActionCreators({
   fetchRoles,
 
     fetchVendorProducts,
-    addMapItem
+    addMapItem,
+    updateMapItem,
+    removeMapItem
 }, dispatch))(withRouter(MainpageContainer))

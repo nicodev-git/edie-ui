@@ -1052,7 +1052,7 @@ export function showCellParamModal (visible, data) {
 
 export function fetchVendorProducts () {
   return dispatch => {
-    axios.get(`${ROOT_URL}/vendorproduct?size=1000`).then(res => {
+    axios.get(`${ROOT_URL}/product?size=1000`).then(res => {
       dispatch({type: FETCH_VENDOR_PRODUCTS, data: sortBy(res.data._embedded.vendorProducts, p => p.name ? p.name.toLowerCase() : '')})
     })
   }
@@ -1060,7 +1060,7 @@ export function fetchVendorProducts () {
 
 export function addVendorProduct (entity, cb) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/vendorproduct`, entity).then(res => {
+    axios.post(`${ROOT_URL}/product`, entity).then(res => {
       if (res.data) {
         dispatch({type: ADD_VENDOR_PRODUCT, data: res.data})
         cb && cb(res.data)
@@ -1075,7 +1075,7 @@ export function addVendorProduct (entity, cb) {
 
 export function updateVendorProduct (entity) {
   return dispatch => {
-    axios.put(`${ROOT_URL}/vendorproduct/${entity.id}`, entity).then(res => {
+    axios.put(`${ROOT_URL}/product/${entity.id}`, entity).then(res => {
       if (res.data) dispatch({type: UPDATE_VENDOR_PRODUCT, data: res.data})
     })
   }
@@ -1083,7 +1083,7 @@ export function updateVendorProduct (entity) {
 
 export function removeVendorProduct (entity) {
   return dispatch => {
-    axios.delete(`${ROOT_URL}/vendorproduct/${entity.id}`).then(res => {
+    axios.delete(`${ROOT_URL}/product/${entity.id}`).then(res => {
       dispatch({type: REMOVE_VENDOR_PRODUCT, data: entity})
     }).catch(error => apiError(dispatch, error))
   }

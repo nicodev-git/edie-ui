@@ -5,8 +5,6 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
     options || (options = {});
     this.callSuper('initialize', options);
 
-    var groupItems = [];
-
     for (var i = 0; i < 1; i++) {
       var line = new fabric.ShapeLineItem([0, 0, 0, 0], {
         strokeWidth: parseInt(options.strokeWidth || 1),
@@ -248,12 +246,13 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
     }
 
     $.each(me.steps, function (i, step) {
-      step.anim && step.anim.remove();
+      // step.anim && step.anim.remove();
       step.remove && step.remove();
     });
     me.steps = [];
 
     map.removeConnector(me);
+    // me.canvas.remove(me);
 
     this.callSuper('remove');
   },

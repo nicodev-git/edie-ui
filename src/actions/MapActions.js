@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
+import { assign, concat, find } from 'lodash'
 import {
   FETCH_MAPS,
   ADD_MAP,
@@ -52,7 +52,7 @@ export const fetchMaps = (initial) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/map`)
+    axios.get(`${ROOT_URL}/map?size=100`)
       .then(response => fetchMapsSuccess(dispatch, response, initial))
       .catch(error => apiError(dispatch, error))
   }
@@ -75,7 +75,7 @@ export const changeMap = (map) => {
       type: CHANGE_MAP,
       map
     })
-    dispatch(fetchMapDevicesAndLines(map.id))
+    dispatch(fetchMapItemsByMap([map.id]))
   }
 }
 
@@ -128,9 +128,8 @@ export const deleteMap = (entity) => {
 }
 
 const deleteMapSuccess = (dispatch, entity) => {
-  dispatch(fetchMaps(true))
   dispatch({
-    type: REMOVE_MAP, // TODO: check this action later
+    type: REMOVE_MAP,
     data: entity
   })
 }
@@ -402,7 +401,7 @@ export const addMapLine = (props, cb) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/device`, props)
+    axios.post(`${ROOT_URL}/mapitem`, props)
       .then(response => addMapLineSuccess(dispatch, response, cb))
       .catch(error => apiError(dispatch, error))
   }
@@ -421,7 +420,7 @@ export const updateMapLine = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.put(`${ROOT_URL}/mapitem/${entity.id}`, entity)
       .then(response => updateMapLineSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -439,7 +438,7 @@ export const deleteMapLine = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href)
+    axios.delete(`${ROOT_URL}/mapitem/${entity.id}`)
       .then(() => deleteMapLineSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
@@ -471,36 +470,95 @@ export function showMapExportModal (visible) {
 
 export function fetchMapItemsByMap (mapids) {
   return dispatch => {
-    axios.get(`${ROOT_URL}/mapitem/search/findByMapids`, {params: {mapids}}).then(res => {
+    axios.get(`${ROOT_URL}/mapitem/search/findByMapids?${encodeUrlParams({mapids})}`).then(res => {
         const data  = res.data._embedded.mapItems
 
         const deviceIds = []
         const productIds = []
         const monitorIds = []
+        const lines = []
+
+        const allItems = []
+
         data.forEach(p => {
-            let id = p.item['PRODUCT']
-            if (id) return productIds.push(id)
-
-            id = p.item['DEVICE']
-            if (id) return deviceIds.push(id)
-
-            id = p.item['MONITOR']
-            if (id) return monitorIds.push(id)
+          switch(p.type) {
+              case 'PRODUCT':
+                  productIds.push(p.itemId)
+                  break
+              case 'DEVICE':
+                  deviceIds.push(p.itemId)
+                  break
+              case 'MONITOR':
+                  monitorIds.push(p.itemId)
+                  break
+              case 'LONGHUB':
+                  allItems.push(p)
+                  break
+              case 'LINE':
+                  lines.push(p)
+                  break
+              default:
+                  break
+          }
         })
 
+        const reqs = []
         if (deviceIds.length) {
-
+            const req = axios.get(`${ROOT_URL}/device/search/findByIds?${encodeUrlParams({ids: deviceIds})}`)
+            reqs.push(req)
+        } else {
+            reqs.push(true)
         }
 
         if (productIds.length) {
-
+            const req = axios.get(`${ROOT_URL}/product/search/findByIds?${encodeUrlParams({ids: productIds})}`)
+            reqs.push(req)
+        } else {
+            reqs.push(true)
         }
 
         if (monitorIds.length) {
-
+            const req = axios.get(`${ROOT_URL}/monitor/search/findByIds?${encodeUrlParams({ids: monitorIds})}`)
+            reqs.push(req)
+        } else {
+            reqs.push(true)
         }
+        axios.all(reqs).then(allRes => {
+            if (allRes[0].data) {
+                allRes[0].data._embedded.devices.forEach(device => {
+                    const item = find(data, {itemId: device.id})
+                    if (!item) return
+                    allItems.push({
+                        ...item,
+                        entity: device
+                    })
+                })
+            }
 
-        dispatch({type: FETCH_MAP_ITEMS, data})
+            if (allRes[1].data) {
+                allRes[1].data._embedded.products.forEach(product => {
+                    const item = find(data, {itemId: product.id})
+                    if (!item) return
+                    allItems.push({
+                        ...item,
+                        entity: product
+                    })
+                })
+            }
+
+            if (allRes[2].data) {
+                allRes[2].data._embedded.monitors.forEach(monitor => {
+                    const item = find(data, {itemId: monitor.uid})
+                    if (!item) return
+                    allItems.push({
+                        ...item,
+                        entity: monitor
+                    })
+                })
+            }
+
+            dispatch({type: FETCH_MAP_ITEMS, data: allItems, lines})
+        })
     })
   }
 }
@@ -510,7 +568,7 @@ export function addMapItem (entity) {
   return dispatch => {
     axios.post(`${ROOT_URL}/mapitem`, entity).then(res => {
       if (res.data) {
-        dispatch({type: ADD_MAP_ITEM, data: res.data})
+        dispatch({type: ADD_MAP_ITEM, data: {...res.data, entity: entity.entity}})
       }
     })
   }
@@ -519,7 +577,7 @@ export function addMapItem (entity) {
 export function updateMapItem (entity) {
   return dispatch => {
     axios.put(`${ROOT_URL}/mapitem/${entity.id}`, entity).then(res => {
-      if (res.data) dispatch({type: UPDATE_MAP_ITEM, data: res.data})
+      if (res.data) dispatch({type: UPDATE_MAP_ITEM, data: {...res.data, entity: entity.entity}})
     })
   }
 }

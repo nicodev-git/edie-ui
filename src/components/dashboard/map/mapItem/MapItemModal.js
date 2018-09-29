@@ -9,7 +9,8 @@ class MapItemModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selIndex: null
+            selIndex: null,
+            selParent: null
         }
     }
 
@@ -21,12 +22,13 @@ class MapItemModal extends React.Component {
     handleFormSubmit(values) {
         const {vendorProducts, editMapItem} = this.props
         const {type} = editMapItem
-        const {selIndex} = this.state
+        const {selIndex, selParent} = this.state
         let item = null
 
         if (!selIndex) return
 
         const servers = this.getServers()
+
         switch (type) {
             case 'DEVICE':
                 item = find(servers, {id: selIndex})
@@ -46,7 +48,8 @@ class MapItemModal extends React.Component {
         if (!item) return
         this.props.onSave({
             type,
-            item
+            item,
+            parent: selParent
         })
     }
 
@@ -54,9 +57,10 @@ class MapItemModal extends React.Component {
         return this.props.devices.filter(p => !!p.monitors)
     }
 
-    onClickRow (selIndex) {
+    onClickRow (selIndex, selParent) {
         this.setState({
-            selIndex
+            selIndex,
+            selParent
         })
     }
 

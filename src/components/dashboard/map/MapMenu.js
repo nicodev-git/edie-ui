@@ -44,7 +44,6 @@ export default class MapMenu extends React.Component {
       if (btn !== 'ok') return
 
       this.props.deleteMap(selectedMap)
-      this.props.addAudit(userInfo.username, userInfo.fullname, `Delete Map '${selectedMap.name}'. Id: ${selectedMap.id}`)
     })
   }
 

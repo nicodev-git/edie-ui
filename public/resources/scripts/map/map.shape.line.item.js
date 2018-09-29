@@ -133,7 +133,7 @@ fabric.ShapeLineItem = fabric.util.createClass(fabric.Line, {
   //Override
   containsPoint: function(p){
     var me = this;
-
+    if (!me.canvas || !me.canvas.map) return false
     var c = {
       x: p.x,
       y: p.y,
