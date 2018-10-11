@@ -411,6 +411,8 @@ class Map extends React.Component {
                 options.width = 200
                 options.height = 200
             } else if (options.type === 'usertext') {
+              //make change also here.. options.type = 'USERTEXT'
+              options.type = 'USERTEXT'
                 options.width = 100
                 options.height = 30
             }
@@ -646,19 +648,36 @@ class Map extends React.Component {
 
             closeCallback && closeCallback()
             if (this.state.editable) this.onClickEdit()
-        } else {
-            if (wizardConfig[options.type] === null) {
-                showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
-                return
+        } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
+           //cater for the FREE TEXT.
+            const params = {
+              type: 'USERTEXT',
+              x: options.x,
+              y: options.y,
+              width: options.width,
+              height: options.height,
+              fontSize: textSize,
+              textAlign: textAlign,
+              mapids: [this.props.selectedMap.id],
+              params: { text: label }              
             }
+             //take a look at free text
+               //how are going to call the itemModal part.
+               
+        } else {
+          /*if (wizardConfig[options.type] === null) {
+              showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
+              return
+          }
 
-            this.setState({
-                deviceWizardConfig: {
-                    options, callback, closeCallback
-                },
-                deviceWizardVisible: true
-            })
-        }
+          this.setState({
+              deviceWizardConfig: {
+                  options, callback, closeCallback
+              },
+              deviceWizardVisible: true
+          })*/
+          
+        } 
     }
 
     onFinishAddWizard(callback, res, params, url) {
