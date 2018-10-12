@@ -412,7 +412,7 @@ class Map extends React.Component {
                 options.height = 200
             } else if (options.type === 'usertext') {
               //make change also here.. options.type = 'USERTEXT'
-              options.type = 'USERTEXT'
+              //options.type = 'USERTEXT' //to avoid confusing deviceWizard part..
                 options.width = 100
                 options.height = 30
             }
@@ -660,10 +660,15 @@ class Map extends React.Component {
               textAlign: textAlign,
               mapids: [this.props.selectedMap.id],
               params: { text: label }              
-            }
+            }*/ //use it after the addWizard... modal
              //take a look at free text
                //how are going to call the itemModal part.
-               
+               this.setState({ //activate the renderDeviceWizard method.
+                 deviceWizardConfig:{
+                   options,callback, closeCallback
+                 },
+                 deviceWizardVisible: true
+               })   
         } else {
           /*if (wizardConfig[options.type] === null) {
               showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
