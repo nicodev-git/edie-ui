@@ -135,7 +135,7 @@ class Map extends React.Component {
         if (!this.state.deviceWizardVisible) return null
 
         const {options, callback, closeCallback} = this.state.deviceWizardConfig
-
+         console.log('what is options in renderDeviceWizard', options)// ==> long hub | free text 
         let extra = {
             mapid: this.props.selectedMap.id,
             mapids: [this.props.selectedMap.id],
@@ -323,7 +323,7 @@ class Map extends React.Component {
     }
 
     onDrop(item, offset) {
-        console.log(item)
+        //console.log('being dropped item original,',item)
 
         let doc = document.documentElement
         let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
@@ -357,9 +357,11 @@ class Map extends React.Component {
             const refMap = this.getDivMap()
             let cmap = this.getCanvasMap()
             refMap.addMapItem(cmap, device, () => {
-
+                 //test this part.. 
+                 console.log('adding map item via device', device)
             })
         } else if (item.template === 'mapItem') {
+           console.log('iam the mapItem')
             const editMapItem = {
                 type: item.type,
                 title: item.title,
@@ -371,7 +373,7 @@ class Map extends React.Component {
                 height: 50
             }
 
-            console.log(editMapItem)
+            //console.log(editMapItem)
 
             this.setState({
                 mapItemModalOpen: true,
@@ -381,6 +383,7 @@ class Map extends React.Component {
                 selectedItem: {}
             })
         } else {
+           //console.log('iam not mapItem n i have no item.id ==> related to free text n long hub')
             let options = {
                 title: item.title,
                 type: getDeviceType(item.template.name),
@@ -396,7 +399,7 @@ class Map extends React.Component {
                 templateName: item.template.name,
                 workflowids: item.template.workflowids || []
             }
-
+             console.log('free text n long hub options', options) //focus here
             if (options.type === 'longhub') {
                 options.type = 'LONGHUB'
                 options.width = 400
@@ -429,7 +432,7 @@ class Map extends React.Component {
                 const refMap = this.getDivMap()
                 let cmap = this.getCanvasMap()
                 refMap.addMapItem(cmap, data, () => {
-
+                   //console.log('show the mapItem', data)
                 })
             }, () => {
                 this.setState({dropItem: null, selectedItem: {}})
@@ -629,6 +632,7 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     showAddWizard(options, callback, closeCallback) {
+      //console.log('showAddWizard in action', options)
         if (options.type === 'longhub' || options.type === 'LONGHUB') {
             const params = {
                 type: 'LONGHUB',
@@ -650,7 +654,9 @@ class Map extends React.Component {
             if (this.state.editable) this.onClickEdit()
         } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
            //cater for the FREE TEXT.
-            const params = {
+           //u need to get the text from the input modal before constructing options.
+           //u shall use ur own modal dialog.. if it fails.
+            /*const params = {
               type: 'USERTEXT',
               x: options.x,
               y: options.y,
@@ -681,14 +687,17 @@ class Map extends React.Component {
               },
               deviceWizardVisible: true
           })*/
-          
+            
         } 
     }
 
     onFinishAddWizard(callback, res, params, url) {
         params.textWidth = Math.max(8 * params.name.length, 50)
         params.textX = params.x + params.width / 2 - params.textWidth / 2
-        this.props.addMapDevice(params, url)
+         console.log('i want to see results after text input',params) //good finally
+        //this.props.addMapDevice(params, url)
+        //finally u need to call the addMapItem props here.
+        this.props.addMapItem(params);
     }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -732,6 +741,7 @@ class Map extends React.Component {
     //////////////////////////////////////////////////////////////
 
     onSaveMapItem(mapItem) {
+        console.log('iam saving on the map')
         const {editMapItem} = this.state
         console.log(mapItem)
         const entity = {
