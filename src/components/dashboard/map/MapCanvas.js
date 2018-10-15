@@ -435,7 +435,7 @@ class MapCanvas extends React.Component {
     let textSize = device.textSize || 13
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
-
+     console.log('i want to see device in addMapItem', device ) //not being activated for free text
     if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,

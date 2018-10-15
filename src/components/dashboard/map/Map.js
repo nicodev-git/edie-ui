@@ -655,26 +655,36 @@ class Map extends React.Component {
         } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
            //cater for the FREE TEXT.
            //u need to get the text from the input modal before constructing options.
-           //u shall use ur own modal dialog.. if it fails.
-            /*const params = {
-              type: 'USERTEXT',
+           //u shall use ur own modal dialog.. if it fails. serg wanted u to do..
+            const params = {
+              //type: 'usertext',
+              type: 'CUSTOM',
               x: options.x,
               y: options.y,
               width: options.width,
               height: options.height,
-              fontSize: textSize,
-              textAlign: textAlign,
-              mapids: [this.props.selectedMap.id],
-              params: { text: label }              
-            }*/ //use it after the addWizard... modal
+              //fontSize: textSize || 11
+              fontSize: 11,
+              //textAlign: textAlign,
+              mapids:[this.props.selectedMap.id],
+              params: {text: 'hello goldsoft'}          
+            } //use it after the addWizard... modal
              //take a look at free text
                //how are going to call the itemModal part.
-               this.setState({ //activate the renderDeviceWizard method.
+               //planning to use the device Wizard part...
+               /*this.setState({ //activate the renderDeviceWizard method.
                  deviceWizardConfig:{
                    options,callback, closeCallback
                  },
                  deviceWizardVisible: true
-               })   
+               })*/ 
+               //console.log('hey usertext', params)
+               this.onClickEdit()
+               this.props.addMapItem(params)
+
+               closeCallback && closeCallback()
+               if (this.state.editable) this.onClickEdit()
+                 
         } else {
           /*if (wizardConfig[options.type] === null) {
               showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
