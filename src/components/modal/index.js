@@ -7,6 +7,7 @@ import WorkflowStep3 from './WorkflowStep3'
 import WorkflowWizard from './WorklowWizard'
 import MainWorkflowModalView from './MainWorkflowModalView'
 import WfParamEditModal from './WfParamEditModal'
+import FreeTextModal from './FreeTextModal'
 
 export {
   SimpleModalForm,
@@ -17,5 +18,6 @@ export {
   WorkflowStep3,
   WorkflowWizard,
   MainWorkflowModalView,
-  WfParamEditModal
+  WfParamEditModal,
+  FreeTextModal
 }
