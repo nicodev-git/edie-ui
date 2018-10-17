@@ -53,7 +53,8 @@ class Map extends React.Component {
             freeTextVisible:false,
             formValue:{
               freeText: ''
-            }
+            },
+            freeTextOptions: {}
             
         }
 
@@ -663,7 +664,7 @@ class Map extends React.Component {
            //cater for the FREE TEXT.
            //u need to get the text from the input modal before constructing options.
            //u shall use ur own modal dialog.. if it fails. serg wanted u to do..
-            const params = {
+            const paramsObj = {
               //type: 'usertext',
               type: 'CUSTOM',
               x: options.x,
@@ -716,7 +717,7 @@ class Map extends React.Component {
          console.log('i want to see results after text input',params) //good finally
         //this.props.addMapDevice(params, url)
         //finally u need to call the addMapItem props here.
-        this.props.addMapItem(params);
+        //this.props.addMapItem(params);
     }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -827,8 +828,12 @@ class Map extends React.Component {
     //handleFormSubmit for the adding free text.
     handleFreeTextForm(e){
        e.preventDefault()
-       this.setState({freeTextVisible:false})
-       //find  a way to lead to continue the addMapItem.. stuff
+       let value = this.state.freeText,
+           updatedValue = this.state.freeTextOptions
+           updatedValue.params.text = value
+           this.setState({freeTextOptions:updatedValue})
+           this.setState({freeTextVisible:false}) 
+           this.props.addMapItem(updatedValue)
     }
     handleTextChange(e){
       this.setState({freeText: e.target.value})
