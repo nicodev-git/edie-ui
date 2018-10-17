@@ -16,6 +16,7 @@ import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContaine
 import {wizardConfig, getDeviceType} from 'components/common/wizard/WizardConfig'
 import {showAlert, showConfirm} from 'components/common/Alert'
 import MapItemModal from './mapItem/MapItemModal'
+import FreeTextModal from 'components/modal/FreeTextModal'
 
 import {fullScreen} from 'util/Fullscreen'
 // import {isGroup} from 'shared/Global'
@@ -48,7 +49,12 @@ class Map extends React.Component {
             cmap: null,
 
             mapItemModalOpen: false,
-            editMapItem: null
+            editMapItem: null,
+            freeTextVisible:false,
+            formValue:{
+              freeText: ''
+            }
+            
         }
 
         // /////////////////////////////////////////////
@@ -399,7 +405,7 @@ class Map extends React.Component {
                 templateName: item.template.name,
                 workflowids: item.template.workflowids || []
             }
-             console.log('free text n long hub options', options) //focus here
+             //console.log('free text n long hub options', options) //focus here
             if (options.type === 'longhub') {
                 options.type = 'LONGHUB'
                 options.width = 400
@@ -429,6 +435,7 @@ class Map extends React.Component {
             })
 
             this.showAddWizard(options, (id, name, data) => {
+               console.log(' i have reached near!!!', data)
                 const refMap = this.getDivMap()
                 let cmap = this.getCanvasMap()
                 refMap.addMapItem(cmap, data, () => {
@@ -678,11 +685,13 @@ class Map extends React.Component {
                  },
                  deviceWizardVisible: true
                })*/ 
+                 this.setState({freeTextVisible: true})
+                 //this.renderFreeTextModal();
                //console.log('hey usertext', params)
                this.onClickEdit()
-               this.props.addMapItem(params)
+               //this.props.addMapItem(params)
 
-               closeCallback && closeCallback()
+               //closeCallback && closeCallback()
                if (this.state.editable) this.onClickEdit()
                  
         } else {
@@ -794,6 +803,39 @@ class Map extends React.Component {
             />
         )
     }
+    
+    /////////////////////////////////////////////////////
+    
+    renderFreeTextModal(){
+      if (!this.state.freeTextVisible) return null 
+      const freeTextObj = {
+        title: 'FREE TEXT MAP ITEM',
+        buttonText: 'Submit'
+      }
+       return (
+         <FreeTextModal 
+            header = {freeTextObj.title} 
+            defaultValue = {this.state.formValue.freeText}
+            onChangeText = {this.handleTextChange.bind(this)}
+            onHide = {this.closeFreeTextModal.bind(this)}
+            onSubmit = {this.handleFreeTextForm.bind(this)}
+            buttonText = {freeTextObj.buttonText}            
+         />
+       )
+    }
+    
+    //handleFormSubmit for the adding free text.
+    handleFreeTextForm(e){
+       e.preventDefault()
+       this.setState({freeTextVisible:false})
+       //find  a way to lead to continue the addMapItem.. stuff
+    }
+    handleTextChange(e){
+      this.setState({freeText: e.target.value})
+    }
+    closeFreeTextModal(){
+      this.setState({open: false})
+    }
 
     render() {
         let events = this.mapEvents
@@ -850,6 +892,7 @@ class Map extends React.Component {
 
                 {this.renderMapItemModal()}
                 {this.renderDeviceWizard()}
+                {this.renderFreeTextModal()}
 
             </div>
         )
