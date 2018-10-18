@@ -434,11 +434,10 @@ class Map extends React.Component {
             })
 
             this.showAddWizard(options, (id, name, data) => {
-               console.log(' i have reached near!!!', data)
                 const refMap = this.getDivMap()
                 let cmap = this.getCanvasMap()
                 refMap.addMapItem(cmap, data, () => {
-                   //console.log('show the mapItem', data)
+                  
                 })
             }, () => {
                 this.setState({dropItem: null, selectedItem: {}})
@@ -638,7 +637,6 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     showAddWizard(options, callback, closeCallback) {
-      //console.log('showAddWizard in action', options)
         if (options.type === 'longhub' || options.type === 'LONGHUB') {
             const params = {
                 type: 'LONGHUB',
@@ -659,11 +657,8 @@ class Map extends React.Component {
             closeCallback && closeCallback()
             if (this.state.editable) this.onClickEdit()
         } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
-           //cater for the FREE TEXT.
-           //u need to get the text from the input modal before constructing options.
-           //u shall use ur own modal dialog.. if it fails. serg wanted u to do..
+  
             const paramsObj = {
-              //type: 'usertext',
               type: 'CUSTOM',
               x: options.x,
               y: options.y,
@@ -674,24 +669,14 @@ class Map extends React.Component {
               //textAlign: textAlign,
               mapids:[this.props.selectedMap.id],
               params: {text: 'hello goldsoft'}          
-            } //use it after the addWizard... modal
-             //take a look at free text
-               //how are going to call the itemModal part.
-               //planning to use the device Wizard part...
-               /*this.setState({ //activate the renderDeviceWizard method.
-                 deviceWizardConfig:{
-                   options,callback, closeCallback
-                 },
-                 deviceWizardVisible: true
-               })*/ 
-                 this.setState({freeTextVisible: true})
-                 //this.renderFreeTextModal();
-               //console.log('hey usertext', params)
-               this.onClickEdit()
-               //this.props.addMapItem(params)
-
-               //closeCallback && closeCallback()
-               if (this.state.editable) this.onClickEdit()
+            } 
+            
+            this.setState({freeTextOptions: paramsObj})
+            this.setState({freeTextVisible: true})
+            
+            this.onClickEdit()
+            closeCallback && closeCallback()
+            if (this.state.editable) this.onClickEdit()
                  
         } else {
           /*if (wizardConfig[options.type] === null) {
@@ -830,7 +815,7 @@ class Map extends React.Component {
            updatedValue = this.state.freeTextOptions
            updatedValue.params.text = value
            this.setState({freeTextOptions:updatedValue})
-           this.setState({freeTextVisible:false}) 
+           this.setState({freeTextVisible:false})
            this.props.addMapItem(updatedValue)
     }
     handleTextChange(e){
