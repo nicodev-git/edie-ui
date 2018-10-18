@@ -51,9 +51,7 @@ class Map extends React.Component {
             mapItemModalOpen: false,
             editMapItem: null,
             freeTextVisible:false,
-            formValue:{
-              freeText: ''
-            },
+            freeText: '',
             freeTextOptions: {}
             
         }
@@ -816,7 +814,7 @@ class Map extends React.Component {
        return (
          <FreeTextModal 
             header = {freeTextObj.title} 
-            defaultValue = {this.state.formValue.freeText}
+            defaultValue = {this.state.freeText}
             onChangeText = {this.handleTextChange.bind(this)}
             onHide = {this.closeFreeTextModal.bind(this)}
             onSubmit = {this.handleFreeTextForm.bind(this)}
