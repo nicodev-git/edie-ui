@@ -17,7 +17,7 @@ class FreeTextModal extends  Component{
       }
    }
    
-   //const {header, onHide, onSubmit} = this.props;
+
    render(){
      const {header, onHide, onSubmit,buttonText, defaultValue, onChangeText} = this.props
      

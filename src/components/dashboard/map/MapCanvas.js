@@ -435,7 +435,8 @@ class MapCanvas extends React.Component {
     let textSize = device.textSize || 13
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
-     console.log('i want to see device in addMapItem', device ) //not being activated for free text
+    
+     console.log('i want to see device in addMapItem', device ) //now it is positive for free text
     if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,
@@ -449,9 +450,10 @@ class MapCanvas extends React.Component {
 
         imageUrl: '/resources/images/dashboard/map/longhub.png'
       })
-    } else if (devicetype === 'usertext') {
-      let label = devname
-
+    } else if (type === 'CUSTOM') { // type ==>  formerly usertext
+      
+      let labelText = device.params.text;
+      
       cmap.addShapeText({
         id: deviceid,
         data: device,
@@ -462,8 +464,7 @@ class MapCanvas extends React.Component {
         height: height,
         fontSize: textSize,
         textAlign: textAlign,
-
-        text: label
+        text: labelText
       })
     } else if (devicetype === 'sqlQueryGauge') {
       let percent = this.parseGaugeResult(device)
@@ -479,7 +480,7 @@ class MapCanvas extends React.Component {
         text: percent,
         imageUrl: '/resources/images/dashboard/map/sqlgauge.png'
       })
-    } else {
+    } else {  //for mostly those with item.id --> non-mmebers --> free text n long hub
             // Image
       let imageUrl = ''
       let picture = getItemImage(device, this.props.monitorTemplates) || ''
