@@ -584,9 +584,9 @@ class MapCanvas extends React.Component {
         angle: angle,
         data: device
       })
-    } else if (devicetype === 'Text') {
-      let label = devname
-
+    } else if (devicetype === 'CUSTOM') {
+       let label = device.params.text
+       debugger;
       mapObject.update({
         left: x,
         top: y,
