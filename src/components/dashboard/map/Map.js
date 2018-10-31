@@ -140,7 +140,6 @@ class Map extends React.Component {
         if (!this.state.deviceWizardVisible) return null
 
         const {options, callback, closeCallback} = this.state.deviceWizardConfig
-         console.log('what is options in renderDeviceWizard', options)// ==> long hub | free text 
         let extra = {
             mapid: this.props.selectedMap.id,
             mapids: [this.props.selectedMap.id],
@@ -328,8 +327,7 @@ class Map extends React.Component {
     }
 
     onDrop(item, offset) {
-        //console.log('being dropped item original,',item)
-
+        debugger;
         let doc = document.documentElement
         let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
         let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
@@ -388,7 +386,7 @@ class Map extends React.Component {
                 selectedItem: {}
             })
         } else {
-           //console.log('iam not mapItem n i have no item.id ==> related to free text n long hub')
+          
             let options = {
                 title: item.title,
                 type: getDeviceType(item.template.name),
@@ -419,8 +417,6 @@ class Map extends React.Component {
                 options.width = 200
                 options.height = 200
             } else if (options.type === 'usertext') {
-              //make change also here.. options.type = 'USERTEXT'
-              //options.type = 'USERTEXT' //to avoid confusing deviceWizard part..
                 options.width = 100
                 options.height = 30
             }

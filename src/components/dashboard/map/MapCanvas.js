@@ -358,7 +358,7 @@ class MapCanvas extends React.Component {
             // Find if already exists
       let index = findIndex(prevDeviceData, { id: device.id })
       let existingDevice = index >= 0 ? prevDeviceData[index] : null// findOneBy(device.id, prevDeviceData, 'id');
-
+      
       if (existingDevice) {
         existingDevices.push(existingDevice)
         if (this.isNewDevice(existingDevice)) return
