@@ -675,8 +675,8 @@ class Map extends React.Component {
             
             //this.onClickEdit()
             closeCallback && closeCallback()
-            if (this.state.editable) this.onClickEdit()
-                 
+            //if (this.state.editable) this.onClickEdit()
+             this.setState({editable: false})     
         } else {
           //do nothing or handle another type.....
             
