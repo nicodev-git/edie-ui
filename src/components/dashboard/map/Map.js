@@ -648,13 +648,12 @@ class Map extends React.Component {
                 mapids: [this.props.selectedMap.id]
             }
               
-            //this.setState({addingMapItem})
              this.onClickEdit()
              this.props.addMapItem(params)
-            //this.props.updateMapItem(params)
 
             closeCallback && closeCallback()
             //if (this.state.editable) this.onClickEdit()
+            this.setState({editable:false})//borrowing from the above...
         } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
   
             const paramsObj = {

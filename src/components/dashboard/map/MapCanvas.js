@@ -63,9 +63,10 @@ class MapCanvas extends React.Component {
   componentWillUpdate (nextProps, nextState) {
     if (this.state.cmap) {
       if (nextProps.editable !== this.props.editable) {
+        //debugger;
         this.state.cmap.setEditable(nextProps.editable)
       }
-
+      
       if (nextProps.showTraffic !== this.props.showTraffic) {
         this.state.cmap.setTrafficVisible(nextProps.showTraffic)
       }
@@ -436,7 +437,7 @@ class MapCanvas extends React.Component {
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
     
-     console.log('i want to see device in addMapItem', device ) //now it is positive for free text
+     //debugger;
     if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,
