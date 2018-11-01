@@ -178,6 +178,7 @@ class Map extends React.Component {
 
     onMapKeyUp(e) {
         if (e.key === 'Escape') {
+            //disable edit mode when adding the map items --> long hub n free text.
             if (this.state.editable) {
                 this.onClickEdit()
                 this.toolbar.hideDeviceMenu()
@@ -402,7 +403,7 @@ class Map extends React.Component {
                 templateName: item.template.name,
                 workflowids: item.template.workflowids || []
             }
-             //console.log('free text n long hub options', options) //focus here
+            
             if (options.type === 'longhub') {
                 options.type = 'LONGHUB'
                 options.width = 400
@@ -646,12 +647,14 @@ class Map extends React.Component {
                 mapid: this.props.selectedMap.id,
                 mapids: [this.props.selectedMap.id]
             }
-
-            this.onClickEdit()
-            this.props.addMapItem(params)
+              
+            //this.setState({addingMapItem})
+             this.onClickEdit()
+             this.props.addMapItem(params)
+            //this.props.updateMapItem(params)
 
             closeCallback && closeCallback()
-            if (this.state.editable) this.onClickEdit()
+            //if (this.state.editable) this.onClickEdit()
         } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
   
             const paramsObj = {
@@ -669,23 +672,14 @@ class Map extends React.Component {
             
             this.setState({freeTextOptions: paramsObj})
             this.setState({freeTextVisible: true})
+            //this.renderFreeTextModal()
             
-            this.onClickEdit()
+            //this.onClickEdit()
             closeCallback && closeCallback()
             if (this.state.editable) this.onClickEdit()
                  
         } else {
-          /*if (wizardConfig[options.type] === null) {
-              showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
-              return
-          }
-
-          this.setState({
-              deviceWizardConfig: {
-                  options, callback, closeCallback
-              },
-              deviceWizardVisible: true
-          })*/
+          //do nothing or handle another type.....
             
         } 
     }
@@ -812,7 +806,11 @@ class Map extends React.Component {
            updatedValue.params.text = value
            this.setState({freeTextOptions:updatedValue})
            this.setState({freeTextVisible:false})
+           //this.onClickEdit()
            this.props.addMapItem(updatedValue)
+           
+           /*closeCallback && closeCallback() //undefined...
+           if(this.state.editable) return this.onClickEdit()*/
     }
     handleTextChange(e){
       this.setState({freeText: e.target.value})
