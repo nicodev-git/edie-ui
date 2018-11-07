@@ -16,6 +16,7 @@ import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContaine
 import {wizardConfig, getDeviceType} from 'components/common/wizard/WizardConfig'
 import {showAlert, showConfirm} from 'components/common/Alert'
 import MapItemModal from './mapItem/MapItemModal'
+import FreeTextModal from 'components/modal/FreeTextModal'
 
 import {fullScreen} from 'util/Fullscreen'
 // import {isGroup} from 'shared/Global'
@@ -48,7 +49,11 @@ class Map extends React.Component {
             cmap: null,
 
             mapItemModalOpen: false,
-            editMapItem: null
+            editMapItem: null,
+            freeTextVisible:false,
+            freeText: '',
+            freeTextOptions: {}
+            
         }
 
         // /////////////////////////////////////////////
@@ -135,7 +140,6 @@ class Map extends React.Component {
         if (!this.state.deviceWizardVisible) return null
 
         const {options, callback, closeCallback} = this.state.deviceWizardConfig
-
         let extra = {
             mapid: this.props.selectedMap.id,
             mapids: [this.props.selectedMap.id],
@@ -174,6 +178,7 @@ class Map extends React.Component {
 
     onMapKeyUp(e) {
         if (e.key === 'Escape') {
+            //disable edit mode when adding the map items --> long hub n free text.
             if (this.state.editable) {
                 this.onClickEdit()
                 this.toolbar.hideDeviceMenu()
@@ -323,8 +328,7 @@ class Map extends React.Component {
     }
 
     onDrop(item, offset) {
-        console.log(item)
-
+        debugger;
         let doc = document.documentElement
         let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
         let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
@@ -357,9 +361,11 @@ class Map extends React.Component {
             const refMap = this.getDivMap()
             let cmap = this.getCanvasMap()
             refMap.addMapItem(cmap, device, () => {
-
+                 //test this part.. 
+                 console.log('adding map item via device', device)
             })
         } else if (item.template === 'mapItem') {
+           console.log('iam the mapItem')
             const editMapItem = {
                 type: item.type,
                 title: item.title,
@@ -371,7 +377,7 @@ class Map extends React.Component {
                 height: 50
             }
 
-            console.log(editMapItem)
+            //console.log(editMapItem)
 
             this.setState({
                 mapItemModalOpen: true,
@@ -381,6 +387,7 @@ class Map extends React.Component {
                 selectedItem: {}
             })
         } else {
+          
             let options = {
                 title: item.title,
                 type: getDeviceType(item.template.name),
@@ -396,7 +403,7 @@ class Map extends React.Component {
                 templateName: item.template.name,
                 workflowids: item.template.workflowids || []
             }
-
+            
             if (options.type === 'longhub') {
                 options.type = 'LONGHUB'
                 options.width = 400
@@ -427,7 +434,7 @@ class Map extends React.Component {
                 const refMap = this.getDivMap()
                 let cmap = this.getCanvasMap()
                 refMap.addMapItem(cmap, data, () => {
-
+                  
                 })
             }, () => {
                 this.setState({dropItem: null, selectedItem: {}})
@@ -640,31 +647,49 @@ class Map extends React.Component {
                 mapid: this.props.selectedMap.id,
                 mapids: [this.props.selectedMap.id]
             }
-
-            this.onClickEdit()
-            this.props.addMapItem(params)
+              
+             this.onClickEdit()
+             this.props.addMapItem(params)
 
             closeCallback && closeCallback()
-            if (this.state.editable) this.onClickEdit()
+            //if (this.state.editable) this.onClickEdit()
+            this.setState({editable:false})//borrowing from the above...
+        } else if (options.type === 'usertext' || options.type === 'USERTEXT') {
+  
+            const paramsObj = {
+              type: 'CUSTOM',
+              x: options.x,
+              y: options.y,
+              width: options.width,
+              height: options.height,
+              //fontSize: textSize || 11
+              fontSize: 11,
+              //textAlign: textAlign,
+              mapids:[this.props.selectedMap.id],
+              params: {text: 'hello goldsoft'}          
+            } 
+            
+            this.setState({freeTextOptions: paramsObj})
+            this.setState({freeTextVisible: true})
+            //this.renderFreeTextModal()
+            
+            //this.onClickEdit()
+            closeCallback && closeCallback()
+            //if (this.state.editable) this.onClickEdit()
+             this.setState({editable: false})     
         } else {
-            if (wizardConfig[options.type] === null) {
-                showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
-                return
-            }
-
-            this.setState({
-                deviceWizardConfig: {
-                    options, callback, closeCallback
-                },
-                deviceWizardVisible: true
-            })
-        }
+          //do nothing or handle another type.....
+            
+        } 
     }
 
     onFinishAddWizard(callback, res, params, url) {
         params.textWidth = Math.max(8 * params.name.length, 50)
         params.textX = params.x + params.width / 2 - params.textWidth / 2
-        this.props.addMapDevice(params, url)
+         console.log('i want to see results after text input',params) //good finally
+        //this.props.addMapDevice(params, url)
+        //finally u need to call the addMapItem props here.
+        //this.props.addMapItem(params);
     }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -708,6 +733,7 @@ class Map extends React.Component {
     //////////////////////////////////////////////////////////////
 
     onSaveMapItem(mapItem) {
+        console.log('iam saving on the map')
         const {editMapItem} = this.state
         console.log(mapItem)
         const entity = {
@@ -749,6 +775,47 @@ class Map extends React.Component {
                 onClose={this.onCloseMapItem.bind(this)}
             />
         )
+    }
+    
+    /////////////////////////////////////////////////////
+    
+    renderFreeTextModal(){
+      if (!this.state.freeTextVisible) return null 
+      const freeTextObj = {
+        title: 'FREE TEXT MAP ITEM',
+        buttonText: 'Submit'
+      }
+       return (
+         <FreeTextModal 
+            header = {freeTextObj.title} 
+            defaultValue = {this.state.freeText}
+            onChangeText = {this.handleTextChange.bind(this)}
+            onHide = {this.closeFreeTextModal.bind(this)}
+            onSubmit = {this.handleFreeTextForm.bind(this)}
+            buttonText = {freeTextObj.buttonText}            
+         />
+       )
+    }
+    
+    //handleFormSubmit for the adding free text.
+    handleFreeTextForm(e){
+       e.preventDefault()
+       let value = this.state.freeText,
+           updatedValue = this.state.freeTextOptions
+           updatedValue.params.text = value
+           this.setState({freeTextOptions:updatedValue})
+           this.setState({freeTextVisible:false})
+           //this.onClickEdit()
+           this.props.addMapItem(updatedValue)
+           
+           /*closeCallback && closeCallback() //undefined...
+           if(this.state.editable) return this.onClickEdit()*/
+    }
+    handleTextChange(e){
+      this.setState({freeText: e.target.value})
+    }
+    closeFreeTextModal(){
+      this.setState({open: false})
     }
 
     render() {
@@ -806,6 +873,7 @@ class Map extends React.Component {
 
                 {this.renderMapItemModal()}
                 {this.renderDeviceWizard()}
+                {this.renderFreeTextModal()}
 
             </div>
         )

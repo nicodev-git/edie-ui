@@ -63,9 +63,10 @@ class MapCanvas extends React.Component {
   componentWillUpdate (nextProps, nextState) {
     if (this.state.cmap) {
       if (nextProps.editable !== this.props.editable) {
+        //debugger;
         this.state.cmap.setEditable(nextProps.editable)
       }
-
+      
       if (nextProps.showTraffic !== this.props.showTraffic) {
         this.state.cmap.setTrafficVisible(nextProps.showTraffic)
       }
@@ -358,7 +359,7 @@ class MapCanvas extends React.Component {
             // Find if already exists
       let index = findIndex(prevDeviceData, { id: device.id })
       let existingDevice = index >= 0 ? prevDeviceData[index] : null// findOneBy(device.id, prevDeviceData, 'id');
-
+      
       if (existingDevice) {
         existingDevices.push(existingDevice)
         if (this.isNewDevice(existingDevice)) return
@@ -435,7 +436,8 @@ class MapCanvas extends React.Component {
     let textSize = device.textSize || 13
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
-
+    
+     //debugger;
     if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,
@@ -449,9 +451,10 @@ class MapCanvas extends React.Component {
 
         imageUrl: '/resources/images/dashboard/map/longhub.png'
       })
-    } else if (devicetype === 'usertext') {
-      let label = devname
-
+    } else if (type === 'CUSTOM') { // type ==>  formerly usertext
+      
+      let labelText = device.params.text;
+      
       cmap.addShapeText({
         id: deviceid,
         data: device,
@@ -462,8 +465,7 @@ class MapCanvas extends React.Component {
         height: height,
         fontSize: textSize,
         textAlign: textAlign,
-
-        text: label
+        text: labelText
       })
     } else if (devicetype === 'sqlQueryGauge') {
       let percent = this.parseGaugeResult(device)
@@ -479,7 +481,7 @@ class MapCanvas extends React.Component {
         text: percent,
         imageUrl: '/resources/images/dashboard/map/sqlgauge.png'
       })
-    } else {
+    } else {  //for mostly those with item.id --> non-mmebers --> free text n long hub
             // Image
       let imageUrl = ''
       let picture = getItemImage(device, this.props.monitorTemplates) || ''
@@ -583,9 +585,9 @@ class MapCanvas extends React.Component {
         angle: angle,
         data: device
       })
-    } else if (devicetype === 'Text') {
-      let label = devname
-
+    } else if (devicetype === 'CUSTOM') {
+       let label = device.params.text
+       debugger;
       mapObject.update({
         left: x,
         top: y,

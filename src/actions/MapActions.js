@@ -472,7 +472,7 @@ export function fetchMapItemsByMap (mapids) {
   return dispatch => {
     axios.get(`${ROOT_URL}/mapitem/search/findByMapids?${encodeUrlParams({mapids})}`).then(res => {
         const data  = res.data._embedded.mapItems
-
+        //debugger;
         const deviceIds = []
         const productIds = []
         const monitorIds = []
@@ -492,6 +492,9 @@ export function fetchMapItemsByMap (mapids) {
                   monitorIds.push(p.itemId)
                   break
               case 'LONGHUB':
+                  allItems.push(p)
+                  break
+              case 'CUSTOM':
                   allItems.push(p)
                   break
               case 'LINE':

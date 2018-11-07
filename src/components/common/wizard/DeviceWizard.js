@@ -172,7 +172,7 @@ class DeviceWizard extends Component {
     props.credential = noCred ? null : mergeCredentials({
       templateName: extraParams.templateName
     }, credentials, deviceGlobalCredentials, deviceCredentials)
-    console.log(props)
+    console.log('let see free text',props)
     this.closeModal(true)
     if (onFinish) return onFinish(null, props, currentDevice.server.url)
   }
