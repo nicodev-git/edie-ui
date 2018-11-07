@@ -1,26 +1,21 @@
 import React from 'react'
-import { concat } from 'lodash'
+import {concat} from 'lodash'
 
 import DeviceImg from './DeviceImg'
 
 export default class DeviceMenu extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
 
       keyword: '',
       deviceTypes: [{
-        title: 'Add Existing Devices',
+        title: 'Add Servers',
         items: []
       }, {
         title: 'Map Items',
 
         items: [{
-          title: 'Device',
-          img: 'build.png',
-          template: 'mapItem',
-          type: 'DEVICE'
-        }, {
           title: 'Monitor',
           img: 'build.png',
           template: 'mapItem',
@@ -37,16 +32,17 @@ export default class DeviceMenu extends React.Component {
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.props.fetchDeviceTemplates()
   }
 
-  onChangeDeviceSearch (e) {
+  onChangeDeviceSearch(e) {
     let keyword = e.target.value
     this.setState({keyword})
   }
 
-  onClickItem (item, e) {
+  onClickItem(item, e) {
+    console.log("onClickItem", item)
     const {onClickItem} = this.props
     onClickItem && onClickItem(item, {
       clientX: e.clientX,
@@ -54,17 +50,17 @@ export default class DeviceMenu extends React.Component {
     })
   }
 
-  handleSelect (activePanel) {
-    this.setState({ activePanel })
+  handleSelect(activePanel) {
+    this.setState({activePanel})
   }
 
-  getNewDevices () {
+  getNewDevices() {
     const {allDevices, selectedMap} = this.props
     if (!selectedMap) return []
     return allDevices.filter(p => !p.line && (!p.mapids || !p.mapids.includes(selectedMap.id)))
   }
 
-  render () {
+  render() {
     let devicePanels = []
 
     let deviceTypes = concat([], this.state.deviceTypes)
@@ -162,7 +158,8 @@ export default class DeviceMenu extends React.Component {
         <div className="panel panel-default">
           <div className="panel-body">
             <div className="navbar-search" style={{paddingLeft: '5px'}}>
-              <input type="text" placeholder="Search …" className="form-control" onChange={this.onChangeDeviceSearch.bind(this)}/>
+              <input type="text" placeholder="Search …" className="form-control"
+                     onChange={this.onChangeDeviceSearch.bind(this)}/>
               <button className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>Add Incident</button>
             </div>
           </div>
