@@ -24,6 +24,7 @@ class Main extends React.Component {
     super(props)
     this.state = {
       // minHeight: 1300
+      clickedMapMenu: false
     }
   }
 
@@ -53,7 +54,7 @@ class Main extends React.Component {
   }
   renderDashboard () {
     return (
-      <Dashboard {...this.props}/>
+      <Dashboard {...this.props} mapClick = {this.state.clickedMapMenu}/>
     )
   }
 
@@ -73,6 +74,13 @@ class Main extends React.Component {
     if (item.id === 'dashboard') {
       closeDevice()
     }
+    
+    if (item.id === 'home') { //map tab..
+      this.setState({clickedMapMenu: true})
+    }else {
+        this.setState({clickedMapMenu: false})
+    }
+      
     history.push({
       pathname: item.path,
       search: item.search || ''
