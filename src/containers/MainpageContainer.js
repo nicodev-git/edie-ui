@@ -384,8 +384,8 @@ dispatch => bindActionCreators({
   updateMap,
   deleteMap,
 
-  fetchMaps,
-  changeMap,
+   fetchMaps,
+   changeMap,
 
   fetchAttackers,
 

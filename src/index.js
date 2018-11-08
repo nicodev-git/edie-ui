@@ -11,10 +11,10 @@ import './style'
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(
-                 reducers, 
-                 window.devToolsExtension && window.devToolsExtension()
-               )
- //u need to activate the redux dev tools above... in the store
+        reducers,
+        window.devToolsExtension && window.devToolsExtension()
+      )
+
 console.log('Version: 2018.1.109')
 console.log('React Version: ' + React.version)
 

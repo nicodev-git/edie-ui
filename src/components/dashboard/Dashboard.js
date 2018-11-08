@@ -32,8 +32,8 @@ export default class Dashboard extends React.Component {
     return (
       <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`} hidden={hidden}>
         <MetricPanel {...this.props}/>
-        <Map {...this.props} hidden={hidden} showTraffic={showTraffic}/>
-        <MainIncidentPanel {...this.props} hidden={hidden}/>
+        {this.props.mapClick ? <Map {...this.props} hidden={hidden} showTraffic={showTraffic}/> : null}
+        {this.props.mapClick ? <MainIncidentPanel {...this.props} hidden={hidden}/> : null}
       </div>
     )
   }
