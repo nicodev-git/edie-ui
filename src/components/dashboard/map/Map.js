@@ -360,12 +360,13 @@ class Map extends React.Component {
 
             const refMap = this.getDivMap()
             let cmap = this.getCanvasMap()
-            refMap.addMapItem(cmap, device, () => {
+            //debugger;
+             refMap.addMapItem(cmap, device, () => {
                  //test this part.. 
                  console.log('adding map item via device', device)
             })
+            //this.props.addMapItem(device);
         } else if (item.template === 'mapItem') {
-           console.log('iam the mapItem')
             const editMapItem = {
                 type: item.type,
                 title: item.title,
@@ -686,10 +687,6 @@ class Map extends React.Component {
     onFinishAddWizard(callback, res, params, url) {
         params.textWidth = Math.max(8 * params.name.length, 50)
         params.textX = params.x + params.width / 2 - params.textWidth / 2
-         console.log('i want to see results after text input',params) //good finally
-        //this.props.addMapDevice(params, url)
-        //finally u need to call the addMapItem props here.
-        //this.props.addMapItem(params);
     }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
