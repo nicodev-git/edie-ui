@@ -358,16 +358,16 @@ class Map extends React.Component {
                 width: 50,
                 height: 50
             }
-            this.props.updateMapItem(device)
+            //this.props.updateMapItem(device)
 
             const refMap = this.getDivMap()
             let cmap = this.getCanvasMap()
             //debugger;
-             refMap.addMapItem(cmap, device, () => {
+             /*refMap.addMapItem(cmap, device, () => {
                  //test this part.. 
                  console.log('adding map item via device', device)
-            })
-            //this.props.addMapItem(device);
+            })*/
+            this.props.addMapItem(device);
         } else if (item.template === 'mapItem') {
             const editMapItem = {
                 type: item.type,
