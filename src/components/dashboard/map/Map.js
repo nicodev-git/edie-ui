@@ -328,7 +328,6 @@ class Map extends React.Component {
     }
 
     onDrop(item, offset) {
-        debugger;
         let doc = document.documentElement
         let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
         let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
@@ -345,7 +344,7 @@ class Map extends React.Component {
             const index = findIndex(allDevices, {id: item.id})
             if (index < 0) return
             let device = allDevices[index]
-            //debugger;
+            
               device = {
                 ...device,
                 itemId:item.id,

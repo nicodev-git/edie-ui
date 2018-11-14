@@ -63,7 +63,6 @@ class MapCanvas extends React.Component {
   componentWillUpdate (nextProps, nextState) {
     if (this.state.cmap) {
       if (nextProps.editable !== this.props.editable) {
-        //debugger;
         this.state.cmap.setEditable(nextProps.editable)
       }
       
@@ -437,7 +436,6 @@ class MapCanvas extends React.Component {
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
     
-     //debugger;
     if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,
@@ -587,7 +585,7 @@ class MapCanvas extends React.Component {
       })
     } else if (devicetype === 'CUSTOM') {
        let label = device.params.text
-       debugger;
+       
       mapObject.update({
         left: x,
         top: y,
