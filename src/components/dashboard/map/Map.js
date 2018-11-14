@@ -328,6 +328,7 @@ class Map extends React.Component {
     }
 
     onDrop(item, offset) {
+      
         let doc = document.documentElement
         let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
         let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
@@ -348,6 +349,7 @@ class Map extends React.Component {
               device = {
                 ...device,
                 itemId:item.id,
+                name: item.name,
                 type: 'DEVICE',
                 mapid: device.mapid || selectedMap.id,
                 mapids: [...(device.mapids || []), selectedMap.id],
@@ -367,11 +369,7 @@ class Map extends React.Component {
              
              //this.props.updateMapItem(device)
              this.props.addMapItem(device)
-             const refMap = this.getDivMap()
-             let cmap = this.getCanvasMap()
-             refMap.addMapItem(cmap, device, () => {
-                 this.setState({dropItem: null, selectedItem: {}})
-            })
+             
             
         } else if (item.template === 'mapItem') {
             const editMapItem = {
