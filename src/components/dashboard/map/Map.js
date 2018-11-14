@@ -346,8 +346,9 @@ class Map extends React.Component {
             if (index < 0) return
             let device = allDevices[index]
             //debugger;
-            device = {
+              device = {
                 ...device,
+                itemId:item.id,
                 type: 'DEVICE',
                 mapid: device.mapid || selectedMap.id,
                 mapids: [...(device.mapids || []), selectedMap.id],
@@ -358,14 +359,19 @@ class Map extends React.Component {
                 width: 50,
                 height: 50
             }
+            
+            //some improvements.
+            this.setState({
+              dropItem: item,
+              dropItemPos:pos
+            })
              
              //this.props.updateMapItem(device)
              this.props.addMapItem(device)
              const refMap = this.getDivMap()
              let cmap = this.getCanvasMap()
              refMap.addMapItem(cmap, device, () => {
-                 //test this part.. 
-                 console.log('adding map item via device', device)
+                 this.setState({dropItem: null, selectedItem: {}})
             })
             
         } else if (item.template === 'mapItem') {
@@ -379,8 +385,6 @@ class Map extends React.Component {
                 width: 50,
                 height: 50
             }
-
-            //console.log(editMapItem)
 
             this.setState({
                 mapItemModalOpen: true,
@@ -665,25 +669,21 @@ class Map extends React.Component {
               y: options.y,
               width: options.width,
               height: options.height,
-              //fontSize: textSize || 11
               fontSize: 11,
-              //textAlign: textAlign,
               mapids:[this.props.selectedMap.id],
               params: {text: 'hello goldsoft'}          
             } 
             
             this.setState({freeTextOptions: paramsObj})
             this.setState({freeTextVisible: true})
-            //this.renderFreeTextModal()
             
             //this.onClickEdit()
             closeCallback && closeCallback()
             //if (this.state.editable) this.onClickEdit()
              this.setState({editable: false})     
-        } else {
-          //do nothing or handle another type.....
-            
-        } 
+        }else {
+           //handle other types --> DEVICE or products
+        }
     }
 
     onFinishAddWizard(callback, res, params, url) {
