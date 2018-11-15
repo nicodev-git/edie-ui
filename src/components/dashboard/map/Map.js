@@ -361,15 +361,17 @@ class Map extends React.Component {
                 height: 50
             }
             
-            //some improvements.
             this.setState({
               dropItem: item,
               dropItemPos:pos
+            })         
+             
+            this.props.addMapItem(device)
+             
+            this.setState({
+                dropItem: null,
+                selectedItem: {}
             })
-             
-             //this.props.updateMapItem(device)
-             this.props.addMapItem(device)
-             
             
         } else if (item.template === 'mapItem') {
             const editMapItem = {
