@@ -422,7 +422,8 @@ class MapCanvas extends React.Component {
     const type = device.type
     let deviceid = device.id
     let devicetype = getDeviceType(deviceEntity.templateName)
-    let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    //let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    let devname = device.parentName;
     let devicestatus = deviceEntity.status || 'unknown'
 
     let x = device.x || 0
@@ -550,7 +551,8 @@ class MapCanvas extends React.Component {
     const type = device.type
     let deviceid = device.id
     let devicetype = getDeviceType(deviceEntity.templateName)
-    let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    //let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    let devname = device.parentName;
     let devicestatus = deviceEntity.status || 'UNKNOWN'
 
     let x = device.x || 0
