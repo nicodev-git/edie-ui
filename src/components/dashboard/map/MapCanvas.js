@@ -525,13 +525,15 @@ class MapCanvas extends React.Component {
 
         tooltip: tooltip,
 
-        text: devname,
+        //text: devname,
+        text: devname === null? deviceEntity.name : devname,
         imageUrl: imageUrl,
         statusImageUrl: `/resources/images/dashboard/map/${okurl}`,
 
         statusImageLeft: statusImageLeft,
         statusImageTop: statusImageTop
       }
+      //debugger;
 
       if (devicetype === 'genericdevice') {
         let devicestat = JSON.parse(device.devicestatustext)

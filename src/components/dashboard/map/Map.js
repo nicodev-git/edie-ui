@@ -349,7 +349,7 @@ class Map extends React.Component {
               device = {
                 ...device,
                 itemId:item.id,
-                name: item.name,
+                //name: item.name,
                 type: 'DEVICE',
                 mapid: device.mapid || selectedMap.id,
                 mapids: [...(device.mapids || []), selectedMap.id],
