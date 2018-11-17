@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
+import { signRefresh } from 'actions'
 
 export default function (ComposedComponent) {
   class Authentication extends Component {
     componentWillMount () {
-      if (!this.props.authenticated) {
+      if (!this.props.authenticated && !sessionStorage.token) {        
+        this.gotoLogin()
+      } else if (!this.props.authenticated && sessionStorage.token) {
+        this.refresh()
+      }
+    }
+
+    componentWillUpdate (nextProps) {      
+      if (!nextProps.authenticated && !sessionStorage.token) {
         this.gotoLogin()
       }
     }
 
-    componentWillUpdate (nextProps) {
-      if (!nextProps.authenticated) {
-        this.gotoLogin()
-      }
+    refresh() {
+      const { location, dispatch, history } = this.props
+      let token = sessionStorage.token;
+      dispatch(signRefresh(token, location, history));
     }
 
     gotoLogin () {
