@@ -111,8 +111,11 @@ export default class BraincellClassPickerModal extends React.Component {
 
   renderProductItem (productId) {
     const {vendorProducts, productTypes, productVendors} = this.props
-    if (!productId) return ''
-    const product = find(vendorProducts, {id: productId})
+    if (!productId) 
+      return ''
+    const product = find(vendorProducts, {id: productId});
+    if (!product) 
+      return '';    
     const vendor = productVendors.filter(p => (p.productIds || []).includes(product.id))[0]
     let label = ''
     if (vendor) {
