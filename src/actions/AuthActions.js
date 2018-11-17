@@ -35,11 +35,28 @@ export const signUser = ({ email, password }, redirect, history) => {
   }
 }
 
+export const signRefresh = (token, location, history) => {
+  return (dispatch) => {
+    let response = {
+      data: {
+        token
+      }
+    };
+    const p = location.pathname;
+    const q = location.search;
+    const redirect = JSON.stringify({
+      p, q
+    });
+    signUserSuccess(dispatch, response, redirect, history)
+  }
+}
+
 const signUserSuccess = (dispatch, response, redirect, history) => {
   dispatch({
     type: AUTH_USER
   })
   window.localStorage.setItem('token', response.data.token)
+  window.sessionStorage.setItem('token', response.data.token)
   if (redirect) {
     try {
       const loc = JSON.parse(redirect)
