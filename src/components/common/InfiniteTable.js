@@ -63,7 +63,7 @@ class InfiniteTable extends React.Component {
   }
 
   getCurrentData () {
-    return this.props.useExternal ? this.state.results : this.props.data
+    return (this.props.useExternal ? this.state.results : this.props.data) || [];
   }
 
   getCountPerPage () {
