@@ -42,7 +42,7 @@ export const signRefresh = (token, location, history) => {
         token
       }
     };
-    const p = location.pathname;
+    const p = location.pathname == '' ? '/' : location.pathname ;
     const q = location.search;
     const redirect = JSON.stringify({
       p, q
