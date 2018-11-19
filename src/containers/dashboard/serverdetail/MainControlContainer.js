@@ -34,7 +34,8 @@ import {
 
   showGaugePicker,
   removeWorkflow,
-  fetchWorkflows
+  fetchWorkflows,
+  fixIncident
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -110,6 +111,8 @@ export default connect(
 
     showGaugePicker,
     removeWorkflow,
-    fetchWorkflows
+    fetchWorkflows,
+
+    fixIncident
   }
 )(withRouter(MainControlContainer))

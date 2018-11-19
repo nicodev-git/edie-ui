@@ -286,13 +286,16 @@ export const addMapDevice = (props, url) => {
   }
 }
 
-export const updateMapDevice = (entity) => {
+export const updateMapDevice = (entity, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.put(`${ROOT_URL}/device/${entity.id}`, entity)
-      .then(response => {updateMapDeviceSuccess(dispatch, response)})
+      .then(response => {
+        updateMapDeviceSuccess(dispatch, response);
+        cb && cb()
+      })
       .catch(error => apiError(dispatch, error))
 
     if (entity.credential) {

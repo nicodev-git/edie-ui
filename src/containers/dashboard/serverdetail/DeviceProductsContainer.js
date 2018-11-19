@@ -11,7 +11,7 @@ import {
 
   showDeviceEditModal,
   updateMapDevice,
-
+  fetchDeviceById,
   fetchVendorProducts
 } from 'actions'
 
@@ -32,6 +32,7 @@ export default connect(
     vendorProducts: state.settings.vendorProducts,
     productTypes: state.settings.productTypes,
     productVendors: state.settings.productVendors,
+    productInstances: state.settings.productInstances,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime
@@ -45,6 +46,7 @@ export default connect(
 
     showDeviceEditModal,
     updateMapDevice,
+    fetchDeviceById,
 
     fetchVendorProducts
   }
