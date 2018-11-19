@@ -134,7 +134,8 @@ import {
 
   FETCH_TIMEZONE,
 
-  NO_AUTH_ERROR
+  NO_AUTH_ERROR,
+  FETCH_PRODUCT_INSTANCES
 } from './types'
 
 import { apiError } from './Errors'
@@ -1056,6 +1057,21 @@ export function fetchVendorProducts () {
       dispatch({type: FETCH_VENDOR_PRODUCTS, data: sortBy(res.data._embedded.vendorProducts, p => p.name ? p.name.toLowerCase() : '')})
     })
   }
+}
+
+
+export const fetchDeviceById = (id) => {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/product/instance/findByDevice`, {
+      params: { id }
+    })
+    .then(response => {
+      dispatch({ 
+        type: FETCH_PRODUCT_INSTANCES, 
+        payload: response.data._embedded.productInstances})
+    })
+    .catch(error => apiError(dispatch, error))
+  } 
 }
 
 export function addVendorProduct (entity, cb) {

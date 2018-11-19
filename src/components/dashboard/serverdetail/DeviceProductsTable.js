@@ -19,11 +19,14 @@ export default class DeviceProductsTable extends Component {
       productPickOpen: false
     }
   }
-  componentWillMount() {
-    this.props.fetchVendorProducts()
+  componentWillMount() {    
+    const {device} = this.props
+
+    this.props.fetchDeviceById(device.id)
   }
 
   onClickAdd () {
+    this.props.fetchVendorProducts()
     this.setState({
       productPickOpen: true
     })
@@ -45,9 +48,9 @@ export default class DeviceProductsTable extends Component {
 
 
   getProducts() {
-    const {device, vendorProducts} = this.props
-    if (!device || !device.productIds) return []
-    return vendorProducts.filter(p => device.productIds.includes(p.id))
+    const {device, vendorProducts, productInstances} = this.props    
+    // return vendorProducts.filter(p => device.productIds.includes(p.id))
+    return productInstances;
   }
 
   ///////////////////////////////////////////////////////
@@ -100,7 +103,7 @@ export default class DeviceProductsTable extends Component {
           <tbody>
           {products.map(p =>
             <tr key={p.id}>
-              <td>{p.name}</td>
+              <td>{p.product.name}</td>
               <td>
                 <DeleteIcon className="link" onClick={this.onClickDelete.bind(this, p.id)}/>
               </td>
