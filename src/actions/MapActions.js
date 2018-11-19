@@ -412,7 +412,6 @@ export function fetchMapItemsByMap (mapids) {
   return dispatch => {
     axios.get(`${ROOT_URL}/mapitem/search/findByMapids?${encodeUrlParams({mapids})}`).then(res => {
         const data  = res.data._embedded.mapItems
-        //debugger;
         const deviceIds = []
         const productIds = []
         const monitorIds = []
@@ -511,7 +510,8 @@ export function addMapItem (entity) {
   return dispatch => {
     axios.post(`${ROOT_URL}/mapitem`, entity).then(res => {
       if (res.data) {
-        dispatch({type: ADD_MAP_ITEM, data: {...res.data, entity: entity.entity}})
+        dispatch({type: ADD_MAP_ITEM, data: {...res.data, entity: entity}})
+        debugger;
       }
     })
   }
