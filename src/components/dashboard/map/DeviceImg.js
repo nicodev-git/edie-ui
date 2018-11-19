@@ -10,7 +10,8 @@ const deviceSource = {
       id: props.id,
       img: props.img,
       title: props.title,
-      template: props.template
+      template: props.template,
+      type: props.type
     }
     return item
   },

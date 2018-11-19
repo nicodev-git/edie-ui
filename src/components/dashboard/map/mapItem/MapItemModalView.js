@@ -5,6 +5,8 @@ import {
     CardPanel
 } from 'components/modal/parts'
 import {Button} from '@material-ui/core'
+import AppletCard from 'components/common/AppletCard'
+import { extImageBaseUrl, appletColors as colors, trimOSName, checkAgentUp } from 'shared/Global'
 
 export default class MapItemModalView extends React.Component {
     renderDeviceList() {
@@ -12,7 +14,18 @@ export default class MapItemModalView extends React.Component {
         return (
             <CardPanel title="Servers">
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
-                    <table className="table table-hover">
+                    {devices.map((device, index) => (
+                        <AppletCard 
+                            key={device.id}
+                            color={colors[index % colors.length]}
+                            name={device.templateName || 'Unknown'}
+                            desc={device.name}
+                            onClick={() => onClickRow(device.id)}
+                            titleLimit={15}
+                            img={`${extImageBaseUrl}${device.image}`}
+                        />
+                    ))}
+                    { /* <table className="table table-hover">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -28,7 +41,7 @@ export default class MapItemModalView extends React.Component {
                             </tr>
                         )}
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
             </CardPanel>
         )
@@ -54,7 +67,7 @@ export default class MapItemModalView extends React.Component {
                             >
                                 <td>{monitor.name}</td>
                                 <td>{device.name}</td>
-                            </tr>
+                            </tr>                            
                         ))}
                         </tbody>
                     </table>

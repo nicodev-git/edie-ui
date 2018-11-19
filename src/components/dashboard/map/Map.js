@@ -364,7 +364,7 @@ class Map extends React.Component {
                  console.log('adding map item via device', device)
             })
         } else if (item.template === 'mapItem') {
-           console.log('iam the mapItem')
+            console.log('iam the mapItem')
             const editMapItem = {
                 type: item.type,
                 title: item.title,

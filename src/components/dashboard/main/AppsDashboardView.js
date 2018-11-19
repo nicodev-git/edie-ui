@@ -27,7 +27,7 @@ export default class AppsDashboardView extends React.Component {
     const {filter} = this.state
     const list = this.props.allApps || []
     const s = filter.toLowerCase()
-    if (!s) return list
+    if (!s) return list    
     return list.filter(p => p.Name.toLowerCase().indexOf(s) >= 0)
   }
 
