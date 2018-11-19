@@ -63,7 +63,6 @@ class MapCanvas extends React.Component {
   componentWillUpdate (nextProps, nextState) {
     if (this.state.cmap) {
       if (nextProps.editable !== this.props.editable) {
-        //debugger;
         this.state.cmap.setEditable(nextProps.editable)
       }
       
@@ -423,7 +422,8 @@ class MapCanvas extends React.Component {
     const type = device.type
     let deviceid = device.id
     let devicetype = getDeviceType(deviceEntity.templateName)
-    let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    //let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    let devname = device.parentName;
     let devicestatus = deviceEntity.status || 'unknown'
 
     let x = device.x || 0
@@ -437,7 +437,6 @@ class MapCanvas extends React.Component {
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
     
-     //debugger;
     if (type === 'LONGHUB') {
       cmap.addShapeHub({
         id: deviceid,
@@ -526,13 +525,15 @@ class MapCanvas extends React.Component {
 
         tooltip: tooltip,
 
-        text: devname,
+        //text: devname,
+        text: devname === null? deviceEntity.name : devname,
         imageUrl: imageUrl,
         statusImageUrl: `/resources/images/dashboard/map/${okurl}`,
 
         statusImageLeft: statusImageLeft,
         statusImageTop: statusImageTop
       }
+      //debugger;
 
       if (devicetype === 'genericdevice') {
         let devicestat = JSON.parse(device.devicestatustext)
@@ -552,7 +553,8 @@ class MapCanvas extends React.Component {
     const type = device.type
     let deviceid = device.id
     let devicetype = getDeviceType(deviceEntity.templateName)
-    let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    //let devname = deviceEntity.name + (deviceEntity.parentName ? `(${deviceEntity.parentName})` : '')
+    let devname = device.parentName;
     let devicestatus = deviceEntity.status || 'UNKNOWN'
 
     let x = device.x || 0
