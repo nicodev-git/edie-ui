@@ -346,7 +346,6 @@ class Map extends React.Component {
             if (index < 0) return
             let device = allDevices[index]
               device = {
-                //...device,
                 itemId:item.id,
                 type: 'DEVICE',
                 mapid: device.mapid || selectedMap.id,
