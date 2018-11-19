@@ -52,25 +52,17 @@ export default class MapItemModalView extends React.Component {
         return (
             <CardPanel title="Monitors">
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
-                    <table className="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Device</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {devices.map((device, i) => (device.monitors || []).map(monitor =>
-                            <tr key={`${monitor.uid}`}
-                                className={monitor.uid === selIndex ? 'selected' : ''}
-                                onClick={() => onClickRow(monitor.uid, device)}
-                            >
-                                <td>{monitor.name}</td>
-                                <td>{device.name}</td>
-                            </tr>                            
-                        ))}
-                        </tbody>
-                    </table>
+                    {devices.map((device, i) => (device.monitors || []).map(monitor =>
+                        <AppletCard 
+                            key={monitor.uid}
+                            color={colors[i % colors.length]}
+                            name={monitor.name || 'Unknown'}
+                            desc={monitor.name}
+                            onClick={() => onClickRow(monitor.uid, device)}
+                            titleLimit={15}
+                            img={`${extImageBaseUrl}${device.image}`}
+                        />
+                    ))}
                 </div>
             </CardPanel>
         )

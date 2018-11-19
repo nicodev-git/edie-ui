@@ -328,10 +328,6 @@ class Map extends React.Component {
     }
 
     onDrop(item, offset) {
-<<<<<<< HEAD
-=======
-      
->>>>>>> 645bd5ad1acaa5882f0656421f36c3fee318f559
         let doc = document.documentElement
         let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
         let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
