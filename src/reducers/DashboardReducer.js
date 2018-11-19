@@ -150,7 +150,9 @@ const initialState = {
   mapItems: [],
 
   apiErrorModalOpen: false,
-  apiError: ''
+  apiError: '',
+
+  newIncident: null,
 }
 
 export default function (state = initialState, action) {
@@ -342,6 +344,8 @@ export default function (state = initialState, action) {
       return { ...state, stats: action.stats }
 
     case ADD_DASHBOARD_INCIDENT:
+      return { ...state, newIncidentModalOpen: true, newIncident: action.incident }
+
     case FIX_ALL_DEVICE_INCIDENTS:
       return { ...state, mainIncidentDraw: state.mainIncidentDraw + 1 }
 

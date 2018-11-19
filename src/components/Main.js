@@ -24,7 +24,7 @@ class Main extends React.Component {
     super(props)
     this.state = {
       // minHeight: 1300
-      clickedMapMenu: false
+      clickedMapMenu: true
     }
   }
 

@@ -193,7 +193,9 @@ import {
   UPDATE_PRODUCT_VENDOR,
   REMOVE_PRODUCT_VENDOR,
 
-  FETCH_TIMEZONE
+  FETCH_TIMEZONE,
+
+  FETCH_PRODUCT_INSTANCES
 } from 'actions/types'
 
 import {concat, difference, findIndex, keys, sortBy} from 'lodash'
@@ -255,7 +257,8 @@ const initialState = {
 
   workflowDraw: 1,
 
-  timezoneOffset: 0
+  timezoneOffset: 0,
+  productInstances: []
 }
 
 export default function (state = initialState, action) {
@@ -793,6 +796,8 @@ export default function (state = initialState, action) {
 
     case FETCH_TIMEZONE:
       return { ...state, timezoneOffset: action.data }
+    case FETCH_PRODUCT_INSTANCES:
+      return { ...state, productInstances: action.payload }
     default:
       return state
   }

@@ -137,7 +137,7 @@ export default class IncidentTable extends React.Component {
 
       const {userInfo} = this.props
       const user = userInfo ? userInfo.username : 'User'
-
+      
       this.props.fixIncident(incident, user, text)
     })
   }

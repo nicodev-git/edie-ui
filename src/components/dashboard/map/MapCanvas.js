@@ -587,7 +587,6 @@ class MapCanvas extends React.Component {
       })
     } else if (devicetype === 'CUSTOM') {
        let label = device.params.text
-       debugger;
       mapObject.update({
         left: x,
         top: y,
