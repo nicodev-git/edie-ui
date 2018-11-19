@@ -19,9 +19,12 @@ export default class DeviceProductsTable extends Component {
       productPickOpen: false
     }
   }
-  componentWillMount() {    
-    const {device} = this.props
+  componentWillMount() { 
+    this.getProductsByDevice()
+  }
 
+  getProductsByDevice() {
+    const {device} = this.props
     this.props.fetchDeviceById(device.id)
   }
 
@@ -42,7 +45,8 @@ export default class DeviceProductsTable extends Component {
       this.props.updateMapDevice({
         ...device,
         productIds
-      })
+      }, 
+      () => this.getProductsByDevice())
     })
   }
 
@@ -70,7 +74,8 @@ export default class DeviceProductsTable extends Component {
     this.props.updateMapDevice({
       ...device,
       productIds
-    })
+    }, 
+    () => this.getProductsByDevice())
 
     this.onCloseProductPick()
   }
