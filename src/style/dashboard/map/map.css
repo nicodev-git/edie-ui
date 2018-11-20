@@ -224,3 +224,7 @@ li.dropdown-settings {
 .toolbar-options {
     right: 5px !important;
 }
+
+.modal-back {
+    cursor: pointer;   
+}

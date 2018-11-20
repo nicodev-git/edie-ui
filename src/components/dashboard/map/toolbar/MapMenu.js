@@ -42,7 +42,7 @@ export default class MapMenu extends Component {
   }
 
   onClickDelete () {
-    const {selectedMap, userInfo} = this.props
+    const {selectedMap} = this.props
     if (!selectedMap) return showAlert('Please choose a map to delete.')
 
     showConfirm('Are you sure that you want to delete the map?', btn => {

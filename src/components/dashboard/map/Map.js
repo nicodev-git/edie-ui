@@ -13,7 +13,7 @@ import DividerLine from './DividerLine'
 import {ZoomOptions, ToolbarToggle} from './toolbar'
 
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
-import {wizardConfig, getDeviceType} from 'components/common/wizard/WizardConfig'
+import {getDeviceType} from 'components/common/wizard/WizardConfig'
 import {showAlert, showConfirm} from 'components/common/Alert'
 import MapItemModal from './mapItem/MapItemModal'
 import FreeTextModal from 'components/modal/FreeTextModal'
