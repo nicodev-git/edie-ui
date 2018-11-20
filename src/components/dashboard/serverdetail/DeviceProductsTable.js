@@ -52,7 +52,7 @@ export default class DeviceProductsTable extends Component {
 
 
   getProducts() {
-    const {device, vendorProducts, productInstances} = this.props    
+    const {productInstances} = this.props    
     // return vendorProducts.filter(p => device.productIds.includes(p.id))
     return productInstances;
   }
