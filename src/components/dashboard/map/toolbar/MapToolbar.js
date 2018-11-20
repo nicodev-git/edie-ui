@@ -3,6 +3,7 @@ import { MapMenu, ToolbarOptions, LineTypesMenu } from './index'
 import NewIncidentModal from '../NewIncidentModal'
 import { lineTypes } from 'shared/Global'
 import {hasPermission} from 'shared/Permission'
+import IncidentSnackbar from 'components/common/Snackbar'
 
 export default class Toolbar extends Component {
   constructor (props) {
@@ -13,7 +14,9 @@ export default class Toolbar extends Component {
       displayColorPicker: false,
       displayLineType: false,
       displayDevices: false,
-      headerCollapsed: false
+      headerCollapsed: false,
+      isOpenSnackbar: false,
+      newIncident: null 
     }
 
     this.lineTypes = lineTypes
@@ -27,6 +30,19 @@ export default class Toolbar extends Component {
 
   componentWillUnmount () {
     document.removeEventListener('click', this.handleClick, false)
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.newIncident !== newProps.newIncident) {
+      console.log(newProps.newIncident)
+      this.setState({
+        isOpenSnackbar: true,
+        newIncident: {
+          message: newProps.newIncident.description, 
+          incident: newProps.newIncident
+        }
+      })
+    }
   }
 
   loadLineTypes () {
@@ -127,6 +143,17 @@ export default class Toolbar extends Component {
     )
   }
 
+  renderNewIncidentPopup() {
+    if (!this.state.isOpenSnackbar) return
+    return (
+      <IncidentSnackbar 
+        newIncidentMsg={this.state.newIncident}
+        onClose={() => this.setState({isOpenSnackbar: false})}
+        action={false}
+      />
+    )
+  }
+
   handleClick (e) {
     if (this.state.displayDevices) {
       let path = e.path
@@ -196,6 +223,7 @@ export default class Toolbar extends Component {
           {...this.props}
         />
         {this.renderNewIncidentModal()}
+        {this.renderNewIncidentPopup()}
       </div>
     )
   }
