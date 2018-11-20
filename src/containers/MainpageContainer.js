@@ -278,6 +278,8 @@ export default connect((state) => {
     newIncidentMsg: state.dashboard.newIncidentMsg,
     lastIncidentMsg: state.dashboard.lastIncidentMsg,
 
+    newIncident: state.dashboard.newIncident, 
+
     activationModalOpen: state.auth.activationModalOpen,
     activationMsg: state.auth.activationMsg,
     envVarAvailable: state.settings.envVarAvailable,
@@ -333,8 +335,8 @@ export default connect((state) => {
 
     roles: state.settings.roles,
 
-      vendorProducts: state.settings.vendorProducts,
-      mapItems: state.dashboard.mapItems
+    vendorProducts: state.settings.vendorProducts,
+    mapItems: state.dashboard.mapItems
   }
 },
 dispatch => bindActionCreators({

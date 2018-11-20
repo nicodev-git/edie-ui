@@ -20,6 +20,9 @@ export default class IncidentSnackbar extends React.Component {
     // console.log(reason)
   }
   onClickAlert () {
+    this.props.onClose()
+    if (!this.props.action)
+      return
     const {incident} = this.props.newIncidentMsg
     const q = `(id:${incident.id})`
     this.props.history.push('/search')
@@ -39,11 +42,10 @@ export default class IncidentSnackbar extends React.Component {
       <div className="link" onClick={this.onClickAlert}>
         <Snackbar
           open
-          action={this.searchIcon}
+          action={this.props.action ? this.searchIcon : ''}
           message={newIncidentMsg.message}
-          autoHideDuration={3600000 * 24 * 7}
-          onActionClick={this.onClickAlert}
-          onRequestClose={this.onSnackClose}
+          autoHideDuration={3600000 * 24 * 7}          
+          onClose={this.props.onClose}
         />
         <span className="hidden">{newIncidentMsg.incident.id}</span>
       </div>
