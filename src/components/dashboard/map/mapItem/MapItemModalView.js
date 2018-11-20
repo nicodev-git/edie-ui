@@ -6,42 +6,44 @@ import {
 } from 'components/modal/parts'
 import {Button} from '@material-ui/core'
 import AppletCard from 'components/common/AppletCard'
-import { extImageBaseUrl, appletColors as colors, trimOSName, checkAgentUp } from 'shared/Global'
+import { 
+    extImageBaseUrl, 
+    appletColors as colors,
+    trimOSName
+} from 'shared/Global'
 
 export default class MapItemModalView extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isClickedDevice: false,
+            selectedDevice: null
+        }
+    }
+
+    onClickDevice(device) {
+        this.setState({selectedDevice: device, isClickedDevice: true});
+    }
+
     renderDeviceList() {
-        const {devices, selIndex, onClickRow} = this.props
+        const {devices, selIndex} = this.props
         return (
-            <CardPanel title="Servers">
+            <CardPanel title="Devices">
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
                     {devices.map((device, index) => (
                         <AppletCard 
                             key={device.id}
+                            selected={selIndex}
                             color={colors[index % colors.length]}
                             name={device.templateName || 'Unknown'}
                             desc={device.name}
-                            onClick={() => onClickRow(device.id)}
+                            desc2={<span>{trimOSName(device.osDetails)}<br/>{device.wanip || ''}</span>}
+                            desc3={device.hostname || 'Unknown'}
+                            onClick={() => this.onClickDevice(device)}
                             titleLimit={15}
                             img={`${extImageBaseUrl}${device.image}`}
                         />
                     ))}
-                    { /* <table className="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {devices.map((device, i) =>
-                            <tr key={device.id}
-                                className={device.id === selIndex ? 'selected' : ''}
-                                onClick={() => onClickRow(device.id)}
-                            >
-                                <td>{device.name}</td>
-                            </tr>
-                        )}
-                        </tbody>
-                    </table> */}
                 </div>
             </CardPanel>
         )
@@ -49,50 +51,41 @@ export default class MapItemModalView extends React.Component {
 
     renderMonitors() {
         const {devices, selIndex, onClickRow} = this.props
+        const { selectedDevice } = this.state
         return (
-            <CardPanel title="Monitors">
+            <CardPanel title="Monitors" isBack={true} onBack={() => this.setState({isClickedDevice: false})}>
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
-                    <table className="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Device</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {devices.map((device, i) => (device.monitors || []).map(monitor =>
-                            <tr key={`${monitor.uid}`}
-                                className={monitor.uid === selIndex ? 'selected' : ''}
-                                onClick={() => onClickRow(monitor.uid, device)}
-                            >
-                                <td>{monitor.name}</td>
-                                <td>{device.name}</td>
-                            </tr>                            
-                        ))}
-                        </tbody>
-                    </table>
+                    {devices
+                        .filter(device => device.id === selectedDevice.id)
+                        .map((device, i) => (device.monitors || []).map((monitor, index)=>
+                        <AppletCard 
+                            key={monitor.uid}
+                            selected={selIndex}
+                            color={colors[index % colors.length]}
+                            name={monitor.name || 'Unknown'}
+                            desc={monitor.name}
+                            onClick={() => onClickRow(monitor.uid, device)}
+                            titleLimit={15}
+                            img={`${extImageBaseUrl}${device.image}`}
+                            verified={true}
+                        />
+                    ))}
                 </div>
             </CardPanel>
         )
     }
 
-    // renderProductDevices (product) {
-    //     const {devices} = this.props
-    //     const deviceNames = devices.filter(device => (device.productIds || [])
-    //         .includes(product.id)).map(p => p.name)
-    //     return deviceNames.join(', ')
-    // }
-
-    getProductDevices (product) {
-        const {devices} = this.props
-        return devices.filter(device => (device.productIds || [])
-            .includes(product.id))
+    getProductByDevice (product) {
+        const {devices} = this.props        
+        let device = devices.filter(device => device.id === this.state.selectedDevice.id)[0]
+        return device.productIds && device.productIds.includes(product.id);
     }
 
     renderProducts () {
         const {vendorProducts, onClickRow, selIndex} = this.props
+        const { selectedDevice } = this.state
         return (
-            <CardPanel title="Products">
+            <CardPanel title="Products"  isBack={true} onBack={() => this.setState({isClickedDevice: false})}>
                 <div style={{maxHeight: 300, overflow: 'auto'}}>
                     <table className="table table-hover">
                         <thead>
@@ -104,15 +97,13 @@ export default class MapItemModalView extends React.Component {
                         <tbody>
                         {
                             vendorProducts.map(p => {
-                                const prodDevices = this.getProductDevices(p)
-                                const deviceNames = prodDevices.map(p => p.name)
-                                return (
+                                return this.getProductByDevice(p) && (
                                     <tr key={p.id}
                                         className={p.id === selIndex ? 'selected' : ''}
-                                        onClick={() => onClickRow(p.id, prodDevices[0])}
+                                        onClick={() => onClickRow(p.id, selectedDevice )}
                                     >
-                                        <td>{p.name}</td>
-                                        <td>{deviceNames.join(', ')}</td>
+                                        <td>{ p.name }</td>
+                                        <td>{ selectedDevice.name }</td>
                                     </tr>
                                 )
                             })
@@ -126,6 +117,10 @@ export default class MapItemModalView extends React.Component {
 
     renderContent() {
         const {type} = this.props
+        if (!this.state.isClickedDevice) {
+            return this.renderDeviceList()
+        }
+
         switch (type) {
             case 'DEVICE':
                 return this.renderDeviceList()
