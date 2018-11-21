@@ -344,7 +344,7 @@ export default function (state = initialState, action) {
       return { ...state, stats: action.stats }
 
     case ADD_DASHBOARD_INCIDENT:
-      return { ...state, newIncident: action.incident[0] }
+      return { ...state, newIncident: action.incident[0], mainIncidentDraw: state.mainIncidentDraw + 1 }
 
     case FIX_ALL_DEVICE_INCIDENTS:
       return { ...state, mainIncidentDraw: state.mainIncidentDraw + 1 }
