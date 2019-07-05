@@ -1,5 +1,2 @@
-export function getServerURL(){
-    return 'http://imp.dev.securegion.com';
-}
-
-// const ROOT_URL = getBackendURL();
+export const ROOT_URL = 'https://uiserver-avatar.securegion.com'
+export const SRA_URL = 'https://aaa-avatar.securegion.com'

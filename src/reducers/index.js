@@ -1,18 +1,33 @@
-import { combineReducers } from 'redux';
-import {reducer as formReducer} from 'redux-form';
-import authReducer from './auth_reducer';
-import dashboardReducer from './DashboardReducer'
-import settingsReducer from './SettingsReducer'
-import deviceReducer from './DeviceReducer'
-import searchReducer from './SearchReducer'
+import { combineReducers } from 'redux'
+import {reducer as FormReducer} from 'redux-form'
+import AuthReducer from './AuthReducer'
+import ChatReducer from './ChatReducer'
+import DashboardReducer from './DashboardReducer'
+import SettingsReducer from './SettingsReducer'
+import DeviceReducer from './DeviceReducer'
+import SearchReducer from './SearchReducer'
+import DiagramReducer from './DiagramReducer'
+import AttackersReducer from './AttackersReducer'
+import TagReducer from './TagReducer'
+import GaugeReducer from './GaugeReducer'
+import WorkflowReducer from './WorkflowReducer'
+import AuditReducer from './AuditReducer'
+
 
 const rootReducer = combineReducers({
-    form: formReducer,
-    auth: authReducer,
-    settings: settingsReducer,
-    dashboard: dashboardReducer,
-    devices: deviceReducer,
-    search: searchReducer,
-});
+  form: FormReducer,
+  auth: AuthReducer,
+  settings: SettingsReducer,
+  dashboard: DashboardReducer,
+  devices: DeviceReducer,
+  search: SearchReducer,
+  diagram: DiagramReducer,
+  chat: ChatReducer,
+  attackers: AttackersReducer,
+  tag: TagReducer,
+  gauge: GaugeReducer,
+  workflow: WorkflowReducer,
+  audit: AuditReducer
+})
 
-export default rootReducer;
+export default rootReducer

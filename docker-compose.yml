@@ -1,0 +1,6 @@
+eddieui:
+  image: nexus-dev.securegion.com:18079/eddieui
+  container_name: eddieui
+  ports:
+    - 6000:80
+  restart: unless-stopped

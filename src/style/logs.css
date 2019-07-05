@@ -1,0 +1,44 @@
+.logs .rst__lineBlock {
+    display: none;
+}
+
+.logs .rst__lineChildren {
+    display: none;
+}
+
+.logs .rst__expandButton {
+    background: #fff url('/resources/images/log/folder_collapse.png') no-repeat center;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.logs .rst__collapseButton {
+    background: #fff url('/resources/images/log/folder_expand.png') no-repeat center;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
+.logs .rst__collapseButton:hover,
+.logs .rst__expandButton:hover {
+    background-size: initial;
+}
+
+.logs .rst__rowContents {
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    padding: 0;
+}
+
+.logs .rst__rowWrapper {
+    padding: 0;
+}
+
+.logs .rst__moveHandle {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    width: 24px;
+}

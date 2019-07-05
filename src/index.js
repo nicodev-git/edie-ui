@@ -1,96 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Router , browserHistory } from 'react-router';
-import reducers from './reducers';
-import Routes from './routes';
-import reduxThunk from 'redux-thunk';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import reduxThunk from 'redux-thunk'
 
-import { AUTH_USER } from './actions/types';
+import reducers from './reducers'
+import App from './App'
+import './style'
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
+const store = createStoreWithMiddleware(
+        reducers,
+        window.devToolsExtension && window.devToolsExtension()
+      )
 
-const initialState = {
-    dashboard: {
-        stats: {
-            open: 0,
-            month: 0,
-            today: 0,
-            attackers: 0
-        },
-
-        maps: [],
-        mapDevices: [],
-        mapLines: [],
-
-        incidents: [],
-
-        selectedDevice: null,
-
-        images: [],
-    },
-
-    devices: {
-        devices: [],
-
-        incidents: [],
-        addIncidentModalVisible: false,
-        
-        rules: [],
-        rawIncidents: [],
-        physicalRules: [],
-
-        monitorPickerVisible: false,
-
-        wizardInitialValues: {},
-        monitorWizardVisible: false,
-
-        basicMonitors: [],
-        monitors: [],
-
-        eventLogs: [],
-        apps: [],
-        processes: [],
-    },
-
-    search: {
-        incidents: [],
-        incidentDevices: [],
-    },
-
-    settings: {
-        envVars: [],
-        identities: [],
-        credentials: [],
-
-        deviceTemplates: [],
-        monitorTemplates: [],
-        tplImageModalVisible: false,
-
-        maps: [],
-        editMap: null,
-
-        editUser: null,
-        editUserPin: '',
-
-        showTraffic: true,
-    }
-}
-const store = createStoreWithMiddleware(reducers, initialState);
-
-const token = localStorage.getItem('token');
-
-if (token) {
-    store.dispatch({ type: AUTH_USER });
-}
-
-console.log('Version: 0.6.2')
+console.log('Version: 2018.1.109')
+console.log('React Version: ' + React.version)
 
 ReactDOM.render(
     <Provider store={store}>
-        {Routes}
+        <App/>
     </Provider>
     , document.getElementById('app')
-);
+)
